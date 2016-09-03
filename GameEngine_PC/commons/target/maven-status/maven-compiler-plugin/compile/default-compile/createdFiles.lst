@@ -1,0 +1,14 @@
+com/dferreira/commons/GLSLUtils.class
+com/dferreira/commons/GLTransformation.class
+com/dferreira/commons/shapes/WfObject.class
+com/dferreira/commons/models/TextureData.class
+com/dferreira/commons/Vector3f.class
+com/dferreira/commons/models/Light.class
+com/dferreira/commons/TextUtils.class
+com/dferreira/commons/Vector2f.class
+com/dferreira/commons/waveFront/OBJLoader.class
+com/dferreira/commons/waveFront/PolygonalFace.class
+com/dferreira/commons/shapes/IShape.class
+com/dferreira/commons/ShaderProgram.class
+com/dferreira/commons/LoadUtils.class
+com/dferreira/commons/waveFront/CoordinatePositions.class

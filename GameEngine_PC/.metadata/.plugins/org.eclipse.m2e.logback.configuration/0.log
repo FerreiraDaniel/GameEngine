@@ -1,0 +1,99 @@
+2016-09-03 12:48:37,993 [Worker-16] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.dferreira:commons:0.0.1-SNAPSHOT @ /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/pom.xml.
+2016-09-03 12:48:38,615 [Worker-8] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.dferreira:commons:0.0.1-SNAPSHOT @ /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/pom.xml.
+2016-09-03 12:48:39,192 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:39,192 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/main/resources
+2016-09-03 12:48:39,195 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:39,195 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/test/resources
+2016-09-03 12:48:41,731 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.dferreira:commons:0.0.1-SNAPSHOT @ /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/pom.xml.
+2016-09-03 12:48:42,393 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:42,393 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/main/resources
+2016-09-03 12:48:42,395 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:42,395 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/test/resources
+2016-09-03 12:48:43,494 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:43,495 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/main/resources
+2016-09-03 12:48:43,497 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:43,497 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/test/resources
+2016-09-03 12:48:49,923 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.
+2016-09-03 12:48:53,662 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons
+2016-09-03 12:48:53,662 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B clean
+2016-09-03 12:48:56,299 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:56,299 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/main/resources
+2016-09-03 12:48:56,301 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:48:56,301 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/test/resources
+2016-09-03 12:49:06,054 [Worker-13] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons
+2016-09-03 12:49:06,054 [Worker-13] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B install
+2016-09-03 12:49:12,592 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:12,593 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/main/resources
+2016-09-03 12:49:12,594 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:12,594 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/test/resources
+2016-09-03 12:49:34,181 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: GameEngine:GameEngine2_1:0.0.1-SNAPSHOT @ /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/pom.xml.
+2016-09-03 12:49:34,283 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:34,289 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:49:34,300 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:34,300 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:49:35,608 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:35,614 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:49:35,617 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:35,617 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:49:45,035 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:45,035 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/main/resources
+2016-09-03 12:49:45,037 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:45,037 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/commons/src/test/resources
+2016-09-03 12:49:45,047 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:45,048 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-03 12:49:45,050 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:45,051 [Worker-15] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:49:52,710 [Worker-15] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1
+2016-09-03 12:49:52,711 [Worker-15] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B clean
+2016-09-03 12:49:54,516 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:54,517 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:49:54,526 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:54,526 [Worker-14] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:49:55,553 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:55,554 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-03 12:49:55,555 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:49:55,555 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:50:02,479 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1
+2016-09-03 12:50:02,480 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B install
+2016-09-03 12:50:06,791 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:50:06,792 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:50:06,793 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:50:06,793 [Worker-11] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:50:43,076 [Worker-10] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1
+2016-09-03 12:50:43,077 [Worker-10] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B install
+2016-09-03 12:50:46,946 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:50:46,946 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-03 12:50:46,947 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:50:46,947 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL2_1/src/test/resources
+2016-09-03 12:51:14,919 [Worker-6] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: GameEngine:Example1:0.0.1-SNAPSHOT @ /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/pom.xml.
+2016-09-03 12:51:15,012 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:15,013 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:51:15,016 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:15,017 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-03 12:51:16,300 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:16,300 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:51:16,302 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:16,302 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-03 12:51:18,865 [Worker-4] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2
+2016-09-03 12:51:18,866 [Worker-4] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B clean
+2016-09-03 12:51:20,686 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:20,686 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:51:20,697 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:20,697 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-03 12:51:21,716 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:21,716 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-03 12:51:21,718 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:21,718 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-03 12:51:40,800 [Worker-11] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2
+2016-09-03 12:51:40,801 [Worker-11] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B install
+2016-09-03 12:51:48,038 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:48,038 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-09-03 12:51:48,040 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:51:48,040 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-03 12:51:58,381 [Worker-13] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2
+2016-09-03 12:51:58,381 [Worker-13] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B install
+2016-09-03 12:52:02,360 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:52:02,360 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-09-03 12:52:02,362 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-09-03 12:52:02,362 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-03 13:01:13,216 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.
