@@ -1,0 +1,138 @@
+\hypertarget{interface_entity}{}\section{Entity Class Reference}
+\label{interface_entity}\index{Entity@{Entity}}
+
+
+{\ttfamily \#import $<$Entity.\+h$>$}
+
+Inheritance diagram for Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_entity}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(id) -\/ \hyperlink{interface_entity_ad7147d00332fed30cf14829243c5430e}{init\+::::::}
+\item 
+(void) -\/ \hyperlink{interface_entity_a51ba5b8f3b66cba0b722edaabdd6090e}{increase\+Position\+:::}
+\item 
+(void) -\/ \hyperlink{interface_entity_a6e21b02ee042d70378d336fe6ea16fb5}{increase\+Rotation\+:::}
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{interface_textured_model}{Textured\+Model} $\ast$ {\bfseries model}\hypertarget{interface_entity_a02801075948569b0e2b52bed0e0f7c4c}{}\label{interface_entity_a02801075948569b0e2b52bed0e0f7c4c}
+
+\item 
+\hyperlink{interface_vector3f}{Vector3f} $\ast$ {\bfseries position}\hypertarget{interface_entity_a5b46de87209b8b087852e4cd92e4218c}{}\label{interface_entity_a5b46de87209b8b087852e4cd92e4218c}
+
+\item 
+float {\bfseries rotX}\hypertarget{interface_entity_a872123c5ed32f888d9d34114fcded890}{}\label{interface_entity_a872123c5ed32f888d9d34114fcded890}
+
+\item 
+float {\bfseries rotY}\hypertarget{interface_entity_ab786b45308be8e93648e092703910909}{}\label{interface_entity_ab786b45308be8e93648e092703910909}
+
+\item 
+float {\bfseries rotZ}\hypertarget{interface_entity_aea2a72cc52774873d440d6098b4adfe7}{}\label{interface_entity_aea2a72cc52774873d440d6098b4adfe7}
+
+\item 
+float {\bfseries scale}\hypertarget{interface_entity_a8c1b0331fdaca5874c15e10de1ed3531}{}\label{interface_entity_a8c1b0331fdaca5874c15e10de1ed3531}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents one entity in the 3D world 
+
+\subsection{Method Documentation}
+\index{Entity@{Entity}!increase\+Position\+:::@{increase\+Position\+:::}}
+\index{increase\+Position\+:::@{increase\+Position\+:::}!Entity@{Entity}}
+\subsubsection[{\texorpdfstring{increase\+Position\+:::(float dx,[] float dy,[] float dz)}{increasePosition:::(float dx,[] float dy,[] float dz)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) increase\+Position\+: 
+\begin{DoxyParamCaption}
+\item[{(float)}]{dx}
+\item[{:(float)}]{dy}
+\item[{:(float)}]{dz}
+\end{DoxyParamCaption}
+}\hypertarget{interface_entity_a51ba5b8f3b66cba0b722edaabdd6090e}{}\label{interface_entity_a51ba5b8f3b66cba0b722edaabdd6090e}
+Increases the position of the model using for that the specified components
+
+
+\begin{DoxyParams}{Parameters}
+{\em dx} & X component to be increase \\
+\hline
+{\em dy} & Y component to be increase \\
+\hline
+{\em dz} & Z component to be increase \\
+\hline
+\end{DoxyParams}
+\index{Entity@{Entity}!increase\+Rotation\+:::@{increase\+Rotation\+:::}}
+\index{increase\+Rotation\+:::@{increase\+Rotation\+:::}!Entity@{Entity}}
+\subsubsection[{\texorpdfstring{increase\+Rotation\+:::(float dx,[] float dy,[] float dz)}{increaseRotation:::(float dx,[] float dy,[] float dz)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) increase\+Rotation\+: 
+\begin{DoxyParamCaption}
+\item[{(float)}]{dx}
+\item[{:(float)}]{dy}
+\item[{:(float)}]{dz}
+\end{DoxyParamCaption}
+}\hypertarget{interface_entity_a6e21b02ee042d70378d336fe6ea16fb5}{}\label{interface_entity_a6e21b02ee042d70378d336fe6ea16fb5}
+Increases the rotation of the model using for that the specified components 
+\begin{DoxyParams}{Parameters}
+{\em dx} & X component to be increase \\
+\hline
+{\em dy} & Y component to be increase \\
+\hline
+{\em dz} & Z component to be increase \\
+\hline
+\end{DoxyParams}
+\index{Entity@{Entity}!init\+::::::@{init\+::::::}}
+\index{init\+::::::@{init\+::::::}!Entity@{Entity}}
+\subsubsection[{\texorpdfstring{init\+::::::(\+Textured\+Model $\ast$a\+Model,[] Vector3f $\ast$a\+Position,[] float a\+Rot\+X,[] float a\+Rot\+Y,[] float a\+Rot\+Z,[] float a\+Scale)}{init::::::(TexturedModel *aModel,[] Vector3f *aPosition,[] float aRotX,[] float aRotY,[] float aRotZ,[] float aScale)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (id) init\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf Textured\+Model}$\ast$)}]{a\+Model}
+\item[{:({\bf Vector3f}$\ast$)}]{a\+Position}
+\item[{:(float)}]{a\+RotX}
+\item[{:(float)}]{a\+RotY}
+\item[{:(float)}]{a\+RotZ}
+\item[{:(float)}]{a\+Scale}
+\end{DoxyParamCaption}
+}\hypertarget{interface_entity_ad7147d00332fed30cf14829243c5430e}{}\label{interface_entity_ad7147d00332fed30cf14829243c5430e}
+Initiator of the entity to be render in the 3D world
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Model} & Textured model \\
+\hline
+{\em a\+Position} & Position where the model should be render \\
+\hline
+{\em a\+RotX} & Rotation of the model in the X axle \\
+\hline
+{\em a\+RotY} & Rotation of the model in the Y axle \\
+\hline
+{\em a\+RotZ} & Rotation of the model in the Z axle \\
+\hline
+{\em a\+Scale} & Scale of the model\\
+\hline
+\end{DoxyParams}
+Initiator of the entity to be render in the 3D world
+
+
+\begin{DoxyParams}{Parameters}
+{\em a\+Model} & Textured model \\
+\hline
+{\em position} & Position where the model should be render \\
+\hline
+{\em a\+RotX} & Rotation of the model in the X axle \\
+\hline
+{\em a\+RotY} & Rotation of the model in the Y axle \\
+\hline
+{\em a\+RotZ} & Rotation of the model in the Z axle \\
+\hline
+{\em a\+Scale} & Scale of the model \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Engine/\+Models/Entity.\+h\item 
+Game\+Engine/\+Models/Entity.\+m\end{DoxyCompactItemize}

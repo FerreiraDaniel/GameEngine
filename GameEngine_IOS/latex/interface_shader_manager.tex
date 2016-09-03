@@ -1,0 +1,227 @@
+\hypertarget{interface_shader_manager}{}\section{Shader\+Manager Class Reference}
+\label{interface_shader_manager}\index{Shader\+Manager@{Shader\+Manager}}
+Inheritance diagram for Shader\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{interface_shader_manager}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(id) -\/ \hyperlink{interface_shader_manager_a5b7d6903d3e8dcf4875cb144046e3262}{init\+::}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_ad7c264b0d06bccf7c1e19976633173d0}{bind\+Attributes}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_abe1fcce536c9bd78cd14a23e2b2ac46b}{get\+All\+Uniform\+Locations}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_a9fb731a8cd811cf1740c13cb52774f18}{bind\+Attribute\+::}
+\item 
+(int) -\/ \hyperlink{interface_shader_manager_a0923a8bdd737a702639f26549c2d5186}{get\+Uniform\+Location\+:}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_aad63531f25750d7cb657dcb10670a5c5}{load\+Int\+::}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_a613176179acff066ba03a1409b93dcf3}{load\+Float\+::}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_accbae5024b71677f3e9fef5c8b6cd0fa}{load\+Boolean\+::}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_a23706b17b23084ce2e83055857631905}{load\+Matrix\+::}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_a7dc69f2cb034c904c1483e7764cdb71b}{load\+Matrix3\+::}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_a5169f1f4fac9bf471bb328275d5eb6e5}{start}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_ade2ef03222793482549cc5f49f5f0fd3}{stop}
+\item 
+(void) -\/ \hyperlink{interface_shader_manager_ad0519a6e937387a7a3377123d2eac386}{dealloc}
+\end{DoxyCompactItemize}
+
+
+\subsection{Method Documentation}
+\index{Shader\+Manager@{Shader\+Manager}!bind\+Attribute\+::@{bind\+Attribute\+::}}
+\index{bind\+Attribute\+::@{bind\+Attribute\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{bind\+Attribute\+::(int attribute\+Index,[] char $\ast$variable\+Name)}{bindAttribute::(int attributeIndex,[] char *variableName)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) bind\+Attribute\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{attribute\+Index}
+\item[{:(char$\ast$)}]{variable\+Name}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a9fb731a8cd811cf1740c13cb52774f18}{}\label{interface_shader_manager_a9fb731a8cd811cf1740c13cb52774f18}
+Bind one attribute
+
+
+\begin{DoxyParams}{Parameters}
+{\em attribute\+Index} & Index of the attribute to bind \\
+\hline
+{\em variable\+Name} & Name of the attribute to bind \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!bind\+Attributes@{bind\+Attributes}}
+\index{bind\+Attributes@{bind\+Attributes}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{bind\+Attributes()}{bindAttributes()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) bind\+Attributes 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_ad7c264b0d06bccf7c1e19976633173d0}{}\label{interface_shader_manager_ad7c264b0d06bccf7c1e19976633173d0}
+Called to bind the attributes to the program shader \index{Shader\+Manager@{Shader\+Manager}!dealloc@{dealloc}}
+\index{dealloc@{dealloc}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{dealloc()}{dealloc()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) dealloc 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_ad0519a6e937387a7a3377123d2eac386}{}\label{interface_shader_manager_ad0519a6e937387a7a3377123d2eac386}
+Clean the program shader from memory \index{Shader\+Manager@{Shader\+Manager}!get\+All\+Uniform\+Locations@{get\+All\+Uniform\+Locations}}
+\index{get\+All\+Uniform\+Locations@{get\+All\+Uniform\+Locations}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{get\+All\+Uniform\+Locations()}{getAllUniformLocations()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) get\+All\+Uniform\+Locations 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_abe1fcce536c9bd78cd14a23e2b2ac46b}{}\label{interface_shader_manager_abe1fcce536c9bd78cd14a23e2b2ac46b}
+Called to ensure that all the shader managers get their uniform locations \index{Shader\+Manager@{Shader\+Manager}!get\+Uniform\+Location\+:@{get\+Uniform\+Location\+:}}
+\index{get\+Uniform\+Location\+:@{get\+Uniform\+Location\+:}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{get\+Uniform\+Location\+:(const char $\ast$uniform\+Name)}{getUniformLocation:(const char *uniformName)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (int) get\+Uniform\+Location\+: 
+\begin{DoxyParamCaption}
+\item[{(const char$\ast$)}]{uniform\+Name}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a0923a8bdd737a702639f26549c2d5186}{}\label{interface_shader_manager_a0923a8bdd737a702639f26549c2d5186}
+Get the position of one uniform variable in the program shader
+
+
+\begin{DoxyParams}{Parameters}
+{\em uniform\+Name} & the name of the uniform variable as appears in the shader code \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the position of the uniform variable in program shader 
+\end{DoxyReturn}
+\index{Shader\+Manager@{Shader\+Manager}!init\+::@{init\+::}}
+\index{init\+::@{init\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{init\+::(\+N\+S\+String $\ast$vertex\+File,[] N\+S\+String $\ast$fragment\+File)}{init::(NSString *vertexFile,[] NSString *fragmentFile)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (id) init\+: 
+\begin{DoxyParamCaption}
+\item[{(N\+S\+String$\ast$)}]{vertex\+File}
+\item[{:(N\+S\+String$\ast$)}]{fragment\+File}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a5b7d6903d3e8dcf4875cb144046e3262}{}\label{interface_shader_manager_a5b7d6903d3e8dcf4875cb144046e3262}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+\textcolor{keyword}{@private}
+    \hyperlink{interface_shader_program}{ShaderProgram} * shaderProgram
+\end{DoxyCode}
+Initialize of the program shader manager
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+File} & File with vertex description \\
+\hline
+{\em fragment\+File} & File with fragment description \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!load\+Boolean\+::@{load\+Boolean\+::}}
+\index{load\+Boolean\+::@{load\+Boolean\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{load\+Boolean\+::(int location,[] B\+O\+O\+L value)}{loadBoolean::(int location,[] BOOL value)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) load\+Boolean\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{location}
+\item[{:(B\+O\+OL)}]{value}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_accbae5024b71677f3e9fef5c8b6cd0fa}{}\label{interface_shader_manager_accbae5024b71677f3e9fef5c8b6cd0fa}
+Load a vector to be used in the shader script
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & location of the shader variable in the script \\
+\hline
+{\em vector} & The vector to load Load a boolean value to be used in the shader script\\
+\hline
+{\em location} & The location of the shader variable in the script \\
+\hline
+{\em value} & value to load \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!load\+Float\+::@{load\+Float\+::}}
+\index{load\+Float\+::@{load\+Float\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{load\+Float\+::(int location,[] float value)}{loadFloat::(int location,[] float value)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) load\+Float\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{location}
+\item[{:(float)}]{value}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a613176179acff066ba03a1409b93dcf3}{}\label{interface_shader_manager_a613176179acff066ba03a1409b93dcf3}
+Load a float value to be used in the shader script
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & location of the shader variable in the script \\
+\hline
+{\em value} & value to load \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!load\+Int\+::@{load\+Int\+::}}
+\index{load\+Int\+::@{load\+Int\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{load\+Int\+::(int location,[] int value)}{loadInt::(int location,[] int value)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) load\+Int\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{location}
+\item[{:(int)}]{value}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_aad63531f25750d7cb657dcb10670a5c5}{}\label{interface_shader_manager_aad63531f25750d7cb657dcb10670a5c5}
+Load a integer value to be used in the shader script
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & location of the shader variable in the script \\
+\hline
+{\em value} & The value to load \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!load\+Matrix3\+::@{load\+Matrix3\+::}}
+\index{load\+Matrix3\+::@{load\+Matrix3\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{load\+Matrix3\+::(int location,[] G\+L\+K\+Matrix3 matrix)}{loadMatrix3::(int location,[] GLKMatrix3 matrix)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) load\+Matrix3\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{location}
+\item[{:(G\+L\+K\+Matrix3)}]{matrix}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a7dc69f2cb034c904c1483e7764cdb71b}{}\label{interface_shader_manager_a7dc69f2cb034c904c1483e7764cdb71b}
+Load a matrix to be used in the shader script
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location of the shader variable in the script \\
+\hline
+{\em matrix} & Matrix to load \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!load\+Matrix\+::@{load\+Matrix\+::}}
+\index{load\+Matrix\+::@{load\+Matrix\+::}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{load\+Matrix\+::(int location,[] G\+L\+K\+Matrix4 matrix)}{loadMatrix::(int location,[] GLKMatrix4 matrix)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) load\+Matrix\+: 
+\begin{DoxyParamCaption}
+\item[{(int)}]{location}
+\item[{:(G\+L\+K\+Matrix4)}]{matrix}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a23706b17b23084ce2e83055857631905}{}\label{interface_shader_manager_a23706b17b23084ce2e83055857631905}
+Load a matrix to be used in the shader script
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & The location of the shader variable in the script \\
+\hline
+{\em matrix} & Matrix to load \\
+\hline
+\end{DoxyParams}
+\index{Shader\+Manager@{Shader\+Manager}!start@{start}}
+\index{start@{start}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{start()}{start()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) start 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_a5169f1f4fac9bf471bb328275d5eb6e5}{}\label{interface_shader_manager_a5169f1f4fac9bf471bb328275d5eb6e5}
+Indicates that should start to use a certain program shader \index{Shader\+Manager@{Shader\+Manager}!stop@{stop}}
+\index{stop@{stop}!Shader\+Manager@{Shader\+Manager}}
+\subsubsection[{\texorpdfstring{stop()}{stop()}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) stop 
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+}\hypertarget{interface_shader_manager_ade2ef03222793482549cc5f49f5f0fd3}{}\label{interface_shader_manager_ade2ef03222793482549cc5f49f5f0fd3}
+Indicate that should not use a certain program no more 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Engine/\+Shaders/Shader\+Manager.\+h\item 
+Game\+Engine/\+Shaders/Shader\+Manager.\+m\end{DoxyCompactItemize}

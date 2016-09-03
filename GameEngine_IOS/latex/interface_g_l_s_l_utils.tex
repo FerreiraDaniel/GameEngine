@@ -1,0 +1,61 @@
+\hypertarget{interface_g_l_s_l_utils}{}\section{G\+L\+S\+L\+Utils Class Reference}
+\label{interface_g_l_s_l_utils}\index{G\+L\+S\+L\+Utils@{G\+L\+S\+L\+Utils}}
+Inheritance diagram for G\+L\+S\+L\+Utils\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_g_l_s_l_utils}
+\end{center}
+\end{figure}
+\subsection*{Class Methods}
+\begin{DoxyCompactItemize}
+\item 
+(\hyperlink{interface_shader_program}{Shader\+Program} $\ast$) + \hyperlink{interface_g_l_s_l_utils_afc49711c907879c1b90293a5f21e29d6}{load\+Program\+::}
+\item 
+(B\+O\+OL) + \hyperlink{interface_g_l_s_l_utils_a1c9c56108270842e463fe3d894e1334a}{link\+Program\+:}
+\end{DoxyCompactItemize}
+
+
+\subsection{Method Documentation}
+\index{G\+L\+S\+L\+Utils@{G\+L\+S\+L\+Utils}!link\+Program\+:@{link\+Program\+:}}
+\index{link\+Program\+:@{link\+Program\+:}!G\+L\+S\+L\+Utils@{G\+L\+S\+L\+Utils}}
+\subsubsection[{\texorpdfstring{link\+Program\+:(\+Shader\+Program $\ast$shader\+Program)}{linkProgram:(ShaderProgram *shaderProgram)}}]{\setlength{\rightskip}{0pt plus 5cm}+ (B\+O\+OL) link\+Program\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf Shader\+Program}$\ast$)}]{shader\+Program}
+\end{DoxyParamCaption}
+}\hypertarget{interface_g_l_s_l_utils_a1c9c56108270842e463fe3d894e1334a}{}\label{interface_g_l_s_l_utils_a1c9c56108270842e463fe3d894e1334a}
+Link the program shader with their vertex shader and fragment shader
+
+
+\begin{DoxyParams}{Parameters}
+{\em shader\+Program} & The program shader not linked yet\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+False = Not linked True = Linked 
+\end{DoxyReturn}
+\index{G\+L\+S\+L\+Utils@{G\+L\+S\+L\+Utils}!load\+Program\+::@{load\+Program\+::}}
+\index{load\+Program\+::@{load\+Program\+::}!G\+L\+S\+L\+Utils@{G\+L\+S\+L\+Utils}}
+\subsubsection[{\texorpdfstring{load\+Program\+::(const char $\ast$vertex\+Shader\+Src,[] const char $\ast$frag\+Shader\+Src)}{loadProgram::(const char *vertexShaderSrc,[] const char *fragShaderSrc)}}]{\setlength{\rightskip}{0pt plus 5cm}+ ({\bf Shader\+Program} $\ast$) load\+Program\+: 
+\begin{DoxyParamCaption}
+\item[{(const char $\ast$)}]{vertex\+Shader\+Src}
+\item[{:(const char $\ast$)}]{frag\+Shader\+Src}
+\end{DoxyParamCaption}
+}\hypertarget{interface_g_l_s_l_utils_afc49711c907879c1b90293a5f21e29d6}{}\label{interface_g_l_s_l_utils_afc49711c907879c1b90293a5f21e29d6}
+Compiles the shader sources and attache them to the program
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Shader\+Src} & Source code of the vertex shader \\
+\hline
+{\em frag\+Shader\+Src} & Source code of the fragment shader \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nil There was an error not 0 -\/$>$ Id of the program loaded 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Engine/\+Commons/G\+L\+S\+L\+Utils.\+h\item 
+Game\+Engine/\+Commons/G\+L\+S\+L\+Utils.\+m\end{DoxyCompactItemize}

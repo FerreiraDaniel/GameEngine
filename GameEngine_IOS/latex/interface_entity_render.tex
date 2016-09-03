@@ -1,0 +1,70 @@
+\hypertarget{interface_entity_render}{}\section{Entity\+Render Class Reference}
+\label{interface_entity_render}\index{Entity\+Render@{Entity\+Render}}
+Inheritance diagram for Entity\+Render\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_entity_render}
+\end{center}
+\end{figure}
+\subsection*{Instance Methods}
+\begin{DoxyCompactItemize}
+\item 
+(id) -\/ \hyperlink{interface_entity_render_a854c250e41a1f8e91421b3a1c23e4a9f}{init\+::}
+\item 
+(void) -\/ \hyperlink{interface_entity_render_a37c77a02d2f6f9312dbbd2db2c7585cc}{render\+:}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class responsible to render the entities in the screen 
+
+\subsection{Method Documentation}
+\index{Entity\+Render@{Entity\+Render}!init\+::@{init\+::}}
+\index{init\+::@{init\+::}!Entity\+Render@{Entity\+Render}}
+\subsubsection[{\texorpdfstring{init\+::(\+Entity\+Shader\+Manager $\ast$a\+Shader,[] G\+L\+K\+Matrix4 projection\+Matrix)}{init::(EntityShaderManager *aShader,[] GLKMatrix4 projectionMatrix)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (id) init\+: 
+\begin{DoxyParamCaption}
+\item[{({\bf Entity\+Shader\+Manager}$\ast$)}]{a\+Shader}
+\item[{:(G\+L\+K\+Matrix4)}]{projection\+Matrix}
+\end{DoxyParamCaption}
+}\hypertarget{interface_entity_render_a854c250e41a1f8e91421b3a1c23e4a9f}{}\label{interface_entity_render_a854c250e41a1f8e91421b3a1c23e4a9f}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+\{
+\textcolor{keyword}{@private}
+    
+    
+    \hyperlink{interface_entity_shader_manager}{EntityShaderManager} *eShader
+\end{DoxyCode}
+Initializer of the entity render
+
+
+\begin{DoxyParams}{Parameters}
+{\em e\+Shader} & Shader manager \\
+\hline
+{\em projection\+Matrix} & The projection matrix of the render \\
+\hline
+\end{DoxyParams}
+\index{Entity\+Render@{Entity\+Render}!render\+:@{render\+:}}
+\index{render\+:@{render\+:}!Entity\+Render@{Entity\+Render}}
+\subsubsection[{\texorpdfstring{render\+:(\+G\+L\+K\+Matrix4 modelview\+Matrix)}{render:(GLKMatrix4 modelviewMatrix)}}]{\setlength{\rightskip}{0pt plus 5cm}-\/ (void) render\+: 
+\begin{DoxyParamCaption}
+\item[{(G\+L\+K\+Matrix4)}]{modelview\+Matrix}
+\end{DoxyParamCaption}
+}\hypertarget{interface_entity_render_a37c77a02d2f6f9312dbbd2db2c7585cc}{}\label{interface_entity_render_a37c77a02d2f6f9312dbbd2db2c7585cc}
+Render the entities in the scene
+
+
+\begin{DoxyParams}{Parameters}
+{\em sun} & The source of light of the scene \\
+\hline
+{\em view\+Matrix} & View matrix to render the scene \\
+\hline
+{\em entities} & List of entities of the scene \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Engine/\+Render\+Engine/Entity\+Render.\+h\item 
+Game\+Engine/\+Render\+Engine/Entity\+Render.\+m\end{DoxyCompactItemize}

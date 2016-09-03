@@ -1,0 +1,856 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3214302D1D5F3FBF005C23A1 /* ShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3214302C1D5F3FBF005C23A1 /* ShaderManager.m */; };
+		321430301D5F403A005C23A1 /* EntityShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3214302F1D5F403A005C23A1 /* EntityShaderManager.m */; };
+		321430331D5F4538005C23A1 /* LoadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 321430321D5F4538005C23A1 /* LoadUtils.m */; };
+		321430361D5F558A005C23A1 /* EntityRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 321430351D5F558A005C23A1 /* EntityRender.m */; };
+		3238CE391D6813B600186ED6 /* GLTransformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3238CE381D6813B600186ED6 /* GLTransformation.m */; };
+		3248966A1D669F29001F5AB2 /* ModelTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 324896691D669F29001F5AB2 /* ModelTexture.m */; };
+		3253214E1D7336310061B2ED /* SkyBoxShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3253214D1D7336310061B2ED /* SkyBoxShaderManager.m */; settings = {ASSET_TAGS = (); }; };
+		325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */; settings = {ASSET_TAGS = (); }; };
+		325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */; settings = {ASSET_TAGS = (); }; };
+		326945111D6E3426008C542A /* WfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 326945101D6E3426008C542A /* WfObject.m */; settings = {ASSET_TAGS = (); }; };
+		327861FF1D60B2A300F96EF0 /* Loader.m in Sources */ = {isa = PBXBuildFile; fileRef = 327861FE1D60B2A300F96EF0 /* Loader.m */; };
+		327862021D60B5EE00F96EF0 /* RawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 327862011D60B5EE00F96EF0 /* RawModel.m */; };
+		3284B0411D664DA400177CEC /* Terrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3284B0401D664DA400177CEC /* Terrain.m */; };
+		3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */; settings = {ASSET_TAGS = (); }; };
+		3295B45D1D6B8C3A0065E8E8 /* banana_tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4531D6B8C3A0065E8E8 /* banana_tree.png */; settings = {ASSET_TAGS = (); }; };
+		3295B45E1D6B8C3A0065E8E8 /* fern.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4541D6B8C3A0065E8E8 /* fern.obj */; settings = {ASSET_TAGS = (); }; };
+		3295B45F1D6B8C3A0065E8E8 /* fern.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4551D6B8C3A0065E8E8 /* fern.png */; settings = {ASSET_TAGS = (); }; };
+		3295B4601D6B8C3A0065E8E8 /* flower.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4561D6B8C3A0065E8E8 /* flower.obj */; settings = {ASSET_TAGS = (); }; };
+		3295B4611D6B8C3A0065E8E8 /* flower.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4571D6B8C3A0065E8E8 /* flower.png */; settings = {ASSET_TAGS = (); }; };
+		3295B4621D6B8C3A0065E8E8 /* grass.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4581D6B8C3A0065E8E8 /* grass.obj */; settings = {ASSET_TAGS = (); }; };
+		3295B4631D6B8C3A0065E8E8 /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4591D6B8C3A0065E8E8 /* grass.png */; settings = {ASSET_TAGS = (); }; };
+		3295B4641D6B8C3A0065E8E8 /* tree.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B45A1D6B8C3A0065E8E8 /* tree.obj */; settings = {ASSET_TAGS = (); }; };
+		3295B4651D6B8C3A0065E8E8 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B45B1D6B8C3A0065E8E8 /* tree.png */; settings = {ASSET_TAGS = (); }; };
+		3297C5DF1D68EA10009F7416 /* TextureData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3297C5DE1D68EA10009F7416 /* TextureData.m */; settings = {ASSET_TAGS = (); }; };
+		3297C5F41D68F54E009F7416 /* sky_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5EE1D68F54E009F7416 /* sky_back.png */; settings = {ASSET_TAGS = (); }; };
+		3297C5F51D68F54E009F7416 /* sky_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5EF1D68F54E009F7416 /* sky_bottom.png */; settings = {ASSET_TAGS = (); }; };
+		3297C5F61D68F54E009F7416 /* sky_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F01D68F54E009F7416 /* sky_front.png */; settings = {ASSET_TAGS = (); }; };
+		3297C5F71D68F54E009F7416 /* sky_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F11D68F54E009F7416 /* sky_left.png */; settings = {ASSET_TAGS = (); }; };
+		3297C5F81D68F54E009F7416 /* sky_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F21D68F54E009F7416 /* sky_right.png */; settings = {ASSET_TAGS = (); }; };
+		3297C5F91D68F54E009F7416 /* sky_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F31D68F54E009F7416 /* sky_top.png */; settings = {ASSET_TAGS = (); }; };
+		32A24F081D69F8B200659A3E /* OBJLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A24F071D69F8B200659A3E /* OBJLoader.m */; settings = {ASSET_TAGS = (); }; };
+		32A24F0B1D69F8EC00659A3E /* PolygonalFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */; settings = {ASSET_TAGS = (); }; };
+		32A921671D5EF5D900EF8477 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921661D5EF5D900EF8477 /* main.m */; };
+		32A9216A1D5EF5D900EF8477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921691D5EF5D900EF8477 /* AppDelegate.m */; };
+		32A9216C1D5EF5D900EF8477 /* entity_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 32A9216B1D5EF5D900EF8477 /* entity_vertex_shader.vsh */; };
+		32A9216E1D5EF5D900EF8477 /* entity_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 32A9216D1D5EF5D900EF8477 /* entity_fragment_shader.fsh */; };
+		32A921711D5EF5D900EF8477 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921701D5EF5D900EF8477 /* GameViewController.m */; };
+		32A921741D5EF5D900EF8477 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A921721D5EF5D900EF8477 /* Main.storyboard */; };
+		32A921761D5EF5D900EF8477 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A921751D5EF5D900EF8477 /* Images.xcassets */; };
+		32A921791D5EF5D900EF8477 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A921771D5EF5D900EF8477 /* LaunchScreen.xib */; };
+		32A921851D5EF5D900EF8477 /* GameEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921841D5EF5D900EF8477 /* GameEngineTests.m */; };
+		32A921931D5EFC7F00EF8477 /* MasterRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921921D5EFC7F00EF8477 /* MasterRender.m */; };
+		32A921991D5F0B4200EF8477 /* GLSLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921981D5F0B4200EF8477 /* GLSLUtils.m */; };
+		32A9219C1D5F10D200EF8477 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A9219B1D5F10D200EF8477 /* ShaderProgram.m */; };
+		32A9FB9C1D736BDB002DF607 /* SkyBoxRender.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A9FB9B1D736BDB002DF607 /* SkyBoxRender.m */; settings = {ASSET_TAGS = (); }; };
+		32A9FB9F1D737721002DF607 /* WorldSkyBoxGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A9FB9E1D737721002DF607 /* WorldSkyBoxGenerator.m */; settings = {ASSET_TAGS = (); }; };
+		32B68FDD1D63A8EC00CE74E4 /* Vector2f.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FDC1D63A8EC00CE74E4 /* Vector2f.m */; };
+		32B68FE01D63AA9A00CE74E4 /* Vector3f.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FDF1D63AA9A00CE74E4 /* Vector3f.m */; };
+		32B68FE71D63AD3E00CE74E4 /* TerrainTexturesPack.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FE61D63AD3E00CE74E4 /* TerrainTexturesPack.m */; };
+		32B68FEA1D63B0DA00CE74E4 /* Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FE91D63B0DA00CE74E4 /* Camera.m */; };
+		32B68FED1D63B11F00CE74E4 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FEC1D63B11F00CE74E4 /* Entity.m */; };
+		32B68FF01D63B14900CE74E4 /* SkyBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FEF1D63B14900CE74E4 /* SkyBox.m */; };
+		32B68FF31D63B19100CE74E4 /* SkyBoxShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FF21D63B19100CE74E4 /* SkyBoxShape.m */; };
+		32B68FF91D63B20300CE74E4 /* TerrainShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FF81D63B20300CE74E4 /* TerrainShape.m */; };
+		32B68FFC1D63B23D00CE74E4 /* TexturedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B68FFB1D63B23D00CE74E4 /* TexturedModel.m */; };
+		32CF48331D71974400DFE35F /* DefaultModelGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CF48321D71974400DFE35F /* DefaultModelGenerator.m */; settings = {ASSET_TAGS = (); }; };
+		32ED64B91D688E86007043B1 /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = 32ED64B81D688E86007043B1 /* Light.m */; settings = {ASSET_TAGS = (); }; };
+		32ED64BD1D6894A3007043B1 /* WorldEntitiesGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 32ED64BC1D6894A3007043B1 /* WorldEntitiesGenerator.m */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		32A9217F1D5EF5D900EF8477 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 32A921591D5EF5D900EF8477 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32A921601D5EF5D900EF8477;
+			remoteInfo = GameEngine;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3214302B1D5F3FBF005C23A1 /* ShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderManager.h; path = Shaders/ShaderManager.h; sourceTree = "<group>"; };
+		3214302C1D5F3FBF005C23A1 /* ShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShaderManager.m; path = Shaders/ShaderManager.m; sourceTree = "<group>"; };
+		3214302E1D5F403A005C23A1 /* EntityShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityShaderManager.h; sourceTree = "<group>"; };
+		3214302F1D5F403A005C23A1 /* EntityShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityShaderManager.m; sourceTree = "<group>"; };
+		321430311D5F4538005C23A1 /* LoadUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadUtils.h; path = Commons/LoadUtils.h; sourceTree = "<group>"; };
+		321430321D5F4538005C23A1 /* LoadUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadUtils.m; path = Commons/LoadUtils.m; sourceTree = "<group>"; };
+		321430341D5F558A005C23A1 /* EntityRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityRender.h; path = RenderEngine/EntityRender.h; sourceTree = "<group>"; };
+		321430351D5F558A005C23A1 /* EntityRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityRender.m; path = RenderEngine/EntityRender.m; sourceTree = "<group>"; };
+		3238CE371D6813B600186ED6 /* GLTransformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLTransformation.h; path = Commons/GLTransformation.h; sourceTree = "<group>"; };
+		3238CE381D6813B600186ED6 /* GLTransformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLTransformation.m; path = Commons/GLTransformation.m; sourceTree = "<group>"; };
+		324896681D669F29001F5AB2 /* ModelTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelTexture.h; sourceTree = "<group>"; };
+		324896691D669F29001F5AB2 /* ModelTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelTexture.m; sourceTree = "<group>"; };
+		3253214C1D7336310061B2ED /* SkyBoxShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBoxShaderManager.h; sourceTree = "<group>"; };
+		3253214D1D7336310061B2ED /* SkyBoxShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyBoxShaderManager.m; sourceTree = "<group>"; };
+		3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_vertex_shader.vsh; sourceTree = "<group>"; };
+		325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_fragment_shader.fsh; sourceTree = "<group>"; };
+		325321531D7338FA0061B2ED /* SkyBoxShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SkyBoxShaderConstants.h; sourceTree = "<group>"; };
+		3265AFF21D5F62C300A0E37E /* IShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IShape.h; sourceTree = "<group>"; };
+		3269450F1D6E3426008C542A /* WfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WfObject.h; sourceTree = "<group>"; };
+		326945101D6E3426008C542A /* WfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WfObject.m; sourceTree = "<group>"; };
+		327861FC1D60A32200F96EF0 /* RenderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RenderConstants.h; path = RenderEngine/RenderConstants.h; sourceTree = "<group>"; };
+		327861FD1D60B2A300F96EF0 /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Loader.h; path = RenderEngine/Loader.h; sourceTree = "<group>"; };
+		327861FE1D60B2A300F96EF0 /* Loader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Loader.m; path = RenderEngine/Loader.m; sourceTree = "<group>"; };
+		327862001D60B5EE00F96EF0 /* RawModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawModel.h; sourceTree = "<group>"; };
+		327862011D60B5EE00F96EF0 /* RawModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawModel.m; sourceTree = "<group>"; };
+		327D5FE21D60DFD300D846C7 /* EntityShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityShaderConstants.h; sourceTree = "<group>"; };
+		3284B03F1D664DA400177CEC /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
+		3284B0401D664DA400177CEC /* Terrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Terrain.m; sourceTree = "<group>"; };
+		3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = banana_tree.obj; sourceTree = "<group>"; };
+		3295B4531D6B8C3A0065E8E8 /* banana_tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana_tree.png; sourceTree = "<group>"; };
+		3295B4541D6B8C3A0065E8E8 /* fern.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fern.obj; sourceTree = "<group>"; };
+		3295B4551D6B8C3A0065E8E8 /* fern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fern.png; sourceTree = "<group>"; };
+		3295B4561D6B8C3A0065E8E8 /* flower.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = flower.obj; sourceTree = "<group>"; };
+		3295B4571D6B8C3A0065E8E8 /* flower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flower.png; sourceTree = "<group>"; };
+		3295B4581D6B8C3A0065E8E8 /* grass.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = grass.obj; sourceTree = "<group>"; };
+		3295B4591D6B8C3A0065E8E8 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		3295B45A1D6B8C3A0065E8E8 /* tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.obj; sourceTree = "<group>"; };
+		3295B45B1D6B8C3A0065E8E8 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		3297C5DD1D68EA10009F7416 /* TextureData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureData.h; sourceTree = "<group>"; };
+		3297C5DE1D68EA10009F7416 /* TextureData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextureData.m; sourceTree = "<group>"; };
+		3297C5EE1D68F54E009F7416 /* sky_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_back.png; path = Sky/sky_back.png; sourceTree = "<group>"; };
+		3297C5EF1D68F54E009F7416 /* sky_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_bottom.png; path = Sky/sky_bottom.png; sourceTree = "<group>"; };
+		3297C5F01D68F54E009F7416 /* sky_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_front.png; path = Sky/sky_front.png; sourceTree = "<group>"; };
+		3297C5F11D68F54E009F7416 /* sky_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_left.png; path = Sky/sky_left.png; sourceTree = "<group>"; };
+		3297C5F21D68F54E009F7416 /* sky_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_right.png; path = Sky/sky_right.png; sourceTree = "<group>"; };
+		3297C5F31D68F54E009F7416 /* sky_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_top.png; path = Sky/sky_top.png; sourceTree = "<group>"; };
+		32A24F061D69F8B200659A3E /* OBJLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBJLoader.h; sourceTree = "<group>"; };
+		32A24F071D69F8B200659A3E /* OBJLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBJLoader.m; sourceTree = "<group>"; };
+		32A24F091D69F8EC00659A3E /* PolygonalFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonalFace.h; sourceTree = "<group>"; };
+		32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolygonalFace.m; sourceTree = "<group>"; };
+		32A921611D5EF5D900EF8477 /* GameEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32A921651D5EF5D900EF8477 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32A921661D5EF5D900EF8477 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32A921681D5EF5D900EF8477 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		32A921691D5EF5D900EF8477 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		32A9216B1D5EF5D900EF8477 /* entity_vertex_shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = entity_vertex_shader.vsh; sourceTree = "<group>"; };
+		32A9216D1D5EF5D900EF8477 /* entity_fragment_shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = entity_fragment_shader.fsh; sourceTree = "<group>"; };
+		32A9216F1D5EF5D900EF8477 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GameViewController.h; path = Controllers/GameViewController.h; sourceTree = "<group>"; };
+		32A921701D5EF5D900EF8477 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GameViewController.m; path = Controllers/GameViewController.m; sourceTree = "<group>"; };
+		32A921731D5EF5D900EF8477 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		32A921751D5EF5D900EF8477 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		32A921781D5EF5D900EF8477 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		32A9217E1D5EF5D900EF8477 /* GameEngineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameEngineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		32A921831D5EF5D900EF8477 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32A921841D5EF5D900EF8477 /* GameEngineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameEngineTests.m; sourceTree = "<group>"; };
+		32A921911D5EFC7F00EF8477 /* MasterRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasterRender.h; path = RenderEngine/MasterRender.h; sourceTree = "<group>"; };
+		32A921921D5EFC7F00EF8477 /* MasterRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MasterRender.m; path = RenderEngine/MasterRender.m; sourceTree = "<group>"; };
+		32A921971D5F0B4200EF8477 /* GLSLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLSLUtils.h; path = Commons/GLSLUtils.h; sourceTree = "<group>"; };
+		32A921981D5F0B4200EF8477 /* GLSLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLSLUtils.m; path = Commons/GLSLUtils.m; sourceTree = "<group>"; };
+		32A9219A1D5F10D200EF8477 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderProgram.h; path = Commons/ShaderProgram.h; sourceTree = "<group>"; };
+		32A9219B1D5F10D200EF8477 /* ShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShaderProgram.m; path = Commons/ShaderProgram.m; sourceTree = "<group>"; };
+		32A9FB9A1D736BDB002DF607 /* SkyBoxRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkyBoxRender.h; path = RenderEngine/SkyBoxRender.h; sourceTree = "<group>"; };
+		32A9FB9B1D736BDB002DF607 /* SkyBoxRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SkyBoxRender.m; path = RenderEngine/SkyBoxRender.m; sourceTree = "<group>"; };
+		32A9FB9D1D737721002DF607 /* WorldSkyBoxGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldSkyBoxGenerator.h; sourceTree = "<group>"; };
+		32A9FB9E1D737721002DF607 /* WorldSkyBoxGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldSkyBoxGenerator.m; sourceTree = "<group>"; };
+		32B68FDB1D63A8EC00CE74E4 /* Vector2f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector2f.h; path = Commons/Vector2f.h; sourceTree = "<group>"; };
+		32B68FDC1D63A8EC00CE74E4 /* Vector2f.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Vector2f.m; path = Commons/Vector2f.m; sourceTree = "<group>"; };
+		32B68FDE1D63AA9A00CE74E4 /* Vector3f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3f.h; path = Commons/Vector3f.h; sourceTree = "<group>"; };
+		32B68FDF1D63AA9A00CE74E4 /* Vector3f.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Vector3f.m; path = Commons/Vector3f.m; sourceTree = "<group>"; };
+		32B68FE51D63AD3E00CE74E4 /* TerrainTexturesPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainTexturesPack.h; sourceTree = "<group>"; };
+		32B68FE61D63AD3E00CE74E4 /* TerrainTexturesPack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainTexturesPack.m; sourceTree = "<group>"; };
+		32B68FE81D63B0DA00CE74E4 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		32B68FE91D63B0DA00CE74E4 /* Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Camera.m; sourceTree = "<group>"; };
+		32B68FEB1D63B11F00CE74E4 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		32B68FEC1D63B11F00CE74E4 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		32B68FEE1D63B14900CE74E4 /* SkyBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBox.h; sourceTree = "<group>"; };
+		32B68FEF1D63B14900CE74E4 /* SkyBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyBox.m; sourceTree = "<group>"; };
+		32B68FF11D63B19100CE74E4 /* SkyBoxShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkyBoxShape.h; sourceTree = "<group>"; };
+		32B68FF21D63B19100CE74E4 /* SkyBoxShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SkyBoxShape.m; sourceTree = "<group>"; };
+		32B68FF71D63B20300CE74E4 /* TerrainShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainShape.h; sourceTree = "<group>"; };
+		32B68FF81D63B20300CE74E4 /* TerrainShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainShape.m; sourceTree = "<group>"; };
+		32B68FFA1D63B23D00CE74E4 /* TexturedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturedModel.h; sourceTree = "<group>"; };
+		32B68FFB1D63B23D00CE74E4 /* TexturedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TexturedModel.m; sourceTree = "<group>"; };
+		32CF48311D71974400DFE35F /* DefaultModelGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultModelGenerator.h; sourceTree = "<group>"; };
+		32CF48321D71974400DFE35F /* DefaultModelGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultModelGenerator.m; sourceTree = "<group>"; };
+		32ED64B71D688E86007043B1 /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		32ED64B81D688E86007043B1 /* Light.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Light.m; sourceTree = "<group>"; };
+		32ED64BB1D6894A3007043B1 /* WorldEntitiesGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldEntitiesGenerator.h; sourceTree = "<group>"; };
+		32ED64BC1D6894A3007043B1 /* WorldEntitiesGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldEntitiesGenerator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32A9215E1D5EF5D900EF8477 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32A9217B1D5EF5D900EF8477 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		321430371D5F5C37005C23A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				327862001D60B5EE00F96EF0 /* RawModel.h */,
+				327862011D60B5EE00F96EF0 /* RawModel.m */,
+				32B68FE81D63B0DA00CE74E4 /* Camera.h */,
+				32B68FE91D63B0DA00CE74E4 /* Camera.m */,
+				32B68FEB1D63B11F00CE74E4 /* Entity.h */,
+				32B68FEC1D63B11F00CE74E4 /* Entity.m */,
+				32B68FEE1D63B14900CE74E4 /* SkyBox.h */,
+				32B68FEF1D63B14900CE74E4 /* SkyBox.m */,
+				32B68FF11D63B19100CE74E4 /* SkyBoxShape.h */,
+				32B68FF21D63B19100CE74E4 /* SkyBoxShape.m */,
+				32B68FF71D63B20300CE74E4 /* TerrainShape.h */,
+				32B68FF81D63B20300CE74E4 /* TerrainShape.m */,
+				32B68FFA1D63B23D00CE74E4 /* TexturedModel.h */,
+				32B68FFB1D63B23D00CE74E4 /* TexturedModel.m */,
+				3284B03F1D664DA400177CEC /* Terrain.h */,
+				3284B0401D664DA400177CEC /* Terrain.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		321430381D5F5CAF005C23A1 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				32A9216B1D5EF5D900EF8477 /* entity_vertex_shader.vsh */,
+				32A9216D1D5EF5D900EF8477 /* entity_fragment_shader.fsh */,
+				3214302E1D5F403A005C23A1 /* EntityShaderManager.h */,
+				3214302F1D5F403A005C23A1 /* EntityShaderManager.m */,
+				327D5FE21D60DFD300D846C7 /* EntityShaderConstants.h */,
+			);
+			name = Entities;
+			path = Shaders/Entities;
+			sourceTree = "<group>";
+		};
+		3253214B1D7335220061B2ED /* SkyBox */ = {
+			isa = PBXGroup;
+			children = (
+				325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */,
+				3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */,
+				3253214C1D7336310061B2ED /* SkyBoxShaderManager.h */,
+				3253214D1D7336310061B2ED /* SkyBoxShaderManager.m */,
+				325321531D7338FA0061B2ED /* SkyBoxShaderConstants.h */,
+			);
+			name = SkyBox;
+			path = Shaders/SkyBox;
+			sourceTree = "<group>";
+		};
+		3265AFF11D5F625800A0E37E /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shapes;
+			sourceTree = "<group>";
+		};
+		3295B4511D6B8C3A0065E8E8 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */,
+				3295B4531D6B8C3A0065E8E8 /* banana_tree.png */,
+				3295B4541D6B8C3A0065E8E8 /* fern.obj */,
+				3295B4551D6B8C3A0065E8E8 /* fern.png */,
+				3295B4561D6B8C3A0065E8E8 /* flower.obj */,
+				3295B4571D6B8C3A0065E8E8 /* flower.png */,
+				3295B4581D6B8C3A0065E8E8 /* grass.obj */,
+				3295B4591D6B8C3A0065E8E8 /* grass.png */,
+				3295B45A1D6B8C3A0065E8E8 /* tree.obj */,
+				3295B45B1D6B8C3A0065E8E8 /* tree.png */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		3297C5E01D68F387009F7416 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				3295B4511D6B8C3A0065E8E8 /* Entities */,
+				3297C5FA1D68F55E009F7416 /* Sky */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		3297C5FA1D68F55E009F7416 /* Sky */ = {
+			isa = PBXGroup;
+			children = (
+				3297C5EE1D68F54E009F7416 /* sky_back.png */,
+				3297C5EF1D68F54E009F7416 /* sky_bottom.png */,
+				3297C5F01D68F54E009F7416 /* sky_front.png */,
+				3297C5F11D68F54E009F7416 /* sky_left.png */,
+				3297C5F21D68F54E009F7416 /* sky_right.png */,
+				3297C5F31D68F54E009F7416 /* sky_top.png */,
+			);
+			name = Sky;
+			sourceTree = "<group>";
+		};
+		32A24F041D69F6D900659A3E /* Shapes */ = {
+			isa = PBXGroup;
+			children = (
+				3265AFF21D5F62C300A0E37E /* IShape.h */,
+				3269450F1D6E3426008C542A /* WfObject.h */,
+				326945101D6E3426008C542A /* WfObject.m */,
+			);
+			name = Shapes;
+			path = Commons/Shapes;
+			sourceTree = "<group>";
+		};
+		32A24F051D69F76500659A3E /* WaveFront */ = {
+			isa = PBXGroup;
+			children = (
+				32A24F061D69F8B200659A3E /* OBJLoader.h */,
+				32A24F071D69F8B200659A3E /* OBJLoader.m */,
+				32A24F091D69F8EC00659A3E /* PolygonalFace.h */,
+				32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */,
+			);
+			name = WaveFront;
+			path = Commons/WaveFront;
+			sourceTree = "<group>";
+		};
+		32A921581D5EF5D900EF8477 = {
+			isa = PBXGroup;
+			children = (
+				3297C5E01D68F387009F7416 /* Res */,
+				32A921631D5EF5D900EF8477 /* GameEngine */,
+				32A921811D5EF5D900EF8477 /* GameEngineTests */,
+				32A921621D5EF5D900EF8477 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		32A921621D5EF5D900EF8477 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				32A921611D5EF5D900EF8477 /* GameEngine.app */,
+				32A9217E1D5EF5D900EF8477 /* GameEngineTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32A921631D5EF5D900EF8477 /* GameEngine */ = {
+			isa = PBXGroup;
+			children = (
+				32ED64BA1D68945F007043B1 /* ModelGenerators */,
+				32B68FE11D63AC8A00CE74E4 /* Textures */,
+				3265AFF11D5F625800A0E37E /* Shapes */,
+				321430371D5F5C37005C23A1 /* Models */,
+				32A921961D5F0AEB00EF8477 /* Commons */,
+				32A921951D5F092B00EF8477 /* Controllers */,
+				32A921901D5EFC0D00EF8477 /* RenderEngine */,
+				32A9218E1D5EF73D00EF8477 /* Shaders */,
+				32A921681D5EF5D900EF8477 /* AppDelegate.h */,
+				32A921691D5EF5D900EF8477 /* AppDelegate.m */,
+				32A921721D5EF5D900EF8477 /* Main.storyboard */,
+				32A921751D5EF5D900EF8477 /* Images.xcassets */,
+				32A921771D5EF5D900EF8477 /* LaunchScreen.xib */,
+				32A921641D5EF5D900EF8477 /* Supporting Files */,
+			);
+			path = GameEngine;
+			sourceTree = "<group>";
+		};
+		32A921641D5EF5D900EF8477 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				32A921651D5EF5D900EF8477 /* Info.plist */,
+				32A921661D5EF5D900EF8477 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32A921811D5EF5D900EF8477 /* GameEngineTests */ = {
+			isa = PBXGroup;
+			children = (
+				32A921841D5EF5D900EF8477 /* GameEngineTests.m */,
+				32A921821D5EF5D900EF8477 /* Supporting Files */,
+			);
+			path = GameEngineTests;
+			sourceTree = "<group>";
+		};
+		32A921821D5EF5D900EF8477 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				32A921831D5EF5D900EF8477 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32A9218E1D5EF73D00EF8477 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				3253214B1D7335220061B2ED /* SkyBox */,
+				321430381D5F5CAF005C23A1 /* Entities */,
+				3214302B1D5F3FBF005C23A1 /* ShaderManager.h */,
+				3214302C1D5F3FBF005C23A1 /* ShaderManager.m */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		32A921901D5EFC0D00EF8477 /* RenderEngine */ = {
+			isa = PBXGroup;
+			children = (
+				32A921911D5EFC7F00EF8477 /* MasterRender.h */,
+				32A921921D5EFC7F00EF8477 /* MasterRender.m */,
+				321430341D5F558A005C23A1 /* EntityRender.h */,
+				321430351D5F558A005C23A1 /* EntityRender.m */,
+				327861FC1D60A32200F96EF0 /* RenderConstants.h */,
+				327861FD1D60B2A300F96EF0 /* Loader.h */,
+				327861FE1D60B2A300F96EF0 /* Loader.m */,
+				32A9FB9A1D736BDB002DF607 /* SkyBoxRender.h */,
+				32A9FB9B1D736BDB002DF607 /* SkyBoxRender.m */,
+			);
+			name = RenderEngine;
+			sourceTree = "<group>";
+		};
+		32A921951D5F092B00EF8477 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32A921701D5EF5D900EF8477 /* GameViewController.m */,
+				32A9216F1D5EF5D900EF8477 /* GameViewController.h */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		32A921961D5F0AEB00EF8477 /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				32A24F051D69F76500659A3E /* WaveFront */,
+				32A24F041D69F6D900659A3E /* Shapes */,
+				32ED64B61D688E43007043B1 /* Models */,
+				32A921971D5F0B4200EF8477 /* GLSLUtils.h */,
+				32A921981D5F0B4200EF8477 /* GLSLUtils.m */,
+				32A9219A1D5F10D200EF8477 /* ShaderProgram.h */,
+				32A9219B1D5F10D200EF8477 /* ShaderProgram.m */,
+				321430311D5F4538005C23A1 /* LoadUtils.h */,
+				321430321D5F4538005C23A1 /* LoadUtils.m */,
+				32B68FDB1D63A8EC00CE74E4 /* Vector2f.h */,
+				32B68FDC1D63A8EC00CE74E4 /* Vector2f.m */,
+				32B68FDE1D63AA9A00CE74E4 /* Vector3f.h */,
+				32B68FDF1D63AA9A00CE74E4 /* Vector3f.m */,
+				3238CE371D6813B600186ED6 /* GLTransformation.h */,
+				3238CE381D6813B600186ED6 /* GLTransformation.m */,
+			);
+			name = Commons;
+			sourceTree = "<group>";
+		};
+		32B68FE11D63AC8A00CE74E4 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				32B68FE51D63AD3E00CE74E4 /* TerrainTexturesPack.h */,
+				32B68FE61D63AD3E00CE74E4 /* TerrainTexturesPack.m */,
+				324896681D669F29001F5AB2 /* ModelTexture.h */,
+				324896691D669F29001F5AB2 /* ModelTexture.m */,
+			);
+			path = Textures;
+			sourceTree = "<group>";
+		};
+		32ED64B61D688E43007043B1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				32ED64B71D688E86007043B1 /* Light.h */,
+				32ED64B81D688E86007043B1 /* Light.m */,
+				3297C5DD1D68EA10009F7416 /* TextureData.h */,
+				3297C5DE1D68EA10009F7416 /* TextureData.m */,
+			);
+			name = Models;
+			path = Commons/Models;
+			sourceTree = "<group>";
+		};
+		32ED64BA1D68945F007043B1 /* ModelGenerators */ = {
+			isa = PBXGroup;
+			children = (
+				32ED64BB1D6894A3007043B1 /* WorldEntitiesGenerator.h */,
+				32ED64BC1D6894A3007043B1 /* WorldEntitiesGenerator.m */,
+				32CF48311D71974400DFE35F /* DefaultModelGenerator.h */,
+				32CF48321D71974400DFE35F /* DefaultModelGenerator.m */,
+				32A9FB9D1D737721002DF607 /* WorldSkyBoxGenerator.h */,
+				32A9FB9E1D737721002DF607 /* WorldSkyBoxGenerator.m */,
+			);
+			path = ModelGenerators;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		32A921601D5EF5D900EF8477 /* GameEngine */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32A921881D5EF5D900EF8477 /* Build configuration list for PBXNativeTarget "GameEngine" */;
+			buildPhases = (
+				32A9215D1D5EF5D900EF8477 /* Sources */,
+				32A9215E1D5EF5D900EF8477 /* Frameworks */,
+				32A9215F1D5EF5D900EF8477 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameEngine;
+			productName = GameEngine;
+			productReference = 32A921611D5EF5D900EF8477 /* GameEngine.app */;
+			productType = "com.apple.product-type.application";
+		};
+		32A9217D1D5EF5D900EF8477 /* GameEngineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32A9218B1D5EF5D900EF8477 /* Build configuration list for PBXNativeTarget "GameEngineTests" */;
+			buildPhases = (
+				32A9217A1D5EF5D900EF8477 /* Sources */,
+				32A9217B1D5EF5D900EF8477 /* Frameworks */,
+				32A9217C1D5EF5D900EF8477 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				32A921801D5EF5D900EF8477 /* PBXTargetDependency */,
+			);
+			name = GameEngineTests;
+			productName = GameEngineTests;
+			productReference = 32A9217E1D5EF5D900EF8477 /* GameEngineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		32A921591D5EF5D900EF8477 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Daniel ferreira";
+				TargetAttributes = {
+					32A921601D5EF5D900EF8477 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					32A9217D1D5EF5D900EF8477 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 32A921601D5EF5D900EF8477;
+					};
+				};
+			};
+			buildConfigurationList = 32A9215C1D5EF5D900EF8477 /* Build configuration list for PBXProject "GameEngine" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 32A921581D5EF5D900EF8477;
+			productRefGroup = 32A921621D5EF5D900EF8477 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				32A921601D5EF5D900EF8477 /* GameEngine */,
+				32A9217D1D5EF5D900EF8477 /* GameEngineTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32A9215F1D5EF5D900EF8477 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3295B4631D6B8C3A0065E8E8 /* grass.png in Resources */,
+				3295B4641D6B8C3A0065E8E8 /* tree.obj in Resources */,
+				3297C5F81D68F54E009F7416 /* sky_right.png in Resources */,
+				3297C5F71D68F54E009F7416 /* sky_left.png in Resources */,
+				3295B4601D6B8C3A0065E8E8 /* flower.obj in Resources */,
+				3297C5F41D68F54E009F7416 /* sky_back.png in Resources */,
+				3295B4611D6B8C3A0065E8E8 /* flower.png in Resources */,
+				325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */,
+				32A921791D5EF5D900EF8477 /* LaunchScreen.xib in Resources */,
+				32A921741D5EF5D900EF8477 /* Main.storyboard in Resources */,
+				3295B45D1D6B8C3A0065E8E8 /* banana_tree.png in Resources */,
+				3297C5F51D68F54E009F7416 /* sky_bottom.png in Resources */,
+				32A921761D5EF5D900EF8477 /* Images.xcassets in Resources */,
+				32A9216E1D5EF5D900EF8477 /* entity_fragment_shader.fsh in Resources */,
+				3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */,
+				325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */,
+				3295B4621D6B8C3A0065E8E8 /* grass.obj in Resources */,
+				3295B45E1D6B8C3A0065E8E8 /* fern.obj in Resources */,
+				3295B45F1D6B8C3A0065E8E8 /* fern.png in Resources */,
+				3295B4651D6B8C3A0065E8E8 /* tree.png in Resources */,
+				32A9216C1D5EF5D900EF8477 /* entity_vertex_shader.vsh in Resources */,
+				3297C5F61D68F54E009F7416 /* sky_front.png in Resources */,
+				3297C5F91D68F54E009F7416 /* sky_top.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32A9217C1D5EF5D900EF8477 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32A9215D1D5EF5D900EF8477 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32B68FF31D63B19100CE74E4 /* SkyBoxShape.m in Sources */,
+				32A921991D5F0B4200EF8477 /* GLSLUtils.m in Sources */,
+				3248966A1D669F29001F5AB2 /* ModelTexture.m in Sources */,
+				32A24F0B1D69F8EC00659A3E /* PolygonalFace.m in Sources */,
+				32A9FB9F1D737721002DF607 /* WorldSkyBoxGenerator.m in Sources */,
+				32A9216A1D5EF5D900EF8477 /* AppDelegate.m in Sources */,
+				32A24F081D69F8B200659A3E /* OBJLoader.m in Sources */,
+				32B68FEA1D63B0DA00CE74E4 /* Camera.m in Sources */,
+				3214302D1D5F3FBF005C23A1 /* ShaderManager.m in Sources */,
+				327862021D60B5EE00F96EF0 /* RawModel.m in Sources */,
+				3238CE391D6813B600186ED6 /* GLTransformation.m in Sources */,
+				32B68FFC1D63B23D00CE74E4 /* TexturedModel.m in Sources */,
+				3253214E1D7336310061B2ED /* SkyBoxShaderManager.m in Sources */,
+				32ED64B91D688E86007043B1 /* Light.m in Sources */,
+				3297C5DF1D68EA10009F7416 /* TextureData.m in Sources */,
+				3284B0411D664DA400177CEC /* Terrain.m in Sources */,
+				32CF48331D71974400DFE35F /* DefaultModelGenerator.m in Sources */,
+				32B68FF91D63B20300CE74E4 /* TerrainShape.m in Sources */,
+				32B68FF01D63B14900CE74E4 /* SkyBox.m in Sources */,
+				321430331D5F4538005C23A1 /* LoadUtils.m in Sources */,
+				326945111D6E3426008C542A /* WfObject.m in Sources */,
+				32B68FDD1D63A8EC00CE74E4 /* Vector2f.m in Sources */,
+				32B68FE01D63AA9A00CE74E4 /* Vector3f.m in Sources */,
+				321430361D5F558A005C23A1 /* EntityRender.m in Sources */,
+				32A921931D5EFC7F00EF8477 /* MasterRender.m in Sources */,
+				32B68FED1D63B11F00CE74E4 /* Entity.m in Sources */,
+				32A921711D5EF5D900EF8477 /* GameViewController.m in Sources */,
+				32A921671D5EF5D900EF8477 /* main.m in Sources */,
+				32ED64BD1D6894A3007043B1 /* WorldEntitiesGenerator.m in Sources */,
+				32A9219C1D5F10D200EF8477 /* ShaderProgram.m in Sources */,
+				327861FF1D60B2A300F96EF0 /* Loader.m in Sources */,
+				321430301D5F403A005C23A1 /* EntityShaderManager.m in Sources */,
+				32B68FE71D63AD3E00CE74E4 /* TerrainTexturesPack.m in Sources */,
+				32A9FB9C1D736BDB002DF607 /* SkyBoxRender.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32A9217A1D5EF5D900EF8477 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32A921851D5EF5D900EF8477 /* GameEngineTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		32A921801D5EF5D900EF8477 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32A921601D5EF5D900EF8477 /* GameEngine */;
+			targetProxy = 32A9217F1D5EF5D900EF8477 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		32A921721D5EF5D900EF8477 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A921731D5EF5D900EF8477 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		32A921771D5EF5D900EF8477 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32A921781D5EF5D900EF8477 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		32A921861D5EF5D900EF8477 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos9.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		32A921871D5EF5D900EF8477 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos9.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		32A921891D5EF5D900EF8477 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = GameEngine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		32A9218A1D5EF5D900EF8477 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				GCC_THUMB_SUPPORT = NO;
+				INFOPLIST_FILE = GameEngine/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		32A9218C1D5EF5D900EF8477 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GameEngineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GameEngine.app/GameEngine";
+			};
+			name = Debug;
+		};
+		32A9218D1D5EF5D900EF8477 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = GameEngineTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GameEngine.app/GameEngine";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32A9215C1D5EF5D900EF8477 /* Build configuration list for PBXProject "GameEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32A921861D5EF5D900EF8477 /* Debug */,
+				32A921871D5EF5D900EF8477 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32A921881D5EF5D900EF8477 /* Build configuration list for PBXNativeTarget "GameEngine" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32A921891D5EF5D900EF8477 /* Debug */,
+				32A9218A1D5EF5D900EF8477 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32A9218B1D5EF5D900EF8477 /* Build configuration list for PBXNativeTarget "GameEngineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32A9218C1D5EF5D900EF8477 /* Debug */,
+				32A9218D1D5EF5D900EF8477 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 32A921591D5EF5D900EF8477 /* Project object */;
+}
