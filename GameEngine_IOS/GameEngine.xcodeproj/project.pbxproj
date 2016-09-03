@@ -65,6 +65,14 @@
 		32CF48331D71974400DFE35F /* DefaultModelGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 32CF48321D71974400DFE35F /* DefaultModelGenerator.m */; settings = {ASSET_TAGS = (); }; };
 		32ED64B91D688E86007043B1 /* Light.m in Sources */ = {isa = PBXBuildFile; fileRef = 32ED64B81D688E86007043B1 /* Light.m */; settings = {ASSET_TAGS = (); }; };
 		32ED64BD1D6894A3007043B1 /* WorldEntitiesGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 32ED64BC1D6894A3007043B1 /* WorldEntitiesGenerator.m */; settings = {ASSET_TAGS = (); }; };
+		32EF0CBE1D7AF3E5006D9247 /* terrain_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CBC1D7AF3E5006D9247 /* terrain_fragment_shader.fsh */; settings = {ASSET_TAGS = (); }; };
+		32EF0CBF1D7AF3E5006D9247 /* terrain_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CBD1D7AF3E5006D9247 /* terrain_vertex_shader.vsh */; settings = {ASSET_TAGS = (); }; };
+		32EF0CC61D7AF4F8006D9247 /* blend_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CC11D7AF4F8006D9247 /* blend_map.png */; settings = {ASSET_TAGS = (); }; };
+		32EF0CC71D7AF4F8006D9247 /* mud.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CC21D7AF4F8006D9247 /* mud.png */; settings = {ASSET_TAGS = (); }; };
+		32EF0CC81D7AF4F8006D9247 /* path.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CC31D7AF4F8006D9247 /* path.png */; settings = {ASSET_TAGS = (); }; };
+		32EF0CC91D7AF4F8006D9247 /* terrain_grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CC41D7AF4F8006D9247 /* terrain_grass.png */; settings = {ASSET_TAGS = (); }; };
+		32EF0CCA1D7AF4F8006D9247 /* terrain.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CC51D7AF4F8006D9247 /* terrain.png */; settings = {ASSET_TAGS = (); }; };
+		32EF0CCD1D7B0687006D9247 /* TerrainShaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EF0CCC1D7B0687006D9247 /* TerrainShaderManager.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +185,16 @@
 		32ED64B81D688E86007043B1 /* Light.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Light.m; sourceTree = "<group>"; };
 		32ED64BB1D6894A3007043B1 /* WorldEntitiesGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldEntitiesGenerator.h; sourceTree = "<group>"; };
 		32ED64BC1D6894A3007043B1 /* WorldEntitiesGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldEntitiesGenerator.m; sourceTree = "<group>"; };
+		32EF0CBC1D7AF3E5006D9247 /* terrain_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain_fragment_shader.fsh; sourceTree = "<group>"; };
+		32EF0CBD1D7AF3E5006D9247 /* terrain_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain_vertex_shader.vsh; sourceTree = "<group>"; };
+		32EF0CC11D7AF4F8006D9247 /* blend_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blend_map.png; sourceTree = "<group>"; };
+		32EF0CC21D7AF4F8006D9247 /* mud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mud.png; sourceTree = "<group>"; };
+		32EF0CC31D7AF4F8006D9247 /* path.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = path.png; sourceTree = "<group>"; };
+		32EF0CC41D7AF4F8006D9247 /* terrain_grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain_grass.png; sourceTree = "<group>"; };
+		32EF0CC51D7AF4F8006D9247 /* terrain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrain.png; sourceTree = "<group>"; };
+		32EF0CCB1D7B0687006D9247 /* TerrainShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainShaderManager.h; sourceTree = "<group>"; };
+		32EF0CCC1D7B0687006D9247 /* TerrainShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainShaderManager.m; sourceTree = "<group>"; };
+		32EF0CCE1D7B06F4006D9247 /* TerrainShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TerrainShaderConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +291,7 @@
 		3297C5E01D68F387009F7416 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				32EF0CC01D7AF4B3006D9247 /* Terrain */,
 				3295B4511D6B8C3A0065E8E8 /* Entities */,
 				3297C5FA1D68F55E009F7416 /* Sky */,
 			);
@@ -384,6 +403,7 @@
 		32A9218E1D5EF73D00EF8477 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				32EF0CBB1D7AF294006D9247 /* Terrains */,
 				3253214B1D7335220061B2ED /* SkyBox */,
 				321430381D5F5CAF005C23A1 /* Entities */,
 				3214302B1D5F3FBF005C23A1 /* ShaderManager.h */,
@@ -475,6 +495,31 @@
 			path = ModelGenerators;
 			sourceTree = "<group>";
 		};
+		32EF0CBB1D7AF294006D9247 /* Terrains */ = {
+			isa = PBXGroup;
+			children = (
+				32EF0CBC1D7AF3E5006D9247 /* terrain_fragment_shader.fsh */,
+				32EF0CBD1D7AF3E5006D9247 /* terrain_vertex_shader.vsh */,
+				32EF0CCB1D7B0687006D9247 /* TerrainShaderManager.h */,
+				32EF0CCC1D7B0687006D9247 /* TerrainShaderManager.m */,
+				32EF0CCE1D7B06F4006D9247 /* TerrainShaderConstants.h */,
+			);
+			name = Terrains;
+			path = Shaders/Terrains;
+			sourceTree = "<group>";
+		};
+		32EF0CC01D7AF4B3006D9247 /* Terrain */ = {
+			isa = PBXGroup;
+			children = (
+				32EF0CC11D7AF4F8006D9247 /* blend_map.png */,
+				32EF0CC21D7AF4F8006D9247 /* mud.png */,
+				32EF0CC31D7AF4F8006D9247 /* path.png */,
+				32EF0CC41D7AF4F8006D9247 /* terrain_grass.png */,
+				32EF0CC51D7AF4F8006D9247 /* terrain.png */,
+			);
+			path = Terrain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -556,6 +601,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3295B4631D6B8C3A0065E8E8 /* grass.png in Resources */,
+				32EF0CC91D7AF4F8006D9247 /* terrain_grass.png in Resources */,
 				3295B4641D6B8C3A0065E8E8 /* tree.obj in Resources */,
 				3297C5F81D68F54E009F7416 /* sky_right.png in Resources */,
 				3297C5F71D68F54E009F7416 /* sky_left.png in Resources */,
@@ -563,18 +609,24 @@
 				3297C5F41D68F54E009F7416 /* sky_back.png in Resources */,
 				3295B4611D6B8C3A0065E8E8 /* flower.png in Resources */,
 				325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */,
+				32EF0CC61D7AF4F8006D9247 /* blend_map.png in Resources */,
 				32A921791D5EF5D900EF8477 /* LaunchScreen.xib in Resources */,
+				32EF0CCA1D7AF4F8006D9247 /* terrain.png in Resources */,
 				32A921741D5EF5D900EF8477 /* Main.storyboard in Resources */,
 				3295B45D1D6B8C3A0065E8E8 /* banana_tree.png in Resources */,
 				3297C5F51D68F54E009F7416 /* sky_bottom.png in Resources */,
 				32A921761D5EF5D900EF8477 /* Images.xcassets in Resources */,
 				32A9216E1D5EF5D900EF8477 /* entity_fragment_shader.fsh in Resources */,
+				32EF0CBF1D7AF3E5006D9247 /* terrain_vertex_shader.vsh in Resources */,
 				3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */,
 				325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */,
+				32EF0CBE1D7AF3E5006D9247 /* terrain_fragment_shader.fsh in Resources */,
 				3295B4621D6B8C3A0065E8E8 /* grass.obj in Resources */,
 				3295B45E1D6B8C3A0065E8E8 /* fern.obj in Resources */,
+				32EF0CC71D7AF4F8006D9247 /* mud.png in Resources */,
 				3295B45F1D6B8C3A0065E8E8 /* fern.png in Resources */,
 				3295B4651D6B8C3A0065E8E8 /* tree.png in Resources */,
+				32EF0CC81D7AF4F8006D9247 /* path.png in Resources */,
 				32A9216C1D5EF5D900EF8477 /* entity_vertex_shader.vsh in Resources */,
 				3297C5F61D68F54E009F7416 /* sky_front.png in Resources */,
 				3297C5F91D68F54E009F7416 /* sky_top.png in Resources */,
@@ -609,6 +661,7 @@
 				32B68FFC1D63B23D00CE74E4 /* TexturedModel.m in Sources */,
 				3253214E1D7336310061B2ED /* SkyBoxShaderManager.m in Sources */,
 				32ED64B91D688E86007043B1 /* Light.m in Sources */,
+				32EF0CCD1D7B0687006D9247 /* TerrainShaderManager.m in Sources */,
 				3297C5DF1D68EA10009F7416 /* TextureData.m in Sources */,
 				3284B0411D664DA400177CEC /* Terrain.m in Sources */,
 				32CF48331D71974400DFE35F /* DefaultModelGenerator.m in Sources */,
