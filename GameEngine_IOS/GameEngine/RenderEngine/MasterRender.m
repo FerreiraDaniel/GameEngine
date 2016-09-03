@@ -118,6 +118,10 @@ const float SKY_B = 0.5f;
         // Initializes the entities to be render
         self-> entities = [[NSMutableDictionary alloc]init];
         
+        // Initializes the terrain to be render
+        TerrainShaderManager* tShader = [[TerrainShaderManager alloc] init];
+        
+        
         // Initializes the sky box render
         SkyBoxShaderManager* sbManager = [[SkyBoxShaderManager alloc]init];
         self->skyBoxRender = [[SkyBoxRender alloc] init : sbManager : projectionMatrix];

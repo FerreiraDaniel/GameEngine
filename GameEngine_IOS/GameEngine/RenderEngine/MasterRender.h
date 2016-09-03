@@ -4,6 +4,7 @@
 #import "Camera.h"
 #import "GLTransformation.h"
 #import "Light.h"
+#import "TerrainShaderManager.h"
 #import "SkyBoxShaderManager.h"
 #import "SkyBoxRender.h"
 

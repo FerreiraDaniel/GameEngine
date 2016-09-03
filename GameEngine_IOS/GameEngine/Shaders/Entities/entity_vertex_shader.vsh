@@ -1,5 +1,6 @@
 /*Variable with position of the entity*/
 attribute vec3 position;
+
 /*Variable with coordinates of the textures of the entity*/
 attribute vec2 textureCoords;
 
@@ -10,23 +11,28 @@ attribute vec3 normal;
 
 /*Outputs because we are sending them to the fragment shader*/
 /*The coordinates of the texture as output*/
-varying lowp vec2 pass_textureCoords;
+varying mediump vec2 pass_textureCoords;
 
 
 /*The vector normal to the surface as output*/
 varying lowp vec3 surfaceNormal;
+
 /*The vector that indicates where the light is in relation to the object*/
 varying lowp vec3 toLightVector;
+
 /* vertex from the vertex to the camera*/
 varying lowp vec3 toCameraVector;
+
 /*The visibility of the vertice in order to simulate fog*/
 varying lowp float visibility;
 
 uniform mat4 transformationMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
+
 /*Position where the light of the scene is*/
 uniform vec3 lightPosition;
+
 /*If the entity should have the normals pointing up*/
 uniform float normalsPointingUp;
 
