@@ -5,6 +5,7 @@
 #import "Entity.h"
 #import "WorldEntitiesGenerator.h"
 #import "WorldSkyBoxGenerator.h"
+#import "WorldTerrainsGenerator.h"
 
 #import "Loader.h"
 

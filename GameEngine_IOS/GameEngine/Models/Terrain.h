@@ -1,5 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "RawModel.h"
+#import "TerrainTexturesPack.h"
+#import "Vector3f.h"
+#import "TerrainShape.h"
 
 /**
  * The model to the terrain entity
@@ -28,7 +31,7 @@
 /**
  * The different textures of the terrain
  */
-//@property  (readonly) TerrainTexturesPack *texturePack;
+@property  (readonly) TerrainTexturesPack *texturePack;
 
 /**
  * The constructor of the terrain entity
@@ -37,5 +40,5 @@
  * @param aRawModel			The model of the terrain
  * @param aPosition			Position where the terrain will be put in
  */
-/*- (id)init : (TerrainTexturesPack*) aTexturePack : (RawModel*) aRawModel : (Vector3f*) aPosition;*/
+- (id)init : (TerrainTexturesPack*) aTexturePack : (RawModel*) aRawModel : (Vector3f*) aPosition;
 @end

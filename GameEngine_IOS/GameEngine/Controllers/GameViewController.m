@@ -8,6 +8,7 @@
     MasterRender *renderer;
 
     NSMutableArray *entities;
+    NSMutableArray *terrains;
     Light *light;
     SkyBox *skyBox;
     
@@ -44,13 +45,16 @@
     Loader *loader = [[Loader alloc]init];
     
     /* Prepares the entities that is going to be render */
-    entities = [WorldEntitiesGenerator getEntities: loader];
+    self -> entities = [WorldEntitiesGenerator getEntities: loader];
     
-    	/* Load the lights that is going to render*/
-    light = [WorldEntitiesGenerator getLight];
+    /* Prepares the terrains that is going to render */
+    self -> terrains = [WorldTerrainsGenerator getTerrains: loader];
+    
+    /* Load the lights that is going to render*/
+    self -> light = [WorldEntitiesGenerator getLight];
     
     /* Load the sky box that is going to render*/
-    skyBox = [WorldSkyBoxGenerator getSky : loader];
+    self -> skyBox = [WorldSkyBoxGenerator getSky : loader];
 }
 
 - (void)dealloc
@@ -97,7 +101,7 @@
     
     /*NSDate* startDate = [NSDate date];*/
     // game logic
-    //[renderer processTerrains : terrains];
+    [renderer processTerrains : terrains];
     [renderer processEntities : entities];
     [renderer processSkyBox : skyBox];
     

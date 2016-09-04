@@ -45,10 +45,33 @@ public enum TTerrainLocation {
 	 */
 	skyColor,
 
+	/**
+	 * The background texture
+	 */
+	backgroundTexture,
 
+	/**
+	 * The mud texture
+	 */
+	mudTexture,
+
+	/**
+	 * The grass texture
+	 */
+	grassTexture,
+
+	/**
+	 * The path texture
+	 */
+	pathTexture,
+
+	/**
+	 * The blend map texture
+	 */
+	weightMapTexture,
 	
 	/**
 	 * Meta-data used maintain the existing locations
 	 */
-	numOfEntityLocations
+	numOfTerrainLocations
 }

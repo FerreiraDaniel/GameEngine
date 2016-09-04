@@ -17,12 +17,12 @@ public class WorldTerrainsGenerator {
 	private final static int NUMBER_OF_TERRAINS = 2;
 
 	/**
-	 * Load the texture of the dragon model
+	 * Load the textures of the terrain
 	 *
 	 * @param loader
 	 *            the loader of the texture
 	 *
-	 * @return the textured model of the dragon
+	 * @return the textures package of the terrain
 	 */
 	private static TerrainTexturesPack getTexturedTerrain(Loader loader) {
 		Integer weightMapTextureId = loader.loadTexture(TERRAIN_FOLDER + "blendMap");
@@ -56,9 +56,10 @@ public class WorldTerrainsGenerator {
 
 	/**
 	 * The terrains of the 3D scene
-	 * 
-	 * @param loader
-	 * @return
+	 *
+	 * @param loader The loader in charge of loading the textures of the terrains
+	 *
+	 * @return list of terrains of the scene
 	 */
 	public static Terrain[] getTerrains(Loader loader) {
 		TerrainTexturesPack texturedTerrain = getTexturedTerrain(loader);

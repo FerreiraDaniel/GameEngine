@@ -78,14 +78,14 @@
  * @return the Coordinates of the textures of the shape
  */
 - (float*) getTextureCoords{
-    return nil;
+    return textureCoords;
 }
 
 /*
  Number of the texture coordinates
  */
 - (int) countTextureCoords {
-    return 0;
+    return TERRAIN_TEXTURES_LENGTH;
 }
 
 /**

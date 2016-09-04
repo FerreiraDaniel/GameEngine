@@ -3,7 +3,7 @@
 #import <GLKit/GLKit.h>
 
 static const float ANGLE_OF_ROTATION =  0.4f;
-static const float STEP = 0.2f;
+static const float STEP = 2.0f;
 
 /**
  * Represents the the camera used by the user to see the

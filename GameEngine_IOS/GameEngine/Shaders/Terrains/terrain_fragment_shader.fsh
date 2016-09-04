@@ -53,7 +53,7 @@ void main()
     float backgroundTextureWeight = 1.0 - (weightMapColor.r + weightMapColor.g + weightMapColor.b);
     
     /*Makes the tiling possible*/
-    vec2 tiledCoordinates = pass_textureCoords * 40.0;
+    vec2 tiledCoordinates = pass_textureCoords * 400.0;
     
     /*Compute the background color*/
     vec4 backgroundTextureColor = backgroundTextureWeight * texture2D(backgroundTexture, tiledCoordinates);

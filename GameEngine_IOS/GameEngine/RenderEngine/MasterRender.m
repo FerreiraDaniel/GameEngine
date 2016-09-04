@@ -20,6 +20,11 @@
     EntityRender* entityRender;
     
     /**
+     * Reference to the render of the terrains
+     */
+    TerrainRender* terrainRender;
+    
+    /**
      * Reference to the render of the sky box
      */
     SkyBoxRender* skyBoxRender;
@@ -34,6 +39,11 @@
      * Entities of the world that are going to be rendered
      */
     NSMutableDictionary *entities;
+    
+    /**
+     * List of terrains of the world that are going to be render
+     */
+    NSMutableArray* terrains;
     
     /**
      * The sky box that is going to use during the render
@@ -113,23 +123,26 @@ const float SKY_B = 0.5f;
         
         //Initializes the entity render
         EntityShaderManager* eShader = [[EntityShaderManager alloc] init];
-        entityRender = [[EntityRender alloc] init : eShader : projectionMatrix];
+        self -> entityRender = [[EntityRender alloc] init : eShader : projectionMatrix];
         
-        // Initializes the entities to be render
+        // Initializes the entities to render
         self-> entities = [[NSMutableDictionary alloc]init];
         
-        // Initializes the terrain to be render
+        // Initializes the terrain render
         TerrainShaderManager* tShader = [[TerrainShaderManager alloc] init];
+        self-> terrainRender = [[TerrainRender alloc] init : tShader : projectionMatrix];
         
+        // Initializes the terrains to render
+        self -> terrains = [[NSMutableArray alloc] init];
         
         // Initializes the sky box render
         SkyBoxShaderManager* sbManager = [[SkyBoxShaderManager alloc]init];
-        self->skyBoxRender = [[SkyBoxRender alloc] init : sbManager : projectionMatrix];
+        self-> skyBoxRender = [[SkyBoxRender alloc] init : sbManager : projectionMatrix];
         
         // Initializes the camera
-        camera = [[Camera alloc] init];
+        self ->camera = [[Camera alloc] init];
         
-        
+        projectionMatrix = nil;
     }
     return self;
 }
@@ -170,6 +183,35 @@ const float SKY_B = 0.5f;
 }
 
 /**
+ * Put a terrain in the list of terrains to render
+ *
+ * @param terrain
+ *            the terrain to render
+ */
+- (void)  processTerrain : (Terrain*) terrain {
+    [self-> terrains addObject: terrain];
+}
+
+
+- (void) processTerrains : (NSMutableArray*) lTerrains {
+    [self->terrains removeAllObjects];
+    
+    if ((lTerrains != nil) && (lTerrains.count > 0)) {
+        for (int i = 0; i < lTerrains.count; i++) {
+            Terrain* terrain = lTerrains[i];
+            [self processTerrain : terrain];
+        }
+    }
+}
+
+/**
+ * Set the sky box the use during the render
+ */
+- (void) processSkyBox : (SkyBox*) aSkyBox {
+    self -> skyBox = aSkyBox;
+}
+
+/**
  * Render the entire scene (Called by each frame)
  *
  * @param sun
@@ -180,17 +222,12 @@ const float SKY_B = 0.5f;
     GLTransformation* viewMatrix = [self updateCamera];
     Vector3f* skyColor = [[Vector3f alloc] init: SKY_R : SKY_G : SKY_B];
     [entityRender render: skyColor : sun : viewMatrix : entities];
-    [skyBoxRender render: viewMatrix : skyBox];
+    [terrainRender render: skyColor : sun : viewMatrix : terrains];
     
-    //TODO other renders
+    
+    [skyBoxRender render: viewMatrix : skyBox];
 }
 
-/**
- * Set the sky box the use during the render
- */
-- (void) processSkyBox : (SkyBox*) aSkyBox {
-    self -> skyBox = aSkyBox;
-}
 
 /**
  * Clean the data of the previous frame
@@ -206,6 +243,16 @@ const float SKY_B = 0.5f;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-//TODO dealloc
+/**
+ *  Releases the resources used by the class
+ */
+- (void) dealloc {
+    self -> entityRender = nil;
+    self -> entities = nil;
+    self -> terrainRender = nil;
+    self -> terrains = nil;
+    self -> skyBoxRender = nil;
+    self -> camera = nil;
+}
 
 @end

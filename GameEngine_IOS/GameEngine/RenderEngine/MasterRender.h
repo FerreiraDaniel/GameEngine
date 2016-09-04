@@ -7,6 +7,7 @@
 #import "TerrainShaderManager.h"
 #import "SkyBoxShaderManager.h"
 #import "SkyBoxRender.h"
+#import "TerrainRender.h"
 
 /**
  * Groups the entities in a hash map like this
@@ -31,6 +32,14 @@
  *            list of entities to get render in the next frame
  */
 - (void) processEntities : (NSMutableArray*) lEntities;
+
+/**
+ * Put the terrains to process in the list of terrains to process
+ *
+ * @param lTerrains
+ *            list of terrains to process
+ */
+- (void) processTerrains : (NSMutableArray*) lTerrains;
 
 - (void) processSkyBox : (SkyBox*) aSkyBox;
 

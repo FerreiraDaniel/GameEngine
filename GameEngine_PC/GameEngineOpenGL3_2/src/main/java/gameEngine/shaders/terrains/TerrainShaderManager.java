@@ -77,35 +77,12 @@ public class TerrainShaderManager extends ShaderManager {
 	 */
 	private final static int TEXTURE_UNIT4 = 4;
 
-	/**
-	 * The background texture
-	 */
-	private int backgroundTexture;
-
-	/**
-	 * The mud texture
-	 */
-	private int mudTexture;
-
-	/**
-	 * The grass texture
-	 */
-	private int grassTexture;
-
-	/**
-	 * The path texture
-	 */
-	private int pathTexture;
-
-	/**
-	 * The blend map texture
-	 */
-	private int weightMapTexture;
 
 	/**
 	 * All the locations in the shader programs
 	 */
 	private int[] locations;
+	
 
 	/**
 	 * Constructor of the game shader where the vertex and fragment shader of
@@ -134,7 +111,7 @@ public class TerrainShaderManager extends ShaderManager {
 	 */
 	@Override
 	protected void getAllUniformLocations() {
-		int size = TTerrainLocation.numOfEntityLocations.ordinal();
+		int size = TTerrainLocation.numOfTerrainLocations.ordinal();
 		locations = new int[size];
 
 		for (int i = 0; i < size; i++) {
@@ -148,11 +125,11 @@ public class TerrainShaderManager extends ShaderManager {
 	 * bind of textures
 	 */
 	public void connectTextureUnits() {
-		super.loadInt(backgroundTexture, TEXTURE_UNIT0);
-		super.loadInt(mudTexture, TEXTURE_UNIT1);
-		super.loadInt(grassTexture, TEXTURE_UNIT2);
-		super.loadInt(pathTexture, TEXTURE_UNIT3);
-		super.loadInt(weightMapTexture, TEXTURE_UNIT4);
+		super.loadInt(locations[TTerrainLocation.backgroundTexture.ordinal()], TEXTURE_UNIT0);
+		super.loadInt(locations[TTerrainLocation.mudTexture.ordinal()], TEXTURE_UNIT1);
+		super.loadInt(locations[TTerrainLocation.grassTexture.ordinal()], TEXTURE_UNIT2);
+		super.loadInt(locations[TTerrainLocation.pathTexture.ordinal()], TEXTURE_UNIT3);
+		super.loadInt(locations[TTerrainLocation.weightMapTexture.ordinal()], TEXTURE_UNIT4);
 	}
 
 	

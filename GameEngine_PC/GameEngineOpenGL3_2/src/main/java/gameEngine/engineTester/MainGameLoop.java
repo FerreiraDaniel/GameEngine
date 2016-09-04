@@ -37,7 +37,7 @@ public class MainGameLoop {
 		/* Prepares the entities that is going to be render */
 		Entity[] entities = WorldEntitiesGenerator.getEntities(loader);
 
-		/* Prepares the terrain that is going to render */
+		/* Prepares the terrains that is going to render */
 		Terrain[] terrains = WorldTerrainsGenerator.getTerrains(loader);
 
 		/* Load the lights that is going to render*/

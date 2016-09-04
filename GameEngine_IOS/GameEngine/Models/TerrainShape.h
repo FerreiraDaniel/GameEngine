@@ -2,7 +2,7 @@
 #import "IShape.h"
 #import "RenderConstants.h"
 
-static const float SIZE =  800.0f;
+#define SIZE   800.0f
 
 /* Number of vertices in each side of the terrain */
 static const int  TERRAIN_SHAPE_VERTEX_COUNT = 128;
