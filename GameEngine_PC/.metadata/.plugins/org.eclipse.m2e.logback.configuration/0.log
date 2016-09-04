@@ -327,3 +327,4 @@
 2016-09-04 14:07:19,876 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2016-09-04 14:07:19,877 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2016-09-04 14:07:19,877 [Worker-37] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/test/resources
+2016-09-04 15:42:00,710 [main] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache file is not out-of-date. No remote download required.

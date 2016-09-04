@@ -53,6 +53,7 @@
     [tShader loadSkyColor: skyColor];
     [tShader loadLight: sun];
     [tShader loadViewMatrix: viewMatrix];
+    [tShader connectTextureUnits];
     
     [self render: terrains];
     [tShader stop];
