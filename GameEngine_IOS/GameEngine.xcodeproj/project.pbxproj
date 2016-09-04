@@ -20,7 +20,6 @@
 		327861FF1D60B2A300F96EF0 /* Loader.m in Sources */ = {isa = PBXBuildFile; fileRef = 327861FE1D60B2A300F96EF0 /* Loader.m */; };
 		327862021D60B5EE00F96EF0 /* RawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 327862011D60B5EE00F96EF0 /* RawModel.m */; };
 		327E13561D7C377F003E3ED0 /* WorldTerrainsGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 327E13551D7C377F003E3ED0 /* WorldTerrainsGenerator.m */; settings = {ASSET_TAGS = (); }; };
-		327E135C1D7C4EE6003E3ED0 /* Cube.m in Sources */ = {isa = PBXBuildFile; fileRef = 327E135B1D7C4EE6003E3ED0 /* Cube.m */; settings = {ASSET_TAGS = (); }; };
 		3284B0411D664DA400177CEC /* Terrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3284B0401D664DA400177CEC /* Terrain.m */; };
 		3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */; settings = {ASSET_TAGS = (); }; };
 		3295B45D1D6B8C3A0065E8E8 /* banana_tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4531D6B8C3A0065E8E8 /* banana_tree.png */; settings = {ASSET_TAGS = (); }; };
@@ -117,8 +116,6 @@
 		327D5FE21D60DFD300D846C7 /* EntityShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityShaderConstants.h; sourceTree = "<group>"; };
 		327E13541D7C377F003E3ED0 /* WorldTerrainsGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldTerrainsGenerator.h; sourceTree = "<group>"; };
 		327E13551D7C377F003E3ED0 /* WorldTerrainsGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorldTerrainsGenerator.m; sourceTree = "<group>"; };
-		327E135A1D7C4EE6003E3ED0 /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cube.h; path = ../../../../../.Trash/Cube.h; sourceTree = "<group>"; };
-		327E135B1D7C4EE6003E3ED0 /* Cube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cube.m; path = ../../../../../.Trash/Cube.m; sourceTree = "<group>"; };
 		3284B03F1D664DA400177CEC /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		3284B0401D664DA400177CEC /* Terrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Terrain.m; sourceTree = "<group>"; };
 		3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = banana_tree.obj; sourceTree = "<group>"; };
@@ -276,8 +273,6 @@
 		3265AFF11D5F625800A0E37E /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				327E135A1D7C4EE6003E3ED0 /* Cube.h */,
-				327E135B1D7C4EE6003E3ED0 /* Cube.m */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -692,7 +687,6 @@
 				32A921931D5EFC7F00EF8477 /* MasterRender.m in Sources */,
 				32B68FED1D63B11F00CE74E4 /* Entity.m in Sources */,
 				32A921711D5EF5D900EF8477 /* GameViewController.m in Sources */,
-				327E135C1D7C4EE6003E3ED0 /* Cube.m in Sources */,
 				32A921671D5EF5D900EF8477 /* main.m in Sources */,
 				32ED64BD1D6894A3007043B1 /* WorldEntitiesGenerator.m in Sources */,
 				32A9219C1D5F10D200EF8477 /* ShaderProgram.m in Sources */,

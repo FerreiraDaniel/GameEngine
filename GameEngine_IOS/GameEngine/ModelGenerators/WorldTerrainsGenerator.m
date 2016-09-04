@@ -1,5 +1,4 @@
 #import "WorldTerrainsGenerator.h"
-#import "Cube.h"
 
 @implementation WorldTerrainsGenerator
 
