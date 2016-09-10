@@ -1,12 +1,15 @@
 package gameEngine.shaders.terrains;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.shaders.ShaderManager;
+import gameEngine.shaders.entities.TEntityAttribute;
 
 /**
  * Manager of the shader files that are going to be load to render the 3D
@@ -23,34 +26,6 @@ public class TerrainShaderManager extends ShaderManager {
 	 * Path of the fragment shader file
 	 */
 	private static final String FRAGMENT_FILE = COMMON_PATH + "terrains/terrain_fragment_shader.glsl";
-
-	/**
-	 * Position where to location attribute is going to be bind in the shader
-	 * program
-	 */
-	public final static int LOCATION_ATTR_ID = 0;
-
-	/**
-	 * Position where to texture attribute is going to be bind in the program
-	 * shader
-	 */
-	public final static int TEX_COORDINATE_ATTR_ID = 1;
-
-	/**
-	 * Position where the normal vector are going to be bind in the program
-	 * shader
-	 */
-	public final static int NORMAL_VECTOR_ATTR_ID = 2;
-
-	/**
-	 * Id of attribute the position where the light of scene is
-	 */
-	public final static int LIGHT_POSITION_ATTR_ID = 2;
-
-	/**
-	 * Id of attribute the color where the light of scene have
-	 */
-	public final static int LIGHT_COLOR_ATTR_ID = 3;
 
 	/**
 	 * Texture unit that was bind with glBindTexture GL_TEXTURE0
@@ -77,12 +52,10 @@ public class TerrainShaderManager extends ShaderManager {
 	 */
 	private final static int TEXTURE_UNIT4 = 4;
 
-
 	/**
 	 * All the locations in the shader programs
 	 */
 	private int[] locations;
-	
 
 	/**
 	 * Constructor of the game shader where the vertex and fragment shader of
@@ -97,11 +70,11 @@ public class TerrainShaderManager extends ShaderManager {
 	 * 
 	 */
 	@Override
-	protected HashMap<Integer, String> getAttributes() {
-		HashMap<Integer, String> attributes = new HashMap<>();
-		attributes.put(LOCATION_ATTR_ID, "position");
-		attributes.put(TEX_COORDINATE_ATTR_ID, "textureCoords");
-		attributes.put(NORMAL_VECTOR_ATTR_ID, "normal");
+	protected List<IEnum> getAttributes() {
+		List<IEnum> attributes = new ArrayList<>();
+		attributes.add(TEntityAttribute.position);
+		attributes.add(TEntityAttribute.textureCoords);
+		attributes.add(TEntityAttribute.normal);
 
 		return attributes;
 	}
@@ -111,12 +84,12 @@ public class TerrainShaderManager extends ShaderManager {
 	 */
 	@Override
 	protected void getAllUniformLocations() {
-		int size = TTerrainLocation.numOfTerrainLocations.ordinal();
+		int size = TTerrainUniform.numOfTerrainLocations.ordinal();
 		locations = new int[size];
 
 		for (int i = 0; i < size; i++) {
-			TTerrainLocation locationKey = TTerrainLocation.values()[i];
-			locations[i] = super.getUniformLocation(locationKey.toString());
+			TTerrainUniform locationKey = TTerrainUniform.values()[i];
+			locations[i] = super.getUniformLocation(locationKey);
 		}
 	}
 
@@ -125,22 +98,21 @@ public class TerrainShaderManager extends ShaderManager {
 	 * bind of textures
 	 */
 	public void connectTextureUnits() {
-		super.loadInt(locations[TTerrainLocation.backgroundTexture.ordinal()], TEXTURE_UNIT0);
-		super.loadInt(locations[TTerrainLocation.mudTexture.ordinal()], TEXTURE_UNIT1);
-		super.loadInt(locations[TTerrainLocation.grassTexture.ordinal()], TEXTURE_UNIT2);
-		super.loadInt(locations[TTerrainLocation.pathTexture.ordinal()], TEXTURE_UNIT3);
-		super.loadInt(locations[TTerrainLocation.weightMapTexture.ordinal()], TEXTURE_UNIT4);
+		super.loadInt(locations[TTerrainUniform.backgroundTexture.ordinal()], TEXTURE_UNIT0);
+		super.loadInt(locations[TTerrainUniform.mudTexture.ordinal()], TEXTURE_UNIT1);
+		super.loadInt(locations[TTerrainUniform.grassTexture.ordinal()], TEXTURE_UNIT2);
+		super.loadInt(locations[TTerrainUniform.pathTexture.ordinal()], TEXTURE_UNIT3);
+		super.loadInt(locations[TTerrainUniform.weightMapTexture.ordinal()], TEXTURE_UNIT4);
 	}
 
-	
 	/**
 	 * Load the color of the sky in order to simulate fog
 	 * 
 	 * @param skyColor
-	 * 			Color of the sky
+	 *            Color of the sky
 	 */
 	public void loadSkyColor(Vector3f skyColor) {
-		super.loadVector(locations[TTerrainLocation.skyColor.ordinal()], skyColor);
+		super.loadVector(locations[TTerrainUniform.skyColor.ordinal()], skyColor);
 	}
 
 	/**
@@ -150,7 +122,7 @@ public class TerrainShaderManager extends ShaderManager {
 	 *            the matrix to be loaded
 	 */
 	public void loadProjectionMatrix(GLTransformation matrix) {
-		super.loadMatrix(locations[TTerrainLocation.projectionMatrix.ordinal()], matrix);
+		super.loadMatrix(locations[TTerrainUniform.projectionMatrix.ordinal()], matrix);
 	}
 
 	/**
@@ -160,8 +132,8 @@ public class TerrainShaderManager extends ShaderManager {
 	 *            the light to load in the shader program
 	 */
 	public void loadLight(Light light) {
-		super.loadVector(locations[TTerrainLocation.lightPosition.ordinal()], light.getPosition());
-		super.loadVector(locations[TTerrainLocation.lightColor.ordinal()], light.getColor());
+		super.loadVector(locations[TTerrainUniform.lightPosition.ordinal()], light.getPosition());
+		super.loadVector(locations[TTerrainUniform.lightColor.ordinal()], light.getColor());
 	}
 
 	/**
@@ -173,8 +145,8 @@ public class TerrainShaderManager extends ShaderManager {
 	 *            The reflectivity of the material
 	 */
 	public void loadShineVariables(float damper, float reflectivity) {
-		super.loadFloat(locations[TTerrainLocation.shineDamper.ordinal()], damper);
-		super.loadFloat(locations[TTerrainLocation.reflectivity.ordinal()], reflectivity);
+		super.loadFloat(locations[TTerrainUniform.shineDamper.ordinal()], damper);
+		super.loadFloat(locations[TTerrainUniform.reflectivity.ordinal()], reflectivity);
 	}
 
 	/**
@@ -184,7 +156,7 @@ public class TerrainShaderManager extends ShaderManager {
 	 *            the matrix to be loaded
 	 */
 	public void loadViewMatrix(GLTransformation matrix) {
-		super.loadMatrix(locations[TTerrainLocation.viewMatrix.ordinal()], matrix);
+		super.loadMatrix(locations[TTerrainUniform.viewMatrix.ordinal()], matrix);
 	}
 
 	/**
@@ -194,7 +166,7 @@ public class TerrainShaderManager extends ShaderManager {
 	 *            the matrix to be loaded
 	 */
 	public void loadTransformationMatrix(GLTransformation matrix) {
-		super.loadMatrix(locations[TTerrainLocation.transformationMatrix.ordinal()], matrix);
+		super.loadMatrix(locations[TTerrainUniform.transformationMatrix.ordinal()], matrix);
 	}
 
 }

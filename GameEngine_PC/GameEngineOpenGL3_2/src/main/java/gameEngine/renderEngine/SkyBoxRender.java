@@ -24,11 +24,11 @@ public class SkyBoxRender {
 	/**
 	 * Constructor of the skyBox render
 	 * 
-	 * @param sManager
+	 * @param sbManager
 	 *            Shader manager
-	 *            
-	 * @param projectionMatrix 
-	 * 			The projection matrix
+	 * 
+	 * @param projectionMatrix
+	 *            The projection matrix
 	 */
 	public SkyBoxRender(SkyBoxShaderManager sbManager, GLTransformation projectionMatrix) {
 		this.sbShader = sbManager;
@@ -38,14 +38,13 @@ public class SkyBoxRender {
 		sbManager.stop();
 	}
 
-
 	/**
 	 * Render the sky box of the scene
 	 * 
 	 * @param viewMatrix
 	 *            View matrix to render the scene
 	 * @param skyBox
-	 * 			  The sky box like one entity
+	 *            The sky box like one entity
 	 */
 	public void render(GLTransformation viewMatrix, SkyBox skyBox) {
 		sbShader.start();
@@ -60,7 +59,7 @@ public class SkyBoxRender {
 	 * Bind the attributes of openGL
 	 * 
 	 * @param skyBox
-	 * 			The sky box description that should be prepared
+	 *            The sky box description that should be prepared
 	 */
 	private void prepareSkyBox(SkyBox skyBox) {
 		RawModel model = skyBox.getModel();
@@ -71,21 +70,23 @@ public class SkyBoxRender {
 		// bind several textures of the sky box
 		bindTextures(skyBox);
 	}
-	
+
 	/**
 	 * Bind the cube texture of the skyBox
+	 *
+	 * @param skyBox
+	 *            Reference to the sky box
 	 */
 	private void bindTextures(SkyBox skyBox) {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, skyBox.getTextureId());
 	}
-	
 
 	/**
 	 * Call the render of the triangles to the skyBox itself
 	 * 
 	 * @param skyBox
-	 * 			The sky box to be render
+	 *            The sky box to be render
 	 */
 	private void render(SkyBox skyBox) {
 		RawModel model = skyBox.getModel();
@@ -93,7 +94,7 @@ public class SkyBoxRender {
 	}
 
 	/**
-	 * UnBind the previous binded elements
+	 * UnBind the previous bound elements
 	 */
 	private void unbindTexture() {
 		GL20.glDisableVertexAttribArray(SkyBoxShaderManager.LOCATION_ATTR_ID);
@@ -106,7 +107,5 @@ public class SkyBoxRender {
 	public void cleanUp() {
 		sbShader.cleanUp();
 	}
-
-
 
 }

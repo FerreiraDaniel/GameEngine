@@ -36,23 +36,33 @@ public class SkyBoxShape implements IShape {
 	}
 
 	/**
-	 * The vertices of the sky box
+	 * 
+	 * @return The vertices of the sky box
 	 */
 	@Override
 	public float[] getVertices() {
 		return vertices;
 	}
 
+	/**
+	 * @return the Coordinates of the textures of the shape
+	 */
 	@Override
 	public float[] getTextureCoords() {
 		return null;
 	}
 
+	/**
+	 * @return the normal vectors that make the shape
+	 */
 	@Override
 	public float[] getNormals() {
 		return null;
 	}
 
+	/**
+	 * @return The indices of the vertices that make the shape
+	 */
 	@Override
 	public int[] getIndices() {
 		return null;

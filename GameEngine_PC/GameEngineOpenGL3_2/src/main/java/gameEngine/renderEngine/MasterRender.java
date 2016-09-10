@@ -30,8 +30,8 @@ public class MasterRender {
 	private static final float CAMERA_RATE = 16.0f / 9.0f;
 	private static final float NEAR_PLANE = 0.1f;
 	private static final float FAR_PLANE = 1000.0f;
-	
-	/*Components of the color of the sky*/
+
+	/* Components of the color of the sky */
 	private static final float SKY_R = 0.5f;
 	private static final float SKY_G = 0.5f;
 	private static final float SKY_B = 0.5f;

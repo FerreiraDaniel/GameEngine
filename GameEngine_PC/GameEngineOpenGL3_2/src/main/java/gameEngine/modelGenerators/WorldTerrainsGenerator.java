@@ -42,12 +42,16 @@ public class WorldTerrainsGenerator {
 	}
 
 	/**
+	 * Creates a terrain in a specified position
 	 * 
+	 * @param texturedTerrain
+	 *            Model of the terrain to render
 	 * @param texturedTerrain
 	 *            Model of the terrain to render
 	 * @param position
 	 *            Position where is to put the terrain
-	 * @return
+	 * 
+	 * @return The terrain in the position specified
 	 */
 	private static Terrain getTerrain(TerrainTexturesPack texturedTerrain, RawModel terrainModel, Vector3f position) {
 		Terrain terrain = new Terrain(texturedTerrain, terrainModel, position);
@@ -57,7 +61,8 @@ public class WorldTerrainsGenerator {
 	/**
 	 * The terrains of the 3D scene
 	 *
-	 * @param loader The loader in charge of loading the textures of the terrains
+	 * @param loader
+	 *            The loader in charge of loading the textures of the terrains
 	 *
 	 * @return list of terrains of the scene
 	 */

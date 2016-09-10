@@ -1,12 +1,10 @@
 package gameEngine.renderEngine;
 
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.models.Light;
 
 import gameEngine.models.RawModel;
 import gameEngine.models.SkyBox;
@@ -27,9 +25,9 @@ public class SkyBoxRender {
 	 * 
 	 * @param sManager
 	 *            Shader manager
-	 *            
-	 * @param projectionMatrix 
-	 * 			The projection matrix
+	 * 
+	 * @param projectionMatrix
+	 *            The projection matrix
 	 */
 	public SkyBoxRender(SkyBoxShaderManager sbManager, GLTransformation projectionMatrix) {
 		this.sbShader = sbManager;
@@ -54,7 +52,7 @@ public class SkyBoxRender {
 		unbindTexture();
 		sbShader.stop();
 	}
-	
+
 	/**
 	 * Bind the attributes of openGL
 	 * 
@@ -63,19 +61,19 @@ public class SkyBoxRender {
 	private void prepareSkyBox(SkyBox skyBox) {
 		RawModel model = skyBox.getModel();
 
-		//Enable the attributes to bind
+		// Enable the attributes to bind
 		GL20.glEnableVertexAttribArray(SkyBoxShaderManager.LOCATION_ATTR_ID);
 
 		// bind several textures of the sky box
 		bindTextures(skyBox);
-		
-		//Load from buffers
+
+		// Load from buffers
 		// Load the vertex data
-		GL20.glVertexAttribPointer(SkyBoxShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
-				model.getVertexBuffer());
+		GL20.glVertexAttribPointer(SkyBoxShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE,
+				RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
 
 	}
-	
+
 	/**
 	 * Bind the cube texture of the skyBox
 	 */
@@ -83,7 +81,6 @@ public class SkyBoxRender {
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, skyBox.getTextureId());
 	}
-	
 
 	/**
 	 * Call the render of the triangles to the skyBox itself

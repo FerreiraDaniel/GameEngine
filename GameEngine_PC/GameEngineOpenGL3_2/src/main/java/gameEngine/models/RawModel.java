@@ -18,9 +18,9 @@ public class RawModel {
 	/**
 	 * Constructor of the raw model
 	 * 
-	 * @param the
-	 *            vaoId assigned by openGL
-	 * @param the
+	 * @param vaoId
+	 *            The identifier of vertex array object assigned by openGL
+	 * @param vertexCount
 	 *            number of vertex
 	 */
 	public RawModel(int vaoId, int vertexCount) {
@@ -30,7 +30,7 @@ public class RawModel {
 	}
 
 	/**
-	 * @return the vaoId assigned by openGL
+	 * @return the The identifier of vertex array object assigned by openGL
 	 */
 	public int getVaoId() {
 		return vaoId;

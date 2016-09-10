@@ -13,11 +13,12 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.models.TextureData;
 
 import gameEngine.models.RawModel;
-import gameEngine.shaders.entities.EntityShaderManager;
+import gameEngine.shaders.entities.TEntityAttribute;
 
 public class Loader {
 
@@ -104,11 +105,10 @@ public class Loader {
 	public RawModel loadToVAO(float[] positions, float[] textureCoords, float[] normals, int[] indices) {
 		int vaoID = createVAO();
 
-		
 		bindIndicesBuffer(indices);
-		storeDataInAttributeList(EntityShaderManager.LOCATION_ATTR_ID, VERTEX_SIZE, positions);
-		storeDataInAttributeList(EntityShaderManager.TEX_COORDINATE_ATTR_ID, COORD_SIZE, textureCoords);
-		storeDataInAttributeList(EntityShaderManager.NORMAL_VECTOR_ATTR_ID, NORMAL_SIZE, normals);
+		storeDataInAttributeList(TEntityAttribute.position, VERTEX_SIZE, positions);
+		storeDataInAttributeList(TEntityAttribute.textureCoords, COORD_SIZE, textureCoords);
+		storeDataInAttributeList(TEntityAttribute.normal, NORMAL_SIZE, normals);
 		unbindVAO();
 		return new RawModel(vaoID, indices.length);
 	}
@@ -125,7 +125,7 @@ public class Loader {
 	 */
 	private RawModel loadPositionsToVAO(float[] positions, int dimensions) {
 		int vaoId = createVAO();
-		this.storeDataInAttributeList(EntityShaderManager.LOCATION_ATTR_ID, dimensions, positions);
+		this.storeDataInAttributeList(TEntityAttribute.position, dimensions, positions);
 		unbindVAO();
 		return new RawModel(vaoId, positions.length / dimensions);
 	}
@@ -257,14 +257,14 @@ public class Loader {
 	 * @param data
 	 *            Data to be store
 	 */
-	private void storeDataInAttributeList(int attributeNumber, int coordinateSize, float[] data) {
+	private void storeDataInAttributeList(IEnum attributeNumber, int coordinateSize, float[] data) {
 		int vboID = GL15.glGenBuffers();
 		vbos.add(vboID);
 		// Bind the VBO just created
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
 		FloatBuffer buffer = storeDataInFloatBuffer(data);
 		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-		GL20.glVertexAttribPointer(attributeNumber, coordinateSize, GL11.GL_FLOAT, VERTEX_NORMALIZED, STRIDE,
+		GL20.glVertexAttribPointer(attributeNumber.getValue(), coordinateSize, GL11.GL_FLOAT, VERTEX_NORMALIZED, STRIDE,
 				START_OFFSET);
 		// UnBind the current VBO
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);

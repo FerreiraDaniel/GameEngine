@@ -8,10 +8,10 @@ import com.dferreira.commons.shapes.IShape;
 public class TerrainShape implements IShape {
 	/**/
 	public static final float SIZE = 800.0f;
-	
+
 	/* Number of vertices in each side of the terrain */
 	public static final int VERTEX_COUNT = 128;
-	
+
 	/**
 	 * Vertices of the terrain
 	 */
@@ -32,9 +32,6 @@ public class TerrainShape implements IShape {
 	 */
 	private int[] indices;
 
-	
-	
-	
 	/**
 	 * Generates a completely flat terrain
 	 * 
@@ -79,10 +76,9 @@ public class TerrainShape implements IShape {
 	/**
 	 * Constructor of the terrain shape
 	 */
-	public TerrainShape(){
+	public TerrainShape() {
 		generateTerrain();
 	}
-	
 
 	/**
 	 * The vertices of the terrain
@@ -116,6 +112,4 @@ public class TerrainShape implements IShape {
 		return this.indices;
 	}
 
-
-	
 }

@@ -19,22 +19,20 @@ public class DisplayManager {
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
 	private static final int FPS_CAP = 120;
-	
+
 	/**
 	 * Create a new window with width and height specified
 	 */
 	public static void createDisplay() {
-		
-		 // Use a specified version of OpenGL - namely version 3.2
-		ContextAttribs attribs = new ContextAttribs(3,2)
-		.withForwardCompatible(true)
-		.withProfileCore(true);
-		
+
+		// Use a specified version of OpenGL - namely version 3.2
+		ContextAttribs attribs = new ContextAttribs(3, 2).withForwardCompatible(true).withProfileCore(true);
+
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
 			Display.create(new PixelFormat(), attribs);
 			Display.setTitle("Game engine OpenGl 3.2");
-		} catch(LWJGLException e) {
+		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -46,23 +44,21 @@ public class DisplayManager {
 		Display.sync(FPS_CAP);
 		Display.update();
 	}
-	
+
 	/**
 	 * Close the screen that was just created
 	 */
 	public static void closeDisplay() {
 		Display.destroy();
 	}
-	
+
 	/**
 	 * 
-	 * @return False if should keep render the window
-	 * 			True otherwise
+	 * @return False if should keep render the window True otherwise
 	 */
 	public static boolean closeWasNotRequested() {
 		return !Display.isCloseRequested();
 	}
-
 
 	/**
 	 * Print the information of the system in the screen
@@ -73,7 +69,8 @@ public class DisplayManager {
 		System.out.println("GL_RENDERER: " + glGetString(GL_RENDERER));
 		System.out.println("GL_VERSION: " + glGetString(GL_VERSION));
 		System.out.println();
-		System.out.println("glLoadTransposeMatrixfARB() supported: " + GLContext.getCapabilities().GL_ARB_transpose_matrix);
+		System.out.println(
+				"glLoadTransposeMatrixfARB() supported: " + GLContext.getCapabilities().GL_ARB_transpose_matrix);
 	}
 
 }

@@ -37,7 +37,7 @@ public class SkyBox {
 	}
 
 	/**
-	 * @return the textureId
+	 * @return the texture identifier
 	 */
 	public int getTextureId() {
 		return textureId;

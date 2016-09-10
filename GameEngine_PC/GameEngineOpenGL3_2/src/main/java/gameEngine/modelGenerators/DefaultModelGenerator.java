@@ -19,15 +19,15 @@ public class DefaultModelGenerator {
 	 * The scale of the model
 	 */
 	private float scale;
-	
+
 	/**
 	 * Indicates if the model has transparency or not
 	 */
 	private boolean hasTransparency;
-	
+
 	/**
-	 * Indicate that all our normals of the object are going to point up (in the same
-	 * direction
+	 * Indicate that all our normals of the object are going to point up (in the
+	 * same direction
 	 */
 	private boolean normalsPointingUp;
 
@@ -84,7 +84,8 @@ public class DefaultModelGenerator {
 	}
 
 	/**
-	 * @param hasTransparency the hasTransparency to set
+	 * @param hasTransparency
+	 *            the hasTransparency to set
 	 */
 	public void setHasTransparency(boolean hasTransparency) {
 		this.hasTransparency = hasTransparency;
@@ -98,12 +99,11 @@ public class DefaultModelGenerator {
 	}
 
 	/**
-	 * @param normalsPointingUp the normalsPointingUp to set
+	 * @param normalsPointingUp
+	 *            the normalsPointingUp to set
 	 */
 	public void setNormalsPointingUp(boolean normalsPointingUp) {
 		this.normalsPointingUp = normalsPointingUp;
 	}
-
-
 
 }

@@ -1,12 +1,11 @@
 package gameEngine.shaders;
 
-import java.util.HashMap;
-import java.util.Map.Entry;
-
+import java.util.List;
 import org.lwjgl.opengl.GL20;
 
 import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.ShaderProgram;
 import com.dferreira.commons.Vector3f;
@@ -47,15 +46,15 @@ public abstract class ShaderManager {
 			getAllUniformLocations();
 		}
 	}
-	
+
 	/**
 	 * Bind the attributes of the shader
 	 */
 	private void bindAttributes() {
-		HashMap<Integer, String> attributes = getAttributes();
-		if((attributes != null) && (!attributes.isEmpty())) {
-			for(Entry<Integer, String> entry : attributes.entrySet()) {
-				bindAttribute(entry.getKey(), entry.getValue());
+		List<IEnum> attributes = getAttributes();
+		if ((attributes != null) && (!attributes.isEmpty())) {
+			for (IEnum attribute : attributes) {
+				bindAttribute(attribute.getValue(), attribute.toString());
 			}
 		}
 	}
@@ -63,7 +62,7 @@ public abstract class ShaderManager {
 	/**
 	 * Called to bind the attributes to the program shader
 	 */
-	protected abstract HashMap<Integer, String> getAttributes();
+	protected abstract List<IEnum> getAttributes();
 
 	/**
 	 * Called to ensure that all the shader managers get their uniform locations
@@ -90,10 +89,10 @@ public abstract class ShaderManager {
 	 * 
 	 * @return the position of the uniform variable in program shader
 	 */
-	protected int getUniformLocation(String uniformName) {
-		int location = GL20.glGetUniformLocation(shaderProgram.getProgramId(), uniformName);
-		if(location < 0) {
-			System.out.println("Was not possible to load the location : " + uniformName);
+	protected int getUniformLocation(Enum<?> uniformName) {
+		int location = GL20.glGetUniformLocation(shaderProgram.getProgramId(), uniformName.toString());
+		if (location < 0) {
+			System.err.println("Was not possible to load the location : " + uniformName);
 		}
 		return location;
 	}

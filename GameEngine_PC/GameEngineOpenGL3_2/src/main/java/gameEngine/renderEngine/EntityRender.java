@@ -16,6 +16,7 @@ import gameEngine.models.Entity;
 import gameEngine.models.RawModel;
 import gameEngine.models.TexturedModel;
 import gameEngine.shaders.entities.EntityShaderManager;
+import gameEngine.shaders.entities.TEntityAttribute;
 
 /**
  * Class responsible to render the entities in the screen
@@ -33,6 +34,7 @@ public class EntityRender {
 	 * @param sManager
 	 *            Shader manager
 	 * @param projectionMatrix
+	 *            The projection matrix to the entity render
 	 */
 	public EntityRender(EntityShaderManager sManager, GLTransformation projectionMatrix) {
 		this.eShader = sManager;
@@ -73,7 +75,7 @@ public class EntityRender {
 	 * Render the entities in the scene
 	 * 
 	 * @param skyColor
-	 * 			Color of the sky
+	 *            Color of the sky
 	 * 
 	 * @param sun
 	 *            The source of light of the scene
@@ -82,7 +84,8 @@ public class EntityRender {
 	 * @param entities
 	 *            List of entities of the scene
 	 */
-	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Map<TexturedModel, List<Entity>> entities) {
+	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix,
+			Map<TexturedModel, List<Entity>> entities) {
 		eShader.start();
 		eShader.loadSkyColor(skyColor);
 		eShader.loadLight(sun);
@@ -110,11 +113,11 @@ public class EntityRender {
 					prepareInstance(entity);
 					render(entity);
 				}
-				//Restore the state if has transparency
-				if(!model.hasTransparency()) {
+				// Restore the state if has transparency
+				if (!model.hasTransparency()) {
 					disableCulling();
 				}
-				
+
 				unbindTexturedModel();
 			}
 		}
@@ -124,42 +127,43 @@ public class EntityRender {
 	 * Enable culling of faces to get better performance
 	 */
 	private void enableCulling() {
-		//Enable the GL cull face feature
+		// Enable the GL cull face feature
 		GL11.glEnable(GL11.GL_CULL_FACE);
-		//Avoid to render faces that are away from the camera
+		// Avoid to render faces that are away from the camera
 		GL11.glCullFace(GL11.GL_BACK);
 	}
-	
+
 	/**
 	 * Disable the culling of the faces vital for transparent model
 	 */
 	private void disableCulling() {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 	}
-	
+
 	/**
 	 * Bind the attributes of openGL
 	 * 
-	 * @param texturedModel Model that contains the model of the entity with textures
+	 * @param texturedModel
+	 *            Model that contains the model of the entity with textures
 	 */
 	private void prepareTexturedModel(TexturedModel texturedModel) {
 		RawModel model = texturedModel.getRawModel();
 
-		if(!texturedModel.hasTransparency()) {
+		if (!texturedModel.hasTransparency()) {
 			enableCulling();
 		}
-		
+
 		GL30.glBindVertexArray(model.getVaoId());
-		GL20.glEnableVertexAttribArray(EntityShaderManager.LOCATION_ATTR_ID);
-		GL20.glEnableVertexAttribArray(EntityShaderManager.TEX_COORDINATE_ATTR_ID);
-		GL20.glEnableVertexAttribArray(EntityShaderManager.NORMAL_VECTOR_ATTR_ID);
+		GL20.glEnableVertexAttribArray(TEntityAttribute.position.ordinal());
+		GL20.glEnableVertexAttribArray(TEntityAttribute.textureCoords.ordinal());
+		GL20.glEnableVertexAttribArray(TEntityAttribute.normal.ordinal());
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturedModel.getTexture().getTextureId());
 
 		// Load if should put the normals of the entity point up or not
 		eShader.loadNormalsPointingUp(texturedModel.isNormalsPointingUp());
-		
+
 		// Load the the light properties
 		eShader.loadShineVariables(texturedModel.getTexture().getShineDamper(),
 				texturedModel.getTexture().getReflectivity());
@@ -170,7 +174,7 @@ public class EntityRender {
 	 * Load the transformation matrix of the entity
 	 * 
 	 * @param entity
-	 * 			Entity that is to get prepared to be loaded
+	 *            Entity that is to get prepared to be loaded
 	 */
 	private void prepareInstance(Entity entity) {
 		// Load the transformation matrix
@@ -181,7 +185,7 @@ public class EntityRender {
 	 * Call the render of the triangles to the entity itself
 	 * 
 	 * @param entity
-	 * 			Entity to get render
+	 *            Entity to get render
 	 */
 	private void render(Entity entity) {
 		TexturedModel texturedModel = entity.getModel();
@@ -193,9 +197,9 @@ public class EntityRender {
 	 * UnBind the previous binded elements
 	 */
 	private void unbindTexturedModel() {
-		GL20.glDisableVertexAttribArray(EntityShaderManager.LOCATION_ATTR_ID);
-		GL20.glDisableVertexAttribArray(EntityShaderManager.TEX_COORDINATE_ATTR_ID);
-		GL20.glDisableVertexAttribArray(EntityShaderManager.NORMAL_VECTOR_ATTR_ID);
+		GL20.glDisableVertexAttribArray(TEntityAttribute.position.ordinal());
+		GL20.glDisableVertexAttribArray(TEntityAttribute.textureCoords.ordinal());
+		GL20.glDisableVertexAttribArray(TEntityAttribute.normal.ordinal());
 		GL30.glBindVertexArray(0);
 	}
 

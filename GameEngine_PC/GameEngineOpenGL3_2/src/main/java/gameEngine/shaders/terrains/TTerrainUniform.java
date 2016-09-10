@@ -1,10 +1,12 @@
 package gameEngine.shaders.terrains;
 
+import com.dferreira.commons.IEnum;
+
 /**
  * Locations in the shader program of the terrains
  */
-public enum TTerrainLocation {
-	
+public enum TTerrainUniform implements IEnum {
+
 	/**
 	 * Location of the transformation matrix in the program shader
 	 */
@@ -69,9 +71,17 @@ public enum TTerrainLocation {
 	 * The blend map texture
 	 */
 	weightMapTexture,
-	
+
 	/**
 	 * Meta-data used maintain the existing locations
 	 */
-	numOfTerrainLocations
+	numOfTerrainLocations;
+
+	/**
+	 * The value of the enumeration
+	 */
+	@Override
+	public int getValue() {
+		return this.ordinal();
+	}
 }

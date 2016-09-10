@@ -13,7 +13,7 @@ import gameEngine.renderEngine.Loader;
 public class WorldSkyBoxGenerator {
 	private final static String SKY_FOLDER = "sky/";
 
-	/* The names that the textures of the sky have */
+	/* The names that the textures of the sky */
 	private final static String[] TEXTURE_FILES = { SKY_FOLDER + "right", SKY_FOLDER + "left", SKY_FOLDER + "top",
 			SKY_FOLDER + "bottom", SKY_FOLDER + "back", SKY_FOLDER + "front" };
 
@@ -22,7 +22,7 @@ public class WorldSkyBoxGenerator {
 	 * 
 	 * @param loader
 	 *            object that is going to read the textures of the sky
-	 *            
+	 * 
 	 * @return A reference to the sky box loaded
 	 */
 	public static SkyBox getSky(Loader loader) {

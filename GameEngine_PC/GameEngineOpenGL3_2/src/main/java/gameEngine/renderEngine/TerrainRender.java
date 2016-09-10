@@ -14,6 +14,7 @@ import com.dferreira.commons.models.Light;
 
 import gameEngine.models.RawModel;
 import gameEngine.models.Terrain;
+import gameEngine.shaders.terrains.TTerrainAttribute;
 import gameEngine.shaders.terrains.TerrainShaderManager;
 import gameEngine.textures.TerrainTexturesPack;
 
@@ -109,15 +110,15 @@ public class TerrainRender {
 	 * Bind the attributes of openGL
 	 * 
 	 * @param terrain
-	 * 	Terrain to get prepared
+	 *            Terrain to get prepared
 	 */
 	private void prepareTerrain(Terrain terrain) {
 		RawModel model = terrain.getModel();
 
 		GL30.glBindVertexArray(model.getVaoId());
-		GL20.glEnableVertexAttribArray(TerrainShaderManager.LOCATION_ATTR_ID);
-		GL20.glEnableVertexAttribArray(TerrainShaderManager.TEX_COORDINATE_ATTR_ID);
-		GL20.glEnableVertexAttribArray(TerrainShaderManager.NORMAL_VECTOR_ATTR_ID);
+		GL20.glEnableVertexAttribArray(TTerrainAttribute.position.getValue());
+		GL20.glEnableVertexAttribArray(TTerrainAttribute.textureCoords.getValue());
+		GL20.glEnableVertexAttribArray(TTerrainAttribute.normal.getValue());
 
 		// bind several textures of the terrain
 		bindTextures(terrain);
@@ -130,7 +131,7 @@ public class TerrainRender {
 	 * When loads one texture defines that by default should zoom in/out it
 	 */
 	private void defineTextureFunctionFilters() {
-		// The texture minifying function is used whenever the pixel being
+		// The texture minification function is used whenever the pixel being
 		// textured maps to an area greater than one texture element
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
 
@@ -148,7 +149,8 @@ public class TerrainRender {
 	/**
 	 * Bind the several textures of the terrain
 	 * 
-	 * @param terrain Terrain that is going to get the textures bound
+	 * @param terrain
+	 *            Terrain that is going to get the textures bound
 	 */
 	private void bindTextures(Terrain terrain) {
 		TerrainTexturesPack texturesPackage = terrain.getTexturePack();
@@ -182,7 +184,8 @@ public class TerrainRender {
 	/**
 	 * Call the render of the triangles to the terrain itself
 	 * 
-	 * @param terrain A reference to the terrain to get render
+	 * @param terrain
+	 *            A reference to the terrain to get render
 	 */
 	private void render(Terrain terrain) {
 		RawModel model = terrain.getModel();
@@ -193,9 +196,9 @@ public class TerrainRender {
 	 * UnBind the previous binded elements
 	 */
 	private void unbindTexturedModel() {
-		GL20.glDisableVertexAttribArray(TerrainShaderManager.LOCATION_ATTR_ID);
-		GL20.glDisableVertexAttribArray(TerrainShaderManager.TEX_COORDINATE_ATTR_ID);
-		GL20.glDisableVertexAttribArray(TerrainShaderManager.NORMAL_VECTOR_ATTR_ID);
+		GL20.glDisableVertexAttribArray(TTerrainAttribute.position.getValue());
+		GL20.glDisableVertexAttribArray(TTerrainAttribute.textureCoords.getValue());
+		GL20.glDisableVertexAttribArray(TTerrainAttribute.normal.getValue());
 		GL30.glBindVertexArray(0);
 	}
 

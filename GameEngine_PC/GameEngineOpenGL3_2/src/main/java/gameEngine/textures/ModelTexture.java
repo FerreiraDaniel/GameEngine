@@ -9,21 +9,22 @@ public class ModelTexture {
 	 * The identifier of the texture
 	 */
 	private int textureId;
-	
+
 	/**
 	 * How damped the shine is
 	 */
 	private float shineDamper;
-	
+
 	/**
 	 * How reflective the model is
 	 */
 	private float reflectivity;
-	
+
 	/**
 	 * Constructor of the texture model
 	 * 
-	 * @param id Identifier of the texture id
+	 * @param id
+	 *            Identifier of the texture id
 	 */
 	public ModelTexture(int id) {
 		this.textureId = id;
@@ -46,7 +47,8 @@ public class ModelTexture {
 	}
 
 	/**
-	 * @param shineDamper the shineDamper to set
+	 * @param shineDamper
+	 *            the shineDamper to set
 	 */
 	public void setShineDamper(float shineDamper) {
 		this.shineDamper = shineDamper;
@@ -60,9 +62,10 @@ public class ModelTexture {
 	}
 
 	/**
-	 * @param reflectivity the reflectivity to set
+	 * @param reflectivity
+	 *            the reflectivity to set
 	 */
 	public void setReflectivity(float reflectivity) {
 		this.reflectivity = reflectivity;
-	}	
+	}
 }
