@@ -80,13 +80,12 @@ public class Camera {
 			position.z += (-STEP * Math.sin(pitchR)) + (-STEP * Math.cos(yawR));
 		}
 		
-
+		/*
 		if(GamePad.isKeyDown(GamePad.KEY_TRIANGLE)) {
 		}
-		
-		//
+
 		if(GamePad.isKeyDown(GamePad.KEY_SQUARE)) {
-		}
+		}*/
 		
 		//Go backwards
 		if(GamePad.isKeyDown(GamePad.KEY_CIRCLE)) {

@@ -23,34 +23,29 @@ import java.util.List;
  */
 public class OBJLoader {
 
-    private final static String TAG = "OBJLoader";
-
-    /**
-     * Vertices positions in the model
-     */
-    private static final String VERTEX_PREFIX = "v";
-
-    /**
-     * Normal vertices
-     */
-    private static final String NORMAL_PREFIX = "vn";
-
-    /**
-     * Vertices texture coordinates in our model
-     */
-    private static final String TEXTURE_PREFIX = "vt";
-
-    /**
-     * Face each face represents one triangle
-     */
-    private static final String FACE_PREFIX = "f";
-
     @SuppressWarnings("WeakerAccess")
     public final static int COORDINATES_BY_VERTEX = 3;
     @SuppressWarnings("WeakerAccess")
     public final static int COORDINATES_BY_TEXTURE = 2;
     @SuppressWarnings("WeakerAccess")
     public final static int COORDINATES_BY_NORMAL = 3;
+    private final static String TAG = "OBJLoader";
+    /**
+     * Vertices positions in the model
+     */
+    private static final String VERTEX_PREFIX = "v";
+    /**
+     * Normal vertices
+     */
+    private static final String NORMAL_PREFIX = "vn";
+    /**
+     * Vertices texture coordinates in our model
+     */
+    private static final String TEXTURE_PREFIX = "vt";
+    /**
+     * Face each face represents one triangle
+     */
+    private static final String FACE_PREFIX = "f";
 
     /**
      * Parse two strings and return the equivalent vector2f
@@ -216,7 +211,9 @@ public class OBJLoader {
         IShape shape = (IShape) cache.get(resourceId);
         if (shape == null) {
             IShape newShape = pLoadObjModel(context, resourceId);
-            cache.put(resourceId, newShape);
+            if (newShape != null) {
+                cache.put(resourceId, newShape);
+            }
             return newShape;
         } else {
             return shape;

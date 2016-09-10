@@ -3,8 +3,13 @@ package com.dferreira.game_engine.shaders.skyBox;
 import android.content.Context;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.IEnum;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -13,23 +18,10 @@ import com.dferreira.game_engine.shaders.ShaderManager;
  */
 public class SkyBoxShaderManager extends ShaderManager {
 
-
     /**
-     * Position where to location attribute is going to be bind in the shader
-     * program
+     * All the uniform locations in the shader programs
      */
-    public final static int LOCATION_ATTR_ID = 0;
-
-    /**
-     * Location of the projection matrix in the program shader
-     */
-    private int location_projectionMatrix;
-
-    /**
-     * Location of the view matrix in the program shader
-     */
-    private int location_viewMatrix;
-
+    private int[] uniforms;
 
     /**
      * Constructor of the game shader where the vertex and fragment shader of
@@ -41,12 +33,15 @@ public class SkyBoxShaderManager extends ShaderManager {
         super(context, R.raw.sky_box_vertex_shader, R.raw.sky_box_fragment_shader);
     }
 
+
     /**
-     * Bind the attributes to the program
+     * Bind the attributes of the program
+     *
      */
     @Override
-    protected void bindAttributes() {
-        super.bindAttribute(LOCATION_ATTR_ID, "position");
+    protected List<IEnum> getAttributes() {
+        return new ArrayList<IEnum>(Arrays.asList(TSkyBoxAttribute.values()));
+
     }
 
     /**
@@ -54,27 +49,33 @@ public class SkyBoxShaderManager extends ShaderManager {
      */
     @Override
     protected void getAllUniformLocations() {
-        location_projectionMatrix = super.getUniformLocation("projectionMatrix");
-        location_viewMatrix = super.getUniformLocation("viewMatrix");
-    }
+        int size = TSkyBoxUniform.numOfSkyBoxLocations.getValue();
+        this.uniforms = new int[size];
 
+        for (int i = 0; i < size; i++) {
+            TSkyBoxUniform uniformKey = TSkyBoxUniform.values()[i];
+            uniforms[i] = super.getUniformLocation(uniformKey);
+        }
+    }
 
     /**
      * Load the projection matrix
      *
-     * @param matrix the matrix to be loaded
+     * @param matrix
+     *            the matrix to be loaded
      */
     public void loadProjectionMatrix(GLTransformation matrix) {
-        super.loadMatrix(location_projectionMatrix, matrix);
+        super.loadMatrix(uniforms[TSkyBoxUniform.projectionMatrix.getValue()], matrix);
     }
 
     /**
      * Load the transformation matrix
      *
-     * @param matrix the matrix to be loaded
+     * @param matrix
+     *            the matrix to be loaded
      */
     public void loadViewMatrix(GLTransformation matrix) {
         matrix.setTranslation(0.0f, 0.0f, 0.0f);
-        super.loadMatrix(location_viewMatrix, matrix);
+        super.loadMatrix(uniforms[TSkyBoxUniform.viewMatrix.getValue()], matrix);
     }
 }

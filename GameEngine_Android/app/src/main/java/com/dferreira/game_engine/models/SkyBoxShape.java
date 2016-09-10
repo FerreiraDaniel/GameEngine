@@ -36,7 +36,8 @@ public class SkyBoxShape implements IShape {
     }
 
     /**
-     * The vertices of the sky box
+     *
+     * @return The vertices of the sky box
      */
     @Override
     public float[] getVertices() {

@@ -3,10 +3,14 @@ package com.dferreira.game_engine.shaders.entities;
 import android.content.Context;
 
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Manager of the shader files that are going to be load to render the 3D
@@ -14,68 +18,9 @@ import com.dferreira.game_engine.shaders.ShaderManager;
 public class EntityShaderManager extends ShaderManager {
 
     /**
-     * Position where to location attribute is going to be bind in the shader
-     * program
+     * All the uniform locations in the shader programs
      */
-    public final static int LOCATION_ATTR_ID = 0;
-
-    /**
-     * Position where to texture attribute is going to be bind in the program
-     * shader
-     */
-    public final static int TEX_COORDINATE_ATTR_ID = 1;
-
-    /**
-     * Position where the normal vector are going to be bind in the program
-     * shader
-     */
-    public final static int NORMAL_VECTOR_ATTR_ID = 2;
-
-    /**
-     * Location of the transformation matrix in the program shader
-     */
-    private int location_TransformationMatrix;
-
-    /**
-     * Location of the view matrix in the program shader
-     */
-    private int location_viewMatrix;
-
-    /**
-     * Location of the projection matrix in the program shader
-     */
-    private int location_projectionMatrix;
-
-    /**
-     * Location of the light's position in the program shader
-     */
-    private int location_lightPosition;
-
-    /**
-     * Location of the camera's position in the program shader
-     */
-    private int location_cameraPosition;
-
-    /**
-     * Location of the light's color in the program shader
-     */
-    private int location_lightColor;
-
-    /**
-     * Location of the shineDamper uniform in the fragment shader
-     */
-    private int location_shineDamper;
-
-    /**
-     * Location of the reflectivity uniform in the fragment shader
-     */
-    private int location_reflectivity;
-
-    /**
-     * Location of the variable that indicates the normals of the
-     * object should point up
-     */
-    private int location_normalsPointingUp;
+    private int[] uniforms;
 
 
     /**
@@ -89,29 +34,27 @@ public class EntityShaderManager extends ShaderManager {
     }
 
     /**
-     * Bind the attributes to the program
+     * Bind the attributes of the program shader
+     *
      */
     @Override
-    protected void bindAttributes() {
-        super.bindAttribute(LOCATION_ATTR_ID, "position");
-        super.bindAttribute(TEX_COORDINATE_ATTR_ID, "textureCoords");
-        super.bindAttribute(NORMAL_VECTOR_ATTR_ID, "normal");
+    protected List<IEnum> getAttributes() {
+        return new ArrayList<IEnum>(Arrays.asList(TEntityAttribute.values()));
     }
+
 
     /**
      * Get all the uniform location in the shader script
      */
     @Override
     protected void getAllUniformLocations() {
-        location_projectionMatrix = super.getUniformLocation("projectionMatrix");
-        location_viewMatrix = super.getUniformLocation("viewMatrix");
-        location_TransformationMatrix = super.getUniformLocation("transformationMatrix");
-        location_lightPosition = super.getUniformLocation("lightPosition");
-        location_cameraPosition = super.getUniformLocation("cameraPosition");
-        location_lightColor = super.getUniformLocation("lightColor");
-        location_shineDamper = super.getUniformLocation("shineDamper");
-        location_reflectivity = super.getUniformLocation("reflectivity");
-        location_normalsPointingUp = super.getUniformLocation("normalsPointingUp");
+        int size = TEntityUniform.numOfEntityLocations.getValue();
+        uniforms = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            TEntityUniform location = TEntityUniform.values()[i];
+            uniforms[i] = super.getUniformLocation(location);
+        }
     }
 
     /**
@@ -121,57 +64,55 @@ public class EntityShaderManager extends ShaderManager {
      *            the matrix to be loaded
      */
     public void loadProjectionMatrix(GLTransformation matrix) {
-        super.loadMatrix(location_projectionMatrix, matrix);
+        super.loadMatrix(uniforms[TEntityUniform.projectionMatrix.getValue()], matrix);
     }
 
     /**
-     * Load the transformation matrix
+     * Load the view matrix
      *
      * @param matrix
      *            the matrix to be loaded
      */
     public void loadViewMatrix(GLTransformation matrix) {
-        super.loadMatrix(location_viewMatrix, matrix);
+        super.loadMatrix(uniforms[TEntityUniform.viewMatrix.getValue()], matrix);
     }
 
+
     /**
-     * Put passes the information of the light to the
-     * Shader program
+     * Put passes the information of the light to the Shader program
      *
-     * @param light the light to load in the shader program
+     * @param light
+     *            the light to load in the shader program
      */
-    public void loadLight(Light light){
-        super.loadVector(location_lightPosition, light.getPosition());
-        super.loadVector(location_lightColor, light.getColor());
+    public void loadLight(Light light) {
+        super.loadVector(uniforms[TEntityUniform.lightPosition.getValue()], light.getPosition());
+        super.loadVector(uniforms[TEntityUniform.lightColor.getValue()], light.getColor());
     }
 
     /**
      * Load the values of the specular light in the fragment shader
      *
-     * @param damper		The damper of the specular lighting
-     * @param reflectivity	The reflectivity of the material
+     * @param damper
+     *            The damper of the specular lighting
+     * @param reflectivity
+     *            The reflectivity of the material
      */
     public void loadShineVariables(float damper, float reflectivity) {
-        super.loadFloat(location_shineDamper, damper);
-        super.loadFloat(location_reflectivity ,reflectivity);
+        super.loadFloat(uniforms[TEntityUniform.shineDamper.getValue()], damper);
+        super.loadFloat(uniforms[TEntityUniform.reflectivity.getValue()], reflectivity);
     }
 
     /**
      * Set in the shader if the normals should all of them point up
+     *
      * @param normalsPointingUp
+     *            Flag that indicates if all the normals of the entity are
+     *            pointing up or not
      */
     public void loadNormalsPointingUp(boolean normalsPointingUp) {
-        super.loadBoolean(location_normalsPointingUp, normalsPointingUp);
+        super.loadBoolean(uniforms[TEntityUniform.normalsPointingUp.getValue()], normalsPointingUp);
     }
 
-    /**
-     * Load the position of the camera in the world in the program shader
-     *
-     * @param cameraPosition position of the camera
-     */
-    public void loadCameraPosition(Vector3f cameraPosition) {
-        super.loadVector(location_cameraPosition, cameraPosition);
-    }
 
     /**
      * Load the transformation matrix
@@ -180,7 +121,7 @@ public class EntityShaderManager extends ShaderManager {
      *            the matrix to be loaded
      */
     public void loadTransformationMatrix(GLTransformation matrix) {
-        super.loadMatrix(location_TransformationMatrix, matrix);
+        super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.getValue()], matrix);
     }
 
 }

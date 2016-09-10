@@ -26,20 +26,25 @@ import javax.microedition.khronos.opengles.GL10;
 @SuppressWarnings("WeakerAccess")
 public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
-    // Member variables
-    private int mWidth;
-    private int mHeight;
-
     private final static String TIME_TO_RENDER_TAG = "timeToRender";
-
     /**
      * Handle to a program object
      */
     private final Context context;
-
+    // Member variables
+    private int mWidth;
+    private int mHeight;
+    /**
+     * NOTE: The loader could be a local variable at this stage but in the future
+     * resources should be release in different methods
+     */
     @SuppressWarnings("FieldCanBeLocal")
     private Loader loader;
 
+    /**
+     * The master render is going put all the elements together
+     * in order to render the scene
+     */
     private MasterRender renderer;
 
 
@@ -51,7 +56,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     /**
      * Array of terrains to render
      */
-    Terrain[] terrains;
+    private Terrain[] terrains;
 
     /**
      * Position of the light in scene
@@ -75,7 +80,8 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
 
     /**
-     * Initialize the shader and program object
+     * Initialize the shader programs objects
+     * and load the different components of the application
      *
      * @param gl     Reference to the openGL variable
      * @param config Reference to the configuration
@@ -90,6 +96,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         /*Initializes the main variables responsible to render the 3D world*/
         this.loader = new Loader();
+
         this.renderer = new MasterRender(context);
 
         Date renderInitialized = new Date();
@@ -103,11 +110,11 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize entities " + (entitiesLoaded.getTime() - renderInitialized.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        this.terrains = WorldTerrainsGenerator.getTerrains(context,loader);
+        this.terrains = WorldTerrainsGenerator.getTerrains(context, loader);
 
         Date terrainLoaded = new Date();
 
-        Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - entitiesLoaded.getTime() )+ " ms");
+        Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - entitiesLoaded.getTime()) + " ms");
 
         /* Load the lights that is going to render*/
         this.light = WorldEntitiesGenerator.getLight();
@@ -115,7 +122,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         Date lightLoaded = new Date();
 
-        Log.d(TIME_TO_RENDER_TAG,"Time to initialize light " + (lightLoaded.getTime() - terrainLoaded.getTime()) + " ms");
+        Log.d(TIME_TO_RENDER_TAG, "Time to initialize light " + (lightLoaded.getTime() - terrainLoaded.getTime()) + " ms");
 
         /* Load the sky box that is going to render*/
         this.skyBox = WorldSkyBoxGenerator.getSky(context, loader);
@@ -127,9 +134,11 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Total time:" + (skyBoxLoaded.getTime() - renderInitialized.getTime()));
     }
 
-    // /
-    // Draw a triangle using the shader pair created in onSurfaceCreated()
-    //
+    /**
+     * Draw the entities of the scene
+     *
+     * @param glUnused Variable for reference of openGL 1.0 not used at all
+     */
     public void onDrawFrame(GL10 glUnused) {
         // Set the viewport
         GLES20.glViewport(0, 0, mWidth, mHeight);
@@ -140,14 +149,17 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         renderer.processSkyBox(skyBox);
         renderer.render(light);
 
-
     }
 
-    // /
-    // Handle surface changes
-    //
+    /**
+     * Handle surface changes
+     *
+     * @param glUnused Variable for reference of openGL 1.0 not used at all
+     * @param width    The new width of the screen
+     * @param height   The new height of the screen
+     */
     public void onSurfaceChanged(GL10 glUnused, int width, int height) {
-        mWidth = width;
-        mHeight = height;
+        this.mWidth = width;
+        this.mHeight = height;
     }
 }

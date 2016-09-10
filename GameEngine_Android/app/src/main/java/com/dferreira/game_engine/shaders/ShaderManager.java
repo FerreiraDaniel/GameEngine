@@ -2,14 +2,17 @@ package com.dferreira.game_engine.shaders;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.util.Log;
 
 import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.utils.LoadUtils;
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.ShaderProgram;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.utils.LoadUtils;
 
 import java.nio.FloatBuffer;
+import java.util.List;
 
 /**
  * Generic shader manager with methods to load vertex shader and fragment shader files
@@ -17,6 +20,7 @@ import java.nio.FloatBuffer;
  */
 public abstract class ShaderManager {
 
+    private static final String TAG = "ShaderManager";
     private ShaderProgram shaderProgram;
 
 
@@ -47,7 +51,19 @@ public abstract class ShaderManager {
     /**
      * Called to bind the attributes to the program shader
      */
-    protected abstract void bindAttributes();
+    private void bindAttributes() {
+        List<IEnum> attributes = getAttributes();
+        if ((attributes != null) && (!attributes.isEmpty())) {
+            for (IEnum attribute : attributes) {
+                bindAttribute(attribute.getValue(), attribute.toString());
+            }
+        }
+    }
+
+    /**
+     * Called to bind the attributes to the program shader
+     */
+    protected abstract List<IEnum> getAttributes();
 
     /**
      * Called to ensure that all the shader managers get their uniform locations
@@ -60,7 +76,7 @@ public abstract class ShaderManager {
      * @param attributeIndex Index of the attribute to bind
      * @param variableName   Name of the attribute to bind
      */
-    protected void bindAttribute(int attributeIndex, String variableName) {
+    private void bindAttribute(int attributeIndex, String variableName) {
         GLES20.glBindAttribLocation(shaderProgram.getProgramId(), attributeIndex, variableName);
     }
 
@@ -68,11 +84,17 @@ public abstract class ShaderManager {
     /**
      * Get the position of one uniform variable in the program shader
      *
-     * @param uniformName the name of the uniform variable as appears in the shader code
+     * @param uniformName
+     *            the name of the uniform variable as appears in the shader code
+     *
      * @return the position of the uniform variable in program shader
      */
-    protected int getUniformLocation(String uniformName) {
-        return GLES20.glGetUniformLocation(shaderProgram.getProgramId(), uniformName);
+    protected int getUniformLocation(Enum<?> uniformName) {
+        int location = GLES20.glGetUniformLocation(shaderProgram.getProgramId(), uniformName.toString());
+        if (location < 0) {
+            Log.e(TAG, "Was not possible to load the location : " + uniformName);
+        }
+        return location;
     }
 
     /**

@@ -32,35 +32,36 @@ public class DefaultModelGenerator {
     private boolean normalsPointingUp;
 
     /**
-     * @return
+     * @return The reference to the object that represents the model
      */
     public int getObjectReference() {
         return objectReference;
     }
 
     /**
-     * @param objectReference
-     * @return
+     * Set the reference to object the represents the model
+     *
+     * @param objectReference reference to the object to set
      */
-    public DefaultModelGenerator setObjectReference(int objectReference) {
+    public void setObjectReference(int objectReference) {
         this.objectReference = objectReference;
-        return this;
     }
 
     /**
-     * @return
+     * @return Reference to the object pointing the model
      */
     public int getTextureReference() {
         return textureReference;
     }
 
     /**
-     * @param textureReference
-     * @return
+     * Set the reference to the texture element
+     *
+     * @param textureReference Reference to the textures of the model
+     *
      */
-    public DefaultModelGenerator setTextureReference(int textureReference) {
+    public void setTextureReference(int textureReference) {
         this.textureReference = textureReference;
-        return this;
     }
 
     /**

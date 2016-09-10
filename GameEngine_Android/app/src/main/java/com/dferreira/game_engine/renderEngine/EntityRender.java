@@ -8,6 +8,7 @@ import com.dferreira.game_engine.models.Entity;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.TexturedModel;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
+import com.dferreira.game_engine.shaders.entities.TEntityAttribute;
 
 import java.util.List;
 import java.util.Map;
@@ -82,9 +83,7 @@ public class EntityRender {
      * @param entities HashMap of entities to render
      */
     private void render(Map<TexturedModel, List<Entity>> entities) {
-        if ((entities == null) || (entities.size() == 0)) {
-            return;
-        } else {
+        if ((entities != null) && (!entities.isEmpty())) {
             for (TexturedModel model : entities.keySet()) {
                 List<Entity> batch = entities.get(model);
                 prepareTexturedModel(model);
@@ -102,14 +101,15 @@ public class EntityRender {
      * Bind the attributes of openGL
      *
      * @param texturedModel
+     *            Model that contains the model of the entity with textures
      */
     private void prepareTexturedModel(TexturedModel texturedModel) {
         RawModel model = texturedModel.getRawModel();
 
         //Enable the attributes to bind
-        GLES20.glEnableVertexAttribArray(EntityShaderManager.LOCATION_ATTR_ID);
-        GLES20.glEnableVertexAttribArray(EntityShaderManager.TEX_COORDINATE_ATTR_ID);
-        GLES20.glEnableVertexAttribArray(EntityShaderManager.NORMAL_VECTOR_ATTR_ID);
+        GLES20.glEnableVertexAttribArray(TEntityAttribute.position.getValue());
+        GLES20.glEnableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
+        GLES20.glEnableVertexAttribArray(TEntityAttribute.normal.getValue());
 
         //Enable the specific texture
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
@@ -122,25 +122,26 @@ public class EntityRender {
         eShader.loadShineVariables(texturedModel.getShineDamper(), texturedModel.getReflectivity());
 
         // Load the vertex data
-        GLES20.glVertexAttribPointer(EntityShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
+        GLES20.glVertexAttribPointer(TEntityAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
 
         // Load the texture coordinate
-        GLES20.glVertexAttribPointer(EntityShaderManager.TEX_COORDINATE_ATTR_ID, RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR, GLES20.GL_FLOAT,
+        GLES20.glVertexAttribPointer(TEntityAttribute.textureCoords.getValue(), RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR, GLES20.GL_FLOAT,
                 RenderConstants.VERTEX_NORMALIZED,
                 RenderConstants.STRIDE,
                 model.getTexCoordinates());
 
 
         // Load the normals data
-        GLES20.glVertexAttribPointer(EntityShaderManager.NORMAL_VECTOR_ATTR_ID, RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
+        GLES20.glVertexAttribPointer(TEntityAttribute.normal.getValue(), RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
                 model.getNormalBuffer());
     }
 
 
     /**
-     * Render the entity itself
+     * Load the transformation matrix of the entity
      *
      * @param entity
+     *            Entity that is to get prepared to be loaded
      */
     private void prepareInstance(Entity entity) {
         //Load the transformation matrix
@@ -151,6 +152,7 @@ public class EntityRender {
      * Call the render of the triangles to the entity itself
      *
      * @param entity
+     *            Entity to get render
      */
     private void render(Entity entity) {
         TexturedModel texturedModel = entity.getModel();
@@ -167,9 +169,9 @@ public class EntityRender {
      * UnBind the previous bound elements
      */
     private void unbindTexturedModel() {
-        GLES20.glDisableVertexAttribArray(EntityShaderManager.LOCATION_ATTR_ID);
-        GLES20.glDisableVertexAttribArray(EntityShaderManager.TEX_COORDINATE_ATTR_ID);
-        GLES20.glDisableVertexAttribArray(EntityShaderManager.NORMAL_VECTOR_ATTR_ID);
+        GLES20.glDisableVertexAttribArray(TEntityAttribute.position.getValue());
+        GLES20.glDisableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
+        GLES20.glDisableVertexAttribArray(TEntityAttribute.normal.getValue());
     }
 
     /**

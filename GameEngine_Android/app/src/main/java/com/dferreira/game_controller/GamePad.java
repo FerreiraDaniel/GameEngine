@@ -22,8 +22,7 @@ public class GamePad {
      * @return  Flag that indicates if the key was pressed or not
      */
     public static boolean isKeyDown(int selectedKey) {
-        boolean bValue = keysAreDown[selectedKey];
-        return bValue;
+        return keysAreDown[selectedKey];
     }
 
     /**

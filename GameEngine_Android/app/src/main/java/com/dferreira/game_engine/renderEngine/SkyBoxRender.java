@@ -6,8 +6,8 @@ import android.opengl.GLES20;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.SkyBox;
-import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
 import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
+import com.dferreira.game_engine.shaders.skyBox.TSkyBoxAttribute;
 
 /**
  * Class responsible to render the entities in the screen
@@ -57,14 +57,14 @@ public class SkyBoxRender {
         RawModel model = skyBox.getModel();
 
         //Enable the attributes to bind
-        GLES20.glEnableVertexAttribArray(SkyBoxShaderManager.LOCATION_ATTR_ID);
+        GLES20.glEnableVertexAttribArray(TSkyBoxAttribute.position.getValue());
 
         // bind several textures of the sky box
         bindTextures(skyBox);
 
         //Load from buffers
         // Load the vertex data
-        GLES20.glVertexAttribPointer(EntityShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
+        GLES20.glVertexAttribPointer(TSkyBoxAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
 
 
     }
@@ -82,6 +82,7 @@ public class SkyBoxRender {
      * Call the render of the triangles to the skyBox itself
      *
      * @param skyBox
+     *            The sky box to be render
      */
     private void render(SkyBox skyBox) {
         RawModel model = skyBox.getModel();
@@ -89,10 +90,10 @@ public class SkyBoxRender {
     }
 
     /**
-     * UnBind the previous binded elements
+     * UnBind the previous bound elements
      */
     private void unbindTexture() {
-        GLES20.glDisableVertexAttribArray(SkyBoxShaderManager.LOCATION_ATTR_ID);
+        GLES20.glDisableVertexAttribArray(TSkyBoxAttribute.position.getValue());
     }
 
     /**

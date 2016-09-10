@@ -140,8 +140,8 @@ public class WorldEntitiesGenerator {
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
             TexturedModel texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp());
-            Integer numberOfObjs = entitiesMap.get(key);
-            for (int i = 0; i < numberOfObjs; i++) {
+            Integer numberOfEntities = entitiesMap.get(key);
+            for (int i = 0; i < numberOfEntities; i++) {
                 float xPosition = 20.0f + random.nextFloat() * 200.0f;
                 float zPosition = random.nextFloat() * 200.0f;
                 Vector3f entityPosition = new Vector3f(xPosition, 0.0f, zPosition);

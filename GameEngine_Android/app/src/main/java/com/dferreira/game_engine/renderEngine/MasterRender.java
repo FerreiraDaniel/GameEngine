@@ -70,32 +70,6 @@ public class MasterRender {
     private SkyBox skyBox;
 
     /**
-     * Create the projection matrix with parameters of the camera
-     *
-     * @return A projection matrix
-     */
-    private GLTransformation createProjectionMatrix() {
-        GLTransformation matrix = new GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.gluPerspective(FOV, CAMERA_RATE, NEAR_PLANE, FAR_PLANE);
-
-        return matrix;
-    }
-
-    /**
-     * Clean the data of the previous frame
-     */
-    private void prepare() {
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-
-        // Set the color clear value
-        GLES20.glClearColor(0, 0.3f, 0, 1);
-
-        // Clear the color and depth buffers
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES10.GL_DEPTH_BUFFER_BIT);
-    }
-
-    /**
      * Constructor of the master renderer
      *
      */
@@ -126,6 +100,31 @@ public class MasterRender {
 
     }
 
+    /**
+     * Create the projection matrix with parameters of the camera
+     *
+     * @return A projection matrix
+     */
+    private GLTransformation createProjectionMatrix() {
+        GLTransformation matrix = new GLTransformation();
+        matrix.glLoadIdentity();
+        matrix.gluPerspective(FOV, CAMERA_RATE, NEAR_PLANE, FAR_PLANE);
+
+        return matrix;
+    }
+
+    /**
+     * Clean the data of the previous frame
+     */
+    private void prepare() {
+        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+
+        // Set the color clear value
+        GLES20.glClearColor(0, 0.3f, 0, 1);
+
+        // Clear the color and depth buffers
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES10.GL_DEPTH_BUFFER_BIT);
+    }
 
     /**
      * Put one entity in the list of entities to render
@@ -147,6 +146,7 @@ public class MasterRender {
      *
      * @param lEntities list of entities to get render in the next frame
      */
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     public void processEntities(Entity[] lEntities) {
         entities.clear();
         if ((lEntities != null) && (lEntities.length > 0)) {
@@ -171,6 +171,7 @@ public class MasterRender {
      *
      * @param lTerrains list of terrains to process
      */
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     public void processTerrains(Terrain[] lTerrains) {
         this.terrains.clear();
         if ((lTerrains != null) && (lTerrains.length > 0)) {
@@ -215,8 +216,7 @@ public class MasterRender {
         camera.rotate();
 
         // Matrix update
-        GLTransformation viewMatrix = createViewMatrix(camera);
-        return viewMatrix;
+        return createViewMatrix(camera);
     }
 
     /**

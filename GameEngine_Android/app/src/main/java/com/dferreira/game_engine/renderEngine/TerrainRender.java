@@ -6,7 +6,7 @@ import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.Terrain;
-import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
+import com.dferreira.game_engine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.game_engine.shaders.terrains.TerrainShaderManager;
 import com.dferreira.game_engine.textures.TerrainTexturesPack;
 
@@ -79,16 +79,13 @@ public class TerrainRender {
     }
 
     /**
-     * Render one hashMap of entities where each key is a group of similar
-     * entities to be render
+     * Render one list of terrains
      *
      * @param terrains
-     *            HashMap of entities to render
+     *            List of Terrains to render
      */
     private void render(List<Terrain> terrains) {
-        if ((terrains == null) || (terrains.size() == 0)) {
-            return;
-        } else {
+        if ((terrains != null) && (!terrains.isEmpty())) {
             for (Terrain terrain : terrains) {
                 prepareTerrain(terrain);
                 prepareInstance(terrain);
@@ -102,7 +99,7 @@ public class TerrainRender {
      * When loads one texture defines that by default should zoom in/out it
      */
     private void defineTextureFunctionFilters() {
-        //The texture minifying function is used whenever the pixel being textured maps to an area greater than one texture element
+        //The texture minify function is used whenever the pixel being textured maps to an area greater than one texture element
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
 
         //The texture magnification function is used when the pixel being textured maps to an area less than or equal to one texture element
@@ -145,9 +142,9 @@ public class TerrainRender {
         RawModel model = terrain.getModel();
 
         //Enable the attributes to bind
-        GLES20.glEnableVertexAttribArray(EntityShaderManager.LOCATION_ATTR_ID);
-        GLES20.glEnableVertexAttribArray(EntityShaderManager.TEX_COORDINATE_ATTR_ID);
-        GLES20.glEnableVertexAttribArray(EntityShaderManager.NORMAL_VECTOR_ATTR_ID);
+        GLES20.glEnableVertexAttribArray(TTerrainAttribute.position.getValue());
+        GLES20.glEnableVertexAttribArray(TTerrainAttribute.textureCoords.getValue());
+        GLES20.glEnableVertexAttribArray(TTerrainAttribute.normal.getValue());
 
         // bind several textures of the terrain
         bindTextures(terrain);
@@ -158,17 +155,17 @@ public class TerrainRender {
         tShader.loadShineVariables(1.0f, 0.0f);
 
         // Load the vertex data
-        GLES20.glVertexAttribPointer(EntityShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
+        GLES20.glVertexAttribPointer(TTerrainAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
 
         // Load the texture coordinate
-        GLES20.glVertexAttribPointer(EntityShaderManager.TEX_COORDINATE_ATTR_ID, RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR, GLES20.GL_FLOAT,
+        GLES20.glVertexAttribPointer(TTerrainAttribute.textureCoords.getValue(), RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR, GLES20.GL_FLOAT,
                 RenderConstants.VERTEX_NORMALIZED,
                 RenderConstants.STRIDE,
                 model.getTexCoordinates());
 
 
         // Load the normals data
-        GLES20.glVertexAttribPointer(EntityShaderManager.NORMAL_VECTOR_ATTR_ID, RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
+        GLES20.glVertexAttribPointer(TTerrainAttribute.normal.getValue(), RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
                 model.getNormalBuffer());
     }
 
@@ -183,9 +180,10 @@ public class TerrainRender {
     }
 
     /**
-     * Call the render of the triangles to the entity itself
+     * Call the render of the triangles to the terrain itself
      *
      * @param terrain
+     *            A reference to the terrain to get render
      */
     private void render(Terrain terrain) {
         RawModel model = terrain.getModel();
@@ -199,9 +197,9 @@ public class TerrainRender {
      * UnBind the previous bound elements
      */
     private void unbindTexturedModel() {
-        GLES20.glDisableVertexAttribArray(EntityShaderManager.LOCATION_ATTR_ID);
-        GLES20.glDisableVertexAttribArray(EntityShaderManager.TEX_COORDINATE_ATTR_ID);
-        GLES20.glDisableVertexAttribArray(EntityShaderManager.NORMAL_VECTOR_ATTR_ID);
+        GLES20.glDisableVertexAttribArray(TTerrainAttribute.position.getValue());
+        GLES20.glDisableVertexAttribArray(TTerrainAttribute.textureCoords.getValue());
+        GLES20.glDisableVertexAttribArray(TTerrainAttribute.normal.getValue());
     }
 
 
