@@ -5,6 +5,7 @@ import android.opengl.GLES10;
 import android.opengl.GLES20;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Camera;
 import com.dferreira.game_engine.models.Entity;
@@ -31,6 +32,11 @@ public class MasterRender {
     private static final float CAMERA_RATE = 16.0f / 9.0f;
     private static final float NEAR_PLANE = 0.1f;
     private static final float FAR_PLANE = 1000.0f;
+
+    /* Components of the color of the sky */
+    private static final float SKY_R = 0.5f;
+    private static final float SKY_G = 0.5f;
+    private static final float SKY_B = 0.5f;
 
     /**
      * Reference to the render of the entities
@@ -228,8 +234,9 @@ public class MasterRender {
     public void render(Light sun) {
         this.prepare();
         GLTransformation viewMatrix = this.updateCamera();
-        this.entityRender.render(sun, viewMatrix, entities);
-        this.terrainRender.render(sun, viewMatrix, terrains);
+        Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
+        this.entityRender.render(skyColor, sun, viewMatrix, entities);
+        this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
         this.skyBoxRender.render(viewMatrix, skyBox);
     }
 

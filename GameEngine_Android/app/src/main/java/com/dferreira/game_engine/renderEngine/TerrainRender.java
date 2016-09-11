@@ -3,6 +3,7 @@ package com.dferreira.game_engine.renderEngine;
 import android.opengl.GLES20;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.Terrain;
@@ -62,6 +63,8 @@ public class TerrainRender {
     /**
      * Render the terrains in the scene
      *
+     * @param skyColor
+     *            Color of the sky
      * @param sun
      *            The source of light of the scene
      * @param viewMatrix
@@ -69,8 +72,9 @@ public class TerrainRender {
      * @param terrains
      *            List of terrains of the scene
      */
-    public void render(Light sun, GLTransformation viewMatrix, List<Terrain> terrains) {
+    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, List<Terrain> terrains) {
         tShader.start();
+        tShader.loadSkyColor(skyColor);
         tShader.loadLight(sun);
         tShader.loadViewMatrix(viewMatrix);
 

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
@@ -55,6 +56,15 @@ public class EntityShaderManager extends ShaderManager {
             TEntityUniform location = TEntityUniform.values()[i];
             uniforms[i] = super.getUniformLocation(location);
         }
+    }
+
+    /**
+     * Load the color of the sky in order to simulate fog
+     *
+     * @param skyColor Color of the sky
+     */
+    public void loadSkyColor(Vector3f skyColor) {
+        super.loadVector(uniforms[TEntityUniform.skyColor.getValue()], skyColor);
     }
 
     /**

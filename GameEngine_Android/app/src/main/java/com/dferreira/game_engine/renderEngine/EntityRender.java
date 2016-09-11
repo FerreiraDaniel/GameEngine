@@ -3,6 +3,7 @@ package com.dferreira.game_engine.renderEngine;
 import android.opengl.GLES20;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Entity;
 import com.dferreira.game_engine.models.RawModel;
@@ -26,8 +27,8 @@ public class EntityRender {
     /**
      * Initializer of the entity render
      *
-     * @param sManager          Shader manager
-     * @param projectionMatrix  The projection matrix of the render
+     * @param sManager         Shader manager
+     * @param projectionMatrix The projection matrix of the render
      */
     public EntityRender(EntityShaderManager sManager, GLTransformation projectionMatrix) {
         this.eShader = sManager;
@@ -63,12 +64,14 @@ public class EntityRender {
     /**
      * Render the entities in the scene
      *
+     * @param skyColor   Color of the sky
      * @param sun        The source of light of the scene
      * @param viewMatrix View matrix to render the scene
      * @param entities   List of entities of the scene
      */
-    public void render(Light sun, GLTransformation viewMatrix, Map<TexturedModel, List<Entity>> entities) {
+    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Map<TexturedModel, List<Entity>> entities) {
         eShader.start();
+        eShader.loadSkyColor(skyColor);
         eShader.loadLight(sun);
         eShader.loadViewMatrix(viewMatrix);
 
@@ -100,8 +103,7 @@ public class EntityRender {
     /**
      * Bind the attributes of openGL
      *
-     * @param texturedModel
-     *            Model that contains the model of the entity with textures
+     * @param texturedModel Model that contains the model of the entity with textures
      */
     private void prepareTexturedModel(TexturedModel texturedModel) {
         RawModel model = texturedModel.getRawModel();
@@ -140,8 +142,7 @@ public class EntityRender {
     /**
      * Load the transformation matrix of the entity
      *
-     * @param entity
-     *            Entity that is to get prepared to be loaded
+     * @param entity Entity that is to get prepared to be loaded
      */
     private void prepareInstance(Entity entity) {
         //Load the transformation matrix
@@ -151,8 +152,7 @@ public class EntityRender {
     /**
      * Call the render of the triangles to the entity itself
      *
-     * @param entity
-     *            Entity to get render
+     * @param entity Entity to get render
      */
     private void render(Entity entity) {
         TexturedModel texturedModel = entity.getModel();

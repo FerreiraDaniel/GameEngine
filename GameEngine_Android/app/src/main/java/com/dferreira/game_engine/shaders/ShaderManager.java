@@ -39,6 +39,7 @@ public abstract class ShaderManager {
         this.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc);
 
         if (this.shaderProgram == null) {
+            Log.e(TAG, "Was impossible compile the program shader");
             return;
         }
         bindAttributes();

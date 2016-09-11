@@ -1,13 +1,22 @@
 precision mediump float;
+
 /*The coordinates of the texture as input*/
 varying vec2 pass_textureCoords;
+
 /*The vector normal to the surface as input*/
 varying vec3 surfaceNormal;
+
 /*The vector that indicates where the light is in relation to the object*/
 varying vec3 toLightVector;
+
 /* vertex from the vertex to the camera*/
 varying vec3 toCameraVector;
 
+/*The visibility of the vertice in order to simulate fog*/
+varying float visibility;
+
+
+/*Sampler of the texture of the entity*/
 uniform sampler2D textureSampler;
 
 /*Composition of the light of the screen*/
@@ -15,8 +24,12 @@ uniform vec3 lightColor;
 
 /*The damper of the specular light*/
 uniform float shineDamper;
+
 /*The reflectivity of the specular light*/
 uniform float reflectivity;
+
+/*Color of the sky in order to simulate fog*/
+uniform vec3 skyColor;
 
 void main(void) {
 	/*Normalize the surface normal*/
@@ -49,5 +62,9 @@ void main(void) {
 
 	//Multiply the light component by the texture color
 	vec4 baseColor = vec4(diffuse, 1.0) * textureColor + vec4(finalSpecular, 1.0) ;
+
+	/*Is going to recompute the out color but now taking in account the fog effect*/
+	baseColor = mix(vec4(skyColor, 1.0), baseColor, visibility);
+
 	gl_FragColor = baseColor;
 }
