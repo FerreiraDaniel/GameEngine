@@ -1,5 +1,6 @@
 package com.dferreira.game_engine.renderEngine;
 
+@SuppressWarnings("WeakerAccess")
 public class RenderConstants {
 
     @SuppressWarnings("FieldCanBeLocal")

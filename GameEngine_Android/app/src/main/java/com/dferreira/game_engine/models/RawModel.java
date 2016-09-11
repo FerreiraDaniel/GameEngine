@@ -91,7 +91,7 @@ public class RawModel {
     }
 
     /**
-     * @return
+     * @return the number of indexes
      */
     public int getNumOfIndexes() {
         return numOfIndexes;

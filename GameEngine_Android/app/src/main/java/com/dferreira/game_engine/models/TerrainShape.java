@@ -10,7 +10,7 @@ public class TerrainShape implements IShape {
     public static final float SIZE = 800;
 
     /* Number of vertices in each side of the terrain */
-    public static final int VERTEX_COUNT = 128;
+    private static final int VERTEX_COUNT = 128;
 
     /**
      * Vertices of the terrain
@@ -32,6 +32,13 @@ public class TerrainShape implements IShape {
      */
     private int[] indices;
 
+
+    /**
+     * Constructor of the terrain shape
+     */
+    public TerrainShape() {
+        generateTerrain();
+    }
 
     /**
      * Generates a completely flat terrain
@@ -72,14 +79,6 @@ public class TerrainShape implements IShape {
             }
         }
     }
-
-    /**
-     * Constructor of the terrain shape
-     */
-    public TerrainShape() {
-        generateTerrain();
-    }
-
 
     /**
      * The vertices of the terrain

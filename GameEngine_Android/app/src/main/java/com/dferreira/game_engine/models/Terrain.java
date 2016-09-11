@@ -11,27 +11,27 @@ public class Terrain {
     /**
      * Position of the terrain in the x-axle
      */
-    private float x;
+    private final float x;
 
     /**
      * Position of the terrain in the y-axle
      */
-    private float y;
+    private final float y;
 
     /**
      * Position of the terrain in the z-axle
      */
-    private float z;
+    private final float z;
 
     /**
      * The RawModel of the terrain
      */
-    private RawModel model;
+    private final RawModel model;
 
     /**
      * The different textures of the terrain
      */
-    private TerrainTexturesPack texturePack;
+    private final TerrainTexturesPack texturePack;
 
     /**
      * The constructor of the terrain entity

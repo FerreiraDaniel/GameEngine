@@ -8,7 +8,7 @@ public class ModelTexture {
     /**
      * The identifier of the texture
      */
-    private int textureId;
+    private final int textureId;
 
     /**
      * Constructor of the texture model

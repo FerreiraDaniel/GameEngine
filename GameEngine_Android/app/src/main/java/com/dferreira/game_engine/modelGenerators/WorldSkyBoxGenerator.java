@@ -28,7 +28,8 @@ public class WorldSkyBoxGenerator {
      * The sky of the 3D scene
      *
      * @param loader object that is going to read the textures of the sky
-     * @return
+     *
+     * @return the reference to the sky box created
      */
     public static SkyBox getSky(Context context, Loader loader) {
         IShape skyBoxShape = new SkyBoxShape();

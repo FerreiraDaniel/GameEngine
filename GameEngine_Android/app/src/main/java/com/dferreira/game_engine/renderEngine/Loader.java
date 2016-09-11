@@ -3,8 +3,8 @@ package com.dferreira.game_engine.renderEngine;
 import android.content.Context;
 import android.opengl.GLES20;
 
-import com.dferreira.commons.utils.LoadUtils;
 import com.dferreira.commons.models.TextureData;
+import com.dferreira.commons.utils.LoadUtils;
 import com.dferreira.game_engine.models.RawModel;
 
 import java.nio.ByteBuffer;
@@ -105,8 +105,10 @@ public class Loader {
      *
      * @param context     Context where this method will be called
      * @param resourceIds The resources where should get the images of the cube
+     *
      * @return Identifier of the texture cubic texture loaded
      */
+    @SuppressWarnings("SameParameterValue")
     public Integer loadTCubeMap(Context context, int[] resourceIds) {
         if (resourceIds == null) {
             return null;
@@ -138,10 +140,14 @@ public class Loader {
     }
 
     /**
-     * Convert on array of Integers in a buffer of Integers that can be used in openGL
+     * Convert on array of Integers in a buffer of Integers that can be used in
+     * openGL
      *
      * @param data
-     * @return
+     *            array with data to put in the Integer Buffer the integer
+     *            buffer created
+     *
+     * @return The integer buffer created
      */
     private IntBuffer storeDataInIntBuffer(int[] data) {
         IntBuffer sBuffer = ByteBuffer.allocateDirect(data.length * INT_IN_BYTES)
@@ -152,10 +158,14 @@ public class Loader {
 
 
     /**
-     * Gets one array of float and reserves space to save it natively
+     * Convert on array of Floats in a buffer of Floats that can be used in
+     * openGL
      *
-     * @param data data to be stored
-     * @return
+     * @param data
+     *            array with data to put in the Float Buffer the float buffer
+     *            created
+     *
+     * @return The integer buffer created
      */
     private FloatBuffer storeDataInFloatBuffer(float[] data) {
 

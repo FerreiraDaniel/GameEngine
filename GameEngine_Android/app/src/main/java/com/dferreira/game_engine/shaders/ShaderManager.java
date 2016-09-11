@@ -21,7 +21,7 @@ import java.util.List;
 public abstract class ShaderManager {
 
     private static final String TAG = "ShaderManager";
-    private ShaderProgram shaderProgram;
+    private final ShaderProgram shaderProgram;
 
 
     /**

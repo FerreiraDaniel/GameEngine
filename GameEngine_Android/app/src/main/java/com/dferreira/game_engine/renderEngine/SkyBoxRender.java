@@ -12,12 +12,13 @@ import com.dferreira.game_engine.shaders.skyBox.TSkyBoxAttribute;
 /**
  * Class responsible to render the entities in the screen
  */
+@SuppressWarnings("WeakerAccess")
 public class SkyBoxRender {
 
     /**
      * Reference to the shader manager
      */
-    private SkyBoxShaderManager sbShader;
+    private final SkyBoxShaderManager sbShader;
 
     /**
      * Constructor of the skyBox render

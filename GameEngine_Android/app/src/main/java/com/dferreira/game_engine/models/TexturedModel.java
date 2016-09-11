@@ -10,33 +10,29 @@ public class TexturedModel {
     /**
      * Raw model of the entity
      */
-    private RawModel rawModel;
+    private final RawModel rawModel;
 
     /**
      * Reference to the texture of the entity
      */
-    private ModelTexture texture;
-
-    /**
-     * How damped the shine is
-     */
-    private float shineDamper;
-
-    /**
-     * How reflective the model is
-     */
-    private float reflectivity;
-
+    private final ModelTexture texture;
     /**
      * Indicates if the model has transparency or not
      */
-    private boolean hasTransparency;
-
+    private final boolean hasTransparency;
     /**
      * Indicate that all our normals of the object are going to point up (in the same
      * direction
      */
-    private boolean normalsPointingUp;
+    private final boolean normalsPointingUp;
+    /**
+     * How damped the shine is
+     */
+    private float shineDamper;
+    /**
+     * How reflective the model is
+     */
+    private float reflectivity;
 
     /**
      * Constructor of the textured model
@@ -54,16 +50,6 @@ public class TexturedModel {
         this.reflectivity = 0.0f;
         this.hasTransparency = hasTransparency;
         this.normalsPointingUp = normalsPointingUp;
-    }
-
-    /**
-     * Constructor of the textured model
-     *
-     * @param rawModel	Raw model of the entity
-     * @param texture	Reference to the texture of the entity
-     */
-    public TexturedModel(RawModel rawModel, ModelTexture texture) {
-        this(rawModel, texture, false, false);
     }
 
 

@@ -57,18 +57,18 @@ public class MasterRender {
     /**
      * Reference to the camera from where the user is going to see the 3D world
      */
-    private Camera camera;
+    private final Camera camera;
 
 
     /**
      * Entities of the world that are going to be rendered
      */
-    private Map<TexturedModel, List<Entity>> entities;
+    private final Map<TexturedModel, List<Entity>> entities;
 
     /**
      * List of terrains of the world that are going to be render
      */
-    private List<Terrain> terrains;
+    private final List<Terrain> terrains;
 
     /**
      * The sky box that is going to use during the render
@@ -217,7 +217,7 @@ public class MasterRender {
      * Calls the methods to update the camera and updates the matrix that
      * describe the camera in the scene
      */
-    public GLTransformation updateCamera() {
+    private GLTransformation updateCamera() {
         camera.move();
         camera.rotate();
 

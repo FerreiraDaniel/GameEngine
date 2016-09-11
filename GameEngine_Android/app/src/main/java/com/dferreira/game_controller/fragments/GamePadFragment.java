@@ -20,7 +20,7 @@ public class GamePadFragment extends Fragment implements View.OnTouchListener {
     /**
      * Bind the views to the click listener method
      *
-     * @param view
+     * @param view the view where is to bind the ui elements
      */
     private void bindEvents(View view) {
         //Find the elements in the view

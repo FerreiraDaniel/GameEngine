@@ -13,7 +13,7 @@ public class GamePad {
     public static final int KEY_SQUARE = 6;
     public static final int KEY_CIRCLE = 7;
 
-    private static boolean keysAreDown[] = new boolean[KEY_CIRCLE + 1];
+    private static final boolean[] keysAreDown = new boolean[KEY_CIRCLE + 1];
 
     /**
      *

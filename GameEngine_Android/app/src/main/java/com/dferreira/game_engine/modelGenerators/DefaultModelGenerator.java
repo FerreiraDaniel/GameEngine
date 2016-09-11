@@ -3,6 +3,7 @@ package com.dferreira.game_engine.modelGenerators;
 /**
  * Define the default properties that the element should obey
  */
+@SuppressWarnings("WeakerAccess")
 public class DefaultModelGenerator {
 
     /**

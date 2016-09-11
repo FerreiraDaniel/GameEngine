@@ -15,7 +15,7 @@ public class Camera {
 	/**
 	 * Position where the camera is in the 3D world
 	 */
-	private Vector3f position;
+	private final Vector3f position;
 	
 	/**
 	 * Pitch is up and down (rotation around X-axis)
@@ -30,6 +30,7 @@ public class Camera {
 	/**
 	 * Roll, which we usually don't experience is when you tilt your head (rotation around Z-axis)
 	 */
+	@SuppressWarnings("unused")
 	private float roll;
 	
 	/**
@@ -120,6 +121,7 @@ public class Camera {
 	/**
 	 * @return the roll (rotation around Z-axis)
 	 */
+	@SuppressWarnings("unused")
 	public float getRoll() {
 		return roll;
 	}

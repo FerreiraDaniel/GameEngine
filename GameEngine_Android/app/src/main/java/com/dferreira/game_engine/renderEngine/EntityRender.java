@@ -17,6 +17,7 @@ import java.util.Map;
 /**
  * Class responsible to render the entities in the screen
  */
+@SuppressWarnings("WeakerAccess")
 public class EntityRender {
 
     /**

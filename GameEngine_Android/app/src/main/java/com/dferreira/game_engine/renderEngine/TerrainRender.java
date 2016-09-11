@@ -16,11 +16,12 @@ import java.util.List;
 
 /**
  */
+@SuppressWarnings("WeakerAccess")
 public class TerrainRender {
     /**
      * Reference to the shader manager
      */
-    private TerrainShaderManager tShader;
+    private final TerrainShaderManager tShader;
 
 
     /**
