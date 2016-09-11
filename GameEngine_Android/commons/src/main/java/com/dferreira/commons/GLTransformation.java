@@ -252,9 +252,9 @@ public class GLTransformation {
      */
     public void setTranslation(float tx, float ty, float tz) {
         //The translation is the last column
-        mMatrix[12] = mMatrix[12] / 100.0f;
-        mMatrix[13] = mMatrix[13] / 100.0f;
-        mMatrix[14] = mMatrix[14] / 100.0f;
+        mMatrix[12] = tx;
+        mMatrix[13] = ty;
+        mMatrix[14] = tz;
     }
 
 

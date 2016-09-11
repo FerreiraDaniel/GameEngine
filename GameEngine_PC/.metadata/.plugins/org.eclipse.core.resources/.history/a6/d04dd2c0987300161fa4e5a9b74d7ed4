@@ -1,0 +1,17 @@
+package gameEngine.shaders.entities;
+
+import com.dferreira.commons.IEnum;
+
+/**
+ * Enumeration of attributes to the entity shader
+ */
+public enum TEntityAttribute implements IEnum{
+	;
+
+	@Override
+	public int getValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

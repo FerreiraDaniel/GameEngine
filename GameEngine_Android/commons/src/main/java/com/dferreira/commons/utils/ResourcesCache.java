@@ -9,9 +9,18 @@ import android.support.v4.util.LruCache;
  */
 public class ResourcesCache extends LruCache<Integer, Object> {
 
+    /**
+     * The instance of the cache
+     */
     private static ResourcesCache instance;
-    private static int KB_IN_BYTES = 1024;
-    private static int MB_IN_KB = 1024;
+
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private static final int KB_IN_BYTES = 1024;
+
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private static final int MB_IN_KB = 1024;
 
     /**
      * @param maxSize for caches that do not override {@link #sizeOf}, this is
@@ -24,7 +33,8 @@ public class ResourcesCache extends LruCache<Integer, Object> {
 
     /**
      * Initializes the instance that is going to provide the cache
-     * @param context
+     *
+     * @param context   Context from where the cache will be created
      */
     public static void initInstance(Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

@@ -1,0 +1,12 @@
+package gameEngine.shaders;
+
+/**
+ * Interface that should be define by the enumerations the return numbers
+ */
+public interface IEnum {
+	
+	/**
+	 * @return The value of the constant
+	 */
+	int getValue();
+}

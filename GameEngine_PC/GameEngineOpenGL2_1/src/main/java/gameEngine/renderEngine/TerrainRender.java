@@ -20,7 +20,7 @@ public class TerrainRender {
 	 * Reference to the shader manager
 	 */
 	private TerrainShaderManager tShader;
-	
+
 	/**
 	 * Constructor of the entity render
 	 * 
@@ -35,7 +35,7 @@ public class TerrainRender {
 		sManager.connectTextureUnits();
 		sManager.stop();
 	}
-	
+
 	/**
 	 * Get the transformation matrix of one entity
 	 * 
@@ -56,7 +56,7 @@ public class TerrainRender {
 
 		return matrix;
 	}
-	
+
 	/**
 	 * Render the terrains in the scene
 	 * 
@@ -75,18 +75,15 @@ public class TerrainRender {
 		this.render(terrains);
 		tShader.stop();
 	}
-	
+
 	/**
-	 * Render one hashMap of entities where each key is a group of similar
-	 * entities to be render
+	 * Render one list of terrains
 	 * 
 	 * @param terrains
-	 *            HashMap of entities to render
+	 *            List of Terrains to render
 	 */
 	private void render(List<Terrain> terrains) {
-		if ((terrains == null) || (terrains.size() == 0)) {
-			return;
-		} else {
+		if ((terrains != null) && (!terrains.isEmpty())) {
 			for (Terrain terrain : terrains) {
 				prepareTerrain(terrain);
 				prepareInstance(terrain);
@@ -95,55 +92,60 @@ public class TerrainRender {
 			}
 		}
 	}
-	
+
 	/**
 	 * Bind the attributes of terrain with openGL
 	 * 
-	 * @param terrain The terrain that have the properties to bind
+	 * @param terrain
+	 *            The terrain that have the properties to bind
 	 */
 	private void prepareTerrain(Terrain terrain) {
 		RawModel model = terrain.getModel();
-		
-		//Enable the attributes to bind
+
+		// Enable the attributes to bind
 		GL20.glEnableVertexAttribArray(TerrainShaderManager.LOCATION_ATTR_ID);
 		GL20.glEnableVertexAttribArray(TerrainShaderManager.TEX_COORDINATE_ATTR_ID);
 		GL20.glEnableVertexAttribArray(TerrainShaderManager.NORMAL_VECTOR_ATTR_ID);
-		
+
 		// bind several textures of the terrain
 		bindTextures(terrain);
-		
-		//Load the light properties
+
+		// Load the light properties
 		tShader.loadShineVariables(1.0f, 0.0f);
-		
-		//Load from buffers
+
+		// Load from buffers
 		// Load the vertex data
-		GL20.glVertexAttribPointer(TerrainShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
-				model.getVertexBuffer());
+		GL20.glVertexAttribPointer(TerrainShaderManager.LOCATION_ATTR_ID, RenderConstants.VERTEX_SIZE,
+				RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
 		// Load the texture coordinate
-		GL20.glVertexAttribPointer(TerrainShaderManager.TEX_COORDINATE_ATTR_ID, RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR,
-				RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getTexCoordinates());
+		GL20.glVertexAttribPointer(TerrainShaderManager.TEX_COORDINATE_ATTR_ID,
+				RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR, RenderConstants.VERTEX_NORMALIZED,
+				RenderConstants.STRIDE, model.getTexCoordinates());
 		// Load the normals data
-		GL20.glVertexAttribPointer(TerrainShaderManager.NORMAL_VECTOR_ATTR_ID, RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
-				model.getNormalBuffer());
+		GL20.glVertexAttribPointer(TerrainShaderManager.NORMAL_VECTOR_ATTR_ID,
+				RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, RenderConstants.VERTEX_NORMALIZED,
+				RenderConstants.STRIDE, model.getNormalBuffer());
 	}
-	
-    /**
-     * When loads one texture defines that by default should zoom in/out it
-     */
-    private void defineTextureFunctionFilters() {
-        //The texture minifying function is used whenever the pixel being textured maps to an area greater than one texture element
-    	GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
 
-        //The texture magnification function is used when the pixel being textured maps to an area less than or equal to one texture element
-    	GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
+	/**
+	 * When loads one texture defines that by default should zoom in/out it
+	 */
+	private void defineTextureFunctionFilters() {
+		// The texture minifying function is used whenever the pixel being
+		// textured maps to an area greater than one texture element
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
 
-        //Sets the wrap parameter for texture coordinate s
-    	GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
+		// The texture magnification function is used when the pixel being
+		// textured maps to an area less than or equal to one texture element
+		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
 
-        //Sets the wrap parameter for texture coordinate t
-    	GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
-    }
-	
+		// Sets the wrap parameter for texture coordinate s
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
+
+		// Sets the wrap parameter for texture coordinate t
+		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
+	}
+
 	/**
 	 * Bind the several textures of the terrain
 	 */
@@ -159,22 +161,23 @@ public class TerrainRender {
 		for (int key : texturesMatching.keySet()) {
 			GL13.glActiveTexture(key);
 			GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturesMatching.get(key));
-			
+
 			// Set filtering of the texture
-            defineTextureFunctionFilters();
+			defineTextureFunctionFilters();
 		}
 	}
-	
+
 	/**
 	 * Render the terrain itself
 	 * 
-	 * @param terrain the terrain to render
+	 * @param terrain
+	 *            the terrain to render
 	 */
 	private void prepareInstance(Terrain terrain) {
 		// Load the transformation matrix
 		tShader.loadTransformationMatrix(getTransformationMatrix(terrain));
 	}
-	
+
 	/**
 	 * Call the render of the triangles to the entity itself
 	 * 
@@ -186,7 +189,7 @@ public class TerrainRender {
 		// Specify the indexes
 		GL11.glDrawElements(GL11.GL_TRIANGLES, model.getIndexBuffer());
 	}
-	
+
 	/**
 	 * UnBind the previous binded elements
 	 */
@@ -195,7 +198,7 @@ public class TerrainRender {
 		GL20.glDisableVertexAttribArray(TerrainShaderManager.TEX_COORDINATE_ATTR_ID);
 		GL20.glDisableVertexAttribArray(TerrainShaderManager.NORMAL_VECTOR_ATTR_ID);
 	}
-	
+
 	/**
 	 * Clean up because we need to clean up when we finish the program
 	 */

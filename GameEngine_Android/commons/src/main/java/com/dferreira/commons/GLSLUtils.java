@@ -62,11 +62,16 @@ public class GLSLUtils {
 
         // Load the vertex/fragment shader(s)
         vertexShader = compileShader(GLES20.GL_VERTEX_SHADER, vertexShaderSrc);
-        if (vertexShader == GLES10.GL_FALSE)
+        if (vertexShader == GLES10.GL_FALSE) {
+            Log.e(TAG, "Was not possible compile the vertex shader");
+
             return null;
+        }
+
 
         fragmentShader = compileShader(GLES20.GL_FRAGMENT_SHADER, fragShaderSrc);
         if (fragmentShader == GLES10.GL_FALSE) {
+            Log.e(TAG, "Was not possible compile the fragment shader");
             GLES20.glDeleteShader(vertexShader);
             return null;
         }

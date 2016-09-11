@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="gameEngine.shaders.terrains.TTerrainTexture"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="gameEngine.shaders.terrains.TTerrainAttribute"/>
+<fullyQualifiedTypeName name="com.dferreira.commons.IEnum"/>
+<fullyQualifiedTypeName name="gameEngine.shaders.entities.TEntityAttribute"/>
+<fullyQualifiedTypeName name="gameEngine.renderEngine.MasterRender"/>
+<fullyQualifiedTypeName name="gameEngine.models.Entity"/>
+<fullyQualifiedTypeName name="gameEngine.models.Terrain"/>
+<fullyQualifiedTypeName name="com.dferreira.commons.models.Light"/>
+<fullyQualifiedTypeName name="gameEngine.models.SkyBox"/>
+<fullyQualifiedTypeName name="gameEngine.views.GameEngineRenderer"/>
+<fullyQualifiedTypeName name="java.lang.Enum"/>
+<fullyQualifiedTypeName name="gameEngine.shaders.skyBox.TSkyBoxUniform"/>
+<fullyQualifiedTypeName name="gameEngine.shaders.skyBox.TSkyBoxAttribute"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
 </qualifiedTypeNameHistroy>

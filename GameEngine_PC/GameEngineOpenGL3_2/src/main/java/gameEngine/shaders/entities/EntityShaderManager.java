@@ -1,6 +1,7 @@
 package gameEngine.shaders.entities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.dferreira.commons.GLTransformation;
@@ -40,20 +41,12 @@ public class EntityShaderManager extends ShaderManager {
 	}
 
 	/**
-	 * Bind the attributes to the program
+	 * Bind the attributes of the program shader
 	 * 
 	 */
 	@Override
 	protected List<IEnum> getAttributes() {
-		int size = TEntityAttribute.numOfAttributes.getValue();
-		List<IEnum> attributes = new ArrayList<>(size);
-
-		for (int i = 0; i < size; i++) {
-			TEntityAttribute attribute = TEntityAttribute.values()[i];
-			attributes.add(attribute);
-		}
-
-		return attributes;
+		return new ArrayList<IEnum>(Arrays.asList(TEntityAttribute.values()));
 	}
 
 	/**

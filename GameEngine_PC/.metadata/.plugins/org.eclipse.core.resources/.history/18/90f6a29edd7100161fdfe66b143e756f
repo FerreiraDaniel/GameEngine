@@ -1,8 +1,0 @@
-package gameEngine.shaders.terrains;
-
-/**
- * Enumeration with textures 
- */
-public enum TTerrainTexture {
-
-}

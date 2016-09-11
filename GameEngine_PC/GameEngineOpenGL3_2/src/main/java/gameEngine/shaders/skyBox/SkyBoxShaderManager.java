@@ -24,11 +24,7 @@ public class SkyBoxShaderManager extends ShaderManager {
 	 */
 	private static final String FRAGMENT_FILE = COMMON_PATH + "skyBox/sky_box_fragment_shader.glsl";
 
-	/**
-	 * Position where to location attribute is going to be bind in the shader
-	 * program
-	 */
-	public final static int LOCATION_ATTR_ID = 0;
+
 
 	/**
 	 * All the uniform locations in the shader programs
@@ -44,7 +40,7 @@ public class SkyBoxShaderManager extends ShaderManager {
 	}
 
 	/**
-	 * Bind the attributes to the program
+	 * Bind the attributes of the program
 	 * 
 	 */
 	@Override

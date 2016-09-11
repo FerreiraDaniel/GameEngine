@@ -90,12 +90,10 @@ public class TerrainRender {
 	 * Render one list of terrains
 	 * 
 	 * @param terrains
-	 *            Terrains to render
+	 *            List of Terrains to render
 	 */
 	private void render(List<Terrain> terrains) {
-		if ((terrains == null) || terrains.isEmpty()) {
-			return;
-		} else {
+		if ((terrains != null) && (!terrains.isEmpty())) {
 			for (int i = 0; i < terrains.size(); i++) {
 				Terrain terrain = terrains.get(i);
 				prepareTerrain(terrain);

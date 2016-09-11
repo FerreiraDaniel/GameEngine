@@ -10,6 +10,7 @@ import com.dferreira.commons.GLTransformation;
 import gameEngine.models.RawModel;
 import gameEngine.models.SkyBox;
 import gameEngine.shaders.skyBox.SkyBoxShaderManager;
+import gameEngine.shaders.skyBox.TSkyBoxAttribute;
 
 /**
  * Class responsible to render the sky in the screen
@@ -65,7 +66,7 @@ public class SkyBoxRender {
 		RawModel model = skyBox.getModel();
 
 		GL30.glBindVertexArray(model.getVaoId());
-		GL20.glEnableVertexAttribArray(SkyBoxShaderManager.LOCATION_ATTR_ID);
+		GL20.glEnableVertexAttribArray(TSkyBoxAttribute.position.getValue());
 
 		// bind several textures of the sky box
 		bindTextures(skyBox);
@@ -97,7 +98,7 @@ public class SkyBoxRender {
 	 * UnBind the previous bound elements
 	 */
 	private void unbindTexture() {
-		GL20.glDisableVertexAttribArray(SkyBoxShaderManager.LOCATION_ATTR_ID);
+		GL20.glDisableVertexAttribArray(TSkyBoxAttribute.position.getValue());
 		GL30.glBindVertexArray(0);
 	}
 
