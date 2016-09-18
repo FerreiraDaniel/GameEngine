@@ -1,8 +1,0 @@
-package gameEngine.shaders.skyBox;
-
-/**
- * Enumeration of attributes to the skyBox shader
- */
-public class TSkyBoxAttribute {
-
-}

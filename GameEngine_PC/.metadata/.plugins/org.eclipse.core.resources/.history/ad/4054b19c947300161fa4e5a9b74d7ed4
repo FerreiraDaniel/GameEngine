@@ -1,5 +1,0 @@
-package gameEngine.shaders.entities;
-
-public class TEntityAttribute {
-
-}

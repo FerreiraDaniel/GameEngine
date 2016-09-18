@@ -5,9 +5,9 @@
 #import "GLTransformation.h"
 #import "Light.h"
 #import "TerrainShaderManager.h"
-#import "SkyBoxShaderManager.h"
-#import "SkyBoxRender.h"
 #import "TerrainRender.h"
+#import "SkyBox.h"
+#import "GameEngine-Swift.h"
 
 /**
  * Groups the entities in a hash map like this

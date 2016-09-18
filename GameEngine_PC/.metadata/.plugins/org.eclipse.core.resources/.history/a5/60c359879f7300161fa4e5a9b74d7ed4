@@ -1,8 +1,0 @@
-package gameEngine.shaders.terrains;
-
-/**
- * Enumeration of attributes to the terrain shader
- */
-public enum TTerrainAttribute {
-
-}

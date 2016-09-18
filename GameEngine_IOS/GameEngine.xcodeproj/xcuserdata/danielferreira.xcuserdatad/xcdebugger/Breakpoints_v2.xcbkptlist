@@ -278,7 +278,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.h"
-            timestampString = "494673324.491822"
+            timestampString = "495904447.005329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -1358,11 +1358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "-processEntity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1374,11 +1374,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "-processEntity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1390,11 +1390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "-processEntity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1422,11 +1422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-processEntity:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1438,11 +1438,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-processEntities:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1454,11 +1454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "-processEntities:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1486,11 +1486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "-processEntities:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1502,11 +1502,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494679346.449426"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "-render:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1630,29 +1630,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494103714.107738"
+            timestampString = "495900802.706617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10"
-            endingLineNumber = "10"
-            landmarkName = "@implementation SkyBoxRender"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "@implementation SkyBoxRender1"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494679346.449426"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-render:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1790,11 +1774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494367791.895752"
+            timestampString = "495900802.706617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "-render::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1806,27 +1790,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494367794.55158"
+            timestampString = "495900802.706617"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-render::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
+            timestampString = "495900802.706617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
             endingLineNumber = "49"
-            landmarkName = "-render::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494367796.959589"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
             landmarkName = "-render::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1854,23 +1838,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494367838.458007"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "-render::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494367839.257075"
+            timestampString = "495900802.706617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -1886,11 +1854,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
-            timestampString = "494367935.901204"
+            timestampString = "495900802.706617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "-render::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
+            timestampString = "495900802.706617"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
             landmarkName = "-init::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1966,11 +1950,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495902353.400201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "-init::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1982,11 +1966,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/MasterRender.m"
-            timestampString = "494676339.403145"
+            timestampString = "495904306.162915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "-init::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2516,6 +2500,166 @@
             startingLineNumber = "83"
             endingLineNumber = "83"
             landmarkName = "-connectTextureUnits"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/GLTransformationSwift.swift"
+            timestampString = "495904306.162915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "init()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/Shaders/SkyBox/SkyBoxShaderManagerSwift.swift"
+            timestampString = "495901487.932155"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "loadProjectionMatrix(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/MasterRender.m"
+            timestampString = "495904306.162915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-init::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/MasterRender.m"
+            timestampString = "495904306.162915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "-init::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
+            timestampString = "495901578.986578"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "-init::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
+            timestampString = "495901588.424062"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "-init::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/RenderEngine/SkyBoxRender.m"
+            timestampString = "495901592.304212"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "-init::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/ShaderManagerSwift.swift"
+            timestampString = "495901643.613307"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "loadMatrix(_:matrix:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/GLTransformationSwift.swift"
+            timestampString = "495904306.162915"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "getMatrix()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/SkyBoxRenderSwift.swift"
+            timestampString = "495903862.961022"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "bindTextures(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

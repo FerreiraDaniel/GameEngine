@@ -1,8 +1,0 @@
-package gameEngine.shaders.skyBox;
-
-/**
- * Uniforms in the shader program of the skyBox
- */
-public class TSkyBoxUniform implements IEnum{
-
-}

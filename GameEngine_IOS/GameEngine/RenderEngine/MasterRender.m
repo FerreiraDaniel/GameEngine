@@ -27,7 +27,7 @@
     /**
      * Reference to the render of the sky box
      */
-    SkyBoxRender* skyBoxRender;
+    SkyBoxRenderSwift* skyBoxRender;
     
     
     /**
@@ -76,6 +76,23 @@ const float SKY_B = 0.5f;
     return matrix;
 }
 
+
+/**
+ * Create the projection matrix with parameters of the camera
+ *
+ * @return A projection matrix
+ */
+- (GLTransformationSwift*) createProjectionMatrixSwift {
+    GLTransformationSwift* matrix = [[GLTransformationSwift alloc] init];
+    [matrix glLoadIdentity];
+    float aspect = fabs( ((1.0f) * width) / height);
+    
+    [matrix gluPerspective:FOV aspect:aspect nearZ:NEAR_PLANE farZ:FAR_PLANE];
+    
+    return matrix;
+}
+
+
 /**
  * Create the view matrix from the data that has about the camera
  *
@@ -93,6 +110,16 @@ const float SKY_B = 0.5f;
     [matrix glTranslate : -camPosition.x : -camPosition.y : -camPosition.z];
     return matrix;
 }
+- (GLTransformationSwift*) createViewMatrixSwift : (Camera*) aCamera {
+    GLTransformationSwift* matrix = [[GLTransformationSwift alloc]init ];
+    [matrix glLoadIdentity];
+    [matrix glRotate:aCamera.pitch x:1.0 y:0.0 z:0.0];
+    [matrix glRotate:aCamera.yaw x:0.0 y:1.0 z:0.0];
+    
+    Vector3f *camPosition = aCamera.position;
+    [matrix glTranslate: -camPosition.x ty: -camPosition.y tz: -camPosition.z];
+    return matrix;
+}
 
 
 /**
@@ -107,6 +134,14 @@ const float SKY_B = 0.5f;
     GLTransformation *viewMatrix = [self createViewMatrix: camera];
     return viewMatrix;
 }
+- (GLTransformationSwift*) updateCameraSwift {
+    [camera move];
+    [camera rotate];
+    
+    // Matrix update
+    GLTransformationSwift *viewMatrix = [self createViewMatrixSwift: camera];
+    return viewMatrix;
+}
 
 /**
  Initiator of the master render
@@ -119,6 +154,7 @@ const float SKY_B = 0.5f;
         
         //Initializes the projection matrix
         GLTransformation* projectionMatrix = [self createProjectionMatrix];
+        GLTransformationSwift *projectionMatrixSwift = [self createProjectionMatrixSwift];
         
         
         //Initializes the entity render
@@ -136,8 +172,9 @@ const float SKY_B = 0.5f;
         self -> terrains = [[NSMutableArray alloc] init];
         
         // Initializes the sky box render
-        SkyBoxShaderManager* sbManager = [[SkyBoxShaderManager alloc]init];
-        self-> skyBoxRender = [[SkyBoxRender alloc] init : sbManager : projectionMatrix];
+        SkyBoxShaderManagerSwift* sbManager = [[SkyBoxShaderManagerSwift alloc]init];
+        
+        self-> skyBoxRender = [[SkyBoxRenderSwift alloc] initWithAShader : sbManager  projectionMatrix: projectionMatrixSwift];
         
         // Initializes the camera
         self ->camera = [[Camera alloc] init];
@@ -220,12 +257,13 @@ const float SKY_B = 0.5f;
 - (void) render : (Light*) sun {
     [self prepare];
     GLTransformation* viewMatrix = [self updateCamera];
+    GLTransformationSwift* viewMatrixSwift = [self updateCameraSwift];
     Vector3f* skyColor = [[Vector3f alloc] init: SKY_R : SKY_G : SKY_B];
     [entityRender render: skyColor : sun : viewMatrix : entities];
     [terrainRender render: skyColor : sun : viewMatrix : terrains];
     
+    [skyBoxRender render:viewMatrixSwift skyBox:skyBox];
     
-    [skyBoxRender render: viewMatrix : skyBox];
 }
 
 

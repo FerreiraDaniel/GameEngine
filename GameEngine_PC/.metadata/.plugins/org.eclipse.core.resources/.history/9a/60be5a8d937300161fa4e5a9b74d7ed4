@@ -1,5 +1,0 @@
-package gameEngine.shaders;
-
-public interface IEnum {
-	int getValue();
-}
