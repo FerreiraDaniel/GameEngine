@@ -16,9 +16,9 @@ public enum TSkyBoxUniform : Int {
     */
     viewMatrix,
     
-    /**
-    * Meta-data used maintain the existing locations
-    */
+    /*
+     * Number of uniform locations in the skybox shader
+     */
     numOfSkyBoxLocations;
         
 }

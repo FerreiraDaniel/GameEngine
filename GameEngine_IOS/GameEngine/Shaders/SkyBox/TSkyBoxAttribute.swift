@@ -10,5 +10,10 @@ public enum TSkyBoxAttribute : Int {
     * Position where to location attribute is going to be bind in the shader
     * program
     */
-    position = 0
+    position = 0,
+    
+    /*
+     * Number of attributes in the skybox shader
+     */
+    numberOfAttributes;
 }

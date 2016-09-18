@@ -162,9 +162,9 @@
 		32A921981D5F0B4200EF8477 /* GLSLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLSLUtils.m; path = Commons/GLSLUtils.m; sourceTree = "<group>"; };
 		32A9219A1D5F10D200EF8477 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShaderProgram.h; path = Commons/ShaderProgram.h; sourceTree = "<group>"; };
 		32A9219B1D5F10D200EF8477 /* ShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShaderProgram.m; path = Commons/ShaderProgram.m; sourceTree = "<group>"; };
-		32A952D11D8EE0D7000F2911 /* SkyBoxRenderSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxRenderSwift.swift; sourceTree = "<group>"; };
+		32A952D11D8EE0D7000F2911 /* SkyBoxRenderSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkyBoxRenderSwift.swift; path = RenderEngine/SkyBoxRenderSwift.swift; sourceTree = "<group>"; };
 		32A989801D8ECDAD00FD815D /* GameEngine-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameEngine-Bridging-Header.h"; sourceTree = "<group>"; };
-		32A989811D8ECDAD00FD815D /* GLTransformationSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTransformationSwift.swift; sourceTree = "<group>"; };
+		32A989811D8ECDAD00FD815D /* GLTransformationSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GLTransformationSwift.swift; path = Commons/GLTransformationSwift.swift; sourceTree = "<group>"; };
 		32A989831D8ECE1400FD815D /* ShaderManagerSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderManagerSwift.swift; sourceTree = "<group>"; };
 		32A989851D8ECEA700FD815D /* SkyBoxShaderManagerSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShaderManagerSwift.swift; sourceTree = "<group>"; };
 		32A989871D8ED05600FD815D /* TSkyBoxAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSkyBoxAttribute.swift; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		32EF0CCB1D7B0687006D9247 /* TerrainShaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainShaderManager.h; sourceTree = "<group>"; };
 		32EF0CCC1D7B0687006D9247 /* TerrainShaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainShaderManager.m; sourceTree = "<group>"; };
 		32EF0CCE1D7B06F4006D9247 /* TerrainShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TerrainShaderConstants.h; sourceTree = "<group>"; };
-		32EF0CCF1D7B21DF006D9247 /* TerrainRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainRender.h; sourceTree = "<group>"; };
-		32EF0CD01D7B21DF006D9247 /* TerrainRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerrainRender.m; sourceTree = "<group>"; };
+		32EF0CCF1D7B21DF006D9247 /* TerrainRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TerrainRender.h; path = RenderEngine/TerrainRender.h; sourceTree = "<group>"; };
+		32EF0CD01D7B21DF006D9247 /* TerrainRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TerrainRender.m; path = RenderEngine/TerrainRender.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

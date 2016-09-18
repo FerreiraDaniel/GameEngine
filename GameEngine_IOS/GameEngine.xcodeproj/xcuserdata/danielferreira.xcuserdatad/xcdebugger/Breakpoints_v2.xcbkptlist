@@ -2526,11 +2526,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Shaders/SkyBox/SkyBoxShaderManagerSwift.swift"
-            timestampString = "495901487.932155"
+            timestampString = "495915581.705316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "loadProjectionMatrix(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2622,11 +2622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ShaderManagerSwift.swift"
-            timestampString = "495901643.613307"
+            timestampString = "495915581.705316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "loadMatrix(_:matrix:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2660,6 +2660,22 @@
             startingLineNumber = "72"
             endingLineNumber = "72"
             landmarkName = "bindTextures(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/ShaderManagerSwift.swift"
+            timestampString = "495915581.705316"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "getAttributes()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

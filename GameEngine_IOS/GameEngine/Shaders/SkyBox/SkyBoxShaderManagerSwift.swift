@@ -2,7 +2,7 @@ import Foundation
 
 public class SkyBoxShaderManagerSwift : ShaderManagerSwift {
     
-    private var uniforms : Array<Int>
+
     
     /**
     * Initializor of the game shader where the vertex and fragment shader of
@@ -10,33 +10,29 @@ public class SkyBoxShaderManagerSwift : ShaderManagerSwift {
     *
     */
     public init() {
-        self.uniforms = Array<Int>(count: TSkyBoxUniform.numOfSkyBoxLocations.rawValue, repeatedValue: -1)
-        super.init(vertexFile: "sky_box_vertex_shader" , fragmentFile: "sky_box_fragment_shader")
+        super.init(vertexFile: "sky_box_vertex_shader" , fragmentFile: "sky_box_fragment_shader", numberOfUniforms: TSkyBoxUniform.numOfSkyBoxLocations.rawValue)
+    }
+    
+    /*
+    * Called to provide the attributes that are goint to get bound to the shader
+    */
+    override internal func getAttributes() -> Dictionary<Int, String>! {
+        let attributesDic : Dictionary<Int, String> = [
+            TSkyBoxAttribute.position.rawValue : "\(TSkyBoxAttribute.position)"
+        ];
+        return attributesDic;
     }
     
     /**
-    * Called to bind the attributes to the program shader
+    * Called to provide the uniform locations that are goin to get bound to the shader
     */
-    override internal func  bindAttributes() {
-        super.bindAttribute(TSkyBoxAttribute.position.rawValue, variableName: "position");
-    }
-    
-    /**
-    * Called to ensure that all the shader managers get their uniform locations
-    */
-    internal  override func getAllUniformLocations() {
+    override internal func getUniformLocations() -> Dictionary<NSInteger, String>! {
         let uniformsDic : Dictionary<NSInteger, String> = [
             TSkyBoxUniform.projectionMatrix.rawValue : "projectionMatrix",
             TSkyBoxUniform.viewMatrix.rawValue : "viewMatrix"
         ]
         
-        //Iteract over different elements to get the locations in the program shader
-        for (key, value) in uniformsDic {
-            uniforms[key] = super.getUniformLocation(value)
-            if(uniforms[key] < 0) {
-                NSLog("Problems getting %@'s location in the shader", value);
-            }
-        }
+        return uniformsDic;
     }
     
     /**

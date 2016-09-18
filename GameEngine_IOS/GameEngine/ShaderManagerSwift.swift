@@ -8,14 +8,18 @@ import OpenGLES
 public class ShaderManagerSwift : NSObject{
     
     public var shaderProgram : ShaderProgram!
+    internal var uniforms : Array<Int>
     
     /**
     * Initialize of the program shader manager
     *
     * @param vertexFile   File with vertex description
     * @param fragmentFile File with fragment description
+    * @param numberOfUniforms number of uniform locations of the shader program
     */
-    public init(vertexFile : String, fragmentFile : String) {
+    public init(vertexFile : String, fragmentFile : String, numberOfUniforms : Int) {
+        self.uniforms = Array<Int>(count: numberOfUniforms, repeatedValue: -1)
+        
         super.init()
         
         var vertShaderPathname, fragShaderPathname: String
@@ -60,18 +64,51 @@ public class ShaderManagerSwift : NSObject{
         }
     }
     
+    /*
+     * Called to provide the attributes that are goin to get bound to the shader
+     */
+    internal func getAttributes() -> Dictionary<Int, String>! {
+        NSException.raise("Invoked abstract method", format: "Invoked abstract method", arguments:getVaList(["nil"]))
+        return nil;
+    }
+    
+    
     /**
     * Called to bind the attributes to the program shader
     */
-    internal func bindAttributes() {
-        NSException.raise("Invoked abstract method", format: "Invoked abstract method", arguments:getVaList(["nil"]))
-    }
+    private func bindAttributes() {
+        let attributes : Dictionary<Int, String>! = self.getAttributes();
+        
+        
+        if(attributes != nil) {
+            for (key, value) in attributes {
+                self.bindAttribute(key, variableName: value);
+                }
+            }
+        }
     
+    /**
+     * Called to provide the uniform locations that are goin to get bound to the shader
+    */
+    internal func getUniformLocations() -> Dictionary<NSInteger, String>! {
+        NSException.raise("Invoked abstract method", format: "Invoked abstract method", arguments:getVaList(["nil"]))
+        return nil;
+    }
+
     /**
     * Called to ensure that all the shader managers get their uniform locations
     */
-    internal func getAllUniformLocations() {
-        NSException.raise("Invoked abstract method", format: "Invoked abstract method", arguments:getVaList(["nil"]))
+    private func getAllUniformLocations() {
+        
+        let uniformsDic : Dictionary<NSInteger, String> = getUniformLocations();
+        
+        //Iteract over different elements to get the locations in the program shader
+        for (key, value) in uniformsDic {
+            uniforms[key] = getUniformLocation(value)
+            if(uniforms[key] < 0) {
+                NSLog("Problems getting %@'s location in the shader", value);
+            }
+        }
     }
     
     /**
@@ -80,7 +117,7 @@ public class ShaderManagerSwift : NSObject{
     * @param attributeIndex Index of the attribute to bind
     * @param variableName   Name of the attribute to bind
     */
-    internal func bindAttribute(attributeIndex : Int , variableName : String) {
+    private func bindAttribute(attributeIndex : Int , variableName : String) {
         glBindAttribLocation(shaderProgram.programId, GLuint(attributeIndex), variableName);
     }
     
