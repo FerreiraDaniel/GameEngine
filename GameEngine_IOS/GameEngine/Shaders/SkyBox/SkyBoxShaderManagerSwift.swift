@@ -28,8 +28,8 @@ public class SkyBoxShaderManagerSwift : ShaderManagerSwift {
     */
     override internal func getUniformLocations() -> Dictionary<NSInteger, String>! {
         let uniformsDic : Dictionary<NSInteger, String> = [
-            TSkyBoxUniform.projectionMatrix.rawValue : "projectionMatrix",
-            TSkyBoxUniform.viewMatrix.rawValue : "viewMatrix"
+            TSkyBoxUniform.projectionMatrix.rawValue : "\(TSkyBoxUniform.projectionMatrix)",
+            TSkyBoxUniform.viewMatrix.rawValue : "\(TSkyBoxUniform.viewMatrix)"
         ]
         
         return uniformsDic;
