@@ -24,7 +24,7 @@ public class SkyBoxShaderManagerSwift : ShaderManagerSwift {
     }
     
     /**
-    * Called to provide the uniform locations that are goin to get bound to the shader
+    * Called to provide the uniform locations that are going to get bound to the shader
     */
     override internal func getUniformLocations() -> Dictionary<NSInteger, String>! {
         let uniformsDic : Dictionary<NSInteger, String> = [
