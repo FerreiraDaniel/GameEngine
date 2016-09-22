@@ -17,7 +17,7 @@
     /**
      * Reference to the render of the entities
      */
-    EntityRender* entityRender;
+    EntityRenderSwift * entityRenderSwift;
     
     /**
      * Reference to the render of the terrains
@@ -157,9 +157,9 @@ const float SKY_B = 0.5f;
         GLTransformationSwift *projectionMatrixSwift = [self createProjectionMatrixSwift];
         
         
-        //Initializes the entity render
-        EntityShaderManager* eShader = [[EntityShaderManager alloc] init];
-        self -> entityRender = [[EntityRender alloc] init : eShader : projectionMatrix];
+        //Initializes the entity render        
+        EntityShaderManagerSwift * eShaderSwift = [[EntityShaderManagerSwift alloc] init];
+        self -> entityRenderSwift = [[EntityRenderSwift alloc] initWithAShader : eShaderSwift projectionMatrix : projectionMatrixSwift];
         
         // Initializes the entities to render
         self-> entities = [[NSMutableDictionary alloc]init];
@@ -201,6 +201,7 @@ const float SKY_B = 0.5f;
     }
     [batch addObject: entity];
 }
+
 
 /**
  * Put the entities to process in the hash map dedicated to process entities
@@ -259,7 +260,8 @@ const float SKY_B = 0.5f;
     GLTransformation* viewMatrix = [self updateCamera];
     GLTransformationSwift* viewMatrixSwift = [self updateCameraSwift];
     Vector3f* skyColor = [[Vector3f alloc] init: SKY_R : SKY_G : SKY_B];
-    [entityRender render: skyColor : sun : viewMatrix : entities];
+    //[entityRender render: skyColor : sun : viewMatrix : entities];
+    [entityRenderSwift render:skyColor sun: sun viewMatrix: viewMatrixSwift entities: entities];
     [terrainRender render: skyColor : sun : viewMatrix : terrains];
     
     [skyBoxRender render:viewMatrixSwift skyBox:skyBox];
@@ -285,7 +287,7 @@ const float SKY_B = 0.5f;
  *  Releases the resources used by the class
  */
 - (void) dealloc {
-    self -> entityRender = nil;
+    self -> entityRenderSwift = nil;
     self -> entities = nil;
     self -> terrainRender = nil;
     self -> terrains = nil;

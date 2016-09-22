@@ -1,12 +1,12 @@
 #import <Foundation/Foundation.h>
-#import "EntityRender.h"
-#import "EntityShaderManager.h"
 #import "Camera.h"
 #import "GLTransformation.h"
 #import "Light.h"
 #import "TerrainShaderManager.h"
 #import "TerrainRender.h"
 #import "SkyBox.h"
+#import "TexturedModel.h"
+#import "Entity.h"
 #import "GameEngine-Swift.h"
 
 /**
