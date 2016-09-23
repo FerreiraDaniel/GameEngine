@@ -22,7 +22,7 @@
     /**
      * Reference to the render of the terrains
      */
-    TerrainRender* terrainRender;
+    TerrainRenderSwift* terrainRender;
     
     /**
      * Reference to the render of the sky box
@@ -166,7 +166,7 @@ const float SKY_B = 0.5f;
         
         // Initializes the terrain render
         TerrainShaderManager* tShader = [[TerrainShaderManager alloc] init];
-        self-> terrainRender = [[TerrainRender alloc] init : tShader : projectionMatrix];
+        self-> terrainRender = [[TerrainRenderSwift alloc] initWithAShader : tShader projectionMatrix: projectionMatrix];
         
         // Initializes the terrains to render
         self -> terrains = [[NSMutableArray alloc] init];
@@ -262,7 +262,8 @@ const float SKY_B = 0.5f;
     Vector3f* skyColor = [[Vector3f alloc] init: SKY_R : SKY_G : SKY_B];
     //[entityRender render: skyColor : sun : viewMatrix : entities];
     [entityRenderSwift render:skyColor sun: sun viewMatrix: viewMatrixSwift entities: entities];
-    [terrainRender render: skyColor : sun : viewMatrix : terrains];
+    [terrainRender render:skyColor sun:sun viewMatrix:viewMatrix terrains:terrains];
+    
     
     [skyBoxRender render:viewMatrixSwift skyBox:skyBox];
     

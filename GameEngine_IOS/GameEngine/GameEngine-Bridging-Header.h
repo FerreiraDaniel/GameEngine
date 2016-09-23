@@ -7,4 +7,6 @@
 #import "Light.h"
 #import "TexturedModel.h"
 #import "Entity.h"
+#import "Terrain.h"
+#import "TerrainShaderManager.h"
 
