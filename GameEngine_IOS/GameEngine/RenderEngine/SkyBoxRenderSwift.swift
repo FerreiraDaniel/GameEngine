@@ -6,7 +6,7 @@ public class SkyBoxRenderSwift : NSObject {
     /**
     * Reference to the shader manager
     */
-    private var sbShader : SkyBoxShaderManagerSwift!;
+    private var sbShader : SkyBoxShaderManager!;
     
     
     /**
@@ -15,7 +15,7 @@ public class SkyBoxRenderSwift : NSObject {
     * @param aShader           Shader manager
     * @param projectionMatrix  The projection matrix of the render
     */
-    public init(aShader : SkyBoxShaderManagerSwift , projectionMatrix : GLTransformationSwift) {
+    public init(aShader : SkyBoxShaderManager , projectionMatrix : GLTransformationSwift) {
         sbShader = aShader;
         sbShader.start();
         sbShader.loadProjectionMatrix(projectionMatrix);

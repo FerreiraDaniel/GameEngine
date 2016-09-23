@@ -1,8 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "Camera.h"
-#import "GLTransformation.h"
 #import "Light.h"
-#import "TerrainShaderManager.h"
 #import "SkyBox.h"
 #import "TexturedModel.h"
 #import "Entity.h"
@@ -20,8 +18,6 @@
  */
 - (id)init : (int) width : (int) height;
 
-- (GLTransformation*) createProjectionMatrix;
-- (GLTransformation*) updateCamera;
 
 /**
  * Put the entities to process in the hash map dedicated to process entities

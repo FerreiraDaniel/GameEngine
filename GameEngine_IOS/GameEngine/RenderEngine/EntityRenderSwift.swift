@@ -83,7 +83,7 @@ public class EntityRenderSwift : NSObject {
     */
     private func render(entities : Dictionary<String, Array<Entity>>){
         if (!entities.isEmpty) {
-            for (key, entities) in entities {
+            for (_, entities) in entities {
                 let entity : Entity = entities.first!;
                 let model : TexturedModel = entity.model;
                 self.prepareTexturedModel(model)

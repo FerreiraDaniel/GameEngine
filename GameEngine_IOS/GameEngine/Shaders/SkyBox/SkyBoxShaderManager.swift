@@ -1,8 +1,8 @@
 import Foundation
 
-public class SkyBoxShaderManagerSwift : ShaderManagerSwift {
+public class SkyBoxShaderManager : ShaderManagerSwift {
     
-
+    
     
     /**
     * Initializor of the game shader where the vertex and fragment shader of

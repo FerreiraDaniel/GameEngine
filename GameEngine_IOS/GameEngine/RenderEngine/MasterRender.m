@@ -62,19 +62,6 @@ const float SKY_R = 0.5f;
 const float SKY_G = 0.5f;
 const float SKY_B = 0.5f;
 
-/**
- * Create the projection matrix with parameters of the camera
- *
- * @return A projection matrix
- */
-- (GLTransformation*) createProjectionMatrix {
-    GLTransformation* matrix = [[GLTransformation alloc] init];
-    [matrix glLoadIdentity];
-    float aspect = fabs( ((1.0f) * width) / height);
-    [matrix gluPerspective : FOV : aspect : NEAR_PLANE : FAR_PLANE];
-    
-    return matrix;
-}
 
 
 /**
@@ -101,15 +88,6 @@ const float SKY_B = 0.5f;
  *
  * @return The view matrix
  */
-- (GLTransformation*) createViewMatrix : (Camera*) aCamera {
-    GLTransformation* matrix = [[GLTransformation alloc]init ];
-    [matrix glLoadIdentity];
-    [matrix glRotate : aCamera.pitch : 1.0f : 0.0f : 0.0f];
-    [matrix glRotate : aCamera.yaw : 0.0f : 1.0f : 0.0f];
-    Vector3f *camPosition = aCamera.position;
-    [matrix glTranslate : -camPosition.x : -camPosition.y : -camPosition.z];
-    return matrix;
-}
 - (GLTransformationSwift*) createViewMatrixSwift : (Camera*) aCamera {
     GLTransformationSwift* matrix = [[GLTransformationSwift alloc]init ];
     [matrix glLoadIdentity];
@@ -126,14 +104,6 @@ const float SKY_B = 0.5f;
  * Calls the methods to update the camera and updates the matrix that
  * describe the camera in the scene
  */
-- (GLTransformation*) updateCamera {
-    [camera move];
-    [camera rotate];
-    
-    // Matrix update
-    GLTransformation *viewMatrix = [self createViewMatrix: camera];
-    return viewMatrix;
-}
 - (GLTransformationSwift*) updateCameraSwift {
     [camera move];
     [camera rotate];
@@ -153,7 +123,6 @@ const float SKY_B = 0.5f;
         height = aHeight;
         
         //Initializes the projection matrix
-        GLTransformation* projectionMatrix = [self createProjectionMatrix];
         GLTransformationSwift *projectionMatrixSwift = [self createProjectionMatrixSwift];
         
         
@@ -172,14 +141,14 @@ const float SKY_B = 0.5f;
         self -> terrains = [[NSMutableArray alloc] init];
         
         // Initializes the sky box render
-        SkyBoxShaderManagerSwift* sbManager = [[SkyBoxShaderManagerSwift alloc]init];
+        SkyBoxShaderManager* sbManager = [[SkyBoxShaderManager alloc]init];
         
         self-> skyBoxRender = [[SkyBoxRenderSwift alloc] initWithAShader : sbManager  projectionMatrix: projectionMatrixSwift];
         
         // Initializes the camera
         self ->camera = [[Camera alloc] init];
         
-        projectionMatrix = nil;
+        projectionMatrixSwift = nil;
     }
     return self;
 }
