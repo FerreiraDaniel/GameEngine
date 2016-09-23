@@ -165,8 +165,8 @@ const float SKY_B = 0.5f;
         self-> entities = [[NSMutableDictionary alloc]init];
         
         // Initializes the terrain render
-        TerrainShaderManager* tShader = [[TerrainShaderManager alloc] init];
-        self-> terrainRender = [[TerrainRenderSwift alloc] initWithAShader : tShader projectionMatrix: projectionMatrix];
+        TerrainShaderManagerSwift* tShader = [[TerrainShaderManagerSwift alloc] init];
+        self-> terrainRender = [[TerrainRenderSwift alloc] initWithAShader : tShader projectionMatrix: projectionMatrixSwift];
         
         // Initializes the terrains to render
         self -> terrains = [[NSMutableArray alloc] init];
@@ -257,12 +257,11 @@ const float SKY_B = 0.5f;
  */
 - (void) render : (Light*) sun {
     [self prepare];
-    GLTransformation* viewMatrix = [self updateCamera];
     GLTransformationSwift* viewMatrixSwift = [self updateCameraSwift];
     Vector3f* skyColor = [[Vector3f alloc] init: SKY_R : SKY_G : SKY_B];
     //[entityRender render: skyColor : sun : viewMatrix : entities];
     [entityRenderSwift render:skyColor sun: sun viewMatrix: viewMatrixSwift entities: entities];
-    [terrainRender render:skyColor sun:sun viewMatrix:viewMatrix terrains:terrains];
+    [terrainRender render:skyColor sun:sun viewMatrix:viewMatrixSwift terrains:terrains];
     
     
     [skyBoxRender render:viewMatrixSwift skyBox:skyBox];

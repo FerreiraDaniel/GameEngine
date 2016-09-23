@@ -52,11 +52,11 @@ public class TerrainShaderManagerSwift : ShaderManagerSwift {
     * bind of textures
     */
     public func connectTextureUnits() {
-        super.loadInt(uniforms[TTerrainUniform.backgroundTexture.rawValue], value: Int(GL_TEXTURE0));
-        super.loadInt(uniforms[TTerrainUniform.mudTexture.rawValue], value: Int(GL_TEXTURE1));
-        super.loadInt(uniforms[TTerrainUniform.grassTexture.rawValue], value: Int(GL_TEXTURE2));
-        super.loadInt(uniforms[TTerrainUniform.pathTexture.rawValue], value: Int(GL_TEXTURE3));
-        super.loadInt(uniforms[TTerrainUniform.weightMapTexture.rawValue], value: Int(GL_TEXTURE4));
+        super.loadInt(uniforms[TTerrainUniform.backgroundTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT0.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.mudTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT1.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.grassTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT2.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.pathTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT3.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.weightMapTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT4.rawValue);
     }
     
     /**

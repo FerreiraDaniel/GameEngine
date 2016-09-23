@@ -5,7 +5,7 @@ public class TerrainRenderSwift : NSObject {
     /**
     * Reference to the shader manager
     */
-    var tShader : TerrainShaderManager!;
+    var tShader : TerrainShaderManagerSwift!;
     
     /**
     * Initializer of the terrain render
@@ -13,7 +13,7 @@ public class TerrainRenderSwift : NSObject {
     * @param aShader           Shader manager
     * @param projectionMatrix  The projection matrix of the render
     */
-    public init( aShader : TerrainShaderManager, projectionMatrix : GLTransformation) {
+    public init( aShader : TerrainShaderManagerSwift, projectionMatrix : GLTransformationSwift) {
         self.tShader = aShader;
         self.tShader.start();
         self.tShader.loadProjectionMatrix(projectionMatrix);
@@ -29,15 +29,14 @@ public class TerrainRenderSwift : NSObject {
     * @return The transformation matrix that put the terrain in its right
     *         position
     */
-    private func getTransformationMatrix(terrain : Terrain) -> GLTransformation {
-        let matrix : GLTransformation  = GLTransformation();
+    private func getTransformationMatrix(terrain : Terrain) -> GLTransformationSwift {
+        let matrix : GLTransformationSwift  = GLTransformationSwift();
         matrix.glLoadIdentity();
-        
-        matrix.glTranslate(terrain.x, terrain.y, terrain.z);
+        matrix.glTranslate(terrain.x, ty: terrain.y, tz: terrain.z);
         let terrainRotation : Float = 0.0;
-        matrix.glRotate(terrainRotation,  1.0,  0.0,  0.0)
-        matrix.glRotate(terrainRotation,  0.0,  1.0,  0.0)
-        matrix.glRotate(terrainRotation, 0.0,  0.0,  1.0)
+        matrix.glRotate(terrainRotation, x: 1.0, y: 0.0, z: 0.0)
+        matrix.glRotate(terrainRotation, x: 0.0, y: 1.0, z: 0.0)
+        matrix.glRotate(terrainRotation, x: 0.0, y: 0.0, z: 1.0)
         return matrix;
     }
     
@@ -53,7 +52,7 @@ public class TerrainRenderSwift : NSObject {
     * @param terrains
     *            List of terrains of the scene
     */
-    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
+    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformationSwift, terrains : Array<Terrain>) {
         tShader.start();
         tShader.loadSkyColor(skyColor);
         tShader.loadLight(sun);
@@ -104,7 +103,7 @@ public class TerrainRenderSwift : NSObject {
         self.bindTextures(terrain);
         
         // Bind the light properties
-        tShader.loadShineVariables(1.0, 0.0);
+        tShader.loadShineVariables(1.0, reflectivity: 0.0);
     }
     
     /**
