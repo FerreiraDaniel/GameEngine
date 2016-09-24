@@ -33,7 +33,7 @@ public class ShaderManager : NSObject{
         fragShaderPathname = NSBundle.mainBundle().pathForResource(fragmentFile, ofType: "fsh")!
         fragShaderSrc = LoadUtils.readTextFromRawResource(fragShaderPathname);
         
-        self.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc);
+        self.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc: fragShaderSrc);
         
         if (shaderProgram == nil) {
             return;
