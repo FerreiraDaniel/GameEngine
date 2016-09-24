@@ -89,7 +89,7 @@ const int NUMBER_CUBE_FACES = 6;
  *
  * @return A row model with information loaded
  */
-- (RawModel*) loadToVAO: (id<IShape>) shape {
+- (RawModel*) loadToVAO1: (id<IShape>) shape {
     int vaoID = [self createVAO];
     
     int indicesLength = [shape countIndices];
@@ -141,7 +141,7 @@ const int NUMBER_CUBE_FACES = 6;
  *
  * @return The rawModel pointing to the created VAO
  */
-- (RawModel*) load3DPositionsToVAO : (float*) positions : (int) positionsLength {
+- (RawModel*) load3DPositionsToVAO1 : (float*) positions : (int) positionsLength {
     int dimensions = 3;
     return [self loadPositionsToVAO : positions : positionsLength : dimensions];
 }
@@ -159,84 +159,6 @@ const int NUMBER_CUBE_FACES = 6;
     glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 }
 
-/**
- *  Load one texture from a file and set it in openGL
- *
- * @param fileName
- *            Name of the file to load without the .png extension in the end
- *
- * @return Identifier of the texture loaded
- */
-- (int) loadTexture : (NSString*) fileName {
-    NSString* imagePath = [[NSBundle mainBundle] pathForResource:fileName ofType: PNG_EXTENSION];
-    TextureDataSwift *textureData = [LoadUtils loadTexture: imagePath];
-    
-    if (textureData == nil) {
-        return -1;
-    } else {
-        GLuint textureId;
-        glGenTextures(1, &textureId);
-        glBindTexture(GL_TEXTURE_2D, textureId);
-        
-        int width = [textureData width];
-        int height = [textureData height];
-        Byte *buffer = [textureData buffer];
-        
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  width, height, 0,
-                     GL_RGBA, GL_UNSIGNED_BYTE,  buffer);
-        [self defineTextureFunctionFilters: GL_TEXTURE_2D];
-        
-        [textures addObject: [NSNumber numberWithInteger:textureId]];
-        return textureId;
-    }
-}
-
-/**
- * Loads a cubic texture
- *
- * @param fileNames
- *            Names of the file to load without the .png extension in the
- *            end
- *
- * @return Identifier of the texture cubic texture loaded
- */
-- (int) loadTCubeMap : (NSArray*) fileNames {
-    if (fileNames == nil) {
-        return -1;
-    } else {
-        int cubicTextureTargets[NUMBER_CUBE_FACES] = { GL_TEXTURE_CUBE_MAP_POSITIVE_X,
-            GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
-            GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-            GL_TEXTURE_CUBE_MAP_NEGATIVE_Z };
-        
-        GLuint textureId;
-        glGenTextures(1, &textureId);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, textureId);
-        
-        for (int i = 0; i < NUMBER_CUBE_FACES; i++) {
-            NSString *fileName = fileNames[i];
-            
-            NSString* imagePath = [[NSBundle mainBundle] pathForResource:fileName ofType: PNG_EXTENSION];
-            TextureData *textureData = [LoadUtils loadTexture: imagePath];
-            
-            if (textureData == nil) {
-                return -1;
-            } else {
-                int target = cubicTextureTargets[i];
-                int width = [textureData width];
-                int height = [textureData height];
-                Byte *buffer = [textureData buffer];
-                
-                glTexImage2D(target, 0, GL_RGBA,  width, height, 0,
-                             GL_RGBA, GL_UNSIGNED_BYTE,  buffer);
-            }
-        }
-        [self defineTextureFunctionFilters: GL_TEXTURE_CUBE_MAP];
-        [textures addObject: [NSNumber numberWithInteger:textureId]];
-        return textureId;
-    }
-}
 
 
 /**

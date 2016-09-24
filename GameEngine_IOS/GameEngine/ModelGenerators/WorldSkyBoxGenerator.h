@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
-#import "Loader.h"
 #import "SkyBoxShape.h"
 #import "SkyBox.h"
+#import "GameEngine-Swift.h"
 
 /**
  * Generate the sky box of the 3D scene

@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "Loader.h"
 #import "IShape.h"
 #import "TexturedModel.h"
 #import "Entity.h"
@@ -7,6 +6,7 @@
 #import "Light.h"
 #import "OBJLoader.h"
 #import "DefaultModelGenerator.h"
+#import "GameEngine-Swift.h"
 
 
 /**

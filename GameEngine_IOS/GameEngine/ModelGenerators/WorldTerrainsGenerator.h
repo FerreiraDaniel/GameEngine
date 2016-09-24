@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "TerrainTexturesPack.h"
-#import "Loader.h"
 #import "Terrain.h"
+#import "GameEngine-Swift.h"
 
 /**
  * Responsible for creating the multiple terrains of the 3D world

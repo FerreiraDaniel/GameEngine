@@ -41,7 +41,7 @@
     [self setupGL];
     
     /* Initializes the main variables responsible to render the 3D world */
-    Loader *loader = [[Loader alloc]init];
+    LoaderSwift *loader = [[LoaderSwift alloc]init];
     
     /* Prepares the entities that is going to be render */
     self -> entities = [WorldEntitiesGenerator getEntities: loader];

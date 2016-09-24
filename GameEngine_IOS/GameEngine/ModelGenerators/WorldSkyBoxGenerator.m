@@ -4,9 +4,10 @@
 @implementation WorldSkyBoxGenerator
 
     
-+ (SkyBox*) getSky : (Loader*) loader{
++ (SkyBox*) getSky : (LoaderSwift*) loader{
     id<IShape> skyBoxShape = [[SkyBoxShape alloc] init];
-    RawModel* rawModel = [loader load3DPositionsToVAO: [skyBoxShape getVertices] : [skyBoxShape countVertices]];
+    //RawModel* rawModel = [loader load3DPositionsToVAO: [skyBoxShape getVertices] : [skyBoxShape countVertices]];
+    RawModel* rawModel =[loader load3DPositionsToVAO: [skyBoxShape getVertices] positionsLength:[skyBoxShape countVertices]];
     
     /* The names that the textures of the sky have */
     NSArray* TEXTURE_FILES = [[NSArray alloc] initWithObjects: @"sky_right", @"sky_left", @"sky_top", @"sky_bottom", @"sky_back", @"sky_front" , nil];

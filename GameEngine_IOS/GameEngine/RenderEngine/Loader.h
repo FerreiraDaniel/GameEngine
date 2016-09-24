@@ -6,12 +6,11 @@
 #import <GLKit/GLKit.h>
 #import "EntityShaderConstants.h"
 #import "TextureData.h"
-#import "GameEngine-Swift.h"
 
 @interface Loader : NSObject
 
 - (id)init;
-- (RawModel*) loadToVAO: (id<IShape>) shape;
+- (RawModel*) loadToVAO1: (id<IShape>) shape;
 
 /**
  * Load a list of 3D positions to VAO
@@ -23,26 +22,8 @@
  *
  * @return The rawModel pointing to the created VAO
  */
-- (RawModel*) load3DPositionsToVAO : (float*) positions : (int) positionsLength;
+- (RawModel*) load3DPositionsToVAO1 : (float*) positions : (int) positionsLength;
 
-/**
- *  Load one texture from a file and set it in openGL
- *
- * @param fileName
- *            Name of the file to load without the .png extension in the end
- *
- * @return Identifier of the texture loaded
- */
-- (int) loadTexture : (NSString*) fileName;
 
-/**
- * Loads a cubic texture
- *
- * @param fileNames
- *            Names of the file to load without the .png extension in the
- *            end
- *
- * @return Identifier of the texture cubic texture loaded
- */
-- (int) loadTCubeMap : (NSArray*) fileNames;
+- (void) defineTextureFunctionFilters : (int) target;
 @end

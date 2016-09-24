@@ -2,7 +2,7 @@
 #import "IShape.h"
 
 
-static const float SIZE =  500.0f;
+#define SIZE 500.0f
 
 @interface SkyBoxShape  : NSObject <IShape>
 

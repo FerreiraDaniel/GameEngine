@@ -12,7 +12,7 @@ const int NUMBER_OF_TERRAINS = 2;
  *
  * @return the textures package of the terrain
  */
-+ (TerrainTexturesPack*) getTexturedTerrain : (Loader*) loader {
++ (TerrainTexturesPack*) getTexturedTerrain : (LoaderSwift*) loader {
     int weightMapTextureId = [loader loadTexture : @"blend_map"];
     int backgroundTextureId = [loader loadTexture : @"terrain"];
     int mudTextureId = [loader loadTexture : @"mud"];
@@ -51,7 +51,7 @@ const int NUMBER_OF_TERRAINS = 2;
  *
  * @return list of terrains of the scene
  */
-+ (NSMutableArray*) getTerrains : (Loader*) loader {
++ (NSMutableArray*) getTerrains : (LoaderSwift*) loader {
     TerrainTexturesPack* texturedTerrain = [self getTexturedTerrain : loader];
     id<IShape> terrain = [[TerrainShape alloc] init];
     RawModel* model = [loader loadToVAO: terrain];

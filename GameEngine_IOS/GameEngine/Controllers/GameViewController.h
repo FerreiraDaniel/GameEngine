@@ -7,9 +7,6 @@
 #import "WorldTerrainsGenerator.h"
 #import "GameEngine-Swift.h"
 
-#import "Loader.h"
-
-
 
 @interface GameViewController : GLKViewController
 

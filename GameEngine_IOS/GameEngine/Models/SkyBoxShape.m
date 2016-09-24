@@ -7,6 +7,8 @@
 
 int const __SKY_BOX_NUMBER_OF_ELEMENTS = 108;
 
+
+
 /**
  * Vertices of the sky box
  */
