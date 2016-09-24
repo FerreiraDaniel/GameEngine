@@ -81,36 +81,6 @@ const int NUMBER_CUBE_FACES = 6;
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-/**
- * Load a shape in a VAO (Vertex array object)
- *
- * @param shape
- *            The shape to load
- *
- * @return A row model with information loaded
- */
-- (RawModel*) loadToVAO1: (id<IShape>) shape {
-    int vaoID = [self createVAO];
-    
-    int indicesLength = [shape countIndices];
-    int vertexLength = [shape countVertices];
-    int textureLength = [shape countTextureCoords];
-    int normalsLength = [shape countNormals];
-    
-    unsigned short *indicesData = [shape getIndices];
-    float *vertexData = [shape getVertices];
-    float *textureData = [shape getTextureCoords];
-    float *normalData = [shape getNormals];
-    
-    [self bindIndicesBuffer: indicesData : indicesLength];
-    [self storeDataInAttributeList: LOCATION_ATTR_ID :VERTEX_SIZE : vertexData : vertexLength];
-    [self storeDataInAttributeList: TEX_COORDINATE_ATTR_ID : COORD_SIZE : textureData : textureLength];
-    [self storeDataInAttributeList: NORMAL_VECTOR_ATTR_ID : NORMAL_SIZE : normalData : normalsLength];
-    
-    
-    [self unbindVAO];
-    return [[RawModel alloc] init : vaoID : indicesData : indicesLength];
-}
 
 /**
  * Load a list of positions to VAO
@@ -146,18 +116,6 @@ const int NUMBER_CUBE_FACES = 6;
     return [self loadPositionsToVAO : positions : positionsLength : dimensions];
 }
 
-/**
- * When loads one texture defines that by default should zoom in/out it
- *
- * @param target
- *            the target of the filter
- */
-- (void) defineTextureFunctionFilters : (int) target {
-    glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-}
 
 
 

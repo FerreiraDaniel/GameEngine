@@ -5,7 +5,7 @@ public class LoaderSwift : Loader {
     /**
     * List of the vertex array objects loaded
     */
-    //private var vaos : Array<Int>!;
+    private var vaos : Array<GLuint>!;
     
     /**
     * List of the vertex buffer objects loaded
@@ -30,6 +30,7 @@ public class LoaderSwift : Loader {
     public override init() {
         super.init();
         
+        self.vaos = Array<GLuint>();
         self.textures = Array<GLuint>();
         /*
         self = [super init];
@@ -47,15 +48,13 @@ public class LoaderSwift : Loader {
     *
     * @return the identifier of the VAO created
     */
-    /*private func createVAO() -> Int {
-        
-        
-        GLuint vaoID;
+    private func createVAO() -> Int {
+        var vaoID : GLuint = 0;
         glGenVertexArraysOES(1, &vaoID);
-        [vaos addObject: [NSNumber numberWithInteger:vaoID]];
+        vaos.append(vaoID);
         glBindVertexArrayOES(vaoID);
-        return vaoID;
-    }*/
+        return Int(vaoID);
+    }
     
     /**
     * Store a certain element to be used in the program shader
@@ -128,29 +127,29 @@ public class LoaderSwift : Loader {
     * @return A row model with information loaded
     */
     public func loadToVAO(shape : IShape) -> RawModel{
-        return super.loadToVAO1(shape);
-        /*
-        int vaoID = [self createVAO];
         
-        int indicesLength = [shape countIndices];
-        int vertexLength = [shape countVertices];
-        int textureLength = [shape countTextureCoords];
-        int normalsLength = [shape countNormals];
+        let vaoID = self.createVAO();
         
-        unsigned short *indicesData = [shape getIndices];
-        float *vertexData = [shape getVertices];
-        float *textureData = [shape getTextureCoords];
-        float *normalData = [shape getNormals];
+        let indicesLength = shape.countIndices();
+        let vertexLength = shape.countVertices();
+        let textureLength = shape.countTextureCoords();
+        let normalsLength = shape.countNormals();
+        //Buffers
+        let indicesData = shape.getIndices();
+        let vertexData = shape.getVertices();
+        let textureData = shape.getTextureCoords();
+        let normalData = shape.getNormals();
         
-        [self bindIndicesBuffer: indicesData : indicesLength];
-        [self storeDataInAttributeList: LOCATION_ATTR_ID :VERTEX_SIZE : vertexData : vertexLength];
-        [self storeDataInAttributeList: TEX_COORDINATE_ATTR_ID : COORD_SIZE : textureData : textureLength];
-        [self storeDataInAttributeList: NORMAL_VECTOR_ATTR_ID : NORMAL_SIZE : normalData : normalsLength];
+        super.bindIndicesBuffer(indicesData, indicesLength);
+        
+        super.storeDataInAttributeList( Int32(TEntityAttribute.position.rawValue) , VERTEX_SIZE, vertexData, vertexLength);
+        super.storeDataInAttributeList( Int32(TEntityAttribute.textureCoords.rawValue), COORD_SIZE, textureData, textureLength);
+        super.storeDataInAttributeList( Int32(TEntityAttribute.normal.rawValue), NORMAL_SIZE, normalData, normalsLength);
         
         
-        [self unbindVAO];
-        return [[RawModel alloc] init : vaoID : indicesData : indicesLength];
-        */
+        self.unbindVAO();
+        return RawModel(Int32(vaoID) , indicesData , indicesLength);
+        
     }
     
     /**
@@ -195,17 +194,18 @@ public class LoaderSwift : Loader {
     /**
     * When loads one texture defines that by default should zoom in/out it
     *
-    * @param target
+    * @param itarget
     *            the target of the filter
     */
-    /*private func defineTextureFunctionFilters (target : Int) {
+    private func defineTextureFunctionFilters (itarget : Int32) {
+        let target : GLenum = GLenum(itarget);
         
-    glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
+    glTexParameteri(target, GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
+    glTexParameteri(target, GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
+    glTexParameteri(target, GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
 
-    }*/
+    }
     
     /**
     *  Load one texture from a file and set it in openGL
@@ -240,7 +240,7 @@ public class LoaderSwift : Loader {
             glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA,  width, height, 0,
                 GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
             
-            super.defineTextureFunctionFilters(GL_TEXTURE_2D);
+            self.defineTextureFunctionFilters(GL_TEXTURE_2D);
             self.textures.append(textureId);
             return Int(textureId);
             
@@ -288,7 +288,7 @@ public class LoaderSwift : Loader {
                         GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
                 }
             }
-            super.defineTextureFunctionFilters(GL_TEXTURE_CUBE_MAP);
+            self.defineTextureFunctionFilters(GL_TEXTURE_CUBE_MAP);
             self.textures.append(textureId);
             return Int(textureId);
 
@@ -328,7 +328,7 @@ public class LoaderSwift : Loader {
     */
     deinit {
     
-    //vaos = nil;
+    vaos = nil;
     //vbos = nil;
     textures = nil;
     }

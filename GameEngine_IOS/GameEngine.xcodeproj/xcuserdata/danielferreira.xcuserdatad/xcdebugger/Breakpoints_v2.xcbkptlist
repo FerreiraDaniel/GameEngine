@@ -69,22 +69,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.m"
-            timestampString = "493475531.371408"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-loadToVAO1:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GameEngine/Shaders/Entities/EntityShaderManager.m"
             timestampString = "494600589.305294"
             startingColumnNumber = "9223372036854775807"
@@ -392,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.m"
-            timestampString = "496443943.816899"
+            timestampString = "496448275.559817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "-bindIndicesBuffer::"
             landmarkType = "5">
          </BreakpointContent>
@@ -408,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.m"
-            timestampString = "496443943.816899"
+            timestampString = "496448275.559817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-bindIndicesBuffer::"
             landmarkType = "5">
          </BreakpointContent>
@@ -903,22 +887,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.m"
-            timestampString = "493849056.547813"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-loadToVAO1:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/EntityRender.m"
             timestampString = "494088413.243939"
             startingColumnNumber = "9223372036854775807"
@@ -1230,22 +1198,6 @@
             startingLineNumber = "152"
             endingLineNumber = "152"
             landmarkName = "+createShape::::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.m"
-            timestampString = "494080380.929111"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-loadToVAO1:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2279,22 +2231,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.m"
-            timestampString = "494686483.476094"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "-loadToVAO1:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldTerrainsGenerator.m"
             timestampString = "494688755.425286"
             startingColumnNumber = "9223372036854775807"
@@ -2888,11 +2824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/LoaderSwift.swift"
-            timestampString = "496443366.556446"
+            timestampString = "496446135.74658"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "loadToVAO(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2904,11 +2840,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/LoaderSwift.swift"
-            timestampString = "496444529.253432"
+            timestampString = "496448275.559817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "loadTCubeMap(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2936,11 +2872,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/LoaderSwift.swift"
-            timestampString = "496444529.253432"
+            timestampString = "496448275.559817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "loadTCubeMap(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2952,11 +2888,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/LoaderSwift.swift"
-            timestampString = "496444529.253432"
+            timestampString = "496448275.559817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "loadTCubeMap(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2968,11 +2904,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/LoaderSwift.swift"
-            timestampString = "496444529.253432"
+            timestampString = "496448275.559817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "loadTCubeMap(_:)"
             landmarkType = "5">
          </BreakpointContent>
