@@ -6,6 +6,7 @@
 #import "WorldEntitiesGenerator.h"
 #import "WorldSkyBoxGenerator.h"
 #import "WorldTerrainsGenerator.h"
+#import "GameEngine-Swift.h"
 
 #import "Loader.h"
 

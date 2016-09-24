@@ -4,7 +4,7 @@ import Foundation
 * Groups the entities in a hash map like this
 * the same entity will be just put in different positions
 */
-public class MasterRenderSwift : NSObject{
+public class MasterRender : NSObject{
     
     
     /**
@@ -20,33 +20,33 @@ public class MasterRenderSwift : NSObject{
     /**
     * Reference to the render of the entities
     */
-    private var entityRender : EntityRender;
+    private var entityRender : EntityRender!;
     
     /**
     * Reference to the render of the terrains
     */
-    private var terrainRender : TerrainRender;
+    private var terrainRender : TerrainRender!;
     
     /**
     * Reference to the render of the sky box
     */
-    private var skyBoxRender : SkyBoxRender;
+    private var skyBoxRender : SkyBoxRender!;
     
     
     /**
     * Reference to the camera from where the user is going to see the 3D world
     */
-    private var camera : Camera;
+    private var camera : Camera!;
     
     /**
     * Entities of the world that are going to be rendered
     */
-    private var entities : Array<Entity>;
+    private var entities : Dictionary<String, Array<Entity>>!;
     
     /**
     * List of terrains of the world that are going to be render
     */
-    private var terrains : Array<Terrain>;
+    private var terrains : Array<Terrain>!;
     
     /**
     * The sky box that is going to use during the render
@@ -104,12 +104,12 @@ public class MasterRenderSwift : NSObject{
     * Calls the methods to update the camera and updates the matrix that
     * describe the camera in the scene
     */
-    private func updateCameraSwift() -> GLTransformation {
+    private func updateCamera() -> GLTransformation {
         camera.move();
         camera.rotate();
         
         // Matrix update
-        let viewMatrix : GLTransformation = MasterRenderSwift.createViewMatrix(camera);
+        let viewMatrix : GLTransformation = MasterRender.createViewMatrix(camera);
         return viewMatrix;
     }
     
@@ -126,7 +126,7 @@ public class MasterRenderSwift : NSObject{
         
         
         //Initializes the projection matrix
-        let projectionMatrix : GLTransformation = MasterRenderSwift.createProjectionMatrix(aWidth, height: aHeight);
+        let projectionMatrix : GLTransformation = MasterRender.createProjectionMatrix(aWidth, height: aHeight);
         
         
         //Initializes the entity render
@@ -134,7 +134,7 @@ public class MasterRenderSwift : NSObject{
         self.entityRender = EntityRender(aShader: eShader, projectionMatrix: projectionMatrix);
         
         // Initializes the entities to render
-        self.entities = Array<Entity>();
+        self.entities = Dictionary<String, Array<Entity>>();
         
         // Initializes the terrain render
         let tShader : TerrainShaderManager = TerrainShaderManager();
@@ -155,6 +155,25 @@ public class MasterRenderSwift : NSObject{
         
     }
     
+    /**
+    * Put one entity in the list of entities to render
+    *
+    * @param entity
+    *            the entity to add to the render
+    */
+    private func processEntity(entity : Entity) {
+        let entityModel : TexturedModel = entity.model;
+        let key : String = String(entityModel.id);
+        var batch : Array<Entity>! = entities[key];
+        
+        
+        if (batch == nil) {
+            batch = Array<Entity>();
+        }
+        
+        batch.append(entity);
+        entities[key] = batch;
+    }
     
     /**
     * Put the entities to process in the hash map dedicated to process entities
@@ -163,9 +182,24 @@ public class MasterRenderSwift : NSObject{
     * @param lEntities
     *            list of entities to get render in the next frame
     */
-    public func processEntities(lEntities : Array<Entity>) {
+    public func processEntities(lEntities : Array<Entity>!) {
+        self.entities.removeAll();
+        if ((lEntities != nil) && (!lEntities.isEmpty)) {
+            for entity in lEntities {
+                self.processEntity(entity);
+            }
+        }
     }
     
+    /**
+    * Put a terrain in the list of terrains to render
+    *
+    * @param terrain
+    *            the terrain to render
+    */
+    private func  processTerrain(terrain : Terrain) {
+        self.terrains.append(terrain);
+    }
     
     /**
     * Put the terrains to process in the list of terrains to process
@@ -173,13 +207,18 @@ public class MasterRenderSwift : NSObject{
     * @param lTerrains
     *            list of terrains to process
     */
-    public func  processTerrains(lTerrains : Array<Terrain>) {
+    public func  processTerrains(lTerrains : Array<Terrain>!) {
+        self.terrains.removeAll();
+        for terrain in lTerrains {
+            self.processTerrain(terrain);
+        }
     }
     
     /**
     * Set the sky box the use during the render
     */
     public func  processSkyBox(aSkyBox : SkyBox) {
+        self.skyBox = aSkyBox;
     }
     
     /**
@@ -189,7 +228,37 @@ public class MasterRenderSwift : NSObject{
     *            Sun of the scene
     */
     public func render(sun : Light) {
+        self.prepare();
+        let viewMatrix : GLTransformation = self.updateCamera();
+        let skyColor : Vector3f = Vector3f(MasterRender.SKY_R, MasterRender.SKY_G, MasterRender.SKY_B);
+        entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities);
+        terrainRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, terrains: self.terrains);
+        skyBoxRender.render(viewMatrix, skyBox: self.skyBox);
     }
     
+    /**
+    * Clean the data of the previous frame
+    */
+    private func prepare()
+    {
+        glEnable(GLenum(GL_DEPTH_TEST));
+        
+        // Set the color clear value
+        glClearColor(0, 0.3, 0, 1);
+        
+        // Clear the color and depth buffers
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT) | GLbitfield(GL_DEPTH_BUFFER_BIT))
+    }
     
+    /**
+    *  Releases the resources used by the class
+    */
+    deinit {
+        self.entityRender = nil;
+        self.entities = nil;
+        self.terrainRender = nil;
+        self.terrains = nil;
+        self.skyBoxRender = nil;
+        self.camera = nil;
+    }
 }

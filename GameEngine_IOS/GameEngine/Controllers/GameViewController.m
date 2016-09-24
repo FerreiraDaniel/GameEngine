@@ -1,5 +1,4 @@
 #import "GameViewController.h"
-#import "MasterRender.h"
 
 
 @interface GameViewController () {
@@ -93,7 +92,8 @@
 {
     [EAGLContext setCurrentContext:self.context];
     
-    renderer = [[MasterRender alloc] init: self.view.bounds.size.width : self.view.bounds.size.height];
+    renderer = [[MasterRender alloc] initWithAWidth: self.view.bounds.size.width aHeight: self.view.bounds.size.height];
+    
 }
 
 - (void)update
