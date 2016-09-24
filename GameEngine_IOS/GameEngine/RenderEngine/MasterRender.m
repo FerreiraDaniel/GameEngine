@@ -17,17 +17,17 @@
     /**
      * Reference to the render of the entities
      */
-    EntityRenderSwift * entityRenderSwift;
+    EntityRender * entityRenderSwift;
     
     /**
      * Reference to the render of the terrains
      */
-    TerrainRenderSwift* terrainRender;
+    TerrainRender* terrainRender;
     
     /**
      * Reference to the render of the sky box
      */
-    SkyBoxRenderSwift* skyBoxRender;
+    SkyBoxRender* skyBoxRender;
     
     
     /**
@@ -128,14 +128,14 @@ const float SKY_B = 0.5f;
         
         //Initializes the entity render        
         EntityShaderManager * eShaderSwift = [[EntityShaderManager alloc] init];
-        self -> entityRenderSwift = [[EntityRenderSwift alloc] initWithAShader : eShaderSwift projectionMatrix : projectionMatrix];
+        self -> entityRenderSwift = [[EntityRender alloc] initWithAShader : eShaderSwift projectionMatrix : projectionMatrix];
         
         // Initializes the entities to render
         self-> entities = [[NSMutableDictionary alloc]init];
         
         // Initializes the terrain render
         TerrainShaderManager* tShader = [[TerrainShaderManager alloc] init];
-        self-> terrainRender = [[TerrainRenderSwift alloc] initWithAShader : tShader projectionMatrix: projectionMatrix];
+        self-> terrainRender = [[TerrainRender alloc] initWithAShader : tShader projectionMatrix: projectionMatrix];
         
         // Initializes the terrains to render
         self -> terrains = [[NSMutableArray alloc] init];
@@ -143,7 +143,7 @@ const float SKY_B = 0.5f;
         // Initializes the sky box render
         SkyBoxShaderManager* sbManager = [[SkyBoxShaderManager alloc]init];
         
-        self-> skyBoxRender = [[SkyBoxRenderSwift alloc] initWithAShader : sbManager  projectionMatrix: projectionMatrix];
+        self-> skyBoxRender = [[SkyBoxRender alloc] initWithAShader : sbManager  projectionMatrix: projectionMatrix];
         
         // Initializes the camera
         self ->camera = [[Camera alloc] init];

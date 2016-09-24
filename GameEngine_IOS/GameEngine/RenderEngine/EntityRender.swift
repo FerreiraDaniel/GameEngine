@@ -4,7 +4,7 @@ import OpenGLES
 /**
 * Class responsible to render the entities in the screen
 */
-public class EntityRenderSwift : NSObject {
+public class EntityRender : NSObject {
     
     /**
     * Reference to the shader manager

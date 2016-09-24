@@ -20,17 +20,17 @@ public class MasterRenderSwift : NSObject{
     /**
     * Reference to the render of the entities
     */
-    private var entityRender : EntityRenderSwift;
+    private var entityRender : EntityRender;
     
     /**
     * Reference to the render of the terrains
     */
-    private var terrainRender : TerrainRenderSwift;
+    private var terrainRender : TerrainRender;
     
     /**
     * Reference to the render of the sky box
     */
-    private var skyBoxRender : SkyBoxRenderSwift;
+    private var skyBoxRender : SkyBoxRender;
     
     
     /**
@@ -131,14 +131,14 @@ public class MasterRenderSwift : NSObject{
         
         //Initializes the entity render
         let  eShader : EntityShaderManager = EntityShaderManager();
-        self.entityRender = EntityRenderSwift(aShader: eShader, projectionMatrix: projectionMatrix);
+        self.entityRender = EntityRender(aShader: eShader, projectionMatrix: projectionMatrix);
         
         // Initializes the entities to render
         self.entities = Array<Entity>();
         
         // Initializes the terrain render
         let tShader : TerrainShaderManager = TerrainShaderManager();
-        self.terrainRender = TerrainRenderSwift(aShader: tShader, projectionMatrix: projectionMatrix);
+        self.terrainRender = TerrainRender(aShader: tShader, projectionMatrix: projectionMatrix);
         
         // Initializes the terrains to render
         self.terrains = Array<Terrain>();
@@ -146,7 +146,7 @@ public class MasterRenderSwift : NSObject{
         // Initializes the sky box render
         let sbManager : SkyBoxShaderManager = SkyBoxShaderManager();
         
-        self.skyBoxRender = SkyBoxRenderSwift(aShader: sbManager, projectionMatrix: projectionMatrix);
+        self.skyBoxRender = SkyBoxRender(aShader: sbManager, projectionMatrix: projectionMatrix);
         
         // Initializes the camera
         self.camera = Camera();

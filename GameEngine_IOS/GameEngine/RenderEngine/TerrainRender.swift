@@ -1,6 +1,6 @@
 import Foundation
 
-public class TerrainRenderSwift : NSObject {
+public class TerrainRender : NSObject {
     
     /**
     * Reference to the shader manager

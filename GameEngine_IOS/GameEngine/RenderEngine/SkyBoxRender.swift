@@ -1,7 +1,7 @@
 import Foundation
 import OpenGLES
 
-public class SkyBoxRenderSwift : NSObject {
+public class SkyBoxRender : NSObject {
     
     /**
     * Reference to the shader manager
