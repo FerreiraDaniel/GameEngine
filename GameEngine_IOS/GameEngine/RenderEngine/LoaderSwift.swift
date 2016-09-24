@@ -10,7 +10,7 @@ public class LoaderSwift : Loader {
     /**
     * List of the vertex buffer objects loaded
     */
-    //private var vbos : Array<GLuint>!;
+    private var vbos : Array<GLuint>!;
     
     /**
     * List of the textures that make part of the game engine
@@ -31,6 +31,7 @@ public class LoaderSwift : Loader {
         super.init();
         
         self.vaos = Array<GLuint>();
+        self.vbos = Array<GLuint>();
         self.textures = Array<GLuint>();
         /*
         self = [super init];
@@ -140,7 +141,7 @@ public class LoaderSwift : Loader {
         let textureData = shape.getTextureCoords();
         let normalData = shape.getNormals();
         
-        super.bindIndicesBuffer(indicesData, indicesLength);
+        self.bindIndicesBuffer(indicesData, dLength: Int(indicesLength));
         
         super.storeDataInAttributeList( Int32(TEntityAttribute.position.rawValue) , VERTEX_SIZE, vertexData, vertexLength);
         super.storeDataInAttributeList( Int32(TEntityAttribute.textureCoords.rawValue), COORD_SIZE, textureData, textureLength);
@@ -311,16 +312,16 @@ public class LoaderSwift : Loader {
     */
     private func bindIndicesBuffer(indices : UnsafePointer<Void>, dLength : Int) {
         
-        /*
-        var vboID : GLuint;
+        
+        var vboID : GLuint = 0;
         glGenBuffers(1, &vboID);
         vbos.append(vboID);
         
         // Bind the VBO just created
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID)
-        glBufferData(GLenum(GL_ARRAY_BUFFER), indices.size(), indices, GLenum(GL_STATIC_DRAW))
-        glBufferData(GL_ARRAY_BUFFER, countBytes, indices, GL_STATIC_DRAW);
-        */
+        let countBytes = dLength * sizeof(CUnsignedShort);
+        glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, indices, GLenum(GL_STATIC_DRAW))
+        
     }
     
     /**
@@ -329,7 +330,7 @@ public class LoaderSwift : Loader {
     deinit {
     
     vaos = nil;
-    //vbos = nil;
+    vbos = nil;
     textures = nil;
     }
     

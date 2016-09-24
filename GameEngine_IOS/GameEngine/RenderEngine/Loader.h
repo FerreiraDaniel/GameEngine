@@ -24,7 +24,6 @@
  */
 - (RawModel*) load3DPositionsToVAO1 : (float*) positions : (int) positionsLength;
 
-- (void) bindIndicesBuffer : (unsigned short*) indices : (int) dLength;
 - (void) storeDataInAttributeList: (int) attributeNumber : (int) coordinateSize : (float*) data : (int) dLength;
 
 @end

@@ -126,22 +126,6 @@ const int NUMBER_CUBE_FACES = 6;
     glBindVertexArrayOES(0);
 }
 
-/**
- *
- * @param indices
- *            the indices to vertex buffer object
- * @para dLength
- *            Number of indices that the data has
- */
-- (void) bindIndicesBuffer : (unsigned short*) indices : (int) dLength {
-    GLuint vboID;
-    glGenBuffers(1, &vboID);
-    [vbos addObject: [NSNumber numberWithInteger:vboID]];
-    // Bind the VBO just created
-    glBindBuffer(GL_ARRAY_BUFFER, vboID);
-    int countBytes = dLength * sizeof(unsigned short);
-    glBufferData(GL_ARRAY_BUFFER, countBytes, indices, GL_STATIC_DRAW);
-}
 
 /**
  Desallocate memory
