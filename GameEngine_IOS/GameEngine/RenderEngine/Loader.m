@@ -169,7 +169,7 @@ const int NUMBER_CUBE_FACES = 6;
  */
 - (int) loadTexture : (NSString*) fileName {
     NSString* imagePath = [[NSBundle mainBundle] pathForResource:fileName ofType: PNG_EXTENSION];
-    TextureData *textureData = [LoadUtils loadTexture: imagePath];
+    TextureDataSwift *textureData = [LoadUtils loadTexture: imagePath];
     
     if (textureData == nil) {
         return -1;

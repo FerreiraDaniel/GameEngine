@@ -6,7 +6,7 @@
 #import <GLKit/GLKit.h>
 #import "EntityShaderConstants.h"
 #import "TextureData.h"
-#import "LoadUtils.h"
+#import "GameEngine-Swift.h"
 
 @interface Loader : NSObject
 
