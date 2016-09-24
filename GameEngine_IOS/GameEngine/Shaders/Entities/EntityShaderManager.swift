@@ -1,6 +1,6 @@
 import Foundation
 
-public class EntityShaderManagerSwift : ShaderManagerSwift {
+public class EntityShaderManager : ShaderManager {
     /**
     * Initializor of the game shader where the vertex and fragment shader of
     * the game engine are loaded
@@ -48,7 +48,7 @@ public class EntityShaderManagerSwift : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadProjectionMatrix (matrix : GLTransformationSwift) {
+    public func loadProjectionMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.projectionMatrix.rawValue], matrix: matrix);
     }
     
@@ -58,7 +58,7 @@ public class EntityShaderManagerSwift : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadViewMatrix (matrix : GLTransformationSwift) {
+    public func loadViewMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.viewMatrix.rawValue], matrix: matrix);
     }
     
@@ -68,7 +68,7 @@ public class EntityShaderManagerSwift : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadTransformationMatrix(matrix : GLTransformationSwift) {
+    public func loadTransformationMatrix(matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.rawValue], matrix: matrix);
     }
     

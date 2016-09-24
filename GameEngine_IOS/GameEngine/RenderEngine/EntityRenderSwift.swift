@@ -9,7 +9,7 @@ public class EntityRenderSwift : NSObject {
     /**
     * Reference to the shader manager
     */
-    private var eShader : EntityShaderManagerSwift!;
+    private var eShader : EntityShaderManager!;
     
     /**
     * Initializer of the entity render
@@ -17,7 +17,7 @@ public class EntityRenderSwift : NSObject {
     * @param aShader           Shader manager
     * @param projectionMatrix  The projection matrix of the render
     */
-    public init( aShader : EntityShaderManagerSwift, projectionMatrix : GLTransformationSwift) {
+    public init( aShader : EntityShaderManager, projectionMatrix : GLTransformation) {
         self.eShader = aShader;
         self.eShader.start();
         self.eShader.loadProjectionMatrix(projectionMatrix);
@@ -37,7 +37,7 @@ public class EntityRenderSwift : NSObject {
     * @param entities
     *            List of entities of the scene
     */
-    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformationSwift , entities : Dictionary<String, Array<Entity>>) {
+    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>) {
         // Render the object
         eShader.start();
         //Load the elements of the scene
@@ -60,8 +60,8 @@ public class EntityRenderSwift : NSObject {
     * @return The transformation matrix that put the entity in its right
     *         position
     */
-    private func getTransformationMatrix(entity : Entity) -> GLTransformationSwift {
-        let matrix : GLTransformationSwift  = GLTransformationSwift();
+    private func getTransformationMatrix(entity : Entity) -> GLTransformation {
+        let matrix : GLTransformation  = GLTransformation();
         matrix.glLoadIdentity();
         let entityPosition : Vector3f = entity.position;
         

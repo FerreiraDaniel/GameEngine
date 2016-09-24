@@ -1,6 +1,6 @@
 import Foundation
 
-public class SkyBoxShaderManager : ShaderManagerSwift {
+public class SkyBoxShaderManager : ShaderManager {
     
     
     
@@ -41,7 +41,7 @@ public class SkyBoxShaderManager : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadProjectionMatrix (matrix : GLTransformationSwift) {
+    public func loadProjectionMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TSkyBoxUniform.projectionMatrix.rawValue],matrix: matrix);
     }
     
@@ -51,7 +51,7 @@ public class SkyBoxShaderManager : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadViewMatrix (matrix : GLTransformationSwift) {
+    public func loadViewMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TSkyBoxUniform.viewMatrix.rawValue],matrix: matrix);
     }
 }

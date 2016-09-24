@@ -1,6 +1,6 @@
 import Foundation
 
-public class TerrainShaderManagerSwift : ShaderManagerSwift {
+public class TerrainShaderManager : ShaderManager {
     
     /**
     * Initializor of the game shader where the vertex and fragment shader of
@@ -65,7 +65,7 @@ public class TerrainShaderManagerSwift : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadProjectionMatrix (matrix : GLTransformationSwift) {
+    public func loadProjectionMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TTerrainUniform.projectionMatrix.rawValue], matrix: matrix);
     }
     
@@ -76,7 +76,7 @@ public class TerrainShaderManagerSwift : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadViewMatrix (matrix : GLTransformationSwift) {
+    public func loadViewMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TTerrainUniform.viewMatrix.rawValue], matrix: matrix);
     }
     
@@ -86,7 +86,7 @@ public class TerrainShaderManagerSwift : ShaderManagerSwift {
     * @param matrix
     *            the matrix to be loaded
     */
-    public func loadTransformationMatrix(matrix : GLTransformationSwift) {
+    public func loadTransformationMatrix(matrix : GLTransformation) {
         super.loadMatrix(uniforms[TTerrainUniform.transformationMatrix.rawValue], matrix: matrix);
     }
     

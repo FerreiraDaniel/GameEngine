@@ -5,7 +5,7 @@ import OpenGLES
 *  Master class to handle shaders
 *
 */
-public class ShaderManagerSwift : NSObject{
+public class ShaderManager : NSObject{
     
     public var shaderProgram : ShaderProgram!
     internal var uniforms : Array<Int>
@@ -180,7 +180,7 @@ public class ShaderManagerSwift : NSObject{
     * @param location The location of the shader variable in the script
     * @param matrix   Matrix to load
     */
-    public func loadMatrix (location : Int, matrix : GLTransformationSwift) {
+    public func loadMatrix (location : Int, matrix : GLTransformation) {
         glUniformMatrix4fv(GLint(location), 1, 0, matrix.getMatrix());
     }
     

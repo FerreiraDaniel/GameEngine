@@ -15,7 +15,7 @@ public class SkyBoxRenderSwift : NSObject {
     * @param aShader           Shader manager
     * @param projectionMatrix  The projection matrix of the render
     */
-    public init(aShader : SkyBoxShaderManager , projectionMatrix : GLTransformationSwift) {
+    public init(aShader : SkyBoxShaderManager , projectionMatrix : GLTransformation) {
         sbShader = aShader;
         sbShader.start();
         sbShader.loadProjectionMatrix(projectionMatrix);
@@ -25,7 +25,7 @@ public class SkyBoxRenderSwift : NSObject {
     
     //---------------------------------------------------------------------------------
     //Render method
-    public func render(viewMatrix : GLTransformationSwift, skyBox : SkyBox)
+    public func render(viewMatrix : GLTransformation, skyBox : SkyBox)
     {
         // Render the object
         sbShader.start();
