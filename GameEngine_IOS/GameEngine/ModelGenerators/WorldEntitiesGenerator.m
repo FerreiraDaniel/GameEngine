@@ -33,7 +33,7 @@ const int NUMBER_OF_FLOWERS = 10;
  */
 + (TexturedModel*) getTexturedObj : (Loader*) loader : (NSString*) objName : (NSString*) textureName : (Boolean) hasTransparency : (Boolean) normalsPointingUp {
     id<IShape> shape = [OBJLoader loadObjModel : objName];
-    
+    id<IShape> shape2 = [OBJLoaderSwift loadObjModel:objName];
 
     
     RawModel* rawModel = [loader loadToVAO: shape];

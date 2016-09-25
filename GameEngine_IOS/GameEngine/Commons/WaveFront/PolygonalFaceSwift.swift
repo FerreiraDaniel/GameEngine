@@ -9,20 +9,20 @@ public class PolygonalFaceSwift : NSObject {
     *
     * Index of the vertex of the face
     */
-    var vertexIndex : ushort
+    var vertexIndex : Int
     
     /**
     *
     * Index of the texture of the face
     */
-    var textureIndex : ushort
+    var textureIndex : Int
     
     
     /**
     *
     * Index of normal for this face
     */
-    var normalIndex : ushort
+    var normalIndex : Int
     
     
     /**
@@ -32,7 +32,7 @@ public class PolygonalFaceSwift : NSObject {
     * @param textureIndex Index of the texture of the face
     * @param normalIndex  Index of normal for this face
     */
-    public init(vertexIndex : ushort, textureIndex : ushort, normalIndex : ushort) {
+    public init(vertexIndex : Int, textureIndex : Int, normalIndex : Int) {
         self.vertexIndex = vertexIndex
         self.textureIndex = textureIndex
         self.normalIndex = normalIndex

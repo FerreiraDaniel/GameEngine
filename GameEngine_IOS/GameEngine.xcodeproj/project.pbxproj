@@ -49,6 +49,8 @@
 		32A921791D5EF5D900EF8477 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A921771D5EF5D900EF8477 /* LaunchScreen.xib */; };
 		32A921851D5EF5D900EF8477 /* GameEngineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921841D5EF5D900EF8477 /* GameEngineTests.m */; };
 		32A9219C1D5F10D200EF8477 /* ShaderProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A9219B1D5F10D200EF8477 /* ShaderProgram.m */; };
+		32A94C481D98514100A63154 /* TComponentPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A94C471D98514100A63154 /* TComponentPosition.swift */; settings = {ASSET_TAGS = (); }; };
+		32A94C4A1D98517800A63154 /* TCoordinatePosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A94C491D98517800A63154 /* TCoordinatePosition.swift */; settings = {ASSET_TAGS = (); }; };
 		32A989821D8ECDAD00FD815D /* GLTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A989811D8ECDAD00FD815D /* GLTransformation.swift */; settings = {ASSET_TAGS = (); }; };
 		32A989841D8ECE1400FD815D /* ShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A989831D8ECE1400FD815D /* ShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
 		32A989881D8ED05600FD815D /* TSkyBoxAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A989871D8ED05600FD815D /* TSkyBoxAttribute.swift */; settings = {ASSET_TAGS = (); }; };
@@ -157,6 +159,8 @@
 		32A921841D5EF5D900EF8477 /* GameEngineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameEngineTests.m; sourceTree = "<group>"; };
 		32A9219A1D5F10D200EF8477 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
 		32A9219B1D5F10D200EF8477 /* ShaderProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderProgram.m; sourceTree = "<group>"; };
+		32A94C471D98514100A63154 /* TComponentPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TComponentPosition.swift; sourceTree = "<group>"; };
+		32A94C491D98517800A63154 /* TCoordinatePosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCoordinatePosition.swift; sourceTree = "<group>"; };
 		32A989801D8ECDAD00FD815D /* GameEngine-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameEngine-Bridging-Header.h"; sourceTree = "<group>"; };
 		32A989811D8ECDAD00FD815D /* GLTransformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTransformation.swift; sourceTree = "<group>"; };
 		32A989831D8ECE1400FD815D /* ShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderManager.swift; sourceTree = "<group>"; };
@@ -334,6 +338,8 @@
 				32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */,
 				32A562801D97C7C70014C634 /* OBJLoaderSwift.swift */,
 				32A562821D97CA3D0014C634 /* PolygonalFaceSwift.swift */,
+				32A94C471D98514100A63154 /* TComponentPosition.swift */,
+				32A94C491D98517800A63154 /* TCoordinatePosition.swift */,
 			);
 			path = WaveFront;
 			sourceTree = "<group>";
@@ -668,6 +674,7 @@
 				32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */,
 				3297C5DF1D68EA10009F7416 /* TextureData.m in Sources */,
 				32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */,
+				32A94C481D98514100A63154 /* TComponentPosition.swift in Sources */,
 				32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */,
 				3284B0411D664DA400177CEC /* Terrain.m in Sources */,
 				32CF48331D71974400DFE35F /* DefaultModelGenerator.m in Sources */,
@@ -675,6 +682,7 @@
 				32A562871D97F21E0014C634 /* WfObject.swift in Sources */,
 				32B68FF01D63B14900CE74E4 /* SkyBox.m in Sources */,
 				32B68FDD1D63A8EC00CE74E4 /* Vector2f.m in Sources */,
+				32A94C4A1D98517800A63154 /* TCoordinatePosition.swift in Sources */,
 				32A5627F1D97C3E20014C634 /* Loader.swift in Sources */,
 				32A562811D97C7C70014C634 /* OBJLoaderSwift.swift in Sources */,
 				32A9898A1D8ED06F00FD815D /* TSkyBoxUniform.swift in Sources */,
