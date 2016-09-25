@@ -3,7 +3,7 @@
 #import "Vector2f.h"
 #import "Vector3f.h"
 #import "PolygonalFace.h"
-#import "WfObject.h"
+#import "GameEngine-Swift.h"
 
 @interface OBJLoader : NSObject
 

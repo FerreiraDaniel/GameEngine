@@ -162,15 +162,16 @@ const int COORDINATES_BY_NORMAL = 3;
     }
     
     
-    return [[WfObject alloc] init:
-                   verticesArray :
-            (numberVertices * COORDINATES_BY_VERTEX) :
-                   texturesArray :
-            (numberVertices * COORDINATES_BY_TEXTURE) :
-                    normalsArray :
-            (numberVertices * COORDINATES_BY_NORMAL) :
-                    indicesArray :
-            numberFaces];
+    return [[WfObject alloc] initWithAVertices:verticesArray
+                                     aCountVertices: (numberVertices * COORDINATES_BY_VERTEX)
+                                aTextureCoordinates: texturesArray
+                           aCountTextureCoordinates:(numberVertices * COORDINATES_BY_TEXTURE)
+                                           aNormals: normalsArray
+                                      aCountNormals: (numberVertices * COORDINATES_BY_NORMAL)
+                                           aIndices: indicesArray
+                                      aCountIndices: numberFaces];
+    
+
 }
 
 /**
