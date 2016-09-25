@@ -31,7 +31,7 @@ const int NUMBER_OF_FLOWERS = 10;
  *
  * @return the textured model of the dragon
  */
-+ (TexturedModel*) getTexturedObj : (LoaderSwift*) loader : (NSString*) objName : (NSString*) textureName : (Boolean) hasTransparency : (Boolean) normalsPointingUp {
++ (TexturedModel*) getTexturedObj : (Loader*) loader : (NSString*) objName : (NSString*) textureName : (Boolean) hasTransparency : (Boolean) normalsPointingUp {
     id<IShape> shape = [OBJLoader loadObjModel : objName];
     
 
@@ -128,7 +128,7 @@ const int NUMBER_OF_FLOWERS = 10;
  *
  * @return The entities that will compose the 3D world
  */
-+ (NSMutableArray*) getEntities : (LoaderSwift*) loader {
++ (NSMutableArray*) getEntities : (Loader*) loader {
     NSDictionary* entitiesMap = [self getEntitiesMap];
     
     __block int totalModels = 0;

@@ -1,6 +1,15 @@
 import Foundation
 
-public class LoaderSwift : Loader {
+
+/*
+ * Load the elements to make the scene
+ */
+public class Loader : NSObject {
+    
+    func BUFFER_OFFSET(i: Int) -> UnsafePointer<Void> {
+        let p: UnsafePointer<Void> = nil
+        return p.advancedBy(i)
+    }
     
     /**
     * List of the vertex array objects loaded
@@ -25,23 +34,12 @@ public class LoaderSwift : Loader {
     private let NUMBER_CUBE_FACES : Int = 6;
     
     /**
-    Initiator of the loader
+    * Initiator of the loader
     */
     public override init() {
-        super.init();
-        
         self.vaos = Array<GLuint>();
         self.vbos = Array<GLuint>();
         self.textures = Array<GLuint>();
-        /*
-        self = [super init];
-        if (self) {
-            vaos = [NSMutableArray array];
-            vbos = [NSMutableArray array];
-            textures = [NSMutableArray array];
-        }
-        return self;
-*/
     }
     
     /**
@@ -57,36 +55,6 @@ public class LoaderSwift : Loader {
         return Int(vaoID);
     }
     
-    /**
-    * Store a certain element to be used in the program shader
-    *
-    * @param attributeNumber
-    *            the id of the attribute to load in the program shader
-    * @param coordinateSize
-    *            Number of components of the attribute to store
-    *
-    * @param data
-    *            Data to be store
-    * @para dLength
-    *            Number of elements that the data has
-    */
-       /*private func  storeDataInAttributeList(attributeNumber : Int, coordinateSize : Int, data : UnsafePointer<Void>, dLength : Int) {
-     
-    GLuint vboID;
-    
-    glEnableVertexAttribArray(attributeNumber);
-    glGenBuffers(1, &vboID);
-    [vbos addObject: [NSNumber numberWithInteger:vboID]];
-    // Bind the VBO just created
-    glBindBuffer(GL_ARRAY_BUFFER, vboID);
-    int countBytes = dLength * sizeof(float);
-    glBufferData(GL_ARRAY_BUFFER, countBytes, data, GL_STATIC_DRAW);
-    glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, VERTEX_NORMALIZED, STRIDE,
-    START_OFFSET);
-    // UnBind the current VBO
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    }*/
     
     /**
     * Store a certain element to be used in the program shader
@@ -101,23 +69,23 @@ public class LoaderSwift : Loader {
     * @para dLength
     *            Number of elements that the data has
     */
-    /*private func storeDataInAttributeList(attributeNumber : Int, coordinateSize : Int, data :UnsafePointer<Void> , dLength : Int) {
+    private func storeDataInAttributeList(attributeNumber : Int, coordinateSize : GLint, data :UnsafePointer<Void> , dLength : Int) {
         
-    GLuint vboID;
-    
-    glEnableVertexAttribArray(attributeNumber);
-    glGenBuffers(1, &vboID);
-    [vbos addObject: [NSNumber numberWithInteger:vboID]];
-    // Bind the VBO just created
-    glBindBuffer(GL_ARRAY_BUFFER, vboID);
-    int countBytes = dLength * sizeof(float);
-    glBufferData(GL_ARRAY_BUFFER, countBytes, data, GL_STATIC_DRAW);
-    glVertexAttribPointer(attributeNumber, coordinateSize, GL_FLOAT, VERTEX_NORMALIZED, STRIDE,
-    START_OFFSET);
-    // UnBind the current VBO
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    }*/
+        var vboID : GLuint = 0;
+        
+        glEnableVertexAttribArray(GLuint(attributeNumber));
+        glGenBuffers(1, &vboID);
+        self.vbos.append(vboID);
+        
+        // Bind the VBO just created
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID);
+        let countBytes : Int = dLength * sizeof(CFloat);
+        glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, data, GLenum(GL_STATIC_DRAW));
+        glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstantsSwift.vertexNormalized, STRIDE, BUFFER_OFFSET(0));
+        // UnBind the current VBO
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
+        
+    }
     
     /**
     * Load a shape in a VAO (Vertex array object)
@@ -143,10 +111,9 @@ public class LoaderSwift : Loader {
         
         self.bindIndicesBuffer(indicesData, dLength: Int(indicesLength));
         
-        super.storeDataInAttributeList( Int32(TEntityAttribute.position.rawValue) , VERTEX_SIZE, vertexData, vertexLength);
-        super.storeDataInAttributeList( Int32(TEntityAttribute.textureCoords.rawValue), COORD_SIZE, textureData, textureLength);
-        super.storeDataInAttributeList( Int32(TEntityAttribute.normal.rawValue), NORMAL_SIZE, normalData, normalsLength);
-        
+        self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: RenderConstantsSwift.vertex, data: vertexData, dLength: Int(vertexLength))
+        self.storeDataInAttributeList(TEntityAttribute.textureCoords.rawValue, coordinateSize: RenderConstantsSwift.texture, data: textureData, dLength: Int(textureLength))
+        self.storeDataInAttributeList(TEntityAttribute.normal.rawValue, coordinateSize: RenderConstantsSwift.normal, data: normalData, dLength: Int(normalsLength))
         
         self.unbindVAO();
         return RawModel(Int32(vaoID) , indicesData , indicesLength);
@@ -165,14 +132,15 @@ public class LoaderSwift : Loader {
     *
     * @return The rawModel pointing to the created VAO
     */
-    /*private func  loadPositionsToVAO(positions : UnsafePointer<Void>, positionsLength : Int, dimensions : Int) -> RawModel {
+    private func  loadPositionsToVAO(positions : UnsafePointer<Void>, positionsLength : Int, dimensions : Int) -> RawModel {
         
-    int vaoID = [self createVAO];
-    [self storeDataInAttributeList: LOCATION_ATTR_ID : dimensions : positions: positionsLength];
-    [self unbindVAO];
-    return [[RawModel alloc] init : vaoID : nil : positionsLength/dimensions];
-
-    }*/
+        let vaoID = self.createVAO();
+        self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: GLint(dimensions), data: positions, dLength: positionsLength);
+        self.unbindVAO();
+        
+        return RawModel(Int32(vaoID) , nil , Int32(positionsLength/dimensions));
+        
+    }
     
     /**
     * Load a list of 3D positions to VAO
@@ -185,11 +153,8 @@ public class LoaderSwift : Loader {
     * @return The rawModel pointing to the created VAO
     */
     public func load3DPositionsToVAO(positions : UnsafeMutablePointer<Float>, positionsLength : Int) -> RawModel{
-        return super.load3DPositionsToVAO1(positions, Int32(positionsLength));
-        /*
-        int dimensions = 3;
-        return [self loadPositionsToVAO : positions : positionsLength : dimensions];
-        */
+        let dimensions = 3;
+        return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
     }
     
     /**
@@ -201,11 +166,11 @@ public class LoaderSwift : Loader {
     private func defineTextureFunctionFilters (itarget : Int32) {
         let target : GLenum = GLenum(itarget);
         
-    glTexParameteri(target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
-    glTexParameteri(target, GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
-    glTexParameteri(target, GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
-    glTexParameteri(target, GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
-
+        glTexParameteri(target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
+        glTexParameteri(target, GLenum(GL_TEXTURE_MAG_FILTER), GL_LINEAR);
+        glTexParameteri(target, GLenum(GL_TEXTURE_WRAP_S), GL_CLAMP_TO_EDGE);
+        glTexParameteri(target, GLenum(GL_TEXTURE_WRAP_T), GL_CLAMP_TO_EDGE);
+        
     }
     
     /**
@@ -257,7 +222,7 @@ public class LoaderSwift : Loader {
     *
     * @return Identifier of the texture cubic texture loaded
     */
-    public func loadTCubeMap(fileNames : Array<String>!) -> Int {        
+    public func loadTCubeMap(fileNames : Array<String>!) -> Int {
         if (fileNames == nil) {
             return -1;
         } else {
@@ -284,7 +249,7 @@ public class LoaderSwift : Loader {
                     let width : GLsizei = GLsizei(textureData.width)
                     let height : GLsizei = GLsizei(textureData.height)
                     let buffer : UnsafeMutablePointer<Void> = textureData.buffer
-
+                    
                     glTexImage2D(GLenum(target), 0, GL_RGBA,  width, height, 0,
                         GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
                 }
@@ -292,7 +257,7 @@ public class LoaderSwift : Loader {
             self.defineTextureFunctionFilters(GL_TEXTURE_CUBE_MAP);
             self.textures.append(textureId);
             return Int(textureId);
-
+            
         }
     }
     
@@ -328,10 +293,10 @@ public class LoaderSwift : Loader {
     Desallocate memory
     */
     deinit {
-    
-    vaos = nil;
-    vbos = nil;
-    textures = nil;
+        
+        vaos = nil;
+        vbos = nil;
+        textures = nil;
     }
     
 }

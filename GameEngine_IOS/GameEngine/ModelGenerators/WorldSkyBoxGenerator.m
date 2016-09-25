@@ -4,7 +4,7 @@
 @implementation WorldSkyBoxGenerator
 
     
-+ (SkyBox*) getSky : (LoaderSwift*) loader{
++ (SkyBox*) getSky : (Loader*) loader{
     id<IShape> skyBoxShape = [[SkyBoxShape alloc] init];
     //RawModel* rawModel = [loader load3DPositionsToVAO: [skyBoxShape getVertices] : [skyBoxShape countVertices]];
     RawModel* rawModel =[loader load3DPositionsToVAO: [skyBoxShape getVertices] positionsLength:[skyBoxShape countVertices]];
