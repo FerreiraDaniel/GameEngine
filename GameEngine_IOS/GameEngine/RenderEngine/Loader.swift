@@ -81,7 +81,7 @@ public class Loader : NSObject {
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID);
         let countBytes : Int = dLength * sizeof(CFloat);
         glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, data, GLenum(GL_STATIC_DRAW));
-        glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstantsSwift.vertexNormalized, STRIDE, BUFFER_OFFSET(0));
+        glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstantsSwift.vertexNormalized, RenderConstantsSwift.STRIDE, BUFFER_OFFSET(0));
         // UnBind the current VBO
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
         

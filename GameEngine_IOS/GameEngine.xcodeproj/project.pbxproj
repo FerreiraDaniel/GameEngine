@@ -104,7 +104,6 @@
 		3265AFF21D5F62C300A0E37E /* IShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IShape.h; sourceTree = "<group>"; };
 		3269450F1D6E3426008C542A /* WfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WfObject.h; sourceTree = "<group>"; };
 		326945101D6E3426008C542A /* WfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WfObject.m; sourceTree = "<group>"; };
-		327861FC1D60A32200F96EF0 /* RenderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RenderConstants.h; sourceTree = "<group>"; };
 		327862001D60B5EE00F96EF0 /* RawModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawModel.h; sourceTree = "<group>"; };
 		327862011D60B5EE00F96EF0 /* RawModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawModel.m; sourceTree = "<group>"; };
 		3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainTexture.swift; sourceTree = "<group>"; };
@@ -415,7 +414,6 @@
 		32A921901D5EFC0D00EF8477 /* RenderEngine */ = {
 			isa = PBXGroup;
 			children = (
-				327861FC1D60A32200F96EF0 /* RenderConstants.h */,
 				32AB94291D96A4280060D581 /* EntityRender.swift */,
 				32AB942B1D96A4AD0060D581 /* SkyBoxRender.swift */,
 				32AB942D1D96A4E60060D581 /* TerrainRender.swift */,

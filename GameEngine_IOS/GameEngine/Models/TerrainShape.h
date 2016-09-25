@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
 #import "IShape.h"
-#import "RenderConstants.h"
 
 #define SIZE   800.0f
 
