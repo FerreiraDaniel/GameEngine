@@ -376,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -440,11 +440,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -456,11 +456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -472,11 +472,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "+loadObjModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "+loadObjModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -504,11 +504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "@implementation OBJLoader"
             landmarkType = "3">
          </BreakpointContent>
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "+loadObjModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -536,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "+loadObjModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -552,11 +552,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "+processVertex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -568,11 +568,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270">
+            startingLineNumber = "294"
+            endingLineNumber = "294">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -582,11 +582,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "@implementation OBJLoader"
             landmarkType = "3">
          </BreakpointContent>
@@ -598,11 +598,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502224.307444"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "+processVertex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -614,11 +614,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -630,27 +630,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496501865.681036"
+            timestampString = "496512768.158519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "+createShape::::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1046,11 +1030,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1062,11 +1046,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1094,11 +1078,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496513806.904904"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2902,27 +2886,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
+            timestampString = "496512768.158519"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "+createShape::::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/Commons/WaveFront/OBJLoader.m"
-            timestampString = "496502172.150196"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "+createShape::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2934,11 +2902,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/Shapes/WfObject.swift"
-            timestampString = "496502224.307444"
+            timestampString = "496513790.954454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "countVertices()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2950,11 +2918,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/Shapes/WfObject.swift"
-            timestampString = "496502224.307444"
+            timestampString = "496513790.954454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "WfObject"
             landmarkType = "3">
          </BreakpointContent>
@@ -2966,11 +2934,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/Shapes/WfObject.swift"
-            timestampString = "496502224.307444"
+            timestampString = "496513790.954454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "countTextureCoords()"
             landmarkType = "5">
          </BreakpointContent>

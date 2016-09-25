@@ -121,63 +121,87 @@ const int COORDINATES_BY_NORMAL = 3;
     // We setup the arrays now that we know the size of them
     int numberVertices = [vertices count];
     int numberFaces = [facesLst count];
-    NSMutableArray<NSNumber*>* aaVertices = [[NSMutableArray alloc] initWithCapacity: (numberVertices * COORDINATES_BY_VERTEX)];
     
-    for (int i = 0; i < (numberVertices * COORDINATES_BY_VERTEX); i++) {
-        [aaVertices insertObject: [NSNumber numberWithFloat: 0.0] atIndex:i];
+    //Vertices
+    int verticesLength = (numberVertices * COORDINATES_BY_VERTEX);
+    NSMutableArray<NSNumber*>* aVertices = [[NSMutableArray alloc] initWithCapacity: verticesLength];
+    
+    //Fill the array with zeros
+    for (int i = 0; i < verticesLength; i++) {
+        [aVertices insertObject: [NSNumber numberWithFloat: 0.0] atIndex:i];
     }
     
-    float normalsArray[numberVertices * COORDINATES_BY_NORMAL];
-    float texturesArray[numberVertices * COORDINATES_BY_TEXTURE];
-    unsigned short indicesArray[numberFaces];
+    //Normals
+    int normalsLength = numberVertices * COORDINATES_BY_NORMAL;
+    NSMutableArray<NSNumber*>* normalsArray = [[NSMutableArray alloc] initWithCapacity: normalsLength];
     
-    for (int j = 0; j < numberFaces; j++) {
-        PolygonalFace* face = [facesLst objectAtIndex:j];
-        
-        int vertexIndex = [face vertexIndex];
-        int normalIndex = [face normalIndex];
-        int textureIndex = [face textureIndex];
-        
-        // Point to loaded structure
-
-        Vector3f* vertice = [vertices objectAtIndex: vertexIndex];
-        Vector3f* currentNorm = [normals objectAtIndex: normalIndex];
-        Vector2f* currentTexture = [textures objectAtIndex: textureIndex];
-        
-        // Build index lists
-        indicesArray[j] = vertexIndex;
-        
-        // Uses the (faces and vertices list to build the final vertices
-        // array
-        [aaVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 0)  withObject: [NSNumber numberWithFloat: vertice.x]];
-        [aaVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 1)  withObject: [NSNumber numberWithFloat: vertice.y]];
-        [aaVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 2)  withObject: [NSNumber numberWithFloat: vertice.z]];
-        
-
-        
-        
-        // Build the normals list
-        normalsArray[vertexIndex * COORDINATES_BY_NORMAL] = currentNorm.x;
-        normalsArray[vertexIndex * COORDINATES_BY_NORMAL + 1] = currentNorm.y;
-        normalsArray[vertexIndex * COORDINATES_BY_NORMAL + 2] = currentNorm.z;
-        
-        // Build the texture coordinates list
-        if (currentTexture != nil) {
-            texturesArray[vertexIndex * COORDINATES_BY_TEXTURE] = currentTexture.x;
-            texturesArray[vertexIndex * COORDINATES_BY_TEXTURE + 1] = currentTexture.y;
-        }
+    //Fill the array with zeros
+    for (int i = 0; i < normalsLength; i++) {
+        [normalsArray insertObject: [NSNumber numberWithFloat: 0.0] atIndex:i];
     }
     
     
-    return [[WfObject alloc] initWithAVertices:aaVertices
-                                aTextureCoordinates: texturesArray
-                           aCountTextureCoordinates:(numberVertices * COORDINATES_BY_TEXTURE)
-                                           aNormals: normalsArray
-                                      aCountNormals: (numberVertices * COORDINATES_BY_NORMAL)
-                                           aIndices: indicesArray
-                                      aCountIndices: numberFaces];
+    //Textures
+    int textureLength = numberVertices * COORDINATES_BY_TEXTURE;
+    NSMutableArray<NSNumber*>* texturesArray = [[NSMutableArray alloc] initWithCapacity: textureLength];
     
-
+    //Fill the array with zeros
+    for (int i = 0; i < textureLength; i++) {
+        [texturesArray insertObject: [NSNumber numberWithFloat: 0.0] atIndex:i];
+    }
+    
+    //Indices
+    NSMutableArray<NSNumber*>* indicesArray = [[NSMutableArray alloc] initWithCapacity: numberFaces];
+    
+    //Fill the array with zeros
+    for (int i = 0; i < numberFaces; i++) {
+        [indicesArray insertObject: [NSNumber numberWithFloat: 0.0] atIndex:i];
+    }
+    
+    
+     for (int j = 0; j < numberFaces; j++) {
+     PolygonalFace* face = [facesLst objectAtIndex:j];
+     
+     int vertexIndex = [face vertexIndex];
+     int normalIndex = [face normalIndex];
+     int textureIndex = [face textureIndex];
+     
+     // Point to loaded structure
+     
+     Vector3f* vertice = [vertices objectAtIndex: vertexIndex];
+     Vector3f* currentNorm = [normals objectAtIndex: normalIndex];
+     Vector2f* currentTexture = [textures objectAtIndex: textureIndex];
+     
+     // Build index lists
+     [indicesArray replaceObjectAtIndex:j withObject: [NSNumber numberWithInt: vertexIndex]];
+     
+     // Uses the (faces and vertices list to build the final vertices
+     // array
+     [aVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 0)  withObject: [NSNumber numberWithFloat: vertice.x]];
+     [aVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 1)  withObject: [NSNumber numberWithFloat: vertice.y]];
+     [aVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 2)  withObject: [NSNumber numberWithFloat: vertice.z]];
+     
+     // Build the normals list
+     [normalsArray replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_NORMAL + 0)  withObject: [NSNumber numberWithFloat: currentNorm.x]];
+     [normalsArray replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_NORMAL + 1)  withObject: [NSNumber numberWithFloat: currentNorm.y]];
+     [normalsArray replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_NORMAL + 2)  withObject: [NSNumber numberWithFloat: currentNorm.z]];
+     
+     
+     
+     // Build the texture coordinates list
+     if (currentTexture != nil) {
+     [texturesArray replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_TEXTURE + 0)  withObject: [NSNumber numberWithFloat: currentTexture.x]];
+     [texturesArray replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_TEXTURE + 1)  withObject: [NSNumber numberWithFloat: currentTexture.y]];
+     }
+     }
+    
+    
+    return [[WfObject alloc] initWithAVertices:aVertices
+                           aTextureCoordinates: texturesArray
+                                      aNormals: normalsArray
+                                      aIndices: indicesArray];
+    
+    
 }
 
 /**

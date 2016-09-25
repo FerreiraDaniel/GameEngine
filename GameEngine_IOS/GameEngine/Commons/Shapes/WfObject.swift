@@ -9,20 +9,18 @@ public class WfObject : NSObject, IShape {
     private var _normals: UnsafeMutablePointer<Float> ;
     private var _countNormals : Int;
     private var _indices : UnsafeMutablePointer<ushort>;
-    private var _countIndices : Int;
+    private var _countIndices : Int = 0;
     
     /**
     * Inicializes the waveFront file
     */
     public init(
         aVertices : Array<Float>,
-        aTextureCoordinates : UnsafePointer<Float>,
-        aCountTextureCoordinates : Int,
-        aNormals : UnsafePointer<Float>,
-        aCountNormals : Int,
-        aIndices : UnsafePointer<ushort>,
-        aCountIndices : Int)
+        aTextureCoordinates : Array<Float>,
+        aNormals : Array<Float>,
+        aIndices : Array<Int>)
     {
+        
         //Allocate and fill the vertices memory
         self._vertices = UnsafeMutablePointer<Float>(calloc(aVertices.count, sizeof(CFloat)));
         self._countVertices = aVertices.count;
@@ -33,25 +31,36 @@ public class WfObject : NSObject, IShape {
         
         
         //Allocate and fill the texture memory
-        let countTextureBytes : Int = sizeof(CFloat) * aCountTextureCoordinates;
-        self._textureCoordinates = UnsafeMutablePointer<Float>(calloc(aCountTextureCoordinates, sizeof(CFloat)));
-        self._countTextureCoordinates = aCountTextureCoordinates;
-        memcpy(self._textureCoordinates, aTextureCoordinates, countTextureBytes);
+        self._textureCoordinates = UnsafeMutablePointer<Float>(calloc(aTextureCoordinates.count, sizeof(CFloat)));
+        self._countTextureCoordinates = aTextureCoordinates.count;
+        for(var i = 0;i < aTextureCoordinates.count;i++) {
+            self._textureCoordinates[i] = aTextureCoordinates[i];
+        }
         
         
         //Allocate and fill the normals memory
-        let countNormalsBytes = sizeof(CFloat) * aCountNormals;
-        self._normals = UnsafeMutablePointer<Float>(calloc(aCountNormals, sizeof(CFloat)));
-        self._countNormals = aCountNormals;
-        memcpy(self._normals, aNormals, countNormalsBytes);
+        self._normals = UnsafeMutablePointer<Float>(calloc(aNormals.count, sizeof(CFloat)));
+        self._countNormals = aNormals.count;
+        for(var i = 0;i < self._countNormals;i++) {
+            self._normals[i] = aNormals[i];
+        }
         
         
         //Allocate and fill the indices memory
-        let countIndicesBytes = sizeof(CInt) * aCountIndices;
-        self._indices = UnsafeMutablePointer<ushort>(calloc(aCountIndices, sizeof(CInt)));
-        self._countIndices = aCountIndices;
-        memcpy(self._indices, aIndices, countIndicesBytes);
-        
+        self._indices = UnsafeMutablePointer<ushort>(calloc(aIndices.count, sizeof(CInt)));
+        self._countIndices = aIndices.count;
+        for(var i = 0;i < self._countIndices;i++) {
+            self._indices[i] = UInt16(aIndices[i]);
+        }
+        super.init();
+    }
+    
+    
+    deinit {
+        free(self._vertices);
+        free(self._textureCoordinates);
+        free(self._normals);
+        free(self._indices);
     }
     
     /**
