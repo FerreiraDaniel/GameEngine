@@ -15,8 +15,7 @@ public class WfObject : NSObject, IShape {
     * Inicializes the waveFront file
     */
     public init(
-        aVertices : UnsafePointer<Float>,
-        aCountVertices : Int,
+        aVertices : Array<Float>,
         aTextureCoordinates : UnsafePointer<Float>,
         aCountTextureCoordinates : Int,
         aNormals : UnsafePointer<Float>,
@@ -25,10 +24,12 @@ public class WfObject : NSObject, IShape {
         aCountIndices : Int)
     {
         //Allocate and fill the vertices memory
-        let countVerticesBytes : Int = sizeof(CFloat) * aCountVertices;
-        self._vertices = UnsafeMutablePointer<Float>(calloc(aCountVertices, sizeof(CFloat)));
-        self._countVertices = aCountVertices;
-        memcpy(self._vertices, aVertices, countVerticesBytes);
+        self._vertices = UnsafeMutablePointer<Float>(calloc(aVertices.count, sizeof(CFloat)));
+        self._countVertices = aVertices.count;
+        
+        for(var i = 0;i < aVertices.count;i++) {
+            self._vertices[i] = aVertices[i];
+        }
         
         
         //Allocate and fill the texture memory

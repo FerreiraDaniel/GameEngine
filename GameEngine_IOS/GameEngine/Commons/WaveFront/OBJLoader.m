@@ -121,7 +121,12 @@ const int COORDINATES_BY_NORMAL = 3;
     // We setup the arrays now that we know the size of them
     int numberVertices = [vertices count];
     int numberFaces = [facesLst count];
-    float verticesArray[numberVertices * COORDINATES_BY_VERTEX];
+    NSMutableArray<NSNumber*>* aaVertices = [[NSMutableArray alloc] initWithCapacity: (numberVertices * COORDINATES_BY_VERTEX)];
+    
+    for (int i = 0; i < (numberVertices * COORDINATES_BY_VERTEX); i++) {
+        [aaVertices insertObject: [NSNumber numberWithFloat: 0.0] atIndex:i];
+    }
+    
     float normalsArray[numberVertices * COORDINATES_BY_NORMAL];
     float texturesArray[numberVertices * COORDINATES_BY_TEXTURE];
     unsigned short indicesArray[numberFaces];
@@ -144,9 +149,11 @@ const int COORDINATES_BY_NORMAL = 3;
         
         // Uses the (faces and vertices list to build the final vertices
         // array
-        verticesArray[vertexIndex * COORDINATES_BY_VERTEX] = vertice.x;
-        verticesArray[vertexIndex * COORDINATES_BY_VERTEX + 1] = vertice.y;
-        verticesArray[vertexIndex * COORDINATES_BY_VERTEX + 2] = vertice.z;
+        [aaVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 0)  withObject: [NSNumber numberWithFloat: vertice.x]];
+        [aaVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 1)  withObject: [NSNumber numberWithFloat: vertice.y]];
+        [aaVertices replaceObjectAtIndex: (vertexIndex * COORDINATES_BY_VERTEX + 2)  withObject: [NSNumber numberWithFloat: vertice.z]];
+        
+
         
         
         // Build the normals list
@@ -162,8 +169,7 @@ const int COORDINATES_BY_NORMAL = 3;
     }
     
     
-    return [[WfObject alloc] initWithAVertices:verticesArray
-                                     aCountVertices: (numberVertices * COORDINATES_BY_VERTEX)
+    return [[WfObject alloc] initWithAVertices:aaVertices
                                 aTextureCoordinates: texturesArray
                            aCountTextureCoordinates:(numberVertices * COORDINATES_BY_TEXTURE)
                                            aNormals: normalsArray
