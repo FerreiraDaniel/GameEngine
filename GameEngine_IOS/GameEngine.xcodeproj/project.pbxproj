@@ -10,6 +10,8 @@
 		3248966A1D669F29001F5AB2 /* ModelTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 324896691D669F29001F5AB2 /* ModelTexture.m */; };
 		325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */; settings = {ASSET_TAGS = (); }; };
 		325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */; settings = {ASSET_TAGS = (); }; };
+		3275A13A1D99A8B100B52467 /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A1391D99A8B100B52467 /* OBJLoader.swift */; settings = {ASSET_TAGS = (); }; };
+		3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A13B1D99A91A00B52467 /* PolygonalFace.swift */; settings = {ASSET_TAGS = (); }; };
 		327862021D60B5EE00F96EF0 /* RawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 327862011D60B5EE00F96EF0 /* RawModel.m */; };
 		3279D9131D95D9BF001548F7 /* TTerrainTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */; settings = {ASSET_TAGS = (); }; };
 		3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
@@ -32,12 +34,8 @@
 		3297C5F71D68F54E009F7416 /* sky_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F11D68F54E009F7416 /* sky_left.png */; settings = {ASSET_TAGS = (); }; };
 		3297C5F81D68F54E009F7416 /* sky_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F21D68F54E009F7416 /* sky_right.png */; settings = {ASSET_TAGS = (); }; };
 		3297C5F91D68F54E009F7416 /* sky_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F31D68F54E009F7416 /* sky_top.png */; settings = {ASSET_TAGS = (); }; };
-		32A24F081D69F8B200659A3E /* OBJLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A24F071D69F8B200659A3E /* OBJLoader.m */; settings = {ASSET_TAGS = (); }; };
-		32A24F0B1D69F8EC00659A3E /* PolygonalFace.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */; settings = {ASSET_TAGS = (); }; };
 		32A5627D1D97B7470014C634 /* RenderConstantsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A5627C1D97B7470014C634 /* RenderConstantsSwift.swift */; settings = {ASSET_TAGS = (); }; };
 		32A5627F1D97C3E20014C634 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A5627E1D97C3E20014C634 /* Loader.swift */; settings = {ASSET_TAGS = (); }; };
-		32A562811D97C7C70014C634 /* OBJLoaderSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A562801D97C7C70014C634 /* OBJLoaderSwift.swift */; settings = {ASSET_TAGS = (); }; };
-		32A562831D97CA3D0014C634 /* PolygonalFaceSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A562821D97CA3D0014C634 /* PolygonalFaceSwift.swift */; settings = {ASSET_TAGS = (); }; };
 		32A562871D97F21E0014C634 /* WfObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A562861D97F21E0014C634 /* WfObject.swift */; settings = {ASSET_TAGS = (); }; };
 		32A921671D5EF5D900EF8477 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921661D5EF5D900EF8477 /* main.m */; };
 		32A9216A1D5EF5D900EF8477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A921691D5EF5D900EF8477 /* AppDelegate.m */; };
@@ -106,6 +104,8 @@
 		3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_vertex_shader.vsh; sourceTree = "<group>"; };
 		325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_fragment_shader.fsh; sourceTree = "<group>"; };
 		3265AFF21D5F62C300A0E37E /* IShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IShape.h; sourceTree = "<group>"; };
+		3275A1391D99A8B100B52467 /* OBJLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
+		3275A13B1D99A91A00B52467 /* PolygonalFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolygonalFace.swift; sourceTree = "<group>"; };
 		327862001D60B5EE00F96EF0 /* RawModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawModel.h; sourceTree = "<group>"; };
 		327862011D60B5EE00F96EF0 /* RawModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawModel.m; sourceTree = "<group>"; };
 		3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainTexture.swift; sourceTree = "<group>"; };
@@ -133,14 +133,8 @@
 		3297C5F11D68F54E009F7416 /* sky_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_left.png; path = Sky/sky_left.png; sourceTree = "<group>"; };
 		3297C5F21D68F54E009F7416 /* sky_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_right.png; path = Sky/sky_right.png; sourceTree = "<group>"; };
 		3297C5F31D68F54E009F7416 /* sky_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_top.png; path = Sky/sky_top.png; sourceTree = "<group>"; };
-		32A24F061D69F8B200659A3E /* OBJLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBJLoader.h; sourceTree = "<group>"; };
-		32A24F071D69F8B200659A3E /* OBJLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBJLoader.m; sourceTree = "<group>"; };
-		32A24F091D69F8EC00659A3E /* PolygonalFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonalFace.h; sourceTree = "<group>"; };
-		32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolygonalFace.m; sourceTree = "<group>"; };
 		32A5627C1D97B7470014C634 /* RenderConstantsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderConstantsSwift.swift; sourceTree = "<group>"; };
 		32A5627E1D97C3E20014C634 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
-		32A562801D97C7C70014C634 /* OBJLoaderSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBJLoaderSwift.swift; sourceTree = "<group>"; };
-		32A562821D97CA3D0014C634 /* PolygonalFaceSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolygonalFaceSwift.swift; sourceTree = "<group>"; };
 		32A562861D97F21E0014C634 /* WfObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WfObject.swift; sourceTree = "<group>"; };
 		32A921611D5EF5D900EF8477 /* GameEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A921651D5EF5D900EF8477 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -332,14 +326,10 @@
 		32A24F051D69F76500659A3E /* WaveFront */ = {
 			isa = PBXGroup;
 			children = (
-				32A24F061D69F8B200659A3E /* OBJLoader.h */,
-				32A24F071D69F8B200659A3E /* OBJLoader.m */,
-				32A24F091D69F8EC00659A3E /* PolygonalFace.h */,
-				32A24F0A1D69F8EC00659A3E /* PolygonalFace.m */,
-				32A562801D97C7C70014C634 /* OBJLoaderSwift.swift */,
-				32A562821D97CA3D0014C634 /* PolygonalFaceSwift.swift */,
 				32A94C471D98514100A63154 /* TComponentPosition.swift */,
 				32A94C491D98517800A63154 /* TCoordinatePosition.swift */,
+				3275A1391D99A8B100B52467 /* OBJLoader.swift */,
+				3275A13B1D99A91A00B52467 /* PolygonalFace.swift */,
 			);
 			path = WaveFront;
 			sourceTree = "<group>";
@@ -655,18 +645,16 @@
 			files = (
 				32B68FF31D63B19100CE74E4 /* SkyBoxShape.m in Sources */,
 				3248966A1D669F29001F5AB2 /* ModelTexture.m in Sources */,
-				32A24F0B1D69F8EC00659A3E /* PolygonalFace.m in Sources */,
 				32A9FB9F1D737721002DF607 /* WorldSkyBoxGenerator.m in Sources */,
-				32A562831D97CA3D0014C634 /* PolygonalFaceSwift.swift in Sources */,
 				32A989821D8ECDAD00FD815D /* GLTransformation.swift in Sources */,
 				32A9216A1D5EF5D900EF8477 /* AppDelegate.m in Sources */,
-				32A24F081D69F8B200659A3E /* OBJLoader.m in Sources */,
 				32AB94301D96B5AD0060D581 /* MasterRender.swift in Sources */,
 				32B68FEA1D63B0DA00CE74E4 /* Camera.m in Sources */,
 				3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */,
 				327862021D60B5EE00F96EF0 /* RawModel.m in Sources */,
 				32B68FFC1D63B23D00CE74E4 /* TexturedModel.m in Sources */,
 				32ED64B91D688E86007043B1 /* Light.m in Sources */,
+				3275A13A1D99A8B100B52467 /* OBJLoader.swift in Sources */,
 				32BD73931D93240E00F6DC47 /* TerrainShaderManager.swift in Sources */,
 				32A989841D8ECE1400FD815D /* ShaderManager.swift in Sources */,
 				32C2FE3C1D8F163E006A5BF4 /* TTerrainAttribute.swift in Sources */,
@@ -684,7 +672,6 @@
 				32B68FDD1D63A8EC00CE74E4 /* Vector2f.m in Sources */,
 				32A94C4A1D98517800A63154 /* TCoordinatePosition.swift in Sources */,
 				32A5627F1D97C3E20014C634 /* Loader.swift in Sources */,
-				32A562811D97C7C70014C634 /* OBJLoaderSwift.swift in Sources */,
 				32A9898A1D8ED06F00FD815D /* TSkyBoxUniform.swift in Sources */,
 				327E13561D7C377F003E3ED0 /* WorldTerrainsGenerator.m in Sources */,
 				32B68FE01D63AA9A00CE74E4 /* Vector3f.m in Sources */,
@@ -702,6 +689,7 @@
 				32AB94371D96BCA90060D581 /* GLSLUtils.swift in Sources */,
 				32A9219C1D5F10D200EF8477 /* ShaderProgram.m in Sources */,
 				32B68FE71D63AD3E00CE74E4 /* TerrainTexturesPack.m in Sources */,
+				3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */,
 				32AB943D1D96CF8E0060D581 /* LoadUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

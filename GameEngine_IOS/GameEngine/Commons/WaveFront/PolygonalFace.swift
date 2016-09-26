@@ -3,7 +3,7 @@ import Foundation
 /**
 * Points to the properties of the a face of the polygon
 */
-public class PolygonalFaceSwift : NSObject {
+public class PolygonalFace : NSObject {
     
     /**
     *

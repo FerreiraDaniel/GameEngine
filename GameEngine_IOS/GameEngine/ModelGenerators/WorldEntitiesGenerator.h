@@ -4,7 +4,6 @@
 #import "Entity.h"
 #import "Vector3f.h"
 #import "Light.h"
-#import "OBJLoader.h"
 #import "DefaultModelGenerator.h"
 #import "GameEngine-Swift.h"
 

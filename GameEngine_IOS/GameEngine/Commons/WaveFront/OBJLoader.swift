@@ -3,7 +3,7 @@ import Foundation
 /**
 * Parses files formated in wavefront format
 */
-public class OBJLoaderSwift : NSObject {
+public class OBJLoader : NSObject {
     
     /**
     * Vertices positions in the model
@@ -92,7 +92,7 @@ public class OBJLoaderSwift : NSObject {
     
     * @return The waveFront element as an IShape
     */
-    private static func createShape(vertices : Array<Vector3f>, normals : Array<Vector3f>, textures : Array<Vector2f>, faces : Array<PolygonalFaceSwift>) -> IShape! {
+    private static func createShape(vertices : Array<Vector3f>, normals : Array<Vector3f>, textures : Array<Vector2f>, faces : Array<PolygonalFace>) -> IShape! {
         
         // This are the format of data accepted by the loader
         // We setup the arrays now that we know the size of them
@@ -158,13 +158,13 @@ public class OBJLoaderSwift : NSObject {
     /**
     * Process one vertex
     */
-    private static func processVertex(vertexData : Array<String>) -> PolygonalFaceSwift {
+    private static func processVertex(vertexData : Array<String>) -> PolygonalFace {
         let vertexIndex : Int = (Int(vertexData[TComponentPosition.vertexPos.rawValue]) ?? 0) - 1;
         let textureIndex : Int = (Int(vertexData[TComponentPosition.texturPos.rawValue]) ?? 0) - 1;
         let normalIndex : Int = (Int(vertexData[TComponentPosition.normalPos.rawValue]) ?? 0) - 1;
         
         
-        return PolygonalFaceSwift(vertexIndex: vertexIndex, textureIndex: textureIndex, normalIndex: normalIndex);
+        return PolygonalFace(vertexIndex: vertexIndex, textureIndex: textureIndex, normalIndex: normalIndex);
     }
     
     /**
@@ -180,94 +180,53 @@ public class OBJLoaderSwift : NSObject {
         var vertices : Array<Vector3f> = Array<Vector3f>();
         var textures : Array<Vector2f> = Array<Vector2f>();
         var normals : Array<Vector3f> = Array<Vector3f>();
-        var faces : Array<PolygonalFaceSwift> = Array<PolygonalFaceSwift>();
+        var faces : Array<PolygonalFace> = Array<PolygonalFace>();
         
         //Open the obj file from the disk
         let objPath : String = NSBundle.mainBundle().pathForResource(objFileName, ofType: OBJ_EXTENSION)!
-        var file : UnsafeMutablePointer<FILE> = fopen(objPath, "r")
+        let file : UnsafeMutablePointer<FILE> = fopen(objPath, "r")
         
         if(file != nil) {
             
-            var buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(calloc(MAX_LINE_LENGTH, sizeof(CChar)));
+            let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(calloc(MAX_LINE_LENGTH, sizeof(CChar)));
             //Read the obj file line by line
             while(fgets(buffer, Int32(sizeof(CChar) * MAX_LINE_LENGTH), file) != nil) {
-                let line = String(UTF8String: UnsafePointer<CChar>(buffer))
+                let linen = String(UTF8String: UnsafePointer<CChar>(buffer))
+                //.stringByReplacingOccurrencesOfString(" ", withString: "+")
+                let line = linen?.stringByReplacingOccurrencesOfString("\n", withString: "");
                 let currentLine : Array<String> = line!.componentsSeparatedByString(" ");
                 let prefix : String = currentLine[0];
                 switch(prefix) {
                 case VERTEX_PREFIX:
-                    print("Vertex")
+                    // Parses the vertices
+                    let vertex : Vector3f = self.parseVector3f(currentLine[TCoordinatePosition.posX.rawValue], yStr: currentLine[TCoordinatePosition.posY.rawValue], zStr: currentLine[TCoordinatePosition.posZ.rawValue]);
+                    vertices.append(vertex);
                     break
                 case TEXTURE_PREFIX:
-                    print("texture")
+                    // Parses the texture coordinates
+                    let texture : Vector2f = self.parseVector2f(currentLine[TCoordinatePosition.posX.rawValue], yStr: currentLine[TCoordinatePosition.posY.rawValue]);
+                    textures.append(texture);
                     break
                 case NORMAL_PREFIX:
-                    print("normal")
+                    // Parses the normals
+                    let normal : Vector3f = self.parseVector3f(currentLine[TCoordinatePosition.posX.rawValue], yStr: currentLine[TCoordinatePosition.posY.rawValue], zStr: currentLine[TCoordinatePosition.posZ.rawValue]);
+                    normals.append(normal);
                     break
                 case FACE_PREFIX:
-                    print("face")
-                    break
+                    // Parses the faces
+                    for (var i : Int = 1; i < 4; i++) {
+                        let fVertexStr : Array<String> = currentLine[i].componentsSeparatedByString("/");
+                        let pFace : PolygonalFace = self.processVertex(fVertexStr);
+                        faces.append(pFace);
+                    }
                 default:
                     break
                 }
-                
             }
             
             free(buffer);
             fclose(file);
         }
-        
-        /*
-        NSString* objPath = [[NSBundle mainBundle] pathForResource:objFileName ofType: OBJ_EXTENSION];
-        FILE *file = fopen([objPath UTF8String], "r");
-        char buffer[MAX_LINE_LENGTH];
-        //Read the obj file line by line
-        while ((fgets(buffer, sizeof(char) * MAX_LINE_LENGTH, file) != NULL)){
-        NSString* line = [NSString stringWithUTF8String:buffer];
-        NSArray *currentLine = [line componentsSeparatedByString:@" "];
-        //Switch of the type element to read
-        NSString *prefix = [currentLine objectAtIndex: 0];
-        typedef void (^CaseElementTypeBlock)();
-        
-        NSDictionary *d = @{
-        VERTEX_PREFIX:
-        ^{
-        // Parses the vertices
-        Vector3f *vertex = [self parseVector3f: [currentLine objectAtIndex: posX] :
-        [currentLine objectAtIndex: posY] : [currentLine objectAtIndex: posZ]];
-        [vertices addObject: vertex];
-        },
-        TEXTURE_PREFIX:
-        ^{
-        // Parses the texture coordinates
-        Vector2f *texture = [self parseVector2f: [currentLine objectAtIndex: posX] :
-        [currentLine objectAtIndex: posY]];
-        [textures addObject: texture];
-        },
-        NORMAL_PREFIX:
-        ^{
-        // Parses the normals
-        Vector3f *normal = [self parseVector3f: [currentLine objectAtIndex: posX] :
-        [currentLine objectAtIndex: posY] : [currentLine objectAtIndex: posZ]];
-        [normals addObject: normal];
-        },
-        FACE_PREFIX:
-        ^{
-        // Parses the faces
-        for (int i = 1; i < 4; i++) {
-        NSArray *fVertexStr = [[currentLine objectAtIndex: i] componentsSeparatedByString:@"/"];
-        PolygonalFace *pFace = [self processVertex : fVertexStr];
-        
-        [facesLst addObject:pFace];
-        }
-        }
-        };
-        if([d objectForKey: prefix] == nil) {
-        //Default block
-        } else {
-        ((CaseElementTypeBlock)d[[currentLine objectAtIndex: 0]])(); // invoke the correct block of code
-        }
-        }*/
         
         return self.createShape(vertices, normals: normals, textures: textures, faces: faces);
         
