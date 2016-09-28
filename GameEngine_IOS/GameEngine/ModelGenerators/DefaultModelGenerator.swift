@@ -1,6 +1,6 @@
 import Foundation
 
-public class DefaultModelGeneratorSwift : NSObject {
+public class DefaultModelGenerator: NSObject {
     
     /**
     * The name of the .obj that represents the model

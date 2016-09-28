@@ -59,27 +59,27 @@ public class WorldEntitiesGenerator : NSObject {
     /**
     * Get the default values of the entities that are going make the world
     */
-    private static func getEntitiesMap() -> Dictionary<DefaultModelGeneratorSwift, Int> {
+    private static func getEntitiesMap() -> Dictionary<DefaultModelGenerator, Int> {
         
         /* Fern model */
-        let fernModel = DefaultModelGeneratorSwift(objectName: "fern", textureName: "fern", scale: 1.0, hasTransparency: true, normalsPointingUp: true);
+        let fernModel = DefaultModelGenerator(objectName: "fern", textureName: "fern", scale: 1.0, hasTransparency: true, normalsPointingUp: true);
         
         /* Tree model */
-        let treeModel = DefaultModelGeneratorSwift(objectName: "tree", textureName: "tree", scale: 10.0, hasTransparency: false, normalsPointingUp: false);
+        let treeModel = DefaultModelGenerator(objectName: "tree", textureName: "tree", scale: 10.0, hasTransparency: false, normalsPointingUp: false);
         
         /*Banana tree*/
-        let bananaTreeModel = DefaultModelGeneratorSwift(objectName: "banana_tree", textureName: "banana_tree", scale: 1.0, hasTransparency: true, normalsPointingUp: false);
+        let bananaTreeModel = DefaultModelGenerator(objectName: "banana_tree", textureName: "banana_tree", scale: 1.0, hasTransparency: true, normalsPointingUp: false);
         
         
         /* grass model */
-        let grassModel = DefaultModelGeneratorSwift(objectName: "grass", textureName: "grass", scale: 1.0, hasTransparency: true, normalsPointingUp: true);
+        let grassModel = DefaultModelGenerator(objectName: "grass", textureName: "grass", scale: 1.0, hasTransparency: true, normalsPointingUp: true);
         
         /* flower model */
-        let flowerModel = DefaultModelGeneratorSwift(objectName: "flower", textureName: "flower", scale: 1.0, hasTransparency: true, normalsPointingUp: true);
+        let flowerModel = DefaultModelGenerator(objectName: "flower", textureName: "flower", scale: 1.0, hasTransparency: true, normalsPointingUp: true);
         
         
         /* Entity map of all the existing entities */
-        let valReturn : Dictionary<DefaultModelGeneratorSwift, Int> = [
+        let valReturn : Dictionary<DefaultModelGenerator, Int> = [
             bananaTreeModel : WorldEntitiesGenerator.NUMBER_OF_BANANA_TREES,
             fernModel : WorldEntitiesGenerator.NUMBER_OF_FERNS,
             treeModel : WorldEntitiesGenerator.NUMBER_OF_TREES,
@@ -97,7 +97,7 @@ public class WorldEntitiesGenerator : NSObject {
     * @return The entities that will compose the 3D world
     */
     public static func getEntities(loader : Loader) -> Array<Entity> {
-        let entitiesMap : Dictionary<DefaultModelGeneratorSwift, Int> = WorldEntitiesGenerator.getEntitiesMap();
+        let entitiesMap : Dictionary<DefaultModelGenerator, Int> = WorldEntitiesGenerator.getEntitiesMap();
         
         //Alloccate the entities list
         var entities : Array<Entity> = Array<Entity>();

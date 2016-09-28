@@ -8,5 +8,6 @@
 #import "Terrain.h"
 #import "Camera.h"
 #import "IShape.h"
+#import "SkyBoxShape.h"
 
 
