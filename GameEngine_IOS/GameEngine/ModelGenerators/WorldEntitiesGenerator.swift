@@ -51,7 +51,7 @@ public class WorldEntitiesGenerator : NSObject {
     private static func getEntity(texturedEntity : TexturedModel,  position : Vector3f) -> Entity {
         let rotation : Float = 0;
         let scale : Float = 1.0;
-        let entity : Entity = Entity(texturedEntity , position , rotation , rotation , rotation , scale);
+        let entity : Entity = Entity(model: texturedEntity , position: position , rotX: rotation , rotY: rotation , rotZ: rotation , scale: scale);
         
         return entity;
     }

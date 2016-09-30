@@ -1,7 +1,5 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "ShaderProgram.h"
-#import "Entity.h"
 #import "GameEngine-Swift.h"
 
 
