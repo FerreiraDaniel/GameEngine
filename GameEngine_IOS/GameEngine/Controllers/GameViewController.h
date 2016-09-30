@@ -2,7 +2,6 @@
 #import <GLKit/GLKit.h>
 #import "ShaderProgram.h"
 #import "Entity.h"
-#import "WorldTerrainsGenerator.h"
 #import "GameEngine-Swift.h"
 
 

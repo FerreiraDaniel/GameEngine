@@ -136,15 +136,15 @@ public class TerrainRender : NSObject {
         let texturesPackage : TerrainTexturesPack = terrain.texturePack;
         
         
-        let backgroundTextureId : Int32 = texturesPackage.backgroundTextureId;
-        let mudTextureId : Int32 = texturesPackage.mudTextureId;
-        let grassTextureId : Int32 = texturesPackage.grassTextureId;
-        let pathTextureId : Int32 = texturesPackage.pathTextureId;
-        let weightMapTextureId : Int32 = texturesPackage.weightMapTextureId;
+        let backgroundTextureId : Int = texturesPackage.backgroundTextureId;
+        let mudTextureId : Int = texturesPackage.mudTextureId;
+        let grassTextureId : Int = texturesPackage.grassTextureId;
+        let pathTextureId : Int = texturesPackage.pathTextureId;
+        let weightMapTextureId : Int = texturesPackage.weightMapTextureId;
         
         
         
-        let texturesMatching : Dictionary<Int32, Int32> = [
+        let texturesMatching : Dictionary<Int32, Int> = [
             GL_TEXTURE0 : backgroundTextureId,
             GL_TEXTURE1 : mudTextureId,
             GL_TEXTURE2 : grassTextureId,
