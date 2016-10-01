@@ -120,11 +120,11 @@ public class WorldEntitiesGenerator : NSObject {
     *
     * @return A source of light to the scene
     */
-    public static func getLight() -> Light {
-        let lightPosition : Vector3f = Vector3f(10.0 , 100.0 , 10.0)
-        let lightColor : Vector3f = Vector3f(1.0 , 1.0 , 1.0)
+    public static func getLight() -> LightSwift {
+        let lightPosition : Vector3fSwift = Vector3fSwift(x: 10.0 , y: 100.0 , z: 10.0)
+        let lightColor : Vector3fSwift = Vector3fSwift(x: 1.0 , y: 1.0 , z: 1.0)
         
-        let light : Light = Light(lightPosition , lightColor);
+        let light : LightSwift = LightSwift(position: lightPosition , color: lightColor);
         return light
     }
 }

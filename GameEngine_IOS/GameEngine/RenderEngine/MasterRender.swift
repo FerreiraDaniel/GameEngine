@@ -227,10 +227,10 @@ public class MasterRender : NSObject{
     * @param sun
     *            Sun of the scene
     */
-    public func render(sun : Light) {
+    public func render(sun : LightSwift) {
         self.prepare();
         let viewMatrix : GLTransformation = self.updateCamera();
-        let skyColor : Vector3f = Vector3f(MasterRender.SKY_R, MasterRender.SKY_G, MasterRender.SKY_B);
+        let skyColor : Vector3fSwift = Vector3fSwift(x: MasterRender.SKY_R, y: MasterRender.SKY_G, z: MasterRender.SKY_B);
         entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities);
         terrainRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, terrains: self.terrains);
         skyBoxRender.render(viewMatrix, skyBox: self.skyBox);

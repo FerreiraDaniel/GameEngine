@@ -159,7 +159,7 @@ public class ShaderManager : NSObject{
     * @param location location of the shader variable in the script
     * @param vector The vector to load
     */
-    internal func  loadVector(location : Int, vector : Vector3f) {
+    internal func  loadVector(location : Int, vector : Vector3fSwift) {
         glUniform3f(GLint(location), vector.x, vector.y, vector.z);
     }
     

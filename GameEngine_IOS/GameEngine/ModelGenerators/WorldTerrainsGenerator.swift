@@ -62,7 +62,7 @@ public class WorldTerrainsGenerator : NSObject {
         let terrain1 = getTerrain(texturedTerrain, terrainModel : model, position : terrainPosition1);
 
         let terrainPosition2 : Vector3f = Vector3f(1.0, 0.0, -0.1);
-        let terrain2 = getTerrain(texturedTerrain, terrainModel : model, position : terrainPosition1);
+        let terrain2 = getTerrain(texturedTerrain, terrainModel : model, position : terrainPosition2);
         
         let terrains : Array<Terrain> = [terrain1, terrain2];
         
