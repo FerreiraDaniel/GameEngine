@@ -3,17 +3,17 @@ import Foundation
 /**
 * Represents one light source in the scene
 */
-public class LightSwift : NSObject {
+public class Light : NSObject {
     
     /**
     * Position where the light will exist
     */
-    var position : Vector3fSwift;
+    var position : Vector3f;
     
     /**
     * The intensity of the light in the different components
     */
-    var color : Vector3fSwift;
+    var color : Vector3f;
     
     /**
     * The constructor of the light entity
@@ -23,7 +23,7 @@ public class LightSwift : NSObject {
     * @param aColor
     *            The intensity of the light in the different components
     */
-    public init(position : Vector3fSwift, color : Vector3fSwift) {
+    public init(position : Vector3f, color : Vector3f) {
         self.position = position
         self.color = color
     }

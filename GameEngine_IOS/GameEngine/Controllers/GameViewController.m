@@ -8,7 +8,7 @@
 
     NSMutableArray *entities;
     NSMutableArray *terrains;
-    LightSwift *light;
+    Light *light;
     SkyBox *skyBox;
     
 }

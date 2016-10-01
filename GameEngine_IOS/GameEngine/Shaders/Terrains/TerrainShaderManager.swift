@@ -96,7 +96,7 @@ public class TerrainShaderManager : ShaderManager {
     *
     * @param light the light to load in the shader program
     */
-    public func loadLight(light : LightSwift) {
+    public func loadLight(light : Light) {
         super.loadVector(uniforms[TTerrainUniform.lightPosition.rawValue], vector: light.position);
         super.loadVector(uniforms[TTerrainUniform.lightColor.rawValue], vector: light.color);
     }
@@ -119,7 +119,7 @@ public class TerrainShaderManager : ShaderManager {
     * @param skyColor
     * 			Color of the sky
     */
-    public func  loadSkyColor(skyColor : Vector3fSwift) {
+    public func  loadSkyColor(skyColor : Vector3f) {
         super.loadVector( uniforms[TTerrainUniform.skyColor.rawValue], vector : skyColor);
     }
 }

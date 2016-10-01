@@ -78,7 +78,7 @@ public class EntityShaderManager : ShaderManager {
     *
     * @param light the light to load in the shader program
     */
-    public func loadLight(light : LightSwift) {
+    public func loadLight(light : Light) {
         super.loadVector(uniforms[TEntityUniform.lightPosition.rawValue], vector: light.position);
         super.loadVector(uniforms[TEntityUniform.lightColor.rawValue], vector: light.color);
     }
@@ -109,7 +109,7 @@ public class EntityShaderManager : ShaderManager {
     * @param skyColor
     * 			Color of the sky
     */
-    public func  loadSkyColor(skyColor : Vector3fSwift) {
+    public func  loadSkyColor(skyColor : Vector3f) {
         super.loadVector( uniforms[TEntityUniform.skyColor.rawValue], vector : skyColor);
     }
 }

@@ -58,7 +58,7 @@ public class OBJLoader : NSObject {
         let x : Float = Float(xStr) ?? 0.0
         let y : Float = Float(yStr) ?? 0.0
         
-        return Vector2f(x, y);
+        return Vector2f(x: x, y: y);
     }
     
     
@@ -79,7 +79,7 @@ public class OBJLoader : NSObject {
         let y : Float = Float(yStr) ?? 0.0
         let z : Float = Float(zStr) ?? 0.0
         
-        return Vector3f(x, y, z);
+        return Vector3f(x: x, y: y, z: z);
     }
     
     /**

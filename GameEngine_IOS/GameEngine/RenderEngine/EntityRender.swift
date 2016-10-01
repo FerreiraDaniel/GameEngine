@@ -37,7 +37,7 @@ public class EntityRender : NSObject {
     * @param entities
     *            List of entities of the scene
     */
-    public func render(skyColor : Vector3fSwift, sun : LightSwift, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>) {
+    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>) {
         // Render the object
         eShader.start();
         //Load the elements of the scene

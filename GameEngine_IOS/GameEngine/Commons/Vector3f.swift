@@ -1,6 +1,6 @@
 import Foundation
 
-public class Vector3fSwift : Vector2fSwift {
+public class Vector3f : Vector2f {
     
     var z : Float;
     

@@ -1,4 +1,5 @@
 import Foundation
+import GLKit
 
 public class TerrainRender : NSObject {
     
@@ -52,7 +53,7 @@ public class TerrainRender : NSObject {
     * @param terrains
     *            List of terrains of the scene
     */
-    public func render(skyColor : Vector3fSwift, sun : LightSwift, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
+    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
         tShader.start();
         tShader.loadSkyColor(skyColor);
         tShader.loadLight(sun);
