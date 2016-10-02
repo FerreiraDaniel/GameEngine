@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface RawModel : NSObject
+@interface RawModel1 : NSObject
 
 /**
  * Identifier of the vertex array object of the raw model

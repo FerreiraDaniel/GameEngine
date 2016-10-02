@@ -1,6 +1,5 @@
-
-#import "SkyBox.h"
-#import "TexturedModel.h"
+#import "ModelTexture.h"
+#import "RawModel.h"
 #import "IShape.h"
 #import "SkyBoxShape.h"
 #import "TerrainShape.h"

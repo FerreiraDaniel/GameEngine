@@ -32,7 +32,7 @@ public class WorldEntitiesGenerator : NSObject {
         texture.reflectivity = 1.0
         
         //TexturedModel
-        let texturedModel : TexturedModel = TexturedModel(rawModel, texture, hasTransparency, normalsPointingUp);
+        let texturedModel : TexturedModel = TexturedModel(rawModel: rawModel, texture: texture, hasTransparency: hasTransparency, normalsPointingUp: normalsPointingUp);
         
         return texturedModel;
         

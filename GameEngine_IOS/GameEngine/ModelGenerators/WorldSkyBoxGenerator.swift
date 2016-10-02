@@ -11,7 +11,7 @@ public class WorldSkyBoxGenerator : NSObject {
         
         let textureId = loader.loadTCubeMap(TEXTURE_FILES);
         
-        return SkyBox(Int32(textureId), rawModel)
+        return SkyBox(textureId: textureId, model: rawModel)
 }
 
 }
