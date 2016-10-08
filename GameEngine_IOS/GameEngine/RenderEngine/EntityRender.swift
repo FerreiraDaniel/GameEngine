@@ -110,7 +110,7 @@ public class EntityRender : NSObject {
         let rawModel : RawModel = model.rawModel;
         self.prepareInstance(entity);
         
-        glDrawElements(GLenum(GL_TRIANGLES), rawModel.indicesCount, GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData);
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(rawModel.indicesCount), GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData);
     }
     
     //----------------------------------------------------------------------------------

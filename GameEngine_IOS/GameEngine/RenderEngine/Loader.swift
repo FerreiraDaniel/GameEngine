@@ -117,7 +117,7 @@ public class Loader : NSObject {
         self.storeDataInAttributeList(TEntityAttribute.normal.rawValue, coordinateSize: RenderConstantsSwift.normal, data: normalData, dLength: Int(normalsLength))
         
         self.unbindVAO();
-        return RawModel(vaoId: Int32(vaoID) , indicesData: indicesData , indicesCount: indicesLength);
+        return RawModel(vaoId: vaoID , indicesData: indicesData , indicesCount: Int(indicesLength));
         
     }
     
@@ -139,7 +139,7 @@ public class Loader : NSObject {
         self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: GLint(dimensions), data: positions, dLength: positionsLength);
         self.unbindVAO();
         
-        return RawModel(vaoId: Int32(vaoID) , indicesData: nil , indicesCount: Int32(positionsLength/dimensions));
+        return RawModel(vaoId: vaoID , indicesData: nil , indicesCount: (positionsLength/dimensions));
         
     }
     

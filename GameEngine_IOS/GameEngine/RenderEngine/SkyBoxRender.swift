@@ -82,7 +82,7 @@ public class SkyBoxRender : NSObject {
     */
     private func render(skyBox :  SkyBox) {
         let rawModel : RawModel  = skyBox.model;
-        glDrawArrays(GLenum(GL_TRIANGLES), 0, rawModel.indicesCount);
+        glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(rawModel.indicesCount));
     }
     
     

@@ -180,7 +180,7 @@ public class TerrainRender : NSObject {
     private func render_terrain(terrain : Terrain) {
         let rawModel : RawModel = terrain.model;
         
-        glDrawElements(GLenum(GL_TRIANGLES), rawModel.indicesCount, GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData);
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(rawModel.indicesCount), GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData);
     }
     
     /**

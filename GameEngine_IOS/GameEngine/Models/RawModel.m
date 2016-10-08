@@ -3,13 +3,10 @@
 @implementation RawModel1
 
 
-
-- (id)init : (int) aVaoId : (unsigned short*) aIndicesData : (int) aIndicesCount {
+- (id)init : (unsigned short*) aIndicesData : (int) aIndicesCount {
     self = [super init];
     if (self) {
-        self -> _vaoId = aVaoId;
         self -> _indicesData = aIndicesData;
-        self -> _indicesCount = aIndicesCount;
         
         //Allocate and fill the indices memory
         if(aIndicesData != nil) {
