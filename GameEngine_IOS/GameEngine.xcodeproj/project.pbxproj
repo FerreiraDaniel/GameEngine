@@ -111,7 +111,6 @@
 		327862011D60B5EE00F96EF0 /* RawModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawModel.m; sourceTree = "<group>"; };
 		3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainTexture.swift; sourceTree = "<group>"; };
 		3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShaderManager.swift; sourceTree = "<group>"; };
-		327D5FE21D60DFD300D846C7 /* EntityShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityShaderConstants.h; sourceTree = "<group>"; };
 		3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = banana_tree.obj; sourceTree = "<group>"; };
 		3295B4531D6B8C3A0065E8E8 /* banana_tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana_tree.png; sourceTree = "<group>"; };
 		3295B4541D6B8C3A0065E8E8 /* fern.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fern.obj; sourceTree = "<group>"; };
@@ -234,7 +233,6 @@
 			children = (
 				32A9216B1D5EF5D900EF8477 /* entity_vertex_shader.vsh */,
 				32A9216D1D5EF5D900EF8477 /* entity_fragment_shader.fsh */,
-				327D5FE21D60DFD300D846C7 /* EntityShaderConstants.h */,
 				32C2FE3F1D8F16AC006A5BF4 /* TEntityAttribute.swift */,
 				32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */,
 				32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */,
