@@ -189,7 +189,7 @@ public class Loader : NSObject {
             print("Impossible to get the patch to \(fileName)");
             return -1;
         }
-        let textureData : TextureDataSwift! = LoadUtils.loadTexture(imagePath);
+        let textureData : TextureData! = LoadUtils.loadTexture(imagePath);
         
         if (textureData == nil) {
             print("Impossible to get the image \(imagePath)");

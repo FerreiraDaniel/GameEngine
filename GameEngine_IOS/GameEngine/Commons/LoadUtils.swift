@@ -28,7 +28,7 @@ public class LoadUtils : NSObject {
     * @param fileName
     *            Name of the where the texture exists
     */
-    public static func loadTexture(path : String) -> TextureDataSwift! {
+    public static func loadTexture(path : String) -> TextureData! {
         
         let spriteImage : CGImageRef! = (UIImage(named: path)?.CGImage);
         
@@ -52,7 +52,7 @@ public class LoadUtils : NSObject {
             } else {
                 CGContextDrawImage(spriteContext, CGRectMake(0, 0, CGFloat(width), CGFloat(height)), spriteImage);
             }
-            return TextureDataSwift(buffer: spriteData, width: width, height: height);
+            return TextureData(buffer: spriteData, width: width, height: height);
         }
     }
 }
