@@ -27,7 +27,7 @@ public class WorldEntitiesGenerator : NSObject {
         
         let textureId : Int = loader.loadTexture(textureName)
         
-        let texture : ModelTexture = ModelTexture(Int32(textureId));
+        let texture : ModelTexture = ModelTexture(textureId);
         texture.shineDamper = 10.0
         texture.reflectivity = 1.0
         

@@ -1,4 +1,3 @@
-#import "ModelTexture.h"
 #import "RawModel.h"
 #import "IShape.h"
 #import "SkyBoxShape.h"
