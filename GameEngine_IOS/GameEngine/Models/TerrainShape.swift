@@ -3,7 +3,7 @@ import Foundation
 /**
 * Represents one terrain in the 3D world
 */
-public class TerrainShapeSwift : NSObject, IShape {
+public class TerrainShape : NSObject, IShape {
     
     private static let SIZE : Float = 800.0
     
@@ -49,17 +49,18 @@ public class TerrainShapeSwift : NSObject, IShape {
         var indices : Array<ushort> = Array<ushort>(count: TERRAIN_INDICES_LENGTH, repeatedValue: 0);
         
         let vertext_count : Int = TERRAIN_SHAPE_VERTEX_COUNT;
+        let vertex_count : Float = Float(TERRAIN_SHAPE_VERTEX_COUNT);
         var vertexPointer : Int = 0;
-        for (var i : Int = 0; i < vertext_count; i++) {
-            for (var j : Int = 0; j < vertext_count; j++) {
-                vertices[vertexPointer * 3] = Float(j / (vertext_count - 1)) * SIZE;
+        for (var i : Float = 0; i < vertex_count; i++) {
+            for (var j : Float = 0; j < vertex_count; j++) {
+                vertices[vertexPointer * 3] = Float(j / (vertex_count - 1)) * SIZE;
                 vertices[vertexPointer * 3 + 1] = 0;
-                vertices[vertexPointer * 3 + 2] = Float(i / (vertext_count - 1)) * SIZE;
+                vertices[vertexPointer * 3 + 2] = i / (vertex_count - 1) * SIZE;
                 normals[vertexPointer * 3] = 0;
                 normals[vertexPointer * 3 + 1] = 1;
                 normals[vertexPointer * 3 + 2] = 0;
-                textureCoords[vertexPointer * 2] = Float(j / (vertext_count - 1));
-                textureCoords[vertexPointer * 2 + 1] = Float(i / (vertext_count - 1));
+                textureCoords[vertexPointer * 2] = j / (vertex_count - 1);
+                textureCoords[vertexPointer * 2 + 1] = i / (vertex_count - 1);
                 vertexPointer++;
             }
         }
@@ -87,7 +88,7 @@ public class TerrainShapeSwift : NSObject, IShape {
     * Initiator of the terrain shape
     */
     public override init() {
-        let shape = TerrainShapeSwift.generateTerrain();
+        let shape = TerrainShape.generateTerrain();
         self._vertices = shape.vertices
         self._normals = shape.normals
         self._textureCoords = shape.textureCoords
@@ -108,8 +109,7 @@ public class TerrainShapeSwift : NSObject, IShape {
     * @return number of vertices that make the shape
     */
     public func countVertices() -> Int32 {
-        
-        return Int32(TerrainShapeSwift.TERRAIN_VERTICES_LENGTH);
+        return Int32(TerrainShape.TERRAIN_VERTICES_LENGTH);
     }
     
     /**
@@ -123,7 +123,7 @@ public class TerrainShapeSwift : NSObject, IShape {
     Number of the texture coordinates
     */
     public func countTextureCoords() -> Int32 {
-        return Int32(TerrainShapeSwift.TERRAIN_TEXTURES_LENGTH);
+        return Int32(TerrainShape.TERRAIN_TEXTURES_LENGTH);
     }
     
     /**
@@ -137,14 +137,14 @@ public class TerrainShapeSwift : NSObject, IShape {
     /*
     * Number of normal that the shape has
     */
-    public func countNormals() -> Int32 {
-        return Int32(TerrainShapeSwift.TERRAIN_NORMALS_LENGTH);
+    public  func countNormals() -> Int32 {
+        return Int32(TerrainShape.TERRAIN_NORMALS_LENGTH);
     }
     
     /**
     * @return The indices of the vertices that make the shape
     */
-    public func getIndices() -> UnsafeMutablePointer<ushort> {
+    public  func getIndices() -> UnsafeMutablePointer<ushort> {
         return self._indices;
     }
     
@@ -152,7 +152,7 @@ public class TerrainShapeSwift : NSObject, IShape {
     Number of indices that the shapa has
     */
     public func countIndices() -> Int32 {
-        return Int32(TerrainShapeSwift.TERRAIN_INDICES_LENGTH);
+        return Int32(TerrainShape.TERRAIN_INDICES_LENGTH);
     }
     
 }
