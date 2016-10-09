@@ -3188,11 +3188,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldSkyBoxGenerator.swift"
-            timestampString = "496785208.856167"
+            timestampString = "497737295.081431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6"
-            endingLineNumber = "6"
+            startingLineNumber = "8"
+            endingLineNumber = "8"
             landmarkName = "getSky(_:)"
             landmarkType = "5">
          </BreakpointContent>

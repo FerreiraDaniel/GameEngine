@@ -1,3 +1,5 @@
+import Foundation
+
 /**
 * Holds the data of the pixels of a texture as well as the width and height
 */

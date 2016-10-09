@@ -70,6 +70,7 @@
 		32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */; settings = {ASSET_TAGS = (); }; };
 		32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
 		32C59BAC1DAAC79A001178C2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C59BAB1DAAC79A001178C2 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
+		32C59BAE1DAADC3B001178C2 /* IShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C59BAD1DAADC3B001178C2 /* IShape.swift */; settings = {ASSET_TAGS = (); }; };
 		32DB53781DAA7F530080DA85 /* SkyBoxShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */; settings = {ASSET_TAGS = (); }; };
 		32DB537A1DAA843A0080DA85 /* TerrainShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB53791DAA843A0080DA85 /* TerrainShape.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E21DA198F800B3AC49 /* RawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E11DA198F800B3AC49 /* RawModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -101,7 +102,6 @@
 /* Begin PBXFileReference section */
 		3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_vertex_shader.vsh; sourceTree = "<group>"; };
 		325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_fragment_shader.fsh; sourceTree = "<group>"; };
-		3265AFF21D5F62C300A0E37E /* IShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IShape.h; sourceTree = "<group>"; };
 		3269CF591D9FB3FA007574BC /* Vector2f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector2f.swift; sourceTree = "<group>"; };
 		3269CF5B1D9FB427007574BC /* Vector3f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3f.swift; sourceTree = "<group>"; };
 		3269CF5D1D9FB476007574BC /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -170,6 +170,7 @@
 		32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEntityUniform.swift; sourceTree = "<group>"; };
 		32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityShaderManager.swift; sourceTree = "<group>"; };
 		32C59BAB1DAAC79A001178C2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		32C59BAD1DAADC3B001178C2 /* IShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IShape.swift; sourceTree = "<group>"; };
 		32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShape.swift; sourceTree = "<group>"; };
 		32DB53791DAA843A0080DA85 /* TerrainShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainShape.swift; sourceTree = "<group>"; };
 		32E3E1E11DA198F800B3AC49 /* RawModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawModel.swift; sourceTree = "<group>"; };
@@ -288,8 +289,8 @@
 		32A24F041D69F6D900659A3E /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
-				3265AFF21D5F62C300A0E37E /* IShape.h */,
 				32A562861D97F21E0014C634 /* WfObject.swift */,
+				32C59BAD1DAADC3B001178C2 /* IShape.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -645,6 +646,7 @@
 				32A921671D5EF5D900EF8477 /* main.m in Sources */,
 				3279D9131D95D9BF001548F7 /* TTerrainTexture.swift in Sources */,
 				32ACE9F11D9EF4D4008896E1 /* Entity.swift in Sources */,
+				32C59BAE1DAADC3B001178C2 /* IShape.swift in Sources */,
 				32AB94371D96BCA90060D581 /* GLSLUtils.swift in Sources */,
 				3297CE781DA94A4200530595 /* ModelTexture.swift in Sources */,
 				32ACE9ED1D9EDD20008896E1 /* Terrain.swift in Sources */,
