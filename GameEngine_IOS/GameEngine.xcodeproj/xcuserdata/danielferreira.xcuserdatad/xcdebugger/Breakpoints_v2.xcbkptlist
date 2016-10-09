@@ -2900,11 +2900,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/Shapes/WfObject.swift"
-            timestampString = "496513790.954454"
+            timestampString = "497712658.583901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "countVertices()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2916,11 +2916,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/Shapes/WfObject.swift"
-            timestampString = "496513790.954454"
+            timestampString = "497712658.583901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "WfObject"
             landmarkType = "3">
          </BreakpointContent>
@@ -2932,11 +2932,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Commons/Shapes/WfObject.swift"
-            timestampString = "496513790.954454"
+            timestampString = "497712658.583901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "countTextureCoords()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3227,6 +3227,69 @@
             endingLineNumber = "44"
             landmarkName = "getTerrain(_:terrainModel:position:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/Models/SkyBoxShapeSwift.swift"
+            timestampString = "497711972.441092"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3"
+            endingLineNumber = "3"
+            landmarkName = "SkyBoxShape"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameEngine.SkyBoxShape.(_vertices in _120D3048103D47677D0FDE820B7D24DA).getter : Swift.UnsafeMutablePointer&lt;Swift.Float&gt;"
+                  moduleName = "GameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielferreira/Documents/GameEngine/GameEngine_IOS/GameEngine/Models/SkyBoxShapeSwift.swift"
+                  timestampString = "497712861.218633"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameEngine.SkyBoxShape.(_vertices in _120D3048103D47677D0FDE820B7D24DA).setter : Swift.UnsafeMutablePointer&lt;Swift.Float&gt;"
+                  moduleName = "GameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielferreira/Documents/GameEngine/GameEngine_IOS/GameEngine/Models/SkyBoxShapeSwift.swift"
+                  timestampString = "497712861.218861"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameEngine.SkyBoxShape.(_vertices in _120D3048103D47677D0FDE820B7D24DA).materializeForSet : Swift.UnsafeMutablePointer&lt;Swift.Float&gt;"
+                  moduleName = "GameEngine"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danielferreira/Documents/GameEngine/GameEngine_IOS/GameEngine/Models/SkyBoxShapeSwift.swift"
+                  timestampString = "497712861.219059"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

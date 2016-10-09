@@ -25,6 +25,7 @@ public class WfObject : NSObject, IShape {
         self._vertices = UnsafeMutablePointer<Float>(calloc(aVertices.count, sizeof(CFloat)));
         self._countVertices = aVertices.count;
         
+        //Copy vertices one by one
         for(var i = 0;i < aVertices.count;i++) {
             self._vertices[i] = aVertices[i];
         }
