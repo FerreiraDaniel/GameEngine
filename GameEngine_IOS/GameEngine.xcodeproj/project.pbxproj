@@ -14,7 +14,6 @@
 		3269CF5E1D9FB476007574BC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269CF5D1D9FB476007574BC /* Camera.swift */; settings = {ASSET_TAGS = (); }; };
 		3275A13A1D99A8B100B52467 /* OBJLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A1391D99A8B100B52467 /* OBJLoader.swift */; settings = {ASSET_TAGS = (); }; };
 		3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A13B1D99A91A00B52467 /* PolygonalFace.swift */; settings = {ASSET_TAGS = (); }; };
-		327862021D60B5EE00F96EF0 /* RawModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 327862011D60B5EE00F96EF0 /* RawModel.m */; };
 		3279D9131D95D9BF001548F7 /* TTerrainTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */; settings = {ASSET_TAGS = (); }; };
 		3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
 		3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */; settings = {ASSET_TAGS = (); }; };
@@ -71,7 +70,7 @@
 		32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE3F1D8F16AC006A5BF4 /* TEntityAttribute.swift */; settings = {ASSET_TAGS = (); }; };
 		32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */; settings = {ASSET_TAGS = (); }; };
 		32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
-		32DB53761DAA7AFB0080DA85 /* SkyBoxShapeSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB53751DAA7AFB0080DA85 /* SkyBoxShapeSwift.swift */; settings = {ASSET_TAGS = (); }; };
+		32DB53781DAA7F530080DA85 /* SkyBoxShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E21DA198F800B3AC49 /* RawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E11DA198F800B3AC49 /* RawModel.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E41DA1995F00B3AC49 /* SkyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E61DA199F500B3AC49 /* TexturedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -107,8 +106,6 @@
 		3269CF5D1D9FB476007574BC /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		3275A1391D99A8B100B52467 /* OBJLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBJLoader.swift; sourceTree = "<group>"; };
 		3275A13B1D99A91A00B52467 /* PolygonalFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolygonalFace.swift; sourceTree = "<group>"; };
-		327862001D60B5EE00F96EF0 /* RawModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawModel.h; sourceTree = "<group>"; };
-		327862011D60B5EE00F96EF0 /* RawModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawModel.m; sourceTree = "<group>"; };
 		3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainTexture.swift; sourceTree = "<group>"; };
 		3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShaderManager.swift; sourceTree = "<group>"; };
 		3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = banana_tree.obj; sourceTree = "<group>"; };
@@ -173,7 +170,7 @@
 		32C2FE3F1D8F16AC006A5BF4 /* TEntityAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEntityAttribute.swift; sourceTree = "<group>"; };
 		32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEntityUniform.swift; sourceTree = "<group>"; };
 		32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityShaderManager.swift; sourceTree = "<group>"; };
-		32DB53751DAA7AFB0080DA85 /* SkyBoxShapeSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShapeSwift.swift; sourceTree = "<group>"; };
+		32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShape.swift; sourceTree = "<group>"; };
 		32E3E1E11DA198F800B3AC49 /* RawModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawModel.swift; sourceTree = "<group>"; };
 		32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBox.swift; sourceTree = "<group>"; };
 		32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TexturedModel.swift; sourceTree = "<group>"; };
@@ -211,8 +208,6 @@
 		321430371D5F5C37005C23A1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				327862001D60B5EE00F96EF0 /* RawModel.h */,
-				327862011D60B5EE00F96EF0 /* RawModel.m */,
 				32B68FF71D63B20300CE74E4 /* TerrainShape.h */,
 				32B68FF81D63B20300CE74E4 /* TerrainShape.m */,
 				32ACE9EC1D9EDD20008896E1 /* Terrain.swift */,
@@ -221,7 +216,7 @@
 				32E3E1E11DA198F800B3AC49 /* RawModel.swift */,
 				32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */,
 				32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */,
-				32DB53751DAA7AFB0080DA85 /* SkyBoxShapeSwift.swift */,
+				32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -616,13 +611,12 @@
 				32AB94301D96B5AD0060D581 /* MasterRender.swift in Sources */,
 				32F068851D9C55C200C6C3CC /* WorldSkyBoxGenerator.swift in Sources */,
 				3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */,
-				327862021D60B5EE00F96EF0 /* RawModel.m in Sources */,
 				3275A13A1D99A8B100B52467 /* OBJLoader.swift in Sources */,
 				32BD73931D93240E00F6DC47 /* TerrainShaderManager.swift in Sources */,
 				32F068831D9C549F00C6C3CC /* DefaultModelGenerator.swift in Sources */,
 				32A989841D8ECE1400FD815D /* ShaderManager.swift in Sources */,
-				32DB53761DAA7AFB0080DA85 /* SkyBoxShapeSwift.swift in Sources */,
 				3269CF5C1D9FB427007574BC /* Vector3f.swift in Sources */,
+				32DB53781DAA7F530080DA85 /* SkyBoxShape.swift in Sources */,
 				32C2FE3C1D8F163E006A5BF4 /* TTerrainAttribute.swift in Sources */,
 				32AB942C1D96A4AD0060D581 /* SkyBoxRender.swift in Sources */,
 				32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */,

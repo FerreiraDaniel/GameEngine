@@ -1,6 +1,11 @@
 import Foundation
 
-public class RawModel : RawModel1 {
+public class RawModel : NSObject {
+    
+    /**
+    * Buffer of indices of the model
+    */
+    var indicesData : UnsafeMutablePointer<ushort>
     
     /**
     * Identifier of the vertex array object of the raw model
@@ -25,6 +30,19 @@ public class RawModel : RawModel1 {
     public init!(vaoId: Int, indicesData: UnsafeMutablePointer<UInt16>, indicesCount: Int) {
         self.vaoId = vaoId;
         self.indicesCount = indicesCount;
-        super.init(indicesData, Int32(indicesCount));
+        
+        if(indicesData == nil)
+        {
+            self.indicesData = nil;
+        } else {
+            //Allocate and fill the vertices memory
+            self.indicesData = UnsafeMutablePointer<ushort>(calloc(indicesCount, sizeof(ushort)));
+            
+            //Copy vertices one by one
+            for(var i = 0;i < indicesCount;i++) {
+                self.indicesData[i] = indicesData[i];
+            }
+        }
+        
     }
 }

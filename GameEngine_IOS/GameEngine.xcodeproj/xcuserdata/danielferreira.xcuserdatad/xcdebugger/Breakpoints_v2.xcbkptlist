@@ -3243,53 +3243,38 @@
             endingLineNumber = "3"
             landmarkName = "SkyBoxShape"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GameEngine.SkyBoxShape.(_vertices in _120D3048103D47677D0FDE820B7D24DA).getter : Swift.UnsafeMutablePointer&lt;Swift.Float&gt;"
-                  moduleName = "GameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielferreira/Documents/GameEngine/GameEngine_IOS/GameEngine/Models/SkyBoxShapeSwift.swift"
-                  timestampString = "497712861.218633"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GameEngine.SkyBoxShape.(_vertices in _120D3048103D47677D0FDE820B7D24DA).setter : Swift.UnsafeMutablePointer&lt;Swift.Float&gt;"
-                  moduleName = "GameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielferreira/Documents/GameEngine/GameEngine_IOS/GameEngine/Models/SkyBoxShapeSwift.swift"
-                  timestampString = "497712861.218861"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GameEngine.SkyBoxShape.(_vertices in _120D3048103D47677D0FDE820B7D24DA).materializeForSet : Swift.UnsafeMutablePointer&lt;Swift.Float&gt;"
-                  moduleName = "GameEngine"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielferreira/Documents/GameEngine/GameEngine_IOS/GameEngine/Models/SkyBoxShapeSwift.swift"
-                  timestampString = "497712861.219059"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/Models/RawModel.swift"
+            timestampString = "497713544.834998"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "init(vaoId:indicesData:indicesCount:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/Models/RawModel.swift"
+            timestampString = "497713912.193034"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "init(vaoId:indicesData:indicesCount:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
