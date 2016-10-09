@@ -70,7 +70,9 @@
 		32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE3F1D8F16AC006A5BF4 /* TEntityAttribute.swift */; settings = {ASSET_TAGS = (); }; };
 		32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */; settings = {ASSET_TAGS = (); }; };
 		32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
+		32C59BAC1DAAC79A001178C2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C59BAB1DAAC79A001178C2 /* Utils.swift */; settings = {ASSET_TAGS = (); }; };
 		32DB53781DAA7F530080DA85 /* SkyBoxShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */; settings = {ASSET_TAGS = (); }; };
+		32DB537A1DAA843A0080DA85 /* TerrainShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32DB53791DAA843A0080DA85 /* TerrainShape.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E21DA198F800B3AC49 /* RawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E11DA198F800B3AC49 /* RawModel.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E41DA1995F00B3AC49 /* SkyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */; settings = {ASSET_TAGS = (); }; };
 		32E3E1E61DA199F500B3AC49 /* TexturedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -170,7 +172,9 @@
 		32C2FE3F1D8F16AC006A5BF4 /* TEntityAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEntityAttribute.swift; sourceTree = "<group>"; };
 		32C2FE411D8F16D0006A5BF4 /* TEntityUniform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEntityUniform.swift; sourceTree = "<group>"; };
 		32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityShaderManager.swift; sourceTree = "<group>"; };
+		32C59BAB1DAAC79A001178C2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShape.swift; sourceTree = "<group>"; };
+		32DB53791DAA843A0080DA85 /* TerrainShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainShape.swift; sourceTree = "<group>"; };
 		32E3E1E11DA198F800B3AC49 /* RawModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawModel.swift; sourceTree = "<group>"; };
 		32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBox.swift; sourceTree = "<group>"; };
 		32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TexturedModel.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */,
 				32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */,
 				32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */,
+				32DB53791DAA843A0080DA85 /* TerrainShape.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 				32ACE9EE1D9EF436008896E1 /* ShaderProgram.swift */,
 				3269CF591D9FB3FA007574BC /* Vector2f.swift */,
 				3269CF5B1D9FB427007574BC /* Vector3f.swift */,
+				32C59BAB1DAAC79A001178C2 /* Utils.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -621,10 +627,12 @@
 				32AB942C1D96A4AD0060D581 /* SkyBoxRender.swift in Sources */,
 				32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */,
 				32ACE9E91D9ECD43008896E1 /* WorldTerrainsGenerator.swift in Sources */,
+				32DB537A1DAA843A0080DA85 /* TerrainShape.swift in Sources */,
 				32F068811D9C541200C6C3CC /* WorldEntitiesGenerator.swift in Sources */,
 				32E3E1E61DA199F500B3AC49 /* TexturedModel.swift in Sources */,
 				32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */,
 				32A94C481D98514100A63154 /* TComponentPosition.swift in Sources */,
+				32C59BAC1DAAC79A001178C2 /* Utils.swift in Sources */,
 				32FD16591D9F0AF200BFF6D2 /* LightSwift.swift in Sources */,
 				32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */,
 				32B68FF91D63B20300CE74E4 /* TerrainShape.m in Sources */,
