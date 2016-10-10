@@ -147,7 +147,6 @@
 		32A921841D5EF5D900EF8477 /* GameEngineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameEngineTests.m; sourceTree = "<group>"; };
 		32A94C471D98514100A63154 /* TComponentPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TComponentPosition.swift; sourceTree = "<group>"; };
 		32A94C491D98517800A63154 /* TCoordinatePosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCoordinatePosition.swift; sourceTree = "<group>"; };
-		32A989801D8ECDAD00FD815D /* GameEngine-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameEngine-Bridging-Header.h"; sourceTree = "<group>"; };
 		32A989811D8ECDAD00FD815D /* GLTransformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GLTransformation.swift; sourceTree = "<group>"; };
 		32A989831D8ECE1400FD815D /* ShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderManager.swift; sourceTree = "<group>"; };
 		32A989871D8ED05600FD815D /* TSkyBoxAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSkyBoxAttribute.swift; sourceTree = "<group>"; };
@@ -328,7 +327,6 @@
 		32A921631D5EF5D900EF8477 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				32A989801D8ECDAD00FD815D /* GameEngine-Bridging-Header.h */,
 				32ED64BA1D68945F007043B1 /* ModelGenerators */,
 				32B68FE11D63AC8A00CE74E4 /* Textures */,
 				321430371D5F5C37005C23A1 /* Models */,
@@ -791,7 +789,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "GameEngine/GameEngine-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -809,7 +808,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "GameEngine/GameEngine-Bridging-Header.h";
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
