@@ -119,15 +119,15 @@ public class MasterRender : NSObject{
     *   @param width Width of the view to render the 3D world
     *   @param height Height of the view to render the 3D world
     */
-    public init(aWidth : Int, aHeight : Int) {
+    public init(width : Int, height : Int) {
         
         
-        self.width = aWidth;
-        self.height = aHeight;
+        self.width = width;
+        self.height = height;
         
         
         //Initializes the projection matrix
-        let projectionMatrix : GLTransformation = MasterRender.createProjectionMatrix(aWidth, height: aHeight);
+        let projectionMatrix : GLTransformation = MasterRender.createProjectionMatrix(width, height: height);
         
         
         //Initializes the entity render
