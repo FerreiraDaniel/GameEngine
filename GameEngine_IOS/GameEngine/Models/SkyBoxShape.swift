@@ -57,8 +57,8 @@ public class SkyBoxShape : NSObject, IShape {
     /**
     * @return number of vertices that make the shape
     */
-    public func countVertices() -> Int32 {
-        return Int32(SKY_BOX_NUMBER_OF_ELEMENTS);
+    public func countVertices() -> Int {
+        return SKY_BOX_NUMBER_OF_ELEMENTS;
     }
     
     /**
@@ -71,7 +71,7 @@ public class SkyBoxShape : NSObject, IShape {
     /*
     Number of the texture coordinates
     */
-    public func countTextureCoords() -> Int32 {
+    public func countTextureCoords() -> Int {
         return 0;
     }
     
@@ -86,7 +86,7 @@ public class SkyBoxShape : NSObject, IShape {
     /*
     * Number of normal that the shape has
     */
-    public func countNormals() -> Int32 {
+    public func countNormals() -> Int {
         return 0;
     }
     
@@ -100,7 +100,7 @@ public class SkyBoxShape : NSObject, IShape {
     /*
     Number of indices that the shape has
     */
-    public func countIndices() -> Int32 {
+    public func countIndices() -> Int {
         return 0;
     }
 }

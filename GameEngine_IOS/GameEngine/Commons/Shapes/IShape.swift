@@ -13,7 +13,7 @@ import Foundation
     /**
     * @return number of vertices that make the shape
     */
-    func countVertices() -> Int32
+    func countVertices() -> Int
     
     /**
     * @return the Coordinates of the textures of the shape
@@ -23,7 +23,7 @@ import Foundation
     /*
     Number of the texture coordinates
     */
-    func countTextureCoords() -> Int32
+    func countTextureCoords() -> Int
     
     /**
     *
@@ -34,7 +34,7 @@ import Foundation
     /*
     * Number of normal that the shape has
     */
-    func countNormals() -> Int32
+    func countNormals() -> Int
     
     /**
     * @return The indices of the vertices that make the shape
@@ -44,6 +44,6 @@ import Foundation
     /*
     Number of indices that the shapa has
     */
-    func countIndices() -> Int32
+    func countIndices() -> Int
     
 }

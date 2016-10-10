@@ -74,8 +74,8 @@ public class WfObject : NSObject, IShape {
     /**
     * @return number of vertices that make the shape
     */
-    public func countVertices() -> Int32 {
-        return Int32(self._countVertices);
+    public func countVertices() -> Int {
+        return self._countVertices;
     }
     
     /**
@@ -88,8 +88,8 @@ public class WfObject : NSObject, IShape {
     /*
     Number of the texture coordinates
     */
-    public func countTextureCoords() -> Int32 {
-        return Int32(self._countTextureCoordinates);
+    public func countTextureCoords() -> Int {
+        return self._countTextureCoordinates;
     }
     
     /**
@@ -103,8 +103,8 @@ public class WfObject : NSObject, IShape {
     /*
     * Number of normal that the shape has
     */
-    public func countNormals() -> Int32 {
-        return Int32(self._countNormals);
+    public func countNormals() -> Int {
+        return self._countNormals;
     }
     
     /**
@@ -117,7 +117,7 @@ public class WfObject : NSObject, IShape {
     /*
     Number of indices that the shape has
     */
-    public func countIndices() -> Int32 {
-        return Int32(self._countIndices);
+    public func countIndices() -> Int {
+        return self._countIndices;
     }
 }

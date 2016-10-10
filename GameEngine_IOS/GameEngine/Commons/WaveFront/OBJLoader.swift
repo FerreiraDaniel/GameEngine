@@ -190,7 +190,8 @@ public class OBJLoader : NSObject {
             
             let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(calloc(MAX_LINE_LENGTH, sizeof(CChar)));
             //Read the obj file line by line
-            while(fgets(buffer, Int32(sizeof(CChar) * MAX_LINE_LENGTH), file) != nil) {
+            let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
+            while(fgets(buffer, bytesToRead, file) != nil) {
                 let linen = String(UTF8String: UnsafePointer<CChar>(buffer))
                 //.stringByReplacingOccurrencesOfString(" ", withString: "+")
                 let line = linen?.stringByReplacingOccurrencesOfString("\n", withString: "");

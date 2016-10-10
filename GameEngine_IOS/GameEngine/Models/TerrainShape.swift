@@ -108,8 +108,8 @@ public class TerrainShape : NSObject, IShape {
     /**
     * @return number of vertices that make the shape
     */
-    public func countVertices() -> Int32 {
-        return Int32(TerrainShape.TERRAIN_VERTICES_LENGTH);
+    public func countVertices() -> Int {
+        return TerrainShape.TERRAIN_VERTICES_LENGTH;
     }
     
     /**
@@ -122,8 +122,8 @@ public class TerrainShape : NSObject, IShape {
     /*
     Number of the texture coordinates
     */
-    public func countTextureCoords() -> Int32 {
-        return Int32(TerrainShape.TERRAIN_TEXTURES_LENGTH);
+    public func countTextureCoords() -> Int {
+        return TerrainShape.TERRAIN_TEXTURES_LENGTH;
     }
     
     /**
@@ -137,8 +137,8 @@ public class TerrainShape : NSObject, IShape {
     /*
     * Number of normal that the shape has
     */
-    public  func countNormals() -> Int32 {
-        return Int32(TerrainShape.TERRAIN_NORMALS_LENGTH);
+    public  func countNormals() -> Int {
+        return TerrainShape.TERRAIN_NORMALS_LENGTH;
     }
     
     /**
@@ -151,8 +151,8 @@ public class TerrainShape : NSObject, IShape {
     /*
     Number of indices that the shapa has
     */
-    public func countIndices() -> Int32 {
-        return Int32(TerrainShape.TERRAIN_INDICES_LENGTH);
+    public func countIndices() -> Int {
+        return TerrainShape.TERRAIN_INDICES_LENGTH;
     }
     
 }
