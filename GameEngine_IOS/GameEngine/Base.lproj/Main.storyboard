@@ -19,11 +19,27 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Item" id="oVL-on-2Ug"/>
-                        <barButtonItem title="Item" id="1pY-zW-6E6"/>
+                        <barButtonItem image="ic_pad_right.png" id="oVL-on-2Ug">
+                            <connections>
+                                <action selector="leftPressed:" destination="BV1-FR-VrT" id="XGN-vx-UFr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="ic_pad_left.png" id="1pY-zW-6E6">
+                            <connections>
+                                <action selector="rightPressed:" destination="BV1-FR-VrT" id="Y3i-yP-UMh"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="qhi-dZ-698"/>
-                        <barButtonItem title="Item" id="KJO-9W-TMM"/>
-                        <barButtonItem title="Item" id="HE9-Pu-3eh"/>
+                        <barButtonItem image="ic_pad_down.png" id="KJO-9W-TMM">
+                            <connections>
+                                <action selector="upPressed:" destination="BV1-FR-VrT" id="coz-nN-HnZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem image="ic_pad_up.png" id="HE9-Pu-3eh">
+                            <connections>
+                                <action selector="downPressed:" destination="BV1-FR-VrT" id="cVy-Dc-x5y"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Game Engine" id="2fT-p2-jKS"/>
                 </viewController>
@@ -54,4 +70,10 @@
             <point key="canvasLocation" x="519" y="361"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_pad_down.png" width="33" height="33"/>
+        <image name="ic_pad_left.png" width="33" height="33"/>
+        <image name="ic_pad_right.png" width="33" height="33"/>
+        <image name="ic_pad_up.png" width="33" height="33"/>
+    </resources>
 </document>

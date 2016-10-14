@@ -14,7 +14,9 @@ public class GamePad {
     * @return  Flag that indicates if the key was pressed or not
     */
     public static func isKeyDown(selectedKey : GamePadEnum) -> Bool {
-        return keysAreDown[selectedKey.rawValue];
+        let value = keysAreDown[selectedKey.rawValue];
+        GamePad.setKey(selectedKey, clicked: false);
+        return value;
     }
     
     /**
@@ -24,8 +26,8 @@ public class GamePad {
     * @param clicked       Flag that indicates if is to indicate clicked or not
     */
     public static func setKey(selectedKey : GamePadEnum, clicked : Bool) {
-        print("setKey was called selectedKey: \(selectedKey) value: \(selectedKey.rawValue) clicked: \(clicked)")
         keysAreDown[selectedKey.rawValue] = clicked;
     }
+    
     
 }

@@ -52,16 +52,17 @@ public class Camera : NSObject
         let pitchR : Float = GLKMathDegreesToRadians(self.pitch);
         let yawR : Float =  GLKMathDegreesToRadians(self.yaw);
         
-        //if(Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-        self.position.x += (-STEP * sin(yawR));
-        self.position.y += (+STEP * sin(pitchR));
-        self.position.z += (-STEP * sin(pitchR)) + (-STEP * cos(yawR));
-        //}
-        //if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-        /*_position.x += (+STEP * sin(yawR));
-        _position.y += (-STEP * sin(pitchR));
-        _position.z += (+STEP * sin(pitchR)) + (+STEP * cos(yawR));*/
-        //}
+        if(GamePad.isKeyDown(GamePadEnum.KEY_UP)) {
+            self.position.x += (-STEP * sin(yawR));
+            self.position.y += (+STEP * sin(pitchR));
+            self.position.z += (-STEP * sin(pitchR)) + (-STEP * cos(yawR));
+        }
+        
+        if(GamePad.isKeyDown(GamePadEnum.KEY_DOWN)) {
+            self.position.x += (+STEP * sin(yawR));
+            self.position.y += (-STEP * sin(pitchR));
+            self.position.z += (+STEP * sin(pitchR)) + (+STEP * cos(yawR));
+        }
     }
     
     /**
@@ -79,13 +80,14 @@ public class Camera : NSObject
         //}
         
         /*Looks left*/
-        //if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
-        //_yaw += ANGLE_OF_ROTATION;
-        //}
+        if(GamePad.isKeyDown(GamePadEnum.KEY_LEFT)) {
+            self.yaw += ANGLE_OF_ROTATION;
+        }
         
         /*Looks right*/
-        //if(Keyboard.isKeyDown(Keyboard.KEY_S)) {
-        //_yaw -= ANGLE_OF_ROTATION;
+        if(GamePad.isKeyDown(GamePadEnum.KEY_RIGHT)) {
+            self.yaw -= ANGLE_OF_ROTATION;
+        }
     }
 }
 

@@ -10,7 +10,6 @@
 		3226FAA61DAC07AC00F063C5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3226FAA51DAC07AC00F063C5 /* GameViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		324CFB1B1DAEC5650020CA56 /* GamePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1A1DAEC5650020CA56 /* GamePad.swift */; settings = {ASSET_TAGS = (); }; };
 		324CFB1D1DAEC57A0020CA56 /* GamePadEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */; settings = {ASSET_TAGS = (); }; };
-		324CFB1F1DAEC6670020CA56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1E1DAEC6670020CA56 /* ViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB211DAED0D90020CA56 /* ic_pad_down.png */; settings = {ASSET_TAGS = (); }; };
 		324CFB261DAED0DA0020CA56 /* ic_pad_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB221DAED0DA0020CA56 /* ic_pad_left.png */; settings = {ASSET_TAGS = (); }; };
 		324CFB271DAED0DA0020CA56 /* ic_pad_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB231DAED0DA0020CA56 /* ic_pad_right.png */; settings = {ASSET_TAGS = (); }; };
@@ -110,7 +109,6 @@
 		3226FAA51DAC07AC00F063C5 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		324CFB1A1DAEC5650020CA56 /* GamePad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePad.swift; sourceTree = "<group>"; };
 		324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadEnum.swift; sourceTree = "<group>"; };
-		324CFB1E1DAEC6670020CA56 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		324CFB211DAED0D90020CA56 /* ic_pad_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_down.png; sourceTree = "<group>"; };
 		324CFB221DAED0DA0020CA56 /* ic_pad_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_left.png; sourceTree = "<group>"; };
 		324CFB231DAED0DA0020CA56 /* ic_pad_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_right.png; sourceTree = "<group>"; };
@@ -422,7 +420,6 @@
 			isa = PBXGroup;
 			children = (
 				3226FAA51DAC07AC00F063C5 /* GameViewController.swift */,
-				324CFB1E1DAEC6670020CA56 /* ViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -681,7 +678,6 @@
 				32A5627F1D97C3E20014C634 /* Loader.swift in Sources */,
 				32A9898A1D8ED06F00FD815D /* TSkyBoxUniform.swift in Sources */,
 				32A5627D1D97B7470014C634 /* RenderConstantsSwift.swift in Sources */,
-				324CFB1F1DAEC6670020CA56 /* ViewController.swift in Sources */,
 				32C2FE3E1D8F1670006A5BF4 /* TTerrainUniform.swift in Sources */,
 				32AB942A1D96A4280060D581 /* EntityRender.swift in Sources */,
 				32AB942E1D96A4E60060D581 /* TerrainRender.swift in Sources */,

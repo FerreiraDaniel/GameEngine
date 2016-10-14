@@ -47,6 +47,9 @@ public class GameViewController: GLKViewController {
 
     }
     
+    
+    
+    
     public override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -89,6 +92,26 @@ public class GameViewController: GLKViewController {
         //printf("%f Frames/s\n", (1.0f / secondsBetween));*/
     }
     
+    @IBAction func leftPressed(sender: AnyObject) {
+        GamePad.setKey(GamePadEnum.KEY_LEFT, clicked: true)
+    }
+    
+    
+    @IBAction func rightPressed(sender: AnyObject) {
+        GamePad.setKey(GamePadEnum.KEY_RIGHT, clicked: true)
+    }
+    
+    @IBAction func downPressed(sender: AnyObject) {
+        GamePad.setKey(GamePadEnum.KEY_DOWN, clicked: true)
+    }
+    
+    @IBAction func upPressed(sender: AnyObject) {
+        GamePad.setKey(GamePadEnum.KEY_UP, clicked: true)
+    }
+    
     deinit {
     }
+    
+    
+
 }
