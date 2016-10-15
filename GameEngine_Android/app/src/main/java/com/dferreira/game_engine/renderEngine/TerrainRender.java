@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * Class responsible to render the terrain of the scene
  */
 @SuppressWarnings("WeakerAccess")
 public class TerrainRender {

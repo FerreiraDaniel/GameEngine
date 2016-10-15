@@ -10,7 +10,7 @@ import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
 import com.dferreira.game_engine.shaders.skyBox.TSkyBoxAttribute;
 
 /**
- * Class responsible to render the entities in the screen
+ * Class responsible to render the sky box in the screen
  */
 @SuppressWarnings("WeakerAccess")
 public class SkyBoxRender {
