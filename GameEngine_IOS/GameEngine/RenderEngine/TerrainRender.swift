@@ -110,9 +110,7 @@ public class TerrainRender : NSObject {
     /**
     * When loads one texture defines that by default should zoom in/out it
     */
-    private func defineTextureFunctionFilters() {
-        glActiveTexture(GLuint(GL_TEXTURE0));
-        
+    private func defineTextureFunctionFilters() {        
         // The texture minifying function is used whenever the pixel being
         // textured maps to an area greater than one texture element
         glTexParameteri(GLuint(GL_TEXTURE_2D), GLuint(GL_TEXTURE_MIN_FILTER), GL_LINEAR);

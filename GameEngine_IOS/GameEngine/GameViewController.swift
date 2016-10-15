@@ -44,7 +44,7 @@ public class GameViewController: GLKViewController {
         
         /* Load the sky box that is going to render*/
         self.skyBox = WorldSkyBoxGenerator.getSky(loader);
-
+        
     }
     
     
@@ -113,5 +113,5 @@ public class GameViewController: GLKViewController {
     }
     
     
-
+    
 }
