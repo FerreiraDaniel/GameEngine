@@ -1,7 +1,7 @@
 import Foundation
 
 /**
-* The model to the terrain entity
+** The model to the terrain entity
 */
 public class Terrain : NSObject {
     

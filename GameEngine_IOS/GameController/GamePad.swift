@@ -2,7 +2,7 @@ import Foundation
 
 /**
 * Used handle the entering of data from the user
-*/
+**/
 public class GamePad {
     
     private static var keysAreDown : Array<Bool> = Array<Bool>(count: GamePadEnum.NumberOfButtons.rawValue, repeatedValue: false)
