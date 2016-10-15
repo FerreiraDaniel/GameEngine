@@ -1,6 +1,9 @@
 import Foundation
 import GLKit
 
+/**
+*	Represents one shader program in that can be running in the Graphic Boards
+*/
 public class  ShaderProgram {
     
     /**

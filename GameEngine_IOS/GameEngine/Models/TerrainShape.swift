@@ -21,18 +21,18 @@ public class TerrainShape : NSObject, IShape {
     private var _indices : UnsafeMutablePointer<ushort>;
     
     
-
+    
     /**
-     * Allocate space and copy the data from swift arrays to native c arrays
-     */
+    * Allocate space and copy the data from swift arrays to native c arrays
+    */
     private static func fillPointersData(vertices  : Array<Float>, _ normals : Array<Float>, _ textureCoords : Array<Float>, _ indices : Array<ushort>)
         ->
         (vertices: UnsafeMutablePointer<Float>, normals : UnsafeMutablePointer<Float>, textureCoords : UnsafeMutablePointer<Float>, indices : UnsafeMutablePointer<ushort>)
     {
         return (Utils.arrayToPointer(vertices),
-        Utils.arrayToPointer(normals),
-        Utils.arrayToPointer(textureCoords),
-        Utils.arrayToPointer(indices))
+            Utils.arrayToPointer(normals),
+            Utils.arrayToPointer(textureCoords),
+            Utils.arrayToPointer(indices))
     }
     
     /**
@@ -94,8 +94,6 @@ public class TerrainShape : NSObject, IShape {
         self._textureCoords = shape.textureCoords
         self._indices = shape.indices
     }
-    
-    
     
     
     /**

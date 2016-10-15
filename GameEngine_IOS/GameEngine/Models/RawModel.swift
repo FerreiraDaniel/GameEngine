@@ -1,6 +1,9 @@
 import Foundation
 
-public class RawModel : NSObject {
+/**
+* Represents one raw model of one entity
+*/
+public class RawModel {
     
     /**
     * Buffer of indices of the model

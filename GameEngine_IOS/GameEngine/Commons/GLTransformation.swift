@@ -4,7 +4,7 @@ import Foundation
 * Helps to create the matrix to pass in the render as GL V1 has but
 * Adapted for GL V2
 */
-public class GLTransformation : NSObject {
+public class GLTransformation {
     
     private let GL_TRANSFORMATION_MATRIX_SIZE : Int = 16
     
@@ -14,7 +14,7 @@ public class GLTransformation : NSObject {
     /**
     * The initialize GL Transformation
     */
-    override init()
+    public init()
     {
         self.mMatrix = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0)
     }

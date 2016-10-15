@@ -3,7 +3,7 @@ import Foundation
 /**
 ** The model to the terrain entity
 */
-public class Terrain : NSObject {
+public class Terrain {
     
     private let SIZE : Float = 500
     
@@ -45,6 +45,6 @@ public class Terrain : NSObject {
         self.x = position.x * SIZE;
         self.y = position.y * SIZE;
         self.z = position.z * SIZE;
-
+        
     }
 }

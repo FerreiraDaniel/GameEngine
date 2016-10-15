@@ -7,7 +7,7 @@ import GLKit
 * Represents the the camera used by the user to see the
 * 3D World
 */
-public class Camera : NSObject
+public class Camera
 {
     private let ANGLE_OF_ROTATION : Float =   0.4;
     private let STEP : Float =  2.0;
@@ -37,7 +37,7 @@ public class Camera : NSObject
     Initiator of camera
     *
     */
-    public override init() {
+    public init() {
         self.position = Vector3f(x: 0.0, y: 1.0, z: 0.0);
         self.pitch = 0;
         self.yaw = -120;

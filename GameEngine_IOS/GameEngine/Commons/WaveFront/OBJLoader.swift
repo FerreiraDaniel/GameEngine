@@ -3,7 +3,7 @@ import Foundation
 /**
 * Parses files formated in wavefront format
 */
-public class OBJLoader : NSObject {
+public class OBJLoader {
     
     /**
     * Vertices positions in the model

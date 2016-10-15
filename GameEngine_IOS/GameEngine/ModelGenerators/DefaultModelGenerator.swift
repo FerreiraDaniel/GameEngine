@@ -1,6 +1,9 @@
 import Foundation
 
-public class DefaultModelGenerator: NSObject {
+/**
+* Define the default properties that the element should obey
+*/
+public class DefaultModelGenerator : NSObject {
     
     /**
     * The name of the .obj that represents the model

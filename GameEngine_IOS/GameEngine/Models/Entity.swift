@@ -3,7 +3,7 @@ import Foundation
 /**
 * Represents one entity in the 3D world
 */
-public class Entity : NSObject {
+public class Entity  {
     
     
     /*3D model to be render*/

@@ -1,5 +1,9 @@
 import Foundation
 
+/**
+* Represents one entity with a shape
+* defined by one waveFront file
+*/
 public class WfObject : NSObject, IShape {
     
     private var _vertices : UnsafeMutablePointer<Float> ;
@@ -56,7 +60,9 @@ public class WfObject : NSObject, IShape {
         super.init();
     }
     
-    
+    /**
+    * Dinicializes the waveFront file
+    */
     deinit {
         free(self._vertices);
         free(self._textureCoordinates);

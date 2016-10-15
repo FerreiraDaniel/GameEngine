@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+* Set of util methods to help load the application
+*/
 public class Utils : NSObject {
 
     /***

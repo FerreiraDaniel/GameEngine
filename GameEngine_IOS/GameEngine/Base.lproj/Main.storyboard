@@ -20,22 +20,26 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem image="ic_pad_right.png" id="oVL-on-2Ug">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="leftPressed:" destination="BV1-FR-VrT" id="XGN-vx-UFr"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem image="ic_pad_left.png" id="1pY-zW-6E6">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="rightPressed:" destination="BV1-FR-VrT" id="Y3i-yP-UMh"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="qhi-dZ-698"/>
                         <barButtonItem image="ic_pad_down.png" id="KJO-9W-TMM">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="upPressed:" destination="BV1-FR-VrT" id="coz-nN-HnZ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem image="ic_pad_up.png" id="HE9-Pu-3eh">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="downPressed:" destination="BV1-FR-VrT" id="cVy-Dc-x5y"/>
                             </connections>

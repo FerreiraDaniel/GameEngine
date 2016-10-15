@@ -1,7 +1,7 @@
 import Foundation
 import GLKit
 
-public class LoadUtils : NSObject {
+public class LoadUtils {
     
     /**
     * Reads a string from a certain resource

@@ -4,7 +4,7 @@ import GLKit
 /**
 * Responsible for creating the multiple entities of the 3D world
 */
-public class WorldEntitiesGenerator : NSObject {
+public class WorldEntitiesGenerator {
     
     private static let NUMBER_OF_TREES : Int = 10;
     private static let NUMBER_OF_BANANA_TREES : Int = 10;

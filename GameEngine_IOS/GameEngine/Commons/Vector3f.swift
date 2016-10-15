@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+* Represents a 3D Vector with their x,y,z coordinates
+*/
 public class Vector3f : Vector2f {
     
     var z : Float;
@@ -7,11 +10,11 @@ public class Vector3f : Vector2f {
     /**
     * The Initialize of the vector
     *
-    * @param aX
+    * @param x
     *            X-coordinate
-    * @param aY
+    * @param y
     *            Y-coordinate
-    * @param aZ
+    * @param z
     *            Z-coordinate
     */
     public init(x : Float , y : Float, z : Float) {

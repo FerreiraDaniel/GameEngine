@@ -3,7 +3,7 @@ import Foundation
 /**
 * Contains the identifiers to the several textures of a terrain
 */
-public class TerrainTexturesPack : NSObject {
+public class TerrainTexturesPack {
     
     /**
     * The identifier of the weight map texture
@@ -30,13 +30,15 @@ public class TerrainTexturesPack : NSObject {
     */
     var pathTextureId : Int;
     
-    public override init() {
+    /**
+    * Initializes the terrain texture package with all textures with identifier equals to zero
+    */
+    public init() {
         self.weightMapTextureId = 0;
         self.backgroundTextureId = 0;
         self.mudTextureId = 0;
         self.grassTextureId = 0;
         self.pathTextureId = 0;
-        super.init();
     }
     
 }

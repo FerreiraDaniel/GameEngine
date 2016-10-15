@@ -3,7 +3,7 @@ import Foundation
 /**
 * Has all the required parameters to render one textured entity
 */
-public class ModelTexture : NSObject {
+public class ModelTexture {
     
     /**
     * The identifier of the texture
@@ -22,7 +22,7 @@ public class ModelTexture : NSObject {
     
     
     /**
-    Initiator of model texture
+    *Initiator of model texture
     *
     * @param textureId Identifier of the texture
     *

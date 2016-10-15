@@ -1,6 +1,9 @@
 import Foundation
 import OpenGLES
 
+/**
+* Class responsible to render the sky box in the screen
+*/
 public class SkyBoxRender : NSObject {
     
     /**
@@ -84,9 +87,6 @@ public class SkyBoxRender : NSObject {
         let rawModel : RawModel  = skyBox.model;
         glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(rawModel.indicesCount));
     }
-    
-    
-    
     
     
     /**

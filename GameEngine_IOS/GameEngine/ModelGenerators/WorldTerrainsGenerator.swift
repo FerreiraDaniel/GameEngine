@@ -4,7 +4,7 @@ import Foundation
 * Responsible for creating the multiple terrains of the 3D world
 */
 public class WorldTerrainsGenerator : NSObject {
-
+    
     /**
     * Load the textures of the terrain
     *
@@ -46,13 +46,13 @@ public class WorldTerrainsGenerator : NSObject {
     }
     
     
-/**
-* The terrains of the 3D scene
-*
-* @param loader The loader in charge of loading the textures of the terrains
-*
-* @return list of terrains of the scene
-*/
+    /**
+    * The terrains of the 3D scene
+    *
+    * @param loader The loader in charge of loading the textures of the terrains
+    *
+    * @return list of terrains of the scene
+    */
     public static func getTerrains(loader : Loader) -> Array<Terrain> {
         let texturedTerrain : TerrainTexturesPack = getTexturedTerrain(loader);
         let terrain : IShape = TerrainShape();
@@ -60,7 +60,7 @@ public class WorldTerrainsGenerator : NSObject {
         
         let terrainPosition1 : Vector3f = Vector3f(x: 0.0, y: 0.0, z: -0.1);
         let terrain1 = getTerrain(texturedTerrain, terrainModel : model, position : terrainPosition1);
-
+        
         let terrainPosition2 : Vector3f = Vector3f(x: 1.0, y: 0.0, z: -0.1);
         let terrain2 = getTerrain(texturedTerrain, terrainModel : model, position : terrainPosition2);
         

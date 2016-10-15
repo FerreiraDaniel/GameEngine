@@ -1,7 +1,7 @@
 import Foundation
 import OpenGLES
 
-public class GLSLUtils : NSObject {
+public class GLSLUtils {
     
     /**
     * Load and compiles the shader into device memory

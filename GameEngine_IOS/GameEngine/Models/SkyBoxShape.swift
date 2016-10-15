@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+* Represents the sky box in the 3D world
+*/
 public class SkyBoxShape : NSObject, IShape {
     
     private var _vertices : UnsafeMutablePointer<Float> ;
@@ -7,6 +10,9 @@ public class SkyBoxShape : NSObject, IShape {
     private let SKY_BOX_NUMBER_OF_ELEMENTS : Int = 108;
     private static let SIZE : Float =  500.0
     
+    /**
+    * Vertices of the sky box
+    */
     private let skyBoxVertexData : Array<Float> = [
         -SIZE, SIZE, -SIZE, -SIZE, -SIZE, -SIZE, SIZE, -SIZE, -SIZE, SIZE, -SIZE,
         -SIZE, SIZE, SIZE, -SIZE, -SIZE, SIZE, -SIZE,

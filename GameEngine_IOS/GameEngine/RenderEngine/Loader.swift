@@ -3,8 +3,8 @@ import GLKit
 
 
 /*
- * Load the elements to make the scene
- */
+* Load the elements to make the scene
+*/
 public class Loader : NSObject {
     
     func BUFFER_OFFSET(i: Int) -> UnsafePointer<Void> {
@@ -82,7 +82,7 @@ public class Loader : NSObject {
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID);
         let countBytes : Int = dLength * sizeof(CFloat);
         glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, data, GLenum(GL_STATIC_DRAW));
-        glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstantsSwift.vertexNormalized, RenderConstantsSwift.STRIDE, BUFFER_OFFSET(0));
+        glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstants.vertexNormalized, RenderConstants.STRIDE, BUFFER_OFFSET(0));
         // UnBind the current VBO
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
         
@@ -112,9 +112,9 @@ public class Loader : NSObject {
         
         self.bindIndicesBuffer(indicesData, dLength: Int(indicesLength));
         
-        self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: RenderConstantsSwift.vertex, data: vertexData, dLength: Int(vertexLength))
-        self.storeDataInAttributeList(TEntityAttribute.textureCoords.rawValue, coordinateSize: RenderConstantsSwift.texture, data: textureData, dLength: Int(textureLength))
-        self.storeDataInAttributeList(TEntityAttribute.normal.rawValue, coordinateSize: RenderConstantsSwift.normal, data: normalData, dLength: Int(normalsLength))
+        self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: RenderConstants.vertex, data: vertexData, dLength: Int(vertexLength))
+        self.storeDataInAttributeList(TEntityAttribute.textureCoords.rawValue, coordinateSize: RenderConstants.texture, data: textureData, dLength: Int(textureLength))
+        self.storeDataInAttributeList(TEntityAttribute.normal.rawValue, coordinateSize: RenderConstants.normal, data: normalData, dLength: Int(normalsLength))
         
         self.unbindVAO();
         return RawModel(vaoId: vaoID , indicesData: indicesData , indicesCount: Int(indicesLength));
