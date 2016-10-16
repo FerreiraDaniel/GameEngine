@@ -1,11 +1,13 @@
 package com.dferreira.game_engine.renderEngine;
 
+import android.opengl.GLES10;
 import android.opengl.GLES20;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.TexturedModel;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
@@ -81,6 +83,24 @@ public class EntityRender {
     }
 
     /**
+     * Render the entities in the scene
+     *
+     * @param skyColor   Color of the sky
+     * @param sun        The source of light of the scene
+     * @param viewMatrix View matrix to render the scene
+     * @param player     The player of the scene
+     */
+    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Player player) {
+        eShader.start();
+        eShader.loadSkyColor(skyColor);
+        eShader.loadLight(sun);
+        eShader.loadViewMatrix(viewMatrix);
+
+        this.renderPlayer(player);
+        eShader.stop();
+    }
+
+    /**
      * Render one hashMap of entities where each key is a group of similar
      * entities to be render
      *
@@ -96,6 +116,11 @@ public class EntityRender {
                     prepareInstance(entity);
                     render(entity);
                 }
+                // Restore the state if has transparency
+                if (!model.hasTransparency()) {
+                    disableCulling();
+                }
+
                 unbindTexturedModel();
             }
         }
@@ -108,6 +133,11 @@ public class EntityRender {
      */
     private void prepareTexturedModel(TexturedModel texturedModel) {
         RawModel model = texturedModel.getRawModel();
+
+        //Enable the culling to not force the render of polygons that are not going to be visible
+        if (!texturedModel.hasTransparency()) {
+            enableCulling();
+        }
 
         //Enable the attributes to bind
         GLES20.glEnableVertexAttribArray(TEntityAttribute.position.getValue());
@@ -167,12 +197,45 @@ public class EntityRender {
     }
 
     /**
+     * Render one player of the scene
+     *
+     * @param player the player that is to render in the scene
+     */
+    private void renderPlayer(Player player) {
+        prepareTexturedModel(player.getModel());
+        prepareInstance(player);
+        render(player);
+        // Restore the state if has transparency
+        if (!player.getModel().hasTransparency()) {
+            disableCulling();
+        }
+        unbindTexturedModel();
+    }
+
+    /**
      * UnBind the previous bound elements
      */
     private void unbindTexturedModel() {
         GLES20.glDisableVertexAttribArray(TEntityAttribute.position.getValue());
         GLES20.glDisableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
         GLES20.glDisableVertexAttribArray(TEntityAttribute.normal.getValue());
+    }
+
+    /**
+     * Enable culling of faces to get better performance
+     */
+    private void enableCulling() {
+        // Enable the GL cull face feature
+        GLES10.glEnable(GLES10.GL_CULL_FACE);
+        // Avoid to render faces that are away from the camera
+        GLES10.glCullFace(GLES10.GL_BACK);
+    }
+
+    /**
+     * Disable the culling of the faces vital for transparent model
+     */
+    private void disableCulling() {
+        GLES10.glDisable(GLES10.GL_CULL_FACE);
     }
 
     /**

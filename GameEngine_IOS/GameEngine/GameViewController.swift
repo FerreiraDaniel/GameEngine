@@ -11,6 +11,7 @@ public class GameViewController: GLKViewController {
     private var terrains : Array<Terrain> = [];
     private var light : Light! = nil;
     private var skyBox : SkyBox! = nil;
+    private var player : Player! = nil;
     
     private var context:  EAGLContext! = nil;
     
@@ -44,6 +45,9 @@ public class GameViewController: GLKViewController {
         
         /* Load the sky box that is going to render*/
         self.skyBox = WorldSkyBoxGenerator.getSky(loader);
+        
+        /*Prepares the player that is going to be used in the scene*/
+        self.player = WorldEntitiesGenerator.getPlayer(loader);
         
     }
     
@@ -79,11 +83,14 @@ public class GameViewController: GLKViewController {
     public func update() {
         /*NSDate* startDate = [NSDate date];*/
         // game logic
+        renderer.startFrameRender();
         renderer.processTerrains(terrains);
         renderer.processEntities(entities);
+        renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);
         
         renderer.render(light);
+        renderer.endFrameRender();
         
         // Logs frames/s
         /*NSDate* endDate = [NSDate date];

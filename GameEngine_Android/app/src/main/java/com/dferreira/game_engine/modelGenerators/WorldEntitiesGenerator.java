@@ -7,6 +7,7 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.TexturedModel;
 import com.dferreira.game_engine.renderEngine.Loader;
@@ -162,5 +163,39 @@ public class WorldEntitiesGenerator {
         Vector3f lightColor = new Vector3f(1.0f, 1.0f, 1.0f);
 
         return new Light(lightPosition, lightColor);
+    }
+
+    /**
+     * @return The model with information to generate a player
+     */
+    private static DefaultModelGenerator getPlayerModel() {
+        /* Player model */
+        DefaultModelGenerator playerModel = new DefaultModelGenerator();
+        playerModel.setObjectReference(R.raw.player);
+        playerModel.setTextureReference(R.mipmap.player);
+        playerModel.setScale(0.5f);
+        playerModel.setHasTransparency(false);
+        playerModel.setNormalsPointingUp(false);
+
+        return playerModel;
+    }
+
+    /**
+     * @param loader loader that will load the entities of the 3D world
+     * @return The player that is going to be used in the scene
+     */
+    public static Player getPlayer(Context context, Loader loader) {
+        DefaultModelGenerator model = getPlayerModel();
+
+        TexturedModel texturedObj = getTexturedObj(context, loader, model.getObjectReference(), model.getTextureReference(),
+                model.getHasTransparency(), model.getNormalsPointingUp());
+        float xPosition = 20.0f;
+        float zPosition = 0.0f;
+        Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
+        Player player = new Player(texturedObj, playerPosition, // Position
+                0.0f, 0.0f, 0.0f, // Rotation
+                model.getScale() // Scale
+        );
+        return player;
     }
 }

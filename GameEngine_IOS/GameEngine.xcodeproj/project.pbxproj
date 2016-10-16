@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3226FAA61DAC07AC00F063C5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3226FAA51DAC07AC00F063C5 /* GameViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		323843BA1DB39DFE00E063DC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323843B91DB39DFE00E063DC /* Player.swift */; settings = {ASSET_TAGS = (); }; };
 		324CFB1B1DAEC5650020CA56 /* GamePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1A1DAEC5650020CA56 /* GamePad.swift */; settings = {ASSET_TAGS = (); }; };
 		324CFB1D1DAEC57A0020CA56 /* GamePadEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */; settings = {ASSET_TAGS = (); }; };
 		324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB211DAED0D90020CA56 /* ic_pad_down.png */; settings = {ASSET_TAGS = (); }; };
@@ -66,6 +67,8 @@
 		32ACE9ED1D9EDD20008896E1 /* Terrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACE9EC1D9EDD20008896E1 /* Terrain.swift */; settings = {ASSET_TAGS = (); }; };
 		32ACE9EF1D9EF436008896E1 /* ShaderProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACE9EE1D9EF436008896E1 /* ShaderProgram.swift */; settings = {ASSET_TAGS = (); }; };
 		32ACE9F11D9EF4D4008896E1 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32ACE9F01D9EF4D4008896E1 /* Entity.swift */; settings = {ASSET_TAGS = (); }; };
+		32B1C0B31DB3E3C9008805C1 /* player.obj in Resources */ = {isa = PBXBuildFile; fileRef = 32B1C0B21DB3E3C9008805C1 /* player.obj */; settings = {ASSET_TAGS = (); }; };
+		32B1C0B51DB3E448008805C1 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 32B1C0B41DB3E448008805C1 /* player.png */; settings = {ASSET_TAGS = (); }; };
 		32B3208F1DAC1FCD008B261C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32B3208E1DAC1FCD008B261C /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		32BD73931D93240E00F6DC47 /* TerrainShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32BD73921D93240E00F6DC47 /* TerrainShaderManager.swift */; settings = {ASSET_TAGS = (); }; };
 		32C2FE3C1D8F163E006A5BF4 /* TTerrainAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32C2FE3B1D8F163E006A5BF4 /* TTerrainAttribute.swift */; settings = {ASSET_TAGS = (); }; };
@@ -106,6 +109,7 @@
 
 /* Begin PBXFileReference section */
 		3226FAA51DAC07AC00F063C5 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		323843B91DB39DFE00E063DC /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		324CFB1A1DAEC5650020CA56 /* GamePad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePad.swift; sourceTree = "<group>"; };
 		324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadEnum.swift; sourceTree = "<group>"; };
 		324CFB211DAED0D90020CA56 /* ic_pad_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_down.png; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 		32ACE9EC1D9EDD20008896E1 /* Terrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Terrain.swift; sourceTree = "<group>"; };
 		32ACE9EE1D9EF436008896E1 /* ShaderProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShaderProgram.swift; sourceTree = "<group>"; };
 		32ACE9F01D9EF4D4008896E1 /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		32B1C0B21DB3E3C9008805C1 /* player.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = player.obj; sourceTree = "<group>"; };
+		32B1C0B41DB3E448008805C1 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		32B3208E1DAC1FCD008B261C /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32BD73921D93240E00F6DC47 /* TerrainShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerrainShaderManager.swift; sourceTree = "<group>"; };
 		32C2FE3B1D8F163E006A5BF4 /* TTerrainAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainAttribute.swift; sourceTree = "<group>"; };
@@ -225,6 +231,7 @@
 				32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */,
 				32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */,
 				32DB53791DAA843A0080DA85 /* TerrainShape.swift */,
+				323843B91DB39DFE00E063DC /* Player.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -267,6 +274,8 @@
 		3295B4511D6B8C3A0065E8E8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				32B1C0B41DB3E448008805C1 /* player.png */,
+				32B1C0B21DB3E3C9008805C1 /* player.obj */,
 				3295B4521D6B8C3A0065E8E8 /* banana_tree.obj */,
 				3295B4531D6B8C3A0065E8E8 /* banana_tree.png */,
 				3295B4541D6B8C3A0065E8E8 /* fern.obj */,
@@ -584,10 +593,12 @@
 			files = (
 				324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */,
 				324CFB271DAED0DA0020CA56 /* ic_pad_right.png in Resources */,
+				32B1C0B51DB3E448008805C1 /* player.png in Resources */,
 				3295B4631D6B8C3A0065E8E8 /* grass.png in Resources */,
 				32EF0CC91D7AF4F8006D9247 /* terrain_grass.png in Resources */,
 				3295B4641D6B8C3A0065E8E8 /* tree.obj in Resources */,
 				3297C5F81D68F54E009F7416 /* sky_right.png in Resources */,
+				32B1C0B31DB3E3C9008805C1 /* player.obj in Resources */,
 				3297C5F71D68F54E009F7416 /* sky_left.png in Resources */,
 				3295B4601D6B8C3A0065E8E8 /* flower.obj in Resources */,
 				3297C5F41D68F54E009F7416 /* sky_back.png in Resources */,
@@ -682,6 +693,7 @@
 				32ACE9ED1D9EDD20008896E1 /* Terrain.swift in Sources */,
 				3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */,
 				3269CF5E1D9FB476007574BC /* Camera.swift in Sources */,
+				323843BA1DB39DFE00E063DC /* Player.swift in Sources */,
 				32AB943D1D96CF8E0060D581 /* LoadUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

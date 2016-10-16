@@ -9,6 +9,7 @@ import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.waveFront.OBJLoader;
 
 import gameEngine.models.Entity;
+import gameEngine.models.Player;
 import gameEngine.models.RawModel;
 import gameEngine.models.TexturedModel;
 import gameEngine.renderEngine.Loader;
@@ -131,14 +132,6 @@ public class WorldEntitiesGenerator {
 		flowerModel.setHasTransparency(true);
 		flowerModel.setNormalsPointingUp(true);
 
-		/* Car model */
-		DefaultModelGenerator carModel = new DefaultModelGenerator();
-		carModel.setObjectName("ford_fiesta");
-		carModel.setTextureName("grass");
-		carModel.setScale(10.0f);
-		carModel.setHasTransparency(true);
-		carModel.setNormalsPointingUp(true);
-
 		/* Entity map of all the existing entities */
 		entitiesMap.put(bananaTreeModel, NUMBER_OF_BANANA_TREES);
 		entitiesMap.put(fernModel, NUMBER_OF_FERNS);
@@ -182,5 +175,42 @@ public class WorldEntitiesGenerator {
 			}
 		}
 		return entities;
+	}
+
+	/**
+	 * 
+	 * @return The model with information to generate a player
+	 */
+	private static DefaultModelGenerator getPlayerModel() {
+		/* Player model */
+		DefaultModelGenerator playerModel = new DefaultModelGenerator();
+		playerModel.setObjectName("player");
+		playerModel.setTextureName("player");
+		playerModel.setScale(0.5f);
+		playerModel.setHasTransparency(false);
+		playerModel.setNormalsPointingUp(false);
+
+		return playerModel;
+	}
+
+	/**
+	 * 
+	 * @param loader
+	 *            loader that will load the entities of the 3D world
+	 * 
+	 * @return The player that is going to be used in the scene
+	 */
+	public static Player getPlayer(Loader loader) {
+		DefaultModelGenerator model = getPlayerModel();
+		TexturedModel texturedObj = getTexturedObj(loader, model.getObjectName(), model.getTextureName(),
+				model.getHasTransparency(), model.getNormalsPointingUp());
+		float xPosition = 20.0f;
+		float zPosition = 0.0f;
+		Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
+		Player player = new Player(texturedObj, playerPosition, // Position
+				0.0f, 0.0f, 0.0f, // Rotation
+				model.getScale() // Scale
+		);
+		return player;
 	}
 }

@@ -46,6 +46,7 @@ public class Camera {
 	 */
 	public void move() {
 
+		/*
 		//Looks up
 		if(GamePad.isKeyDown(GamePad.KEY_UP)) {
 			pitch += ANGLE_OF_ROTATION;
@@ -55,6 +56,7 @@ public class Camera {
 		if(GamePad.isKeyDown(GamePad.KEY_DOWN)) {
 			pitch -= ANGLE_OF_ROTATION;
 		}
+		*/
 
 		//Looks left
 		if(GamePad.isKeyDown(GamePad.KEY_LEFT)) {
@@ -75,11 +77,11 @@ public class Camera {
 		double yawR = Math.toRadians(yaw);
 
 		//Accelerates
-		if(GamePad.isKeyDown(GamePad.KEY_X)) {
+		//if(GamePad.isKeyDown(GamePad.KEY_X)) {
 			position.x += (-STEP * Math.sin(yawR));
 			position.y += (+STEP * Math.sin(pitchR));
 			position.z += (-STEP * Math.sin(pitchR)) + (-STEP * Math.cos(yawR));
-		}
+		//}
 		
 		/*
 		if(GamePad.isKeyDown(GamePad.KEY_TRIANGLE)) {
@@ -89,11 +91,11 @@ public class Camera {
 		}*/
 		
 		//Go backwards
-		if(GamePad.isKeyDown(GamePad.KEY_CIRCLE)) {
+		//if(GamePad.isKeyDown(GamePad.KEY_CIRCLE)) {
 			position.x += (+STEP * Math.sin(yawR));
 			position.y += (-STEP * Math.sin(pitchR));
 			position.z += (+STEP * Math.sin(pitchR)) + (+STEP * Math.cos(yawR));
-		}
+		//}
 	}
 	
 

@@ -10,6 +10,7 @@ import com.dferreira.game_engine.modelGenerators.WorldEntitiesGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldSkyBoxGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldTerrainsGenerator;
 import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.renderEngine.Loader;
@@ -67,6 +68,11 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
      * SkyBox of the 3D world
      */
     private SkyBox skyBox;
+
+    /**
+     * The player that is going to be show in the scene
+     */
+    private Player player;
 
 
     /**
@@ -131,7 +137,15 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         Log.d(TIME_TO_RENDER_TAG, "Time initialize sky " + (skyBoxLoaded.getTime() - lightLoaded.getTime()) + " ms");
 
-        Log.d(TIME_TO_RENDER_TAG, "Total time:" + (skyBoxLoaded.getTime() - renderInitialized.getTime()));
+        /*Prepares the player that is going to be used in the scene*/
+        this.player = WorldEntitiesGenerator.getPlayer(context, loader);
+
+        Date playerLoader = new Date();
+
+        Log.d(TIME_TO_RENDER_TAG, "Time initialize player " + (playerLoader.getTime() - skyBoxLoaded.getTime()) + " ms");
+
+
+        Log.d(TIME_TO_RENDER_TAG, "Total time:" + (playerLoader.getTime() - renderInitialized.getTime()));
     }
 
     /**
@@ -144,11 +158,14 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         GLES20.glViewport(0, 0, mWidth, mHeight);
 
         //game logic
+        renderer.startFrameRender();
         renderer.processTerrains(terrains);
         renderer.processEntities(entities);
+        renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);
         renderer.render(light);
 
+        renderer.endFrameRender();
     }
 
     /**

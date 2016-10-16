@@ -40,7 +40,7 @@ public class Camera
     public init() {
         self.position = Vector3f(x: 0.0, y: 1.0, z: 0.0);
         self.pitch = 0;
-        self.yaw = -120;
+        self.yaw = -90;
         self.roll = 0
     }
     
@@ -69,15 +69,6 @@ public class Camera
     * Rotate the camera that the user sees
     */
     public func rotate() {
-        /*Looks down*/
-        //if(Keyboard.isKeyDown(Keyboard.KEY_Z)) {
-        //_pitch -= ANGLE_OF_ROTATION;
-        //}
-        
-        /*Looks up*/
-        //if(Keyboard.isKeyDown(Keyboard.KEY_W)) {
-        //_pitch += ANGLE_OF_ROTATION;
-        //}
         
         /*Looks left*/
         if(GamePad.isKeyDown(GamePadEnum.KEY_LEFT)) {

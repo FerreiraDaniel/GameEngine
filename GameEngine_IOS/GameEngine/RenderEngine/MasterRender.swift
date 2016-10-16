@@ -50,9 +50,25 @@ public class MasterRender : NSObject{
     private var terrains : Array<Terrain>!;
     
     /**
+    * The player that is going to be show in the scene
+    */
+    private var player : Player!;
+    
+    /**
     * The sky box that is going to use during the render
     */
     private var skyBox : SkyBox!;
+    
+    /**
+    * Used to track how long tacks to render a frame
+    */
+    private var startDate : NSDate!;
+    
+    /**
+    * The time to render one last frame in seconds
+    * Variable used to be frame rate independent when moves the entities around
+    */
+    private var timeToRender : Float = 0.0;
     
     /* Constants of the camera */
     private static let FOV : Float = 65.0;
@@ -112,6 +128,15 @@ public class MasterRender : NSObject{
         // Matrix update
         let viewMatrix : GLTransformation = MasterRender.createViewMatrix(camera);
         return viewMatrix;
+    }
+    
+    /**
+    * Call the method to update the player position
+    */
+    private func updatePlayer() {
+        if (self.player != nil) {
+            self.player.move(self.timeToRender);
+        }
     }
     
     /**
@@ -223,6 +248,15 @@ public class MasterRender : NSObject{
     }
     
     /**
+    * Set the player that is going to use during the render
+    *
+    * @param player The player that is going to set
+    */
+    public func processPlayer(player : Player) {
+        self.player = player;
+    }
+    
+    /**
     * Render the entire scene (Called by each frame)
     *
     * @param sun
@@ -230,11 +264,32 @@ public class MasterRender : NSObject{
     */
     public func render(sun : Light) {
         self.prepare();
+        self.updatePlayer();
         let viewMatrix : GLTransformation = self.updateCamera();
         let skyColor : Vector3f = Vector3f(x: MasterRender.SKY_R, y: MasterRender.SKY_G, z: MasterRender.SKY_B);
         entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities);
+        entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, player: player);
         terrainRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, terrains: self.terrains);
         skyBoxRender.render(viewMatrix, skyBox: self.skyBox);
+    }
+    
+    /**
+    * Indicates that is going to start the rendering of a new frame Like that
+    * the master render can compute how long tacks to render the frame
+    */
+    public func startFrameRender() {
+        self.startDate = NSDate();
+    }
+    
+    /**
+    * Indicates that is going to end the rendering of a frame Like that the
+    * master render can compute how long tacks to render the frame
+    */
+    public func endFrameRender() {
+        // Logs frames/s
+        let endDate = NSDate();
+        let interval : NSTimeInterval = endDate.timeIntervalSinceDate(self.startDate);
+        self.timeToRender = Float(interval);
     }
     
     /**
@@ -260,6 +315,7 @@ public class MasterRender : NSObject{
         self.terrainRender = nil;
         self.terrains = nil;
         self.skyBoxRender = nil;
+        self.player = nil;
         self.camera = nil;
     }
 }

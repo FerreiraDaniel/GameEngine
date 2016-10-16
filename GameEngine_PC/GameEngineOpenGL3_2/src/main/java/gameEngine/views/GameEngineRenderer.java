@@ -1,13 +1,12 @@
 package gameEngine.views;
 
-import java.util.Date;
-
 import com.dferreira.commons.models.Light;
 
 import gameEngine.modelGenerators.WorldEntitiesGenerator;
 import gameEngine.modelGenerators.WorldSkyBoxGenerator;
 import gameEngine.modelGenerators.WorldTerrainsGenerator;
 import gameEngine.models.Entity;
+import gameEngine.models.Player;
 import gameEngine.models.SkyBox;
 import gameEngine.models.Terrain;
 import gameEngine.renderEngine.DisplayManager;
@@ -46,6 +45,11 @@ public class GameEngineRenderer {
 	 * SkyBox of the 3D world
 	 */
 	private SkyBox skyBox;
+	
+	/**
+	 * The player that is going to be show in the scene
+	 */
+	private Player player;
 
 	/**
 	 * Constructor of the game engine render
@@ -75,6 +79,9 @@ public class GameEngineRenderer {
 
 		/* Load the sky box that is going to render */
 		this.skyBox = WorldSkyBoxGenerator.getSky(loader);
+		
+		/*Prepares the player that is going to be used in the scene*/
+		this.player = WorldEntitiesGenerator.getPlayer(loader);
 	}
 
 	/**
@@ -82,21 +89,18 @@ public class GameEngineRenderer {
 	 *
 	 */
 	public void onDrawFrame() {
-		Date startDate = new Date();
-
 		// game logic
+		renderer.startFrameRender();
 		renderer.processTerrains(terrains);
 		renderer.processEntities(entities);
 		renderer.processSkyBox(skyBox);
+		renderer.processPlayer(player);
 
 		renderer.render(light);
 
 		DisplayManager.updateDisplay();
 
-		// Logs frames/s
-		Date endDate = new Date();
-		long timeToRender = (endDate.getTime() - startDate.getTime());
-		System.out.println((1000.0f / timeToRender) + "Frames/s");
+		renderer.endFrameRender();
 	}
 
 	/**

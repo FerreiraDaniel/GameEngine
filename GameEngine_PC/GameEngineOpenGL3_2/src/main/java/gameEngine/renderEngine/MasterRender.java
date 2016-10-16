@@ -6,10 +6,12 @@ import gameEngine.shaders.terrains.TerrainShaderManager;
 import gameEngine.models.TexturedModel;
 import gameEngine.models.Camera;
 import gameEngine.models.Entity;
+import gameEngine.models.Player;
 import gameEngine.models.SkyBox;
 import gameEngine.models.Terrain;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,11 +67,27 @@ public class MasterRender {
 	 * List of terrains of the world that are going to be render
 	 */
 	private List<Terrain> terrains;
+	
+	/**
+	 * The player that is going to be show in the scene
+	 */
+	private Player player;
 
 	/**
 	 * The sky box that is going to use during the render
 	 */
 	private SkyBox skyBox;
+
+	/**
+	 * Used to track how long tacks to render a frame
+	 */
+	private Date startDate;
+	
+	/**
+	 * The time to render one last frame in seconds
+	 * Variable used to be frame rate independent when moves the entities around
+	 */
+	private float timeToRender;
 
 	/**
 	 * Create the projection matrix with parameters of the camera
@@ -177,9 +195,20 @@ public class MasterRender {
 
 	/**
 	 * Set the sky box the use during the render
+	 * 
+	 * @param skyBox The sky box that is going to set
 	 */
 	public void processSkyBox(SkyBox skyBox) {
 		this.skyBox = skyBox;
+	}
+	
+	/**
+	 * Set the player that is going to use during the render
+	 * 
+	 * @param player The player that is going to set
+	 */
+	public void processPlayer(Player player) {
+		this.player = player;
 	}
 
 	/**
@@ -213,13 +242,22 @@ public class MasterRender {
 	 * Calls the methods to update the camera and updates the matrix that
 	 * describe the camera in the scene
 	 */
-	public GLTransformation updateCamera() {
+	private GLTransformation updateCamera() {
 		camera.move();
 		camera.rotate();
-
+				
 		// Matrix update
 		GLTransformation viewMatrix = createViewMatrix(camera);
 		return viewMatrix;
+	}
+	
+	/**
+	 * Call the method to update the player position
+	 */
+	private void updatePlayer() {
+		if(this.player != null) {
+			this.player.move(this.timeToRender);
+		}
 	}
 
 	/**
@@ -230,13 +268,35 @@ public class MasterRender {
 	 */
 	public void render(Light sun) {
 		this.prepare();
+		this.updatePlayer();
 		GLTransformation viewMatrix = this.updateCamera();
 		Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
 		this.entityRender.render(skyColor, sun, viewMatrix, entities);
 		this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
 		this.skyBoxRender.render(viewMatrix, skyBox);
+		this.entityRender.render(skyColor, sun, viewMatrix, player);
 	}
 
+
+	/**
+	 * Indicates that is going to start the rendering of a new frame Like that
+	 * the master render can compute how long tacks to render the frame
+	 */
+	public void startFrameRender() {
+		this.startDate = new Date();
+	}
+
+	/**
+	 * Indicates that is going to end the rendering of a frame Like that the
+	 * master render can compute how long tacks to render the frame
+	 */
+	public void endFrameRender() {
+		// Logs frames/s
+		Date endDate = new Date();
+		this.timeToRender = (endDate.getTime() - startDate.getTime()) / 1000.0f;
+		//System.out.println((timeToRender) + " ms");
+	}
+	
 	/**
 	 * Clean up because we need to clean up when we finish the program
 	 */

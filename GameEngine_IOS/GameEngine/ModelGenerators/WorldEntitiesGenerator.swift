@@ -128,4 +128,32 @@ public class WorldEntitiesGenerator {
         let light : Light = Light(position: lightPosition , color: lightColor);
         return light
     }
+    
+    /**
+    * @return The model with information to generate a player
+    */
+    private static func getPlayerModel() -> DefaultModelGenerator {
+        /* Player model */
+        let playerModel = DefaultModelGenerator(objectName: "player", textureName: "player", scale: 0.5, hasTransparency: false, normalsPointingUp: false);
+        return playerModel;
+    }
+    
+    /**
+    * @param loader loader that will load the entities of the 3D world
+    * @return The player that is going to be used in the scene
+    */
+    public static func getPlayer(loader : Loader) -> Player {
+        let model : DefaultModelGenerator = getPlayerModel();
+        let texturedObj : TexturedModel = getTexturedObj(loader, objName: model.objectName, textureName: model.textureName, hasTransparency: model.hasTransparency, normalsPointingUp: model.normalsPointingUp);
+        let xPosition : Float = 20.0;
+        let zPosition : Float = 0.0;
+        let playerPosition : Vector3f = Vector3f(x: xPosition, y: -1.0, z: zPosition);
+        let player : Player = Player(model: texturedObj,
+            position: playerPosition, // Position
+            rotX: 0.0, rotY: 0.0, rotZ: 0.0, // Rotation
+            scale: model.scale // Scale
+        )
+        
+        return player;
+    }
 }

@@ -9,6 +9,7 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Camera;
 import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.TexturedModel;
@@ -17,6 +18,7 @@ import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
 import com.dferreira.game_engine.shaders.terrains.TerrainShaderManager;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +73,25 @@ public class MasterRender {
     private final List<Terrain> terrains;
 
     /**
+     * The player that is going to be show in the scene
+     */
+    private Player player;
+
+    /**
      * The sky box that is going to use during the render
      */
     private SkyBox skyBox;
+
+    /**
+     * Used to track how long tacks to render a frame
+     */
+    private Date startDate;
+
+    /**
+     * The time to render one last frame in seconds
+     * Variable used to be frame rate independent when moves the entities around
+     */
+    private float timeToRender;
 
     /**
      * Constructor of the master renderer
@@ -196,6 +214,15 @@ public class MasterRender {
     }
 
     /**
+     * Set the player that is going to use during the render
+     *
+     * @param player The player that is going to set
+     */
+    public void processPlayer(Player player) {
+        this.player = player;
+    }
+
+    /**
      * Create the view matrix from the data that has about the camera
      *
      * @param camera
@@ -226,6 +253,15 @@ public class MasterRender {
     }
 
     /**
+     * Call the method to update the player position
+     */
+    private void updatePlayer() {
+        if (this.player != null) {
+            this.player.move(this.timeToRender);
+        }
+    }
+
+    /**
      * Render the entire scene (Called by each frame)
      *
      * @param sun
@@ -233,11 +269,32 @@ public class MasterRender {
      */
     public void render(Light sun) {
         this.prepare();
+        this.updatePlayer();
         GLTransformation viewMatrix = this.updateCamera();
         Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
         this.entityRender.render(skyColor, sun, viewMatrix, entities);
+        this.entityRender.render(skyColor, sun, viewMatrix, player);
         this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
         this.skyBoxRender.render(viewMatrix, skyBox);
+    }
+
+    /**
+     * Indicates that is going to start the rendering of a new frame Like that
+     * the master render can compute how long tacks to render the frame
+     */
+    public void startFrameRender() {
+        this.startDate = new Date();
+    }
+
+    /**
+     * Indicates that is going to end the rendering of a frame Like that the
+     * master render can compute how long tacks to render the frame
+     */
+    public void endFrameRender() {
+        // Logs frames/s
+        Date endDate = new Date();
+        this.timeToRender = (endDate.getTime() - startDate.getTime()) / 1000.0f;
+        //System.out.println((timeToRender) + " ms");
     }
 
     /**

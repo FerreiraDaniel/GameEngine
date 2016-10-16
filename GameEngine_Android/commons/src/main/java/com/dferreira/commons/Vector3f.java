@@ -12,14 +12,26 @@ public class Vector3f extends Vector2f {
      * The constructor of the vector
      *
      * @param x
-     *            coordinate
+     *            x-coordinate
      * @param y
-     *            coordinate
+     *            y-coordinate
      * @param z
-     *            coordinate
+     *            z-coordinate
      */
     public Vector3f(float x, float y, float z) {
         super(x, y);
         this.z = z;
+    }
+
+    /**
+     * @return A string describing the vector3f
+     */
+    @Override
+    public String toString() {
+        return "Vector3f{" +
+                "x=" + x +
+                "y=" + y +
+                "z=" + z +
+                '}';
     }
 }

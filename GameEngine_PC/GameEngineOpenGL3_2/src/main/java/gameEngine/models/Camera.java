@@ -10,7 +10,7 @@ import com.dferreira.commons.Vector3f;
 public class Camera {
 
 	private final static float ANGLE_OF_ROTATION = 0.4f;
-	private final static float STEP = 0.2f;
+	//private final static float STEP = 0.2f;
 
 	private Vector3f position;
 
@@ -43,9 +43,10 @@ public class Camera {
 	 * the camera
 	 */
 	public void move() {
-		double pitchR = Math.toRadians(pitch);
-		double yawR = Math.toRadians(yaw);
+		//double pitchR = Math.toRadians(pitch);
+		//double yawR = Math.toRadians(yaw);
 
+		/*
 		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
 			position.x += (-STEP * Math.sin(yawR));
 			position.y += (+STEP * Math.sin(pitchR));
@@ -56,6 +57,7 @@ public class Camera {
 			position.y += (-STEP * Math.sin(pitchR));
 			position.z += (+STEP * Math.sin(pitchR)) + (+STEP * Math.cos(yawR));
 		}
+		*/
 	}
 
 	/**

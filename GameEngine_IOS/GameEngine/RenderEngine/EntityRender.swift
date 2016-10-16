@@ -52,6 +52,24 @@ public class EntityRender : NSObject {
     }
     
     /**
+    * Render the entities in the scene
+    *
+    * @param skyColor   Color of the sky
+    * @param sun        The source of light of the scene
+    * @param viewMatrix View matrix to render the scene
+    * @param player     The player of the scene
+    */
+    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation ,player : Player) {
+        eShader.start();
+        eShader.loadSkyColor(skyColor);
+        eShader.loadLight(sun);
+        eShader.loadViewMatrix(viewMatrix);
+        
+        self.renderPlayer(player);
+        eShader.stop();
+    }
+    
+    /**
     * Get the transformation matrix of one entity
     *
     * @param entity
@@ -174,6 +192,22 @@ public class EntityRender : NSObject {
     */
     private func disableCulling() {
         glDisable(GLuint(GL_CULL_FACE));
+    }
+    
+    /**
+    * Render one player of the scene
+    *
+    * @param player the player that is to render in the scene
+    */
+    private func renderPlayer(player : Player) {
+        prepareTexturedModel(player.model);
+        prepareInstance(player);
+        self.renderEntity(player);
+        // Restore the state if has transparency
+        if (!player.model.hasTransparency) {
+            disableCulling();
+        }
+        unbindTexturedModel();
     }
     
     /**

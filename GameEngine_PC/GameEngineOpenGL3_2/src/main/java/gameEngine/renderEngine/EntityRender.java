@@ -13,6 +13,7 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.models.Entity;
+import gameEngine.models.Player;
 import gameEngine.models.RawModel;
 import gameEngine.models.TexturedModel;
 import gameEngine.shaders.entities.EntityShaderManager;
@@ -66,12 +67,6 @@ public class EntityRender {
 	}
 
 	/**
-	 * Render the entire scene (Called by each frame)
-	 * 
-	 * @param sun
-	 *            Sun of the scene
-	 */
-	/**
 	 * Render the entities in the scene
 	 * 
 	 * @param skyColor
@@ -94,6 +89,30 @@ public class EntityRender {
 		this.render(entities);
 		eShader.stop();
 	}
+	
+	/**
+	 * Render the entities in the scene
+	 * 
+	 * @param skyColor
+	 *            Color of the sky
+	 * 
+	 * @param sun
+	 *            The source of light of the scene
+	 * @param viewMatrix
+	 *            View matrix to render the scene
+	 * @param player
+	 *            The player of the scene
+	 */
+	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Player player) {
+		eShader.start();
+		eShader.loadSkyColor(skyColor);
+		eShader.loadLight(sun);
+		eShader.loadViewMatrix(viewMatrix);
+
+		this.renderPlayer(player);
+		eShader.stop();
+	}
+
 
 	/**
 	 * Render one hashMap of entities where each key is a group of similar
@@ -122,6 +141,22 @@ public class EntityRender {
 			}
 		}
 	}
+	
+	/**
+	 * Render one player of the scene
+	 * 
+	 * @param player the player that is to render in the scene
+	 */
+	private void renderPlayer(Player player) {
+		prepareTexturedModel(player.getModel());
+		prepareInstance(player);
+		render(player);
+		// Restore the state if has transparency
+		if (!player.getModel().hasTransparency()) {
+			disableCulling();
+		}
+		unbindTexturedModel();
+	}
 
 	/**
 	 * Enable culling of faces to get better performance
@@ -149,6 +184,7 @@ public class EntityRender {
 	private void prepareTexturedModel(TexturedModel texturedModel) {
 		RawModel model = texturedModel.getRawModel();
 
+		//Enable the culling to not force the render of polygons that are not going to be visible
 		if (!texturedModel.hasTransparency()) {
 			enableCulling();
 		}
@@ -209,4 +245,5 @@ public class EntityRender {
 	public void cleanUp() {
 		eShader.cleanUp();
 	}
+
 }
