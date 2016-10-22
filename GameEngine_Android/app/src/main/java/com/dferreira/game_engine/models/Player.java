@@ -10,7 +10,7 @@ import com.dferreira.game_controller.GamePad;
 public class Player extends Entity {
 
     /*Distance that the user is going to run in one second*/
-    private static final float RUN_SPEED = 20.0f;
+    private static final float RUN_SPEED = 30.0f;
     /*Angle that the user will turn in one second*/
     private static final float TURN_SPEED = 160.0f;
     /*The gravity that is going to push the player back to the ground*/

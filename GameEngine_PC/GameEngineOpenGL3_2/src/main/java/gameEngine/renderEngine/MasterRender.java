@@ -4,6 +4,7 @@ import gameEngine.shaders.entities.EntityShaderManager;
 import gameEngine.shaders.skyBox.SkyBoxShaderManager;
 import gameEngine.shaders.terrains.TerrainShaderManager;
 import gameEngine.models.TexturedModel;
+import gameEngine.models.ThirdPersonCamera;
 import gameEngine.models.Camera;
 import gameEngine.models.Entity;
 import gameEngine.models.Player;
@@ -56,7 +57,7 @@ public class MasterRender {
 	/**
 	 * Reference to the camera from where the user is going to see the 3D world
 	 */
-	private Camera camera;
+	private ThirdPersonCamera camera;
 
 	/**
 	 * Entities of the world that are going to be rendered
@@ -130,7 +131,7 @@ public class MasterRender {
 		this.terrains = new ArrayList<Terrain>();
 
 		// Initializes the camera
-		this.camera = new Camera();
+		this.camera = new ThirdPersonCamera();
 
 	}
 
@@ -243,8 +244,11 @@ public class MasterRender {
 	 * describe the camera in the scene
 	 */
 	private GLTransformation updateCamera() {
-		camera.move();
-		camera.rotate();
+		
+		//Update the camera taking in account the position of the player
+		if(player != null) {
+			camera.update(player);
+		}
 				
 		// Matrix update
 		GLTransformation viewMatrix = createViewMatrix(camera);
@@ -271,10 +275,9 @@ public class MasterRender {
 		this.updatePlayer();
 		GLTransformation viewMatrix = this.updateCamera();
 		Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
-		this.entityRender.render(skyColor, sun, viewMatrix, entities);
+		this.entityRender.render(skyColor, sun, viewMatrix, entities, player);
 		this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
 		this.skyBoxRender.render(viewMatrix, skyBox);
-		this.entityRender.render(skyColor, sun, viewMatrix, player);
 	}
 
 

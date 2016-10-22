@@ -9,8 +9,7 @@ import GLKit
 */
 public class Camera
 {
-    private let ANGLE_OF_ROTATION : Float =   0.4;
-    private let STEP : Float =  2.0;
+
     
     
     /**
@@ -42,43 +41,6 @@ public class Camera
         self.pitch = 0;
         self.yaw = -90;
         self.roll = 0
-    }
-    
-    /**
-    * Read the keys pressed by the used and updates the
-    * position of the camera
-    */
-    public func move() {
-        let pitchR : Float = GLKMathDegreesToRadians(self.pitch);
-        let yawR : Float =  GLKMathDegreesToRadians(self.yaw);
-        
-        if(GamePad.isKeyDown(GamePadEnum.KEY_UP)) {
-            self.position.x += (-STEP * sin(yawR));
-            self.position.y += (+STEP * sin(pitchR));
-            self.position.z += (-STEP * sin(pitchR)) + (-STEP * cos(yawR));
-        }
-        
-        if(GamePad.isKeyDown(GamePadEnum.KEY_DOWN)) {
-            self.position.x += (+STEP * sin(yawR));
-            self.position.y += (-STEP * sin(pitchR));
-            self.position.z += (+STEP * sin(pitchR)) + (+STEP * cos(yawR));
-        }
-    }
-    
-    /**
-    * Rotate the camera that the user sees
-    */
-    public func rotate() {
-        
-        /*Looks left*/
-        if(GamePad.isKeyDown(GamePadEnum.KEY_LEFT)) {
-            self.yaw += ANGLE_OF_ROTATION;
-        }
-        
-        /*Looks right*/
-        if(GamePad.isKeyDown(GamePadEnum.KEY_RIGHT)) {
-            self.yaw -= ANGLE_OF_ROTATION;
-        }
     }
 }
 

@@ -186,7 +186,7 @@ public class WorldEntitiesGenerator {
 		DefaultModelGenerator playerModel = new DefaultModelGenerator();
 		playerModel.setObjectName("player");
 		playerModel.setTextureName("player");
-		playerModel.setScale(0.5f);
+		playerModel.setScale(1.0f);
 		playerModel.setHasTransparency(false);
 		playerModel.setNormalsPointingUp(false);
 
@@ -204,9 +204,10 @@ public class WorldEntitiesGenerator {
 		DefaultModelGenerator model = getPlayerModel();
 		TexturedModel texturedObj = getTexturedObj(loader, model.getObjectName(), model.getTextureName(),
 				model.getHasTransparency(), model.getNormalsPointingUp());
-		float xPosition = 20.0f;
+		float xPosition = 0.0f;
+		float yPosition = 2.0f;
 		float zPosition = 0.0f;
-		Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
+		Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
 		Player player = new Player(texturedObj, playerPosition, // Position
 				0.0f, 0.0f, 0.0f, // Rotation
 				model.getScale() // Scale

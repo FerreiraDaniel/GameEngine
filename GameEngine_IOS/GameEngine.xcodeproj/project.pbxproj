@@ -44,6 +44,8 @@
 		3297CE7A1DA94C5700530595 /* TextureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297CE791DA94C5700530595 /* TextureData.swift */; settings = {ASSET_TAGS = (); }; };
 		32A5627F1D97C3E20014C634 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A5627E1D97C3E20014C634 /* Loader.swift */; settings = {ASSET_TAGS = (); }; };
 		32A562871D97F21E0014C634 /* WfObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A562861D97F21E0014C634 /* WfObject.swift */; settings = {ASSET_TAGS = (); }; };
+		32A8D8491DBBB24F00BEE381 /* ThirdPersonCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8D8481DBBB24F00BEE381 /* ThirdPersonCamera.swift */; settings = {ASSET_TAGS = (); }; };
+		32A8D84B1DBBB45800BEE381 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8D84A1DBBB45800BEE381 /* Math.swift */; settings = {ASSET_TAGS = (); }; };
 		32A9216C1D5EF5D900EF8477 /* entity_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 32A9216B1D5EF5D900EF8477 /* entity_vertex_shader.vsh */; };
 		32A9216E1D5EF5D900EF8477 /* entity_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 32A9216D1D5EF5D900EF8477 /* entity_fragment_shader.fsh */; };
 		32A921741D5EF5D900EF8477 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A921721D5EF5D900EF8477 /* Main.storyboard */; };
@@ -145,6 +147,8 @@
 		3297CE791DA94C5700530595 /* TextureData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureData.swift; sourceTree = "<group>"; };
 		32A5627E1D97C3E20014C634 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		32A562861D97F21E0014C634 /* WfObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WfObject.swift; sourceTree = "<group>"; };
+		32A8D8481DBBB24F00BEE381 /* ThirdPersonCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPersonCamera.swift; sourceTree = "<group>"; };
+		32A8D84A1DBBB45800BEE381 /* Math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		32A921611D5EF5D900EF8477 /* GameEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A921651D5EF5D900EF8477 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A9216B1D5EF5D900EF8477 /* entity_vertex_shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = entity_vertex_shader.vsh; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 				32DB53771DAA7F530080DA85 /* SkyBoxShape.swift */,
 				32DB53791DAA843A0080DA85 /* TerrainShape.swift */,
 				323843B91DB39DFE00E063DC /* Player.swift */,
+				32A8D8481DBBB24F00BEE381 /* ThirdPersonCamera.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				3269CF591D9FB3FA007574BC /* Vector2f.swift */,
 				3269CF5B1D9FB427007574BC /* Vector3f.swift */,
 				32C59BAB1DAAC79A001178C2 /* Utils.swift */,
+				32A8D84A1DBBB45800BEE381 /* Math.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -560,6 +566,7 @@
 				TargetAttributes = {
 					32A921601D5EF5D900EF8477 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = F8LSF3KS7G;
 					};
 					32A9217D1D5EF5D900EF8477 = {
 						CreatedOnToolsVersion = 6.4;
@@ -673,6 +680,7 @@
 				32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */,
 				32ACE9EB1D9ECF2C008896E1 /* TerrainTexturesPack.swift in Sources */,
 				32A562871D97F21E0014C634 /* WfObject.swift in Sources */,
+				32A8D8491DBBB24F00BEE381 /* ThirdPersonCamera.swift in Sources */,
 				32A94C4A1D98517800A63154 /* TCoordinatePosition.swift in Sources */,
 				3226FAA61DAC07AC00F063C5 /* GameViewController.swift in Sources */,
 				32A5627F1D97C3E20014C634 /* Loader.swift in Sources */,
@@ -683,6 +691,7 @@
 				3297CE7A1DA94C5700530595 /* TextureData.swift in Sources */,
 				32B3208F1DAC1FCD008B261C /* AppDelegate.swift in Sources */,
 				32A989881D8ED05600FD815D /* TSkyBoxAttribute.swift in Sources */,
+				32A8D84B1DBBB45800BEE381 /* Math.swift in Sources */,
 				3279D9131D95D9BF001548F7 /* TTerrainTexture.swift in Sources */,
 				32ACE9F11D9EF4D4008896E1 /* Entity.swift in Sources */,
 				32C59BAE1DAADC3B001178C2 /* IShape.swift in Sources */,
@@ -826,9 +835,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = GameEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -836,6 +846,7 @@
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -845,15 +856,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = GameEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Dferreira.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

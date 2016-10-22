@@ -1,16 +1,11 @@
 package gameEngine.models;
 
-import org.lwjgl.input.Keyboard;
-
 import com.dferreira.commons.Vector3f;
 
 /**
  * Represents the the camera used by the user to see the 3D World
  */
 public class Camera {
-
-	private final static float ANGLE_OF_ROTATION = 0.4f;
-	//private final static float STEP = 0.2f;
 
 	private Vector3f position;
 
@@ -31,58 +26,24 @@ public class Camera {
 	 */
 	private float roll;
 
+	
 	/**
-	 * 
+	 * Initializer of the camera of the scene
 	 */
 	public Camera() {
 		this.position = new Vector3f(0, 1.0f, 0);
 	}
 
+
+
+	
 	/**
-	 * Read the keyboard keys pressed by the used and updates the position of
-	 * the camera
+	 * Uses the position of the player to update the position of the camera
+	 *
+	 * @param player Reference to that the camera is going to follow
 	 */
-	public void move() {
-		//double pitchR = Math.toRadians(pitch);
-		//double yawR = Math.toRadians(yaw);
-
-		/*
-		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-			position.x += (-STEP * Math.sin(yawR));
-			position.y += (+STEP * Math.sin(pitchR));
-			position.z += (-STEP * Math.sin(pitchR)) + (-STEP * Math.cos(yawR));
-		}
-		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-			position.x += (+STEP * Math.sin(yawR));
-			position.y += (-STEP * Math.sin(pitchR));
-			position.z += (+STEP * Math.sin(pitchR)) + (+STEP * Math.cos(yawR));
-		}
-		*/
-	}
-
-	/**
-	 * Rotate the camera that the user sees
-	 */
-	public void rotate() {
-		/* Looks down */
-		if (Keyboard.isKeyDown(Keyboard.KEY_Z)) {
-			pitch -= ANGLE_OF_ROTATION;
-		}
-
-		/* Looks up */
-		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			pitch += ANGLE_OF_ROTATION;
-		}
-
-		/* Looks left */
-		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			yaw += ANGLE_OF_ROTATION;
-		}
-
-		/* Looks right */
-		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
-			yaw -= ANGLE_OF_ROTATION;
-		}
+	public void update(Player player) {
+		
 	}
 
 	/**
@@ -98,12 +59,30 @@ public class Camera {
 	public float getPitch() {
 		return pitch;
 	}
+	
+	/**
+	 * Set the value of the pitch
+	 * 
+	 * @param pitch The rotation around X-axis
+	 */
+	protected void setPitch(float pitch) {
+		this.pitch = pitch;
+	}
 
 	/**
 	 * @return the yaw (rotation around Y-axis)
 	 */
 	public float getYaw() {
 		return yaw;
+	}
+	
+	/**
+	 * Set the yaw of the camera
+	 * 
+	 * @param yaw (rotation around Y-axis)
+	 */
+	protected void setYaw(float yaw) {
+		this.yaw = yaw;
 	}
 
 	/**

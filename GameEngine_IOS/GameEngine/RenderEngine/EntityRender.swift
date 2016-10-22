@@ -36,8 +36,9 @@ public class EntityRender : NSObject {
     *            View matrix to render the scene
     * @param entities
     *            List of entities of the scene
+    * @param player     The player of the scene
     */
-    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>) {
+    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>, player : Player) {
         // Render the object
         eShader.start();
         //Load the elements of the scene
@@ -47,27 +48,11 @@ public class EntityRender : NSObject {
         
         // Render the entities
         self.render(entities);
+        self.renderPlayer(player);
         
         eShader.stop();
     }
     
-    /**
-    * Render the entities in the scene
-    *
-    * @param skyColor   Color of the sky
-    * @param sun        The source of light of the scene
-    * @param viewMatrix View matrix to render the scene
-    * @param player     The player of the scene
-    */
-    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation ,player : Player) {
-        eShader.start();
-        eShader.loadSkyColor(skyColor);
-        eShader.loadLight(sun);
-        eShader.loadViewMatrix(viewMatrix);
-        
-        self.renderPlayer(player);
-        eShader.stop();
-    }
     
     /**
     * Get the transformation matrix of one entity

@@ -204,7 +204,7 @@ public class GLTransformation {
     */
     public func  gluPerspective(yViewAngle : Float, aspect : Float, nearZ : Float, farZ : Float){
         
-        let yAngle : Float = yViewAngle / 360.0 * Float(M_PI)
+        let yAngle : Float = Math.toRadians(yViewAngle)
         
         let frustumH : Float = tan(yAngle) * nearZ;
         let frustumW : Float = frustumH * aspect;

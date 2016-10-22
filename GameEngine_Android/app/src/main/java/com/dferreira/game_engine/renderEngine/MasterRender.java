@@ -13,6 +13,7 @@ import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.TexturedModel;
+import com.dferreira.game_engine.models.ThirdPersonCamera;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
 import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
 import com.dferreira.game_engine.shaders.terrains.TerrainShaderManager;
@@ -59,7 +60,7 @@ public class MasterRender {
     /**
      * Reference to the camera from where the user is going to see the 3D world
      */
-    private final Camera camera;
+    private final ThirdPersonCamera camera;
 
 
     /**
@@ -120,7 +121,7 @@ public class MasterRender {
         this.terrains = new ArrayList<>();
 
         // Initializes the camera
-        this.camera = new Camera(0.0f, 2.5f, 0.0f);
+        this.camera = new ThirdPersonCamera();
 
     }
 
@@ -245,8 +246,11 @@ public class MasterRender {
      * describe the camera in the scene
      */
     private GLTransformation updateCamera() {
-        camera.move();
-        camera.rotate();
+
+        //Update the camera taking in account the position of the player
+        if(player != null) {
+            camera.update(player);
+        }
 
         // Matrix update
         return createViewMatrix(camera);

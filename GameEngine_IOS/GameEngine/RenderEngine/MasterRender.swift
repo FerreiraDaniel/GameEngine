@@ -37,7 +37,7 @@ public class MasterRender : NSObject{
     /**
     * Reference to the camera from where the user is going to see the 3D world
     */
-    private var camera : Camera!;
+    private var camera : ThirdPersonCamera!;
     
     /**
     * Entities of the world that are going to be rendered
@@ -122,8 +122,11 @@ public class MasterRender : NSObject{
     * describe the camera in the scene
     */
     private func updateCamera() -> GLTransformation {
-        camera.move();
-        camera.rotate();
+        
+        //Update the camera taking in account the position of the player
+        if(player != nil) {
+            camera.update(Player: player);
+        }
         
         // Matrix update
         let viewMatrix : GLTransformation = MasterRender.createViewMatrix(camera);
@@ -175,7 +178,7 @@ public class MasterRender : NSObject{
         self.skyBoxRender = SkyBoxRender(aShader: sbManager, projectionMatrix: projectionMatrix);
         
         // Initializes the camera
-        self.camera = Camera();
+        self.camera = ThirdPersonCamera();
         
         super.init();
         
@@ -267,8 +270,7 @@ public class MasterRender : NSObject{
         self.updatePlayer();
         let viewMatrix : GLTransformation = self.updateCamera();
         let skyColor : Vector3f = Vector3f(x: MasterRender.SKY_R, y: MasterRender.SKY_G, z: MasterRender.SKY_B);
-        entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities);
-        entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, player: player);
+        entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities, player: self.player);
         terrainRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, terrains: self.terrains);
         skyBoxRender.render(viewMatrix, skyBox: self.skyBox);
     }

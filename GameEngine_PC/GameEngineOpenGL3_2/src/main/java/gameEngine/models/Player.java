@@ -105,7 +105,7 @@ public class Player extends Entity {
 			upwardsSpeed += GRAVITIY * timeToRender;
 			super.increasePosition(0.0f, upwardsSpeed, 0.0f);
 		} else {
-			super.getPosition().y = TERRAIN_HEIGHT - 1.0f;
+			super.getPosition().y = TERRAIN_HEIGHT;
 		}
 	}
 	

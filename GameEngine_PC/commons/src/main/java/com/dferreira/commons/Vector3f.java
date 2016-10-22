@@ -22,4 +22,12 @@ public class Vector3f extends Vector2f {
 		super(x, y);
 		this.z = z;
 	}
+	
+	/**
+	 * Transforms a 3F vector into a string
+	 */
+	@Override
+	public String toString() {
+		return String.format("(%f,%f,%f)", x, y, z);
+	}
 }

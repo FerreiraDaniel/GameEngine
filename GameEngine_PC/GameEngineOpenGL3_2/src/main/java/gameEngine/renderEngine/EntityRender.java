@@ -78,41 +78,21 @@ public class EntityRender {
 	 *            View matrix to render the scene
 	 * @param entities
 	 *            List of entities of the scene
+	 * @param player
+	 *            The player of the scene
 	 */
 	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix,
-			Map<TexturedModel, List<Entity>> entities) {
+			Map<TexturedModel, List<Entity>> entities, Player player) {
 		eShader.start();
 		eShader.loadSkyColor(skyColor);
 		eShader.loadLight(sun);
 		eShader.loadViewMatrix(viewMatrix);
 
 		this.render(entities);
-		eShader.stop();
-	}
-	
-	/**
-	 * Render the entities in the scene
-	 * 
-	 * @param skyColor
-	 *            Color of the sky
-	 * 
-	 * @param sun
-	 *            The source of light of the scene
-	 * @param viewMatrix
-	 *            View matrix to render the scene
-	 * @param player
-	 *            The player of the scene
-	 */
-	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Player player) {
-		eShader.start();
-		eShader.loadSkyColor(skyColor);
-		eShader.loadLight(sun);
-		eShader.loadViewMatrix(viewMatrix);
-
 		this.renderPlayer(player);
 		eShader.stop();
 	}
-
+	
 
 	/**
 	 * Render one hashMap of entities where each key is a group of similar
