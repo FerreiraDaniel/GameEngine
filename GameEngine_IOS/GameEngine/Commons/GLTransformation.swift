@@ -1,9 +1,9 @@
 import Foundation
 
 /**
-* Helps to create the matrix to pass in the render as GL V1 has but
-* Adapted for GL V2
-*/
+ * Helps to create the matrix to pass in the render as GL V1 has but
+ * Adapted for GL V2
+ */
 public class GLTransformation {
     
     private let GL_TRANSFORMATION_MATRIX_SIZE : Int = 16
@@ -12,20 +12,20 @@ public class GLTransformation {
     
     
     /**
-    * The initialize GL Transformation
-    */
+     * The initialize GL Transformation
+     */
     public init()
     {
         self.mMatrix = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0)
     }
     
     /**
-    * Multiply the current matrix by a translation matrix
-    *
-    * @param tx Specify the x coordinate of a translation vector
-    * @param ty Specify the y coordinate of a translation vector
-    * @param tz Specify the z coordinate of a translation vector
-    */
+     * Multiply the current matrix by a translation matrix
+     *
+     * @param tx Specify the x coordinate of a translation vector
+     * @param ty Specify the y coordinate of a translation vector
+     * @param tz Specify the z coordinate of a translation vector
+     */
     public func glTranslate(tx : Float, ty : Float, tz : Float) {
         //Set the last row of the transformation matrix to translate
         mMatrix[12] += (mMatrix[0] * tx + mMatrix[4]
@@ -39,25 +39,23 @@ public class GLTransformation {
     }
     
     /**
-    * Multiply two matrix
-    *
-    * @param srcA First matrix
-    * @param srcB Second matrix
-    *
-    */
+     * Multiply two matrix
+     *
+     * @param srcA First matrix
+     * @param srcB Second matrix
+     *
+     */
     private func lMultiplyMatrix( srcA : Array<Float>, srcB : Array<Float>)  {
         var tmp : [Float] = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0);
-        var i : Int = 0;
-        var j : Int = 0;
         
-        for (i  = 0; i < 4; i += 1) {
+        for i : Int  in 0 ..< 4 {
             //Entire row
             let a0 : Float = srcA[i * 4];
             let a1 : Float = srcA[i * 4 + 1];
             let a2 : Float = srcA[i * 4 + 2];
             let a3 : Float = srcA[i * 4 + 3];
             
-            for(j = 0;j < 4; j += 1) {
+            for j : Int in 0 ..< 4 {
                 //Entire column
                 let b0 : Float = srcB[0 * 4 + j]
                 let b1 : Float = srcB[1 * 4 + j]
@@ -75,7 +73,7 @@ public class GLTransformation {
         }
         
         //Copy temp to mMatrix
-        for(i = 0; i < GL_TRANSFORMATION_MATRIX_SIZE; i += 1) {
+        for i : Int in 0 ..< GL_TRANSFORMATION_MATRIX_SIZE {
             mMatrix[i] = tmp[i];
         }
     }
@@ -83,13 +81,13 @@ public class GLTransformation {
     
     
     /**
-    * Multiply the current matrix by a rotation matrix
-    *
-    * @param angle Specifies the angle of rotation, in degrees.
-    * @param x     Specify the factor in x coordinate
-    * @param y     Specify the factor in y coordinate
-    * @param z     Specify the factor in z coordinate
-    */
+     * Multiply the current matrix by a rotation matrix
+     *
+     * @param angle Specifies the angle of rotation, in degrees.
+     * @param x     Specify the factor in x coordinate
+     * @param y     Specify the factor in y coordinate
+     * @param z     Specify the factor in z coordinate
+     */
     public func glRotate(angle : Float, x : Float, y : Float, z : Float) {
         let mag : CFloat = sqrt(x * x + y * y + z * z)
         
@@ -147,15 +145,15 @@ public class GLTransformation {
     }
     
     /**
-    * Multiply the current matrix by a perspective matrix
-    *
-    * @param left   Specify the coordinate for the vertical clipping plane.
-    * @param right  Specify the coordinate for the right vertical clipping plane.
-    * @param bottom Specify the coordinate for the bottom horizontal clipping plane.
-    * @param top    Specify the coordinate for the horizontal clipping plane.
-    * @param nearZ  Specify the distance to the near clipping plane. Distances must be positive.
-    * @param farZ   Specify the distance to the far depth clipping plane. Distances must be positive.
-    */
+     * Multiply the current matrix by a perspective matrix
+     *
+     * @param left   Specify the coordinate for the vertical clipping plane.
+     * @param right  Specify the coordinate for the right vertical clipping plane.
+     * @param bottom Specify the coordinate for the bottom horizontal clipping plane.
+     * @param top    Specify the coordinate for the horizontal clipping plane.
+     * @param nearZ  Specify the distance to the near clipping plane. Distances must be positive.
+     * @param farZ   Specify the distance to the far depth clipping plane. Distances must be positive.
+     */
     private func glFrustum (left : Float, right : Float, bottom : Float, top : Float, nearZ : Float, farZ : Float) {
         let deltaX : Float = right - left;
         let deltaY : Float = top - bottom;
@@ -164,7 +162,7 @@ public class GLTransformation {
         
         if ((nearZ <= 0.0) || (farZ <= 0.0) || (deltaX <= 0.0)
             || (deltaY <= 0.0) || (deltaZ <= 0.0)) {
-                return
+            return
         }
         
         //First row
@@ -197,11 +195,11 @@ public class GLTransformation {
     
     
     /**
-    * @param yViewAngle specifies the field of view angle, in degrees, in the Y direction.
-    * @param aspect     specifies the aspect ration that determines the field of view in the x direction. The aspect ratio is the ratio of x (width) to y (height).
-    * @param nearZ      specifies the distance from the viewer to the near clipping plane (always positive).
-    * @param farZ       specifies the distance from the viewer to the far clipping plane (always positive).
-    */
+     * @param yViewAngle specifies the field of view angle, in degrees, in the Y direction.
+     * @param aspect     specifies the aspect ration that determines the field of view in the x direction. The aspect ratio is the ratio of x (width) to y (height).
+     * @param nearZ      specifies the distance from the viewer to the near clipping plane (always positive).
+     * @param farZ       specifies the distance from the viewer to the far clipping plane (always positive).
+     */
     public func  gluPerspective(yViewAngle : Float, aspect : Float, nearZ : Float, farZ : Float){
         
         let yAngle : Float = Math.toRadians(yViewAngle)
@@ -214,12 +212,10 @@ public class GLTransformation {
     
     
     /**
-    * Replace the current matrix with the identity matrix
-    */
+     * Replace the current matrix with the identity matrix
+     */
     public func  glLoadIdentity(){
-        var i : Int = 0;
-        
-        for (i = 0; i < GL_TRANSFORMATION_MATRIX_SIZE; i += 1) {
+        for i : Int  in 0 ..<  GL_TRANSFORMATION_MATRIX_SIZE {
             self.mMatrix[i] = 0.0;
         }
         
@@ -231,11 +227,11 @@ public class GLTransformation {
     }
     
     /**
-    * Multiples the matrix by on vector of scaling
-    * @param sx 	scaling vector in the x-axle
-    * @param sy	scaling vector in the y-axle
-    * @param sz 	scaling vector in the z-axle
-    */
+     * Multiples the matrix by on vector of scaling
+     * @param sx 	scaling vector in the x-axle
+     * @param sy	scaling vector in the y-axle
+     * @param sz 	scaling vector in the z-axle
+     */
     public func  glScale(sx : Float, sy : Float, sz : Float) {
         //Set the main diagonal
         mMatrix[0] = sx * mMatrix[0];
@@ -246,12 +242,12 @@ public class GLTransformation {
     
     
     /**
-    * Set the translation in the matrix
-    *
-    * @param tx 	translation vector in the x-axle
-    * @param ty	translation vector in the y-axle
-    * @param tz 	translation vector in the z-axle
-    */
+     * Set the translation in the matrix
+     *
+     * @param tx 	translation vector in the x-axle
+     * @param ty	translation vector in the y-axle
+     * @param tz 	translation vector in the z-axle
+     */
     public func setTranslation(tx : Float, ty: Float, tz : Float) {
         //The translation is the last row
         mMatrix[12] = tx;
@@ -261,8 +257,8 @@ public class GLTransformation {
     
     
     /**
-    * @return current matrix
-    */
+     * @return current matrix
+     */
     public func getMatrix() ->  Array<Float> {
         return self.mMatrix;
     }

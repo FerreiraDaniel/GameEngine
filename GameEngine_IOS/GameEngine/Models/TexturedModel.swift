@@ -43,7 +43,8 @@ public class TexturedModel : NSObject {
     * @param aNormalsPointingUp	Indicates if the normals of the model should point up
     */
     public init(rawModel : RawModel, texture : ModelTexture, hasTransparency : Bool, normalsPointingUp : Bool) {
-        self.id = TexturedModel.newId++;
+        self.id = TexturedModel.newId;
+        TexturedModel.newId += 1;
         self.rawModel = rawModel;
         self.texture = texture
         self.hasTransparency = hasTransparency
@@ -57,7 +58,8 @@ public class TexturedModel : NSObject {
     * @param aTexture	Reference to the texture of the entity
     */
     public init(rawModel : RawModel, texture : ModelTexture) {
-        self.id = TexturedModel.newId++;
+        self.id = TexturedModel.newId;
+        TexturedModel.newId += 1;
         self.rawModel = rawModel;
         self.texture = texture
         self.hasTransparency = false

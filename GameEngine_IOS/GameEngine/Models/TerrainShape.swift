@@ -1,8 +1,8 @@
 import Foundation
 
 /**
-* Represents one terrain in the 3D world
-*/
+ * Represents one terrain in the 3D world
+ */
 public class TerrainShape : NSObject, IShape {
     
     private static let SIZE : Float = 800.0
@@ -23,22 +23,22 @@ public class TerrainShape : NSObject, IShape {
     
     
     /**
-    * Allocate space and copy the data from swift arrays to native c arrays
-    */
+     * Allocate space and copy the data from swift arrays to native c arrays
+     */
     private static func fillPointersData(vertices  : Array<Float>, _ normals : Array<Float>, _ textureCoords : Array<Float>, _ indices : Array<ushort>)
         ->
         (vertices: UnsafeMutablePointer<Float>, normals : UnsafeMutablePointer<Float>, textureCoords : UnsafeMutablePointer<Float>, indices : UnsafeMutablePointer<ushort>)
     {
         return (Utils.arrayToPointer(vertices),
-            Utils.arrayToPointer(normals),
-            Utils.arrayToPointer(textureCoords),
-            Utils.arrayToPointer(indices))
+                Utils.arrayToPointer(normals),
+                Utils.arrayToPointer(textureCoords),
+                Utils.arrayToPointer(indices))
     }
     
     /**
-    * Generates a completely flat terrain
-    *
-    */
+     * Generates a completely flat terrain
+     *
+     */
     private static func generateTerrain()
         ->
         (vertices: UnsafeMutablePointer<Float>, normals : UnsafeMutablePointer<Float>, textureCoords : UnsafeMutablePointer<Float>, indices : UnsafeMutablePointer<ushort>)
@@ -73,12 +73,18 @@ public class TerrainShape : NSObject, IShape {
                 let topRight = topLeft + 1;
                 let bottomLeft = ((gz + 1) * vertext_count) + gx;
                 let bottomRight = bottomLeft + 1;
-                indices[pointer++] = ushort(topLeft);
-                indices[pointer++] = ushort(bottomLeft);
-                indices[pointer++] = ushort(topRight);
-                indices[pointer++] = ushort(topRight);
-                indices[pointer++] = ushort(bottomLeft);
-                indices[pointer++] = ushort(bottomRight);
+                indices[pointer] = ushort(topLeft);
+                pointer += 1;
+                indices[pointer] = ushort(bottomLeft);
+                pointer += 1;
+                indices[pointer] = ushort(topRight);
+                pointer += 1;
+                indices[pointer] = ushort(topRight);
+                pointer += 1;
+                indices[pointer] = ushort(bottomLeft);
+                pointer += 1;
+                indices[pointer] = ushort(bottomRight);
+                pointer += 1;
             }
         }
         return fillPointersData(vertices, normals, textureCoords , indices);
@@ -87,8 +93,8 @@ public class TerrainShape : NSObject, IShape {
     
     
     /**
-    * Initiator of the terrain shape
-    */
+     * Initiator of the terrain shape
+     */
     public override init() {
         let shape = TerrainShape.generateTerrain();
         self._vertices = shape.vertices
@@ -99,58 +105,58 @@ public class TerrainShape : NSObject, IShape {
     
     
     /**
-    * @return the vertices of the shape
-    */
+     * @return the vertices of the shape
+     */
     public func getVertices() -> UnsafeMutablePointer<Float> {
         return self._vertices;
     }
     
     /**
-    * @return number of vertices that make the shape
-    */
+     * @return number of vertices that make the shape
+     */
     public func countVertices() -> Int {
         return TerrainShape.TERRAIN_VERTICES_LENGTH;
     }
     
     /**
-    * @return the Coordinates of the textures of the shape
-    */
+     * @return the Coordinates of the textures of the shape
+     */
     public func getTextureCoords()  -> UnsafeMutablePointer<Float> {
         return self._textureCoords;
     }
     
     /*
-    Number of the texture coordinates
-    */
+     Number of the texture coordinates
+     */
     public func countTextureCoords() -> Int {
         return TerrainShape.TERRAIN_TEXTURES_LENGTH;
     }
     
     /**
-    *
-    * @return the normal vectors that make the shape
-    */
+     *
+     * @return the normal vectors that make the shape
+     */
     public func getNormals() -> UnsafeMutablePointer<Float> {
         return self._normals;
     }
     
     /*
-    * Number of normal that the shape has
-    */
+     * Number of normal that the shape has
+     */
     public  func countNormals() -> Int {
         return TerrainShape.TERRAIN_NORMALS_LENGTH;
     }
     
     /**
-    * @return The indices of the vertices that make the shape
-    */
+     * @return The indices of the vertices that make the shape
+     */
     public  func getIndices() -> UnsafeMutablePointer<ushort> {
         return self._indices;
     }
     
     /*
-    Number of indices that the shapa has
-    */
+     Number of indices that the shapa has
+     */
     public func countIndices() -> Int {
         return TerrainShape.TERRAIN_INDICES_LENGTH;
     }
