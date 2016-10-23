@@ -42,7 +42,7 @@ public class RawModel {
             self.indicesData = UnsafeMutablePointer<ushort>(calloc(indicesCount, sizeof(ushort)));
             
             //Copy vertices one by one
-            for(var i = 0;i < indicesCount;i++) {
+            for i in 0 ..< indicesCount {
                 self.indicesData[i] = indicesData[i];
             }
         }

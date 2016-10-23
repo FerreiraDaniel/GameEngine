@@ -104,9 +104,9 @@ public class WorldEntitiesGenerator {
         var entities : Array<Entity> = Array<Entity>();
         for (key, size) in entitiesMap {
             let texturedModel = WorldEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, textureName: key.textureName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
-            for(var i  = 0; i < size;i++) {
-                let xPosition : Float = 20.0 + Float(rand() % 400);
-                let zPosition : Float = Float(rand() % 400)
+            for i in 0 ..< size {
+                let xPosition : Float = 20.0 + Float(arc4random_uniform(400));
+                let zPosition : Float = Float(arc4random_uniform(400))
                 let entityPosition : Vector3f = Vector3f(x: xPosition, y: 0.0, z: zPosition);
                 let entity = getEntity(texturedModel, position: entityPosition);
                 entity.scale = key.scale

@@ -51,8 +51,10 @@ public class TerrainShape : NSObject, IShape {
         let vertext_count : Int = TERRAIN_SHAPE_VERTEX_COUNT;
         let vertex_count : Float = Float(TERRAIN_SHAPE_VERTEX_COUNT);
         var vertexPointer : Int = 0;
-        for (var i : Float = 0; i < vertex_count; i++) {
-            for (var j : Float = 0; j < vertex_count; j++) {
+        for ii : Int in 0 ..< vertext_count {
+            let i = Float(ii)
+            for ij : Int in 0 ..< vertext_count {
+                let j = Float(ij)
                 vertices[vertexPointer * 3] = Float(j / (vertex_count - 1)) * SIZE;
                 vertices[vertexPointer * 3 + 1] = 0;
                 vertices[vertexPointer * 3 + 2] = i / (vertex_count - 1) * SIZE;
@@ -61,12 +63,12 @@ public class TerrainShape : NSObject, IShape {
                 normals[vertexPointer * 3 + 2] = 0;
                 textureCoords[vertexPointer * 2] = j / (vertex_count - 1);
                 textureCoords[vertexPointer * 2 + 1] = i / (vertex_count - 1);
-                vertexPointer++;
+                vertexPointer += 1;
             }
         }
         var pointer : Int = 0;
-        for (var gz : Int = 0; gz < vertext_count - 1; gz++) {
-            for (var gx : Int = 0; gx < vertext_count - 1; gx++) {
+        for gz : Int in 0 ..< vertext_count - 1 {
+            for gx : Int in 0 ..< (vertext_count - 1) {
                 let topLeft = (gz * vertext_count) + gx;
                 let topRight = topLeft + 1;
                 let bottomLeft = ((gz + 1) * vertext_count) + gx;

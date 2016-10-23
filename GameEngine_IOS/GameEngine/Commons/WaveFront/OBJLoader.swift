@@ -114,7 +114,7 @@ public class OBJLoader {
         //Indices
         var indicesArray : Array<Int> = Array<Int>(count: numberFaces, repeatedValue: 0);
         
-        for (var j : Int = 0; j < numberFaces; j++) {
+        for j : Int in 0 ..< numberFaces {
             let face = faces[j];
             
             let vertexIndex = face.vertexIndex;
@@ -215,7 +215,7 @@ public class OBJLoader {
                     break
                 case FACE_PREFIX:
                     // Parses the faces
-                    for (var i : Int = 1; i < 4; i++) {
+                    for i : Int in 1 ..< 4 {
                         let fVertexStr : Array<String> = currentLine[i].componentsSeparatedByString("/");
                         let pFace : PolygonalFace = self.processVertex(fVertexStr);
                         faces.append(pFace);

@@ -41,7 +41,7 @@ public class SkyBoxShape : NSObject, IShape {
         self._vertices = UnsafeMutablePointer<Float>(calloc(skyBoxVertexData.count, sizeof(CFloat)));
         
         //Copy vertices one by one
-        for(var i = 0;i < skyBoxVertexData.count;i++) {
+        for i in 0 ..< skyBoxVertexData.count {
             self._vertices[i] = skyBoxVertexData[i];
         }
     }

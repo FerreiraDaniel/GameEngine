@@ -30,7 +30,7 @@ public class WfObject : NSObject, IShape {
         self._countVertices = aVertices.count;
         
         //Copy vertices one by one
-        for(var i = 0;i < aVertices.count;i++) {
+        for i in 0 ..< aVertices.count {
             self._vertices[i] = aVertices[i];
         }
         
@@ -38,7 +38,7 @@ public class WfObject : NSObject, IShape {
         //Allocate and fill the texture memory
         self._textureCoordinates = UnsafeMutablePointer<Float>(calloc(aTextureCoordinates.count, sizeof(CFloat)));
         self._countTextureCoordinates = aTextureCoordinates.count;
-        for(var i = 0;i < aTextureCoordinates.count;i++) {
+        for i in 0 ..< aTextureCoordinates.count {
             self._textureCoordinates[i] = aTextureCoordinates[i];
         }
         
@@ -46,7 +46,7 @@ public class WfObject : NSObject, IShape {
         //Allocate and fill the normals memory
         self._normals = UnsafeMutablePointer<Float>(calloc(aNormals.count, sizeof(CFloat)));
         self._countNormals = aNormals.count;
-        for(var i = 0;i < self._countNormals;i++) {
+        for i in 0 ..< self._countNormals {
             self._normals[i] = aNormals[i];
         }
         
@@ -54,7 +54,7 @@ public class WfObject : NSObject, IShape {
         //Allocate and fill the indices memory
         self._indices = UnsafeMutablePointer<ushort>(calloc(aIndices.count, sizeof(CInt)));
         self._countIndices = aIndices.count;
-        for(var i = 0;i < self._countIndices;i++) {
+        for i in 0 ..< self._countIndices {
             self._indices[i] = UInt16(aIndices[i]);
         }
         super.init();

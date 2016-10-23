@@ -50,14 +50,14 @@ public class GLTransformation {
         var i : Int = 0;
         var j : Int = 0;
         
-        for (i  = 0; i < 4; i++) {
+        for (i  = 0; i < 4; i += 1) {
             //Entire row
             let a0 : Float = srcA[i * 4];
             let a1 : Float = srcA[i * 4 + 1];
             let a2 : Float = srcA[i * 4 + 2];
             let a3 : Float = srcA[i * 4 + 3];
             
-            for(j = 0;j < 4; j++) {
+            for(j = 0;j < 4; j += 1) {
                 //Entire column
                 let b0 : Float = srcB[0 * 4 + j]
                 let b1 : Float = srcB[1 * 4 + j]
@@ -75,7 +75,7 @@ public class GLTransformation {
         }
         
         //Copy temp to mMatrix
-        for(i = 0; i < GL_TRANSFORMATION_MATRIX_SIZE; i++) {
+        for(i = 0; i < GL_TRANSFORMATION_MATRIX_SIZE; i += 1) {
             mMatrix[i] = tmp[i];
         }
     }
@@ -219,7 +219,7 @@ public class GLTransformation {
     public func  glLoadIdentity(){
         var i : Int = 0;
         
-        for (i = 0; i < GL_TRANSFORMATION_MATRIX_SIZE; i++) {
+        for (i = 0; i < GL_TRANSFORMATION_MATRIX_SIZE; i += 1) {
             self.mMatrix[i] = 0.0;
         }
         

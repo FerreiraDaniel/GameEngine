@@ -14,7 +14,7 @@ public class Utils : NSObject {
         let pointer = UnsafeMutablePointer<Float>(calloc(lArray.count, sizeof(Float)));
         
         //Copy elements one by one
-        for(var i = 0;i < lArray.count;i++) {
+        for i in 0 ..< lArray.count {
             pointer[i] = lArray[i];
         }
         
@@ -31,7 +31,7 @@ public class Utils : NSObject {
         let pointer = UnsafeMutablePointer<ushort>(calloc(lArray.count, sizeof(ushort)));
         
         //Copy elements one by one
-        for(var i = 0;i < lArray.count;i++) {
+        for i in 0 ..< lArray.count {
             pointer[i] = lArray[i];
         }
         

@@ -237,7 +237,7 @@ public class Loader : NSObject {
             glActiveTexture(GLenum(GL_TEXTURE0));
             glBindTexture(GLenum(GL_TEXTURE_CUBE_MAP), textureId);
             
-            for (var i = 0; i < NUMBER_CUBE_FACES; i++) {
+            for i in 0 ..< NUMBER_CUBE_FACES {
                 let fileName = fileNames[i];
                 
                 let imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)

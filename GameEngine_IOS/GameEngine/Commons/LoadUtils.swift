@@ -45,7 +45,7 @@ public class LoadUtils {
             let bytesPerRow = CGImageGetBytesPerRow(spriteImage); //width * 4
             let space = CGImageGetColorSpace(spriteImage);
             let bitmapInfo = CGImageAlphaInfo.PremultipliedLast.rawValue;
-            let spriteContext : CGContextRef! = CGBitmapContextCreate(spriteData, width, height, bitsPerComponent, bytesPerRow, space, bitmapInfo);
+            let spriteContext : CGContextRef! = CGBitmapContextCreate(spriteData, width, height, bitsPerComponent, bytesPerRow, space!, bitmapInfo);
             if(spriteContext == nil) {
                 print("Impossible to get the sprint context");
                 return nil;
