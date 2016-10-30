@@ -47,7 +47,7 @@ public class GameViewController: GLKViewController {
         self.skyBox = WorldSkyBoxGenerator.getSky(loader);
         
         /*Prepares the player that is going to be used in the scene*/
-        self.player = WorldEntitiesGenerator.getPlayer(loader);
+        self.player = WorldPlayersGenerator.getPlayer(loader);
         
     }
     

@@ -25,10 +25,46 @@ public class Math {
     }
     
     /**
-    * Return the sine of the angle passed
-    */
+     * Return the sine of the angle passed
+     */
     public static func sin(radianAngle : Float) -> Float
     {
         return sinf(radianAngle);
+    }
+    
+    /**
+     * In geometry, the barycentric coordinate system is a coordinate system in
+     * which the location of a point of a triangle is specified as the center of
+     * mass, or barycenter, of usually unequal masses placed at its vertices
+     *
+     * @param v1
+     *            First of the vertices of the triangle
+     * @param v2
+     *            Second of the vertices of the triangle
+     * @param v3
+     *            Third of the vertices of the triangle
+     * @param pos
+     *            Position the is to determine
+     *
+     * @return The location determined
+     */
+    public static func barryCentric(v1 : Vector3f, v2 : Vector3f, v3 : Vector3f, pos : Vector2f) -> Float {
+        let det0 : Float = ((v2.z - v3.z) * (v1.x - v3.x))
+        let det1 : Float = ((v3.x - v2.x) * (v1.z - v3.z))
+        let det : Float =  det0 + det1;
+        // Compute dot products
+        let l10 : Float = (v2.z - v3.z) * (pos.x - v3.x);
+        let l11 : Float = (v3.x - v2.x) * (pos.y - v3.z);
+        let l1 : Float = (l10 + l11) / det;
+        //
+        let l20 : Float = (v3.z - v1.z) * (pos.x - v3.x)
+        let l21 : Float = (v1.x - v3.x) * (pos.y - v3.z)
+        let l2 : Float = ((l20 + l21) / det);
+        //
+        let l3 : Float = (1.0 - l1 - l2);
+        
+        let yPos : Float = Float(l1 * v1.y + l2 * v2.y + l3 * v3.y);
+        
+        return yPos;
     }
 }

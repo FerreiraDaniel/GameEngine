@@ -3,8 +3,8 @@ import GLKit
 
 
 /*
-* Load the elements to make the scene
-*/
+ * Load the elements to make the scene
+ */
 public class Loader : NSObject {
     
     func BUFFER_OFFSET(i: Int) -> UnsafePointer<Void> {
@@ -13,30 +13,30 @@ public class Loader : NSObject {
     }
     
     /**
-    * List of the vertex array objects loaded
-    */
+     * List of the vertex array objects loaded
+     */
     private var vaos : Array<GLuint>!;
     
     /**
-    * List of the vertex buffer objects loaded
-    */
+     * List of the vertex buffer objects loaded
+     */
     private var vbos : Array<GLuint>!;
     
     /**
-    * List of the textures that make part of the game engine
-    */
+     * List of the textures that make part of the game engine
+     */
     private var textures : Array<GLuint>!;
     
     /**
-    * Extension of the png files
-    */
+     * Extension of the png files
+     */
     private let PNG_EXTENSION : String  = "png";
     
     private let NUMBER_CUBE_FACES : Int = 6;
     
     /**
-    * Initiator of the loader
-    */
+     * Initiator of the loader
+     */
     public override init() {
         self.vaos = Array<GLuint>();
         self.vbos = Array<GLuint>();
@@ -44,10 +44,10 @@ public class Loader : NSObject {
     }
     
     /**
-    * Create a vertex array object
-    *
-    * @return the identifier of the VAO created
-    */
+     * Create a vertex array object
+     *
+     * @return the identifier of the VAO created
+     */
     private func createVAO() -> Int {
         var vaoID : GLuint = 0;
         glGenVertexArraysOES(1, &vaoID);
@@ -58,18 +58,18 @@ public class Loader : NSObject {
     
     
     /**
-    * Store a certain element to be used in the program shader
-    *
-    * @param attributeNumber
-    *            the id of the attribute to load in the program shader
-    * @param coordinateSize
-    *            Number of components of the attribute to store
-    *
-    * @param data
-    *            Data to be store
-    * @para dLength
-    *            Number of elements that the data has
-    */
+     * Store a certain element to be used in the program shader
+     *
+     * @param attributeNumber
+     *            the id of the attribute to load in the program shader
+     * @param coordinateSize
+     *            Number of components of the attribute to store
+     *
+     * @param data
+     *            Data to be store
+     * @para dLength
+     *            Number of elements that the data has
+     */
     private func storeDataInAttributeList(attributeNumber : Int, coordinateSize : GLint, data :UnsafePointer<Void> , dLength : Int) {
         
         var vboID : GLuint = 0;
@@ -89,13 +89,13 @@ public class Loader : NSObject {
     }
     
     /**
-    * Load a shape in a VAO (Vertex array object)
-    *
-    * @param shape
-    *            The shape to load
-    *
-    * @return A row model with information loaded
-    */
+     * Load a shape in a VAO (Vertex array object)
+     *
+     * @param shape
+     *            The shape to load
+     *
+     * @return A row model with information loaded
+     */
     public func loadToVAO(shape : IShape) -> RawModel{
         
         let vaoID = self.createVAO();
@@ -122,17 +122,17 @@ public class Loader : NSObject {
     }
     
     /**
-    * Load a list of positions to VAO
-    *
-    * @param positions
-    *            Positions to load
-    * @para positionsLength
-    *            Number of positions to load in the vertex array object
-    * @param dimensions
-    *            Number of components that the positions has
-    *
-    * @return The rawModel pointing to the created VAO
-    */
+     * Load a list of positions to VAO
+     *
+     * @param positions
+     *            Positions to load
+     * @para positionsLength
+     *            Number of positions to load in the vertex array object
+     * @param dimensions
+     *            Number of components that the positions has
+     *
+     * @return The rawModel pointing to the created VAO
+     */
     private func  loadPositionsToVAO(positions : UnsafePointer<Void>, positionsLength : Int, dimensions : Int) -> RawModel {
         
         let vaoID = self.createVAO();
@@ -144,26 +144,26 @@ public class Loader : NSObject {
     }
     
     /**
-    * Load a list of 3D positions to VAO
-    *
-    * @param positions
-    *            Positions to load
-    * @para positionsLength
-    *            Number of positions to load in the vertex array object
-    *
-    * @return The rawModel pointing to the created VAO
-    */
+     * Load a list of 3D positions to VAO
+     *
+     * @param positions
+     *            Positions to load
+     * @para positionsLength
+     *            Number of positions to load in the vertex array object
+     *
+     * @return The rawModel pointing to the created VAO
+     */
     public func load3DPositionsToVAO(positions : UnsafeMutablePointer<Float>, positionsLength : Int) -> RawModel{
         let dimensions = 3;
         return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
     }
     
     /**
-    * When loads one texture defines that by default should zoom in/out it
-    *
-    * @param itarget
-    *            the target of the filter
-    */
+     * When loads one texture defines that by default should zoom in/out it
+     *
+     * @param itarget
+     *            the target of the filter
+     */
     private func defineTextureFunctionFilters (itarget : Int32) {
         let target : GLenum = GLenum(itarget);
         
@@ -175,13 +175,13 @@ public class Loader : NSObject {
     }
     
     /**
-    *  Load one texture from a file and set it in openGL
-    *
-    * @param fileName
-    *            Name of the file to load without the .png extension in the end
-    *
-    * @return Identifier of the texture loaded
-    */
+     *  Load one texture from a file and set it in openGL
+     *
+     * @param fileName
+     *            Name of the file to load without the .png extension in the end
+     *
+     * @return Identifier of the texture loaded
+     */
     public func loadTexture(fileName : String) -> Int {
         let imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
         
@@ -205,7 +205,7 @@ public class Loader : NSObject {
             
             
             glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA,  width, height, 0,
-                GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
+                         GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
             
             self.defineTextureFunctionFilters(GL_TEXTURE_2D);
             self.textures.append(textureId);
@@ -214,23 +214,44 @@ public class Loader : NSObject {
         }
     }
     
+    
     /**
-    * Loads a cubic texture
-    *
-    * @param fileNames
-    *            Names of the file to load without the .png extension in the
-    *            end
-    *
-    * @return Identifier of the texture cubic texture loaded
-    */
+     *  Loads the data of a texture without bind
+     *
+     * @param fileName
+     *            Name of the file to load without the .png extension in the end
+     *
+     * @return The texture read from the file without any openGL bind
+     */
+    public func getTextureData(fileName : String) -> TextureData! {
+        let imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
+        
+        if(imagePath == nil) {
+            print("Impossible to get the patch to \(fileName)");
+            return nil;
+        } else {
+            let textureData : TextureData! = LoadUtils.loadTexture(imagePath);
+            return textureData;
+        }
+    }
+    
+    /**
+     * Loads a cubic texture
+     *
+     * @param fileNames
+     *            Names of the file to load without the .png extension in the
+     *            end
+     *
+     * @return Identifier of the texture cubic texture loaded
+     */
     public func loadTCubeMap(fileNames : Array<String>!) -> Int {
         if (fileNames == nil) {
             return -1;
         } else {
             let cubicTextureTargets : Array<Int32> = [GL_TEXTURE_CUBE_MAP_POSITIVE_X,
-                GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
-                GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-                GL_TEXTURE_CUBE_MAP_NEGATIVE_Z ];
+                                                      GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+                                                      GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+                                                      GL_TEXTURE_CUBE_MAP_NEGATIVE_Z ];
             
             var textureId : GLuint = 0;
             glGenTextures(1, &textureId);
@@ -252,7 +273,7 @@ public class Loader : NSObject {
                     let buffer : UnsafeMutablePointer<Void> = textureData.buffer
                     
                     glTexImage2D(GLenum(target), 0, GL_RGBA,  width, height, 0,
-                        GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
+                                 GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
                 }
             }
             self.defineTextureFunctionFilters(GL_TEXTURE_CUBE_MAP);
@@ -263,19 +284,19 @@ public class Loader : NSObject {
     }
     
     /**
-    * UnBind the current vertex array object
-    */
+     * UnBind the current vertex array object
+     */
     private func unbindVAO() {
         glBindVertexArrayOES(0);
     }
     
     /**
-    *
-    * @param indices
-    *            the indices to vertex buffer object
-    * @para dLength
-    *            Number of indices that the data has
-    */
+     *
+     * @param indices
+     *            the indices to vertex buffer object
+     * @para dLength
+     *            Number of indices that the data has
+     */
     private func bindIndicesBuffer(indices : UnsafePointer<Void>, dLength : Int) {
         
         
@@ -291,8 +312,8 @@ public class Loader : NSObject {
     }
     
     /**
-    Desallocate memory
-    */
+     Desallocate memory
+     */
     deinit {
         
         vaos = nil;
