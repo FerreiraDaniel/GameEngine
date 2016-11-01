@@ -1,5 +1,7 @@
 package com.dferreira.game_engine.models;
 
+import com.dferreira.commons.Maths;
+import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.game_engine.textures.TerrainTexturesPack;
 
@@ -23,6 +25,9 @@ public class Terrain {
      */
     private final float z;
 
+    /* Heights of the components of the terrain */
+    private final float[][] heights;
+
     /**
      * The RawModel of the terrain
      */
@@ -38,12 +43,14 @@ public class Terrain {
      *
      * @param texturePack The identifiers of the textures to the terrain
      * @param rawModel    The model of the terrain
+     * @param heights     The heights of the terrain
      * @param position    Position where the terrain will be put in
      */
-    public Terrain(TerrainTexturesPack texturePack, RawModel rawModel, Vector3f position) {
+    public Terrain(TerrainTexturesPack texturePack, RawModel rawModel, float[][] heights, Vector3f position) {
 
         this.texturePack = texturePack;
         this.model = rawModel;
+        this.heights = heights;
         this.x = position.x * TerrainShape.SIZE;
         this.y = position.y * TerrainShape.SIZE;
         this.z = position.z * TerrainShape.SIZE;
@@ -85,5 +92,45 @@ public class Terrain {
      */
     public RawModel getModel() {
         return model;
+    }
+
+    /**
+     * The height of the terrain in a certain position of the world
+     *
+     * @param worldX The x-component of the location to compute the height of the
+     *               terrain
+     * @param worldZ The y-component of the location to compute the height of the
+     *               terrain
+     * @return The height of the terrain in the specified position of the world
+     */
+    public float getHeightOfTerrain(float worldX, float worldZ) {
+        float terrainX = worldX - this.x;
+        float terrainZ = worldZ - this.z;
+        float gridSquareSize = TerrainShape.SIZE / ((float) heights.length - 1);
+        int gridX = (int) Math.floor(terrainX / gridSquareSize);
+        int gridZ = (int) Math.floor(terrainZ / gridSquareSize);
+        if (gridX >= heights.length - 1 || gridZ >= heights.length - 1 || gridX < 0 || gridZ < 0) {
+            return 0;
+        }
+        float xCoord = (terrainX % gridSquareSize);
+        float zCoord = (terrainZ % gridSquareSize);
+
+        float height;
+        if (xCoord <= (gridSquareSize - zCoord)) {
+            float v1Height = heights[gridX][gridZ];
+            float v3Height = heights[gridX][gridZ + 1];
+            height = Maths.barryCentric(new Vector3f(0, v1Height, 0),
+                    new Vector3f(gridSquareSize, heights[gridX + 1][gridZ], 0),
+                    new Vector3f(0, v3Height, gridSquareSize), new Vector2f(xCoord, zCoord));
+        } else {
+            float v1Height = heights[gridX + 1][gridZ];
+            float v2Height = heights[gridX + 1][gridZ + 1];
+            float v3Height = heights[gridX][gridZ + 1];
+            height = Maths.barryCentric(new Vector3f(gridSquareSize, v1Height, 0),
+                    new Vector3f(gridSquareSize, v2Height, gridSquareSize), new Vector3f(0, v3Height, gridSquareSize),
+                    new Vector2f(xCoord, zCoord));
+        }
+
+        return height;
     }
 }

@@ -52,6 +52,7 @@ public class SkyBoxShaderManager : ShaderManager {
     *            the matrix to be loaded
     */
     public func loadViewMatrix (matrix : GLTransformation) {
+        matrix.setTranslation(0.0, ty: 0.0, tz: 0.0)
         super.loadMatrix(uniforms[TSkyBoxUniform.viewMatrix.rawValue],matrix: matrix);
     }
 }

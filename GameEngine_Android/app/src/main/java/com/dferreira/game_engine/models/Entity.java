@@ -48,7 +48,7 @@ public class Entity {
      * @param dy	Y component to be increase
      * @param dz	Z component to be increase
      */
-    public void increasePosition(float dx, float dy, float dz) {
+    void increasePosition(float dx, float dy, float dz) {
         this.position.x += dx;
         this.position.y += dy;
         this.position.z += dz;

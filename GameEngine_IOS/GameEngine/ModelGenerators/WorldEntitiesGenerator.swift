@@ -71,12 +71,12 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     }
     
     /*
-    * @param loader
-    *            loader that will load the entities of the 3D world
+     * @param loader  loader that will load the entities of the 3D world
+     * @param terrain The terrain used to determine the height position
     *
     * @return The entities that will compose the 3D world
     */
-    public static func getEntities(loader : Loader) -> Array<Entity> {
+    public static func getEntities(loader : Loader, terrain : Terrain) -> Array<Entity> {
         let entitiesMap : Dictionary<DefaultModelGenerator, Int> = WorldEntitiesGenerator.getEntitiesMap();
         
         //Alloccate the entities list
@@ -86,7 +86,9 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
             for _ in 0 ..< size {
                 let xPosition : Float = 20.0 + Float(arc4random_uniform(400));
                 let zPosition : Float = Float(arc4random_uniform(400))
-                let entityPosition : Vector3f = Vector3f(x: xPosition, y: 0.0, z: zPosition);
+                let yPosition : Float = terrain.getHeightOfTerrain(xPosition, worldZ: zPosition);
+                
+                let entityPosition : Vector3f = Vector3f(x: xPosition, y: yPosition, z: zPosition);
                 let entity = getEntity(texturedModel, position: entityPosition);
                 entity.scale = Float(arc4random_uniform(UInt32(key.scale)));
                 entities.append(entity);

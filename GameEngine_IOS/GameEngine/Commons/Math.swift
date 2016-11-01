@@ -32,6 +32,33 @@ public class Math {
         return sinf(radianAngle);
     }
     
+    /*
+     *  Returns the correctly rounded positive square root of a double value.
+     */
+    public static func sqrt(a : Float) -> Float
+    {
+        return sqrtf(a)
+    }
+    
+    /**
+     * Returns the largest (closest to positive infinity)
+     * {@code double} value that is less than or equal to the
+     * argument and is equal to a mathematical integer. Special cases:
+     * <ul><li>If the argument value is already equal to a
+     * mathematical integer, then the result is the same as the
+     * argument.  <li>If the argument is NaN or an infinity or
+     * positive zero or negative zero, then the result is the same as
+     * the argument.</ul>
+     *
+     * @param   a   a value.
+     * @return  the largest (closest to positive infinity)
+     *          floating-point value that less than or equal to the argument
+     *          and is equal to a mathematical integer.
+     */
+    public static func floor(a : Float) -> Float {
+        return floorf(a);
+    }
+    
     /**
      * In geometry, the barycentric coordinate system is a coordinate system in
      * which the location of a point of a triangle is specified as the center of

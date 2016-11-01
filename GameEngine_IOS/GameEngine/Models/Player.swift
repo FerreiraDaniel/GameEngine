@@ -1,8 +1,8 @@
 import Foundation
 
 /**
-* Player that is going to be used in the scene
-*/
+ * Player that is going to be used in the scene
+ */
 public class Player : Entity {
     
     /*Distance that the user is going to run in one second*/
@@ -13,8 +13,6 @@ public class Player : Entity {
     private let GRAVITY : Float = -0.5;
     /*Power that the player is going to be push up when is jumping*/
     private let JUMP_POWER : Float = 0.3;
-    /*Height of the terrain*/
-    private let TERRAIN_HEIGHT : Float = 0.0;
     
     /*The current speed of the player*/
     private var currentSpeed : Float;
@@ -26,15 +24,15 @@ public class Player : Entity {
     private var upwardsSpeed : Float;
     
     /**
-    * Initiator of the player to be render in the 3D world
-    *
-    * @param model    Textured model
-    * @param position position where the model should be render
-    * @param rotX     Rotation of the model in the X axle
-    * @param rotY     Rotation of the model in the Y axle
-    * @param rotZ     Rotation of the model in the Z axle
-    * @param scale    Scale of the model
-    */
+     * Initiator of the player to be render in the 3D world
+     *
+     * @param model    Textured model
+     * @param position position where the model should be render
+     * @param rotX     Rotation of the model in the X axle
+     * @param rotY     Rotation of the model in the Y axle
+     * @param rotZ     Rotation of the model in the Z axle
+     * @param scale    Scale of the model
+     */
     public override init(model : TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
         self.currentSpeed = 0.0
         self.currentTurnSpeed = 0.0
@@ -43,9 +41,10 @@ public class Player : Entity {
     }
     
     /**
-    * Check the input of the user in order to update the current values of the movement
-    */
-    private func checkInputs() {
+     * Check the input of the user in order to update the current values of the movement
+     * @param terrain Reference to the terrain
+     */
+    private func checkInputs(terrain : Terrain) {
         if (GamePad.isKeyDown(GamePadEnum.KEY_DOWN)) {
             //Go in front
             self.currentSpeed = -RUN_SPEED;
@@ -68,16 +67,16 @@ public class Player : Entity {
         }
         
         /*if (GamePad.isKeyDown(GamePad.KEY_TRIANGLE)) {
-        self.jump();
-        }*/
+         self.jump(terrain);
+         }*/
     }
     
     /**
-    * Move the player and rotate it around the scene
-    *
-    * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
-    *                     frame rate independent
-    */
+     * Move the player and rotate it around the scene
+     *
+     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
+     *                     frame rate independent
+     */
     private func moveAndRotate(timeToRender : Float) {
         let turnByFrame : Float = currentTurnSpeed * timeToRender;
         self.increaseRotation(0.0, dy: turnByFrame, dz: 0.0);
@@ -89,39 +88,45 @@ public class Player : Entity {
     }
     
     /**
-    * When the player is above the terrain height make it to fall down
-    *
-    * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
-    *                     frame rate independent
-    */
-    private func fallDown(timeToRender : Float) {
-        if ((position.y > TERRAIN_HEIGHT) || (upwardsSpeed > 0)) {
+     * When the player is above the terrain height make it to fall down
+     *
+     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
+     *                     frame rate independent
+     * @param terrain      Reference to the terrain to compute where is going to fall
+     */
+    private func fallDown(timeToRender : Float, terrain : Terrain) {
+        let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
+        
+        if ((position.y > terrainHeight) || (upwardsSpeed > 0)) {
             upwardsSpeed += GRAVITY * timeToRender;
             super.increasePosition(0.0, dy: upwardsSpeed, dz: 0.0);
         } else {
-            super.position.y = TERRAIN_HEIGHT;
+            super.position.y = terrainHeight;
         }
     }
     
     /**
-    * Set the upward speed of the player in order make it jump
-    */
-    private func jump() {
-        if (position.y <= TERRAIN_HEIGHT) {
-            upwardsSpeed = TERRAIN_HEIGHT + JUMP_POWER;
+     * Set the upward speed of the player in order make it jump
+     * @param terrain Reference to the terrain in order to compute the height that is going to jump
+     */
+    private func jump(terrain : Terrain) {
+        let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
+        if (position.y <= terrainHeight) {
+            upwardsSpeed = terrainHeight + JUMP_POWER;
         }
     }
     
     /**
-    * Move the player due the the keys that are pressed in the keyBoard
-    *
-    * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
-    *                     frame rate independent
-    */
-    public func move(timeToRender : Float) {
-        checkInputs();
+     * Move the player due the the keys that are pressed in the keyBoard
+     *
+     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
+     *                     frame rate independent
+     * @param terrain	Terrain used to determine the height where the player is going to fall/stay
+     */
+    public func move(timeToRender : Float, terrain : Terrain) {
+        checkInputs(terrain);
         moveAndRotate(timeToRender);
-        fallDown(timeToRender);
+        fallDown(timeToRender, terrain: terrain);
     }
     
 }

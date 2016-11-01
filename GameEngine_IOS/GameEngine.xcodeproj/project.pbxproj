@@ -17,6 +17,7 @@
 		324CFB281DAED0DA0020CA56 /* ic_pad_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB241DAED0DA0020CA56 /* ic_pad_up.png */; };
 		325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */; };
 		325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */; };
+		3267A07C1DC734F40075D68B /* heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 3267A07B1DC734F40075D68B /* heightmap.png */; };
 		3269CF5A1D9FB3FA007574BC /* Vector2f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269CF591D9FB3FA007574BC /* Vector2f.swift */; };
 		3269CF5C1D9FB427007574BC /* Vector3f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269CF5B1D9FB427007574BC /* Vector3f.swift */; };
 		3269CF5E1D9FB476007574BC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269CF5D1D9FB476007574BC /* Camera.swift */; };
@@ -124,6 +125,7 @@
 		324CFB241DAED0DA0020CA56 /* ic_pad_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_up.png; sourceTree = "<group>"; };
 		3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_vertex_shader.vsh; sourceTree = "<group>"; };
 		325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_fragment_shader.fsh; sourceTree = "<group>"; };
+		3267A07B1DC734F40075D68B /* heightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heightmap.png; sourceTree = "<group>"; };
 		3269CF591D9FB3FA007574BC /* Vector2f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector2f.swift; sourceTree = "<group>"; };
 		3269CF5B1D9FB427007574BC /* Vector3f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3f.swift; sourceTree = "<group>"; };
 		3269CF5D1D9FB476007574BC /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 		32EF0CC01D7AF4B3006D9247 /* Terrain */ = {
 			isa = PBXGroup;
 			children = (
+				3267A07B1DC734F40075D68B /* heightmap.png */,
 				32EF0CC11D7AF4F8006D9247 /* blend_map.png */,
 				32EF0CC21D7AF4F8006D9247 /* mud.png */,
 				32EF0CC31D7AF4F8006D9247 /* path.png */,
@@ -620,6 +623,7 @@
 				3297C5F81D68F54E009F7416 /* sky_right.png in Resources */,
 				32B1C0B31DB3E3C9008805C1 /* player.obj in Resources */,
 				3297C5F71D68F54E009F7416 /* sky_left.png in Resources */,
+				3267A07C1DC734F40075D68B /* heightmap.png in Resources */,
 				3295B4601D6B8C3A0065E8E8 /* flower.obj in Resources */,
 				3297C5F41D68F54E009F7416 /* sky_back.png in Resources */,
 				3295B4611D6B8C3A0065E8E8 /* flower.png in Resources */,

@@ -102,6 +102,7 @@ public class TexturedModel {
     /**
      * Returns if the model has any transparency or not
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean hasTransparency() {
         return this.hasTransparency;
     }

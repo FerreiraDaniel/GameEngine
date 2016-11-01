@@ -35,17 +35,6 @@ public class Camera {
 	}
 
 
-
-	
-	/**
-	 * Uses the position of the player to update the position of the camera
-	 *
-	 * @param player Reference to that the camera is going to follow
-	 */
-	public void update(Player player) {
-		
-	}
-
 	/**
 	 * @return the position position where the camera is
 	 */

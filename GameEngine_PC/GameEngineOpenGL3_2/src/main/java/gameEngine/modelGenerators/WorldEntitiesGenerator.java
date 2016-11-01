@@ -5,25 +5,22 @@ import java.util.Random;
 
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
-import com.dferreira.commons.shapes.IShape;
-import com.dferreira.commons.waveFront.OBJLoader;
 
 import gameEngine.models.Entity;
-import gameEngine.models.Player;
-import gameEngine.models.RawModel;
+import gameEngine.models.Terrain;
 import gameEngine.models.TexturedModel;
 import gameEngine.renderEngine.Loader;
-import gameEngine.textures.ModelTexture;
 
 /**
  * Responsible for creating the multiple entities of the 3D world
  */
-public class WorldEntitiesGenerator {
-	private final static int NUMBER_OF_TREES = 20;
+public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
+	private final static int NUMBER_OF_TREES = 100;
 	private final static int NUMBER_OF_BANANA_TREES = 30;
 	private final static int NUMBER_OF_FERNS = 20;
 	private final static int NUMBER_OF_GRASS = 20;
 	private final static int NUMBER_OF_FLOWERS = 100;
+	private final static int NUMBER_OF_MARBLES = 10;
 
 	/**
 	 * 
@@ -34,37 +31,6 @@ public class WorldEntitiesGenerator {
 		Vector3f lightColor = new Vector3f(1.0f, 1.0f, 1.0f);
 
 		return new Light(lightPosition, lightColor);
-	}
-
-	/**
-	 * Load a textured model
-	 *
-	 * @param loader
-	 *            the loader of the texture
-	 * @param objName
-	 *            The name of the waveFront file without extension
-	 * @param texureName
-	 *            The name of the image file without extension
-	 * @param hasTransparency
-	 *            Flag that indicates if has transparency or not
-	 * @param normalsPointingUp
-	 *            Indicates that all the normals of the object are pointing up
-	 * 
-	 * @return the textured model loaded
-	 */
-	private static TexturedModel getTexturedObj(Loader loader, String objName, String texureName,
-			boolean hasTransparency, boolean normalsPointingUp) {
-		IShape shape = OBJLoader.loadObjModel(objName);
-
-		RawModel model = loader.loadToVAO(shape.getVertices(), shape.getTextureCoords(), shape.getNormals(),
-				shape.getIndices());
-		Integer textureId = loader.loadTexture(texureName);
-		ModelTexture texture = new ModelTexture(textureId);
-		texture.setShineDamper(10.0f);
-		texture.setReflectivity(1.0f);
-		TexturedModel texturedModel = new TexturedModel(model, texture, hasTransparency, normalsPointingUp);
-
-		return texturedModel;
 	}
 
 	/**
@@ -131,13 +97,23 @@ public class WorldEntitiesGenerator {
 		flowerModel.setScale(1.0f);
 		flowerModel.setHasTransparency(true);
 		flowerModel.setNormalsPointingUp(true);
+		
+		/*Marble model*/
+		DefaultModelGenerator marbleModel = new DefaultModelGenerator();
+		marbleModel.setObjectName("marble");
+		marbleModel.setTextureName("marble");
+		marbleModel.setScale(5.0f);
+		marbleModel.setHasTransparency(false);
+		marbleModel.setNormalsPointingUp(false);
 
+		
 		/* Entity map of all the existing entities */
 		entitiesMap.put(bananaTreeModel, NUMBER_OF_BANANA_TREES);
 		entitiesMap.put(fernModel, NUMBER_OF_FERNS);
 		entitiesMap.put(treeModel, NUMBER_OF_TREES);
 		entitiesMap.put(grassModel, NUMBER_OF_GRASS);
 		entitiesMap.put(flowerModel, NUMBER_OF_FLOWERS);
+		entitiesMap.put(marbleModel, NUMBER_OF_MARBLES);
 
 		return entitiesMap;
 	}
@@ -146,10 +122,11 @@ public class WorldEntitiesGenerator {
 	 * 
 	 * @param loader
 	 *            loader that will load the entities of the 3D world
-	 * 
+	 * @param terrain
+	 * 			The terrain used to determine the height position
 	 * @return The entities that will compose the 3D world
 	 */
-	public static Entity[] getEntities(Loader loader) {
+	public static Entity[] getEntities(Loader loader, Terrain terrain) {
 		HashMap<DefaultModelGenerator, Integer> entitiesMap = getEntitiesMap();
 
 		int totalModels = 0;
@@ -167,51 +144,15 @@ public class WorldEntitiesGenerator {
 			for (int i = 0; i < numberOfObjs; i++) {
 				float xPosition = 20.0f + random.nextFloat() * 400.0f;
 				float zPosition = random.nextFloat() * 400.0f;
-				Vector3f entityPosition = new Vector3f(xPosition, 0.0f, zPosition);
+				float yPosition = terrain.getHeightOfTerrain(xPosition, zPosition);
+				Vector3f entityPosition = new Vector3f(xPosition, yPosition, zPosition);
 				Entity entity = getEntity(texturedObj, entityPosition);
-				entity.setScale(key.getScale());
+				float scale = random.nextFloat() * key.getScale();
+				entity.setScale(scale);
 				entities[count] = entity;
 				++count;
 			}
 		}
 		return entities;
-	}
-
-	/**
-	 * 
-	 * @return The model with information to generate a player
-	 */
-	private static DefaultModelGenerator getPlayerModel() {
-		/* Player model */
-		DefaultModelGenerator playerModel = new DefaultModelGenerator();
-		playerModel.setObjectName("player");
-		playerModel.setTextureName("player");
-		playerModel.setScale(1.0f);
-		playerModel.setHasTransparency(false);
-		playerModel.setNormalsPointingUp(false);
-
-		return playerModel;
-	}
-
-	/**
-	 * 
-	 * @param loader
-	 *            loader that will load the entities of the 3D world
-	 * 
-	 * @return The player that is going to be used in the scene
-	 */
-	public static Player getPlayer(Loader loader) {
-		DefaultModelGenerator model = getPlayerModel();
-		TexturedModel texturedObj = getTexturedObj(loader, model.getObjectName(), model.getTextureName(),
-				model.getHasTransparency(), model.getNormalsPointingUp());
-		float xPosition = 0.0f;
-		float yPosition = 2.0f;
-		float zPosition = 0.0f;
-		Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
-		Player player = new Player(texturedObj, playerPosition, // Position
-				0.0f, 0.0f, 0.0f, // Rotation
-				model.getScale() // Scale
-		);
-		return player;
 	}
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.modelGenerators.WorldEntitiesGenerator;
+import com.dferreira.game_engine.modelGenerators.WorldPlayersGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldSkyBoxGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldTerrainsGenerator;
 import com.dferreira.game_engine.models.Entity;
@@ -109,18 +110,20 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
-        /*Prepares the entities that are going to be render*/
-        this.entities = WorldEntitiesGenerator.getEntities(context, loader);
-
-        Date entitiesLoaded = new Date();
-        Log.d(TIME_TO_RENDER_TAG, "Time to initialize entities " + (entitiesLoaded.getTime() - renderInitialized.getTime()) + " ms");
-
         /* Prepares the terrain that is going to render */
         this.terrains = WorldTerrainsGenerator.getTerrains(context, loader);
 
         Date terrainLoaded = new Date();
 
-        Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - entitiesLoaded.getTime()) + " ms");
+        Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - renderInitialized.getTime()) + " ms");
+
+        /*Prepares the entities that are going to be render*/
+        this.entities = WorldEntitiesGenerator.getEntities(context, loader, terrains[0]);
+
+        Date entitiesLoaded = new Date();
+        Log.d(TIME_TO_RENDER_TAG, "Time to initialize entities " + (entitiesLoaded.getTime() - terrainLoaded.getTime()) + " ms");
+
+
 
         /* Load the lights that is going to render*/
         this.light = WorldEntitiesGenerator.getLight();
@@ -138,7 +141,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time initialize sky " + (skyBoxLoaded.getTime() - lightLoaded.getTime()) + " ms");
 
         /*Prepares the player that is going to be used in the scene*/
-        this.player = WorldEntitiesGenerator.getPlayer(context, loader);
+        this.player = WorldPlayersGenerator.getPlayer(context, loader);
 
         Date playerLoader = new Date();
 

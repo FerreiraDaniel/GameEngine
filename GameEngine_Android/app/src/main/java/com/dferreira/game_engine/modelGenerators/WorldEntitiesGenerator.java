@@ -7,13 +7,9 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Entity;
-import com.dferreira.game_engine.models.Player;
-import com.dferreira.game_engine.models.RawModel;
+import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.TexturedModel;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.shapes.IShape;
-import com.dferreira.game_engine.textures.ModelTexture;
-import com.dferreira.game_engine.wave_front.OBJLoader;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -21,34 +17,14 @@ import java.util.Random;
 /**
  * Responsible for creating the multiple entities of the 3D world
  */
-public class WorldEntitiesGenerator {
+public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
     private final static int NUMBER_OF_TREES = 10;
     private final static int NUMBER_OF_BANANA_TREES = 5;
     private final static int NUMBER_OF_FERNS = 10;
     private final static int NUMBER_OF_GRASS = 10;
     private final static int NUMBER_OF_FLOWERS = 20;
-
-    /**
-     * Load the texture of the dragon model
-     *
-     * @param loader the loader of the texture
-     * @return the textured model of the dragon
-     */
-    private static TexturedModel getTexturedObj(Context context, Loader loader, int modelId, int mTextureId, boolean hasTransparency, boolean normalsPointingUp) {
-        IShape objModel = OBJLoader.loadObjModel(context, modelId);
-        RawModel model = loader.loadToRawModel(objModel.getVertices(), objModel.getTextureCoords(),
-                objModel.getNormals(), objModel.getIndices());
-        Integer textureId = loader.loadTexture(context, mTextureId);
-        ModelTexture texture = new ModelTexture(textureId);
-        TexturedModel texturedModel = new TexturedModel(model, texture, hasTransparency, normalsPointingUp);
-
-        texturedModel.setShineDamper(10.0f);
-        texturedModel.setReflectivity(1.0f);
-
-        return texturedModel;
-    }
-
+    private final static int NUMBER_OF_MARBLES = 10;
 
     /**
      * Get one entity in a certain position
@@ -113,21 +89,31 @@ public class WorldEntitiesGenerator {
         flowerModel.setNormalsPointingUp(true);
 
 
+        		/*Marble model*/
+        DefaultModelGenerator marbleModel = new DefaultModelGenerator();
+        marbleModel.setObjectReference(R.raw.marble);
+        marbleModel.setTextureReference(R.mipmap.marble);
+        marbleModel.setScale(5.0f);
+        marbleModel.setHasTransparency(false);
+        marbleModel.setNormalsPointingUp(false);
+
 		/*Entity map of all the existing entities*/
         entitiesMap.put(fernModel, NUMBER_OF_FERNS);
         entitiesMap.put(treeModel, NUMBER_OF_TREES);
         entitiesMap.put(bananaTreeModel, NUMBER_OF_BANANA_TREES);
         entitiesMap.put(grassModel, NUMBER_OF_GRASS);
         entitiesMap.put(flowerModel, NUMBER_OF_FLOWERS);
+        entitiesMap.put(marbleModel, NUMBER_OF_MARBLES);
 
         return entitiesMap;
     }
 
     /**
-     * @param loader loader that will load the entities of the 3D world
+     * @param loader  loader that will load the entities of the 3D world
+     * @param terrain The terrain used to determine the height position
      * @return The entities that will compose the 3D world
      */
-    public static Entity[] getEntities(Context context, Loader loader) {
+    public static Entity[] getEntities(Context context, Loader loader, Terrain terrain) {
 
         HashMap<DefaultModelGenerator, Integer> entitiesMap = getEntitiesMap();
 
@@ -145,7 +131,9 @@ public class WorldEntitiesGenerator {
             for (int i = 0; i < numberOfEntities; i++) {
                 float xPosition = 20.0f + random.nextFloat() * 200.0f;
                 float zPosition = random.nextFloat() * 200.0f;
-                Vector3f entityPosition = new Vector3f(xPosition, 0.0f, zPosition);
+                float yPosition = terrain.getHeightOfTerrain(xPosition, zPosition);
+
+                Vector3f entityPosition = new Vector3f(xPosition, yPosition, zPosition);
                 Entity entity = getEntity(texturedObj, entityPosition);
                 entity.setScale(key.getScale() * random.nextFloat());
                 entities[count] = entity;
@@ -165,37 +153,5 @@ public class WorldEntitiesGenerator {
         return new Light(lightPosition, lightColor);
     }
 
-    /**
-     * @return The model with information to generate a player
-     */
-    private static DefaultModelGenerator getPlayerModel() {
-        /* Player model */
-        DefaultModelGenerator playerModel = new DefaultModelGenerator();
-        playerModel.setObjectReference(R.raw.player);
-        playerModel.setTextureReference(R.mipmap.player);
-        playerModel.setScale(0.5f);
-        playerModel.setHasTransparency(false);
-        playerModel.setNormalsPointingUp(false);
 
-        return playerModel;
-    }
-
-    /**
-     * @param loader loader that will load the entities of the 3D world
-     * @return The player that is going to be used in the scene
-     */
-    public static Player getPlayer(Context context, Loader loader) {
-        DefaultModelGenerator model = getPlayerModel();
-
-        TexturedModel texturedObj = getTexturedObj(context, loader, model.getObjectReference(), model.getTextureReference(),
-                model.getHasTransparency(), model.getNormalsPointingUp());
-        float xPosition = 20.0f;
-        float zPosition = 0.0f;
-        Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
-        Player player = new Player(texturedObj, playerPosition, // Position
-                0.0f, 0.0f, 0.0f, // Rotation
-                model.getScale() // Scale
-        );
-        return player;
-    }
 }

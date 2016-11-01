@@ -96,7 +96,6 @@ public class MasterRender {
 
     /**
      * Constructor of the master renderer
-     *
      */
     public MasterRender(Context context) {
         //Initializes the projection matrix
@@ -226,9 +225,7 @@ public class MasterRender {
     /**
      * Create the view matrix from the data that has about the camera
      *
-     * @param camera
-     *            the camera to which is to create the view matrix
-     *
+     * @param camera the camera to which is to create the view matrix
      * @return The view matrix
      */
     private GLTransformation createViewMatrix(Camera camera) {
@@ -248,8 +245,8 @@ public class MasterRender {
     private GLTransformation updateCamera() {
 
         //Update the camera taking in account the position of the player
-        if(player != null) {
-            camera.update(player);
+        if (player != null) {
+            camera.update(player, this.terrains.get(0));
         }
 
         // Matrix update
@@ -261,15 +258,14 @@ public class MasterRender {
      */
     private void updatePlayer() {
         if (this.player != null) {
-            this.player.move(this.timeToRender);
+            this.player.move(this.timeToRender, this.terrains.get(0));
         }
     }
 
     /**
      * Render the entire scene (Called by each frame)
      *
-     * @param sun
-     *            Sun of the scene
+     * @param sun Sun of the scene
      */
     public void render(Light sun) {
         this.prepare();

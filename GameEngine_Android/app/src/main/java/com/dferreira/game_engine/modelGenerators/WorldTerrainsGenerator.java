@@ -4,12 +4,12 @@ package com.dferreira.game_engine.modelGenerators;
 import android.content.Context;
 
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.models.TextureData;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.TerrainShape;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.shapes.IShape;
 import com.dferreira.game_engine.textures.TerrainTexturesPack;
 
 /**
@@ -24,7 +24,6 @@ public class WorldTerrainsGenerator {
      * Load the texture of the terrain
      *
      * @param loader Loader to load the raw model
-     *
      * @return the textured model of the terrain
      */
     private static TerrainTexturesPack getTexturedTerrain(Context context, Loader loader) {
@@ -45,27 +44,30 @@ public class WorldTerrainsGenerator {
     }
 
     /**
+     * Creates a terrain in a specified position
      *
-     * @param texturedTerrain
-     *            Model of the terrain to render
-     * @param position
-     *            Position where is to put the terrain
-     * @return  Return one object of type terrain
+     * @param texturedTerrain Packages with textures of the terrain
+     * @param terrainModel    Model of the terrain to render
+     * @param heights         The height of the vertices of the terrain
+     * @param position        Position where is to put the terrain
+     *
+     * @return The terrain in the position specified
      */
-    private static Terrain getTerrain(TerrainTexturesPack texturedTerrain, RawModel terrainModel, Vector3f position) {
-        return new Terrain(texturedTerrain, terrainModel, position);
+    private static Terrain getTerrain(TerrainTexturesPack texturedTerrain, RawModel terrainModel, float[][] heights, Vector3f position) {
+        return new Terrain(texturedTerrain, terrainModel, heights, position);
     }
 
     /**
      * The terrains of the 3D scene
      *
      * @param loader Loader to load the raw model
-     * @return  A set of the terrains of the 3D scene
+     * @return A set of the terrains of the 3D scene
      */
     public static Terrain[] getTerrains(Context context, Loader loader) {
         TerrainTexturesPack terrainTexturesPackage = getTexturedTerrain(context, loader);
+        TextureData heightMap = loader.getTextureData(context, R.mipmap.terrain_heightmap);
 
-        IShape terrain = new TerrainShape();
+        TerrainShape terrain = new TerrainShape(heightMap);
 
         RawModel model = loader.loadToRawModel(terrain.getVertices(), terrain.getTextureCoords(), terrain.getNormals(),
                 terrain.getIndices());
@@ -74,7 +76,7 @@ public class WorldTerrainsGenerator {
 
 
         Vector3f terrainPosition1 = new Vector3f(0.0f, 0.0f, -0.1f);
-        Terrain terrain1 = getTerrain(terrainTexturesPackage, model, terrainPosition1);
+        Terrain terrain1 = getTerrain(terrainTexturesPackage, model, terrain.getHeights(), terrainPosition1);
 
         terrains[0] = terrain1;
         return terrains;

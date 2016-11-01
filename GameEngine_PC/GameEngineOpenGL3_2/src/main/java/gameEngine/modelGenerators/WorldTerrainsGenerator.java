@@ -1,7 +1,7 @@
 package gameEngine.modelGenerators;
 
 import com.dferreira.commons.Vector3f;
-import com.dferreira.commons.shapes.IShape;
+import com.dferreira.commons.models.TextureData;
 
 import gameEngine.models.RawModel;
 import gameEngine.models.Terrain;
@@ -14,7 +14,7 @@ import gameEngine.textures.TerrainTexturesPack;
  */
 public class WorldTerrainsGenerator {
 	private final static String TERRAIN_FOLDER = "terrain/";
-	private final static int NUMBER_OF_TERRAINS = 2;
+	private final static int NUMBER_OF_TERRAINS = 1;
 
 	/**
 	 * Load the textures of the terrain
@@ -45,16 +45,19 @@ public class WorldTerrainsGenerator {
 	 * Creates a terrain in a specified position
 	 * 
 	 * @param texturedTerrain
+	 *            Packages with textures of the terrain
+	 * @param terrainModel
 	 *            Model of the terrain to render
-	 * @param texturedTerrain
-	 *            Model of the terrain to render
+	 * @param heights
+	 *            The height of the vertices of the terrain
 	 * @param position
 	 *            Position where is to put the terrain
 	 * 
 	 * @return The terrain in the position specified
 	 */
-	private static Terrain getTerrain(TerrainTexturesPack texturedTerrain, RawModel terrainModel, Vector3f position) {
-		Terrain terrain = new Terrain(texturedTerrain, terrainModel, position);
+	private static Terrain getTerrain(TerrainTexturesPack texturedTerrain, RawModel terrainModel, float[][] heights,
+			Vector3f position) {
+		Terrain terrain = new Terrain(texturedTerrain, terrainModel, heights, position);
 		return terrain;
 	}
 
@@ -68,19 +71,17 @@ public class WorldTerrainsGenerator {
 	 */
 	public static Terrain[] getTerrains(Loader loader) {
 		TerrainTexturesPack texturedTerrain = getTexturedTerrain(loader);
-		IShape terrain = new TerrainShape();
+		TextureData heightMap = loader.getTextureData(TERRAIN_FOLDER + "heightmap");
+		TerrainShape terrain = new TerrainShape(heightMap);
 		RawModel model = loader.loadToVAO(terrain.getVertices(), terrain.getTextureCoords(), terrain.getNormals(),
 				terrain.getIndices());
 
 		Terrain[] terrains = new Terrain[NUMBER_OF_TERRAINS];
 
 		Vector3f terrainPosition1 = new Vector3f(0.0f, 0.0f, -0.1f);
-		Terrain terrain1 = getTerrain(texturedTerrain, model, terrainPosition1);
-		Vector3f terrainPosition2 = new Vector3f(1.0f, 0.0f, -0.1f);
-		Terrain terrain2 = getTerrain(texturedTerrain, model, terrainPosition2);
+		Terrain terrain1 = getTerrain(texturedTerrain, model, terrain.getHeights(), terrainPosition1);
 
 		terrains[0] = terrain1;
-		terrains[1] = terrain2;
 		return terrains;
 	}
 }

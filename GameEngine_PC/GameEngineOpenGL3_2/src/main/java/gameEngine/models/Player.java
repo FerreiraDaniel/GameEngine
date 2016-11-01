@@ -9,15 +9,14 @@ import org.lwjgl.input.Keyboard;
 public class Player extends Entity {
 
 	/*Distance that the user is going to run in one second*/
-	private static final float RUN_SPEED = 20.0f;
+	private static final float RUN_SPEED = 60.0f;
 	/*Angle that the user will turn in one second*/
 	private static final float TURN_SPEED = 160.0f;
 	/*The gravity that is going to push the player back to the ground*/
 	private static final float GRAVITIY = -0.5f;
 	/*Power that the player is going to be push up when is jumping*/
 	private static final float JUMP_POWER = 0.3f;
-	/*Height of the terrain*/
-	private static final float TERRAIN_HEIGHT = -0.0f;
+
 
 	/*The current speed of the player*/
 	private float currentSpeed = 0.0f;
@@ -50,8 +49,10 @@ public class Player extends Entity {
 	
 	/**
 	 * Check the input of the user in order to update the current values of the movement
+	 * 
+	 * @param terrain Reference to the terrain
 	 */
-	private void checkInputs() {
+	private void checkInputs(Terrain terrain) {
 		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
 			//Go in front
 			this.currentSpeed = RUN_SPEED;
@@ -74,7 +75,7 @@ public class Player extends Entity {
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			this.jump();
+			this.jump(terrain);
 		}
 	}
 
@@ -99,22 +100,27 @@ public class Player extends Entity {
 	 * 
 	 * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is 
 	 * frame rate independent
+	 * @param terrain	Reference to the terrain to compute where is going to fall
 	 */
-	private void fallDown(float timeToRender) {
-		if((getPosition().y > TERRAIN_HEIGHT) || (upwardsSpeed > 0)) {
+	private void fallDown(float timeToRender, Terrain terrain) {
+		float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
+		if((getPosition().y > terrainHeight) || (upwardsSpeed > 0)) {
 			upwardsSpeed += GRAVITIY * timeToRender;
 			super.increasePosition(0.0f, upwardsSpeed, 0.0f);
 		} else {
-			super.getPosition().y = TERRAIN_HEIGHT;
+			super.getPosition().y = terrainHeight;
 		}
 	}
 	
 	/**
 	 * Set the upward speed of the player in order make it jump
+	 * 
+	 * @param terrain Reference to the terrain in order to compute the height that is going to jump
 	 */
-	private void jump() {
-		if(super.getPosition().y <= TERRAIN_HEIGHT) {
-			upwardsSpeed = TERRAIN_HEIGHT + JUMP_POWER;
+	private void jump(Terrain terrain) {
+		float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
+		if(super.getPosition().y <= terrainHeight) {
+			upwardsSpeed = terrainHeight + JUMP_POWER;
 		}
 	}
 	
@@ -123,11 +129,12 @@ public class Player extends Entity {
 	 * 
 	 * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is 
 	 * frame rate independent
+	 * @param terrain	Terrain used to determine the height where the player is going to fall/stay
 	 */
-	public void move(float timeToRender) {
-		checkInputs();
+	public void move(float timeToRender, Terrain terrain) {
+		checkInputs(terrain);
 		moveAndRotate(timeToRender);
-		fallDown(timeToRender);
+		fallDown(timeToRender, terrain);
 	}
 	
 }

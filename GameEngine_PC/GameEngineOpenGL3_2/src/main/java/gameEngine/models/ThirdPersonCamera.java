@@ -31,12 +31,13 @@ public class ThirdPersonCamera extends Camera {
 	 * Uses the position of the player to update the position of the camera
 	 *
 	 * @param player Reference to that the camera is going to follow
+	 * @param terrain			The camera needs to be above the terrain otherwise gets flick
 	 */
-	public void update(Player player) {
+	public void update(Player player, Terrain terrain) {
 		this.checkMouseInputs();
 		float horizontalDistance = getHorizontalDistance();
 		float verticalDistance = getVerticalDistance();
-		this.calculateCameraPosition(horizontalDistance, verticalDistance, player);
+		this.calculateCameraPosition(horizontalDistance, verticalDistance, player, terrain);
 		this.setYaw(180 - player.getRotY() + angleAroundPlayer);
 	}
 	
@@ -47,15 +48,22 @@ public class ThirdPersonCamera extends Camera {
      * @param horizontalDistance		Horizontal distance
      * @param verticalDistance	Vertical distance
      * @param player			Player of the scene
+     * @param terrain			The camera needs to be above the terrain otherwise gets flick
      */
-    private void calculateCameraPosition(float horizontalDistance, float verticalDistance, Player player) {
+    private void calculateCameraPosition(float horizontalDistance, float verticalDistance, Player player, Terrain terrain) {
         float theta = player.getRotY() + angleAroundPlayer;
         double rTheta = Math.toRadians(theta);
         float offsetX = (float) (horizontalDistance * Math.sin(rTheta));
         float offsetZ = (float) (horizontalDistance * Math.cos(rTheta));
         getPosition().x = 1.0f * player.getPosition().x + offsetX;
         getPosition().z = 1.0f * player.getPosition().z - offsetZ;
-        getPosition().y = (player.getPosition().y + 10.0f)  + verticalDistance;
+        getPosition().y = (player.getPosition().y + 10.0f  + 
+        		verticalDistance);
+        float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
+        if(getPosition().y < terrainHeight) {
+        	getPosition().y = (player.getPosition().y + 10.0f + terrainHeight  + 
+            		verticalDistance);
+        } 
     }
 	
 	/**

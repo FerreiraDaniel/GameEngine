@@ -33,12 +33,12 @@ public class GameViewController: GLKViewController {
         /* Initializes the main variables responsible to render the 3D world */
         let loader : Loader = Loader()
         
-        
-        /* Prepares the entities that is going to be render */
-        self.entities = WorldEntitiesGenerator.getEntities(loader);
-        
         /* Prepares the terrains that is going to render */
         self.terrains = WorldTerrainsGenerator.getTerrains(loader);
+        
+        /* Prepares the entities that is going to be render */
+        self.entities = WorldEntitiesGenerator.getEntities(loader, terrain: terrains[0]);
+        
         
         /* Load the lights that is going to render*/
         self.light = WorldEntitiesGenerator.getLight();

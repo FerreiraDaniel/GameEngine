@@ -247,7 +247,7 @@ public class MasterRender {
 		
 		//Update the camera taking in account the position of the player
 		if(player != null) {
-			camera.update(player);
+			camera.update(player, this.terrains.get(0));
 		}
 				
 		// Matrix update
@@ -260,7 +260,7 @@ public class MasterRender {
 	 */
 	private void updatePlayer() {
 		if(this.player != null) {
-			this.player.move(this.timeToRender);
+			this.player.move(this.timeToRender, this.terrains.get(0));
 		}
 	}
 

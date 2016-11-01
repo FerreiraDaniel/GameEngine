@@ -1,5 +1,6 @@
 com/dferreira/commons/GLSLUtils.class
 com/dferreira/commons/GLTransformation.class
+com/dferreira/commons/Maths.class
 com/dferreira/commons/shapes/WfObject.class
 com/dferreira/commons/models/TextureData.class
 com/dferreira/commons/Vector3f.class

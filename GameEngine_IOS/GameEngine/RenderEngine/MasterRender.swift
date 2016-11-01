@@ -138,7 +138,7 @@ public class MasterRender : NSObject{
     */
     private func updatePlayer() {
         if (self.player != nil) {
-            self.player.move(self.timeToRender);
+            self.player.move(self.timeToRender, terrain: terrains[0]);
         }
     }
     

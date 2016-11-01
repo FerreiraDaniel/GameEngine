@@ -34,4 +34,14 @@ public class Vector3f extends Vector2f {
                 "z=" + z +
                 '}';
     }
+
+    /**
+     * Normalizes the components of the vector
+     */
+    public void normalise() {
+        double magnitude = Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
+        this.x = (float) (x / magnitude);
+        this.y = (float) (y / magnitude);
+        this.z = (float) (z / magnitude);
+    }
 }

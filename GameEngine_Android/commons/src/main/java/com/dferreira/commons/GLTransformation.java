@@ -250,6 +250,7 @@ public class GLTransformation {
      * @param ty	translation vector in the y-axle
      * @param tz 	translation vector in the z-axle
      */
+    @SuppressWarnings("SameParameterValue")
     public void setTranslation(float tx, float ty, float tz) {
         //The translation is the last column
         mMatrix[12] = tx;

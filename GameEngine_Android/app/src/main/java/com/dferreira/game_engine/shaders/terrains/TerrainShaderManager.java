@@ -133,6 +133,7 @@ public class TerrainShaderManager extends ShaderManager {
      * @param reflectivity
      *            The reflectivity of the material
      */
+    @SuppressWarnings("SameParameterValue")
     public void loadShineVariables(float damper, float reflectivity) {
         super.loadFloat(uniforms[TTerrainUniform.shineDamper.ordinal()], damper);
         super.loadFloat(uniforms[TTerrainUniform.reflectivity.ordinal()], reflectivity);

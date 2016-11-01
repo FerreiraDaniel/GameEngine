@@ -7,6 +7,23 @@ import java.nio.ByteBuffer;
  */
 public class TextureData {
 
+	/* Number of components of the image (RGBA) */
+	private static final int COMPONENTS_IMAGE = 4;
+
+	
+	/* Offset of the red component */
+	private static final int R_POSITION = 0;
+	/* Offset of the green component */
+	private static final int G_POSITION = 1;
+	/* Offset of the blue component */
+	private static final int B_POSITION = 2;
+
+    /*Max allowed value of the a component of a pixel*/
+    private static final int MAX_COMPONENT = 255;
+
+    /*Maximum value that the component RGB has*/
+    public static final float MAX_PIXEL_COLOR = MAX_COMPONENT * MAX_COMPONENT * MAX_COMPONENT;
+	
 	/**
 	 * Width of the texture
 	 */
@@ -58,5 +75,46 @@ public class TextureData {
 	 */
 	public ByteBuffer getBuffer() {
 		return buffer;
+	}
+
+	/**
+	 * Get the component of the image
+	 * 
+	 * @param x
+	 *            x-coordinate
+	 * @param y
+	 *            y-coordinate
+	 * @param this_
+	 *            Texture with different heights in the terrain
+	 * @param componentOffset
+	 * 
+	 * @return
+	 */
+	private char getComponent(int x, int y, int componentOffset) {
+		// First check if the coordinates are in the range of the image
+		if ((x < 0) || (x >= this.getHeight()) || (y < 0) || (y >= this.getHeight())) {
+			// No in the range
+			return 0;
+		} else {
+			int index = ((y * this.getWidth()) + x) * COMPONENTS_IMAGE;
+			char component = (char) this.getBuffer().get(index + componentOffset);
+			return component;
+		}
+	}
+
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 * 
+	 * @return One integer representing the RGB colors of the pixel in the
+	 *         position passed
+	 */
+	public int getRGB(int x, int y) {
+		char rComponent = getComponent(x, y, R_POSITION);
+		char gComponent = getComponent(x, y, G_POSITION);
+		char bComponent = getComponent(x, y, B_POSITION);
+
+		return (bComponent << 16) + (gComponent << 8) + rComponent;
 	}
 }

@@ -3,6 +3,7 @@ package gameEngine.views;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.modelGenerators.WorldEntitiesGenerator;
+import gameEngine.modelGenerators.WorldPlayersGenerator;
 import gameEngine.modelGenerators.WorldSkyBoxGenerator;
 import gameEngine.modelGenerators.WorldTerrainsGenerator;
 import gameEngine.models.Entity;
@@ -45,7 +46,7 @@ public class GameEngineRenderer {
 	 * SkyBox of the 3D world
 	 */
 	private SkyBox skyBox;
-	
+
 	/**
 	 * The player that is going to be show in the scene
 	 */
@@ -68,20 +69,21 @@ public class GameEngineRenderer {
 		this.loader = new Loader();
 		this.renderer = new MasterRender();
 
-		/* Prepares the entities that is going to be render */
-		this.entities = WorldEntitiesGenerator.getEntities(loader);
-
 		/* Prepares the terrains that is going to render */
 		this.terrains = WorldTerrainsGenerator.getTerrains(loader);
+		
+		/* Prepares the entities that is going to be render */
+		this.entities = WorldEntitiesGenerator.getEntities(loader, terrains[0]);
+
 
 		/* Load the light that is going to render */
 		this.light = WorldEntitiesGenerator.getLight();
 
 		/* Load the sky box that is going to render */
 		this.skyBox = WorldSkyBoxGenerator.getSky(loader);
-		
-		/*Prepares the player that is going to be used in the scene*/
-		this.player = WorldEntitiesGenerator.getPlayer(loader);
+
+		/* Prepares the player that is going to be used in the scene */
+		this.player = WorldPlayersGenerator.getPlayer(loader);
 	}
 
 	/**

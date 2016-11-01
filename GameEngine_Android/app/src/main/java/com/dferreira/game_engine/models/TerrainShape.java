@@ -1,5 +1,8 @@
 package com.dferreira.game_engine.models;
 
+
+import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.models.TextureData;
 import com.dferreira.game_engine.shapes.IShape;
 
 /**
@@ -12,10 +15,22 @@ public class TerrainShape implements IShape {
     /* Number of vertices in each side of the terrain */
     private static final int VERTEX_COUNT = 128;
 
+
+    /*Minimum height that the terrain has*/
+    private static final float MIN_HEIGHT = -120.0f;
+    /*Maximum height that the terrain has*/
+    private static final float MAX_HEIGHT = 120.0f;
+
+
     /**
      * Vertices of the terrain
      */
     private float[] vertices;
+
+    /**
+     * Heights of the vertices that make the terrain
+     */
+    private float[][] heights;
 
     /**
      * Normals of the terrain
@@ -35,34 +50,67 @@ public class TerrainShape implements IShape {
 
     /**
      * Constructor of the terrain shape
+     *
+     * @param heightMap Texture with different heights in the terrain
      */
-    public TerrainShape() {
-        generateTerrain();
+    public TerrainShape(TextureData heightMap) {
+        generateTerrain(heightMap);
     }
 
     /**
-     * Generates a completely flat terrain
+     * Get the height of the terrain in the specified coordinate
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return the height of the terrain in the specified position
      */
-    private void generateTerrain() {
+    private float getCurrentHeight(int x, int y) {
+        if ((x < 0) || (x >= VERTEX_COUNT) || (y < 0) || (y >= VERTEX_COUNT)) {
+            return 0.0f;
+        } else {
+            return heights[x][y];
+        }
+    }
+
+    /**
+     * Generates a terrain
+     *
+     * @param heightMap Texture with different heights in the terrain
+     */
+    private void generateTerrain(TextureData heightMap) {
         int count = VERTEX_COUNT * VERTEX_COUNT;
         this.vertices = new float[count * 3];
         this.normals = new float[count * 3];
         this.textureCoords = new float[count * 2];
         this.indices = new int[6 * (VERTEX_COUNT - 1) * (VERTEX_COUNT - 1)];
+        this.heights = new float[VERTEX_COUNT][VERTEX_COUNT];
+
+        // Generates the positions of the terrain
         int vertexPointer = 0;
         for (int i = 0; i < VERTEX_COUNT; i++) {
             for (int j = 0; j < VERTEX_COUNT; j++) {
+                this.heights[j][i] = getHeight(j, i, heightMap);
                 vertices[vertexPointer * 3] = (float) j / ((float) VERTEX_COUNT - 1) * SIZE;
-                vertices[vertexPointer * 3 + 1] = 0;
+                vertices[vertexPointer * 3 + 1] = this.heights[j][i];
                 vertices[vertexPointer * 3 + 2] = (float) i / ((float) VERTEX_COUNT - 1) * SIZE;
-                normals[vertexPointer * 3] = 0;
-                normals[vertexPointer * 3 + 1] = 1;
-                normals[vertexPointer * 3 + 2] = 0;
                 textureCoords[vertexPointer * 2] = (float) j / ((float) VERTEX_COUNT - 1);
                 textureCoords[vertexPointer * 2 + 1] = (float) i / ((float) VERTEX_COUNT - 1);
                 vertexPointer++;
             }
         }
+
+        // Generates the normals of the terrain
+        vertexPointer = 0;
+        for (int i = 0; i < VERTEX_COUNT; i++) {
+            for (int j = 0; j < VERTEX_COUNT; j++) {
+                Vector3f normal = calculateNormal(j, i);
+                normals[vertexPointer * 3] = normal.x;
+                normals[vertexPointer * 3 + 1] = normal.y;
+                normals[vertexPointer * 3 + 2] = normal.z;
+                vertexPointer++;
+            }
+        }
+
         int pointer = 0;
         for (int gz = 0; gz < VERTEX_COUNT - 1; gz++) {
             for (int gx = 0; gx < VERTEX_COUNT - 1; gx++) {
@@ -78,6 +126,42 @@ public class TerrainShape implements IShape {
                 indices[pointer++] = bottomRight;
             }
         }
+    }
+
+    /**
+     * Computes the normal of a vertex using for that the neighbor points
+     *
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return The normal of the point
+     */
+    private Vector3f calculateNormal(int x, int y) {
+        float heightL = getCurrentHeight(x - 1, y);
+        float heightR = getCurrentHeight(x + 1, y);
+        float heightD = getCurrentHeight(x, y - 1);
+        float heightU = getCurrentHeight(x, y + 1);
+        Vector3f normal = new Vector3f(heightL - heightR, 2f, heightD - heightU);
+        normal.normalise();
+        return normal;
+    }
+
+    /**
+     * Get the height that was specified in the height map image
+     *
+     * @param x         x-coordinate
+     * @param y         y-coordinate
+     * @param heightMap Texture with different heights in the terrain
+     *
+     * @return the height of the terrain in the specified position
+     */
+    @SuppressWarnings("UnnecessaryLocalVariable")
+    private float getHeight(int x, int y, TextureData heightMap) {
+
+        long rgb = heightMap.getRGB(x, y);
+        float heightNormal = (rgb / TextureData.MAX_PIXEL_COLOR);
+        float finalHeight = (heightNormal * (MAX_HEIGHT - MIN_HEIGHT)) + MIN_HEIGHT;
+
+        return finalHeight;
     }
 
     /**
@@ -109,4 +193,10 @@ public class TerrainShape implements IShape {
     }
 
 
+    /**
+     * @return The heights of the vertices of the terrain
+     */
+    public float[][] getHeights() {
+        return this.heights;
+    }
 }

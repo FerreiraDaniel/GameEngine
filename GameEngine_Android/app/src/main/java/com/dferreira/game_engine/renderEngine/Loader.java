@@ -81,6 +81,7 @@ public class Loader {
      *
      * @param context    Context where this method will be called
      * @param resourceId id of the resource where the texture exists
+     *
      * @return Id from the texture that was bounded in openGL
      */
     @SuppressWarnings("SameParameterValue")
@@ -137,6 +138,20 @@ public class Loader {
         }
         defineTextureFunctionFilters(GLES20.GL_TEXTURE_CUBE_MAP);
         return textureId[0];
+    }
+
+    /**
+     *  Loads the data of a texture without bind
+     *
+     * @param context    Context where this method will be called
+     * @param resourceId id of the resource where the texture exists
+     *
+     * @return The texture read from the file without any openGL bind
+     */
+    @SuppressWarnings({"SameParameterValue", "UnnecessaryLocalVariable"})
+    public TextureData getTextureData(Context context, int resourceId) {
+        TextureData textureData = LoadUtils.decodeTextureFile(context, resourceId);
+        return textureData;
     }
 
     /**

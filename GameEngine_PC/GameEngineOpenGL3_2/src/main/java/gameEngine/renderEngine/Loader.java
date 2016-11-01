@@ -179,6 +179,7 @@ public class Loader {
 			return textureId;
 		}
 	}
+	
 
 	/**
 	 * Loads a cubic texture
@@ -218,6 +219,19 @@ public class Loader {
 		textures.add(textureId);
 		return textureId;
 	}
+	
+    /**
+     *  Loads the data of a texture without bind 
+     * 
+     * @param fileName
+     *            Name of the file to load without the .png extension in the end
+     *
+     * @return The texture read from the file without any openGL bind
+     */
+    public TextureData getTextureData(String fileName) {
+        TextureData textureData = LoadUtils.loadTexture(RESOURCES_FOLDER + fileName + PNG_EXTENSION);
+        return textureData;
+    }
 
 	/**
 	 * A bit o memory cleaning
