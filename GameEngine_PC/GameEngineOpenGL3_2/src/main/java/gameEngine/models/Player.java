@@ -114,6 +114,7 @@ public class Player extends Entity {
 			super.getPosition().y = terrainHeight;
 		}
 		
+		//Set the flag of jump to false
 		if(super.getPosition().y <= terrainHeight) {
 			this.isJumping = false;
 		}

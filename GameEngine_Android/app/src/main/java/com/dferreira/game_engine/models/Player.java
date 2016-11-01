@@ -14,9 +14,9 @@ public class Player extends Entity {
     /*Angle that the user will turn in one second*/
     private static final float TURN_SPEED = 160.0f;
     /*The gravity that is going to push the player back to the ground*/
-    private static final float GRAVITY = -0.5f;
+    private static final float GRAVITY = -9.8f;
     /*Power that the player is going to be push up when is jumping*/
-    private static final float JUMP_POWER = 0.3f;
+    private static final float JUMP_POWER = 0.01f;
 
 
     /*The current speed of the player*/
@@ -44,6 +44,7 @@ public class Player extends Entity {
     @SuppressWarnings("SameParameterValue")
     public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
         super(model, position, rotX, rotY, rotZ, scale);
+        this.isJumping = false;
     }
 
     /**
@@ -103,11 +104,16 @@ public class Player extends Entity {
      */
     private void fallDown(float timeToRender, Terrain terrain) {
         float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
-        if ((getPosition().y > terrainHeight) || (upwardsSpeed > 0)) {
+        if (((getPosition().y > terrainHeight) || (upwardsSpeed > 0)) && isJumping) {
             upwardsSpeed += GRAVITY * timeToRender;
             super.increasePosition(0.0f, upwardsSpeed, 0.0f);
         } else {
             super.getPosition().y = terrainHeight;
+        }
+
+        //Set the flag of jump to false
+        if (super.getPosition().y <= terrainHeight) {
+            this.isJumping = false;
         }
     }
 
@@ -118,8 +124,9 @@ public class Player extends Entity {
      */
     private void jump(Terrain terrain) {
         float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
-        if(super.getPosition().y <= terrainHeight) {
+        if ((super.getPosition().y <= terrainHeight) && (!isJumping)) {
             upwardsSpeed = terrainHeight + JUMP_POWER;
+            isJumping = true;
         }
     }
 
