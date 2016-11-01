@@ -90,7 +90,6 @@ public class Terrain {
                                            v3: Vector3f(x: 0.0, y: v3Height, z: gridSquareSize),
                                            pos: Vector2f(x: xCoord, y: zCoord));
             }
-            
             return height;
         }
         

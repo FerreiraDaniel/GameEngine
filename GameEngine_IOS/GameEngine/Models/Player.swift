@@ -23,6 +23,9 @@ public class Player : Entity {
     /*The speed which the player is going up*/
     private var upwardsSpeed : Float;
     
+    /*Indicates if is jumping or not*/
+    private var isJumping : Bool
+    
     /**
      * Initiator of the player to be render in the 3D world
      *
@@ -37,6 +40,7 @@ public class Player : Entity {
         self.currentSpeed = 0.0
         self.currentTurnSpeed = 0.0
         self.upwardsSpeed = 0.0
+        self.isJumping = false;
         super.init(model: model, position: position, rotX: rotX, rotY: rotY, rotZ: rotZ, scale: scale);
     }
     
@@ -97,11 +101,17 @@ public class Player : Entity {
     private func fallDown(timeToRender : Float, terrain : Terrain) {
         let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
         
-        if ((position.y > terrainHeight) || (upwardsSpeed > 0)) {
+        
+        if (((position.y > terrainHeight) || (upwardsSpeed > 0)) && isJumping) {
             upwardsSpeed += GRAVITY * timeToRender;
             super.increasePosition(0.0, dy: upwardsSpeed, dz: 0.0);
         } else {
             super.position.y = terrainHeight;
+        }
+        
+        //Ends the jump
+        if(isJumping) && (position.y <= terrainHeight) {
+            isJumping = false
         }
     }
     
@@ -113,6 +123,7 @@ public class Player : Entity {
         let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
         if (position.y <= terrainHeight) {
             upwardsSpeed = terrainHeight + JUMP_POWER;
+            isJumping = true
         }
     }
     

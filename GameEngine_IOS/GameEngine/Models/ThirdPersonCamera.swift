@@ -28,11 +28,12 @@ public class ThirdPersonCamera : Camera {
     * Uses the position of the player to update the position of the camera
     *
     * @param player Reference to that the camera is going to follow
+    * @param terrain			The camera needs to be above the terrain otherwise gets flick
     */
-    public func update(Player player: Player) {
+    public func update(Player player: Player, terrain : Terrain) {
         let horizontalDistance = getHorizontalDistance();
         let verticalDistance = getVerticalDistance();
-        self.calculateCameraPosition(horizontalDistance, verticalDistance: verticalDistance, player: player);
+        self.calculateCameraPosition(horizontalDistance, verticalDistance: verticalDistance, player: player, terrain: terrain);
         self.yaw = (180 - player.rotY + angleAroundPlayer);
     }
     
@@ -43,7 +44,7 @@ public class ThirdPersonCamera : Camera {
     * @param verticalDistance   Vertical distance
     * @param player             Player of the scene
     */
-    private func calculateCameraPosition(horizontalDistance: Float, verticalDistance : Float, player : Player) {
+    private func calculateCameraPosition(horizontalDistance: Float, verticalDistance : Float, player : Player, terrain : Terrain) {
         let theta = player.rotY + angleAroundPlayer;
         let rTheta = Math.toRadians(theta);
         
@@ -52,6 +53,11 @@ public class ThirdPersonCamera : Camera {
         position.x = player.position.x + offsetX;
         position.z = player.position.z - offsetZ;
         position.y = (player.position.y + 10.0) + verticalDistance;
+        //Check if the camera is above the terrain
+        let terrainHeight : Float = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
+        if(position.y < terrainHeight) {
+            position.y = (position.y + terrainHeight);
+        }
     }
     
     

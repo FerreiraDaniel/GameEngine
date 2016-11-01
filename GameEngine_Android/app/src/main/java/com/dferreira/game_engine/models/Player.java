@@ -28,6 +28,9 @@ public class Player extends Entity {
     /*The speed which the player is going up*/
     private float upwardsSpeed = 0.0f;
 
+    /*Indicates if the player is jumping or not*/
+    private boolean isJumping;
+
     /**
      * Constructor of the player to be render in the 3D world
      *
