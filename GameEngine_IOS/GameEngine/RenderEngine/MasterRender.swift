@@ -125,7 +125,7 @@ public class MasterRender : NSObject{
         
         //Update the camera taking in account the position of the player
         if(player != nil) {
-            camera.update(Player: player);
+            camera.update(Player: player, terrain: terrains[0]);
         }
         
         // Matrix update
