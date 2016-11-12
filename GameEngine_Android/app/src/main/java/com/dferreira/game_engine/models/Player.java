@@ -18,6 +18,9 @@ public class Player extends Entity {
     /*Power that the player is going to be push up when is jumping*/
     private static final float JUMP_POWER = 0.01f;
 
+    /*Texture index of the player*/
+    private static final int TEXTURE_INDEX = 0;
+
 
     /*The current speed of the player*/
     private float currentSpeed = 0.0f;
@@ -43,7 +46,7 @@ public class Player extends Entity {
      */
     @SuppressWarnings("SameParameterValue")
     public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
-        super(model, position, rotX, rotY, rotZ, scale);
+        super(model, position, rotX, rotY, rotZ, scale, TEXTURE_INDEX);
         this.isJumping = false;
     }
 

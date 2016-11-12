@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
@@ -28,15 +29,14 @@ public class EntityShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context   Context where the game engine will be created
+     * @param context Context where the game engine will be created
      */
-    public EntityShaderManager(Context context ) {
+    public EntityShaderManager(Context context) {
         super(context, R.raw.entity_vertex_shader, R.raw.entity_fragment_shader);
     }
 
     /**
      * Bind the attributes of the program shader
-     *
      */
     @Override
     protected List<IEnum> getAttributes() {
@@ -59,6 +59,24 @@ public class EntityShaderManager extends ShaderManager {
     }
 
     /**
+     * Load the atlas factor in the shader program
+     *
+     * @param atlasFactor The atlas factor to load
+     */
+    public void loadAtlasFactor(int atlasFactor) {
+        super.loadFloat(uniforms[TEntityUniform.atlasFactor.getValue()], atlasFactor);
+    }
+
+    /**
+     * Load the offset of the texture useful if it is an atlas texture
+     *
+     * @param textureOffset the offset of the texture
+     */
+    public void loadTextureOffset(Vector2f textureOffset) {
+        super.loadVector(uniforms[TEntityUniform.textureOffset.getValue()], textureOffset);
+    }
+
+    /**
      * Load the color of the sky in order to simulate fog
      *
      * @param skyColor Color of the sky
@@ -70,8 +88,7 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Load the projection matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadProjectionMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TEntityUniform.projectionMatrix.getValue()], matrix);
@@ -80,8 +97,7 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Load the view matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadViewMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TEntityUniform.viewMatrix.getValue()], matrix);
@@ -91,8 +107,7 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Put passes the information of the light to the Shader program
      *
-     * @param light
-     *            the light to load in the shader program
+     * @param light the light to load in the shader program
      */
     public void loadLight(Light light) {
         super.loadVector(uniforms[TEntityUniform.lightPosition.getValue()], light.getPosition());
@@ -102,10 +117,8 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Load the values of the specular light in the fragment shader
      *
-     * @param damper
-     *            The damper of the specular lighting
-     * @param reflectivity
-     *            The reflectivity of the material
+     * @param damper       The damper of the specular lighting
+     * @param reflectivity The reflectivity of the material
      */
     public void loadShineVariables(float damper, float reflectivity) {
         super.loadFloat(uniforms[TEntityUniform.shineDamper.getValue()], damper);
@@ -115,9 +128,8 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Set in the shader if the normals should all of them point up
      *
-     * @param normalsPointingUp
-     *            Flag that indicates if all the normals of the entity are
-     *            pointing up or not
+     * @param normalsPointingUp Flag that indicates if all the normals of the entity are
+     *                          pointing up or not
      */
     public void loadNormalsPointingUp(boolean normalsPointingUp) {
         super.loadBoolean(uniforms[TEntityUniform.normalsPointingUp.getValue()], normalsPointingUp);
@@ -127,8 +139,7 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Load the transformation matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadTransformationMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.getValue()], matrix);

@@ -1,5 +1,6 @@
 package com.dferreira.game_engine.models;
 
+import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 
 /**
@@ -20,18 +21,31 @@ public class Entity {
     private float scale;
 
     /**
+     * If the object has an atlas factor bigger that one this this index will
+     * indicate which one of the textures the entity is using
+     */
+    private int textureIndex;
+
+    /**
+     * 2D vector that is going to determine where the texture of the entity is
+     * going to start
+     */
+    private Vector2f textureOffset;
+
+    /**
      * Constructor of the entity to be render in the 3D world
      *
-     * @param model Textured model
-     * @param position position where the model should be render
-     * @param rotX	Rotation of the model in the X axle
-     * @param rotY  Rotation of the model in the Y axle
-     * @param rotZ	Rotation of the model in the Z axle
-     * @param scale Scale of the model
+     * @param model        Textured model
+     * @param position     position where the model should be render
+     * @param rotX         Rotation of the model in the X axle
+     * @param rotY         Rotation of the model in the Y axle
+     * @param rotZ         Rotation of the model in the Z axle
+     * @param scale        Scale of the model
+     * @param textureIndex Indicates which of the textures is going to use
      */
     @SuppressWarnings("SameParameterValue")
     public Entity(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ,
-                  float scale) {
+                  float scale, int textureIndex) {
         super();
         this.model = model;
         this.position = position;
@@ -39,14 +53,16 @@ public class Entity {
         this.rotY = rotY;
         this.rotZ = rotZ;
         this.scale = scale;
+        this.textureIndex = textureIndex;
+        this.textureOffset = this.computeTextureOffset();
     }
 
     /**
      * Increases the position of the model using for that the specified components
      *
-     * @param dx	X component to be increase
-     * @param dy	Y component to be increase
-     * @param dz	Z component to be increase
+     * @param dx X component to be increase
+     * @param dy Y component to be increase
+     * @param dz Z component to be increase
      */
     void increasePosition(float dx, float dy, float dz) {
         this.position.x += dx;
@@ -56,9 +72,10 @@ public class Entity {
 
     /**
      * Increases the rotation of the model using for that the specified components
-     * @param dx	X component to be increase
-     * @param dy	Y component to be increase
-     * @param dz	Z component to be increase
+     *
+     * @param dx X component to be increase
+     * @param dy Y component to be increase
+     * @param dz Z component to be increase
      */
     @SuppressWarnings("SameParameterValue")
     public void increaseRotation(float dx, float dy, float dz) {
@@ -89,7 +106,6 @@ public class Entity {
     }
 
     /**
-     *
      * @param position The position to be set
      */
     public void setPosition(Vector3f position) {
@@ -152,5 +168,64 @@ public class Entity {
         this.scale = scale;
     }
 
+    /**
+     * @return the index of texture
+     */
+    public int getTextureIndex() {
+        return textureIndex;
+    }
 
+    /**
+     * @param textureIndex the index of the texture to set
+     */
+    public void setTextureIndex(int textureIndex) {
+        this.textureIndex = textureIndex;
+        this.textureOffset = computeTextureOffset();
+    }
+
+    /**
+     * @return A number between 0 and 1 that is going indicate where the texture
+     * will have have there x-axle start based upon the texture atlas
+     * factor
+     */
+    private float computeTextureXOffset() {
+        if ((this.textureIndex == 0.0f) || (this.model == null) || (this.model.getTexture() == null)) {
+            return 0.0f;
+        } else {
+            int atlasFactor = this.model.getTexture().getAtlasFactor();
+            float column = textureIndex % (atlasFactor);
+            // Return the value in percentage of the total
+            return column / ((float) atlasFactor);
+        }
+    }
+
+    /**
+     * @return A number between 0 and 1 that is going indicate where the texture
+     * will have have there y-axle start based upon the texture atlas
+     * factor
+     */
+    private float computeTextureYOffset() {
+        if ((this.textureIndex == 0.0f) || (this.model == null) || (this.model.getTexture() == null)) {
+            return 0.0f;
+        } else {
+            int atlasFactor = this.model.getTexture().getAtlasFactor();
+            float row = textureIndex / (atlasFactor);
+            // Return the value in percentage of the total
+            return row / ((float) atlasFactor);
+        }
+    }
+
+    /**
+     * @return A vector with coordinates where the texture starts
+     */
+    private Vector2f computeTextureOffset() {
+        return new Vector2f(computeTextureXOffset(), computeTextureYOffset());
+    }
+
+    /**
+     * @return the offset of the texture of the entity
+     */
+    public Vector2f getTextureOffset() {
+        return textureOffset;
+    }
 }

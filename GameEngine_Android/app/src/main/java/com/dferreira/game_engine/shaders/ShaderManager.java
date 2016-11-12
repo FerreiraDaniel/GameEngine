@@ -8,6 +8,7 @@ import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.ShaderProgram;
+import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.utils.LoadUtils;
 
@@ -85,9 +86,7 @@ public abstract class ShaderManager {
     /**
      * Get the position of one uniform variable in the program shader
      *
-     * @param uniformName
-     *            the name of the uniform variable as appears in the shader code
-     *
+     * @param uniformName the name of the uniform variable as appears in the shader code
      * @return the position of the uniform variable in program shader
      */
     protected int getUniformLocation(Enum<?> uniformName) {
@@ -101,10 +100,8 @@ public abstract class ShaderManager {
     /**
      * Load a integer value to be used in the shader script
      *
-     * @param location
-     *            location of the shader variable in the script
-     * @param value
-     *            The value to load
+     * @param location location of the shader variable in the script
+     * @param value    The value to load
      */
     protected void loadInt(int location, int value) {
         GLES20.glUniform1i(location, value);
@@ -121,10 +118,20 @@ public abstract class ShaderManager {
     }
 
     /**
-     * Load a vector to be used in the shader script
+     * Load a 2D vector to be used in the shader script
      *
      * @param location location of the shader variable in the script
-     * @param vector The vector to load
+     * @param vector   The vector to load
+     */
+    protected void loadVector(int location, Vector2f vector) {
+        GLES20.glUniform2f(location, vector.x, vector.y);
+    }
+
+    /**
+     * Load a 3D vector to be used in the shader script
+     *
+     * @param location location of the shader variable in the script
+     * @param vector   The vector to load
      */
     protected void loadVector(int location, Vector3f vector) {
         GLES20.glUniform3f(location, vector.x, vector.y, vector.z);

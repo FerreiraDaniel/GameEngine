@@ -21,7 +21,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
     private final static int NUMBER_OF_TREES = 10;
     private final static int NUMBER_OF_BANANA_TREES = 5;
-    private final static int NUMBER_OF_FERNS = 10;
+    private final static int NUMBER_OF_FERNS = 100;
     private final static int NUMBER_OF_GRASS = 10;
     private final static int NUMBER_OF_FLOWERS = 20;
     private final static int NUMBER_OF_MARBLES = 10;
@@ -37,7 +37,8 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         return new Entity(texturedEntity,
                 position,
                 0.0f, 0.0f, 0.0f,    //Rotation
-                0.0f    //Scale
+                0.0f,    //Scale
+                0 //Image index used in case of atlas images
         );
     }
 
@@ -54,6 +55,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         fernModel.setScale(1.0f);
         fernModel.setHasTransparency(true);
         fernModel.setNormalsPointingUp(true);
+        fernModel.setAtlasFactor(2);
 
 		/*Tree model*/
         DefaultModelGenerator treeModel = new DefaultModelGenerator();
@@ -62,6 +64,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         treeModel.setScale(10.0f);
         treeModel.setHasTransparency(false);
         treeModel.setNormalsPointingUp(false);
+        treeModel.setAtlasFactor(1);
 
         /*Banana tree*/
         DefaultModelGenerator bananaTreeModel = new DefaultModelGenerator();
@@ -70,6 +73,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         bananaTreeModel.setScale(1.0f);
         bananaTreeModel.setHasTransparency(true);
         bananaTreeModel.setNormalsPointingUp(false);
+        bananaTreeModel.setAtlasFactor(1);
 
 
 		/*grass model*/
@@ -79,6 +83,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         grassModel.setScale(1.0f);
         grassModel.setHasTransparency(true);
         grassModel.setNormalsPointingUp(true);
+        grassModel.setAtlasFactor(1);
 
         		/* flower model */
         DefaultModelGenerator flowerModel = new DefaultModelGenerator();
@@ -87,6 +92,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         flowerModel.setScale(1.0f);
         flowerModel.setHasTransparency(true);
         flowerModel.setNormalsPointingUp(true);
+        flowerModel.setAtlasFactor(1);
 
 
         		/*Marble model*/
@@ -96,6 +102,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         marbleModel.setScale(5.0f);
         marbleModel.setHasTransparency(false);
         marbleModel.setNormalsPointingUp(false);
+        marbleModel.setAtlasFactor(1);
 
 		/*Entity map of all the existing entities*/
         entitiesMap.put(fernModel, NUMBER_OF_FERNS);
@@ -126,7 +133,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         Random random = new Random();
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
-            TexturedModel texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp());
+            TexturedModel texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp(), key.getAtlasFactor());
             Integer numberOfEntities = entitiesMap.get(key);
             for (int i = 0; i < numberOfEntities; i++) {
                 float xPosition = 20.0f + random.nextFloat() * 200.0f;
@@ -136,6 +143,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
                 Vector3f entityPosition = new Vector3f(xPosition, yPosition, zPosition);
                 Entity entity = getEntity(texturedObj, entityPosition);
                 entity.setScale(key.getScale() * random.nextFloat());
+                entity.setTextureIndex(i % (key.getAtlasFactor() * key.getAtlasFactor()));
                 entities[count] = entity;
                 ++count;
             }
