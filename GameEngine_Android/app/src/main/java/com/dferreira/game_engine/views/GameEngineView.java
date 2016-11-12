@@ -9,6 +9,8 @@ import android.util.AttributeSet;
  */
 public class GameEngineView extends GLSurfaceView {
 
+    private GameEngineRenderer objPickerRenderer;
+
     /**
      * Standard View constructor. In order to render something, you
      * must call {@link #setRenderer} to register a renderer.
@@ -26,7 +28,16 @@ public class GameEngineView extends GLSurfaceView {
         this.setEGLConfigChooser(5, 6, 5, 0, 16, 0);
 
         this.setEGLContextClientVersion(2);
-        GameEngineRenderer objPickerRenderer = new GameEngineRenderer(context);
+        objPickerRenderer = new GameEngineRenderer(context);
         this.setRenderer(objPickerRenderer);
+    }
+
+    /**
+     *
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        this.objPickerRenderer.cleanUp();
     }
 }

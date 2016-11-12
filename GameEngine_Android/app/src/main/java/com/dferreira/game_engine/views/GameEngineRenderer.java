@@ -93,6 +93,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
      * @param gl     Reference to the openGL variable
      * @param config Reference to the configuration
      */
+    @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
         Date startDate = new Date();
@@ -156,6 +157,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
      *
      * @param glUnused Variable for reference of openGL 1.0 not used at all
      */
+    @Override
     public void onDrawFrame(GL10 glUnused) {
         // Set the viewport
         GLES20.glViewport(0, 0, mWidth, mHeight);
@@ -178,8 +180,16 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
      * @param width    The new width of the screen
      * @param height   The new height of the screen
      */
+    @Override
     public void onSurfaceChanged(GL10 glUnused, int width, int height) {
         this.mWidth = width;
         this.mHeight = height;
+    }
+
+    /**
+     * Clean up because we need to clean up when we finish the program
+     */
+    public void cleanUp() {
+        this.renderer.cleanUp();
     }
 }
