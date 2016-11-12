@@ -10,8 +10,8 @@ import java.nio.FloatBuffer;
  */
 public class GLTransformation {
 
-    private float[] mMatrix = new float[16];
     private final FloatBuffer mMatrixFloatBuffer;
+    private float[] mMatrix = new float[16];
 
     /**
      * Simply allocates space for a matrix of [4x4] floats
@@ -211,6 +211,7 @@ public class GLTransformation {
      * @param modelView   Transformation over the model
      * @param perspective Transformation over the perspective
      */
+    @SuppressWarnings("unused")
     public void multiplyMatrix(GLTransformation modelView, GLTransformation perspective) {
         this.multiplyMatrix(modelView.get(), perspective.get());
     }

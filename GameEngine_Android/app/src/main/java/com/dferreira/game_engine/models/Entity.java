@@ -78,7 +78,7 @@ public class Entity {
      * @param dz Z component to be increase
      */
     @SuppressWarnings("SameParameterValue")
-    public void increaseRotation(float dx, float dy, float dz) {
+    void increaseRotation(float dx, float dy, float dz) {
         this.rotX += dx;
         this.rotY += dy;
         this.rotZ += dz;
@@ -94,6 +94,7 @@ public class Entity {
     /**
      * @param model the textured model to be set
      */
+    @SuppressWarnings("unused")
     public void setModel(TexturedModel model) {
         this.model = model;
     }
@@ -108,6 +109,7 @@ public class Entity {
     /**
      * @param position The position to be set
      */
+    @SuppressWarnings("unused")
     public void setPosition(Vector3f position) {
         this.position = position;
     }
@@ -122,6 +124,7 @@ public class Entity {
     /**
      * @param rotX the rotation of the entity in the X axle
      */
+    @SuppressWarnings("unused")
     public void setRotX(float rotX) {
         this.rotX = rotX;
     }
@@ -136,6 +139,7 @@ public class Entity {
     /**
      * @param rotY the rotation of the entity in the Y axle
      */
+    @SuppressWarnings("unused")
     public void setRotY(float rotY) {
         this.rotY = rotY;
     }
@@ -150,6 +154,7 @@ public class Entity {
     /**
      * @param rotZ the rotation of the entity in the Z axle
      */
+    @SuppressWarnings("unused")
     public void setRotZ(float rotZ) {
         this.rotZ = rotZ;
     }
@@ -171,6 +176,7 @@ public class Entity {
     /**
      * @return the index of texture
      */
+    @SuppressWarnings("unused")
     public int getTextureIndex() {
         return textureIndex;
     }

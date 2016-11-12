@@ -36,66 +36,6 @@ public class Camera {
         this.position = new Vector3f(0.0f, 2.5f, 0.0f);
     }
 
-    /**
-     * Read the keyboard keys pressed by the used and updates the
-     * position of the camera
-     */
-    /*
-	public void move() {
-
-
-		//Looks up
-		if(GamePad.isKeyDown(GamePad.KEY_UP)) {
-			pitch += ANGLE_OF_ROTATION;
-		}
-
-		//Looks down
-		if(GamePad.isKeyDown(GamePad.KEY_DOWN)) {
-			pitch -= ANGLE_OF_ROTATION;
-		}
-
-
-		//Looks left
-		if(GamePad.isKeyDown(GamePad.KEY_LEFT)) {
-			yaw += ANGLE_OF_ROTATION;
-		}
-
-		//Looks right
-		if(GamePad.isKeyDown(GamePad.KEY_RIGHT)) {
-			yaw -= ANGLE_OF_ROTATION;
-		}
-	}*/
-
-    /**
-     * Rotate the camera that the user sees
-     */
-	/*
-	public void rotate() {
-		double pitchR = Math.toRadians(pitch);
-		double yawR = Math.toRadians(yaw);
-
-		//Accelerates
-		//if(GamePad.isKeyDown(GamePad.KEY_X)) {
-			position.x += (-STEP * Math.sin(yawR));
-			position.y += (+STEP * Math.sin(pitchR));
-			position.z += (-STEP * Math.sin(pitchR)) + (-STEP * Math.cos(yawR));
-		//}
-		
-
-		if(GamePad.isKeyDown(GamePad.KEY_TRIANGLE)) {
-		}
-
-		if(GamePad.isKeyDown(GamePad.KEY_SQUARE)) {
-		}
-		
-		//Go backwards
-		//if(GamePad.isKeyDown(GamePad.KEY_CIRCLE)) {
-			position.x += (+STEP * Math.sin(yawR));
-			position.y += (-STEP * Math.sin(pitchR));
-			position.z += (+STEP * Math.sin(pitchR)) + (+STEP * Math.cos(yawR));
-		//}
-	}*/
-
 
     /**
      * @return the position position where the camera is
@@ -116,6 +56,7 @@ public class Camera {
      *
      * @param pitch The rotation around X-axis
      */
+    @SuppressWarnings("unused")
     protected void setPitch(float pitch) {
         this.pitch = pitch;
     }
@@ -132,7 +73,7 @@ public class Camera {
      *
      * @param yaw (rotation around Y-axis)
      */
-    protected void setYaw(float yaw) {
+    void setYaw(float yaw) {
         this.yaw = yaw;
     }
 

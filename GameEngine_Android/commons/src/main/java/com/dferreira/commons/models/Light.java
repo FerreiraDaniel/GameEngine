@@ -39,6 +39,7 @@ public class Light {
     /**
      * @param position the position to set
      */
+    @SuppressWarnings("unused")
     public void setPosition(Vector3f position) {
         this.position = position;
     }
@@ -53,6 +54,7 @@ public class Light {
     /**
      * @param color the color to set
      */
+    @SuppressWarnings("unused")
     public void setColor(Vector3f color) {
         this.color = color;
     }

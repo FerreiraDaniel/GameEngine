@@ -1,6 +1,7 @@
 package com.dferreira.game_engine.renderEngine;
 
 import android.opengl.GLES20;
+import android.util.SparseIntArray;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.Vector3f;
@@ -11,7 +12,6 @@ import com.dferreira.game_engine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.game_engine.shaders.terrains.TerrainShaderManager;
 import com.dferreira.game_engine.textures.TerrainTexturesPack;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -28,8 +28,7 @@ public class TerrainRender {
     /**
      * Constructor of the entity render
      *
-     * @param sManager
-     *            Shader manager
+     * @param sManager Shader manager
      */
     public TerrainRender(TerrainShaderManager sManager, GLTransformation projectionMatrix) {
         this.tShader = sManager;
@@ -43,11 +42,9 @@ public class TerrainRender {
     /**
      * Get the transformation matrix of one entity
      *
-     * @param entity
-     *            Entity for which is to create the transformation matrix
-     *
+     * @param entity Entity for which is to create the transformation matrix
      * @return The transformation matrix that put the entity in its right
-     *         position
+     * position
      */
     private GLTransformation getTransformationMatrix(Terrain entity) {
         GLTransformation matrix = new GLTransformation();
@@ -65,14 +62,10 @@ public class TerrainRender {
     /**
      * Render the terrains in the scene
      *
-     * @param skyColor
-     *            Color of the sky
-     * @param sun
-     *            The source of light of the scene
-     * @param viewMatrix
-     *            View matrix to render the scene
-     * @param terrains
-     *            List of terrains of the scene
+     * @param skyColor   Color of the sky
+     * @param sun        The source of light of the scene
+     * @param viewMatrix View matrix to render the scene
+     * @param terrains   List of terrains of the scene
      */
     public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, List<Terrain> terrains) {
         tShader.start();
@@ -87,8 +80,7 @@ public class TerrainRender {
     /**
      * Render one list of terrains
      *
-     * @param terrains
-     *            List of Terrains to render
+     * @param terrains List of Terrains to render
      */
     private void render(List<Terrain> terrains) {
         if ((terrains != null) && (!terrains.isEmpty())) {
@@ -123,16 +115,19 @@ public class TerrainRender {
      */
     private void bindTextures(Terrain terrain) {
         TerrainTexturesPack texturesPackage = terrain.getTexturePack();
-        HashMap<Integer, Integer> texturesMatching = new HashMap<>();
+        SparseIntArray texturesMatching = new SparseIntArray(5);
         texturesMatching.put(GLES20.GL_TEXTURE0, texturesPackage.getBackgroundTextureId());
         texturesMatching.put(GLES20.GL_TEXTURE1, texturesPackage.getMudTextureId());
         texturesMatching.put(GLES20.GL_TEXTURE2, texturesPackage.getGrassTextureId());
         texturesMatching.put(GLES20.GL_TEXTURE3, texturesPackage.getPathTextureId());
         texturesMatching.put(GLES20.GL_TEXTURE4, texturesPackage.getWeightMapTextureId());
 
-        for (int key : texturesMatching.keySet()) {
+        for (int i = 0; i < texturesMatching.size(); i++) {
+            int key = texturesMatching.keyAt(i);
+            int textureId = texturesMatching.get(key);
+
             GLES20.glActiveTexture(key);
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texturesMatching.get(key));
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
 
             // Set filtering of the texture
             defineTextureFunctionFilters();
@@ -154,7 +149,6 @@ public class TerrainRender {
 
         // bind several textures of the terrain
         bindTextures(terrain);
-
 
 
         //Load the light properties
@@ -188,8 +182,7 @@ public class TerrainRender {
     /**
      * Call the render of the triangles to the terrain itself
      *
-     * @param terrain
-     *            A reference to the terrain to get render
+     * @param terrain A reference to the terrain to get render
      */
     private void render(Terrain terrain) {
         RawModel model = terrain.getModel();
@@ -207,7 +200,6 @@ public class TerrainRender {
         GLES20.glDisableVertexAttribArray(TTerrainAttribute.textureCoords.getValue());
         GLES20.glDisableVertexAttribArray(TTerrainAttribute.normal.getValue());
     }
-
 
 
     /**
