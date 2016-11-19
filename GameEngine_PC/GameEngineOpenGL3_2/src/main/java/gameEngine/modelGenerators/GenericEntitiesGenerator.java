@@ -26,11 +26,13 @@ public class GenericEntitiesGenerator {
 	 *            Flag that indicates if has transparency or not
 	 * @param normalsPointingUp
 	 *            Indicates that all the normals of the object are pointing up
+	 * @param atlasFactor
+	 * 			The atlas factor of the texture
 	 * 
 	 * @return the textured model loaded
 	 */
 	protected static TexturedModel getTexturedObj(Loader loader, String objName, String texureName,
-			boolean hasTransparency, boolean normalsPointingUp) {
+			boolean hasTransparency, boolean normalsPointingUp, int atlasFactor) {
 		IShape shape = OBJLoader.loadObjModel(objName);
 
 		RawModel model = loader.loadToVAO(shape.getVertices(), shape.getTextureCoords(), shape.getNormals(),
@@ -39,6 +41,7 @@ public class GenericEntitiesGenerator {
 		ModelTexture texture = new ModelTexture(textureId);
 		texture.setShineDamper(10.0f);
 		texture.setReflectivity(1.0f);
+		texture.setAtlasFactor(atlasFactor);
 		TexturedModel texturedModel = new TexturedModel(model, texture, hasTransparency, normalsPointingUp);
 
 		return texturedModel;

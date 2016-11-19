@@ -17,7 +17,7 @@ import gameEngine.renderEngine.Loader;
 public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 	private final static int NUMBER_OF_TREES = 100;
 	private final static int NUMBER_OF_BANANA_TREES = 30;
-	private final static int NUMBER_OF_FERNS = 20;
+	private final static int NUMBER_OF_FERNS = 100;
 	private final static int NUMBER_OF_GRASS = 20;
 	private final static int NUMBER_OF_FLOWERS = 100;
 	private final static int NUMBER_OF_MARBLES = 10;
@@ -46,7 +46,8 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 	private static Entity getEntity(TexturedModel texturedEntity, Vector3f position) {
 		Entity entity = new Entity(texturedEntity, position, // Position
 				0.0f, 0.0f, 0.0f, // Rotation
-				0.0f // Scale
+				0.0f, // Scale
+				0 //Image index used in case of atlas images
 		);
 		return entity;
 	}
@@ -65,6 +66,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		fernModel.setScale(1.0f);
 		fernModel.setHasTransparency(true);
 		fernModel.setNormalsPointingUp(true);
+		fernModel.setAtlasFactor(2);
 
 		/* Tree model */
 		DefaultModelGenerator treeModel = new DefaultModelGenerator();
@@ -73,6 +75,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		treeModel.setScale(10.0f);
 		treeModel.setHasTransparency(false);
 		treeModel.setNormalsPointingUp(false);
+		treeModel.setAtlasFactor(1);
 
 		/* Banana tree */
 		DefaultModelGenerator bananaTreeModel = new DefaultModelGenerator();
@@ -81,6 +84,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		bananaTreeModel.setScale(1.0f);
 		bananaTreeModel.setHasTransparency(true);
 		bananaTreeModel.setNormalsPointingUp(false);
+		bananaTreeModel.setAtlasFactor(1);
 
 		/* grass model */
 		DefaultModelGenerator grassModel = new DefaultModelGenerator();
@@ -89,6 +93,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		grassModel.setScale(1.0f);
 		grassModel.setHasTransparency(true);
 		grassModel.setNormalsPointingUp(true);
+		grassModel.setAtlasFactor(1);
 
 		/* flower model */
 		DefaultModelGenerator flowerModel = new DefaultModelGenerator();
@@ -97,6 +102,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		flowerModel.setScale(1.0f);
 		flowerModel.setHasTransparency(true);
 		flowerModel.setNormalsPointingUp(true);
+		flowerModel.setAtlasFactor(1);
 		
 		/*Marble model*/
 		DefaultModelGenerator marbleModel = new DefaultModelGenerator();
@@ -105,6 +111,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		marbleModel.setScale(5.0f);
 		marbleModel.setHasTransparency(false);
 		marbleModel.setNormalsPointingUp(false);
+		marbleModel.setAtlasFactor(1);
 
 		
 		/* Entity map of all the existing entities */
@@ -139,7 +146,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		int count = 0;
 		for (DefaultModelGenerator key : entitiesMap.keySet()) {
 			TexturedModel texturedObj = getTexturedObj(loader, key.getObjectName(), key.getTextureName(),
-					key.getHasTransparency(), key.getNormalsPointingUp());
+					key.getHasTransparency(), key.getNormalsPointingUp(), key.getAtlasFactor());
 			Integer numberOfObjs = entitiesMap.get(key);
 			for (int i = 0; i < numberOfObjs; i++) {
 				float xPosition = 20.0f + random.nextFloat() * 400.0f;
@@ -149,6 +156,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 				Entity entity = getEntity(texturedObj, entityPosition);
 				float scale = random.nextFloat() * key.getScale();
 				entity.setScale(scale);
+				entity.setTextureIndex(i % (key.getAtlasFactor() * key.getAtlasFactor()));
 				entities[count] = entity;
 				++count;
 			}

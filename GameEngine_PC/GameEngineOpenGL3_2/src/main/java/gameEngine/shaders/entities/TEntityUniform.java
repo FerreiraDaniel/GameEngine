@@ -54,6 +54,16 @@ public enum TEntityUniform implements IEnum {
 	normalsPointingUp,
 
 	/**
+	 * When using atlas textures is going to define the location of the atlas factor
+	 */
+	atlasFactor,
+	
+	/**
+	 * Location of the start position of the texture that is going to be applied in the entity
+	 */
+	textureOffset,
+	
+	/**
 	 * Meta-data used maintain the existing locations
 	 */
 	numOfEntityLocations;

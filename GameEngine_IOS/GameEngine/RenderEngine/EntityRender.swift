@@ -148,6 +148,9 @@ public class EntityRender : NSObject {
         // Load the the light properties
         eShader.loadShineVariables(modelTexture.shineDamper,  reflectivity: modelTexture.reflectivity);
         
+        //Load the texture atlas of the model
+        eShader.loadAtlasFactor(modelTexture.atlasFactor);
+        
     }
     
     /**
@@ -159,6 +162,8 @@ public class EntityRender : NSObject {
     private func prepareInstance(entity : Entity) {
         // Load the transformation matrix
         eShader.loadTransformationMatrix(self.getTransformationMatrix(entity));
+        // Load the offset of the texture of the entity
+        eShader.loadTextureOffset(entity.getTextureOffset());
     }
     
     

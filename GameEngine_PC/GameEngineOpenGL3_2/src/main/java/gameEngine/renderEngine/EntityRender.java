@@ -18,6 +18,7 @@ import gameEngine.models.RawModel;
 import gameEngine.models.TexturedModel;
 import gameEngine.shaders.entities.EntityShaderManager;
 import gameEngine.shaders.entities.TEntityAttribute;
+import gameEngine.textures.ModelTexture;
 
 /**
  * Class responsible to render the entities in the screen
@@ -163,6 +164,7 @@ public class EntityRender {
 	 */
 	private void prepareTexturedModel(TexturedModel texturedModel) {
 		RawModel model = texturedModel.getRawModel();
+		ModelTexture texture = texturedModel.getTexture();
 
 		//Enable the culling to not force the render of polygons that are not going to be visible
 		if (!texturedModel.hasTransparency()) {
@@ -175,14 +177,16 @@ public class EntityRender {
 		GL20.glEnableVertexAttribArray(TEntityAttribute.normal.ordinal());
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturedModel.getTexture().getTextureId());
-
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTextureId());
+		
 		// Load if should put the normals of the entity point up or not
 		eShader.loadNormalsPointingUp(texturedModel.isNormalsPointingUp());
 
 		// Load the the light properties
-		eShader.loadShineVariables(texturedModel.getTexture().getShineDamper(),
-				texturedModel.getTexture().getReflectivity());
+		eShader.loadShineVariables(texture.getShineDamper(),
+				texture.getReflectivity());
+		//Load the texture atlas of the model
+		eShader.loadAtlasFactor(texture.getAtlasFactor());
 
 	}
 
@@ -195,6 +199,8 @@ public class EntityRender {
 	private void prepareInstance(Entity entity) {
 		// Load the transformation matrix
 		eShader.loadTransformationMatrix(getTransformationMatrix(entity));
+		// Load the offset of the texture of the entity
+		eShader.loadTextureOffset(entity.getTextureOffset());
 	}
 
 	/**

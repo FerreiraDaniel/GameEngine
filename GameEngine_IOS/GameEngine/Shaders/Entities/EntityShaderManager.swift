@@ -2,17 +2,17 @@ import Foundation
 
 public class EntityShaderManager : ShaderManager {
     /**
-    * Initializor of the game shader where the vertex and fragment shader of
-    * the game engine are loaded
-    *
-    */
+     * Initializor of the game shader where the vertex and fragment shader of
+     * the game engine are loaded
+     *
+     */
     public init() {
         super.init(vertexFile: "entity_vertex_shader" , fragmentFile: "entity_fragment_shader", numberOfUniforms: TEntityUniform.numOfEntityLocations.rawValue)
     }
     
     /**
-    * Called to bind the attributes to the program shader
-    */
+     * Called to bind the attributes to the program shader
+     */
     override internal func getAttributes() -> Dictionary<Int, String>! {
         let attributesDic : Dictionary<Int, String> = [
             TEntityAttribute.position.rawValue : "\(TEntityAttribute.position)",
@@ -23,8 +23,8 @@ public class EntityShaderManager : ShaderManager {
     }
     
     /**
-    * Called to provide the uniform locations that are going to get bound to the shader
-    */
+     * Called to provide the uniform locations that are going to get bound to the shader
+     */
     override internal func getUniformLocations() -> Dictionary<NSInteger, String>! {
         let uniformsDic : Dictionary<NSInteger, String> = [
             TEntityUniform.projectionMatrix.rawValue : "\(TEntityUniform.projectionMatrix)",
@@ -35,7 +35,9 @@ public class EntityShaderManager : ShaderManager {
             TEntityUniform.shineDamper.rawValue : "\(TEntityUniform.shineDamper)",
             TEntityUniform.reflectivity.rawValue : "\(TEntityUniform.reflectivity)",
             TEntityUniform.skyColor.rawValue : "\(TEntityUniform.skyColor)",
-            TEntityUniform.normalsPointingUp.rawValue : "\(TEntityUniform.normalsPointingUp)"
+            TEntityUniform.normalsPointingUp.rawValue : "\(TEntityUniform.normalsPointingUp)",
+            TEntityUniform.atlasFactor.rawValue : "\(TEntityUniform.atlasFactor)",
+            TEntityUniform.textureOffset.rawValue : "\(TEntityUniform.textureOffset)"
         ]
         
         return uniformsDic;
@@ -43,73 +45,91 @@ public class EntityShaderManager : ShaderManager {
     
     
     /**
-    * Load the projection matrix
-    *
-    * @param matrix
-    *            the matrix to be loaded
-    */
+     * Load the projection matrix
+     *
+     * @param matrix
+     *            the matrix to be loaded
+     */
     public func loadProjectionMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.projectionMatrix.rawValue], matrix: matrix);
     }
     
     /**
-    * Load the view matrix
-    *
-    * @param matrix
-    *            the matrix to be loaded
-    */
+     * Load the view matrix
+     *
+     * @param matrix
+     *            the matrix to be loaded
+     */
     public func loadViewMatrix (matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.viewMatrix.rawValue], matrix: matrix);
     }
     
     /**
-    * Load the transformation matrix
-    *
-    * @param matrix
-    *            the matrix to be loaded
-    */
+     * Load the transformation matrix
+     *
+     * @param matrix
+     *            the matrix to be loaded
+     */
     public func loadTransformationMatrix(matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.rawValue], matrix: matrix);
     }
     
     /**
-    * Put passes the information of the light to the
-    * Shader program
-    *
-    * @param light the light to load in the shader program
-    */
+     * Put passes the information of the light to the
+     * Shader program
+     *
+     * @param light the light to load in the shader program
+     */
     public func loadLight(light : Light) {
         super.loadVector(uniforms[TEntityUniform.lightPosition.rawValue], vector: light.position);
         super.loadVector(uniforms[TEntityUniform.lightColor.rawValue], vector: light.color);
     }
     
     /**
-    * Load the values of the specular light in the fragment shader
-    *
-    * @param damper		The damper of the specular lighting
-    * @param reflectivity	The reflectivity of the material
-    */
+     * Load the values of the specular light in the fragment shader
+     *
+     * @param damper		The damper of the specular lighting
+     * @param reflectivity	The reflectivity of the material
+     */
     public func loadShineVariables(damper : Float, reflectivity : Float) {
         super.loadFloat(uniforms[TEntityUniform.shineDamper.rawValue], value: damper);
         super.loadFloat(uniforms[TEntityUniform.reflectivity.rawValue], value : reflectivity);
     }
     
     /**
-    * Set in the shader if the normals should all of them point up
-    *
-    * @param normalsPointingUp Flag that indicates if all the normals of the entity are poiting up or not
-    */
+     * Set in the shader if the normals should all of them point up
+     *
+     * @param normalsPointingUp Flag that indicates if all the normals of the entity are poiting up or not
+     */
     public func loadNormalsPointingUp(normalsPointingUp : Bool) {
         super.loadBoolean( uniforms[TEntityUniform.normalsPointingUp.rawValue], value :  normalsPointingUp);
     }
     
     /**
-    * Load the color of the sky in order to simulate fog
-    *
-    * @param skyColor
-    * 			Color of the sky
-    */
+     * Load the color of the sky in order to simulate fog
+     *
+     * @param skyColor
+     * 			Color of the sky
+     */
     public func  loadSkyColor(skyColor : Vector3f) {
         super.loadVector( uniforms[TEntityUniform.skyColor.rawValue], vector : skyColor);
+    }
+    
+    /**
+     * Load the atlas factor in the shader program
+     *
+     * @param atlasFactor The atlas factor to load
+     */
+    public func loadAtlasFactor(atlasFactor : Int) {
+        super.loadFloat(uniforms[TEntityUniform.atlasFactor.rawValue], value: Float(atlasFactor));
+    }
+    
+    /**
+     * Load the offset of the texture useful if it is an atlas texture
+     *
+     * @param textureOffset the offset of the texture
+     */
+    public func loadTextureOffset(textureOffset : Vector2f) {
+        super.loadVector(uniforms[TEntityUniform.textureOffset.rawValue], vector: textureOffset);
     }
 }

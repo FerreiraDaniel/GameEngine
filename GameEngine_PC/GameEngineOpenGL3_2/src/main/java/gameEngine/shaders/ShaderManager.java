@@ -8,6 +8,7 @@ import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.ShaderProgram;
+import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 
 /**
@@ -120,9 +121,21 @@ public abstract class ShaderManager {
 	protected void loadFloat(int location, float value) {
 		GL20.glUniform1f(location, value);
 	}
+	
+	/**
+	 * Load a 2D vector to be used in the shader script
+	 * 
+	 * @param location
+	 *            location of the shader variable in the script
+	 * @param vector
+	 *            The vector to load
+	 */
+	protected void loadVector(int location, Vector2f vector) {
+		GL20.glUniform2f(location, vector.x, vector.y);
+	}
 
 	/**
-	 * Load a vector to be used in the shader script
+	 * Load a 3D vector to be used in the shader script
 	 * 
 	 * @param location
 	 *            location of the shader variable in the script

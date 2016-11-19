@@ -23,6 +23,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
 		playerModel.setScale(1.0f);
 		playerModel.setHasTransparency(false);
 		playerModel.setNormalsPointingUp(false);
+		playerModel.setAtlasFactor(1);
 
 		return playerModel;
 	}
@@ -37,7 +38,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
 	public static Player getPlayer(Loader loader) {
 		DefaultModelGenerator model = getPlayerModel();
 		TexturedModel texturedObj = getTexturedObj(loader, model.getObjectName(), model.getTextureName(),
-				model.getHasTransparency(), model.getNormalsPointingUp());
+				model.getHasTransparency(), model.getNormalsPointingUp(), model.getAtlasFactor());
 		float xPosition = 20.0f;
 		float yPosition = -1.0f;
 		float zPosition = 0.0f;
