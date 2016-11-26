@@ -1,5 +1,9 @@
 import Foundation
 
+/**
+ * Manager of the shader files that are going to be load to render the 3D
+ * Terrain
+ */
 public class TerrainShaderManager : ShaderManager {
     
     /**

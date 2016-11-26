@@ -112,6 +112,7 @@ public class Loader {
 		unbindVAO();
 		return new RawModel(vaoID, indices.length);
 	}
+	
 
 	/**
 	 * Load a list of positions to VAO
@@ -128,6 +129,19 @@ public class Loader {
 		this.storeDataInAttributeList(TEntityAttribute.position, dimensions, positions);
 		unbindVAO();
 		return new RawModel(vaoId, positions.length / dimensions);
+	}
+
+	/**
+	 * Load a list of 2D positions to VAO
+	 * 
+	 * @param positions
+	 *            Positions to load
+	 * 
+	 * @return The rawModel pointing to the created VAO
+	 */
+	public RawModel load2DPositionsToVAO(float[] positions) {
+		int dimensions = 2;
+		return loadPositionsToVAO(positions, dimensions);
 	}
 
 	/**

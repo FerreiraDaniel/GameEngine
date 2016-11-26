@@ -74,8 +74,8 @@ public class SkyBoxShape : NSObject, IShape {
         return nil;
     }
     
-    /*
-    Number of the texture coordinates
+    /**
+    *Number of the texture coordinates
     */
     public func countTextureCoords() -> Int {
         return 0;

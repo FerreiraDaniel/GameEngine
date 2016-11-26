@@ -144,6 +144,21 @@ public class Loader : NSObject {
     }
     
     /**
+     * Load a list of 2D positions to VAO
+     *
+     * @param positions
+     *            Positions to load
+     * @para positionsLength
+     *            Number of positions to load in the vertex array object
+     *
+     * @return The rawModel pointing to the created VAO
+     */
+    public func load2DPositionsToVAO(positions : UnsafeMutablePointer<Float>, positionsLength : Int) -> RawModel{
+        let dimensions = 2;
+        return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
+    }
+    
+    /**
      * Load a list of 3D positions to VAO
      *
      * @param positions

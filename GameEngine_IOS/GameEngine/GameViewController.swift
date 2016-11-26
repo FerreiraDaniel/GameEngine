@@ -6,12 +6,43 @@ import GLKit
 
 public class GameViewController: GLKViewController {
     
+    /**
+     * The master render is going put all the elements together in order to
+     * render the scene
+     */
     private var renderer : MasterRender! = nil;
+    
+    /**
+     * Array of entities to render
+     */
     private var entities : Array<Entity> = [];
+    
+    /**
+     * Array of terrains to render
+     */
     private var terrains : Array<Terrain> = [];
+
+    /**
+     * Array of GUIs to render
+     */
+    private var guis : Array<GuiTexture> = [];
+    
+    /**
+     * Position of the light in scene
+     */
     private var light : Light! = nil;
+    
+    /**
+     * SkyBox of the 3D world
+     */
     private var skyBox : SkyBox! = nil;
+    
+    /**
+     * The player that is going to be show in the scene
+     */
     private var player : Player! = nil;
+    
+
     
     private var context:  EAGLContext! = nil;
     
@@ -42,6 +73,9 @@ public class GameViewController: GLKViewController {
         
         /* Load the lights that is going to render*/
         self.light = WorldEntitiesGenerator.getLight();
+        
+        /* Prepares the guis that is going to render*/
+        self.guis = WorldGUIsGenerator.getGUIs(loader);
         
         /* Load the sky box that is going to render*/
         self.skyBox = WorldSkyBoxGenerator.getSky(loader);
@@ -88,6 +122,7 @@ public class GameViewController: GLKViewController {
         renderer.processEntities(entities);
         renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);
+        renderer.processGUIs(self.guis);
         
         renderer.render(light);
         renderer.endFrameRender();

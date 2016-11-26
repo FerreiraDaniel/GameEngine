@@ -3,10 +3,12 @@ package gameEngine.views;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.modelGenerators.WorldEntitiesGenerator;
+import gameEngine.modelGenerators.WorldGUIsGenerator;
 import gameEngine.modelGenerators.WorldPlayersGenerator;
 import gameEngine.modelGenerators.WorldSkyBoxGenerator;
 import gameEngine.modelGenerators.WorldTerrainsGenerator;
 import gameEngine.models.Entity;
+import gameEngine.models.GuiTexture;
 import gameEngine.models.Player;
 import gameEngine.models.SkyBox;
 import gameEngine.models.Terrain;
@@ -36,6 +38,12 @@ public class GameEngineRenderer {
 	 * Array of terrains to render
 	 */
 	private Terrain[] terrains;
+	
+	/**
+	 * Array of GUIs to render
+	 */
+	private GuiTexture[] guis;
+	
 
 	/**
 	 * Position of the light in scene
@@ -71,7 +79,7 @@ public class GameEngineRenderer {
 
 		/* Prepares the terrains that is going to render */
 		this.terrains = WorldTerrainsGenerator.getTerrains(loader);
-		
+				
 		/* Prepares the entities that is going to be render */
 		this.entities = WorldEntitiesGenerator.getEntities(loader, terrains[0]);
 
@@ -79,6 +87,9 @@ public class GameEngineRenderer {
 		/* Load the light that is going to render */
 		this.light = WorldEntitiesGenerator.getLight();
 
+		/* Prepares the guis that is going to render*/
+		this.guis = WorldGUIsGenerator.getGUIs(loader);
+		
 		/* Load the sky box that is going to render */
 		this.skyBox = WorldSkyBoxGenerator.getSky(loader);
 
@@ -97,6 +108,7 @@ public class GameEngineRenderer {
 		renderer.processEntities(entities);
 		renderer.processSkyBox(skyBox);
 		renderer.processPlayer(player);
+		renderer.processGUIs(this.guis);
 
 		renderer.render(light);
 

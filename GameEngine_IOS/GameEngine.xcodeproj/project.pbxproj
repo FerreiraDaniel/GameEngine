@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		3226FAA61DAC07AC00F063C5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3226FAA51DAC07AC00F063C5 /* GameViewController.swift */; };
 		323843BA1DB39DFE00E063DC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323843B91DB39DFE00E063DC /* Player.swift */; };
+		323E0AA81DE61CF30038A96B /* GuiRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323E0AA71DE61CF30038A96B /* GuiRender.swift */; };
+		3246A7B01DE1CDB100D40DD0 /* GuiShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246A7AF1DE1CDB100D40DD0 /* GuiShape.swift */; };
+		3246A7B21DE1D12600D40DD0 /* GuiTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246A7B11DE1D12600D40DD0 /* GuiTexture.swift */; };
+		3246A7B51DE1D39300D40DD0 /* GuiShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246A7B41DE1D39300D40DD0 /* GuiShaderManager.swift */; };
+		3246A7B71DE1D3D700D40DD0 /* TGuiAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246A7B61DE1D3D700D40DD0 /* TGuiAttribute.swift */; };
+		3246A7B91DE1D3FC00D40DD0 /* TGuiUniform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3246A7B81DE1D3FC00D40DD0 /* TGuiUniform.swift */; };
+		3246A7BC1DE1D46B00D40DD0 /* gui_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3246A7BA1DE1D46B00D40DD0 /* gui_fragment_shader.fsh */; };
+		3246A7BD1DE1D46B00D40DD0 /* gui_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3246A7BB1DE1D46B00D40DD0 /* gui_vertex_shader.vsh */; };
 		324CFB1B1DAEC5650020CA56 /* GamePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1A1DAEC5650020CA56 /* GamePad.swift */; };
 		324CFB1D1DAEC57A0020CA56 /* GamePadEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */; };
 		324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB211DAED0D90020CA56 /* ic_pad_down.png */; };
@@ -17,6 +25,8 @@
 		324CFB281DAED0DA0020CA56 /* ic_pad_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB241DAED0DA0020CA56 /* ic_pad_up.png */; };
 		325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */; };
 		325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */; };
+		325A6B061DE762390068C945 /* WorldGUIsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A6B051DE762390068C945 /* WorldGUIsGenerator.swift */; };
+		325A6B091DE762D40068C945 /* game_engine_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 325A6B081DE762D40068C945 /* game_engine_logo.png */; };
 		325F27991DD73E14008CEE42 /* fern.png in Resources */ = {isa = PBXBuildFile; fileRef = 325F27981DD73E14008CEE42 /* fern.png */; };
 		3267A07C1DC734F40075D68B /* heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 3267A07B1DC734F40075D68B /* heightmap.png */; };
 		3269CF5A1D9FB3FA007574BC /* Vector2f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269CF591D9FB3FA007574BC /* Vector2f.swift */; };
@@ -117,6 +127,14 @@
 /* Begin PBXFileReference section */
 		3226FAA51DAC07AC00F063C5 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		323843B91DB39DFE00E063DC /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		323E0AA71DE61CF30038A96B /* GuiRender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuiRender.swift; sourceTree = "<group>"; };
+		3246A7AF1DE1CDB100D40DD0 /* GuiShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuiShape.swift; sourceTree = "<group>"; };
+		3246A7B11DE1D12600D40DD0 /* GuiTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuiTexture.swift; sourceTree = "<group>"; };
+		3246A7B41DE1D39300D40DD0 /* GuiShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuiShaderManager.swift; sourceTree = "<group>"; };
+		3246A7B61DE1D3D700D40DD0 /* TGuiAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGuiAttribute.swift; sourceTree = "<group>"; };
+		3246A7B81DE1D3FC00D40DD0 /* TGuiUniform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TGuiUniform.swift; sourceTree = "<group>"; };
+		3246A7BA1DE1D46B00D40DD0 /* gui_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gui_fragment_shader.fsh; sourceTree = "<group>"; };
+		3246A7BB1DE1D46B00D40DD0 /* gui_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gui_vertex_shader.vsh; sourceTree = "<group>"; };
 		324CFB1A1DAEC5650020CA56 /* GamePad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePad.swift; sourceTree = "<group>"; };
 		324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadEnum.swift; sourceTree = "<group>"; };
 		324CFB211DAED0D90020CA56 /* ic_pad_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_down.png; sourceTree = "<group>"; };
@@ -125,6 +143,8 @@
 		324CFB241DAED0DA0020CA56 /* ic_pad_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_up.png; sourceTree = "<group>"; };
 		3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_vertex_shader.vsh; sourceTree = "<group>"; };
 		325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_fragment_shader.fsh; sourceTree = "<group>"; };
+		325A6B051DE762390068C945 /* WorldGUIsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldGUIsGenerator.swift; sourceTree = "<group>"; };
+		325A6B081DE762D40068C945 /* game_engine_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_engine_logo.png; sourceTree = "<group>"; };
 		325F27981DD73E14008CEE42 /* fern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fern.png; sourceTree = "<group>"; };
 		3267A07B1DC734F40075D68B /* heightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heightmap.png; sourceTree = "<group>"; };
 		3269CF591D9FB3FA007574BC /* Vector2f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector2f.swift; sourceTree = "<group>"; };
@@ -247,6 +267,8 @@
 				32DB53791DAA843A0080DA85 /* TerrainShape.swift */,
 				323843B91DB39DFE00E063DC /* Player.swift */,
 				32A8D8481DBBB24F00BEE381 /* ThirdPersonCamera.swift */,
+				3246A7AF1DE1CDB100D40DD0 /* GuiShape.swift */,
+				3246A7B11DE1D12600D40DD0 /* GuiTexture.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +283,18 @@
 				32C2FE431D8F187E006A5BF4 /* EntityShaderManager.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		3246A7B31DE1D30500D40DD0 /* Guis */ = {
+			isa = PBXGroup;
+			children = (
+				3246A7BA1DE1D46B00D40DD0 /* gui_fragment_shader.fsh */,
+				3246A7BB1DE1D46B00D40DD0 /* gui_vertex_shader.vsh */,
+				3246A7B41DE1D39300D40DD0 /* GuiShaderManager.swift */,
+				3246A7B61DE1D3D700D40DD0 /* TGuiAttribute.swift */,
+				3246A7B81DE1D3FC00D40DD0 /* TGuiUniform.swift */,
+			);
+			path = Guis;
 			sourceTree = "<group>";
 		};
 		324CFB201DAED0B50020CA56 /* Buttons */ = {
@@ -284,6 +318,14 @@
 				3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */,
 			);
 			path = SkyBox;
+			sourceTree = "<group>";
+		};
+		325A6B071DE762B10068C945 /* Guis */ = {
+			isa = PBXGroup;
+			children = (
+				325A6B081DE762D40068C945 /* game_engine_logo.png */,
+			);
+			path = Guis;
 			sourceTree = "<group>";
 		};
 		3295B4511D6B8C3A0065E8E8 /* Entities */ = {
@@ -310,6 +352,7 @@
 		3297C5E01D68F387009F7416 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				325A6B071DE762B10068C945 /* Guis */,
 				324CFB201DAED0B50020CA56 /* Buttons */,
 				32EF0CC01D7AF4B3006D9247 /* Terrain */,
 				3295B4511D6B8C3A0065E8E8 /* Entities */,
@@ -418,6 +461,7 @@
 		32A9218E1D5EF73D00EF8477 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				3246A7B31DE1D30500D40DD0 /* Guis */,
 				32EF0CBB1D7AF294006D9247 /* Terrains */,
 				3253214B1D7335220061B2ED /* SkyBox */,
 				321430381D5F5CAF005C23A1 /* Entities */,
@@ -435,6 +479,7 @@
 				32AB942F1D96B5AD0060D581 /* MasterRender.swift */,
 				32A5627E1D97C3E20014C634 /* Loader.swift */,
 				32E0537E1DB22D80007DBB2A /* RenderConstants.swift */,
+				323E0AA71DE61CF30038A96B /* GuiRender.swift */,
 			);
 			path = RenderEngine;
 			sourceTree = "<group>";
@@ -501,6 +546,7 @@
 				32ACE9E81D9ECD43008896E1 /* WorldTerrainsGenerator.swift */,
 				327543211DC6987C00450E8E /* GenericEntitiesGenerator.swift */,
 				327543231DC6994F00450E8E /* WorldPlayersGenerator.swift */,
+				325A6B051DE762390068C945 /* WorldGUIsGenerator.swift */,
 			);
 			path = ModelGenerators;
 			sourceTree = "<group>";
@@ -626,8 +672,10 @@
 				3297C5F71D68F54E009F7416 /* sky_left.png in Resources */,
 				3267A07C1DC734F40075D68B /* heightmap.png in Resources */,
 				3295B4601D6B8C3A0065E8E8 /* flower.obj in Resources */,
+				3246A7BD1DE1D46B00D40DD0 /* gui_vertex_shader.vsh in Resources */,
 				3297C5F41D68F54E009F7416 /* sky_back.png in Resources */,
 				3295B4611D6B8C3A0065E8E8 /* flower.png in Resources */,
+				3246A7BC1DE1D46B00D40DD0 /* gui_fragment_shader.fsh in Resources */,
 				325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */,
 				32EF0CC61D7AF4F8006D9247 /* blend_map.png in Resources */,
 				32A921791D5EF5D900EF8477 /* LaunchScreen.xib in Resources */,
@@ -644,6 +692,7 @@
 				3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */,
 				325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */,
 				32EF0CBE1D7AF3E5006D9247 /* terrain_fragment_shader.fsh in Resources */,
+				325A6B091DE762D40068C945 /* game_engine_logo.png in Resources */,
 				324CFB281DAED0DA0020CA56 /* ic_pad_up.png in Resources */,
 				3295B4621D6B8C3A0065E8E8 /* grass.obj in Resources */,
 				3295B45E1D6B8C3A0065E8E8 /* fern.obj in Resources */,
@@ -689,16 +738,20 @@
 				32AB942C1D96A4AD0060D581 /* SkyBoxRender.swift in Sources */,
 				32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */,
 				32ACE9E91D9ECD43008896E1 /* WorldTerrainsGenerator.swift in Sources */,
+				3246A7B21DE1D12600D40DD0 /* GuiTexture.swift in Sources */,
 				32DB537A1DAA843A0080DA85 /* TerrainShape.swift in Sources */,
 				32F068811D9C541200C6C3CC /* WorldEntitiesGenerator.swift in Sources */,
 				327543241DC6994F00450E8E /* WorldPlayersGenerator.swift in Sources */,
 				32E3E1E61DA199F500B3AC49 /* TexturedModel.swift in Sources */,
+				3246A7B01DE1CDB100D40DD0 /* GuiShape.swift in Sources */,
+				3246A7B91DE1D3FC00D40DD0 /* TGuiUniform.swift in Sources */,
 				324CFB1B1DAEC5650020CA56 /* GamePad.swift in Sources */,
 				32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */,
 				32A94C481D98514100A63154 /* TComponentPosition.swift in Sources */,
 				32C59BAC1DAAC79A001178C2 /* Utils.swift in Sources */,
 				32FD16591D9F0AF200BFF6D2 /* LightSwift.swift in Sources */,
 				32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */,
+				323E0AA81DE61CF30038A96B /* GuiRender.swift in Sources */,
 				32ACE9EB1D9ECF2C008896E1 /* TerrainTexturesPack.swift in Sources */,
 				32A562871D97F21E0014C634 /* WfObject.swift in Sources */,
 				32A8D8491DBBB24F00BEE381 /* ThirdPersonCamera.swift in Sources */,
@@ -717,11 +770,14 @@
 				32ACE9F11D9EF4D4008896E1 /* Entity.swift in Sources */,
 				32C59BAE1DAADC3B001178C2 /* IShape.swift in Sources */,
 				32AB94371D96BCA90060D581 /* GLSLUtils.swift in Sources */,
+				3246A7B71DE1D3D700D40DD0 /* TGuiAttribute.swift in Sources */,
 				32E0537F1DB22D80007DBB2A /* RenderConstants.swift in Sources */,
 				3297CE781DA94A4200530595 /* ModelTexture.swift in Sources */,
 				324CFB1D1DAEC57A0020CA56 /* GamePadEnum.swift in Sources */,
 				32ACE9ED1D9EDD20008896E1 /* Terrain.swift in Sources */,
 				3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */,
+				3246A7B51DE1D39300D40DD0 /* GuiShaderManager.swift in Sources */,
+				325A6B061DE762390068C945 /* WorldGUIsGenerator.swift in Sources */,
 				3269CF5E1D9FB476007574BC /* Camera.swift in Sources */,
 				323843BA1DB39DFE00E063DC /* Player.swift in Sources */,
 				32AB943D1D96CF8E0060D581 /* LoadUtils.swift in Sources */,

@@ -1,12 +1,14 @@
 package gameEngine.renderEngine;
 
 import gameEngine.shaders.entities.EntityShaderManager;
+import gameEngine.shaders.guis.GuiShaderManager;
 import gameEngine.shaders.skyBox.SkyBoxShaderManager;
 import gameEngine.shaders.terrains.TerrainShaderManager;
 import gameEngine.models.TexturedModel;
 import gameEngine.models.ThirdPersonCamera;
 import gameEngine.models.Camera;
 import gameEngine.models.Entity;
+import gameEngine.models.GuiTexture;
 import gameEngine.models.Player;
 import gameEngine.models.SkyBox;
 import gameEngine.models.Terrain;
@@ -53,7 +55,12 @@ public class MasterRender {
 	 * Reference to the render of the sky box
 	 */
 	private final SkyBoxRender skyBoxRender;
-
+	
+	/**
+	 * Reference to the render of GUIs
+	 */
+	private final GuiRender guiRender;
+	
 	/**
 	 * Reference to the camera from where the user is going to see the 3D world
 	 */
@@ -74,6 +81,11 @@ public class MasterRender {
 	 */
 	private Player player;
 
+	/**
+	 * List of GUIs to show the status of the user
+	 */
+	private List<GuiTexture> guis;
+	
 	/**
 	 * The sky box that is going to use during the render
 	 */
@@ -127,9 +139,15 @@ public class MasterRender {
 		SkyBoxShaderManager sbManager = new SkyBoxShaderManager();
 		this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix);
 
+		GuiShaderManager gShader = new GuiShaderManager();
+		this.guiRender = new GuiRender(gShader);
+		
 		// Initializes the terrains to render
 		this.terrains = new ArrayList<Terrain>();
 
+		// Initializes the GUIs to render
+		this.guis = new ArrayList<GuiTexture>();
+		
 		// Initializes the camera
 		this.camera = new ThirdPersonCamera();
 
@@ -193,7 +211,33 @@ public class MasterRender {
 			}
 		}
 	}
-
+	
+	/**
+	 * Put a GUI in the list of GUIs to render
+	 * 
+	 * @param gui
+	 *            the GUI to render
+	 */
+	private void processGUI(GuiTexture gui) {
+		this.guis.add(gui);
+	}
+	
+	/**
+	 * Put the GUIs to process in the list of GUIs to process
+	 * 
+	 * @param lGuis
+	 *            array of GUIs to process
+	 */
+	public void processGUIs(GuiTexture[] lGuis) {
+		this.guis.clear();
+		if ((lGuis != null) && (lGuis.length > 0)) {
+			for (int i = 0; i < lGuis.length; i++) {
+				GuiTexture gui = lGuis[i];
+				processGUI(gui);
+			}
+		}
+	}
+	
 	/**
 	 * Set the sky box the use during the render
 	 * 
@@ -278,6 +322,7 @@ public class MasterRender {
 		this.entityRender.render(skyColor, sun, viewMatrix, entities, player);
 		this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
 		this.skyBoxRender.render(viewMatrix, skyBox);
+		this.guiRender.render(this.guis);
 	}
 
 
@@ -309,6 +354,10 @@ public class MasterRender {
 		this.skyBoxRender.cleanUp();
 		this.entities.clear();
 		this.terrains.clear();
+		this.guis.clear();		
+		this.entities = null;
+		this.terrains = null;
+		this.guis = null;
 		this.skyBox = null;
 	}
 }
