@@ -4,7 +4,11 @@ package com.dferreira.game_engine.renderEngine;
 public class RenderConstants {
 
     @SuppressWarnings("FieldCanBeLocal")
+    public final static int VERTEX_SIZE_2D = 2;
+
+    @SuppressWarnings("FieldCanBeLocal")
     public final static int VERTEX_SIZE = 3;
+
 
     //Specifies whether fixed-point data values should be normalized (GL_TRUE) or converted directly as fixed-point values (GL_FALSE) when they are accessed.
     @SuppressWarnings("FieldCanBeLocal")

@@ -27,8 +27,8 @@ public class WorldSkyBoxGenerator {
     /**
      * The sky of the 3D scene
      *
-     * @param loader object that is going to read the textures of the sky
-     *
+     * @param context Context where the method was called
+     * @param loader  object that is going to read the textures of the sky
      * @return the reference to the sky box created
      */
     public static SkyBox getSky(Context context, Loader loader) {

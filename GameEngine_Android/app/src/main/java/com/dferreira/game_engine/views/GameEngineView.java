@@ -9,17 +9,17 @@ import android.util.AttributeSet;
  */
 public class GameEngineView extends GLSurfaceView {
 
-    private GameEngineRenderer objPickerRenderer;
+    private final GameEngineRenderer gameEngineRenderer;
 
     /**
      * Standard View constructor. In order to render something, you
      * must call {@link #setRenderer} to register a renderer.
      *
      * @param context context where this view will be called
-     * @param attrs attributes that are passed to the view
+     * @param attrs   attributes that are passed to the view
      */
     public GameEngineView(Context context, AttributeSet attrs) {
-        super(context,attrs);
+        super(context, attrs);
 
         // Tell the surface view we want to create an OpenGL ES 2.0-compatible
         // context, and set an OpenGL ES 2.0-compatible renderer.
@@ -28,8 +28,8 @@ public class GameEngineView extends GLSurfaceView {
         this.setEGLConfigChooser(5, 6, 5, 0, 16, 0);
 
         this.setEGLContextClientVersion(2);
-        objPickerRenderer = new GameEngineRenderer(context);
-        this.setRenderer(objPickerRenderer);
+        gameEngineRenderer = new GameEngineRenderer(context);
+        this.setRenderer(gameEngineRenderer);
     }
 
     /**
@@ -38,6 +38,6 @@ public class GameEngineView extends GLSurfaceView {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        this.objPickerRenderer.cleanUp();
+        this.gameEngineRenderer.cleanUp();
     }
 }

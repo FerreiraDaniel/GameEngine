@@ -54,6 +54,17 @@ public class Loader {
     }
 
     /**
+     * Load a list of 2D positions to RawModel
+     *
+     * @param positions Positions to load
+     * @return The rawModel pointing to the positions
+     */
+    public RawModel load2DPositionsToRawModel(float[] positions) {
+        int dimensions = 2;
+        return loadPositionsToRawModel(positions, dimensions);
+    }
+
+    /**
      * Load a list of 3D positions to RawModel
      *
      * @param positions Positions to load

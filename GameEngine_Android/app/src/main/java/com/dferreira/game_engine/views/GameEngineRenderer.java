@@ -7,10 +7,12 @@ import android.util.Log;
 
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.modelGenerators.WorldEntitiesGenerator;
+import com.dferreira.game_engine.modelGenerators.WorldGUIsGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldPlayersGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldSkyBoxGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldTerrainsGenerator;
 import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.GuiTexture;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
@@ -59,6 +61,11 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
      * Array of terrains to render
      */
     private Terrain[] terrains;
+
+    /**
+     * Array of GUIs to render
+     */
+    private GuiTexture[] GUIs;
 
     /**
      * Position of the light in scene
@@ -134,6 +141,9 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize light " + (lightLoaded.getTime() - terrainLoaded.getTime()) + " ms");
 
+        		/* Prepares the GUIs that is going to render*/
+        this.GUIs = WorldGUIsGenerator.getGUIs(context, loader);
+
         /* Load the sky box that is going to render*/
         this.skyBox = WorldSkyBoxGenerator.getSky(context, loader);
 
@@ -168,6 +178,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         renderer.processEntities(entities);
         renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);
+        renderer.processGUIs(this.GUIs);
         renderer.render(light);
 
         renderer.endFrameRender();

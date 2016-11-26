@@ -9,12 +9,14 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Camera;
 import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.GuiTexture;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.TexturedModel;
 import com.dferreira.game_engine.models.ThirdPersonCamera;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
+import com.dferreira.game_engine.shaders.guis.GuiShaderManager;
 import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
 import com.dferreira.game_engine.shaders.terrains.TerrainShaderManager;
 
@@ -58,6 +60,11 @@ public class MasterRender {
     private final SkyBoxRender skyBoxRender;
 
     /**
+     * Reference to the render of GUIs
+     */
+    private final GuiRender guiRender;
+
+    /**
      * Reference to the camera from where the user is going to see the 3D world
      */
     private final ThirdPersonCamera camera;
@@ -77,6 +84,11 @@ public class MasterRender {
      * The player that is going to be show in the scene
      */
     private Player player;
+
+    /**
+     * List of GUIs to show the status of the user
+     */
+    private List<GuiTexture> GUIs;
 
     /**
      * The sky box that is going to use during the render
@@ -116,8 +128,14 @@ public class MasterRender {
         SkyBoxShaderManager sbManager = new SkyBoxShaderManager(context);
         this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix);
 
+        GuiShaderManager gShader = new GuiShaderManager(context);
+        this.guiRender = new GuiRender(gShader);
+
         // Initializes the terrains to render
         this.terrains = new ArrayList<>();
+
+        // Initializes the GUIs to render
+        this.GUIs = new ArrayList<>();
 
         // Initializes the camera
         this.camera = new ThirdPersonCamera();
@@ -214,6 +232,31 @@ public class MasterRender {
     }
 
     /**
+     * Put a GUI in the list of GUIs to render
+     *
+     * @param gui the GUI to render
+     */
+    private void processGUI(GuiTexture gui) {
+        this.GUIs.add(gui);
+    }
+
+    /**
+     * Put the GUIs to process in the list of GUIs to process
+     *
+     * @param lGUIs array of GUIs to process
+     */
+    public void processGUIs(GuiTexture[] lGUIs) {
+        this.GUIs.clear();
+        if ((lGUIs != null) && (lGUIs.length > 0)) {
+            //noinspection ForLoopReplaceableByForEach
+            for (int i = 0; i < lGUIs.length; i++) {
+                GuiTexture gui = lGUIs[i];
+                processGUI(gui);
+            }
+        }
+    }
+
+    /**
      * Set the player that is going to use during the render
      *
      * @param player The player that is going to set
@@ -276,6 +319,7 @@ public class MasterRender {
         this.entityRender.render(skyColor, sun, viewMatrix, player);
         this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
         this.skyBoxRender.render(viewMatrix, skyBox);
+        this.guiRender.render(this.GUIs);
     }
 
     /**
@@ -304,8 +348,11 @@ public class MasterRender {
         this.entityRender.cleanUp();
         this.terrainRender.cleanUp();
         this.skyBoxRender.cleanUp();
+        this.guiRender.cleanUp();
         this.entities.clear();
         this.terrains.clear();
+        this.GUIs.clear();
+        this.GUIs = null;
         this.skyBox = null;
     }
 }
