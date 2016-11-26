@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 import com.dferreira.commons.Vector3f;
-import com.dferreira.commons.models.Light;
 
 import gameEngine.models.Entity;
 import gameEngine.models.Terrain;
@@ -21,17 +20,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 	private final static int NUMBER_OF_GRASS = 20;
 	private final static int NUMBER_OF_FLOWERS = 100;
 	private final static int NUMBER_OF_MARBLES = 10;
-
-	/**
-	 * 
-	 * @return A source of light to the scene
-	 */
-	public static Light getLight() {
-		Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-		Vector3f lightColor = new Vector3f(1.0f, 1.0f, 1.0f);
-
-		return new Light(lightPosition, lightColor);
-	}
 
 	/**
 	 * Get one entity in a certain position

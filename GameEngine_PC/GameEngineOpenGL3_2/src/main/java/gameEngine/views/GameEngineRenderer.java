@@ -4,6 +4,7 @@ import com.dferreira.commons.models.Light;
 
 import gameEngine.modelGenerators.WorldEntitiesGenerator;
 import gameEngine.modelGenerators.WorldGUIsGenerator;
+import gameEngine.modelGenerators.WorldLightsGenerator;
 import gameEngine.modelGenerators.WorldPlayersGenerator;
 import gameEngine.modelGenerators.WorldSkyBoxGenerator;
 import gameEngine.modelGenerators.WorldTerrainsGenerator;
@@ -46,9 +47,9 @@ public class GameEngineRenderer {
 	
 
 	/**
-	 * Position of the light in scene
+	 * The lights in scene
 	 */
-	private Light light;
+	private Light[] lights;
 
 	/**
 	 * SkyBox of the 3D world
@@ -85,9 +86,9 @@ public class GameEngineRenderer {
 
 
 		/* Load the light that is going to render */
-		this.light = WorldEntitiesGenerator.getLight();
+		this.lights = WorldLightsGenerator.getLights();
 
-		/* Prepares the guis that is going to render*/
+		/* Prepares the GUIs that is going to render*/
 		this.guis = WorldGUIsGenerator.getGUIs(loader);
 		
 		/* Load the sky box that is going to render */
@@ -110,7 +111,7 @@ public class GameEngineRenderer {
 		renderer.processPlayer(player);
 		renderer.processGUIs(this.guis);
 
-		renderer.render(light);
+		renderer.render(lights);
 
 		DisplayManager.updateDisplay();
 

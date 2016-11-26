@@ -311,16 +311,16 @@ public class MasterRender {
 	/**
 	 * Render the entire scene (Called by each frame)
 	 * 
-	 * @param sun
-	 *            Sun of the scene
+	 * @param lights
+	 *            The lights of the scene
 	 */
-	public void render(Light sun) {
+	public void render(Light[] lights) {
 		this.prepare();
 		this.updatePlayer();
 		GLTransformation viewMatrix = this.updateCamera();
 		Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
-		this.entityRender.render(skyColor, sun, viewMatrix, entities, player);
-		this.terrainRender.render(skyColor, sun, viewMatrix, terrains);
+		this.entityRender.render(skyColor, lights, viewMatrix, entities, player);
+		this.terrainRender.render(skyColor, lights, viewMatrix, terrains);
 		this.skyBoxRender.render(viewMatrix, skyBox);
 		this.guiRender.render(this.guis);
 	}

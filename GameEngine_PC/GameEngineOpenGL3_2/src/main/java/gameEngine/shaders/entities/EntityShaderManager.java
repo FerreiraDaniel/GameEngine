@@ -103,14 +103,14 @@ public class EntityShaderManager extends ShaderManager {
 	}
 
 	/**
-	 * Put passes the information of the light to the Shader program
+	 * Put passes the information of the lights to the Shader program
 	 * 
-	 * @param light
-	 *            the light to load in the shader program
+	 * @param lights
+	 *            the lights to load in the shader program
 	 */
-	public void loadLight(Light light) {
-		super.loadVector(uniforms[TEntityUniform.lightPosition.getValue()], light.getPosition());
-		super.loadVector(uniforms[TEntityUniform.lightColor.getValue()], light.getColor());
+	public void loadLights(Light[] lights) {
+		super.loadVector(uniforms[TEntityUniform.lightPosition.getValue()], lights[0].getPosition());
+		super.loadVector(uniforms[TEntityUniform.lightColor.getValue()], lights[0].getColor());
 	}
 
 	/**

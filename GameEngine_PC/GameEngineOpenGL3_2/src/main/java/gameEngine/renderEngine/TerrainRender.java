@@ -69,17 +69,17 @@ public class TerrainRender {
 	 * 
 	 * @param skyColor
 	 *            Color of the sky
-	 * @param sun
-	 *            The source of light of the scene
+	 * @param lights
+	 *            The lights of the scene
 	 * @param viewMatrix
 	 *            View matrix to render the scene
 	 * @param terrains
 	 *            List of terrains of the scene
 	 */
-	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, List<Terrain> terrains) {
+	public void render(Vector3f skyColor, Light[] lights, GLTransformation viewMatrix, List<Terrain> terrains) {
 		tShader.start();
 		tShader.loadSkyColor(skyColor);
-		tShader.loadLight(sun);
+		tShader.loadLights(lights);
 		tShader.loadViewMatrix(viewMatrix);
 
 		this.render(terrains);

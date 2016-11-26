@@ -73,8 +73,8 @@ public class EntityRender {
 	 * @param skyColor
 	 *            Color of the sky
 	 * 
-	 * @param sun
-	 *            The source of light of the scene
+	 * @param lights
+	 *            The lights of the scene
 	 * @param viewMatrix
 	 *            View matrix to render the scene
 	 * @param entities
@@ -82,11 +82,11 @@ public class EntityRender {
 	 * @param player
 	 *            The player of the scene
 	 */
-	public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix,
+	public void render(Vector3f skyColor, Light[] lights, GLTransformation viewMatrix,
 			Map<TexturedModel, List<Entity>> entities, Player player) {
 		eShader.start();
 		eShader.loadSkyColor(skyColor);
-		eShader.loadLight(sun);
+		eShader.loadLights(lights);
 		eShader.loadViewMatrix(viewMatrix);
 
 		this.render(entities);
