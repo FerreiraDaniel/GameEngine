@@ -14,13 +14,4 @@
         android:layout_height="0dp"
         android:layout_weight="7"
         tools:layout="@layout/game_engine" />
-
-    <fragment
-        android:id="@+id/game_controller"
-        android:name="com.dferreira.game_controller.fragments.GamePadFragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        tools:layout="@layout/game_controller" />
-
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.dferreira.game_engine.models;
 
 import com.dferreira.commons.Vector2f;
+import com.dferreira.game_controller.GamePadKey;
 
 /**
  * Represents one texture to be show in the UI of the game (In 2D)
@@ -28,16 +29,25 @@ public class GuiTexture {
     private final Vector2f scale;
 
     /**
-     * @param textureId Identifier of the texture
-     * @param position  Position of the texture between (0,0) and (1.0,1.0)
-     * @param scale     Scale factor of the texture
+     * The game pad key that the gui texture will trigger if pressed
+     * Note if null nothing will be trigger
      */
-    public GuiTexture(RawModel rawModel, int textureId, Vector2f position, Vector2f scale) {
+    private final GamePadKey gamePadKey;
+
+    /**
+     * @param rawModel   The rawModel that will be used by the guiTexture
+     * @param textureId  Identifier of the texture
+     * @param position   Position of the texture between (0,0) and (1.0,1.0)
+     * @param scale      Scale factor of the texture
+     * @param gamePadKey The reference to the key that will be trigger
+     */
+    public GuiTexture(RawModel rawModel, int textureId, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
         super();
         this.rawModel = rawModel;
         this.textureId = textureId;
         this.position = position;
         this.scale = scale;
+        this.gamePadKey = gamePadKey;
     }
 
     /**
@@ -66,5 +76,24 @@ public class GuiTexture {
      */
     public Vector2f getScale() {
         return scale;
+    }
+
+    /**
+     * @return The reference to the key that will be trigger
+     */
+    public GamePadKey getGamePadKey() {
+        return gamePadKey;
+    }
+
+    /**
+     * @param locationX x-coordinate of the location passed
+     * @param locationY y-coordinate of the location passed
+     * @return False do not contains the location passed
+     * True contains the location passed
+     */
+    public boolean containsLocation(float locationX, float locationY) {
+        return (locationX >= (position.x - scale.x)) &&
+                (locationX <= (position.x + scale.x)) &&
+                ((locationY >= (position.y - scale.y)) && ((locationY <= (position.y + scale.y))));
     }
 }

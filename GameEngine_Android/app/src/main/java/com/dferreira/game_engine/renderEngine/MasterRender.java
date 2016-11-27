@@ -7,6 +7,8 @@ import android.opengl.GLES20;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
+import com.dferreira.game_controller.GameEngineTouchListener;
+import com.dferreira.game_controller.GamePad;
 import com.dferreira.game_engine.models.Camera;
 import com.dferreira.game_engine.models.Entity;
 import com.dferreira.game_engine.models.GuiTexture;
@@ -297,6 +299,22 @@ public class MasterRender {
     }
 
     /**
+     * Uses the GUIs to update the game pad of the game
+     */
+    private void updateGamePad() {
+        if ((this.GUIs != null) && (!this.GUIs.isEmpty())) {
+            //noinspection ForLoopReplaceableByForEach
+            for (int i = 0; i < this.GUIs.size(); i++) {
+                GuiTexture guiTexture = this.GUIs.get(i);
+                if (guiTexture.getGamePadKey() != null) {
+                    boolean keyPressed = guiTexture.containsLocation(GameEngineTouchListener.getGlX(), GameEngineTouchListener.getGlY());
+                    GamePad.setKey(guiTexture.getGamePadKey(), keyPressed && GameEngineTouchListener.getIsPressed());
+                }
+            }
+        }
+    }
+
+    /**
      * Call the method to update the player position
      */
     private void updatePlayer() {
@@ -312,6 +330,7 @@ public class MasterRender {
      */
     public void render(Light sun) {
         this.prepare();
+        this.updateGamePad();
         this.updatePlayer();
         GLTransformation viewMatrix = this.updateCamera();
         Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);

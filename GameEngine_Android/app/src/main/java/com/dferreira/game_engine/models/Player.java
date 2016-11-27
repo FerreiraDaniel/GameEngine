@@ -2,6 +2,7 @@ package com.dferreira.game_engine.models;
 
 import com.dferreira.commons.Vector3f;
 import com.dferreira.game_controller.GamePad;
+import com.dferreira.game_controller.GamePadKey;
 
 
 /**
@@ -56,20 +57,20 @@ public class Player extends Entity {
      * @param terrain Reference to the terrain
      */
     private void checkInputs(Terrain terrain) {
-        if (GamePad.isKeyDown(GamePad.KEY_X)) {
+        if (GamePad.isKeyDown(GamePadKey.x)) {
             //Go in front
             this.currentSpeed = RUN_SPEED;
-        } else if (GamePad.isKeyDown(GamePad.KEY_CIRCLE)) {
+        } else if (GamePad.isKeyDown(GamePadKey.circle)) {
             //Go backwards
             this.currentSpeed = -RUN_SPEED;
         } else {
             //Stay where it is
             this.currentSpeed = 0;
         }
-        if (GamePad.isKeyDown(GamePad.KEY_LEFT)) {
+        if (GamePad.isKeyDown(GamePadKey.left)) {
             //Rotate counterclockwise
             this.currentTurnSpeed = -TURN_SPEED;
-        } else if (GamePad.isKeyDown(GamePad.KEY_RIGHT)) {
+        } else if (GamePad.isKeyDown(GamePadKey.right)) {
             //Rotate clockwise
             this.currentTurnSpeed = TURN_SPEED;
         } else {
@@ -77,7 +78,7 @@ public class Player extends Entity {
             this.currentTurnSpeed = 0;
         }
 
-        if (GamePad.isKeyDown(GamePad.KEY_TRIANGLE)) {
+        if (GamePad.isKeyDown(GamePadKey.triangle)) {
             this.jump(terrain);
         }
     }

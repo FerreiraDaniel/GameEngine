@@ -3,6 +3,9 @@ package com.dferreira.game_engine.views;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
+import android.view.SurfaceHolder;
+
+import com.dferreira.game_controller.GameEngineTouchListener;
 
 /**
  * View with game rendered
@@ -10,6 +13,7 @@ import android.util.AttributeSet;
 public class GameEngineView extends GLSurfaceView {
 
     private final GameEngineRenderer gameEngineRenderer;
+    private final GameEngineTouchListener touchListener;
 
     /**
      * Standard View constructor. In order to render something, you
@@ -28,8 +32,25 @@ public class GameEngineView extends GLSurfaceView {
         this.setEGLConfigChooser(5, 6, 5, 0, 16, 0);
 
         this.setEGLContextClientVersion(2);
+        //Set the render of the view
         gameEngineRenderer = new GameEngineRenderer(context);
         this.setRenderer(gameEngineRenderer);
+
+        //Set the listener that are going to handle the on view touch
+        touchListener = new GameEngineTouchListener();
+        this.setOnTouchListener(touchListener);
+
+        touchListener.setHeight(this.getHeight());
+        touchListener.setWidth(this.getWidth());
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        super.surfaceChanged(holder, format, w, h);
+        if (touchListener != null) {
+            touchListener.setHeight(this.getHeight());
+            touchListener.setWidth(this.getWidth());
+        }
     }
 
     /**
