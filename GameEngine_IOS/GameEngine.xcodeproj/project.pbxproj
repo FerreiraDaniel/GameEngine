@@ -18,7 +18,6 @@
 		3246A7BC1DE1D46B00D40DD0 /* gui_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3246A7BA1DE1D46B00D40DD0 /* gui_fragment_shader.fsh */; };
 		3246A7BD1DE1D46B00D40DD0 /* gui_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3246A7BB1DE1D46B00D40DD0 /* gui_vertex_shader.vsh */; };
 		324CFB1B1DAEC5650020CA56 /* GamePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1A1DAEC5650020CA56 /* GamePad.swift */; };
-		324CFB1D1DAEC57A0020CA56 /* GamePadEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */; };
 		324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB211DAED0D90020CA56 /* ic_pad_down.png */; };
 		324CFB261DAED0DA0020CA56 /* ic_pad_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB221DAED0DA0020CA56 /* ic_pad_left.png */; };
 		324CFB271DAED0DA0020CA56 /* ic_pad_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 324CFB231DAED0DA0020CA56 /* ic_pad_right.png */; };
@@ -26,7 +25,6 @@
 		325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */; };
 		325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */; };
 		325A6B061DE762390068C945 /* WorldGUIsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 325A6B051DE762390068C945 /* WorldGUIsGenerator.swift */; };
-		325A6B091DE762D40068C945 /* game_engine_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 325A6B081DE762D40068C945 /* game_engine_logo.png */; };
 		325F27991DD73E14008CEE42 /* fern.png in Resources */ = {isa = PBXBuildFile; fileRef = 325F27981DD73E14008CEE42 /* fern.png */; };
 		3267A07C1DC734F40075D68B /* heightmap.png in Resources */ = {isa = PBXBuildFile; fileRef = 3267A07B1DC734F40075D68B /* heightmap.png */; };
 		3269CF5A1D9FB3FA007574BC /* Vector2f.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3269CF591D9FB3FA007574BC /* Vector2f.swift */; };
@@ -101,6 +99,8 @@
 		32E3E1E21DA198F800B3AC49 /* RawModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E11DA198F800B3AC49 /* RawModel.swift */; };
 		32E3E1E41DA1995F00B3AC49 /* SkyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */; };
 		32E3E1E61DA199F500B3AC49 /* TexturedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */; };
+		32E555AD1DEB040100992318 /* GamePadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E555AC1DEB040100992318 /* GamePadKey.swift */; };
+		32E555B11DEB0D1900992318 /* GameEngineGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E555B01DEB0D1900992318 /* GameEngineGestureRecognizer.swift */; };
 		32EF0CBE1D7AF3E5006D9247 /* terrain_fragment_shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CBC1D7AF3E5006D9247 /* terrain_fragment_shader.fsh */; };
 		32EF0CBF1D7AF3E5006D9247 /* terrain_vertex_shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CBD1D7AF3E5006D9247 /* terrain_vertex_shader.vsh */; };
 		32EF0CC61D7AF4F8006D9247 /* blend_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EF0CC11D7AF4F8006D9247 /* blend_map.png */; };
@@ -136,7 +136,6 @@
 		3246A7BA1DE1D46B00D40DD0 /* gui_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gui_fragment_shader.fsh; sourceTree = "<group>"; };
 		3246A7BB1DE1D46B00D40DD0 /* gui_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = gui_vertex_shader.vsh; sourceTree = "<group>"; };
 		324CFB1A1DAEC5650020CA56 /* GamePad.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePad.swift; sourceTree = "<group>"; };
-		324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadEnum.swift; sourceTree = "<group>"; };
 		324CFB211DAED0D90020CA56 /* ic_pad_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_down.png; sourceTree = "<group>"; };
 		324CFB221DAED0DA0020CA56 /* ic_pad_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_left.png; sourceTree = "<group>"; };
 		324CFB231DAED0DA0020CA56 /* ic_pad_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_pad_right.png; sourceTree = "<group>"; };
@@ -144,7 +143,6 @@
 		3253214F1D7336CF0061B2ED /* sky_box_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_vertex_shader.vsh; sourceTree = "<group>"; };
 		325321511D7336DE0061B2ED /* sky_box_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = sky_box_fragment_shader.fsh; sourceTree = "<group>"; };
 		325A6B051DE762390068C945 /* WorldGUIsGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldGUIsGenerator.swift; sourceTree = "<group>"; };
-		325A6B081DE762D40068C945 /* game_engine_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game_engine_logo.png; sourceTree = "<group>"; };
 		325F27981DD73E14008CEE42 /* fern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fern.png; sourceTree = "<group>"; };
 		3267A07B1DC734F40075D68B /* heightmap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heightmap.png; sourceTree = "<group>"; };
 		3269CF591D9FB3FA007574BC /* Vector2f.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector2f.swift; sourceTree = "<group>"; };
@@ -223,6 +221,8 @@
 		32E3E1E11DA198F800B3AC49 /* RawModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawModel.swift; sourceTree = "<group>"; };
 		32E3E1E31DA1995F00B3AC49 /* SkyBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBox.swift; sourceTree = "<group>"; };
 		32E3E1E51DA199F500B3AC49 /* TexturedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TexturedModel.swift; sourceTree = "<group>"; };
+		32E555AC1DEB040100992318 /* GamePadKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePadKey.swift; sourceTree = "<group>"; };
+		32E555B01DEB0D1900992318 /* GameEngineGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngineGestureRecognizer.swift; sourceTree = "<group>"; };
 		32EF0CBC1D7AF3E5006D9247 /* terrain_fragment_shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain_fragment_shader.fsh; sourceTree = "<group>"; };
 		32EF0CBD1D7AF3E5006D9247 /* terrain_vertex_shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain_vertex_shader.vsh; sourceTree = "<group>"; };
 		32EF0CC11D7AF4F8006D9247 /* blend_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blend_map.png; sourceTree = "<group>"; };
@@ -320,14 +320,6 @@
 			path = SkyBox;
 			sourceTree = "<group>";
 		};
-		325A6B071DE762B10068C945 /* Guis */ = {
-			isa = PBXGroup;
-			children = (
-				325A6B081DE762D40068C945 /* game_engine_logo.png */,
-			);
-			path = Guis;
-			sourceTree = "<group>";
-		};
 		3295B4511D6B8C3A0065E8E8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,7 +344,6 @@
 		3297C5E01D68F387009F7416 /* Res */ = {
 			isa = PBXGroup;
 			children = (
-				325A6B071DE762B10068C945 /* Guis */,
 				324CFB201DAED0B50020CA56 /* Buttons */,
 				32EF0CC01D7AF4B3006D9247 /* Terrain */,
 				3295B4511D6B8C3A0065E8E8 /* Entities */,
@@ -514,7 +505,8 @@
 			isa = PBXGroup;
 			children = (
 				324CFB1A1DAEC5650020CA56 /* GamePad.swift */,
-				324CFB1C1DAEC57A0020CA56 /* GamePadEnum.swift */,
+				32E555AC1DEB040100992318 /* GamePadKey.swift */,
+				32E555B01DEB0D1900992318 /* GameEngineGestureRecognizer.swift */,
 			);
 			path = GameController;
 			sourceTree = "<group>";
@@ -692,7 +684,6 @@
 				3295B45C1D6B8C3A0065E8E8 /* banana_tree.obj in Resources */,
 				325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */,
 				32EF0CBE1D7AF3E5006D9247 /* terrain_fragment_shader.fsh in Resources */,
-				325A6B091DE762D40068C945 /* game_engine_logo.png in Resources */,
 				324CFB281DAED0DA0020CA56 /* ic_pad_up.png in Resources */,
 				3295B4621D6B8C3A0065E8E8 /* grass.obj in Resources */,
 				3295B45E1D6B8C3A0065E8E8 /* fern.obj in Resources */,
@@ -728,6 +719,7 @@
 				327543221DC6987C00450E8E /* GenericEntitiesGenerator.swift in Sources */,
 				32F068851D9C55C200C6C3CC /* WorldSkyBoxGenerator.swift in Sources */,
 				3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */,
+				32E555B11DEB0D1900992318 /* GameEngineGestureRecognizer.swift in Sources */,
 				3275A13A1D99A8B100B52467 /* OBJLoader.swift in Sources */,
 				32BD73931D93240E00F6DC47 /* TerrainShaderManager.swift in Sources */,
 				32F068831D9C549F00C6C3CC /* DefaultModelGenerator.swift in Sources */,
@@ -763,6 +755,7 @@
 				32AB942A1D96A4280060D581 /* EntityRender.swift in Sources */,
 				32AB942E1D96A4E60060D581 /* TerrainRender.swift in Sources */,
 				3297CE7A1DA94C5700530595 /* TextureData.swift in Sources */,
+				32E555AD1DEB040100992318 /* GamePadKey.swift in Sources */,
 				32B3208F1DAC1FCD008B261C /* AppDelegate.swift in Sources */,
 				32A989881D8ED05600FD815D /* TSkyBoxAttribute.swift in Sources */,
 				32A8D84B1DBBB45800BEE381 /* Math.swift in Sources */,
@@ -773,7 +766,6 @@
 				3246A7B71DE1D3D700D40DD0 /* TGuiAttribute.swift in Sources */,
 				32E0537F1DB22D80007DBB2A /* RenderConstants.swift in Sources */,
 				3297CE781DA94A4200530595 /* ModelTexture.swift in Sources */,
-				324CFB1D1DAEC57A0020CA56 /* GamePadEnum.swift in Sources */,
 				32ACE9ED1D9EDD20008896E1 /* Terrain.swift in Sources */,
 				3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */,
 				3246A7B51DE1D39300D40DD0 /* GuiShaderManager.swift in Sources */,

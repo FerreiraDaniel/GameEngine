@@ -50,20 +50,20 @@ public class Player : Entity {
      * @param terrain Reference to the terrain
      */
     private func checkInputs(terrain : Terrain) {
-        if (GamePad.isKeyDown(GamePadEnum.KEY_DOWN)) {
+        if (GamePad.isKeyDown(GamePadKey.circle)) {
             //Go in front
             self.currentSpeed = -RUN_SPEED;
-        } else if (GamePad.isKeyDown(GamePadEnum.KEY_UP)) {
+        } else if (GamePad.isKeyDown(GamePadKey.x)) {
             //Go backwards
             self.currentSpeed = RUN_SPEED;
         } else {
             //Stay where it is
             self.currentSpeed = 0;
         }
-        if(GamePad.isKeyDown(GamePadEnum.KEY_LEFT)) {
+        if(GamePad.isKeyDown(GamePadKey.left)) {
             //Rotate counterclockwise
             self.currentTurnSpeed = -TURN_SPEED;
-        } else if (GamePad.isKeyDown(GamePadEnum.KEY_RIGHT)) {
+        } else if (GamePad.isKeyDown(GamePadKey.right)) {
             //Rotate clockwise
             self.currentTurnSpeed = TURN_SPEED;
         } else {

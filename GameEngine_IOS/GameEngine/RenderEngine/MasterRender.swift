@@ -61,7 +61,7 @@ public class MasterRender : NSObject{
     /**
      * List of GUIs to show the status of the user
      */
-    private var guis : Array<GuiTexture>!;
+    private var GUIs : Array<GuiTexture>!;
     
     /**
      * The sky box that is going to use during the render
@@ -143,6 +143,20 @@ public class MasterRender : NSObject{
     }
     
     /**
+     * Uses the GUIs to update the game pad of the game
+     */
+    private func updateGamePad() {
+        if ((self.GUIs != nil) && (!self.GUIs.isEmpty)) {
+            for guiTexture in GUIs {
+                if(guiTexture.gamePadKey != nil) {
+                    let keyPressed = guiTexture.containsLocation(GameEngineGestureRecognizer.getGlX(), GameEngineGestureRecognizer.getGlY());
+                    GamePad.setKey(guiTexture.gamePadKey, clicked: keyPressed && GameEngineGestureRecognizer.getIsPressed());
+                }
+            }
+        }
+    }
+    
+    /**
      * Call the method to update the player position
      */
     private func updatePlayer() {
@@ -190,7 +204,7 @@ public class MasterRender : NSObject{
         self.skyBoxRender = SkyBoxRender(aShader: sbManager, projectionMatrix: projectionMatrix);
         
         // Initializes the GUIs to render
-        self.guis = Array<GuiTexture>();
+        self.GUIs = Array<GuiTexture>();
         
         
         // Initializes the camera
@@ -266,7 +280,7 @@ public class MasterRender : NSObject{
      *            the GUI to render
      */
     private func processGUI(gui : GuiTexture) {
-        self.guis.append(gui);
+        self.GUIs.append(gui);
     }
     
     /**
@@ -276,7 +290,7 @@ public class MasterRender : NSObject{
      *            array of GUIs to process
      */
     public func processGUIs(lGuis : Array<GuiTexture>) {
-        self.guis.removeAll();
+        self.GUIs.removeAll();
         
         if (!lGuis.isEmpty) {
             for gui in lGuis {
@@ -310,13 +324,14 @@ public class MasterRender : NSObject{
      */
     public func render(sun : Light) {
         self.prepare();
+        self.updateGamePad();
         self.updatePlayer();
         let viewMatrix : GLTransformation = self.updateCamera();
         let skyColor : Vector3f = Vector3f(x: MasterRender.SKY_R, y: MasterRender.SKY_G, z: MasterRender.SKY_B);
         self.entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities, player: self.player);
         self.terrainRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, terrains: self.terrains);
         self.skyBoxRender.render(viewMatrix, skyBox: self.skyBox);
-        self.guiRender.render(self.guis);
+        self.guiRender.render(self.GUIs);
     }
     
     /**
@@ -364,7 +379,7 @@ public class MasterRender : NSObject{
         self.terrains = nil;
         self.player = nil;
         self.camera = nil;
-        self.guis = nil;
+        self.GUIs = nil;
         self.skyBox = nil;
     }
 }

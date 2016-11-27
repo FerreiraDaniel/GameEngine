@@ -59,6 +59,10 @@ public class GameViewController: GLKViewController {
         view.context = self.context!
         view.drawableDepthFormat = .Format24
         
+        //Handle events registration
+        let gestureRecognizer = GameEngineGestureRecognizer()
+        view.addGestureRecognizer(gestureRecognizer)
+        
         self.setupGL()
         
         /* Initializes the main variables responsible to render the 3D world */
@@ -135,20 +139,20 @@ public class GameViewController: GLKViewController {
     }
     
     @IBAction func leftPressed(sender: AnyObject) {
-        GamePad.setKey(GamePadEnum.KEY_LEFT, clicked: true)
+        GamePad.setKey(GamePadKey.left, clicked: true)
     }
     
     
     @IBAction func rightPressed(sender: AnyObject) {
-        GamePad.setKey(GamePadEnum.KEY_RIGHT, clicked: true)
+        GamePad.setKey(GamePadKey.right, clicked: true)
     }
     
     @IBAction func downPressed(sender: AnyObject) {
-        GamePad.setKey(GamePadEnum.KEY_DOWN, clicked: true)
+        GamePad.setKey(GamePadKey.down, clicked: true)
     }
     
     @IBAction func upPressed(sender: AnyObject) {
-        GamePad.setKey(GamePadEnum.KEY_UP, clicked: true)
+        GamePad.setKey(GamePadKey.up, clicked: true)
     }
     
     deinit {
