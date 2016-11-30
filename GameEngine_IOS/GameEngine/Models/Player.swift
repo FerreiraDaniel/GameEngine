@@ -35,14 +35,13 @@ public class Player : Entity {
      * @param rotY     Rotation of the model in the Y axle
      * @param rotZ     Rotation of the model in the Z axle
      * @param scale    Scale of the model
-     * @param textureIndex   Indicates which of the textures is going to use
      */
-    public override init(model : TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float, textureIndex: Int) {
+    public override init(model : TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
         self.currentSpeed = 0.0
         self.currentTurnSpeed = 0.0
         self.upwardsSpeed = 0.0
         self.isJumping = false;
-        super.init(model: model, position: position, rotX: rotX, rotY: rotY, rotZ: rotZ, scale: scale, textureIndex: textureIndex);
+        super.init(model: model, position: position, rotX: rotX, rotY: rotY, rotZ: rotZ, scale: scale);
     }
     
     /**

@@ -35,9 +35,7 @@ public class EntityShaderManager : ShaderManager {
             TEntityUniform.shineDamper.rawValue : "\(TEntityUniform.shineDamper)",
             TEntityUniform.reflectivity.rawValue : "\(TEntityUniform.reflectivity)",
             TEntityUniform.skyColor.rawValue : "\(TEntityUniform.skyColor)",
-            TEntityUniform.normalsPointingUp.rawValue : "\(TEntityUniform.normalsPointingUp)",
-            TEntityUniform.atlasFactor.rawValue : "\(TEntityUniform.atlasFactor)",
-            TEntityUniform.textureOffset.rawValue : "\(TEntityUniform.textureOffset)"
+            TEntityUniform.normalsPointingUp.rawValue : "\(TEntityUniform.normalsPointingUp)"
         ]
         
         return uniformsDic;
@@ -113,23 +111,5 @@ public class EntityShaderManager : ShaderManager {
      */
     public func  loadSkyColor(skyColor : Vector3f) {
         super.loadVector( uniforms[TEntityUniform.skyColor.rawValue], vector : skyColor);
-    }
-    
-    /**
-     * Load the atlas factor in the shader program
-     *
-     * @param atlasFactor The atlas factor to load
-     */
-    public func loadAtlasFactor(atlasFactor : Int) {
-        super.loadFloat(uniforms[TEntityUniform.atlasFactor.rawValue], value: Float(atlasFactor));
-    }
-    
-    /**
-     * Load the offset of the texture useful if it is an atlas texture
-     *
-     * @param textureOffset the offset of the texture
-     */
-    public func loadTextureOffset(textureOffset : Vector2f) {
-        super.loadVector(uniforms[TEntityUniform.textureOffset.rawValue], vector: textureOffset);
     }
 }

@@ -31,17 +31,12 @@ public class DefaultModelGenerator : NSObject {
     */
     var normalsPointingUp : Bool;
     
-    /**
-     * Atlas factor if bigger that one means that the object as multiple textures in the same image
-     */
-    var atlasFactor : Int;
     
-    public init(objectName : String, textureName : String, scale : Float, hasTransparency : Bool, normalsPointingUp : Bool, atlasFactor : Int) {
+    public init(objectName : String, textureName : String, scale : Float, hasTransparency : Bool, normalsPointingUp : Bool) {
         self.objectName = objectName;
         self.textureName = textureName
         self.scale = scale
         self.hasTransparency = hasTransparency
         self.normalsPointingUp = normalsPointingUp
-        self.atlasFactor = atlasFactor
     }
 }

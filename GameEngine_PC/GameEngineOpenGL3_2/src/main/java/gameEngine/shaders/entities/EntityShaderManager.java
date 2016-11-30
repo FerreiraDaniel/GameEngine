@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
@@ -64,24 +63,6 @@ public class EntityShaderManager extends ShaderManager {
 		}
 	}
 
-	/**
-	 * Load the atlas factor in the shader program
-	 * 
-	 * @param atlasFactor The atlas factor to load
-	 */
-	public void loadAtlasFactor(int atlasFactor) {
-	    super.loadFloat(uniforms[TEntityUniform.atlasFactor.getValue()], atlasFactor);
-	}
-
-	/**
-	 * Load the offset of the texture useful if it is an atlas texture
-	 * 
-	 * @param textureOffset the offset of the texture
-	 */
-	public void loadTextureOffset(Vector2f textureOffset) {
-	    super.loadVector(uniforms[TEntityUniform.textureOffset.getValue()], textureOffset);
-	}
-	
 	/**
 	 * Load the color of the sky in order to simulate fog
 	 * 

@@ -10,11 +10,6 @@ public class ModelTexture {
      */
     private final int textureId;
 
-    /**
-     * The atlas factor the end object will have
-     * atlasFactor * atlasFactor = number of textures
-     */
-    private int atlasFactor;
 
     /**
      * Constructor of the texture model
@@ -23,7 +18,6 @@ public class ModelTexture {
      */
     public ModelTexture(int id) {
         this.textureId = id;
-        this.atlasFactor = 1;    //By default will be one meaning that the object only have one texture
     }
 
     /**
@@ -33,19 +27,4 @@ public class ModelTexture {
         return textureId;
     }
 
-    /**
-     * @return the atlasFactor
-     * The end object will have
-     * atlasFactor * atlasFactor = number of textures
-     */
-    public int getAtlasFactor() {
-        return atlasFactor;
-    }
-
-    /**
-     * @param atlasFactor the atlasFactor to set
-     */
-    public void setAtlasFactor(int atlasFactor) {
-        this.atlasFactor = atlasFactor;
-    }
 }

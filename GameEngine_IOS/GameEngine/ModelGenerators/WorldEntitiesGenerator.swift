@@ -28,15 +28,12 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     private static func getEntity(texturedEntity : TexturedModel,  position : Vector3f) -> Entity {
         let rotation : Float = 0;
         let scale : Float = 1.0;
-        let textureIndex : Int = 0;
         let entity : Entity = Entity(model: texturedEntity ,
                                      position: position ,
                                      rotX: rotation ,
                                      rotY: rotation ,
                                      rotZ: rotation ,
-                                     scale: scale,
-                                     textureIndex: textureIndex
-                                     );
+                                     scale: scale);
         
         return entity;
     }
@@ -47,25 +44,23 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     private static func getEntitiesMap() -> Dictionary<DefaultModelGenerator, Int> {
         
         /* Fern model */
-        let fernModel = DefaultModelGenerator(objectName: "fern", textureName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true, atlasFactor: 2);
+        let fernModel = DefaultModelGenerator(objectName: "fern", textureName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /* Tree model */
-        let treeModel = DefaultModelGenerator(objectName: "tree", textureName: "tree", scale: 30.0, hasTransparency: false, normalsPointingUp: false,
-                                              atlasFactor: 1
-                                              );
+        let treeModel = DefaultModelGenerator(objectName: "tree", textureName: "tree", scale: 30.0, hasTransparency: false, normalsPointingUp: false);
         
         /*Banana tree*/
-        let bananaTreeModel = DefaultModelGenerator(objectName: "banana_tree", textureName: "banana_tree", scale: 3.0, hasTransparency: true, normalsPointingUp: false, atlasFactor: 1);
+        let bananaTreeModel = DefaultModelGenerator(objectName: "banana_tree", textureName: "banana_tree", scale: 3.0, hasTransparency: true, normalsPointingUp: false);
         
         
         /* grass model */
-        let grassModel = DefaultModelGenerator(objectName: "grass", textureName: "grass", scale: 3.0, hasTransparency: true, normalsPointingUp: true, atlasFactor: 1);
+        let grassModel = DefaultModelGenerator(objectName: "grass", textureName: "grass", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /* flower model */
-        let flowerModel = DefaultModelGenerator(objectName: "flower", textureName: "flower", scale: 3.0, hasTransparency: true, normalsPointingUp: true, atlasFactor: 1);
+        let flowerModel = DefaultModelGenerator(objectName: "flower", textureName: "flower", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /*Marble model*/
-        let marbleModel = DefaultModelGenerator(objectName: "marble", textureName: "marble", scale: 5.0, hasTransparency: false, normalsPointingUp: false, atlasFactor: 1);
+        let marbleModel = DefaultModelGenerator(objectName: "marble", textureName: "marble", scale: 5.0, hasTransparency: false, normalsPointingUp: false);
 
 
         /* Entity map of all the existing entities */
@@ -93,17 +88,15 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
         //Alloccate the entities list
         var entities : Array<Entity> = Array<Entity>();
         for (key, numberOfObjs) in entitiesMap {
-            let texturedModel = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, textureName: key.textureName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp, atlasFactor: key.atlasFactor);
-            for i in 0 ..< numberOfObjs {
+            let texturedModel = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, textureName: key.textureName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
+            for _ in 0 ..< numberOfObjs {
                 let xPosition : Float = 20.0 + Float(arc4random_uniform(400));
                 let zPosition : Float = Float(arc4random_uniform(400))
                 let yPosition : Float = terrain.getHeightOfTerrain(xPosition, worldZ: zPosition);
                 
                 let entityPosition : Vector3f = Vector3f(x: xPosition, y: yPosition, z: zPosition);
-                let textureIndex : Int = i % (key.atlasFactor * key.atlasFactor)
                 let entity = getEntity(texturedModel, position: entityPosition);
                 entity.scale = Float(arc4random_uniform(UInt32(key.scale)));
-                entity.setTextureIndex(textureIndex)
                 entities.append(entity);
             }
         }

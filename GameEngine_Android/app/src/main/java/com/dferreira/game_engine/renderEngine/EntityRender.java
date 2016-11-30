@@ -156,9 +156,6 @@ public class EntityRender {
         //Load the light properties
         eShader.loadShineVariables(texturedModel.getShineDamper(), texturedModel.getReflectivity());
 
-        //Load the texture atlas of the model
-        eShader.loadAtlasFactor(texture.getAtlasFactor());
-
         // Load the vertex data
         GLES20.glVertexAttribPointer(TEntityAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
 
@@ -183,8 +180,6 @@ public class EntityRender {
     private void prepareInstance(Entity entity) {
         //Load the transformation matrix
         eShader.loadTransformationMatrix(getTransformationMatrix(entity));
-        // Load the offset of the texture of the entity
-        eShader.loadTextureOffset(entity.getTextureOffset());
     }
 
     /**

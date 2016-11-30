@@ -37,12 +37,6 @@ uniform vec3 lightPosition;
 /*If the entity should have the normals pointing up*/
 uniform float normalsPointingUp;
 
-/*Atlas factor in case that the entity have several textures in the same image */
-uniform float atlasFactor;
-
-/*Offset in case that the entity have several textures in the same image*/
-uniform vec2 textureOffset;
-
 /*Density of fog*/
 const float fog_density = 0.007;
 
@@ -58,8 +52,8 @@ void main(void) {
 
 	gl_Position = projectionMatrix * positionRelativeToCam;
 
-	/*Compute the texture coordinate taking in account the atlas textures*/
-    pass_textureCoords = (textureCoords/atlasFactor) + textureOffset;
+	/*Passes the texture coordinate*/
+    pass_textureCoords = textureCoords;
 
     vec3 actualNormal = (normalsPointingUp == 1.0) ? vec3(0.0, 1.0, 0.0) : normal;
 

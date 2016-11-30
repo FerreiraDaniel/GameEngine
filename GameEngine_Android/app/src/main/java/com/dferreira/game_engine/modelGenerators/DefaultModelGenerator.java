@@ -32,10 +32,6 @@ public class DefaultModelGenerator {
      */
     private boolean normalsPointingUp;
 
-    /**
-     * Atlas factor if bigger that one means that the object as multiple textures in the same image
-     */
-    private int atlasFactor;
 
     /**
      * @return The reference to the object that represents the model
@@ -110,21 +106,5 @@ public class DefaultModelGenerator {
      */
     public void setNormalsPointingUp(boolean normalsPointingUp) {
         this.normalsPointingUp = normalsPointingUp;
-    }
-
-    /**
-     * @return the atlasFactor (Bigger that one means that the object as multiple textures in the same image)
-     */
-    public int getAtlasFactor() {
-        return atlasFactor;
-    }
-
-    /**
-     * Bigger that one means that the object as multiple textures in the same image
-     *
-     * @param atlasFactor the atlasFactor to set
-     */
-    public void setAtlasFactor(int atlasFactor) {
-        this.atlasFactor = atlasFactor;
     }
 }

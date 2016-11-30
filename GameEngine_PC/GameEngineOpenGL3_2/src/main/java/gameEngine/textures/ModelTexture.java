@@ -19,12 +19,6 @@ public class ModelTexture {
 	 * How reflective the model is
 	 */
 	private float reflectivity;
-	
-	/*
-	 * The atlas factor the end object will have
-	 * atlasFactor * atlasFactor = number of textures
-	 */
-	private int atlasFactor;
 
 	/**
 	 * Constructor of the texture model
@@ -36,7 +30,6 @@ public class ModelTexture {
 		this.textureId = id;
 		this.shineDamper = 1.0f;
 		this.reflectivity = 0.0f;
-		this.atlasFactor = 1;	//By default will be one meaning that the object only have one texture
 	}
 
 	/**
@@ -75,22 +68,4 @@ public class ModelTexture {
 	public void setReflectivity(float reflectivity) {
 		this.reflectivity = reflectivity;
 	}
-
-	/**
-	 * @return the atlasFactor
-	 * The end object will have
-	 * atlasFactor * atlasFactor = number of textures
-	 */
-	public int getAtlasFactor() {
-		return atlasFactor;
-	}
-
-	/**
-	 * @param atlasFactor the atlasFactor to set
-	 */
-	public void setAtlasFactor(int atlasFactor) {
-		this.atlasFactor = atlasFactor;
-	}
-	
-	
 }

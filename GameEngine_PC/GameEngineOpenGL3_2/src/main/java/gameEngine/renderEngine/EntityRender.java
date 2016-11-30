@@ -93,7 +93,6 @@ public class EntityRender {
 		this.renderPlayer(player);
 		eShader.stop();
 	}
-	
 
 	/**
 	 * Render one hashMap of entities where each key is a group of similar
@@ -122,11 +121,12 @@ public class EntityRender {
 			}
 		}
 	}
-	
+
 	/**
 	 * Render one player of the scene
 	 * 
-	 * @param player the player that is to render in the scene
+	 * @param player
+	 *            the player that is to render in the scene
 	 */
 	private void renderPlayer(Player player) {
 		prepareTexturedModel(player.getModel());
@@ -166,7 +166,8 @@ public class EntityRender {
 		RawModel model = texturedModel.getRawModel();
 		ModelTexture texture = texturedModel.getTexture();
 
-		//Enable the culling to not force the render of polygons that are not going to be visible
+		// Enable the culling to not force the render of polygons that are not
+		// going to be visible
 		if (!texturedModel.hasTransparency()) {
 			enableCulling();
 		}
@@ -178,15 +179,12 @@ public class EntityRender {
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTextureId());
-		
+
 		// Load if should put the normals of the entity point up or not
 		eShader.loadNormalsPointingUp(texturedModel.isNormalsPointingUp());
 
 		// Load the the light properties
-		eShader.loadShineVariables(texture.getShineDamper(),
-				texture.getReflectivity());
-		//Load the texture atlas of the model
-		eShader.loadAtlasFactor(texture.getAtlasFactor());
+		eShader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
 
 	}
 
@@ -199,8 +197,6 @@ public class EntityRender {
 	private void prepareInstance(Entity entity) {
 		// Load the transformation matrix
 		eShader.loadTransformationMatrix(getTransformationMatrix(entity));
-		// Load the offset of the texture of the entity
-		eShader.loadTextureOffset(entity.getTextureOffset());
 	}
 
 	/**

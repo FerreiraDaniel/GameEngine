@@ -4052,11 +4052,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Models/Player.swift"
-            timestampString = "501238568.559396"
+            timestampString = "502224124.908933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "fallDown(timeToRender:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4067,77 +4067,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/EntityRender.swift"
-            timestampString = "501240115.399537"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "prepareTexturedModel(texturedModel:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "GameEngine/Shaders/Entities/EntityShaderManager.swift"
-            timestampString = "501241805.724762"
+            timestampString = "502224124.908933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "loadAtlasFactor(atlasFactor:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/Shaders/Entities/EntityShaderManager.swift"
-            timestampString = "501241808.194135"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "loadTextureOffset(textureOffset:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/Shaders/Entities/EntityShaderManager.swift"
-            timestampString = "501242039.403689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "loadSkyColor(skyColor:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/Shaders/Entities/EntityShaderManager.swift"
-            timestampString = "501242673.34152"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "loadAtlasFactor(atlasFactor:)"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "loadSkyColor(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4176,7 +4112,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/Shaders/ShaderManager.swift"
@@ -4212,12 +4148,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldEntitiesGenerator.swift"
-            timestampString = "501247812.052872"
+            timestampString = "502224124.908933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "getEntities(loader:terrain:)"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4228,12 +4164,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldEntitiesGenerator.swift"
-            timestampString = "501247812.052872"
+            timestampString = "502224124.908933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "getEntities(loader:terrain:)"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4244,12 +4180,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldEntitiesGenerator.swift"
-            timestampString = "501247812.052872"
+            timestampString = "502224124.908933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "getEntities(loader:terrain:)"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4260,12 +4196,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldEntitiesGenerator.swift"
-            timestampString = "501247812.052872"
+            timestampString = "502224124.908933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "getEntities(loader:terrain:)"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -25,12 +25,6 @@ public class Entity  {
     
     
     /**
-     * 2D vector that is going to determine where the texture of the entity is
-     * going to start
-     */
-    private var textureOffset : Vector2f;
-    
-    /**
      * Initiator of the entity to be render in the 3D world
      *
      * @param model          Textured model
@@ -39,16 +33,14 @@ public class Entity  {
      * @param rotY           Rotation of the model in the Y axle
      * @param rotZ           Rotation of the model in the Z axle
      * @param scale          Scale of the model
-     * @param textureIndex   Indicates which of the textures is going to use
      */
-    public init(model: TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float, textureIndex: Int) {
+    public init(model: TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
         self.model = model;
         self.position = position;
         self.rotX = rotX;
         self.rotY = rotY;
         self.rotZ = rotZ;
         self.scale = scale;
-        self.textureOffset = Entity.computeTextureOffset(textureIndex, atlasFactor: self.model.texture.atlasFactor);
     }
     
     
@@ -75,60 +67,5 @@ public class Entity  {
         self.rotX += dx;
         self.rotY += dy;
         self.rotZ += dz;
-    }
-    
-    /**
-     * @param textureIndex
-     *            the index of the texture to set
-     */
-    public func setTextureIndex(textureIndex : Int) {
-        self.textureOffset = Entity.computeTextureOffset(textureIndex, atlasFactor: self.model.texture.atlasFactor);
-    }
-    
-    /**
-     * @return A number between 0 and 1 that is going indicate where the texture
-     *         will have have there x-axle start based upon the texture atlas
-     *         factor
-     */
-    private static func computeTextureXOffset(textureIndex : Int, atlasFactor : Int) -> Float {
-        if (textureIndex == 0) {
-            return 0.0;
-        } else {
-            let atlasFactor :Int = atlasFactor;
-            let column = textureIndex % (atlasFactor);
-            // Return the value in percentage of the total
-            return Float(column) / (Float(atlasFactor));
-        }
-    }
-    
-    /**
-     * @return A number between 0 and 1 that is going indicate where the texture
-     *         will have have there y-axle start based upon the texture atlas
-     *         factor
-     */
-    private static func computeTextureYOffset(textureIndex : Int, atlasFactor : Int) -> Float {
-        if (textureIndex == 0) {
-            return 0.0;
-        } else {
-            let atlasFactor :Int = atlasFactor;
-            let row = textureIndex / (atlasFactor);
-            // Return the value in percentage of the total
-            return Float(row) / (Float(atlasFactor));
-        }
-    }
-    
-    /**
-     *
-     * @return A vector with coordinates where the texture starts
-     */
-    private static func computeTextureOffset(textureIndex : Int, atlasFactor : Int) -> Vector2f {
-        return Vector2f(x: computeTextureXOffset(textureIndex, atlasFactor: atlasFactor), y: computeTextureYOffset(textureIndex, atlasFactor: atlasFactor));
-    }
-    
-    /**
-     * @return the offset of the texture of the entity
-     */
-    public func getTextureOffset() -> Vector2f {
-        return self.textureOffset;
     }
 }
