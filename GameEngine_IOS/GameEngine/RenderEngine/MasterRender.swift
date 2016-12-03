@@ -221,8 +221,8 @@ public class MasterRender : NSObject{
      *            the entity to add to the render
      */
     private func processEntity(entity : Entity) {
-        let entityModel : TexturedModel = entity.model;
-        let key : String = String(entityModel.id);
+        let genericEntity : GenericEntity = entity.genericEntity;
+        let key : String = String(genericEntity.id);
         var batch : Array<Entity>! = entities[key];
         
         

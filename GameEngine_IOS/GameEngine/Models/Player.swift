@@ -36,12 +36,12 @@ public class Player : Entity {
      * @param rotZ     Rotation of the model in the Z axle
      * @param scale    Scale of the model
      */
-    public override init(model : TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
+    public override init(genericEntity : GenericEntity, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
         self.currentSpeed = 0.0
         self.currentTurnSpeed = 0.0
         self.upwardsSpeed = 0.0
         self.isJumping = false;
-        super.init(model: model, position: position, rotX: rotX, rotY: rotY, rotZ: rotZ, scale: scale);
+        super.init(genericEntity: genericEntity, position: position, rotX: rotX, rotY: rotY, rotZ: rotZ, scale: scale);
     }
     
     /**

@@ -12,13 +12,14 @@ import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
-import gameEngine.models.Entity;
 import gameEngine.models.Player;
 import gameEngine.models.RawModel;
-import gameEngine.models.TexturedModel;
+import gameEngine.models.complexEntities.Entity;
+import gameEngine.models.complexEntities.GenericEntity;
+import gameEngine.models.complexEntities.Material;
+import gameEngine.models.complexEntities.RawModelMaterial;
 import gameEngine.shaders.entities.EntityShaderManager;
 import gameEngine.shaders.entities.TEntityAttribute;
-import gameEngine.textures.ModelTexture;
 
 /**
  * Class responsible to render the entities in the screen
@@ -83,7 +84,7 @@ public class EntityRender {
 	 *            The player of the scene
 	 */
 	public void render(Vector3f skyColor, Light[] lights, GLTransformation viewMatrix,
-			Map<TexturedModel, List<Entity>> entities, Player player) {
+			Map<GenericEntity, List<Entity>> entities, Player player) {
 		eShader.start();
 		eShader.loadSkyColor(skyColor);
 		eShader.loadLights(lights);
@@ -101,19 +102,20 @@ public class EntityRender {
 	 * @param entities
 	 *            HashMap of entities to render
 	 */
-	private void render(Map<TexturedModel, List<Entity>> entities) {
+	private void render(Map<GenericEntity, List<Entity>> entities) {
 		if ((entities == null) || (entities.size() == 0)) {
 			return;
 		} else {
-			for (TexturedModel model : entities.keySet()) {
-				List<Entity> batch = entities.get(model);
+			for (GenericEntity genericEntity : entities.keySet()) {
+				RawModelMaterial model = genericEntity.getModel();
+				List<Entity> batch = entities.get(genericEntity);
 				prepareTexturedModel(model);
 				for (Entity entity : batch) {
 					prepareInstance(entity);
 					render(entity);
 				}
 				// Restore the state if has transparency
-				if (!model.hasTransparency()) {
+				if (!model.getMaterial().hasTransparency()) {
 					disableCulling();
 				}
 
@@ -129,11 +131,11 @@ public class EntityRender {
 	 *            the player that is to render in the scene
 	 */
 	private void renderPlayer(Player player) {
-		prepareTexturedModel(player.getModel());
+		prepareTexturedModel(player.getGenericEntity().getModel());
 		prepareInstance(player);
 		render(player);
 		// Restore the state if has transparency
-		if (!player.getModel().hasTransparency()) {
+		if (!player.getGenericEntity().getModel().getMaterial().hasTransparency()) {
 			disableCulling();
 		}
 		unbindTexturedModel();
@@ -162,13 +164,13 @@ public class EntityRender {
 	 * @param texturedModel
 	 *            Model that contains the model of the entity with textures
 	 */
-	private void prepareTexturedModel(TexturedModel texturedModel) {
+	private void prepareTexturedModel(RawModelMaterial texturedModel) {
 		RawModel model = texturedModel.getRawModel();
-		ModelTexture texture = texturedModel.getTexture();
+		Material material = texturedModel.getMaterial();
 
 		// Enable the culling to not force the render of polygons that are not
 		// going to be visible
-		if (!texturedModel.hasTransparency()) {
+		if (!material.hasTransparency()) {
 			enableCulling();
 		}
 
@@ -178,13 +180,13 @@ public class EntityRender {
 		GL20.glEnableVertexAttribArray(TEntityAttribute.normal.ordinal());
 
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getTextureId());
+		GL11.glBindTexture(GL11.GL_TEXTURE_2D, material.getTextureId());
 
 		// Load if should put the normals of the entity point up or not
-		eShader.loadNormalsPointingUp(texturedModel.isNormalsPointingUp());
+		eShader.loadNormalsPointingUp(material.areNormalsPointingUp());
 
 		// Load the the light properties
-		eShader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
+		eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
 
 	}
 
@@ -206,7 +208,7 @@ public class EntityRender {
 	 *            Entity to get render
 	 */
 	private void render(Entity entity) {
-		TexturedModel texturedModel = entity.getModel();
+		RawModelMaterial texturedModel = entity.getGenericEntity().getModel();
 		RawModel model = texturedModel.getRawModel();
 		GL11.glDrawElements(GL11.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
 	}

@@ -19,11 +19,12 @@ public class WorldPlayersGenerator {
      */
     public static func getPlayer(loader : Loader) -> Player {
         let model : DefaultModelGenerator = getPlayerModel();
-        let texturedObj : TexturedModel = GenericEntitiesGenerator.getTexturedObj(loader, objName: model.objectName, textureName: model.textureName, hasTransparency: model.hasTransparency, normalsPointingUp: model.normalsPointingUp);
+        let texturedObj : RawModelMaterial = GenericEntitiesGenerator.getTexturedObj(loader, objName: model.objectName, textureName: model.textureName, hasTransparency: model.hasTransparency, normalsPointingUp: model.normalsPointingUp);
         let xPosition : Float = 20.0;
         let zPosition : Float = 0.0;
         let playerPosition : Vector3f = Vector3f(x: xPosition, y: -1.0, z: zPosition);
-        let player : Player = Player(model: texturedObj,
+        let genericEntity : GenericEntity = GenericEntity(texturedObj);
+        let player : Player = Player(genericEntity: genericEntity,
                                      position: playerPosition, // Position
             rotX: 0.0, rotY: 0.0, rotZ: 0.0, // Rotation
             scale: model.scale // Scale

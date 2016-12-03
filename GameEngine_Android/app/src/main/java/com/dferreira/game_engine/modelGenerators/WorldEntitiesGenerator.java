@@ -6,9 +6,10 @@ import android.content.Context;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
-import com.dferreira.game_engine.models.Entity;
 import com.dferreira.game_engine.models.Terrain;
-import com.dferreira.game_engine.models.TexturedModel;
+import com.dferreira.game_engine.models.complexEntities.Entity;
+import com.dferreira.game_engine.models.complexEntities.GenericEntity;
+import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
 
 import java.util.HashMap;
@@ -29,12 +30,12 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
     /**
      * Get one entity in a certain position
      *
-     * @param texturedEntity Model of the entity to render
-     * @param position       Position where is to put the entity in the 3D world
+     * @param genericEntity Generic entity
+     * @param position      Position where is to put the entity in the 3D world
      * @return the entity to render
      */
-    private static Entity getEntity(TexturedModel texturedEntity, Vector3f position) {
-        return new Entity(texturedEntity,
+    private static Entity getEntity(GenericEntity genericEntity, Vector3f position) {
+        return new Entity(genericEntity,
                 position,
                 0.0f, 0.0f, 0.0f,    //Rotation
                 0.0f    //Scale
@@ -126,15 +127,16 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         Random random = new Random();
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
-            TexturedModel texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp());
+            RawModelMaterial texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp());
             Integer numberOfEntities = entitiesMap.get(key);
+            GenericEntity genericEntity = new GenericEntity(texturedObj);
             for (int i = 0; i < numberOfEntities; i++) {
                 float xPosition = 20.0f + random.nextFloat() * 200.0f;
                 float zPosition = random.nextFloat() * 200.0f;
                 float yPosition = terrain.getHeightOfTerrain(xPosition, zPosition);
 
                 Vector3f entityPosition = new Vector3f(xPosition, yPosition, zPosition);
-                Entity entity = getEntity(texturedObj, entityPosition);
+                Entity entity = getEntity(genericEntity, entityPosition);
                 entity.setScale(key.getScale() * random.nextFloat());
                 entities[count] = entity;
                 ++count;

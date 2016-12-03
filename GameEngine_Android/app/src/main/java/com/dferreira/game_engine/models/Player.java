@@ -3,6 +3,8 @@ package com.dferreira.game_engine.models;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.game_controller.GamePad;
 import com.dferreira.game_controller.GamePadKey;
+import com.dferreira.game_engine.models.complexEntities.Entity;
+import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 
 
 /**
@@ -35,16 +37,16 @@ public class Player extends Entity {
     /**
      * Constructor of the player to be render in the 3D world
      *
-     * @param model    Textured model
-     * @param position position where the model should be render
-     * @param rotX     Rotation of the model in the X axle
-     * @param rotY     Rotation of the model in the Y axle
-     * @param rotZ     Rotation of the model in the Z axle
-     * @param scale    Scale of the model
+     * @param genericEntity The generic entity of the player
+     * @param position      position where the model should be render
+     * @param rotX          Rotation of the model in the X axle
+     * @param rotY          Rotation of the model in the Y axle
+     * @param rotZ          Rotation of the model in the Z axle
+     * @param scale         Scale of the model
      */
     @SuppressWarnings("SameParameterValue")
-    public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
-        super(model, position, rotX, rotY, rotZ, scale);
+    public Player(GenericEntity genericEntity, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+        super(genericEntity, position, rotX, rotY, rotZ, scale);
         this.isJumping = false;
     }
 

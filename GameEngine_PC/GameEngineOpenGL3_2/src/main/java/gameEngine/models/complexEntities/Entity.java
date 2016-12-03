@@ -1,6 +1,5 @@
-package gameEngine.models;
+package gameEngine.models.complexEntities;
 
-import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
 
 /**
@@ -8,8 +7,11 @@ import com.dferreira.commons.Vector3f;
  */
 public class Entity {
 
-	/* 3D model to be render */
-	private TexturedModel model;
+	/**
+	 * Keys: Have the name of the group The name of the material group for
+	 * instance harm
+	 */
+	private final GenericEntity genericEntity;
 
 	/* Position where the entity is */
 	private Vector3f position;
@@ -20,18 +22,13 @@ public class Entity {
 	/* Scale of the model */
 	private float scale;
 
-	/*
-	 * If the object has an atlas factor bigger that one this this index will
-	 * indicate which one of the textures the entity is using
-	 */
-	private int textureIndex;
-
 	/**
 	 * 
 	 * Constructor of the entity to be render in the 3D world
 	 * 
-	 * @param model
-	 *            Textured model
+	 * @param genericEntity
+	 *            reference to a generic entity with the description of the
+	 *            model
 	 * @param position
 	 *            position where the model should be render
 	 * @param rotX
@@ -44,9 +41,9 @@ public class Entity {
 	 *            Scale of the model
 	 * 
 	 */
-	public Entity(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+	public Entity(GenericEntity genericEntity, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
 		super();
-		this.model = model;
+		this.genericEntity = genericEntity;
 		this.position = position;
 		this.rotX = rotX;
 		this.rotY = rotY;
@@ -86,21 +83,6 @@ public class Entity {
 		this.rotX += dx;
 		this.rotY += dy;
 		this.rotZ += dz;
-	}
-
-	/**
-	 * @return the textured model
-	 */
-	public TexturedModel getModel() {
-		return model;
-	}
-
-	/**
-	 * @param the
-	 *            textured model to be set
-	 */
-	public void setModel(TexturedModel model) {
-		this.model = model;
 	}
 
 	/**
@@ -177,5 +159,12 @@ public class Entity {
 	 */
 	public void setScale(float scale) {
 		this.scale = scale;
+	}
+
+	/**
+	 * @return the genericEntity
+	 */
+	public GenericEntity getGenericEntity() {
+		return genericEntity;
 	}
 }

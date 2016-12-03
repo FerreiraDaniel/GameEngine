@@ -5,7 +5,8 @@ import android.content.Context;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Player;
-import com.dferreira.game_engine.models.TexturedModel;
+import com.dferreira.game_engine.models.complexEntities.GenericEntity;
+import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
 
 /**
@@ -36,12 +37,13 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
     public static Player getPlayer(Context context, Loader loader) {
         DefaultModelGenerator model = getPlayerModel();
 
-        TexturedModel texturedObj = getTexturedObj(context, loader, model.getObjectReference(), model.getTextureReference(),
+        RawModelMaterial texturedObj = getTexturedObj(context, loader, model.getObjectReference(), model.getTextureReference(),
                 model.getHasTransparency(), model.getNormalsPointingUp());
         float xPosition = 20.0f;
         float zPosition = 0.0f;
         Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
-        Player player = new Player(texturedObj, playerPosition, // Position
+        GenericEntity genericEntity = new GenericEntity(texturedObj);
+        Player player = new Player(genericEntity, playerPosition, // Position
                 0.0f, 0.0f, 0.0f, // Rotation
                 model.getScale() // Scale
         );

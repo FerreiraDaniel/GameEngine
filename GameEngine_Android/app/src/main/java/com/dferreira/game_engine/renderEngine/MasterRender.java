@@ -10,13 +10,13 @@ import com.dferreira.commons.models.Light;
 import com.dferreira.game_controller.GameEngineTouchListener;
 import com.dferreira.game_controller.GamePad;
 import com.dferreira.game_engine.models.Camera;
-import com.dferreira.game_engine.models.Entity;
 import com.dferreira.game_engine.models.GuiTexture;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
-import com.dferreira.game_engine.models.TexturedModel;
 import com.dferreira.game_engine.models.ThirdPersonCamera;
+import com.dferreira.game_engine.models.complexEntities.Entity;
+import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
 import com.dferreira.game_engine.shaders.guis.GuiShaderManager;
 import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
@@ -75,7 +75,7 @@ public class MasterRender {
     /**
      * Entities of the world that are going to be rendered
      */
-    private final Map<TexturedModel, List<Entity>> entities;
+    private final Map<GenericEntity, List<Entity>> entities;
 
     /**
      * List of terrains of the world that are going to be render
@@ -176,11 +176,11 @@ public class MasterRender {
      * @param entity the entity to add to the render
      */
     private void processEntity(Entity entity) {
-        TexturedModel entityModel = entity.getModel();
-        List<Entity> batch = entities.get(entityModel);
+        GenericEntity genericEntity = entity.getGenericEntity();
+        List<Entity> batch = entities.get(genericEntity);
         if (batch == null) {
             batch = new ArrayList<>();
-            entities.put(entityModel, batch);
+            entities.put(genericEntity, batch);
         }
         batch.add(entity);
     }

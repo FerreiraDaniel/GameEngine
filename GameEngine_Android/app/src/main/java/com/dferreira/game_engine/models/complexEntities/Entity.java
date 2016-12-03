@@ -1,4 +1,4 @@
-package com.dferreira.game_engine.models;
+package com.dferreira.game_engine.models.complexEntities;
 
 import com.dferreira.commons.Vector3f;
 
@@ -7,8 +7,11 @@ import com.dferreira.commons.Vector3f;
  */
 public class Entity {
 
-    /*3D model to be render*/
-    private TexturedModel model;
+    /**
+     * Keys: Have the name of the group The name of the material group for
+     * instance harm
+     */
+    private final GenericEntity genericEntity;
 
     /*Position where the entity is*/
     private Vector3f position;
@@ -23,18 +26,19 @@ public class Entity {
     /**
      * Constructor of the entity to be render in the 3D world
      *
-     * @param model    Textured model
-     * @param position position where the model should be render
-     * @param rotX     Rotation of the model in the X axle
-     * @param rotY     Rotation of the model in the Y axle
-     * @param rotZ     Rotation of the model in the Z axle
-     * @param scale    Scale of the model
+     * @param genericEntity reference to a generic entity with the description of the
+     *                      model
+     * @param position      position where the model should be render
+     * @param rotX          Rotation of the model in the X axle
+     * @param rotY          Rotation of the model in the Y axle
+     * @param rotZ          Rotation of the model in the Z axle
+     * @param scale         Scale of the model
      */
     @SuppressWarnings("SameParameterValue")
-    public Entity(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ,
+    public Entity(GenericEntity genericEntity, Vector3f position, float rotX, float rotY, float rotZ,
                   float scale) {
         super();
-        this.model = model;
+        this.genericEntity = genericEntity;
         this.position = position;
         this.rotX = rotX;
         this.rotY = rotY;
@@ -49,7 +53,7 @@ public class Entity {
      * @param dy Y component to be increase
      * @param dz Z component to be increase
      */
-    void increasePosition(float dx, float dy, float dz) {
+    public void increasePosition(float dx, float dy, float dz) {
         this.position.x += dx;
         this.position.y += dy;
         this.position.z += dz;
@@ -63,26 +67,12 @@ public class Entity {
      * @param dz Z component to be increase
      */
     @SuppressWarnings("SameParameterValue")
-    void increaseRotation(float dx, float dy, float dz) {
+    public void increaseRotation(float dx, float dy, float dz) {
         this.rotX += dx;
         this.rotY += dy;
         this.rotZ += dz;
     }
 
-    /**
-     * @return the textured model
-     */
-    public TexturedModel getModel() {
-        return model;
-    }
-
-    /**
-     * @param model the textured model to be set
-     */
-    @SuppressWarnings("unused")
-    public void setModel(TexturedModel model) {
-        this.model = model;
-    }
 
     /**
      * @return the position of the model
@@ -156,5 +146,12 @@ public class Entity {
      */
     public void setScale(float scale) {
         this.scale = scale;
+    }
+
+    /**
+     * @return the genericEntity
+     */
+    public GenericEntity getGenericEntity() {
+        return genericEntity;
     }
 }

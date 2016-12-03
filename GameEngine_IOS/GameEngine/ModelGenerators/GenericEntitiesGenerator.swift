@@ -19,21 +19,23 @@ public class GenericEntitiesGenerator {
      * @param normalsPointingUp
      *            Indicates that all the normals of the object are pointing up
      *
-     * @return the textured model of the dragon
+     * @return the textured model loaded
      */
-    public static func getTexturedObj(loader : Loader, objName : String, textureName : String, hasTransparency : Bool, normalsPointingUp : Bool) -> TexturedModel  {
+    public static func getTexturedObj(loader : Loader, objName : String, textureName : String, hasTransparency : Bool, normalsPointingUp : Bool) -> RawModelMaterial  {
         let shape : IShape = OBJLoader.loadObjModel(objName);
         
         let rawModel : RawModel = loader.loadToVAO(shape);
         
         let textureId : Int = loader.loadTexture(textureName)
         
-        let texture : ModelTexture = ModelTexture(textureId);
-        texture.shineDamper = 10.0
-        texture.reflectivity = 1.0
+        let material : Material = Material(textureId);
+        material.shineDamper = 10.0
+        material.reflectivity = 1.0
+        material.hasTransparency = hasTransparency
+        material.normalsPointingUp = normalsPointingUp
         
         //TexturedModel
-        let texturedModel : TexturedModel = TexturedModel(rawModel: rawModel, texture: texture, hasTransparency: hasTransparency, normalsPointingUp: normalsPointingUp);
+        let texturedModel : RawModelMaterial = RawModelMaterial(rawModel: rawModel, material: material);
         
         return texturedModel;
     }

@@ -3,10 +3,10 @@ package com.dferreira.game_engine.modelGenerators;
 import android.content.Context;
 
 import com.dferreira.game_engine.models.RawModel;
-import com.dferreira.game_engine.models.TexturedModel;
+import com.dferreira.game_engine.models.complexEntities.Material;
+import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
 import com.dferreira.game_engine.shapes.IShape;
-import com.dferreira.game_engine.textures.ModelTexture;
 import com.dferreira.game_engine.wave_front.OBJLoader;
 
 /**
@@ -31,17 +31,20 @@ class GenericEntitiesGenerator {
      * @param normalsPointingUp Indicates that all the normals of the object are pointing up
      * @return the textured model loaded
      */
-    static TexturedModel getTexturedObj(Context context, Loader loader, int modelId, int mTextureId, boolean hasTransparency, boolean normalsPointingUp) {
+    static RawModelMaterial getTexturedObj(Context context, Loader loader, int modelId, int mTextureId, boolean hasTransparency, boolean normalsPointingUp) {
         IShape objModel = OBJLoader.loadObjModel(context, modelId);
         RawModel model = loader.loadToRawModel(objModel.getVertices(), objModel.getTextureCoords(),
                 objModel.getNormals(), objModel.getIndices());
         Integer textureId = loader.loadTexture(context, mTextureId);
-        ModelTexture texture = new ModelTexture(textureId);
-        TexturedModel texturedModel = new TexturedModel(model, texture, hasTransparency, normalsPointingUp);
+        //The material
+        Material material = new Material(textureId);
+        material.setHasTransparency(hasTransparency);
+        material.setNormalsPointingUp(normalsPointingUp);
+        material.setShineDamper(10.0f);
+        material.setReflectivity(1.0f);
+        //
+        RawModelMaterial rawModelMaterial = new RawModelMaterial(model, material);
 
-        texturedModel.setShineDamper(10.0f);
-        texturedModel.setReflectivity(1.0f);
-
-        return texturedModel;
+        return rawModelMaterial;
     }
 }

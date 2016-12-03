@@ -4,10 +4,10 @@ import gameEngine.shaders.entities.EntityShaderManager;
 import gameEngine.shaders.guis.GuiShaderManager;
 import gameEngine.shaders.skyBox.SkyBoxShaderManager;
 import gameEngine.shaders.terrains.TerrainShaderManager;
-import gameEngine.models.TexturedModel;
 import gameEngine.models.ThirdPersonCamera;
+import gameEngine.models.complexEntities.Entity;
+import gameEngine.models.complexEntities.GenericEntity;
 import gameEngine.models.Camera;
-import gameEngine.models.Entity;
 import gameEngine.models.GuiTexture;
 import gameEngine.models.Player;
 import gameEngine.models.SkyBox;
@@ -69,7 +69,7 @@ public class MasterRender {
 	/**
 	 * Entities of the world that are going to be rendered
 	 */
-	private Map<TexturedModel, List<Entity>> entities;
+	private Map<GenericEntity, List<Entity>> entities;
 
 	/**
 	 * List of terrains of the world that are going to be render
@@ -129,7 +129,7 @@ public class MasterRender {
 		this.entityRender = new EntityRender(eShader, projectionMatrix);
 
 		// Initializes the entities to be render
-		this.entities = new HashMap<TexturedModel, List<Entity>>();
+		this.entities = new HashMap<GenericEntity, List<Entity>>();
 
 		// Initializes the terrain render
 		TerrainShaderManager tShader = new TerrainShaderManager();
@@ -160,7 +160,7 @@ public class MasterRender {
 	 *            the entity to add to the render
 	 */
 	private void processEntity(Entity entity) {
-		TexturedModel entityModel = entity.getModel();
+		GenericEntity entityModel = entity.getGenericEntity();
 		List<Entity> batch = entities.get(entityModel);
 		if (batch == null) {
 			batch = new ArrayList<Entity>();

@@ -5,9 +5,11 @@ import Foundation
  */
 public class Entity  {
     
-    
-    /*3D model to be render*/
-    var model : TexturedModel
+    /**
+     * Keys: Have the name of the group The name of the material group for
+     * instance harm
+     */
+    var genericEntity : GenericEntity;
     
     /*Position where the entity is*/
     var  position : Vector3f
@@ -27,15 +29,15 @@ public class Entity  {
     /**
      * Initiator of the entity to be render in the 3D world
      *
-     * @param model          Textured model
+     * @param genericEntity  Reference to a generic entity with the description of the model
      * @param position       Position where the model should be render
      * @param rotX           Rotation of the model in the X axle
      * @param rotY           Rotation of the model in the Y axle
      * @param rotZ           Rotation of the model in the Z axle
      * @param scale          Scale of the model
      */
-    public init(model: TexturedModel, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
-        self.model = model;
+    public init(genericEntity : GenericEntity, position : Vector3f, rotX : Float, rotY : Float, rotZ : Float, scale : Float) {
+        self.genericEntity = genericEntity;
         self.position = position;
         self.rotX = rotX;
         self.rotY = rotY;

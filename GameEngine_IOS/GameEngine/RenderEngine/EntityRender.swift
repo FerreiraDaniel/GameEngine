@@ -88,14 +88,15 @@ public class EntityRender : NSObject {
         if (!entities.isEmpty) {
             for (_, entities) in entities {
                 let entity : Entity = entities.first!;
-                let model : TexturedModel = entity.model;
+                let genericEntity : GenericEntity = entity.genericEntity
+                let model : RawModelMaterial = genericEntity.model;
                 self.prepareTexturedModel(model)
                 for entity in entities {
                     self.renderEntity(entity);
                 }
                 self.unbindTexturedModel();
                 //Restore the state if has transparency
-                if(!model.hasTransparency) {
+                if(!model.material.hasTransparency) {
                     self.disableCulling();
                 }
             }
@@ -109,7 +110,8 @@ public class EntityRender : NSObject {
     * 			Entity to get render
     */
     private func renderEntity(entity : Entity) {
-        let model : TexturedModel = entity.model;
+        let genericEntity : GenericEntity = entity.genericEntity;
+        let model : RawModelMaterial = genericEntity.model;
         let rawModel : RawModel = model.rawModel;
         self.prepareInstance(entity);
         
@@ -123,11 +125,11 @@ public class EntityRender : NSObject {
     *
     * @param texturedModel Model that contains the model of the entity with textures
     */
-    private func prepareTexturedModel(texturedModel : TexturedModel) {
+    private func prepareTexturedModel(texturedModel : RawModelMaterial) {
         let model : RawModel = texturedModel.rawModel;
-        let modelTexture : ModelTexture = texturedModel.texture;
+        let material : Material = texturedModel.material;
         
-        if(!texturedModel.hasTransparency) {
+        if(!material.hasTransparency) {
             self.enableCulling();
         };
         glBindVertexArrayOES(GLuint(model.vaoId));
@@ -140,13 +142,13 @@ public class EntityRender : NSObject {
         
         //Activate the texture of the entity
         glActiveTexture(GLuint(GL_TEXTURE0));
-        glBindTexture(GLuint(GL_TEXTURE_2D), GLuint(modelTexture.textureId));
+        glBindTexture(GLuint(GL_TEXTURE_2D), GLuint(material.textureId));
         
         // Load if should put the normals of the entity point up or not
-        eShader.loadNormalsPointingUp(texturedModel.normalsPointingUp);
+        eShader.loadNormalsPointingUp(material.normalsPointingUp);
         
         // Load the the light properties
-        eShader.loadShineVariables(modelTexture.shineDamper,  reflectivity: modelTexture.reflectivity);
+        eShader.loadShineVariables(material.shineDamper,  reflectivity: material.reflectivity);
     }
     
     /**
@@ -184,11 +186,11 @@ public class EntityRender : NSObject {
     * @param player the player that is to render in the scene
     */
     private func renderPlayer(player : Player) {
-        prepareTexturedModel(player.model);
+        prepareTexturedModel(player.genericEntity.model);
         prepareInstance(player);
         self.renderEntity(player);
         // Restore the state if has transparency
-        if (!player.model.hasTransparency) {
+        if (!player.genericEntity.model.material.hasTransparency) {
             disableCulling();
         }
         unbindTexturedModel();

@@ -18,17 +18,17 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     /**
     * Get one entity in a certain position
     *
-    * @param texturedEntity
-    *            Model of the entity to render
+     * @param genericEntity
+     *            Generic entity
     * @param position
     *            Position where is to put the entity in the 3D world
     *
     * @return the entity to render
     */
-    private static func getEntity(texturedEntity : TexturedModel,  position : Vector3f) -> Entity {
+    private static func getEntity(genericEntity : GenericEntity,  position : Vector3f) -> Entity {
         let rotation : Float = 0;
         let scale : Float = 1.0;
-        let entity : Entity = Entity(model: texturedEntity ,
+        let entity : Entity = Entity(genericEntity: genericEntity ,
                                      position: position ,
                                      rotX: rotation ,
                                      rotY: rotation ,
@@ -89,13 +89,14 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
         var entities : Array<Entity> = Array<Entity>();
         for (key, numberOfObjs) in entitiesMap {
             let texturedModel = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, textureName: key.textureName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
+            let genericEntity : GenericEntity = GenericEntity(texturedModel);
             for _ in 0 ..< numberOfObjs {
                 let xPosition : Float = 20.0 + Float(arc4random_uniform(400));
                 let zPosition : Float = Float(arc4random_uniform(400))
                 let yPosition : Float = terrain.getHeightOfTerrain(xPosition, worldZ: zPosition);
                 
                 let entityPosition : Vector3f = Vector3f(x: xPosition, y: yPosition, z: zPosition);
-                let entity = getEntity(texturedModel, position: entityPosition);
+                let entity = getEntity(genericEntity, position: entityPosition);
                 entity.scale = Float(arc4random_uniform(UInt32(key.scale)));
                 entities.append(entity);
             }

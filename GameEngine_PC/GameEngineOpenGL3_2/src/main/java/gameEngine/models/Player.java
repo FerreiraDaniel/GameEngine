@@ -1,6 +1,10 @@
 package gameEngine.models;
 
 import com.dferreira.commons.Vector3f;
+
+import gameEngine.models.complexEntities.Entity;
+import gameEngine.models.complexEntities.GenericEntity;
+
 import org.lwjgl.input.Keyboard;
 
 /**
@@ -33,8 +37,9 @@ public class Player extends Entity {
 	/**
 	 * Constructor of the player to be render in the 3D world
 	 * 
-	 * @param model
-	 *            Textured model
+	 * @param genericEntity
+	 *            reference to a generic entity with the description of the
+	 *            model
 	 * @param position
 	 *            position where the model should be render
 	 * @param rotX
@@ -46,8 +51,8 @@ public class Player extends Entity {
 	 * @param scale
 	 *            Scale of the model
 	 */
-	public Player(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
-		super(model, position, rotX, rotY, rotZ, scale);
+	public Player(GenericEntity genericEntity, Vector3f position, float rotX, float rotY, float rotZ, float scale) {
+		super(genericEntity, position, rotX, rotY, rotZ, scale);
 		this.isJumping = false;
 	}
 	

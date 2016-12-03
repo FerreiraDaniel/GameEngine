@@ -11,7 +11,7 @@ import com.dferreira.game_engine.modelGenerators.WorldGUIsGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldPlayersGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldSkyBoxGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldTerrainsGenerator;
-import com.dferreira.game_engine.models.Entity;
+import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.GuiTexture;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;

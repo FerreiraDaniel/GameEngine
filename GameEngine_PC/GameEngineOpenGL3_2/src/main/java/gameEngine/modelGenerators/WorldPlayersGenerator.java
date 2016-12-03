@@ -3,7 +3,8 @@ package gameEngine.modelGenerators;
 import com.dferreira.commons.Vector3f;
 
 import gameEngine.models.Player;
-import gameEngine.models.TexturedModel;
+import gameEngine.models.complexEntities.GenericEntity;
+import gameEngine.models.complexEntities.RawModelMaterial;
 import gameEngine.renderEngine.Loader;
 
 /**
@@ -36,13 +37,14 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
 	 */
 	public static Player getPlayer(Loader loader) {
 		DefaultModelGenerator model = getPlayerModel();
-		TexturedModel texturedObj = getTexturedObj(loader, model.getObjectName(), model.getTextureName(),
+		RawModelMaterial texturedObj = getTexturedObj(loader, model.getObjectName(), model.getTextureName(),
 				model.getHasTransparency(), model.getNormalsPointingUp());
 		float xPosition = 20.0f;
 		float yPosition = -1.0f;
 		float zPosition = 0.0f;
 		Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
-		Player player = new Player(texturedObj, playerPosition, // Position
+		GenericEntity genericEntity = new GenericEntity(texturedObj);
+		Player player = new Player(genericEntity, playerPosition, // Position
 				0.0f, 0.0f, 0.0f, // Rotation
 				model.getScale() // Scale
 		);

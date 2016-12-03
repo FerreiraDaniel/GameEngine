@@ -6,13 +6,14 @@ import android.opengl.GLES20;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
-import com.dferreira.game_engine.models.Entity;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.RawModel;
-import com.dferreira.game_engine.models.TexturedModel;
+import com.dferreira.game_engine.models.complexEntities.Entity;
+import com.dferreira.game_engine.models.complexEntities.GenericEntity;
+import com.dferreira.game_engine.models.complexEntities.Material;
+import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
 import com.dferreira.game_engine.shaders.entities.TEntityAttribute;
-import com.dferreira.game_engine.textures.ModelTexture;
 
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class EntityRender {
      * @param viewMatrix View matrix to render the scene
      * @param entities   List of entities of the scene
      */
-    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Map<TexturedModel, List<Entity>> entities) {
+    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Map<GenericEntity, List<Entity>> entities) {
         eShader.start();
         eShader.loadSkyColor(skyColor);
         eShader.loadLight(sun);
@@ -107,10 +108,11 @@ public class EntityRender {
      *
      * @param entities HashMap of entities to render
      */
-    private void render(Map<TexturedModel, List<Entity>> entities) {
+    private void render(Map<GenericEntity, List<Entity>> entities) {
         if ((entities != null) && (!entities.isEmpty())) {
-            for (TexturedModel model : entities.keySet()) {
-                List<Entity> batch = entities.get(model);
+            for (GenericEntity genericEntity : entities.keySet()) {
+                RawModelMaterial model = genericEntity.getModel();
+                List<Entity> batch = entities.get(genericEntity);
                 prepareTexturedModel(model);
 
                 for (Entity entity : batch) {
@@ -118,7 +120,7 @@ public class EntityRender {
                     render(entity);
                 }
                 // Restore the state if has transparency
-                if (!model.hasTransparency()) {
+                if (!model.getMaterial().hasTransparency()) {
                     disableCulling();
                 }
 
@@ -130,14 +132,14 @@ public class EntityRender {
     /**
      * Bind the attributes of openGL
      *
-     * @param texturedModel Model that contains the model of the entity with textures
+     * @param rawModelMaterial Model that contains the model of the entity with textures
      */
-    private void prepareTexturedModel(TexturedModel texturedModel) {
-        RawModel model = texturedModel.getRawModel();
-        ModelTexture texture = texturedModel.getTexture();
+    private void prepareTexturedModel(RawModelMaterial rawModelMaterial) {
+        RawModel model = rawModelMaterial.getRawModel();
+        Material material = rawModelMaterial.getMaterial();
 
         //Enable the culling to not force the render of polygons that are not going to be visible
-        if (!texturedModel.hasTransparency()) {
+        if (!material.hasTransparency()) {
             enableCulling();
         }
 
@@ -148,13 +150,13 @@ public class EntityRender {
 
         //Enable the specific texture
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture.getTextureId());
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, material.getTextureId());
 
         // Load if should put the normals of the entity point up or not
-        eShader.loadNormalsPointingUp(texturedModel.isNormalsPointingUp());
+        eShader.loadNormalsPointingUp(material.areNormalsPointingUp());
 
         //Load the light properties
-        eShader.loadShineVariables(texturedModel.getShineDamper(), texturedModel.getReflectivity());
+        eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
 
         // Load the vertex data
         GLES20.glVertexAttribPointer(TEntityAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
@@ -188,8 +190,8 @@ public class EntityRender {
      * @param entity Entity to get render
      */
     private void render(Entity entity) {
-        TexturedModel texturedModel = entity.getModel();
-        RawModel model = texturedModel.getRawModel();
+        RawModelMaterial rawModelMaterial = entity.getGenericEntity().getModel();
+        RawModel model = rawModelMaterial.getRawModel();
 
         //Specify the indexes
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getNumOfIndexes(),
@@ -204,11 +206,12 @@ public class EntityRender {
      * @param player the player that is to render in the scene
      */
     private void renderPlayer(Player player) {
-        prepareTexturedModel(player.getModel());
+        RawModelMaterial rawModelMaterial = player.getGenericEntity().getModel();
+        prepareTexturedModel(rawModelMaterial);
         prepareInstance(player);
         render(player);
         // Restore the state if has transparency
-        if (!player.getModel().hasTransparency()) {
+        if (!rawModelMaterial.getMaterial().hasTransparency()) {
             disableCulling();
         }
         unbindTexturedModel();
