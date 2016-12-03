@@ -9,10 +9,13 @@ import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
+import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -128,8 +131,15 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
             RawModelMaterial texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp());
+            //Prepare generic entity begin
+            List<RawModelMaterial> materials = new ArrayList<>();
+            materials.add(texturedObj);
+            MaterialGroup materialGroup = new MaterialGroup(materials);
+            HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
+            groupsOfMaterials.put("body", materialGroup);
+            GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
+            //Prepare generic entity end
             Integer numberOfEntities = entitiesMap.get(key);
-            GenericEntity genericEntity = new GenericEntity(texturedObj);
             for (int i = 0; i < numberOfEntities; i++) {
                 float xPosition = 20.0f + random.nextFloat() * 200.0f;
                 float zPosition = random.nextFloat() * 200.0f;

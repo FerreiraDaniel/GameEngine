@@ -8,7 +8,7 @@ public class Material {
     /**
      * The identifier of the texture
      */
-    private int textureId;
+    private final int textureId;
 
     /**
      * How damped the shine is
@@ -89,6 +89,7 @@ public class Material {
     /**
      * Returns if the model has any transparency or not
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean hasTransparency() {
         return this.hasTransparency;
     }

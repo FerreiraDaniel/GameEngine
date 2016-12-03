@@ -43,8 +43,7 @@ class GenericEntitiesGenerator {
         material.setShineDamper(10.0f);
         material.setReflectivity(1.0f);
         //
-        RawModelMaterial rawModelMaterial = new RawModelMaterial(model, material);
 
-        return rawModelMaterial;
+        return new RawModelMaterial(model, material);
     }
 }

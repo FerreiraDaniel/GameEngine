@@ -6,8 +6,13 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
+import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Responsible for creating the creating the player(s) of the scene
@@ -42,7 +47,15 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         float xPosition = 20.0f;
         float zPosition = 0.0f;
         Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
-        GenericEntity genericEntity = new GenericEntity(texturedObj);
+
+        //Prepare generic entity begin
+        List<RawModelMaterial> materials = new ArrayList<>();
+        materials.add(texturedObj);
+        MaterialGroup materialGroup = new MaterialGroup(materials);
+        HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
+        groupsOfMaterials.put("body", materialGroup);
+        GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
+        //Prepare generic entity end
         Player player = new Player(genericEntity, playerPosition, // Position
                 0.0f, 0.0f, 0.0f, // Rotation
                 model.getScale() // Scale

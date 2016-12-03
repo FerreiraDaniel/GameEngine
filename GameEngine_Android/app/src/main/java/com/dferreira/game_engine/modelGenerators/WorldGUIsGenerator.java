@@ -82,7 +82,7 @@ public class WorldGUIsGenerator {
         GUIs[GUIIndex++] = squareButton;
         GUIs[GUIIndex++] = xButton;
         GUIs[GUIIndex++] = triangleButton;
-        GUIs[GUIIndex++] = circleButton;
+        GUIs[GUIIndex] = circleButton;
 
         return GUIs;
     }

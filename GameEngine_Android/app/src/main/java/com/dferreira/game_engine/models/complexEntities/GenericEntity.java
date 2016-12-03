@@ -1,38 +1,35 @@
 package com.dferreira.game_engine.models.complexEntities;
 
 
+import java.util.HashMap;
+
 /**
  * Generic entity without any specific of a determined entity
  */
 public class GenericEntity {
-    /* 3D model to be render */
-    private RawModelMaterial model;
+
 
     /**
-     *
+     * Keys: Have the name of the group The name of the material group for
+     * instance harm
+     */
+    private final HashMap<String, MaterialGroup> groupsOfMaterials;
+
+
+    /**
      * Constructor of the generic entity to be render in the 3D world
      *
-     * @param model
-     *            Textured model
-     *
+     * @param groupsOfMaterials HashMap with groups of materials to use in entity
      */
-    public GenericEntity(RawModelMaterial model) {
+    public GenericEntity(HashMap<String, MaterialGroup> groupsOfMaterials) {
         super();
-        this.model = model;
+        this.groupsOfMaterials = groupsOfMaterials;
     }
 
     /**
-     * @return the textured model
+     * @return the groupsOfMaterials
      */
-    public RawModelMaterial getModel() {
-        return model;
-    }
-
-    /**
-     * @param model
-     *            The textured model to be set
-     */
-    public void setModel(RawModelMaterial model) {
-        this.model = model;
+    public HashMap<String, MaterialGroup> getGroupsOfMaterials() {
+        return groupsOfMaterials;
     }
 }

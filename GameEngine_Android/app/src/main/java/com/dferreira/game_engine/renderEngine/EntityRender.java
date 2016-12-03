@@ -11,10 +11,12 @@ import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.models.complexEntities.Material;
+import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.shaders.entities.EntityShaderManager;
 import com.dferreira.game_engine.shaders.entities.TEntityAttribute;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,52 +113,60 @@ public class EntityRender {
     private void render(Map<GenericEntity, List<Entity>> entities) {
         if ((entities != null) && (!entities.isEmpty())) {
             for (GenericEntity genericEntity : entities.keySet()) {
-                RawModelMaterial model = genericEntity.getModel();
-                List<Entity> batch = entities.get(genericEntity);
-                prepareTexturedModel(model);
-
-                for (Entity entity : batch) {
-                    prepareInstance(entity);
-                    render(entity);
+                HashMap<String, MaterialGroup> groupsOfMaterials = genericEntity.getGroupsOfMaterials();
+                for (String groupName : groupsOfMaterials.keySet()) {
+                    MaterialGroup materialGroup = groupsOfMaterials.get(groupName);
+                    for (RawModelMaterial rawModelMaterial : materialGroup.getMaterials()) {
+                        RawModel model = rawModelMaterial.getRawModel();
+                        Material material = rawModelMaterial.getMaterial();
+                        prepareMaterial(material);
+                        prepareModel(model);
+                        List<Entity> batch = entities.get(genericEntity);
+                        for (Entity entity : batch) {
+                            loadEntityTransformation(entity);
+                            render(model);
+                        }
+                        unPrepareModel();
+                        unPrepareMaterial(material);
+                    }
                 }
-                // Restore the state if has transparency
-                if (!model.getMaterial().hasTransparency()) {
-                    disableCulling();
-                }
-
-                unbindTexturedModel();
             }
         }
     }
 
     /**
-     * Bind the attributes of openGL
+     * Render one player of the scene
      *
-     * @param rawModelMaterial Model that contains the model of the entity with textures
+     * @param player the player that is to render in the scene
      */
-    private void prepareTexturedModel(RawModelMaterial rawModelMaterial) {
-        RawModel model = rawModelMaterial.getRawModel();
-        Material material = rawModelMaterial.getMaterial();
-
-        //Enable the culling to not force the render of polygons that are not going to be visible
-        if (!material.hasTransparency()) {
-            enableCulling();
+    private void renderPlayer(Player player) {
+        GenericEntity genericEntity = player.getGenericEntity();
+        HashMap<String, MaterialGroup> groupsOfMaterials = genericEntity.getGroupsOfMaterials();
+        for (String groupName : groupsOfMaterials.keySet()) {
+            MaterialGroup materialGroup = groupsOfMaterials.get(groupName);
+            for (RawModelMaterial rawModelMaterial : materialGroup.getMaterials()) {
+                RawModel model = rawModelMaterial.getRawModel();
+                Material material = rawModelMaterial.getMaterial();
+                prepareMaterial(material);
+                prepareModel(model);
+                loadEntityTransformation(player);
+                render(model);
+                unPrepareModel();
+                unPrepareMaterial(material);
+            }
         }
+    }
 
+    /**
+     * Bind the model to render the entity with openGL
+     *
+     * @param model Model that contains the model of the entity with textures
+     */
+    private void prepareModel(RawModel model) {
         //Enable the attributes to bind
         GLES20.glEnableVertexAttribArray(TEntityAttribute.position.getValue());
         GLES20.glEnableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
         GLES20.glEnableVertexAttribArray(TEntityAttribute.normal.getValue());
-
-        //Enable the specific texture
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, material.getTextureId());
-
-        // Load if should put the normals of the entity point up or not
-        eShader.loadNormalsPointingUp(material.areNormalsPointingUp());
-
-        //Load the light properties
-        eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
 
         // Load the vertex data
         GLES20.glVertexAttribPointer(TEntityAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
@@ -173,54 +183,56 @@ public class EntityRender {
                 model.getNormalBuffer());
     }
 
+    /**
+     * Bind the attributes of the material with openGL
+     *
+     * @param material Contains a reference to the material to bind
+     */
+    private void prepareMaterial(Material material) {
+
+        //Enable the culling to not force the render of polygons that are not going to be visible
+        if (!material.hasTransparency()) {
+            enableCulling();
+        }
+
+
+        //Enable the specific texture
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, material.getTextureId());
+
+        // Load if should put the normals of the entity point up or not
+        eShader.loadNormalsPointingUp(material.areNormalsPointingUp());
+
+        //Load the light properties
+        eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
+    }
+
 
     /**
      * Load the transformation matrix of the entity
      *
      * @param entity Entity that is to get prepared to be loaded
      */
-    private void prepareInstance(Entity entity) {
-        //Load the transformation matrix
+    private void loadEntityTransformation(Entity entity) {
+        // Load the transformation matrix
         eShader.loadTransformationMatrix(getTransformationMatrix(entity));
     }
 
     /**
-     * Call the render of the triangles to the entity itself
+     * Call the render of the triangles to the model
      *
-     * @param entity Entity to get render
+     * @param model Raw model to get render
      */
-    private void render(Entity entity) {
-        RawModelMaterial rawModelMaterial = entity.getGenericEntity().getModel();
-        RawModel model = rawModelMaterial.getRawModel();
-
+    private void render(RawModel model) {
         //Specify the indexes
         GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getNumOfIndexes(),
                 GLES20.GL_UNSIGNED_INT, model.getIndexBuffer());
-
-        // Specify the indexes
-    }
-
-    /**
-     * Render one player of the scene
-     *
-     * @param player the player that is to render in the scene
-     */
-    private void renderPlayer(Player player) {
-        RawModelMaterial rawModelMaterial = player.getGenericEntity().getModel();
-        prepareTexturedModel(rawModelMaterial);
-        prepareInstance(player);
-        render(player);
-        // Restore the state if has transparency
-        if (!rawModelMaterial.getMaterial().hasTransparency()) {
-            disableCulling();
-        }
-        unbindTexturedModel();
     }
 
     /**
      * UnBind the previous bound elements
      */
-    private void unbindTexturedModel() {
+    private void unPrepareModel() {
         GLES20.glDisableVertexAttribArray(TEntityAttribute.position.getValue());
         GLES20.glDisableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
         GLES20.glDisableVertexAttribArray(TEntityAttribute.normal.getValue());
@@ -241,6 +253,18 @@ public class EntityRender {
      */
     private void disableCulling() {
         GLES10.glDisable(GLES10.GL_CULL_FACE);
+    }
+
+    /**
+     * UnBind the attributes of the material with openGL
+     *
+     * @param material Contains a reference to the material to bind
+     */
+    private void unPrepareMaterial(Material material) {
+        // Restore the state if has transparency
+        if (!material.hasTransparency()) {
+            disableCulling();
+        }
     }
 
     /**
