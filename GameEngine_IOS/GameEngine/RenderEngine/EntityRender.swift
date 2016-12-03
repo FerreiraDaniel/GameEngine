@@ -2,21 +2,21 @@ import Foundation
 import OpenGLES
 
 /**
-* Class responsible to render the entities in the screen
-*/
+ * Class responsible to render the entities in the screen
+ */
 public class EntityRender : NSObject {
     
     /**
-    * Reference to the shader manager
-    */
+     * Reference to the shader manager
+     */
     private var eShader : EntityShaderManager!;
     
     /**
-    * Initializer of the entity render
-    *
-    * @param aShader           Shader manager
-    * @param projectionMatrix  The projection matrix of the render
-    */
+     * Initializer of the entity render
+     *
+     * @param aShader           Shader manager
+     * @param projectionMatrix  The projection matrix of the render
+     */
     public init( aShader : EntityShaderManager, projectionMatrix : GLTransformation) {
         self.eShader = aShader;
         self.eShader.start();
@@ -25,19 +25,19 @@ public class EntityRender : NSObject {
     }
     
     /**
-    * Render the entities in the scene
-    *
-    * @param skyColor
-    * 			Color of the sky
-    *
-    * @param sun
-    *            The source of light of the scene
-    * @param viewMatrix
-    *            View matrix to render the scene
-    * @param entities
-    *            List of entities of the scene
-    * @param player     The player of the scene
-    */
+     * Render the entities in the scene
+     *
+     * @param skyColor
+     * 			Color of the sky
+     *
+     * @param sun
+     *            The source of light of the scene
+     * @param viewMatrix
+     *            View matrix to render the scene
+     * @param entities
+     *            List of entities of the scene
+     * @param player     The player of the scene
+     */
     public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>, player : Player) {
         // Render the object
         eShader.start();
@@ -55,14 +55,14 @@ public class EntityRender : NSObject {
     
     
     /**
-    * Get the transformation matrix of one entity
-    *
-    * @param entity
-    *            Entity for which is to create the transformation matrix
-    *
-    * @return The transformation matrix that put the entity in its right
-    *         position
-    */
+     * Get the transformation matrix of one entity
+     *
+     * @param entity
+     *            Entity for which is to create the transformation matrix
+     *
+     * @return The transformation matrix that put the entity in its right
+     *         position
+     */
     private func getTransformationMatrix(entity : Entity) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
         matrix.glLoadIdentity();
@@ -78,69 +78,93 @@ public class EntityRender : NSObject {
     }
     
     /**
-    * Render one hashMap of entities where each key is a group of similar
-    * entities to be render
-    *
-    * @param entities
-    *            HashMap of entities to render
-    */
+     * Render one hashMap of entities where each key is a group of similar
+     * entities to be render
+     *
+     * @param entities
+     *            HashMap of entities to render
+     */
     private func render(entities : Dictionary<String, Array<Entity>>){
         if (!entities.isEmpty) {
-            for (_, entities) in entities {
-                let entity : Entity = entities.first!;
-                let genericEntity : GenericEntity = entity.genericEntity
-                let model : RawModelMaterial = genericEntity.model;
-                self.prepareTexturedModel(model)
-                for entity in entities {
-                    self.renderEntity(entity);
-                }
-                self.unbindTexturedModel();
-                //Restore the state if has transparency
-                if(!model.material.hasTransparency) {
-                    self.disableCulling();
+            for (_, batch) in entities {
+                let firstEntity : Entity = batch.first!;
+                let genericEntity : GenericEntity = firstEntity.genericEntity
+                let groupsOfMaterials : Dictionary<String, MaterialGroup>  = genericEntity.groupsOfMaterials;
+                for(_, materialGroup) in groupsOfMaterials {
+                    for rawModelMaterial in materialGroup.materials {
+                        let model : RawModel = rawModelMaterial.rawModel
+                        let material : Material = rawModelMaterial.material
+                        prepareMaterial(material);
+                        prepareModel(model);
+                        for entity in batch {
+                            loadEntityTransformation(entity);
+                            self.render(model);
+                        }
+                        unPrepareModel();
+                        unPrepareMaterial(material);
+                    }
                 }
             }
         }
     }
     
     /**
-    * Call the render of the triangles to the entity itself
-    *
-    * @param entity
-    * 			Entity to get render
-    */
-    private func renderEntity(entity : Entity) {
-        let genericEntity : GenericEntity = entity.genericEntity;
-        let model : RawModelMaterial = genericEntity.model;
-        let rawModel : RawModel = model.rawModel;
-        self.prepareInstance(entity);
-        
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(rawModel.indicesCount), GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData);
+     * Render one player of the scene
+     *
+     * @param player the player that is to render in the scene
+     */
+    private func renderPlayer(player : Player) {
+        let genericEntity : GenericEntity = player.genericEntity;
+        let groupsOfMaterials : Dictionary<String, MaterialGroup> = genericEntity.groupsOfMaterials;
+        for(_, materialGroup) in groupsOfMaterials {
+            for rawModelMaterial in materialGroup.materials {
+                let model : RawModel = rawModelMaterial.rawModel
+                let material : Material = rawModelMaterial.material
+                prepareMaterial(material);
+                prepareModel(model);
+                loadEntityTransformation(player);
+                render(model);
+                unPrepareModel();
+                unPrepareMaterial(material);
+            }
+        }
+    }
+    
+    /**
+     * Call the render of the triangles to the model
+     *
+     * @param model Raw model to get render
+     */
+    private func render(model: RawModel) {
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(model.indicesCount), GLenum(GL_UNSIGNED_SHORT), model.indicesData);
     }
     
     //----------------------------------------------------------------------------------
     
     /**
-    * Bind the attributes of openGL
-    *
-    * @param texturedModel Model that contains the model of the entity with textures
-    */
-    private func prepareTexturedModel(texturedModel : RawModelMaterial) {
-        let model : RawModel = texturedModel.rawModel;
-        let material : Material = texturedModel.material;
-        
-        if(!material.hasTransparency) {
-            self.enableCulling();
-        };
+     * Bind the model to render the entity with openGL
+     *
+     * @param model Model that contains the model of the entity with textures
+     */
+    private func prepareModel(model : RawModel) {
         glBindVertexArrayOES(GLuint(model.vaoId));
-        
-        
+        //Enable the attributes to bind
         glEnableVertexAttribArray(GLuint(TEntityAttribute.position.rawValue));
         glEnableVertexAttribArray(GLuint(TEntityAttribute.textureCoords.rawValue));
         glEnableVertexAttribArray(GLuint(TEntityAttribute.normal.rawValue));
+    }
+    
+    /**
+     * Bind the attributes of the material with openGL
+     *
+     * @param material Contains a reference to the material to bind
+     */
+    private func prepareMaterial(material : Material) {
+        if(!material.hasTransparency) {
+            self.enableCulling();
+        };
         
-        
-        //Activate the texture of the entity
+        //Enable the specific texture
         glActiveTexture(GLuint(GL_TEXTURE0));
         glBindTexture(GLuint(GL_TEXTURE_2D), GLuint(material.textureId));
         
@@ -152,20 +176,20 @@ public class EntityRender : NSObject {
     }
     
     /**
-    * Load the transformation matrix of the entity
-    *
-    * @param entity
-    * 			Entity that is to get prepared to be loaded
-    */
-    private func prepareInstance(entity : Entity) {
+     * Load the transformation matrix of the entity
+     *
+     * @param entity
+     * 			Entity that is to get prepared to be loaded
+     */
+    private func loadEntityTransformation(entity : Entity) {
         // Load the transformation matrix
         eShader.loadTransformationMatrix(self.getTransformationMatrix(entity));
     }
     
     
     /**
-    * Enable culling of faces to get better performance
-    */
+     * Enable culling of faces to get better performance
+     */
     private func enableCulling() {
         //Enable the GL cull face feature
         glEnable(GLuint(GL_CULL_FACE));
@@ -174,32 +198,19 @@ public class EntityRender : NSObject {
     }
     
     /**
-    * Disable the culling of the faces vital for transparent model
-    */
+     * Disable the culling of the faces vital for transparent model
+     */
     private func disableCulling() {
         glDisable(GLuint(GL_CULL_FACE));
     }
     
-    /**
-    * Render one player of the scene
-    *
-    * @param player the player that is to render in the scene
-    */
-    private func renderPlayer(player : Player) {
-        prepareTexturedModel(player.genericEntity.model);
-        prepareInstance(player);
-        self.renderEntity(player);
-        // Restore the state if has transparency
-        if (!player.genericEntity.model.material.hasTransparency) {
-            disableCulling();
-        }
-        unbindTexturedModel();
-    }
+    
+    
     
     /**
-    * UnBind the previous binded elements
-    */
-    private func unbindTexturedModel() {
+     * UnBind the previous bound elements
+     */
+    private func unPrepareModel() {
         
         glDisableVertexAttribArray(GLuint(TEntityAttribute.position.rawValue));
         glDisableVertexAttribArray(GLuint(TEntityAttribute.textureCoords.rawValue));
@@ -210,8 +221,20 @@ public class EntityRender : NSObject {
     }
     
     /**
-    * Clean up because we need to clean up when we finish the program
-    */
+     * UnBind the attributes of the material with openGL
+     *
+     * @param material Contains a reference to the material to bind
+     */
+    private func unPrepareMaterial(material : Material) {
+        // Restore the state if has transparency
+        if (!material.hasTransparency) {
+            disableCulling();
+        }
+    }
+    
+    /**
+     * Clean up because we need to clean up when we finish the program
+     */
     deinit {
         eShader = nil;
     }

@@ -23,7 +23,12 @@ public class WorldPlayersGenerator {
         let xPosition : Float = 20.0;
         let zPosition : Float = 0.0;
         let playerPosition : Vector3f = Vector3f(x: xPosition, y: -1.0, z: zPosition);
-        let genericEntity : GenericEntity = GenericEntity(texturedObj);
+        //Prepare generic entity begin
+        let materials : Array<RawModelMaterial> = [texturedObj];
+        let materialGroup : MaterialGroup = MaterialGroup(materials);
+        let groupsOfMaterials : Dictionary<String, MaterialGroup> = ["body" : materialGroup];
+        let genericEntity : GenericEntity =  GenericEntity(groupsOfMaterials);
+        //Prepare generic entity end
         let player : Player = Player(genericEntity: genericEntity,
                                      position: playerPosition, // Position
             rotX: 0.0, rotY: 0.0, rotZ: 0.0, // Rotation

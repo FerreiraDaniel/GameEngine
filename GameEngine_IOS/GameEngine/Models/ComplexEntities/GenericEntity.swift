@@ -9,10 +9,13 @@ public class GenericEntity  {
     /**
      * Identifier of the generic entity
      */
-    var id : Int;
+    let id : String;
     
-    /*3D model to be render*/
-    var model : RawModelMaterial
+    /**
+     * Keys: Have the name of the group The name of the material group for
+     * instance harm
+     */
+    let groupsOfMaterials : Dictionary<String, MaterialGroup>;
     
     
     /**
@@ -20,9 +23,9 @@ public class GenericEntity  {
      *
      * @param model          Textured model
      */
-    public init(_ model : RawModelMaterial) {
-        self.id = GenericEntity.newId;
+    public init(_ groupsOfMaterials : Dictionary<String, MaterialGroup>) {
+        self.id = String(GenericEntity.newId);
         GenericEntity.newId += 1;
-        self.model = model;
+        self.groupsOfMaterials = groupsOfMaterials;
     }
 }

@@ -51,6 +51,7 @@
 		3295B4631D6B8C3A0065E8E8 /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B4591D6B8C3A0065E8E8 /* grass.png */; };
 		3295B4641D6B8C3A0065E8E8 /* tree.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3295B45A1D6B8C3A0065E8E8 /* tree.obj */; };
 		3295B4651D6B8C3A0065E8E8 /* tree.png in Resources */ = {isa = PBXBuildFile; fileRef = 3295B45B1D6B8C3A0065E8E8 /* tree.png */; };
+		32971D781DF2F49400852057 /* MaterialGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32971D771DF2F49400852057 /* MaterialGroup.swift */; };
 		3297C5F41D68F54E009F7416 /* sky_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5EE1D68F54E009F7416 /* sky_back.png */; };
 		3297C5F51D68F54E009F7416 /* sky_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5EF1D68F54E009F7416 /* sky_bottom.png */; };
 		3297C5F61D68F54E009F7416 /* sky_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F01D68F54E009F7416 /* sky_front.png */; };
@@ -170,6 +171,7 @@
 		3295B4591D6B8C3A0065E8E8 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
 		3295B45A1D6B8C3A0065E8E8 /* tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.obj; sourceTree = "<group>"; };
 		3295B45B1D6B8C3A0065E8E8 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		32971D771DF2F49400852057 /* MaterialGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialGroup.swift; sourceTree = "<group>"; };
 		3297C5EE1D68F54E009F7416 /* sky_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_back.png; path = Sky/sky_back.png; sourceTree = "<group>"; };
 		3297C5EF1D68F54E009F7416 /* sky_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_bottom.png; path = Sky/sky_bottom.png; sourceTree = "<group>"; };
 		3297C5F01D68F54E009F7416 /* sky_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_front.png; path = Sky/sky_front.png; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				3235C52A1DF2125500CEF81C /* Material.swift */,
 				3235C52C1DF2150100CEF81C /* GenericEntity.swift */,
 				3235C52E1DF2158500CEF81C /* RawModelMaterial.swift */,
+				32971D771DF2F49400852057 /* MaterialGroup.swift */,
 			);
 			path = ComplexEntities;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				32AB942C1D96A4AD0060D581 /* SkyBoxRender.swift in Sources */,
 				32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */,
 				32ACE9E91D9ECD43008896E1 /* WorldTerrainsGenerator.swift in Sources */,
+				32971D781DF2F49400852057 /* MaterialGroup.swift in Sources */,
 				3246A7B21DE1D12600D40DD0 /* GuiTexture.swift in Sources */,
 				32DB537A1DAA843A0080DA85 /* TerrainShape.swift in Sources */,
 				32F068811D9C541200C6C3CC /* WorldEntitiesGenerator.swift in Sources */,

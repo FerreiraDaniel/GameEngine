@@ -222,7 +222,7 @@ public class MasterRender : NSObject{
      */
     private func processEntity(entity : Entity) {
         let genericEntity : GenericEntity = entity.genericEntity;
-        let key : String = String(genericEntity.id);
+        let key : String = genericEntity.id;
         var batch : Array<Entity>! = entities[key];
         
         

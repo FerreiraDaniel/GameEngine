@@ -89,7 +89,12 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
         var entities : Array<Entity> = Array<Entity>();
         for (key, numberOfObjs) in entitiesMap {
             let texturedModel = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, textureName: key.textureName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
-            let genericEntity : GenericEntity = GenericEntity(texturedModel);
+            //Prepare generic entity begin
+            let materials : Array<RawModelMaterial> = [texturedModel];
+            let materialGroup : MaterialGroup = MaterialGroup(materials);
+            let groupsOfMaterials : Dictionary<String, MaterialGroup> = ["body" : materialGroup];
+            let genericEntity : GenericEntity =  GenericEntity(groupsOfMaterials);
+            //Prepare generic entity end
             for _ in 0 ..< numberOfObjs {
                 let xPosition : Float = 20.0 + Float(arc4random_uniform(400));
                 let zPosition : Float = Float(arc4random_uniform(400))

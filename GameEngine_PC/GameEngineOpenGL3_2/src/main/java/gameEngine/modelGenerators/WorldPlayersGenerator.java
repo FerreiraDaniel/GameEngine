@@ -1,9 +1,14 @@
 package gameEngine.modelGenerators;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import com.dferreira.commons.Vector3f;
 
 import gameEngine.models.Player;
 import gameEngine.models.complexEntities.GenericEntity;
+import gameEngine.models.complexEntities.MaterialGroup;
 import gameEngine.models.complexEntities.RawModelMaterial;
 import gameEngine.renderEngine.Loader;
 
@@ -43,7 +48,14 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
 		float yPosition = -1.0f;
 		float zPosition = 0.0f;
 		Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
-		GenericEntity genericEntity = new GenericEntity(texturedObj);
+		//Prepare generic entity begin
+		List<RawModelMaterial> materials = new ArrayList<>();
+		materials.add(texturedObj);
+		MaterialGroup materialGroup = new MaterialGroup(materials);
+		HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
+		groupsOfMaterials.put("body", materialGroup);
+		GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
+		//Prepare generic entity end
 		Player player = new Player(genericEntity, playerPosition, // Position
 				0.0f, 0.0f, 0.0f, // Rotation
 				model.getScale() // Scale

@@ -4153,7 +4153,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "getEntities(loader:terrain:)"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4169,7 +4169,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
             endingLineNumber = "91"
-            landmarkName = "getEntities(loader:terrain:)"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4180,12 +4180,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldEntitiesGenerator.swift"
-            timestampString = "502449645.652214"
+            timestampString = "502464535.421413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "getEntities(loader:terrain:)"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4196,92 +4196,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldEntitiesGenerator.swift"
-            timestampString = "502449645.652214"
+            timestampString = "502464535.421413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "getEntities(loader:terrain:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/EntityRender.swift"
-            timestampString = "502449645.652214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
-            landmarkName = "render(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/EntityRender.swift"
-            timestampString = "501246282.880461"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "render(entities:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/EntityRender.swift"
-            timestampString = "502449645.652214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "render(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/EntityRender.swift"
-            timestampString = "502449645.652214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "render(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/EntityRender.swift"
-            timestampString = "502449645.652214"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "render(_:)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "getEntities(_:terrain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
