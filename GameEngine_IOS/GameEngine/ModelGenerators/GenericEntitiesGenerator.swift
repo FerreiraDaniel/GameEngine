@@ -5,6 +5,7 @@ import Foundation
  */
 public class GenericEntitiesGenerator {
     
+    
     /**
      * Load a textured model
      *
@@ -12,8 +13,6 @@ public class GenericEntitiesGenerator {
      *            the loader of the texture
      * @param objName
      *            The name of the waveFront file without extension
-     * @param texureName
-     *            The name of the image file without extension
      * @param hasTransparency
      *            Flag that indicates if has transparency or not
      * @param normalsPointingUp
@@ -21,22 +20,29 @@ public class GenericEntitiesGenerator {
      *
      * @return the textured model loaded
      */
-    public static func getTexturedObj(loader : Loader, objName : String, textureName : String, hasTransparency : Bool, normalsPointingUp : Bool) -> RawModelMaterial  {
-        let shape : IShape = OBJLoader.loadObjModel(objName);
+    internal static func getTexturedObj(loader : Loader, objName : String, hasTransparency : Bool, normalsPointingUp : Bool) -> Dictionary<String, MaterialGroup> {
+        let shapes : [IShape] = OBJLoader.loadObjModel(objName);
         
-        let rawModel : RawModel = loader.loadToVAO(shape);
+        var groupsOfMaterials : Dictionary<String, MaterialGroup> = Dictionary<String, MaterialGroup>();
         
-        let textureId : Int = loader.loadTexture(textureName)
+        for shape in shapes {
+            let model : RawModel = loader.loadToVAO(shape);
+            let material : Material? = loader.loadMaterial(shape);
+            if(material != nil)
+            {
+                material!.shineDamper = 10.0
+                material!.reflectivity = 1.0
+                material!.hasTransparency = hasTransparency
+                material!.normalsPointingUp = normalsPointingUp
+            }
+            let texturedModel : RawModelMaterial = RawModelMaterial(rawModel: model, material: material)
+            
+            var materials : [RawModelMaterial] = [RawModelMaterial]()
+            materials.append(texturedModel)
+            let materialGroup : MaterialGroup = MaterialGroup(materials)
+            groupsOfMaterials[shape.getGroupName()!] = materialGroup
+        }
         
-        let material : Material = Material(textureId);
-        material.shineDamper = 10.0
-        material.reflectivity = 1.0
-        material.hasTransparency = hasTransparency
-        material.normalsPointingUp = normalsPointingUp
-        
-        //TexturedModel
-        let texturedModel : RawModelMaterial = RawModelMaterial(rawModel: rawModel, material: material);
-        
-        return texturedModel;
+        return groupsOfMaterials
     }
 }

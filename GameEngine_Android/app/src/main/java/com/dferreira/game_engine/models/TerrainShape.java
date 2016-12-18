@@ -3,7 +3,8 @@ package com.dferreira.game_engine.models;
 
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.TextureData;
-import com.dferreira.game_engine.shapes.IShape;
+import com.dferreira.commons.shapes.IExternalMaterial;
+import com.dferreira.commons.shapes.IShape;
 
 /**
  * Represents one terrain in the 3D world
@@ -151,7 +152,6 @@ public class TerrainShape implements IShape {
      * @param x         x-coordinate
      * @param y         y-coordinate
      * @param heightMap Texture with different heights in the terrain
-     *
      * @return the height of the terrain in the specified position
      */
     @SuppressWarnings("UnnecessaryLocalVariable")
@@ -198,5 +198,21 @@ public class TerrainShape implements IShape {
      */
     public float[][] getHeights() {
         return this.heights;
+    }
+
+    /**
+     * @return The group that the terrain shape belongs (if any)
+     */
+    @Override
+    public String getGroupName() {
+        return null;
+    }
+
+    /**
+     * @return The reference to the material of the terrain shape
+     */
+    @Override
+    public IExternalMaterial getMaterial() {
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package com.dferreira.game_engine.modelGenerators;
 
 import android.content.Context;
 
+import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
@@ -10,12 +11,9 @@ import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
-import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,8 +22,8 @@ import java.util.Random;
 public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
     private final static int NUMBER_OF_TREES = 10;
-    private final static int NUMBER_OF_BANANA_TREES = 5;
-    private final static int NUMBER_OF_FERNS = 100;
+    private final static int NUMBER_OF_BANANA_TREES = 100;
+    private final static int NUMBER_OF_FERNS = 5;
     private final static int NUMBER_OF_GRASS = 10;
     private final static int NUMBER_OF_FLOWERS = 20;
     private final static int NUMBER_OF_MARBLES = 10;
@@ -54,7 +52,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		/*Fern model*/
         DefaultModelGenerator fernModel = new DefaultModelGenerator();
         fernModel.setObjectReference(R.raw.fern);
-        fernModel.setTextureReference(R.mipmap.fern);
         fernModel.setScale(1.0f);
         fernModel.setHasTransparency(true);
         fernModel.setNormalsPointingUp(true);
@@ -62,7 +59,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		/*Tree model*/
         DefaultModelGenerator treeModel = new DefaultModelGenerator();
         treeModel.setObjectReference(R.raw.tree);
-        treeModel.setTextureReference(R.mipmap.tree);
         treeModel.setScale(10.0f);
         treeModel.setHasTransparency(false);
         treeModel.setNormalsPointingUp(false);
@@ -70,7 +66,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         /*Banana tree*/
         DefaultModelGenerator bananaTreeModel = new DefaultModelGenerator();
         bananaTreeModel.setObjectReference(R.raw.banana_tree);
-        bananaTreeModel.setTextureReference(R.mipmap.banana_tree);
         bananaTreeModel.setScale(1.0f);
         bananaTreeModel.setHasTransparency(true);
         bananaTreeModel.setNormalsPointingUp(false);
@@ -79,7 +74,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		/*grass model*/
         DefaultModelGenerator grassModel = new DefaultModelGenerator();
         grassModel.setObjectReference(R.raw.grass);
-        grassModel.setTextureReference(R.mipmap.grass);
         grassModel.setScale(1.0f);
         grassModel.setHasTransparency(true);
         grassModel.setNormalsPointingUp(true);
@@ -87,7 +81,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         		/* flower model */
         DefaultModelGenerator flowerModel = new DefaultModelGenerator();
         flowerModel.setObjectReference(R.raw.flower);
-        flowerModel.setTextureReference(R.mipmap.flower);
         flowerModel.setScale(1.0f);
         flowerModel.setHasTransparency(true);
         flowerModel.setNormalsPointingUp(true);
@@ -96,7 +89,6 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         		/*Marble model*/
         DefaultModelGenerator marbleModel = new DefaultModelGenerator();
         marbleModel.setObjectReference(R.raw.marble);
-        marbleModel.setTextureReference(R.mipmap.marble);
         marbleModel.setScale(5.0f);
         marbleModel.setHasTransparency(false);
         marbleModel.setNormalsPointingUp(false);
@@ -130,13 +122,8 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         Random random = new Random();
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
-            RawModelMaterial texturedObj = getTexturedObj(context, loader, key.getObjectReference(), key.getTextureReference(), key.getHasTransparency(), key.getNormalsPointingUp());
-            //Prepare generic entity begin
-            List<RawModelMaterial> materials = new ArrayList<>();
-            materials.add(texturedObj);
-            MaterialGroup materialGroup = new MaterialGroup(materials);
-            HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
-            groupsOfMaterials.put("body", materialGroup);
+            HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, key.getObjectReference(),
+                    key.getHasTransparency(), key.getNormalsPointingUp());
             GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
             //Prepare generic entity end
             Integer numberOfEntities = entitiesMap.get(key);
@@ -160,7 +147,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
      */
     public static Light getLight() {
         Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-        Vector3f lightColor = new Vector3f(1.0f, 1.0f, 1.0f);
+        ColorRGB lightColor = new ColorRGB(1.0f, 1.0f, 1.0f);
 
         return new Light(lightPosition, lightColor);
     }

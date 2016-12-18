@@ -40,7 +40,7 @@ uniform float shineDamper;
 uniform float reflectivity;
 
 /*Color of the sky in order to simulate fog*/
-uniform vec3 skyColor;
+uniform vec4 skyColor;
 
 void main(void) {
 	/*Using the blend map texture is going to attribute a certain weight to the different textures*/
@@ -88,7 +88,7 @@ void main(void) {
 	vec4 baseColor = vec4(diffuse, 1.0) * totalColor + vec4(finalSpecular, 1.0) ;
 
 	/*Is going to recompute the out color but now taking in account the fog effect*/
-    baseColor = mix(vec4(skyColor, 1.0), baseColor, visibility);
+    baseColor = mix(skyColor, baseColor, visibility);
 
 	gl_FragColor = baseColor;
 }

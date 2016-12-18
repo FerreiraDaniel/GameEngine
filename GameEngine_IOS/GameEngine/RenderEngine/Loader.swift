@@ -122,6 +122,43 @@ public class Loader : NSObject {
     }
     
     /**
+     *
+     * @param externalMaterial
+     *            A reference to an external material with all the information
+     *            needed to create a material
+     *
+     * @return The material loaded
+     */
+    public func loadMaterial(shape : IShape) -> Material? {
+        let externalMaterial : IExternalMaterial? = shape.getMaterial()
+        
+        
+        if (externalMaterial == nil) {
+            return nil;
+        } else {
+            var textureId : Int;
+            var textureWeight : Float;
+            var diffuseColor : ColorRGBA;
+            
+            if ((externalMaterial!.getDiffuseTextureFileName() == nil)
+                || (externalMaterial!.getDiffuseTextureFileName() == "")) {
+                textureId = 0;
+                textureWeight = 0.0;
+                diffuseColor = (externalMaterial!.getDiffuseColor() == nil) ? ColorRGBA(r: 0.0, g: 0.0, b: 0.0, a: 1.0) : ColorRGBA(color: externalMaterial!.getDiffuseColor()!);
+            } else {
+                textureId = self.loadTexture(externalMaterial!.getDiffuseTextureFileName()!);
+                textureWeight = 1.0;
+                diffuseColor = ColorRGBA(r: 0.0, g: 0.0, b: 0.0, a: 1.0);
+            }
+            let material : Material = Material(textureId);
+            material.textureWeight = textureWeight
+            material.diffuseColor = diffuseColor;
+            
+            return material;
+        }
+    }
+    
+    /**
      * Load a list of positions to VAO
      *
      * @param positions
@@ -198,7 +235,12 @@ public class Loader : NSObject {
      * @return Identifier of the texture loaded
      */
     public func loadTexture(fileName : String) -> Int {
-        let imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
+        var imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
+        
+        if(imagePath == nil) {
+            let fName = fileName.componentsSeparatedByString(".")
+            imagePath = NSBundle.mainBundle().pathForResource(fName[0], ofType: PNG_EXTENSION)
+        }
         
         if(imagePath == nil) {
             print("Impossible to get the patch to \(fileName)");

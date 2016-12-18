@@ -1,8 +1,7 @@
-package com.dferreira.game_engine.shapes;
+package com.dferreira.commons.shapes;
 
 /**
- * Represents one entity with a shape
- * defined by one waveFront file
+ * Represents one entity with a shape defined by one waveFront file
  */
 public class WfObject implements IShape {
 
@@ -10,7 +9,8 @@ public class WfObject implements IShape {
     private final float[] textureCoords;
     private final float[] normals;
     private final int[] indices;
-
+    private final String groupName;
+    private final IExternalMaterial material;
 
     /**
      * Constructor of the waveFront shape define
@@ -19,19 +19,23 @@ public class WfObject implements IShape {
      * @param textureCoords Coordinate of the textures of the shape
      * @param normals       The normal vectors of the shape
      * @param indices       Indices of the shape
+     * @param groupName     Name of the group wish belongs
+     * @param material      Material of the Wavefront object if any
      */
-    public WfObject(float[] vertices, float[] textureCoords, float[] normals, int[] indices) {
+    public WfObject(float[] vertices, float[] textureCoords, float[] normals, int[] indices, String groupName,
+                    IExternalMaterial material) {
         super();
         this.vertices = vertices;
         this.textureCoords = textureCoords;
         this.normals = normals;
         this.indices = indices;
+        this.groupName = groupName;
+        this.material = material;
     }
 
     /**
      * @return the vertices of the file
      */
-    @Override
     public float[] getVertices() {
         return vertices;
     }
@@ -39,7 +43,6 @@ public class WfObject implements IShape {
     /**
      * @return the coordinates of the textures of the file
      */
-    @Override
     public float[] getTextureCoords() {
         return textureCoords;
     }
@@ -47,7 +50,6 @@ public class WfObject implements IShape {
     /**
      * @return the indices the make the file render possible
      */
-    @Override
     public int[] getIndices() {
         return indices;
     }
@@ -59,4 +61,21 @@ public class WfObject implements IShape {
     public float[] getNormals() {
         return normals;
     }
+
+    /**
+     * @return the groupName Name of the group wish belongs
+     */
+    @Override
+    public String getGroupName() {
+        return groupName;
+    }
+
+    /**
+     * @return The material associated with shape
+     */
+    @Override
+    public IExternalMaterial getMaterial() {
+        return material;
+    }
+
 }

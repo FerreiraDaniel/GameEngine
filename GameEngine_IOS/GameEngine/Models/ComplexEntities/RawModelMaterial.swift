@@ -13,7 +13,7 @@ public class RawModelMaterial {
     /**
      * Reference to the texture of the entity
      */
-    var material : Material;
+    var material : Material?;
     
     
     /**
@@ -22,7 +22,7 @@ public class RawModelMaterial {
      * @param rawModel	Raw model of the entity
      * @param material	Reference to the texture of the entity
      */
-    public init(rawModel : RawModel, material : Material) {
+    public init(rawModel : RawModel, material : Material?) {
         self.rawModel = rawModel;
         self.material = material
     }

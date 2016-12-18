@@ -1,5 +1,7 @@
 package com.dferreira.game_engine.models.complexEntities;
 
+import com.dferreira.commons.ColorRGBA;
+
 /**
  * Has the parameters of the material of a rawModel
  */
@@ -9,6 +11,16 @@ public class Material {
      * The identifier of the texture
      */
     private final int textureId;
+
+    /**
+     * The weight of the texture for the ambient color of the object
+     */
+    private float textureWeight;
+
+    /**
+     * constant color of the ambient component
+     */
+    private ColorRGBA diffuseColor;
 
     /**
      * How damped the shine is
@@ -61,6 +73,7 @@ public class Material {
     /**
      * @param shineDamper the shineDamper to set
      */
+    @SuppressWarnings("SameParameterValue")
     public void setShineDamper(float shineDamper) {
         this.shineDamper = shineDamper;
     }
@@ -75,6 +88,7 @@ public class Material {
     /**
      * @param reflectivity the reflectivity to set
      */
+    @SuppressWarnings("SameParameterValue")
     public void setReflectivity(float reflectivity) {
         this.reflectivity = reflectivity;
     }
@@ -108,4 +122,32 @@ public class Material {
         return normalsPointingUp;
     }
 
+    /**
+     * @param textureWeight the weight of texture to set
+     */
+    public void setTextureWeight(float textureWeight) {
+        this.textureWeight = textureWeight;
+    }
+
+    /**
+     * @return the weight of  component to the final diffuse
+     */
+    public float getTextureWeight() {
+        return textureWeight;
+    }
+
+    /**
+     * @return the diffuseColor
+     */
+    public ColorRGBA getDiffuseColor() {
+        return diffuseColor;
+    }
+
+
+    /**
+     * @param diffuseColor the diffuseColor to set
+     */
+    public void setDiffuseColor(ColorRGBA diffuseColor) {
+        this.diffuseColor = diffuseColor;
+    }
 }

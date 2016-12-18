@@ -38,7 +38,7 @@ public class EntityRender : NSObject {
      *            List of entities of the scene
      * @param player     The player of the scene
      */
-    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>, player : Player) {
+    public func render(skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>, player : Player) {
         // Render the object
         eShader.start();
         //Load the elements of the scene
@@ -93,15 +93,22 @@ public class EntityRender : NSObject {
                 for(_, materialGroup) in groupsOfMaterials {
                     for rawModelMaterial in materialGroup.materials {
                         let model : RawModel = rawModelMaterial.rawModel
-                        let material : Material = rawModelMaterial.material
-                        prepareMaterial(material);
+                        let material : Material? = rawModelMaterial.material
+                        if(material != nil)
+                        {
+                            prepareMaterial(material!);
+                        }
+                        
                         prepareModel(model);
                         for entity in batch {
                             loadEntityTransformation(entity);
                             self.render(model);
                         }
                         unPrepareModel();
-                        unPrepareMaterial(material);
+                        if(material != nil)
+                        {
+                            unPrepareMaterial(material!);
+                        }
                     }
                 }
             }
@@ -119,13 +126,19 @@ public class EntityRender : NSObject {
         for(_, materialGroup) in groupsOfMaterials {
             for rawModelMaterial in materialGroup.materials {
                 let model : RawModel = rawModelMaterial.rawModel
-                let material : Material = rawModelMaterial.material
-                prepareMaterial(material);
+                let material : Material? = rawModelMaterial.material
+                if(material != nil)
+                {
+                    prepareMaterial(material!);
+                }
                 prepareModel(model);
                 loadEntityTransformation(player);
                 render(model);
                 unPrepareModel();
-                unPrepareMaterial(material);
+                if(material != nil)
+                {
+                    unPrepareMaterial(material!);
+                }
             }
         }
     }
@@ -164,15 +177,24 @@ public class EntityRender : NSObject {
             self.enableCulling();
         };
         
-        //Enable the specific texture
-        glActiveTexture(GLuint(GL_TEXTURE0));
-        glBindTexture(GLuint(GL_TEXTURE_2D), GLuint(material.textureId));
+        
+        if(material.textureId > 0) {
+            //Enable the specific texture
+            glActiveTexture(GLuint(GL_TEXTURE0));
+            glBindTexture(GLuint(GL_TEXTURE_2D), GLuint(material.textureId));
+        }
         
         // Load if should put the normals of the entity point up or not
         eShader.loadNormalsPointingUp(material.normalsPointingUp);
         
         // Load the the light properties
         eShader.loadShineVariables(material.shineDamper,  reflectivity: material.reflectivity);
+        
+        // Load the texture weight of the material
+        eShader.loadTextureWeight(material.textureWeight);
+        
+        // Load the diffuse color of the material
+        eShader.loadDiffuseColor(material.diffuseColor);
     }
     
     /**

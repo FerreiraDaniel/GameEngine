@@ -95,4 +95,18 @@ public class GuiShape : NSObject, IShape {
         return 0;
     }
     
+    /**
+     * @return the groupName Name of the group wish belongs
+     */
+    public func getGroupName() -> String? {
+        return nil;
+    }
+    
+    /**
+     *
+     * @return The material that is associated with shape
+     */
+    public func getMaterial() -> IExternalMaterial? {
+        return nil;
+    }
 }

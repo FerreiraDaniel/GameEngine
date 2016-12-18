@@ -4,8 +4,8 @@ import android.content.Context;
 import android.opengl.GLES10;
 import android.opengl.GLES20;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_controller.GameEngineTouchListener;
 import com.dferreira.game_controller.GamePad;
@@ -44,6 +44,7 @@ public class MasterRender {
     private static final float SKY_R = 0.5f;
     private static final float SKY_G = 0.5f;
     private static final float SKY_B = 0.5f;
+    private static final float SKY_A = 1.0f;
 
     /**
      * Reference to the render of the entities
@@ -83,7 +84,7 @@ public class MasterRender {
     private final List<Terrain> terrains;
 
     /**
-     * The player that is going to be show in the scene
+     * The player_mtl that is going to be show in the scene
      */
     private Player player;
 
@@ -259,9 +260,9 @@ public class MasterRender {
     }
 
     /**
-     * Set the player that is going to use during the render
+     * Set the player_mtl that is going to use during the render
      *
-     * @param player The player that is going to set
+     * @param player The player_mtl that is going to set
      */
     public void processPlayer(Player player) {
         this.player = player;
@@ -289,7 +290,7 @@ public class MasterRender {
      */
     private GLTransformation updateCamera() {
 
-        //Update the camera taking in account the position of the player
+        //Update the camera taking in account the position of the player_mtl
         if (player != null) {
             camera.update(player, this.terrains.get(0));
         }
@@ -315,7 +316,7 @@ public class MasterRender {
     }
 
     /**
-     * Call the method to update the player position
+     * Call the method to update the player_mtl position
      */
     private void updatePlayer() {
         if (this.player != null) {
@@ -333,7 +334,7 @@ public class MasterRender {
         this.updateGamePad();
         this.updatePlayer();
         GLTransformation viewMatrix = this.updateCamera();
-        Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
+        ColorRGBA skyColor = new ColorRGBA(SKY_R, SKY_G, SKY_B, SKY_A);
         this.entityRender.render(skyColor, sun, viewMatrix, entities);
         this.entityRender.render(skyColor, sun, viewMatrix, player);
         this.terrainRender.render(skyColor, sun, viewMatrix, terrains);

@@ -2,10 +2,14 @@ package com.dferreira.game_engine.renderEngine;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.text.TextUtils;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.models.TextureData;
+import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.utils.LoadUtils;
 import com.dferreira.game_engine.models.RawModel;
+import com.dferreira.game_engine.models.complexEntities.Material;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -40,6 +44,40 @@ public class Loader {
         FloatBuffer texCoordinatesBuffer = storeDataInFloatBuffer(textureCoordinates);
 
         return new RawModel(vertexBuffer, indexBuffer, indices.length, normalBuffer, texCoordinatesBuffer);
+    }
+
+    /**
+     * @param context          Context where this method will be called
+     * @param externalMaterial A reference to an external material with all the information
+     *                         needed to create a material
+     * @return The material loaded
+     */
+    public Material loadMaterial(Context context, IExternalMaterial externalMaterial) {
+        if (externalMaterial == null) {
+            return null;
+        } else {
+            Integer textureId;
+            float textureWeight;
+            ColorRGBA diffuseColor;
+
+            if ((externalMaterial.getDiffuseTextureFileName() == null)
+                    || ("".equals(externalMaterial.getDiffuseTextureFileName().trim()))) {
+                textureId = 0;
+                textureWeight = 0.0f;
+                diffuseColor = (externalMaterial.getDiffuseColor() == null) ? new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f) : new ColorRGBA(externalMaterial.getDiffuseColor());
+            } else {
+
+                textureId = this.loadTexture(context, externalMaterial.getDiffuseTextureFileName());
+                textureWeight = 1.0f;
+                diffuseColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f);
+            }
+            Material material = new Material(textureId);
+
+            material.setTextureWeight(textureWeight);
+            material.setDiffuseColor(diffuseColor);
+
+            return material;
+        }
     }
 
     /**
@@ -92,7 +130,6 @@ public class Loader {
      *
      * @param context    Context where this method will be called
      * @param resourceId id of the resource where the texture exists
-     *
      * @return Id from the texture that was bounded in openGL
      */
     @SuppressWarnings("SameParameterValue")
@@ -113,11 +150,33 @@ public class Loader {
     }
 
     /**
+     * Load texture from resource located in the mipmap folder
+     *
+     * @param context         Context where this method will be called
+     * @param textureFileName The name of the texture where the texture exists
+     * @return Id from the texture that was bounded in openGL
+     */
+    private int loadTexture(Context context, String textureFileName) {
+
+        if (TextUtils.isEmpty(textureFileName)) {
+            return 0;
+        } else {
+            String resourceName = textureFileName.split("\\.png")[0];
+            int resourceId = context.getResources().getIdentifier(resourceName, "mipmap", context.getPackageName());
+            if (resourceId == 0) {
+                return 0;
+            } else {
+                return loadTexture(context, resourceId);
+            }
+        }
+
+    }
+
+    /**
      * Loads a cubic texture
      *
      * @param context     Context where this method will be called
      * @param resourceIds The resources where should get the images of the cube
-     *
      * @return Identifier of the texture cubic texture loaded
      */
     @SuppressWarnings("SameParameterValue")
@@ -152,11 +211,10 @@ public class Loader {
     }
 
     /**
-     *  Loads the data of a texture without bind
+     * Loads the data of a texture without bind
      *
      * @param context    Context where this method will be called
      * @param resourceId id of the resource where the texture exists
-     *
      * @return The texture read from the file without any openGL bind
      */
     @SuppressWarnings({"SameParameterValue", "UnnecessaryLocalVariable"})
@@ -169,10 +227,8 @@ public class Loader {
      * Convert on array of Integers in a buffer of Integers that can be used in
      * openGL
      *
-     * @param data
-     *            array with data to put in the Integer Buffer the integer
-     *            buffer created
-     *
+     * @param data array with data to put in the Integer Buffer the integer
+     *             buffer created
      * @return The integer buffer created
      */
     private IntBuffer storeDataInIntBuffer(int[] data) {
@@ -187,10 +243,8 @@ public class Loader {
      * Convert on array of Floats in a buffer of Floats that can be used in
      * openGL
      *
-     * @param data
-     *            array with data to put in the Float Buffer the float buffer
-     *            created
-     *
+     * @param data array with data to put in the Float Buffer the float buffer
+     *             created
      * @return The integer buffer created
      */
     private FloatBuffer storeDataInFloatBuffer(float[] data) {

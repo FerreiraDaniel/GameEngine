@@ -56,7 +56,7 @@ public class TerrainRender : NSObject {
     * @param terrains
     *            List of terrains of the scene
     */
-    public func render(skyColor : Vector3f, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
+    public func render(skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
         tShader.start();
         tShader.loadSkyColor(skyColor);
         tShader.loadLight(sun);

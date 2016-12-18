@@ -1,5 +1,6 @@
 package gameEngine.modelGenerators;
 
+import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
@@ -15,7 +16,7 @@ public class WorldLightsGenerator {
 	 */
 	private static Light getSun() {
 		Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-		Vector3f lightColor = new Vector3f(1.0f, 1.0f, 1.0f);
+		ColorRGB lightColor = new ColorRGB(1.0f, 1.0f, 1.0f);
 
 		return new Light(lightPosition, lightColor);
 	}
@@ -25,7 +26,7 @@ public class WorldLightsGenerator {
 	 */
 	private static Light getRedLight() {
 		Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-		Vector3f lightColor = new Vector3f(1.0f, 0.0f, 0.0f);
+		ColorRGB lightColor = new ColorRGB(1.0f, 0.0f, 0.0f);
 
 		return new Light(lightPosition, lightColor);
 	}
@@ -35,7 +36,7 @@ public class WorldLightsGenerator {
 	 */
 	private static Light getGreenLight() {
 		Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-		Vector3f lightColor = new Vector3f(0.0f, 1.0f, 0.0f);
+		ColorRGB lightColor = new ColorRGB(0.0f, 1.0f, 0.0f);
 
 		return new Light(lightPosition, lightColor);
 	}
@@ -45,7 +46,7 @@ public class WorldLightsGenerator {
 	 */
 	public static Light getBlueLight() {
 		Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-		Vector3f lightColor = new Vector3f(0.0f, 0.0f, 1.0f);
+		ColorRGB lightColor = new ColorRGB(0.0f, 0.0f, 1.0f);
 
 		return new Light(lightPosition, lightColor);
 	}

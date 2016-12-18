@@ -78,7 +78,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     private SkyBox skyBox;
 
     /**
-     * The player that is going to be show in the scene
+     * The player_mtl that is going to be show in the scene
      */
     private Player player;
 
@@ -151,12 +151,12 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         Log.d(TIME_TO_RENDER_TAG, "Time initialize sky " + (skyBoxLoaded.getTime() - lightLoaded.getTime()) + " ms");
 
-        /*Prepares the player that is going to be used in the scene*/
+        /*Prepares the player_mtl that is going to be used in the scene*/
         this.player = WorldPlayersGenerator.getPlayer(context, loader);
 
         Date playerLoader = new Date();
 
-        Log.d(TIME_TO_RENDER_TAG, "Time initialize player " + (playerLoader.getTime() - skyBoxLoaded.getTime()) + " ms");
+        Log.d(TIME_TO_RENDER_TAG, "Time initialize player_mtl " + (playerLoader.getTime() - skyBoxLoaded.getTime()) + " ms");
 
 
         Log.d(TIME_TO_RENDER_TAG, "Total time:" + (playerLoader.getTime() - renderInitialized.getTime()));

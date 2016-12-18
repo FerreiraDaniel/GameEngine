@@ -1,6 +1,8 @@
 package com.dferreira.game_engine.models;
 
-import com.dferreira.game_engine.shapes.IShape;
+
+import com.dferreira.commons.shapes.IExternalMaterial;
+import com.dferreira.commons.shapes.IShape;
 
 /**
  * Represents the sky box in the 3D world
@@ -36,7 +38,6 @@ public class SkyBoxShape implements IShape {
     }
 
     /**
-     *
      * @return The vertices of the sky box
      */
     @Override
@@ -69,4 +70,19 @@ public class SkyBoxShape implements IShape {
     }
 
 
+    /**
+     * @return The group that the sky box shape belongs (if any)
+     */
+    @Override
+    public String getGroupName() {
+        return null;
+    }
+
+    /**
+     * @return The reference to the material of the sky box shape
+     */
+    @Override
+    public IExternalMaterial getMaterial() {
+        return null;
+    }
 }

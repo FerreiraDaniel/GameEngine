@@ -2,12 +2,12 @@ package com.dferreira.game_engine.modelGenerators;
 
 import android.content.Context;
 
+import com.dferreira.commons.shapes.IShape;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.SkyBoxShape;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.shapes.IShape;
 
 
 /**

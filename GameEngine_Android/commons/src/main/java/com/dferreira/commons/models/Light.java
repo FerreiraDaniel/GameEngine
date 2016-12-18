@@ -1,5 +1,6 @@
 package com.dferreira.commons.models;
 
+import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.Vector3f;
 
 /**
@@ -15,7 +16,7 @@ public class Light {
     /**
      * The intensity of the light in the different components
      */
-    private Vector3f color;
+    private ColorRGB color;
 
     /**
      * The constructor of the light entity
@@ -23,7 +24,7 @@ public class Light {
      * @param position Position where the light will exist
      * @param color    The intensity of the light in the different components
      */
-    public Light(Vector3f position, Vector3f color) {
+    public Light(Vector3f position, ColorRGB color) {
         super();
         this.position = position;
         this.color = color;
@@ -47,7 +48,7 @@ public class Light {
     /**
      * @return the color
      */
-    public Vector3f getColor() {
+    public ColorRGB getColor() {
         return color;
     }
 
@@ -55,7 +56,7 @@ public class Light {
      * @param color the color to set
      */
     @SuppressWarnings("unused")
-    public void setColor(Vector3f color) {
+    public void setColor(ColorRGB color) {
         this.color = color;
     }
 

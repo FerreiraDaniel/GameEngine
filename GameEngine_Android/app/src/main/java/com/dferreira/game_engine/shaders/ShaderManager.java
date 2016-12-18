@@ -4,6 +4,8 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.util.Log;
 
+import com.dferreira.commons.ColorRGB;
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
@@ -123,6 +125,7 @@ public abstract class ShaderManager {
      * @param location location of the shader variable in the script
      * @param vector   The vector to load
      */
+    @SuppressWarnings("unused")
     protected void loadVector(int location, Vector2f vector) {
         GLES20.glUniform2f(location, vector.x, vector.y);
     }
@@ -135,6 +138,26 @@ public abstract class ShaderManager {
      */
     protected void loadVector(int location, Vector3f vector) {
         GLES20.glUniform3f(location, vector.x, vector.y, vector.z);
+    }
+
+    /**
+     * Load a color RGB to be used in the shader script
+     *
+     * @param location location of the shader variable in the script
+     * @param color    The color to load
+     */
+    protected void loadColorRGB(int location, ColorRGB color) {
+        GLES20.glUniform3f(location, color.r, color.g, color.b);
+    }
+
+    /**
+     * Load a color RGBA to be used in the shader script
+     *
+     * @param location location of the shader variable in the script
+     * @param color    The color to load
+     */
+    protected void loadColorRGBA(int location, ColorRGBA color) {
+        GLES20.glUniform4f(location, color.r, color.g, color.b, color.a);
     }
 
     /**

@@ -1,5 +1,6 @@
 package gameEngine.models;
 
+import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 
 /**
@@ -68,4 +69,19 @@ public class SkyBoxShape implements IShape {
 		return null;
 	}
 
+    /**
+     * @return The group that the sky box shape belongs (if any)
+     */
+    @Override
+    public String getGroupName() {
+        return null;
+    }
+
+    /**
+     * @return The reference to the material of the sky box shape
+     */
+    @Override
+    public IExternalMaterial getMaterial() {
+        return null;
+    }
 }

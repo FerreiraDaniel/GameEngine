@@ -2,9 +2,9 @@ package com.dferreira.game_engine.shaders.entities;
 
 import android.content.Context;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
@@ -63,8 +63,8 @@ public class EntityShaderManager extends ShaderManager {
      *
      * @param skyColor Color of the sky
      */
-    public void loadSkyColor(Vector3f skyColor) {
-        super.loadVector(uniforms[TEntityUniform.skyColor.getValue()], skyColor);
+    public void loadSkyColor(ColorRGBA skyColor) {
+        super.loadColorRGBA(uniforms[TEntityUniform.skyColor.getValue()], skyColor);
     }
 
     /**
@@ -93,7 +93,7 @@ public class EntityShaderManager extends ShaderManager {
      */
     public void loadLight(Light light) {
         super.loadVector(uniforms[TEntityUniform.lightPosition.getValue()], light.getPosition());
-        super.loadVector(uniforms[TEntityUniform.lightColor.getValue()], light.getColor());
+        super.loadColorRGB(uniforms[TEntityUniform.lightColor.getValue()], light.getColor());
     }
 
     /**
@@ -127,4 +127,24 @@ public class EntityShaderManager extends ShaderManager {
         super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.getValue()], matrix);
     }
 
+
+    /**
+     * Load the texture weight of the material
+     *
+     * @param textureWeight
+     *            texture weight of the material
+     */
+    public void loadTextureWeight(float textureWeight) {
+        super.loadFloat(uniforms[TEntityUniform.textureWeight.getValue()], textureWeight);
+    }
+
+    /**
+     * Load the diffuse color of the material
+     *
+     * @param diffuseColor
+     *            diffuse color of the material
+     */
+    public void loadDiffuseColor(ColorRGBA diffuseColor) {
+        super.loadColorRGBA(uniforms[TEntityUniform.diffuseColor.getValue()], diffuseColor);
+    }
 }

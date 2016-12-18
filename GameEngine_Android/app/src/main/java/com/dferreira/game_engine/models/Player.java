@@ -16,28 +16,28 @@ public class Player extends Entity {
     private static final float RUN_SPEED = 90.0f;
     /*Angle that the user will turn in one second*/
     private static final float TURN_SPEED = 160.0f;
-    /*The gravity that is going to push the player back to the ground*/
+    /*The gravity that is going to push the player_mtl back to the ground*/
     private static final float GRAVITY = -9.8f;
-    /*Power that the player is going to be push up when is jumping*/
+    /*Power that the player_mtl is going to be push up when is jumping*/
     private static final float JUMP_POWER = 0.01f;
 
 
-    /*The current speed of the player*/
+    /*The current speed of the player_mtl*/
     private float currentSpeed = 0.0f;
 
     /*The current speed turning*/
     private float currentTurnSpeed = 0.0f;
 
-    /*The speed which the player is going up*/
+    /*The speed which the player_mtl is going up*/
     private float upwardsSpeed = 0.0f;
 
-    /*Indicates if the player is jumping or not*/
+    /*Indicates if the player_mtl is jumping or not*/
     private boolean isJumping;
 
     /**
-     * Constructor of the player to be render in the 3D world
+     * Constructor of the player_mtl to be render in the 3D world
      *
-     * @param genericEntity The generic entity of the player
+     * @param genericEntity The generic entity of the player_mtl
      * @param position      position where the model should be render
      * @param rotX          Rotation of the model in the X axle
      * @param rotY          Rotation of the model in the Y axle
@@ -83,9 +83,9 @@ public class Player extends Entity {
     }
 
     /**
-     * Move the player and rotate it around the scene
+     * Move the player_mtl and rotate it around the scene
      *
-     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
+     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player_mtl is
      *                     frame rate independent
      */
     private void moveAndRotate(float timeToRender) {
@@ -99,9 +99,9 @@ public class Player extends Entity {
     }
 
     /**
-     * When the player is above the terrain height make it to fall down
+     * When the player_mtl is above the terrain height make it to fall down
      *
-     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
+     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player_mtl is
      *                     frame rate independent
      * @param terrain      Reference to the terrain to compute where is going to fall
      */
@@ -121,7 +121,7 @@ public class Player extends Entity {
     }
 
     /**
-     * Set the upward speed of the player in order make it jump
+     * Set the upward speed of the player_mtl in order make it jump
      *
      * @param terrain Reference to the terrain in order to compute the height that is going to jump
      */
@@ -135,11 +135,11 @@ public class Player extends Entity {
 
 
     /**
-     * Move the player due the the keys that are pressed in the keyBoard
+     * Move the player_mtl due the the keys that are pressed in the keyBoard
      *
-     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
+     * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player_mtl is
      *                     frame rate independent
-     * @param terrain      Terrain used to determine the height where the player is going to fall/stay
+     * @param terrain      Terrain used to determine the height where the player_mtl is going to fall/stay
      */
     public void move(float timeToRender, Terrain terrain) {
         checkInputs(terrain);

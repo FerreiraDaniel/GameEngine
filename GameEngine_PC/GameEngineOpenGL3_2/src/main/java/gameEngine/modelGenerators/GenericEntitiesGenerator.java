@@ -1,10 +1,15 @@
 package gameEngine.modelGenerators;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.waveFront.OBJLoader;
 
 import gameEngine.models.RawModel;
 import gameEngine.models.complexEntities.Material;
+import gameEngine.models.complexEntities.MaterialGroup;
 import gameEngine.models.complexEntities.RawModelMaterial;
 import gameEngine.renderEngine.Loader;
 
@@ -20,8 +25,6 @@ public class GenericEntitiesGenerator {
 	 *            the loader of the texture
 	 * @param objName
 	 *            The name of the waveFront file without extension
-	 * @param texureName
-	 *            The name of the image file without extension
 	 * @param hasTransparency
 	 *            Flag that indicates if has transparency or not
 	 * @param normalsPointingUp
@@ -29,21 +32,30 @@ public class GenericEntitiesGenerator {
 	 * 
 	 * @return the textured model loaded
 	 */
-	protected static RawModelMaterial getTexturedObj(Loader loader, String objName, String texureName,
+	protected static HashMap<String, MaterialGroup> getTexturedObj(Loader loader, String objName,
 			boolean hasTransparency, boolean normalsPointingUp) {
-		IShape shape = OBJLoader.loadObjModel(objName);
+		List<IShape> shapes = OBJLoader.loadObjModel(objName);
 
-		RawModel model = loader.loadToVAO(shape.getVertices(), shape.getTextureCoords(), shape.getNormals(),
-				shape.getIndices());
-		Integer textureId = loader.loadTexture(texureName);
-		Material material = new Material(textureId);
-		material.setShineDamper(10.0f);
-		material.setReflectivity(1.0f);
-		material.setHasTransparency(hasTransparency);
-		;
-		material.setNormalsPointingUp(normalsPointingUp);
-		RawModelMaterial texturedModel = new RawModelMaterial(model, material);
+		HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
 
-		return texturedModel;
+		for (int i = 0; i < shapes.size(); i++) {
+			IShape shape = shapes.get(i);
+
+			RawModel model = loader.loadToVAO(shape.getVertices(), shape.getTextureCoords(), shape.getNormals(),
+					shape.getIndices());
+			Material material = loader.loadMaterial(shape.getMaterial());
+			material.setShineDamper(10.0f);
+			material.setReflectivity(1.0f);
+			material.setHasTransparency(hasTransparency);
+			material.setNormalsPointingUp(normalsPointingUp);
+			RawModelMaterial texturedModel = new RawModelMaterial(model, material);
+
+			List<RawModelMaterial> materials = new ArrayList<>();
+			materials.add(texturedModel);
+			MaterialGroup materialGroup = new MaterialGroup(materials);
+			groupsOfMaterials.put(shape.getGroupName(), materialGroup);
+		}
+
+		return groupsOfMaterials;
 	}
 }

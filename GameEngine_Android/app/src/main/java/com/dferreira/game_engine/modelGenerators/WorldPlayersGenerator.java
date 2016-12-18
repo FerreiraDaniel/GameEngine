@@ -7,25 +7,21 @@ import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
-import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
- * Responsible for creating the creating the player(s) of the scene
+ * Responsible for creating the creating the player_mtl(s) of the scene
  */
 public class WorldPlayersGenerator extends GenericEntitiesGenerator {
     /**
-     * @return The model with information to generate a player
+     * @return The model with information to generate a player_mtl
      */
     private static DefaultModelGenerator getPlayerModel() {
         /* Player model */
         DefaultModelGenerator playerModel = new DefaultModelGenerator();
         playerModel.setObjectReference(R.raw.player);
-        playerModel.setTextureReference(R.mipmap.player);
         playerModel.setScale(0.5f);
         playerModel.setHasTransparency(false);
         playerModel.setNormalsPointingUp(false);
@@ -36,24 +32,19 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
 
     /**
      * @param loader loader that will load the entities of the 3D world
-     * @return The player that is going to be used in the scene
+     * @return The player_mtl that is going to be used in the scene
      */
     @SuppressWarnings("UnnecessaryLocalVariable")
     public static Player getPlayer(Context context, Loader loader) {
         DefaultModelGenerator model = getPlayerModel();
 
-        RawModelMaterial texturedObj = getTexturedObj(context, loader, model.getObjectReference(), model.getTextureReference(),
-                model.getHasTransparency(), model.getNormalsPointingUp());
         float xPosition = 20.0f;
         float zPosition = 0.0f;
         Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
 
-        //Prepare generic entity begin
-        List<RawModelMaterial> materials = new ArrayList<>();
-        materials.add(texturedObj);
-        MaterialGroup materialGroup = new MaterialGroup(materials);
-        HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
-        groupsOfMaterials.put("body", materialGroup);
+        //Load the obj of the player
+        HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, model.getObjectReference(),
+                model.getHasTransparency(), model.getNormalsPointingUp());
         GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
         //Prepare generic entity end
         Player player = new Player(genericEntity, playerPosition, // Position

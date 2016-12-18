@@ -29,10 +29,27 @@ uniform float shineDamper;
 uniform float reflectivity;
 
 /*Color of the sky in order to simulate fog*/
-uniform vec3 skyColor;
+uniform vec4 skyColor;
+
+/* Weight of the texture in the final ambient color to be render*/
+uniform float textureWeight;
+
+/* Color that the material is going to get if there is not texture*/
+uniform vec4 diffuseColor;
 
 void main()
 {
+    /*Is going to get which should be the texture result using the coordinates*/
+    vec4 textureColor = texture2D(textureSampler,pass_textureCoords);
+    
+    /*Check if the half if less that 0.5 if is ignore the element*/
+    if(textureColor.a < 0.5) {
+        discard;
+    }
+    
+    //Computes the diffuse component of the color of the object
+    vec4 objectDiffuse = (textureWeight * textureColor) + diffuseColor;
+    
     /*Normalize the surface normal*/
     vec3 unitNormal = normalize(surfaceNormal);
 
@@ -57,16 +74,10 @@ void main()
     float dampedFactor = pow(specularFactor, shineDamper);
     vec3 finalSpecular = dampedFactor * reflectivity * lightColor;
     
-    /*Is going to get which should be the texture result using the coordinates*/
-    vec4 textureColor = texture2D(textureSampler,pass_textureCoords);
+
+    //Final mix effect
+    gl_FragColor = vec4(diffuse, 1.0) * objectDiffuse + vec4(finalSpecular, 1.0);
     
-    /*Check if the half if less that 0.5 if is ignore the element*/
-    if(textureColor.a < 0.5) {
-        discard;
-    }
-    
-    gl_FragColor = vec4(diffuse, 1.0) * textureColor + vec4(finalSpecular, 1.0);
-    
-    /*Is going to recomput the out color but now taking in account the fog effect*/
-    gl_FragColor = mix(vec4(skyColor, 1.0), gl_FragColor, visibility);
+    /*Is going to recompute the out color but now taking in account the fog effect*/
+    gl_FragColor = mix(skyColor, gl_FragColor, visibility);
 }

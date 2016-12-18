@@ -2,48 +2,58 @@ package com.dferreira.game_engine.modelGenerators;
 
 import android.content.Context;
 
+import com.dferreira.commons.shapes.IShape;
+import com.dferreira.commons.wavefront.OBJLoader;
 import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.complexEntities.Material;
+import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.shapes.IShape;
-import com.dferreira.game_engine.wave_front.OBJLoader;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Provide generic methods to generate entities
  */
 class GenericEntitiesGenerator {
 
-    /**
-     * Load the texture of the dragon model
-     *
-     * @param loader the loader of the texture
-     * @return the textured model of the dragon
-     */
 
     /**
      * Load a textured model
      *
+     * @param context           Context where this method will be called
      * @param loader            the loader of the texture
      * @param modelId           The name of the waveFront file without extension
-     * @param mTextureId        The name of the image file without extension
      * @param hasTransparency   Flag that indicates if has transparency or not
      * @param normalsPointingUp Indicates that all the normals of the object are pointing up
      * @return the textured model loaded
      */
-    static RawModelMaterial getTexturedObj(Context context, Loader loader, int modelId, int mTextureId, boolean hasTransparency, boolean normalsPointingUp) {
-        IShape objModel = OBJLoader.loadObjModel(context, modelId);
-        RawModel model = loader.loadToRawModel(objModel.getVertices(), objModel.getTextureCoords(),
-                objModel.getNormals(), objModel.getIndices());
-        Integer textureId = loader.loadTexture(context, mTextureId);
-        //The material
-        Material material = new Material(textureId);
-        material.setHasTransparency(hasTransparency);
-        material.setNormalsPointingUp(normalsPointingUp);
-        material.setShineDamper(10.0f);
-        material.setReflectivity(1.0f);
-        //
+    static HashMap<String, MaterialGroup> getTexturedObj(Context context, Loader loader, int modelId,
+                                                         boolean hasTransparency, boolean normalsPointingUp) {
+        List<IShape> shapes = OBJLoader.loadObjModel(context, modelId);
 
-        return new RawModelMaterial(model, material);
+        HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
+
+        for (int i = 0; i < shapes.size(); i++) {
+            IShape shape = shapes.get(i);
+
+            RawModel model = loader.loadToRawModel(shape.getVertices(), shape.getTextureCoords(), shape.getNormals(),
+                    shape.getIndices());
+            Material material = loader.loadMaterial(context, shape.getMaterial());
+            material.setShineDamper(10.0f);
+            material.setReflectivity(1.0f);
+            material.setHasTransparency(hasTransparency);
+            material.setNormalsPointingUp(normalsPointingUp);
+            RawModelMaterial texturedModel = new RawModelMaterial(model, material);
+
+            List<RawModelMaterial> materials = new ArrayList<>();
+            materials.add(texturedModel);
+            MaterialGroup materialGroup = new MaterialGroup(materials);
+            groupsOfMaterials.put(shape.getGroupName(), materialGroup);
+        }
+
+        return groupsOfMaterials;
     }
 }

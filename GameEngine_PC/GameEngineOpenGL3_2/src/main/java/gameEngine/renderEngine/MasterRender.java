@@ -21,8 +21,8 @@ import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 /**
@@ -40,6 +40,7 @@ public class MasterRender {
 	private static final float SKY_R = 0.5f;
 	private static final float SKY_G = 0.5f;
 	private static final float SKY_B = 0.5f;
+	private static final float SKY_A = 1.0f;
 
 	/**
 	 * Reference to the render of the entities
@@ -318,7 +319,7 @@ public class MasterRender {
 		this.prepare();
 		this.updatePlayer();
 		GLTransformation viewMatrix = this.updateCamera();
-		Vector3f skyColor = new Vector3f(SKY_R, SKY_G, SKY_B);
+		ColorRGBA skyColor = new ColorRGBA(SKY_R, SKY_G, SKY_B, SKY_A);
 		this.entityRender.render(skyColor, lights, viewMatrix, entities, player);
 		this.terrainRender.render(skyColor, lights, viewMatrix, terrains);
 		this.skyBoxRender.render(viewMatrix, skyBox);
@@ -342,7 +343,7 @@ public class MasterRender {
 		// Logs frames/s
 		Date endDate = new Date();
 		this.timeToRender = (endDate.getTime() - startDate.getTime()) / 1000.0f;
-		//System.out.println((timeToRender) + " ms");
+		//System.out.println((1.0 / timeToRender) + " ms");
 	}
 	
 	/**

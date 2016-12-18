@@ -2,9 +2,9 @@ package com.dferreira.game_engine.shaders.terrains;
 
 import android.content.Context;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
@@ -52,7 +52,7 @@ public class TerrainShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context   Context where the game engine will be created
+     * @param context Context where the game engine will be created
      */
     public TerrainShaderManager(Context context) {
         super(context, R.raw.terrain_vertex_shader, R.raw.terrain_fragment_shader);
@@ -60,7 +60,6 @@ public class TerrainShaderManager extends ShaderManager {
 
     /**
      * Bind the attributes of the program shader
-     *
      */
     @Override
     protected List<IEnum> getAttributes() {
@@ -97,18 +96,16 @@ public class TerrainShaderManager extends ShaderManager {
     /**
      * Load the color of the sky in order to simulate fog
      *
-     * @param skyColor
-     *            Color of the sky
+     * @param skyColor Color of the sky
      */
-    public void loadSkyColor(Vector3f skyColor) {
-        super.loadVector(uniforms[TTerrainUniform.skyColor.ordinal()], skyColor);
+    public void loadSkyColor(ColorRGBA skyColor) {
+        super.loadColorRGBA(uniforms[TTerrainUniform.skyColor.ordinal()], skyColor);
     }
 
     /**
      * Load the projection matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadProjectionMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TTerrainUniform.projectionMatrix.ordinal()], matrix);
@@ -117,21 +114,18 @@ public class TerrainShaderManager extends ShaderManager {
     /**
      * Put passes the information of the light to the Shader program
      *
-     * @param light
-     *            the light to load in the shader program
+     * @param light the light to load in the shader program
      */
     public void loadLight(Light light) {
         super.loadVector(uniforms[TTerrainUniform.lightPosition.ordinal()], light.getPosition());
-        super.loadVector(uniforms[TTerrainUniform.lightColor.ordinal()], light.getColor());
+        super.loadColorRGB(uniforms[TTerrainUniform.lightColor.ordinal()], light.getColor());
     }
 
     /**
      * Load the values of the specular light in the fragment shader
      *
-     * @param damper
-     *            The damper of the specular lighting
-     * @param reflectivity
-     *            The reflectivity of the material
+     * @param damper       The damper of the specular lighting
+     * @param reflectivity The reflectivity of the material
      */
     @SuppressWarnings("SameParameterValue")
     public void loadShineVariables(float damper, float reflectivity) {
@@ -142,8 +136,7 @@ public class TerrainShaderManager extends ShaderManager {
     /**
      * Load the transformation matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadViewMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TTerrainUniform.viewMatrix.ordinal()], matrix);
@@ -152,8 +145,7 @@ public class TerrainShaderManager extends ShaderManager {
     /**
      * Load the transformation matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadTransformationMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TTerrainUniform.transformationMatrix.ordinal()], matrix);

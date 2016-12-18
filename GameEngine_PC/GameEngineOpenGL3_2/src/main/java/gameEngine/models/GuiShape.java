@@ -1,5 +1,6 @@
 package gameEngine.models;
 
+import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 
 /**
@@ -49,6 +50,19 @@ public class GuiShape implements IShape {
 	 */
 	@Override
 	public int[] getIndices() {
+		return null;
+	}
+
+    /**
+     * @return The group that the gui shape belongs (if any)
+     */
+	@Override
+	public String getGroupName() {
+		return null;
+	}
+
+	@Override
+	public IExternalMaterial getMaterial() {
 		return null;
 	}
 

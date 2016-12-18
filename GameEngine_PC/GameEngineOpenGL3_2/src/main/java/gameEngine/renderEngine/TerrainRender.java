@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.models.RawModel;
@@ -76,7 +76,7 @@ public class TerrainRender {
 	 * @param terrains
 	 *            List of terrains of the scene
 	 */
-	public void render(Vector3f skyColor, Light[] lights, GLTransformation viewMatrix, List<Terrain> terrains) {
+	public void render(ColorRGBA skyColor, Light[] lights, GLTransformation viewMatrix, List<Terrain> terrains) {
 		tShader.start();
 		tShader.loadSkyColor(skyColor);
 		tShader.loadLights(lights);

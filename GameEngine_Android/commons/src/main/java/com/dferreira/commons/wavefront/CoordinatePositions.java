@@ -1,4 +1,4 @@
-package com.dferreira.game_engine.wave_front;
+package com.dferreira.commons.wavefront;
 
 /**
  *	Positions where the coordinates are when each line of wavefront

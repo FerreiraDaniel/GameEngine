@@ -1,9 +1,9 @@
 import Foundation
 
 /**
-* Represents one entity with a shape
-* defined by one waveFront file
-*/
+ * Represents one entity with a shape
+ * defined by one waveFront file
+ */
 public class WfObject : NSObject, IShape {
     
     private var _vertices : UnsafeMutablePointer<Float> ;
@@ -14,55 +14,79 @@ public class WfObject : NSObject, IShape {
     private var _countNormals : Int;
     private var _indices : UnsafeMutablePointer<ushort>;
     private var _countIndices : Int = 0;
+    private var _groupName : String?;
+    private var _material : IExternalMaterial?;
+    
     
     /**
-    * Inicializes the waveFront file
-    */
+     *  Get one array of floats and returns one pointer to native memory of it
+     */
+    private static func floatArray2Pointer(floatArray : Array<Float>) -> UnsafeMutablePointer<Float>
+    {
+        let countElements : Int = floatArray.count;
+        let pointer = UnsafeMutablePointer<Float>(calloc(countElements, sizeof(CFloat)));
+        
+        //Copy vertices one by one
+        for i in 0 ..< countElements {
+            pointer[i] = floatArray[i];
+        }
+        return pointer
+    }
+    
+    /**
+     *  Get one array of ints and returns one pointer to native memory of it
+     */
+    private static func intArray2Pointer(intArray : Array<Int>) -> UnsafeMutablePointer<ushort>
+    {
+        let countElements : Int = intArray.count;
+        let pointer = UnsafeMutablePointer<ushort>(calloc(countElements, sizeof(ushort)));
+        
+        //Copy vertices one by one
+        for i in 0 ..< countElements {
+            pointer[i] = UInt16(intArray[i]);
+        }
+        return pointer
+    }
+    
+    /**
+     * Inicializes the waveFront file
+     */
     public init(
-        aVertices : Array<Float>,
-        aTextureCoordinates : Array<Float>,
-        aNormals : Array<Float>,
-        aIndices : Array<Int>)
+        _ aVertices : Array<Float>,
+          _ aTextureCoordinates : Array<Float>,
+            _ aNormals : Array<Float>,
+              _ aIndices : Array<Int>,
+                _ groupName : String?,
+                  _ material : IExternalMaterial?
+        )
     {
         
         //Allocate and fill the vertices memory
-        self._vertices = UnsafeMutablePointer<Float>(calloc(aVertices.count, sizeof(CFloat)));
+        self._vertices = WfObject.floatArray2Pointer(aVertices);
         self._countVertices = aVertices.count;
         
-        //Copy vertices one by one
-        for i in 0 ..< aVertices.count {
-            self._vertices[i] = aVertices[i];
-        }
-        
-        
         //Allocate and fill the texture memory
-        self._textureCoordinates = UnsafeMutablePointer<Float>(calloc(aTextureCoordinates.count, sizeof(CFloat)));
+        self._textureCoordinates = WfObject.floatArray2Pointer(aTextureCoordinates);
         self._countTextureCoordinates = aTextureCoordinates.count;
-        for i in 0 ..< aTextureCoordinates.count {
-            self._textureCoordinates[i] = aTextureCoordinates[i];
-        }
-        
         
         //Allocate and fill the normals memory
-        self._normals = UnsafeMutablePointer<Float>(calloc(aNormals.count, sizeof(CFloat)));
+        self._normals = WfObject.floatArray2Pointer(aNormals);
         self._countNormals = aNormals.count;
-        for i in 0 ..< self._countNormals {
-            self._normals[i] = aNormals[i];
-        }
-        
         
         //Allocate and fill the indices memory
-        self._indices = UnsafeMutablePointer<ushort>(calloc(aIndices.count, sizeof(CInt)));
+        self._indices = WfObject.intArray2Pointer(aIndices);
         self._countIndices = aIndices.count;
-        for i in 0 ..< self._countIndices {
-            self._indices[i] = UInt16(aIndices[i]);
-        }
+        
+        //Assigns the name of the group to the internal attribute
+        self._groupName = groupName
+        self._material = material
+        
         super.init();
     }
     
     /**
-    * Dinicializes the waveFront file
-    */
+     * Dinicializes the waveFront file
+     */
     deinit {
         free(self._vertices);
         free(self._textureCoordinates);
@@ -71,59 +95,74 @@ public class WfObject : NSObject, IShape {
     }
     
     /**
-    * @return the vertices of the shape
-    */
+     * @return the vertices of the shape
+     */
     public func getVertices() -> UnsafeMutablePointer<Float> {
         return self._vertices;
     }
     
     /**
-    * @return number of vertices that make the shape
-    */
+     * @return number of vertices that make the shape
+     */
     public func countVertices() -> Int {
         return self._countVertices;
     }
     
     /**
-    * @return the Coordinates of the textures of the shape
-    */
+     * @return the Coordinates of the textures of the shape
+     */
     public func getTextureCoords()  -> UnsafeMutablePointer<Float> {
         return self._textureCoordinates;
     }
     
     /*
-    Number of the texture coordinates
-    */
+     Number of the texture coordinates
+     */
     public func countTextureCoords() -> Int {
         return self._countTextureCoordinates;
     }
     
     /**
-    *
-    * @return the normal vectors that make the shape
-    */
+     *
+     * @return the normal vectors that make the shape
+     */
     public func getNormals() -> UnsafeMutablePointer<Float> {
         return self._normals;
     }
     
     /*
-    * Number of normal that the shape has
-    */
+     * Number of normal that the shape has
+     */
     public func countNormals() -> Int {
         return self._countNormals;
     }
     
     /**
-    * @return The indices of the vertices that make the shape
-    */
+     * @return The indices of the vertices that make the shape
+     */
     public func getIndices() -> UnsafeMutablePointer<ushort> {
         return self._indices;
     }
     
     /*
-    Number of indices that the shape has
-    */
+     Number of indices that the shape has
+     */
     public func countIndices() -> Int {
         return self._countIndices;
+    }
+    
+    /**
+     * @return the groupName Name of the group wish belongs
+     */
+    public func getGroupName() -> String? {
+        return self._groupName;
+    }
+    
+    /**
+     *
+     * @return The material associated with shape
+     */
+    public func getMaterial() -> IExternalMaterial? {
+        return self._material;
     }
 }

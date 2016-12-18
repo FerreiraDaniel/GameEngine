@@ -44,7 +44,7 @@ uniform float shineDamper;
 uniform float reflectivity;
 
 /*Color of the sky in order to simulate fog*/
-uniform vec3 skyColor;
+uniform vec4 skyColor;
 
 void main(void) {
 
@@ -100,6 +100,6 @@ void main(void) {
 	out_Color = vec4(diffuse, 1.0) * totalColor + vec4(finalSpecular, 1.0);
 	
 	/*Is going to recompute the out color but now taking in account the fog effect*/
-	out_Color = mix(vec4(skyColor, 1.0), out_Color, visibility);
+	out_Color = mix(skyColor, out_Color, visibility);
 	
 }

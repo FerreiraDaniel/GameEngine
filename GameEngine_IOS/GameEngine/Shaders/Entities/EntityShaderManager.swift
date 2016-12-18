@@ -35,7 +35,9 @@ public class EntityShaderManager : ShaderManager {
             TEntityUniform.shineDamper.rawValue : "\(TEntityUniform.shineDamper)",
             TEntityUniform.reflectivity.rawValue : "\(TEntityUniform.reflectivity)",
             TEntityUniform.skyColor.rawValue : "\(TEntityUniform.skyColor)",
-            TEntityUniform.normalsPointingUp.rawValue : "\(TEntityUniform.normalsPointingUp)"
+            TEntityUniform.normalsPointingUp.rawValue : "\(TEntityUniform.normalsPointingUp)",
+            TEntityUniform.textureWeight.rawValue : "\(TEntityUniform.textureWeight)",
+            TEntityUniform.diffuseColor.rawValue : "\(TEntityUniform.diffuseColor)"
         ]
         
         return uniformsDic;
@@ -80,7 +82,7 @@ public class EntityShaderManager : ShaderManager {
      */
     public func loadLight(light : Light) {
         super.loadVector(uniforms[TEntityUniform.lightPosition.rawValue], vector: light.position);
-        super.loadVector(uniforms[TEntityUniform.lightColor.rawValue], vector: light.color);
+        super.loadColorRGB(uniforms[TEntityUniform.lightColor.rawValue], color: light.color);
     }
     
     /**
@@ -109,7 +111,27 @@ public class EntityShaderManager : ShaderManager {
      * @param skyColor
      * 			Color of the sky
      */
-    public func  loadSkyColor(skyColor : Vector3f) {
-        super.loadVector( uniforms[TEntityUniform.skyColor.rawValue], vector : skyColor);
+    public func  loadSkyColor(skyColor : ColorRGBA) {
+        super.loadColorRGBA(uniforms[TEntityUniform.skyColor.rawValue], color: skyColor)
+    }
+    
+    /**
+     * Load the texture weight of the material
+     *
+     * @param textureWeight
+     *            texture weight of the material
+     */
+    public func loadTextureWeight(textureWeight : Float) {
+        super.loadFloat(uniforms[TEntityUniform.textureWeight.rawValue], value: textureWeight);
+    }
+    
+    /**
+     * Load the diffuse color of the material
+     *
+     * @param diffuseColor
+     *            diffuse color of the material
+     */
+    public func loadDiffuseColor(diffuseColor : ColorRGBA) {
+        super.loadColorRGBA(uniforms[TEntityUniform.diffuseColor.rawValue], color : diffuseColor);
     }
 }

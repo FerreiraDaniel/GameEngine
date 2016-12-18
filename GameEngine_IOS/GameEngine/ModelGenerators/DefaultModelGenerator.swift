@@ -10,10 +10,6 @@ public class DefaultModelGenerator : NSObject {
     */
     var objectName : String;
     
-    /**
-    * The name of the .png that represents the texture of the model
-    */
-    var textureName : String;
     
     /**
     * The scale of the model
@@ -32,9 +28,8 @@ public class DefaultModelGenerator : NSObject {
     var normalsPointingUp : Bool;
     
     
-    public init(objectName : String, textureName : String, scale : Float, hasTransparency : Bool, normalsPointingUp : Bool) {
+    public init(objectName : String, scale : Float, hasTransparency : Bool, normalsPointingUp : Bool) {
         self.objectName = objectName;
-        self.textureName = textureName
         self.scale = scale
         self.hasTransparency = hasTransparency
         self.normalsPointingUp = normalsPointingUp

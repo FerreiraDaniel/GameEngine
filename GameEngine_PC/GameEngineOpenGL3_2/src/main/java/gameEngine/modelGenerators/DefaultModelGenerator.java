@@ -11,11 +11,6 @@ public class DefaultModelGenerator {
 	private String objectName;
 
 	/**
-	 * The name of the .png that represents the texture of the model
-	 */
-	private String textureName;
-
-	/**
 	 * The scale of the model
 	 */
 	private float scale;
@@ -44,21 +39,6 @@ public class DefaultModelGenerator {
 	 */
 	public void setObjectName(String objectName) {
 		this.objectName = objectName;
-	}
-
-	/**
-	 * @return the textureName
-	 */
-	public String getTextureName() {
-		return textureName;
-	}
-
-	/**
-	 * @param textureName
-	 *            the textureName to set
-	 */
-	public void setTextureName(String textureName) {
-		this.textureName = textureName;
 	}
 
 	/**

@@ -44,23 +44,23 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     private static func getEntitiesMap() -> Dictionary<DefaultModelGenerator, Int> {
         
         /* Fern model */
-        let fernModel = DefaultModelGenerator(objectName: "fern", textureName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
+        let fernModel = DefaultModelGenerator(objectName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /* Tree model */
-        let treeModel = DefaultModelGenerator(objectName: "tree", textureName: "tree", scale: 30.0, hasTransparency: false, normalsPointingUp: false);
+        let treeModel = DefaultModelGenerator(objectName: "tree", scale: 30.0, hasTransparency: false, normalsPointingUp: false);
         
         /*Banana tree*/
-        let bananaTreeModel = DefaultModelGenerator(objectName: "banana_tree", textureName: "banana_tree", scale: 3.0, hasTransparency: true, normalsPointingUp: false);
+        let bananaTreeModel = DefaultModelGenerator(objectName: "banana_tree", scale: 3.0, hasTransparency: true, normalsPointingUp: false);
         
         
         /* grass model */
-        let grassModel = DefaultModelGenerator(objectName: "grass", textureName: "grass", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
+        let grassModel = DefaultModelGenerator(objectName: "grass", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /* flower model */
-        let flowerModel = DefaultModelGenerator(objectName: "flower", textureName: "flower", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
+        let flowerModel = DefaultModelGenerator(objectName: "flower", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /*Marble model*/
-        let marbleModel = DefaultModelGenerator(objectName: "marble", textureName: "marble", scale: 5.0, hasTransparency: false, normalsPointingUp: false);
+        let marbleModel = DefaultModelGenerator(objectName: "marble", scale: 5.0, hasTransparency: false, normalsPointingUp: false);
 
 
         /* Entity map of all the existing entities */
@@ -88,11 +88,8 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
         //Alloccate the entities list
         var entities : Array<Entity> = Array<Entity>();
         for (key, numberOfObjs) in entitiesMap {
-            let texturedModel = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, textureName: key.textureName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
+            let groupsOfMaterials = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
             //Prepare generic entity begin
-            let materials : Array<RawModelMaterial> = [texturedModel];
-            let materialGroup : MaterialGroup = MaterialGroup(materials);
-            let groupsOfMaterials : Dictionary<String, MaterialGroup> = ["body" : materialGroup];
             let genericEntity : GenericEntity =  GenericEntity(groupsOfMaterials);
             //Prepare generic entity end
             for _ in 0 ..< numberOfObjs {
@@ -116,7 +113,7 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     */
     public static func getLight() -> Light {
         let lightPosition : Vector3f = Vector3f(x: 10.0 , y: 100.0 , z: 10.0)
-        let lightColor : Vector3f = Vector3f(x: 1.0 , y: 1.0 , z: 1.0)
+        let lightColor : ColorRGB = ColorRGB(r: 1.0 , g: 1.0 , b: 1.0)
         
         let light : Light = Light(position: lightPosition , color: lightColor);
         return light

@@ -6,12 +6,12 @@ package com.dferreira.game_engine.models;
 public class ThirdPersonCamera extends Camera {
 
     /**
-     * Distance between camera and the player controlled by the user
+     * Distance between camera and the player_mtl controlled by the user
      */
     private final float distanceFromPlayer;
 
     /**
-     * Angle around the player
+     * Angle around the player_mtl
      */
     private final float angleAroundPlayer;
 
@@ -25,7 +25,7 @@ public class ThirdPersonCamera extends Camera {
     }
 
     /**
-     * Uses the position of the player to update the position of the camera
+     * Uses the position of the player_mtl to update the position of the camera
      *
      * @param player Reference to that the camera is going to follow
      * @param terrain			The camera needs to be above the terrain otherwise gets flick
@@ -38,7 +38,7 @@ public class ThirdPersonCamera extends Camera {
     }
 
     /**
-     * Compute the position where the camera should be to follow the player
+     * Compute the position where the camera should be to follow the player_mtl
      *
      * @param horizontalDistance Horizontal distance
      * @param verticalDistance   Vertical distance
@@ -62,14 +62,14 @@ public class ThirdPersonCamera extends Camera {
 
 
     /**
-     * @return Horizontal distance from the camera to the player
+     * @return Horizontal distance from the camera to the player_mtl
      */
     private float getHorizontalDistance() {
         return (float) (distanceFromPlayer * Math.cos(Math.toRadians(getPitch())));
     }
 
     /**
-     * @return Vertical distance from the camera to the player
+     * @return Vertical distance from the camera to the player_mtl
      */
     private float getVerticalDistance() {
         return (float) (distanceFromPlayer * Math.sin(Math.toRadians(getPitch())));

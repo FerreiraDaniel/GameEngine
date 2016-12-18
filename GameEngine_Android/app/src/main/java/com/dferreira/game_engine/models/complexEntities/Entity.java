@@ -53,7 +53,7 @@ public class Entity {
      * @param dy Y component to be increase
      * @param dz Z component to be increase
      */
-    public void increasePosition(float dx, float dy, float dz) {
+    protected void increasePosition(float dx, float dy, float dz) {
         this.position.x += dx;
         this.position.y += dy;
         this.position.z += dz;
@@ -67,7 +67,7 @@ public class Entity {
      * @param dz Z component to be increase
      */
     @SuppressWarnings("SameParameterValue")
-    public void increaseRotation(float dx, float dy, float dz) {
+    protected void increaseRotation(float dx, float dy, float dz) {
         this.rotX += dx;
         this.rotY += dy;
         this.rotZ += dz;

@@ -3,9 +3,9 @@ package gameEngine.shaders.terrains;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.shaders.ShaderManager;
@@ -111,8 +111,8 @@ public class TerrainShaderManager extends ShaderManager {
 	 * @param skyColor
 	 *            Color of the sky
 	 */
-	public void loadSkyColor(Vector3f skyColor) {
-		super.loadVector(uniforms[TTerrainUniform.skyColor.ordinal()], skyColor);
+	public void loadSkyColor(ColorRGBA skyColor) {
+		super.loadColorRGBA(uniforms[TTerrainUniform.skyColor.ordinal()], skyColor);
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class TerrainShaderManager extends ShaderManager {
 	 */
 	public void loadLights(Light[] lights) {
 		super.loadVector(uniforms[TTerrainUniform.lightPosition.ordinal()], lights[0].getPosition());
-		super.loadVector(uniforms[TTerrainUniform.lightColor.ordinal()], lights[0].getColor());
+		super.loadColorRGB(uniforms[TTerrainUniform.lightColor.ordinal()], lights[0].getColor());
 	}
 
 	/**

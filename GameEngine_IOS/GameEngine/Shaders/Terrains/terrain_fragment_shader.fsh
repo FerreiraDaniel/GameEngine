@@ -42,7 +42,7 @@ uniform float shineDamper;
 uniform float reflectivity;
 
 /*Color of the sky in order to simulate fog*/
-uniform vec3 skyColor;
+uniform vec4 skyColor;
 
 void main()
 {
@@ -98,6 +98,6 @@ void main()
     gl_FragColor = vec4(diffuse, 1.0) * totalColor + vec4(finalSpecular, 1.0);
     
     /*Is going to recompute the out color but now taking in account the fog effect*/
-    gl_FragColor = mix(vec4(skyColor, 1.0), gl_FragColor, visibility);
+    gl_FragColor = mix(skyColor, gl_FragColor, visibility);
 
 }

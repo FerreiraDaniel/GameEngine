@@ -3,8 +3,8 @@ package com.dferreira.game_engine.renderEngine;
 import android.opengl.GLES10;
 import android.opengl.GLES20;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.RawModel;
@@ -76,7 +76,7 @@ public class EntityRender {
      * @param viewMatrix View matrix to render the scene
      * @param entities   List of entities of the scene
      */
-    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Map<GenericEntity, List<Entity>> entities) {
+    public void render(ColorRGBA skyColor, Light sun, GLTransformation viewMatrix, Map<GenericEntity, List<Entity>> entities) {
         eShader.start();
         eShader.loadSkyColor(skyColor);
         eShader.loadLight(sun);
@@ -92,9 +92,9 @@ public class EntityRender {
      * @param skyColor   Color of the sky
      * @param sun        The source of light of the scene
      * @param viewMatrix View matrix to render the scene
-     * @param player     The player of the scene
+     * @param player     The player_mtl of the scene
      */
-    public void render(Vector3f skyColor, Light sun, GLTransformation viewMatrix, Player player) {
+    public void render(ColorRGBA skyColor, Light sun, GLTransformation viewMatrix, Player player) {
         eShader.start();
         eShader.loadSkyColor(skyColor);
         eShader.loadLight(sun);
@@ -135,9 +135,9 @@ public class EntityRender {
     }
 
     /**
-     * Render one player of the scene
+     * Render one player_mtl of the scene
      *
-     * @param player the player that is to render in the scene
+     * @param player the player_mtl that is to render in the scene
      */
     private void renderPlayer(Player player) {
         GenericEntity genericEntity = player.getGenericEntity();
@@ -205,6 +205,12 @@ public class EntityRender {
 
         //Load the light properties
         eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
+
+        // Load the texture weight of the material
+        eShader.loadTextureWeight(material.getTextureWeight());
+
+        // Load the diffuse color of the material
+        eShader.loadDiffuseColor(material.getDiffuseColor());
     }
 
 

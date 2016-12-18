@@ -58,7 +58,7 @@ public enum TTerrainUniform implements IEnum {
     mudTexture,
 
     /**
-     * The grass texture
+     * The grass_mtl texture
      */
     grassTexture,
 

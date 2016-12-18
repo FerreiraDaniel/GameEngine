@@ -2,6 +2,7 @@ package gameEngine.models;
 
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.TextureData;
+import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 
 /**
@@ -14,13 +15,12 @@ public class TerrainShape implements IShape {
 	/* Number of blocks in each side of the terrain */
 	public static final int VERTEX_COUNT = 128;
 
-    /*Minimum height that the terrain has*/
-    private static final float MIN_HEIGHT = -40.0f;
-    
-    /*Maximum height that the terrain has*/
-    private static final float MAX_HEIGHT = 40.0f;
+	/* Minimum height that the terrain has */
+	private static final float MIN_HEIGHT = -40.0f;
 
-	
+	/* Maximum height that the terrain has */
+	private static final float MAX_HEIGHT = 40.0f;
+
 	/**
 	 * Vertices of the terrain
 	 */
@@ -80,18 +80,18 @@ public class TerrainShape implements IShape {
 
 		int vertexPointer = 0;
 		// Generates the positions of the terrain
-        for (int i = 0; i < VERTEX_COUNT; i++) {
-            for (int j = 0; j < VERTEX_COUNT; j++) {
-                vertices[vertexPointer * 3] = (float) j / ((float) VERTEX_COUNT - 1) * SIZE;
-                this.heights[j][i] = getHeight(j, i, heightMap);
-                vertices[vertexPointer * 3 + 1] = this.heights[j][i];
-                vertices[vertexPointer * 3 + 2] = (float) i / ((float) VERTEX_COUNT - 1) * SIZE;
-                textureCoords[vertexPointer * 2] = (float) j / ((float) VERTEX_COUNT - 1);
-                textureCoords[vertexPointer * 2 + 1] = (float) i / ((float) VERTEX_COUNT - 1);
-                vertexPointer++;
-            }
-        }
-		
+		for (int i = 0; i < VERTEX_COUNT; i++) {
+			for (int j = 0; j < VERTEX_COUNT; j++) {
+				vertices[vertexPointer * 3] = (float) j / ((float) VERTEX_COUNT - 1) * SIZE;
+				this.heights[j][i] = getHeight(j, i, heightMap);
+				vertices[vertexPointer * 3 + 1] = this.heights[j][i];
+				vertices[vertexPointer * 3 + 2] = (float) i / ((float) VERTEX_COUNT - 1) * SIZE;
+				textureCoords[vertexPointer * 2] = (float) j / ((float) VERTEX_COUNT - 1);
+				textureCoords[vertexPointer * 2 + 1] = (float) i / ((float) VERTEX_COUNT - 1);
+				vertexPointer++;
+			}
+		}
+
 		vertexPointer = 0;
 		// Generates the normals of the terrain
 		for (int i = 0; i < VERTEX_COUNT; i++) {
@@ -208,5 +208,21 @@ public class TerrainShape implements IShape {
 	 */
 	public float[][] getHeights() {
 		return this.heights;
+	}
+
+	/**
+	 * @return The group that the terrain shape belongs (if any)
+	 */
+	@Override
+	public String getGroupName() {
+		return null;
+	}
+
+	/**
+	 * @return The reference to the material of the terrain shape
+	 */
+	@Override
+	public IExternalMaterial getMaterial() {
+		return null;
 	}
 }

@@ -13,11 +13,14 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.models.TextureData;
+import com.dferreira.commons.shapes.IExternalMaterial;
 
 import gameEngine.models.RawModel;
+import gameEngine.models.complexEntities.Material;
 import gameEngine.shaders.entities.TEntityAttribute;
 
 public class Loader {
@@ -112,7 +115,41 @@ public class Loader {
 		unbindVAO();
 		return new RawModel(vaoID, indices.length);
 	}
-	
+
+	/**
+	 * 
+	 * @param externalMaterial
+	 *            A reference to an external material with all the information
+	 *            needed to create a material
+	 * 
+	 * @return The material loaded
+	 */
+	public Material loadMaterial(IExternalMaterial externalMaterial) {
+		if (externalMaterial == null) {
+			return null;
+		} else {
+			Integer textureId;
+			float textureWeight;
+			ColorRGBA diffuseColor;
+
+			if ((externalMaterial.getDiffuseTextureFileName() == null)
+					|| ("".equals(externalMaterial.getDiffuseTextureFileName().trim()))) {
+				textureId = 0;
+				textureWeight = 0.0f;
+				diffuseColor = (externalMaterial.getDiffuseColor() == null) ? new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f) : new ColorRGBA(externalMaterial.getDiffuseColor());
+			} else {
+				textureId = this.loadTexture(externalMaterial.getDiffuseTextureFileName());
+				textureWeight = 1.0f;
+				diffuseColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f);
+			}
+			Material material = new Material(textureId);
+
+			material.setTextureWeight(textureWeight);
+			material.setDiffuseColor(diffuseColor);
+			
+			return material;
+		}
+	}
 
 	/**
 	 * Load a list of positions to VAO
@@ -178,7 +215,8 @@ public class Loader {
 	 * @return Identifier of the texture loaded
 	 */
 	public Integer loadTexture(String fileName) {
-		TextureData textureData = LoadUtils.loadTexture(RESOURCES_FOLDER + fileName + PNG_EXTENSION);
+		String fName = (fileName.contains(PNG_EXTENSION)) ? fileName : fileName + PNG_EXTENSION;
+		TextureData textureData = LoadUtils.loadTexture(RESOURCES_FOLDER + fName);
 		if (textureData == null) {
 			return null;
 		} else {
@@ -193,7 +231,6 @@ public class Loader {
 			return textureId;
 		}
 	}
-	
 
 	/**
 	 * Loads a cubic texture
@@ -233,19 +270,19 @@ public class Loader {
 		textures.add(textureId);
 		return textureId;
 	}
-	
-    /**
-     *  Loads the data of a texture without bind 
-     * 
-     * @param fileName
-     *            Name of the file to load without the .png extension in the end
-     *
-     * @return The texture read from the file without any openGL bind
-     */
-    public TextureData getTextureData(String fileName) {
-        TextureData textureData = LoadUtils.loadTexture(RESOURCES_FOLDER + fileName + PNG_EXTENSION);
-        return textureData;
-    }
+
+	/**
+	 * Loads the data of a texture without bind
+	 * 
+	 * @param fileName
+	 *            Name of the file to load without the .png extension in the end
+	 *
+	 * @return The texture read from the file without any openGL bind
+	 */
+	public TextureData getTextureData(String fileName) {
+		TextureData textureData = LoadUtils.loadTexture(RESOURCES_FOLDER + fileName + PNG_EXTENSION);
+		return textureData;
+	}
 
 	/**
 	 * A bit o memory cleaning

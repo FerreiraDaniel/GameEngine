@@ -3,6 +3,8 @@ package gameEngine.shaders;
 import java.util.List;
 import org.lwjgl.opengl.GL20;
 
+import com.dferreira.commons.ColorRGB;
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
@@ -121,7 +123,7 @@ public abstract class ShaderManager {
 	protected void loadFloat(int location, float value) {
 		GL20.glUniform1f(location, value);
 	}
-	
+
 	/**
 	 * Load a 2D vector to be used in the shader script
 	 * 
@@ -144,6 +146,30 @@ public abstract class ShaderManager {
 	 */
 	protected void loadVector(int location, Vector3f vector) {
 		GL20.glUniform3f(location, vector.x, vector.y, vector.z);
+	}
+
+	/**
+	 * Load a color RGB to be used in the shader script
+	 * 
+	 * @param location
+	 *            location of the shader variable in the script
+	 * @param color
+	 *            The color to load
+	 */
+	protected void loadColorRGB(int location, ColorRGB color) {
+		GL20.glUniform3f(location, color.r, color.g, color.b);
+	}
+
+	/**
+	 * Load a color RGBA to be used in the shader script
+	 * 
+	 * @param location
+	 *            location of the shader variable in the script
+	 * @param color
+	 *            The color to load
+	 */
+	protected void loadColorRGBA(int location, ColorRGBA color) {
+		GL20.glUniform4f(location, color.r, color.g, color.b, color.a);
 	}
 
 	/**

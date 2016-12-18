@@ -11,10 +11,6 @@ public class DefaultModelGenerator {
      */
     private int objectReference;
 
-    /**
-     * The name of the .png that represents the texture of the model
-     */
-    private int textureReference;
 
     /**
      * The scale of the model
@@ -49,21 +45,6 @@ public class DefaultModelGenerator {
         this.objectReference = objectReference;
     }
 
-    /**
-     * @return Reference to the object pointing the model
-     */
-    public int getTextureReference() {
-        return textureReference;
-    }
-
-    /**
-     * Set the reference to the texture element
-     *
-     * @param textureReference Reference to the textures of the model
-     */
-    public void setTextureReference(int textureReference) {
-        this.textureReference = textureReference;
-    }
 
     /**
      * @return the scale

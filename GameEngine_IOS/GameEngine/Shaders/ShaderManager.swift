@@ -176,6 +176,30 @@ public class ShaderManager : NSObject{
     }
     
     /**
+     * Load a color RGB to be used in the shader script
+     *
+     * @param location
+     *            location of the shader variable in the script
+     * @param color
+     *            The color to load
+     */
+    internal func loadColorRGB(location: Int,  color: ColorRGB) {
+        glUniform3f(GLint(location), color.r, color.g, color.b);
+    }
+    
+    /**
+     * Load a color RGBA to be used in the shader script
+     *
+     * @param location
+     *            location of the shader variable in the script
+     * @param color
+     *            The color to load
+     */
+    internal func loadColorRGBA(location : Int, color: ColorRGBA) {
+        glUniform4f(GLint(location), color.r, color.g, color.b, color.a);
+    }
+    
+    /**
      * Load a boolean value to be used in the shader script
      *
      * @param location The location of the shader variable in the script

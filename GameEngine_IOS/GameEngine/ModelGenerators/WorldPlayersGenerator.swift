@@ -9,7 +9,7 @@ public class WorldPlayersGenerator {
      */
     private static func getPlayerModel() -> DefaultModelGenerator {
         /* Player model */
-        let playerModel = DefaultModelGenerator(objectName: "player", textureName: "player", scale: 0.5, hasTransparency: false, normalsPointingUp: false);
+        let playerModel = DefaultModelGenerator(objectName: "player", scale: 0.5, hasTransparency: false, normalsPointingUp: false);
         return playerModel;
     }
     
@@ -19,14 +19,11 @@ public class WorldPlayersGenerator {
      */
     public static func getPlayer(loader : Loader) -> Player {
         let model : DefaultModelGenerator = getPlayerModel();
-        let texturedObj : RawModelMaterial = GenericEntitiesGenerator.getTexturedObj(loader, objName: model.objectName, textureName: model.textureName, hasTransparency: model.hasTransparency, normalsPointingUp: model.normalsPointingUp);
         let xPosition : Float = 20.0;
         let zPosition : Float = 0.0;
         let playerPosition : Vector3f = Vector3f(x: xPosition, y: -1.0, z: zPosition);
         //Prepare generic entity begin
-        let materials : Array<RawModelMaterial> = [texturedObj];
-        let materialGroup : MaterialGroup = MaterialGroup(materials);
-        let groupsOfMaterials : Dictionary<String, MaterialGroup> = ["body" : materialGroup];
+        let groupsOfMaterials : Dictionary<String, MaterialGroup> = GenericEntitiesGenerator.getTexturedObj(loader, objName: model.objectName, hasTransparency: model.hasTransparency, normalsPointingUp: model.normalsPointingUp);
         let genericEntity : GenericEntity =  GenericEntity(groupsOfMaterials);
         //Prepare generic entity end
         let player : Player = Player(genericEntity: genericEntity,

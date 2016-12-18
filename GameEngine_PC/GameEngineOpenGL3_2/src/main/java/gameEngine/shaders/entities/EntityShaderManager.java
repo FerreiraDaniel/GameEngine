@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.shaders.ShaderManager;
@@ -69,8 +69,8 @@ public class EntityShaderManager extends ShaderManager {
 	 * @param skyColor
 	 *            Color of the sky
 	 */
-	public void loadSkyColor(Vector3f skyColor) {
-		super.loadVector(uniforms[TEntityUniform.skyColor.getValue()], skyColor);
+	public void loadSkyColor(ColorRGBA skyColor) {
+		super.loadColorRGBA(uniforms[TEntityUniform.skyColor.getValue()], skyColor);
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class EntityShaderManager extends ShaderManager {
 	 */
 	public void loadLights(Light[] lights) {
 		super.loadVector(uniforms[TEntityUniform.lightPosition.getValue()], lights[0].getPosition());
-		super.loadVector(uniforms[TEntityUniform.lightColor.getValue()], lights[0].getColor());
+		super.loadColorRGB(uniforms[TEntityUniform.lightColor.getValue()], lights[0].getColor());
 	}
 
 	/**
@@ -136,6 +136,26 @@ public class EntityShaderManager extends ShaderManager {
 	 */
 	public void loadTransformationMatrix(GLTransformation matrix) {
 		super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.getValue()], matrix);
+	}
+
+	/**
+	 * Load the texture weight of the material
+	 * 
+	 * @param textureWeight
+	 *            texture weight of the material
+	 */
+	public void loadTextureWeight(float textureWeight) {
+		super.loadFloat(uniforms[TEntityUniform.textureWeight.getValue()], textureWeight);
+	}
+
+	/**
+	 * Load the diffuse color of the material
+	 * 
+	 * @param diffuseColor
+	 *            diffuse color of the material
+	 */
+	public void loadDiffuseColor(ColorRGBA diffuseColor) {
+		super.loadColorRGBA(uniforms[TEntityUniform.diffuseColor.getValue()], diffuseColor);
 	}
 
 }

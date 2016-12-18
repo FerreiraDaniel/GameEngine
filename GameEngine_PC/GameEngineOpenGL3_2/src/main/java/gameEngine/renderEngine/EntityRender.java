@@ -9,8 +9,8 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.models.Player;
@@ -85,7 +85,7 @@ public class EntityRender {
 	 * @param player
 	 *            The player of the scene
 	 */
-	public void render(Vector3f skyColor, Light[] lights, GLTransformation viewMatrix,
+	public void render(ColorRGBA skyColor, Light[] lights, GLTransformation viewMatrix,
 			Map<GenericEntity, List<Entity>> entities, Player player) {
 		eShader.start();
 		eShader.loadSkyColor(skyColor);
@@ -193,6 +193,12 @@ public class EntityRender {
 
 		// Load the the light properties
 		eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
+
+		// Load the texture weight of the material
+		eShader.loadTextureWeight(material.getTextureWeight());
+		
+		// Load the diffuse color of the material
+		eShader.loadDiffuseColor(material.getDiffuseColor());
 	}
 
 	/**
@@ -203,7 +209,7 @@ public class EntityRender {
 	 */
 	private void prepareModel(RawModel model) {
 		GL30.glBindVertexArray(model.getVaoId());
-		//Enable the attributes to bind
+		// Enable the attributes to bind
 		GL20.glEnableVertexAttribArray(TEntityAttribute.position.ordinal());
 		GL20.glEnableVertexAttribArray(TEntityAttribute.textureCoords.ordinal());
 		GL20.glEnableVertexAttribArray(TEntityAttribute.normal.ordinal());

@@ -52,6 +52,15 @@ public enum TEntityUniform : Int {
     */
     normalsPointingUp,
     
+    /**
+     * Weight of the texture in the final ambient color to be render
+     */
+    textureWeight,
+    
+    /**
+     * Color that the material is going to get if there is not texture
+     */
+    diffuseColor,
     
     /**
     * Meta-data used maintain the existing locations

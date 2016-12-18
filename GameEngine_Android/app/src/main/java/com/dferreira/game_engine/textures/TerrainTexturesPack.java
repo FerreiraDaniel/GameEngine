@@ -21,7 +21,7 @@ public class TerrainTexturesPack {
     private int mudTextureId;
 
     /**
-     * Identifier of the grass texture
+     * Identifier of the grass_mtl texture
      */
     private int grassTextureId;
 

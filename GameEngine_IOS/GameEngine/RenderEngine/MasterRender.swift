@@ -89,6 +89,7 @@ public class MasterRender : NSObject{
     private static let SKY_R : Float = 0.5;
     private static let SKY_G : Float = 0.5;
     private static let SKY_B : Float = 0.5;
+    private static let SKY_A : Float = 1.0;
     
     /**
      * Create the projection matrix with parameters of the camera
@@ -327,7 +328,7 @@ public class MasterRender : NSObject{
         self.updateGamePad();
         self.updatePlayer();
         let viewMatrix : GLTransformation = self.updateCamera();
-        let skyColor : Vector3f = Vector3f(x: MasterRender.SKY_R, y: MasterRender.SKY_G, z: MasterRender.SKY_B);
+        let skyColor : ColorRGBA = ColorRGBA(r: MasterRender.SKY_R, g: MasterRender.SKY_G, b: MasterRender.SKY_B, a: MasterRender.SKY_A);
         self.entityRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, entities: self.entities, player: self.player);
         self.terrainRender.render(skyColor, sun: sun, viewMatrix: viewMatrix, terrains: self.terrains);
         self.skyBoxRender.render(viewMatrix, skyBox: self.skyBox);
