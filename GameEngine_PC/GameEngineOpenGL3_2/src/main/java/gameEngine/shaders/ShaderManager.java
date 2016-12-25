@@ -22,7 +22,7 @@ public abstract class ShaderManager {
 	/**
 	 * Directory where the shader are in the project
 	 */
-	protected static final String COMMON_PATH = "src/main/java/GameEngine/Shaders/";
+	protected static final String COMMON_PATH = "src/main/java/gameEngine/shaders/";
 
 	private ShaderProgram shaderProgram;
 

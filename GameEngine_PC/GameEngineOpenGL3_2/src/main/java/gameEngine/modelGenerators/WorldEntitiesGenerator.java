@@ -9,6 +9,7 @@ import gameEngine.models.Terrain;
 import gameEngine.models.complexEntities.Entity;
 import gameEngine.models.complexEntities.GenericEntity;
 import gameEngine.models.complexEntities.MaterialGroup;
+import gameEngine.models.complexEntities.TEntity;
 import gameEngine.renderEngine.Loader;
 
 /**
@@ -49,42 +50,42 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
 		/* Fern model */
 		DefaultModelGenerator fernModel = new DefaultModelGenerator();
-		fernModel.setObjectName("fern");
+		fernModel.setObjectType(TEntity.fern);
 		fernModel.setScale(1.0f);
 		fernModel.setHasTransparency(true);
 		fernModel.setNormalsPointingUp(true);
 
 		/* Tree model */
 		DefaultModelGenerator treeModel = new DefaultModelGenerator();
-		treeModel.setObjectName("tree");
+		treeModel.setObjectType(TEntity.tree);
 		treeModel.setScale(10.0f);
 		treeModel.setHasTransparency(false);
 		treeModel.setNormalsPointingUp(false);
 
 		/* Banana tree */
 		DefaultModelGenerator bananaTreeModel = new DefaultModelGenerator();
-		bananaTreeModel.setObjectName("banana_tree");
+		bananaTreeModel.setObjectType(TEntity.banana_tree);
 		bananaTreeModel.setScale(1.0f);
 		bananaTreeModel.setHasTransparency(true);
 		bananaTreeModel.setNormalsPointingUp(false);
 
 		/* grass model */
 		DefaultModelGenerator grassModel = new DefaultModelGenerator();
-		grassModel.setObjectName("grass");
+		grassModel.setObjectType(TEntity.grass);
 		grassModel.setScale(1.0f);
 		grassModel.setHasTransparency(true);
 		grassModel.setNormalsPointingUp(true);
 
 		/* flower model */
 		DefaultModelGenerator flowerModel = new DefaultModelGenerator();
-		flowerModel.setObjectName("flower");
+		flowerModel.setObjectType(TEntity.flower);
 		flowerModel.setScale(1.0f);
 		flowerModel.setHasTransparency(true);
 		flowerModel.setNormalsPointingUp(true);
 
 		/* Marble model */
 		DefaultModelGenerator marbleModel = new DefaultModelGenerator();
-		marbleModel.setObjectName("marble");
+		marbleModel.setObjectType(TEntity.marble);
 		marbleModel.setScale(5.0f);
 		marbleModel.setHasTransparency(false);
 		marbleModel.setNormalsPointingUp(false);
@@ -120,9 +121,9 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		Random random = new Random();
 		int count = 0;
 		for (DefaultModelGenerator key : entitiesMap.keySet()) {
-			HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, key.getObjectName(),
+			HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, key.getObjectType().getValue(),
 					key.getHasTransparency(), key.getNormalsPointingUp());
-			GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
+			GenericEntity genericEntity = new GenericEntity(groupsOfMaterials, key.getObjectType());
 			// Prepare generic entity end
 			Integer numberOfObjs = entitiesMap.get(key);
 			for (int i = 0; i < numberOfObjs; i++) {

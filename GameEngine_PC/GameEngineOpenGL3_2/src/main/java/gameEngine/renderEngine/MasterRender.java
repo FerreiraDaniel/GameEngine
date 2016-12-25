@@ -26,8 +26,7 @@ import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.models.Light;
 
 /**
- * Groups the entities in a hash map like this the same entity will be just put
- * in different positions
+ * Render all the different elements of the render engine
  */
 public class MasterRender {
 

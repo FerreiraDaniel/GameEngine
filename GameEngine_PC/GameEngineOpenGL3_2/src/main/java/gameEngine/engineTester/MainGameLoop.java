@@ -1,5 +1,6 @@
 package gameEngine.engineTester;
 
+import gameEngine.audioEngine.AudioManager;
 import gameEngine.renderEngine.DisplayManager;
 import gameEngine.views.GameEngineRenderer;
 
@@ -18,6 +19,7 @@ public class MainGameLoop {
 	public static void main(String[] args) {
 		DisplayManager.createDisplay();
 		DisplayManager.printSystemInfo();
+		AudioManager.init();
 
 		GameEngineRenderer gameEngineRender = new GameEngineRenderer();
 
@@ -30,6 +32,6 @@ public class MainGameLoop {
 		/* Calls the clean up methods to free memory */
 
 		DisplayManager.closeDisplay();
-
+		AudioManager.cleanUp();
 	}
 }

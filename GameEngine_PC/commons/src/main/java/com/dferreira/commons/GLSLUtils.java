@@ -40,7 +40,7 @@ public class GLSLUtils {
 		compileStatus = GL20.glGetShaderi(shaderId, GL20.GL_COMPILE_STATUS);
 
 		if (compileStatus == GL11.GL_FALSE) {
-			System.out.println(GL20.glGetShaderInfoLog(shaderId, STR_MAX_LEN));
+			System.err.println(GL20.glGetShaderInfoLog(shaderId, STR_MAX_LEN));
 			System.err.println("Could not compile shader");
 			GL20.glDeleteShader(shaderId);
 			return 0;

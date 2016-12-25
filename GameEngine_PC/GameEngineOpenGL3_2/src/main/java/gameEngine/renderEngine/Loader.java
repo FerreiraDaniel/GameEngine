@@ -1,17 +1,23 @@
 package gameEngine.renderEngine;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.openal.AL10;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.newdawn.slick.openal.OggData;
+import org.newdawn.slick.openal.OggDecoder;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.IEnum;
@@ -19,6 +25,8 @@ import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IExternalMaterial;
 
+import gameEngine.models.AudioBuffer;
+import gameEngine.models.AudioSource;
 import gameEngine.models.RawModel;
 import gameEngine.models.complexEntities.Material;
 import gameEngine.shaders.entities.TEntityAttribute;
@@ -39,6 +47,21 @@ public class Loader {
 	 * List of the textures that make part of the game engine
 	 */
 	private List<Integer> textures;
+
+	/**
+	 * List of audio buffers in use by the game
+	 */
+	private List<Integer> audioBuffers;
+
+	/**
+	 * Decoder for ogg files
+	 */
+	private final OggDecoder oggDecoder;
+
+	/**
+	 * List of audio sources in use by the game
+	 */
+	private List<Integer> audioSources;
 
 	/**
 	 * Number of components that make part of one vertex
@@ -83,12 +106,20 @@ public class Loader {
 	private final String PNG_EXTENSION = ".png";
 
 	/**
+	 * Extension of vorbis files
+	 */
+	private final String OGG_EXTENSION = ".ogg";
+
+	/**
 	 * Constructor of the loader class
 	 */
 	public Loader() {
 		this.vaos = new ArrayList<Integer>();
 		this.vbos = new ArrayList<Integer>();
 		this.textures = new ArrayList<Integer>();
+		this.audioBuffers = new ArrayList<Integer>();
+		this.audioSources = new ArrayList<Integer>();
+		this.oggDecoder = new OggDecoder();
 	}
 
 	/**
@@ -136,7 +167,8 @@ public class Loader {
 					|| ("".equals(externalMaterial.getDiffuseTextureFileName().trim()))) {
 				textureId = 0;
 				textureWeight = 0.0f;
-				diffuseColor = (externalMaterial.getDiffuseColor() == null) ? new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f) : new ColorRGBA(externalMaterial.getDiffuseColor());
+				diffuseColor = (externalMaterial.getDiffuseColor() == null) ? new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f)
+						: new ColorRGBA(externalMaterial.getDiffuseColor());
 			} else {
 				textureId = this.loadTexture(externalMaterial.getDiffuseTextureFileName());
 				textureWeight = 1.0f;
@@ -146,7 +178,7 @@ public class Loader {
 
 			material.setTextureWeight(textureWeight);
 			material.setDiffuseColor(diffuseColor);
-			
+
 			return material;
 		}
 	}
@@ -285,18 +317,121 @@ public class Loader {
 	}
 
 	/**
-	 * A bit o memory cleaning
+	 * Load one audio file in a buffer
+	 * 
+	 * @param fileName
+	 *            The file name of the file to load
+	 * 
+	 * @return The identifier of the buffer return by open GL
 	 */
-	public void cleanUp() {
-		for (Integer vao : vaos) {
-			GL30.glDeleteVertexArrays(vao);
+	public AudioBuffer loadSound(String fileName) {
+		int bufferId = AL10.alGenBuffers();
+		AudioBuffer audioBuffer = null;
+
+		/**
+		 * Was not possible to one buffer return AL false
+		 */
+		if (AL10.alGetError() != AL10.AL_NO_ERROR) {
+			return null;
 		}
-		for (Integer vbo : vbos) {
-			GL15.glDeleteBuffers(vbo);
+
+		FileInputStream fin = null;
+		BufferedInputStream bin = null;
+		OggData oggFile = null;
+		try {
+			fin = new FileInputStream(RESOURCES_FOLDER + fileName + OGG_EXTENSION);
+			bin = new BufferedInputStream(fin);
+			oggFile = oggDecoder.getData(bin);
+
+			if (oggFile == null) {
+				// Was not possible read the file so releases the resources
+				AL10.alDeleteBuffers(bufferId);
+			} else {
+				audioBuffers.add(bufferId);
+				int oggFormat = oggFile.channels > 1 ? AL10.AL_FORMAT_STEREO16 : AL10.AL_FORMAT_MONO16;
+				AL10.alBufferData(bufferId, oggFormat, oggFile.data, oggFile.rate);
+				// oggFile.dispose();
+				audioBuffer = new AudioBuffer(bufferId);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (oggFile != null) {
+				oggFile.data.clear();
+				oggFile = null;
+			}
+			try {
+				if (bin != null) {
+					bin.close();
+				}
+				if (fin != null) {
+					fin.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		for (Integer texture : textures) {
-			GL11.glDeleteTextures(texture);
+		return audioBuffer;
+	}
+
+	/**
+	 * 
+	 * @param errorId
+	 * 
+	 * @return A string with description of the error
+	 */
+	private String getALErrorString(int errorId) {
+		switch (errorId) {
+		case AL10.AL_NO_ERROR:
+			return "No Error token";
+		case AL10.AL_INVALID_NAME:
+			return "Invalid Name parameter";
+		case AL10.AL_INVALID_ENUM:
+			return "Invalid parameter";
+		case AL10.AL_INVALID_VALUE:
+			return "Invalid enum parameter value";
+		case AL10.AL_INVALID_OPERATION:
+			return "Illegal call";
+		case AL10.AL_OUT_OF_MEMORY:
+			return "Unable to allocate memory";
+		default:
+			return "";
 		}
+	}
+
+	/**
+	 * 
+	 * @return If possible one audio source with everything set
+	 */
+	private AudioSource genAudioSource() {
+		int sourceId = AL10.alGenSources();
+		int errorId = AL10.alGetError();
+		if (errorId == AL10.AL_NO_ERROR) {
+			return new AudioSource(sourceId);
+		} else {
+			System.err.println(getALErrorString(errorId));
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param numberOfSources
+	 *            Number of audio sources to generate
+	 * 
+	 * @return A list of the audio sources generated
+	 */
+	public List<AudioSource> genAudioSources(int numberOfSources) {
+		List<AudioSource> sourceLst = new ArrayList<AudioSource>();
+		for (int i = 0; i < numberOfSources; i++) {
+			AudioSource audioSource = genAudioSource();
+			if (audioSource == null) {
+				break;
+			} else {
+				sourceLst.add(audioSource);
+			}
+		}
+		return sourceLst;
 	}
 
 	/**
@@ -388,4 +523,38 @@ public class Loader {
 		buffer.flip();
 		return buffer;
 	}
+
+	/**
+	 * A bit o memory cleaning
+	 */
+	public void cleanUp() {
+		// Release of vaos
+		for (Integer vao : vaos) {
+			GL30.glDeleteVertexArrays(vao);
+		}
+		this.vaos = null;
+
+		// Release of vbos
+		for (Integer vbo : vbos) {
+			GL15.glDeleteBuffers(vbo);
+		}
+		this.vbos = null;
+		// Textures
+		for (Integer texture : textures) {
+			GL11.glDeleteTextures(texture);
+		}
+		this.textures = null;
+		// Release of audio sources
+		for (int sourceId : this.audioSources) {
+			AL10.alSourceStop(sourceId);
+			AL10.alDeleteSources(sourceId);
+		}
+
+		// Release of audio buffers
+		for (int buffer : this.audioBuffers) {
+			AL10.alDeleteBuffers(buffer);
+		}
+		this.audioBuffers = null;
+	}
+
 }

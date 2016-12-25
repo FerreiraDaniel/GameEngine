@@ -1,14 +1,22 @@
 package gameEngine.views;
 
 
+import java.util.HashMap;
+import java.util.List;
+
 import com.dferreira.commons.models.Light;
 
+import gameEngine.audioEngine.MasterPlayer;
+import gameEngine.audioEngine.TAudioEnum;
+import gameEngine.modelGenerators.WorldAudioGenerator;
 import gameEngine.modelGenerators.WorldEntitiesGenerator;
 import gameEngine.modelGenerators.WorldGUIsGenerator;
 import gameEngine.modelGenerators.WorldLightsGenerator;
 import gameEngine.modelGenerators.WorldPlayersGenerator;
 import gameEngine.modelGenerators.WorldSkyBoxGenerator;
 import gameEngine.modelGenerators.WorldTerrainsGenerator;
+import gameEngine.models.AudioBuffer;
+import gameEngine.models.AudioSource;
 import gameEngine.models.GuiTexture;
 import gameEngine.models.Player;
 import gameEngine.models.SkyBox;
@@ -20,6 +28,11 @@ import gameEngine.renderEngine.MasterRender;
 
 public class GameEngineRenderer {
 
+	/**
+	 * Number of audio sources available
+	 */
+	private static final int POOL_SOURCES_SIZE = 32;
+	
 	/**
 	 * Loader should handle the loading of resources from disk
 	 */
@@ -61,6 +74,16 @@ public class GameEngineRenderer {
 	 * The player that is going to be show in the scene
 	 */
 	private Player player;
+	
+	/**
+	 * Dictionary of sounds supported by by the game
+	 */
+	private HashMap<TAudioEnum, AudioBuffer> audioLibrary;
+	
+	/**
+	 * Reference to the player of sounds of the game
+	 */
+	private MasterPlayer masterPlayer;
 
 	/**
 	 * Constructor of the game engine render
@@ -78,6 +101,7 @@ public class GameEngineRenderer {
 		/* Initializes the main variables responsible to render the 3D world */
 		this.loader = new Loader();
 		this.renderer = new MasterRender();
+		
 
 		/* Prepares the terrains that is going to render */
 		this.terrains = WorldTerrainsGenerator.getTerrains(loader);
@@ -97,26 +121,49 @@ public class GameEngineRenderer {
 
 		/* Prepares the player that is going to be used in the scene */
 		this.player = WorldPlayersGenerator.getPlayer(loader);
+		
+		
+		/* Prepares the sounds to be used by the engine*/
+		this.audioLibrary = WorldAudioGenerator.getBuffers(loader);
+		
+		/*Sounds player*/
+		List<AudioSource> sourceLst = loader.genAudioSources(POOL_SOURCES_SIZE);
+		this.masterPlayer = new MasterPlayer(sourceLst);
+		
 	}
 
 	/**
-	 * Draw the entities of the scene
-	 *
+	 * Makes all the necessary calls to update the 
+	 * frame
 	 */
-	public void onDrawFrame() {
-		// game logic
+	private void renderFrame() {
 		renderer.startFrameRender();
 		renderer.processTerrains(terrains);
 		renderer.processEntities(entities);
 		renderer.processSkyBox(skyBox);
 		renderer.processPlayer(player);
 		renderer.processGUIs(this.guis);
-
 		renderer.render(lights);
-
 		DisplayManager.updateDisplay();
-
 		renderer.endFrameRender();
+	}
+	
+	/**
+	 * Calls everything necessary to play the sounds of the game
+	 */
+	private void playAudio() {
+		masterPlayer.processEntities(entities);
+		masterPlayer.processPlayer(player);
+		masterPlayer.play(this.audioLibrary);
+	}
+	
+	/**
+	 * Draw the entities of the scene
+	 *
+	 */
+	public void onDrawFrame() {
+		this.renderFrame();
+		this.playAudio();
 	}
 
 	/**
@@ -125,5 +172,6 @@ public class GameEngineRenderer {
 	public void dealloc() {
 		this.loader.cleanUp();
 		this.renderer.cleanUp();
+		this.masterPlayer.cleanUp();
 	}
 }

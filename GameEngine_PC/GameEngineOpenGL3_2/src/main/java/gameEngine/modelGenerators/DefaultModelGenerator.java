@@ -1,5 +1,7 @@
 package gameEngine.modelGenerators;
 
+import gameEngine.models.complexEntities.TEntity;
+
 /**
  * Define the default properties that the element should obey
  */
@@ -8,7 +10,7 @@ public class DefaultModelGenerator {
 	/**
 	 * The name of the .obj that represents the model
 	 */
-	private String objectName;
+	private TEntity objectType;
 
 	/**
 	 * The scale of the model
@@ -27,18 +29,18 @@ public class DefaultModelGenerator {
 	private boolean normalsPointingUp;
 
 	/**
-	 * @return the objectName that represents the model
+	 * @return the objectType that represents the model
 	 */
-	public String getObjectName() {
-		return objectName;
+	public TEntity getObjectType() {
+		return objectType;
 	}
 
 	/**
 	 * @param objectName
 	 *            the objectName to set that represents the model
 	 */
-	public void setObjectName(String objectName) {
-		this.objectName = objectName;
+	public void setObjectType(TEntity objectType) {
+		this.objectType = objectType;
 	}
 
 	/**

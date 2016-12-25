@@ -233,7 +233,7 @@ public class OBJLoader extends GenericLoader {
 					}
 					break;
 				default:
-					System.out.println("Impossible to parse:" + line);
+					System.err.println("Impossible to parse:" + line);
 					break;
 				}
 			}
