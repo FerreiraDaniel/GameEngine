@@ -1,3 +1,4 @@
+precision mediump float;
 
 /*Coordinates of the texture notice that they are 3D*/
 /*The coordinates of the texture as input*/

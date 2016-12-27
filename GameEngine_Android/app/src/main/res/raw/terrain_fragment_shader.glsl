@@ -12,7 +12,7 @@ varying vec3 toLightVector;
 /* vertex from the vertex to the camera*/
 varying vec3 toCameraVector;
 
-/*The visibility of the vertice in order to simulate fog*/
+/*The visibility of the vertex in order to simulate fog*/
 varying float visibility;
 
 /*The background texture*/
