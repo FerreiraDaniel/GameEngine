@@ -2,8 +2,8 @@ import Foundation
 import GLKit
 
 /**
-* Responsible for creating the multiple entities of the 3D world
-*/
+ * Responsible for creating the multiple entities of the 3D world
+ */
 public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     
     private static let NUMBER_OF_TREES : Int = 10;
@@ -12,19 +12,19 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     private static let NUMBER_OF_GRASS : Int = 10;
     private static let NUMBER_OF_FLOWERS  : Int = 20;
     private static let NUMBER_OF_MARBLES : Int = 10;
-
+    
     
     
     /**
-    * Get one entity in a certain position
-    *
+     * Get one entity in a certain position
+     *
      * @param genericEntity
      *            Generic entity
-    * @param position
-    *            Position where is to put the entity in the 3D world
-    *
-    * @return the entity to render
-    */
+     * @param position
+     *            Position where is to put the entity in the 3D world
+     *
+     * @return the entity to render
+     */
     private static func getEntity(genericEntity : GenericEntity,  position : Vector3f) -> Entity {
         let rotation : Float = 0;
         let scale : Float = 1.0;
@@ -39,30 +39,30 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     }
     
     /**
-    * Get the default values of the entities that are going make the world
-    */
+     * Get the default values of the entities that are going make the world
+     */
     private static func getEntitiesMap() -> Dictionary<DefaultModelGenerator, Int> {
         
         /* Fern model */
-        let fernModel = DefaultModelGenerator(objectName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
+        let fernModel = DefaultModelGenerator(objectType: TEntity.fern, objectName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /* Tree model */
-        let treeModel = DefaultModelGenerator(objectName: "tree", scale: 30.0, hasTransparency: false, normalsPointingUp: false);
+        let treeModel = DefaultModelGenerator(objectType: TEntity.tree, objectName: "tree", scale: 30.0, hasTransparency: false, normalsPointingUp: false);
         
         /*Banana tree*/
-        let bananaTreeModel = DefaultModelGenerator(objectName: "banana_tree", scale: 3.0, hasTransparency: true, normalsPointingUp: false);
+        let bananaTreeModel = DefaultModelGenerator(objectType: TEntity.banana_tree, objectName: "banana_tree", scale: 3.0, hasTransparency: true, normalsPointingUp: false);
         
         
         /* grass model */
-        let grassModel = DefaultModelGenerator(objectName: "grass", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
+        let grassModel = DefaultModelGenerator(objectType: TEntity.grass, objectName: "grass", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /* flower model */
-        let flowerModel = DefaultModelGenerator(objectName: "flower", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
+        let flowerModel = DefaultModelGenerator(objectType: TEntity.flower, objectName: "flower", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
         
         /*Marble model*/
-        let marbleModel = DefaultModelGenerator(objectName: "marble", scale: 5.0, hasTransparency: false, normalsPointingUp: false);
-
-
+        let marbleModel = DefaultModelGenerator(objectType: TEntity.marble, objectName: "marble", scale: 5.0, hasTransparency: false, normalsPointingUp: false);
+        
+        
         /* Entity map of all the existing entities */
         let valReturn : Dictionary<DefaultModelGenerator, Int> = [
             bananaTreeModel : WorldEntitiesGenerator.NUMBER_OF_BANANA_TREES,
@@ -79,9 +79,9 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     /*
      * @param loader  loader that will load the entities of the 3D world
      * @param terrain The terrain used to determine the height position
-    *
-    * @return The entities that will compose the 3D world
-    */
+     *
+     * @return The entities that will compose the 3D world
+     */
     public static func getEntities(loader : Loader, terrain : Terrain) -> Array<Entity> {
         let entitiesMap : Dictionary<DefaultModelGenerator, Int> = WorldEntitiesGenerator.getEntitiesMap();
         
@@ -90,7 +90,7 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
         for (key, numberOfObjs) in entitiesMap {
             let groupsOfMaterials = GenericEntitiesGenerator.getTexturedObj(loader, objName: key.objectName, hasTransparency: key.hasTransparency, normalsPointingUp: key.normalsPointingUp);
             //Prepare generic entity begin
-            let genericEntity : GenericEntity =  GenericEntity(groupsOfMaterials);
+            let genericEntity : GenericEntity =  GenericEntity(groupsOfMaterials, key.objectType);
             //Prepare generic entity end
             for _ in 0 ..< numberOfObjs {
                 let xPosition : Float = 20.0 + Float(arc4random_uniform(400));
@@ -108,9 +108,9 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     }
     
     /**
-    *
-    * @return A source of light to the scene
-    */
+     *
+     * @return A source of light to the scene
+     */
     public static func getLight() -> Light {
         let lightPosition : Vector3f = Vector3f(x: 10.0 , y: 100.0 , z: 10.0)
         let lightColor : ColorRGB = ColorRGB(r: 1.0 , g: 1.0 , b: 1.0)

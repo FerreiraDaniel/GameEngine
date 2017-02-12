@@ -140,4 +140,11 @@ public class Player : Entity {
         fallDown(timeToRender, terrain: terrain);
     }
     
+    
+    /**
+     * @return the current speed of the player
+     */
+    public func getCurrentSpeed() -> Float {
+        return self.currentSpeed;
+    }
 }

@@ -79,7 +79,6 @@ public class GenericPlayer {
     private func getSourceiState(sourceId : ALuint) -> ALint {
         var state : ALint = 0;
         alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
-        NSLog("\(state)")
         return state;
     }
     

@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one entity in the 3D world
  */
-public class Entity  {
+public class Entity : NSObject {
     
     /**
      * Keys: Have the name of the group The name of the material group for

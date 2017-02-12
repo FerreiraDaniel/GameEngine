@@ -50,6 +50,9 @@
 		3297C5F81D68F54E009F7416 /* sky_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F21D68F54E009F7416 /* sky_right.png */; };
 		3297C5F91D68F54E009F7416 /* sky_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5F31D68F54E009F7416 /* sky_top.png */; };
 		3297CE7A1DA94C5700530595 /* TextureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3297CE791DA94C5700530595 /* TextureData.swift */; };
+		32982D8B1E4F76ED00B9AC4D /* EntityPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32982D8A1E4F76ED00B9AC4D /* EntityPlayer.swift */; };
+		32982D8D1E4F7FA900B9AC4D /* TAudioEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32982D8C1E4F7FA900B9AC4D /* TAudioEnum.swift */; };
+		32982D8F1E4FAD4300B9AC4D /* TEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32982D8E1E4FAD4300B9AC4D /* TEntity.swift */; };
 		32A5627F1D97C3E20014C634 /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A5627E1D97C3E20014C634 /* Loader.swift */; };
 		32A562871D97F21E0014C634 /* WfObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A562861D97F21E0014C634 /* WfObject.swift */; };
 		32A8D8491DBBB24F00BEE381 /* ThirdPersonCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32A8D8481DBBB24F00BEE381 /* ThirdPersonCamera.swift */; };
@@ -204,6 +207,9 @@
 		3297C5F21D68F54E009F7416 /* sky_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_right.png; path = Sky/sky_right.png; sourceTree = "<group>"; };
 		3297C5F31D68F54E009F7416 /* sky_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_top.png; path = Sky/sky_top.png; sourceTree = "<group>"; };
 		3297CE791DA94C5700530595 /* TextureData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureData.swift; sourceTree = "<group>"; };
+		32982D8A1E4F76ED00B9AC4D /* EntityPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityPlayer.swift; sourceTree = "<group>"; };
+		32982D8C1E4F7FA900B9AC4D /* TAudioEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAudioEnum.swift; sourceTree = "<group>"; };
+		32982D8E1E4FAD4300B9AC4D /* TEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEntity.swift; sourceTree = "<group>"; };
 		32A5627E1D97C3E20014C634 /* Loader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		32A562861D97F21E0014C634 /* WfObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WfObject.swift; sourceTree = "<group>"; };
 		32A8D8481DBBB24F00BEE381 /* ThirdPersonCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPersonCamera.swift; sourceTree = "<group>"; };
@@ -364,6 +370,7 @@
 				3235C52C1DF2150100CEF81C /* GenericEntity.swift */,
 				3235C52E1DF2158500CEF81C /* RawModelMaterial.swift */,
 				32971D771DF2F49400852057 /* MaterialGroup.swift */,
+				32982D8E1E4FAD4300B9AC4D /* TEntity.swift */,
 			);
 			path = ComplexEntities;
 			sourceTree = "<group>";
@@ -611,6 +618,8 @@
 			children = (
 				32AD7C8F1E4F2FAD007231E9 /* Models */,
 				32AD7C8D1E4F1079007231E9 /* GenericPlayer.swift */,
+				32982D8A1E4F76ED00B9AC4D /* EntityPlayer.swift */,
+				32982D8C1E4F7FA900B9AC4D /* TAudioEnum.swift */,
 			);
 			path = AudioEngine;
 			sourceTree = "<group>";
@@ -921,6 +930,7 @@
 				32AD7C8E1E4F1079007231E9 /* GenericPlayer.swift in Sources */,
 				327543241DC6994F00450E8E /* WorldPlayersGenerator.swift in Sources */,
 				3235C52B1DF2125500CEF81C /* Material.swift in Sources */,
+				32982D8D1E4F7FA900B9AC4D /* TAudioEnum.swift in Sources */,
 				32B3A2981E045BD00046CFFF /* IExternalMaterial.swift in Sources */,
 				3246A7B01DE1CDB100D40DD0 /* GuiShape.swift in Sources */,
 				3246A7B91DE1D3FC00D40DD0 /* TGuiUniform.swift in Sources */,
@@ -928,6 +938,7 @@
 				32E4CB5A1E058C1C00081996 /* ComponentPositions.swift in Sources */,
 				32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */,
 				32A94C481D98514100A63154 /* TComponentPosition.swift in Sources */,
+				32982D8F1E4FAD4300B9AC4D /* TEntity.swift in Sources */,
 				32C59BAC1DAAC79A001178C2 /* Utils.swift in Sources */,
 				32E4CB581E05831600081996 /* MtlLoader.swift in Sources */,
 				32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */,
@@ -945,6 +956,7 @@
 				32C2FE3E1D8F1670006A5BF4 /* TTerrainUniform.swift in Sources */,
 				322AB50D1E059A77002B5D71 /* WfMaterial.swift in Sources */,
 				32AB942A1D96A4280060D581 /* EntityRender.swift in Sources */,
+				32982D8B1E4F76ED00B9AC4D /* EntityPlayer.swift in Sources */,
 				32AB942E1D96A4E60060D581 /* TerrainRender.swift in Sources */,
 				3297CE7A1DA94C5700530595 /* TextureData.swift in Sources */,
 				32E555AD1DEB040100992318 /* GamePadKey.swift in Sources */,

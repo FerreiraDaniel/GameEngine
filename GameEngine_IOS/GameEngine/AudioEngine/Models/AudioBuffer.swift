@@ -5,7 +5,7 @@ import OpenAL
 /**
  * Audio buffer to get played
  */
-public class AudioBuffer {
+public class AudioBuffer : NSObject {
     
     /**
      * Identifier of the buffer to play in openAL

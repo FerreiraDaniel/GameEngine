@@ -87,11 +87,7 @@ public class GameViewController: GLKViewController {
         /*Prepares the player that is going to be used in the scene*/
         self.player = WorldPlayersGenerator.getPlayer(loader);
         
-        
-        /*Tests for audio*/
-        let testAudio : GenericPlayer = GenericPlayer();
-        testAudio.isPlaying(0);
-        
+                
     }
     
     
