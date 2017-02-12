@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		320E23D01E50E6FC00524888 /* bounce.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CC1E50E6FC00524888 /* bounce.ogg */; };
+		320E23D11E50E6FC00524888 /* breaking wood.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CD1E50E6FC00524888 /* breaking wood.ogg */; };
+		320E23D21E50E6FC00524888 /* falcon.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CE1E50E6FC00524888 /* falcon.ogg */; };
+		320E23D31E50E6FC00524888 /* footsteps.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CF1E50E6FC00524888 /* footsteps.ogg */; };
+		320E23D51E50E70E00524888 /* wind.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23D41E50E70E00524888 /* wind.ogg */; };
 		3226FAA61DAC07AC00F063C5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3226FAA51DAC07AC00F063C5 /* GameViewController.swift */; };
 		322AB50D1E059A77002B5D71 /* WfMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322AB50C1E059A77002B5D71 /* WfMaterial.swift */; };
 		3235C5291DF2115100CEF81C /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3235C5281DF2115100CEF81C /* Entity.swift */; };
@@ -42,6 +47,9 @@
 		3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A13B1D99A91A00B52467 /* PolygonalFace.swift */; };
 		3279D9131D95D9BF001548F7 /* TTerrainTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */; };
 		3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */; };
+		328D4F9B1E506B1400C10ED0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D4F9A1E506B1400C10ED0 /* AudioManager.swift */; };
+		328D4F9D1E50972A00C10ED0 /* MasterPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D4F9C1E50972A00C10ED0 /* MasterPlayer.swift */; };
+		328D4F9F1E50BC3B00C10ED0 /* WorldAudioGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D4F9E1E50BC3B00C10ED0 /* WorldAudioGenerator.swift */; };
 		32971D781DF2F49400852057 /* MaterialGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32971D771DF2F49400852057 /* MaterialGroup.swift */; };
 		3297C5F41D68F54E009F7416 /* sky_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5EE1D68F54E009F7416 /* sky_back.png */; };
 		3297C5F51D68F54E009F7416 /* sky_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 3297C5EF1D68F54E009F7416 /* sky_bottom.png */; };
@@ -164,6 +172,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		320E23CC1E50E6FC00524888 /* bounce.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bounce.ogg; sourceTree = "<group>"; };
+		320E23CD1E50E6FC00524888 /* breaking wood.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "breaking wood.ogg"; sourceTree = "<group>"; };
+		320E23CE1E50E6FC00524888 /* falcon.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = falcon.ogg; sourceTree = "<group>"; };
+		320E23CF1E50E6FC00524888 /* footsteps.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = footsteps.ogg; sourceTree = "<group>"; };
+		320E23D41E50E70E00524888 /* wind.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = wind.ogg; sourceTree = "<group>"; };
 		3226FAA51DAC07AC00F063C5 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		322AB50C1E059A77002B5D71 /* WfMaterial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WfMaterial.swift; sourceTree = "<group>"; };
 		3235C5281DF2115100CEF81C /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -199,6 +212,9 @@
 		3275A13B1D99A91A00B52467 /* PolygonalFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolygonalFace.swift; sourceTree = "<group>"; };
 		3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainTexture.swift; sourceTree = "<group>"; };
 		3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShaderManager.swift; sourceTree = "<group>"; };
+		328D4F9A1E506B1400C10ED0 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		328D4F9C1E50972A00C10ED0 /* MasterPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterPlayer.swift; sourceTree = "<group>"; };
+		328D4F9E1E50BC3B00C10ED0 /* WorldAudioGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldAudioGenerator.swift; sourceTree = "<group>"; };
 		32971D771DF2F49400852057 /* MaterialGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialGroup.swift; sourceTree = "<group>"; };
 		3297C5EE1D68F54E009F7416 /* sky_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_back.png; path = Sky/sky_back.png; sourceTree = "<group>"; };
 		3297C5EF1D68F54E009F7416 /* sky_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sky_bottom.png; path = Sky/sky_bottom.png; sourceTree = "<group>"; };
@@ -410,6 +426,18 @@
 			path = SkyBox;
 			sourceTree = "<group>";
 		};
+		328D4FA01E50D60C00C10ED0 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				320E23D41E50E70E00524888 /* wind.ogg */,
+				320E23CC1E50E6FC00524888 /* bounce.ogg */,
+				320E23CD1E50E6FC00524888 /* breaking wood.ogg */,
+				320E23CE1E50E6FC00524888 /* falcon.ogg */,
+				320E23CF1E50E6FC00524888 /* footsteps.ogg */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		3295B4511D6B8C3A0065E8E8 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,12 +474,14 @@
 		3297C5E01D68F387009F7416 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				328D4FA01E50D60C00C10ED0 /* Audio */,
 				324CFB201DAED0B50020CA56 /* Buttons */,
 				32EF0CC01D7AF4B3006D9247 /* Terrain */,
 				3295B4511D6B8C3A0065E8E8 /* Entities */,
 				3297C5FA1D68F55E009F7416 /* Sky */,
 			);
-			path = Res;
+			name = Res;
+			path = ../Res;
 			sourceTree = "<group>";
 		};
 		3297C5FA1D68F55E009F7416 /* Sky */ = {
@@ -498,7 +528,6 @@
 			isa = PBXGroup;
 			children = (
 				32B320931DAC26C2008B261C /* GameController */,
-				3297C5E01D68F387009F7416 /* Res */,
 				32A921631D5EF5D900EF8477 /* GameEngine */,
 				32A921811D5EF5D900EF8477 /* GameEngineTests */,
 				32A921621D5EF5D900EF8477 /* Products */,
@@ -620,6 +649,8 @@
 				32AD7C8D1E4F1079007231E9 /* GenericPlayer.swift */,
 				32982D8A1E4F76ED00B9AC4D /* EntityPlayer.swift */,
 				32982D8C1E4F7FA900B9AC4D /* TAudioEnum.swift */,
+				328D4F9A1E506B1400C10ED0 /* AudioManager.swift */,
+				328D4F9C1E50972A00C10ED0 /* MasterPlayer.swift */,
 			);
 			path = AudioEngine;
 			sourceTree = "<group>";
@@ -636,6 +667,7 @@
 		32B320931DAC26C2008B261C /* GameController */ = {
 			isa = PBXGroup;
 			children = (
+				3297C5E01D68F387009F7416 /* Res */,
 				324CFB1A1DAEC5650020CA56 /* GamePad.swift */,
 				32E555AC1DEB040100992318 /* GamePadKey.swift */,
 				32E555B01DEB0D1900992318 /* GameEngineGestureRecognizer.swift */,
@@ -704,6 +736,7 @@
 				327543211DC6987C00450E8E /* GenericEntitiesGenerator.swift */,
 				327543231DC6994F00450E8E /* WorldPlayersGenerator.swift */,
 				325A6B051DE762390068C945 /* WorldGUIsGenerator.swift */,
+				328D4F9E1E50BC3B00C10ED0 /* WorldAudioGenerator.swift */,
 			);
 			path = ModelGenerators;
 			sourceTree = "<group>";
@@ -823,6 +856,7 @@
 				324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */,
 				32E4CB541E05797E00081996 /* tree.mtl in Resources */,
 				32E4CB401E05797E00081996 /* game_engine_logo.png in Resources */,
+				320E23D31E50E6FC00524888 /* footsteps.ogg in Resources */,
 				324CFB271DAED0DA0020CA56 /* ic_pad_right.png in Resources */,
 				32EF0CC91D7AF4F8006D9247 /* terrain_grass.png in Resources */,
 				32E4CB4B1E05797E00081996 /* left.png in Resources */,
@@ -849,6 +883,7 @@
 				32E4CB461E05797E00081996 /* player.obj in Resources */,
 				32E4CB3C1E05797E00081996 /* flower.png in Resources */,
 				32E4CB361E05797E00081996 /* banana_tree.obj in Resources */,
+				320E23D21E50E6FC00524888 /* falcon.ogg in Resources */,
 				32E4CB4E1E05797E00081996 /* blendMap.png in Resources */,
 				32E4CB481E05797E00081996 /* back.png in Resources */,
 				32EF0CCA1D7AF4F8006D9247 /* terrain.png in Resources */,
@@ -856,6 +891,7 @@
 				32E4CB471E05797E00081996 /* player.png in Resources */,
 				32E4CB391E05797E00081996 /* fern.png in Resources */,
 				32E4CB561E05797E00081996 /* tree.png in Resources */,
+				320E23D51E50E70E00524888 /* wind.ogg in Resources */,
 				32A921741D5EF5D900EF8477 /* Main.storyboard in Resources */,
 				32E4CB4D1E05797E00081996 /* top.png in Resources */,
 				32E4CB421E05797E00081996 /* marble.mtl in Resources */,
@@ -866,7 +902,9 @@
 				32A9216E1D5EF5D900EF8477 /* entity_fragment_shader.fsh in Resources */,
 				32E4CB431E05797E00081996 /* marble.obj in Resources */,
 				32E4CB3A1E05797E00081996 /* flower.mtl in Resources */,
+				320E23D01E50E6FC00524888 /* bounce.ogg in Resources */,
 				32EF0CBF1D7AF3E5006D9247 /* terrain_vertex_shader.vsh in Resources */,
+				320E23D11E50E6FC00524888 /* breaking wood.ogg in Resources */,
 				325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */,
 				32E4CB381E05797E00081996 /* fern.obj in Resources */,
 				32E4CB4A1E05797E00081996 /* front.png in Resources */,
@@ -921,6 +959,7 @@
 				32AB942C1D96A4AD0060D581 /* SkyBoxRender.swift in Sources */,
 				3268DA451E052DE400E26C16 /* MtlPrefix.swift in Sources */,
 				3268DA431E052A0C00E26C16 /* OBJPrefix.swift in Sources */,
+				328D4F9B1E506B1400C10ED0 /* AudioManager.swift in Sources */,
 				32C2FE401D8F16AC006A5BF4 /* TEntityAttribute.swift in Sources */,
 				32ACE9E91D9ECD43008896E1 /* WorldTerrainsGenerator.swift in Sources */,
 				32971D781DF2F49400852057 /* MaterialGroup.swift in Sources */,
@@ -936,10 +975,12 @@
 				3246A7B91DE1D3FC00D40DD0 /* TGuiUniform.swift in Sources */,
 				324CFB1B1DAEC5650020CA56 /* GamePad.swift in Sources */,
 				32E4CB5A1E058C1C00081996 /* ComponentPositions.swift in Sources */,
+				328D4F9F1E50BC3B00C10ED0 /* WorldAudioGenerator.swift in Sources */,
 				32C2FE421D8F16D0006A5BF4 /* TEntityUniform.swift in Sources */,
 				32A94C481D98514100A63154 /* TComponentPosition.swift in Sources */,
 				32982D8F1E4FAD4300B9AC4D /* TEntity.swift in Sources */,
 				32C59BAC1DAAC79A001178C2 /* Utils.swift in Sources */,
+				328D4F9D1E50972A00C10ED0 /* MasterPlayer.swift in Sources */,
 				32E4CB581E05831600081996 /* MtlLoader.swift in Sources */,
 				32C2FE441D8F187E006A5BF4 /* EntityShaderManager.swift in Sources */,
 				323E0AA81DE61CF30038A96B /* GuiRender.swift in Sources */,

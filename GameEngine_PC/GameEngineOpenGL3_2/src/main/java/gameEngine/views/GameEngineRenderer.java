@@ -76,7 +76,7 @@ public class GameEngineRenderer {
 	private Player player;
 	
 	/**
-	 * Dictionary of sounds supported by by the game
+	 * Dictionary of sounds supported by the game
 	 */
 	private HashMap<TAudioEnum, AudioBuffer> audioLibrary;
 	

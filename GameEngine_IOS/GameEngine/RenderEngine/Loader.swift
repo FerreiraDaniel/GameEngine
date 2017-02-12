@@ -1,6 +1,6 @@
 import Foundation
 import GLKit
-
+import OpenAL
 
 /*
  * Load the elements to make the scene
@@ -338,6 +338,79 @@ public class Loader : NSObject {
             return Int(textureId);
             
         }
+    }
+    
+    
+    /**
+     * Load one audio file in a buffer
+     *
+     * @param fileName
+     *            The file name of the file to load
+     *
+     * @return The identifier of the buffer return by open GL
+     */
+    public func loadSound(fileName : String) -> AudioBuffer! {
+        var audioBuffer : AudioBuffer! = nil;
+        
+        var bufferId : ALuint = 0
+        
+        alGenBuffers(1, &bufferId)
+        
+        
+        
+        /**
+         * Was not possible to one buffer return AL false
+         */
+        if (alGetError() != AL_NO_ERROR) {
+            return nil;
+        }
+        
+        let filePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: "ogg")
+        if(filePath == nil) {
+            print("Impossible to get the patch to audio \(fileName) ");
+            return nil;
+        }
+        
+        let bgURL : NSURL = NSURL(fileURLWithPath: filePath)
+        
+        /*
+         FileInputStream fin = null;
+         BufferedInputStream bin = null;
+         OggData oggFile = null;
+         try {
+         fin = new FileInputStream(RESOURCES_FOLDER + fileName + OGG_EXTENSION);
+         bin = new BufferedInputStream(fin);
+         oggFile = oggDecoder.getData(bin);
+         
+         if (oggFile == null) {
+         // Was not possible read the file so releases the resources
+         AL10.alDeleteBuffers(bufferId);
+         } else {
+         audioBuffers.add(bufferId);
+         int oggFormat = oggFile.channels > 1 ? AL10.AL_FORMAT_STEREO16 : AL10.AL_FORMAT_MONO16;
+         AL10.alBufferData(bufferId, oggFormat, oggFile.data, oggFile.rate);
+         // oggFile.dispose();
+         audioBuffer = new AudioBuffer(bufferId);
+         }
+         } catch (Exception e) {
+         e.printStackTrace();
+         } finally {
+         if (oggFile != null) {
+         oggFile.data.clear();
+         oggFile = null;
+         }
+         try {
+         if (bin != null) {
+         bin.close();
+         }
+         if (fin != null) {
+         fin.close();
+         }
+         } catch (IOException e) {
+         e.printStackTrace();
+         }
+         }*/
+        return audioBuffer;
     }
     
     /**

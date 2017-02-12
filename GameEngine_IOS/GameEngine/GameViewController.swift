@@ -7,6 +7,11 @@ import GLKit
 public class GameViewController: GLKViewController {
     
     /**
+     * Number of audio sources available
+     */
+    private let POOL_SOURCES_SIZE : Int = 32;
+    
+    /**
      * The master render is going put all the elements together in order to
      * render the scene
      */
@@ -21,7 +26,7 @@ public class GameViewController: GLKViewController {
      * Array of terrains to render
      */
     private var terrains : Array<Terrain> = [];
-
+    
     /**
      * Array of GUIs to render
      */
@@ -42,10 +47,22 @@ public class GameViewController: GLKViewController {
      */
     private var player : Player! = nil;
     
-
+    
+    /**
+     * Dictionary of sounds supported by the game
+     */
+    private var audioLibrary : [TAudioEnum :  AudioBuffer]! = nil;
+    
+    /**
+     * Reference to the player of sounds of the game
+     */
+    private var masterPlayer : MasterPlayer! = nil;
     
     private var context:  EAGLContext! = nil;
     
+    /**
+     *  Is called once when the controller is created and viewDidAppear is called each time the view, well
+     */
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,13 +74,15 @@ public class GameViewController: GLKViewController {
         
         let view = self.view as! GLKView
         view.context = self.context!
-        view.drawableDepthFormat = .Format24
+        view.drawableDepthFormat = GLKViewDrawableDepthFormat.Format24
         
         //Handle events registration
         let gestureRecognizer = GameEngineGestureRecognizer()
         view.addGestureRecognizer(gestureRecognizer)
         
         self.setupGL()
+        
+        AudioManager.initOpenAL()
         
         /* Initializes the main variables responsible to render the 3D world */
         let loader : Loader = Loader()
@@ -87,7 +106,8 @@ public class GameViewController: GLKViewController {
         /*Prepares the player that is going to be used in the scene*/
         self.player = WorldPlayersGenerator.getPlayer(loader);
         
-                
+        /* Prepares the sounds to be used by the engine*/
+        self.audioLibrary = WorldAudioGenerator.getBuffers(loader);
     }
     
     
@@ -100,6 +120,7 @@ public class GameViewController: GLKViewController {
             self.view = nil
             
             self.tearDownGL()
+            AudioManager.teardownOpenAL()
             
             if EAGLContext.currentContext() === self.context {
                 EAGLContext.setCurrentContext(nil)
@@ -119,8 +140,11 @@ public class GameViewController: GLKViewController {
         self.renderer = nil;
     }
     
-    public func update() {
-        /*NSDate* startDate = [NSDate date];*/
+    /**
+     * Makes all the necessary calls to update the
+     * frame
+     */
+    private func renderFrame() {
         // game logic
         renderer.startFrameRender();
         renderer.processTerrains(terrains);
@@ -131,12 +155,22 @@ public class GameViewController: GLKViewController {
         
         renderer.render(light);
         renderer.endFrameRender();
-        
-        // Logs frames/s
-        /*NSDate* endDate = [NSDate date];
-        
-        NSTimeInterval secondsBetween = [endDate timeIntervalSinceDate:startDate];
-        //printf("%f Frames/s\n", (1.0f / secondsBetween));*/
+    }
+    
+    /**
+     * Calls everything necessary to play the sounds of the game
+     */
+    private func playAudio() {
+        //masterPlayer.play(self.audioLibrary, entities: self.entities, player: self.player)
+    }
+    
+    /**
+     * Draw the entities of the scene
+     *
+     */
+    public func update() {
+        renderFrame()
+        playAudio();
     }
     
     @IBAction func leftPressed(sender: AnyObject) {

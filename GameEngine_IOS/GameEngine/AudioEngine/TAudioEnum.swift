@@ -31,4 +31,6 @@ public enum TAudioEnum : String {
      * Used to indicate that the user is in one height level so with more wind
      */
     wind = "wind"
+    
+    static let allValues = [bounce, breakingWood, falcon, footsteps, wind]
 }
