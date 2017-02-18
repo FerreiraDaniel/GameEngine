@@ -41,7 +41,7 @@ public class AudioManager {
                 if error == AL_NO_ERROR
                 {
                     return true
-                }else {
+                } else {
                     NSLog("Error Generating Buffers: \(error)")
                     return false
                 }

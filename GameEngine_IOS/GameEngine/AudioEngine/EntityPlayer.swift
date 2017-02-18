@@ -273,7 +273,7 @@ public class EntityPlayer : GenericPlayer {
                     
                     // Make birds to play in each tree
                     let breakingWood : AudioBuffer = audioLibrary[TAudioEnum.breakingWood]!;
-                    if(audioSource.getBuffer() == breakingWood) {
+                    if ((audioSource.getBuffer() != nil) && (audioSource.getBuffer() == breakingWood)) {
                         continue;
                     }
                     let sourceId : ALuint = audioSource.getSourceId()

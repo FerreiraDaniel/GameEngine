@@ -16,7 +16,7 @@ public class AudioBuffer : NSObject {
      * @param bufferId
      *            Identifier of the buffer to play in openAL
      */
-    public init(bufferId : ALint) {
+    public init(_ bufferId : ALint) {
         self.bufferId = bufferId;
     }
     

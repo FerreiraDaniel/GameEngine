@@ -108,6 +108,10 @@ public class GameViewController: GLKViewController {
         
         /* Prepares the sounds to be used by the engine*/
         self.audioLibrary = WorldAudioGenerator.getBuffers(loader);
+        
+        /*Sounds player*/
+        let sourceLst : [AudioSource] = loader.genAudioSources(POOL_SOURCES_SIZE);
+        self.masterPlayer = MasterPlayer(sourcesAvailable: sourceLst);
     }
     
     
@@ -161,7 +165,7 @@ public class GameViewController: GLKViewController {
      * Calls everything necessary to play the sounds of the game
      */
     private func playAudio() {
-        //masterPlayer.play(self.audioLibrary, entities: self.entities, player: self.player)
+        masterPlayer.play(self.audioLibrary, entities: self.entities, player: self.player)
     }
     
     /**

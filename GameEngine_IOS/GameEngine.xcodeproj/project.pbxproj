@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		320E23D01E50E6FC00524888 /* bounce.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CC1E50E6FC00524888 /* bounce.ogg */; };
-		320E23D11E50E6FC00524888 /* breaking wood.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CD1E50E6FC00524888 /* breaking wood.ogg */; };
-		320E23D21E50E6FC00524888 /* falcon.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CE1E50E6FC00524888 /* falcon.ogg */; };
-		320E23D31E50E6FC00524888 /* footsteps.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23CF1E50E6FC00524888 /* footsteps.ogg */; };
-		320E23D51E50E70E00524888 /* wind.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 320E23D41E50E70E00524888 /* wind.ogg */; };
 		3226FAA61DAC07AC00F063C5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3226FAA51DAC07AC00F063C5 /* GameViewController.swift */; };
 		322AB50D1E059A77002B5D71 /* WfMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 322AB50C1E059A77002B5D71 /* WfMaterial.swift */; };
 		3235C5291DF2115100CEF81C /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3235C5281DF2115100CEF81C /* Entity.swift */; };
@@ -47,6 +42,11 @@
 		3275A13C1D99A91A00B52467 /* PolygonalFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3275A13B1D99A91A00B52467 /* PolygonalFace.swift */; };
 		3279D9131D95D9BF001548F7 /* TTerrainTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */; };
 		3279D9151D95DE5F001548F7 /* SkyBoxShaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */; };
+		3279F90A1E57905E0036015B /* bounce.aac in Resources */ = {isa = PBXBuildFile; fileRef = 3279F9091E57905E0036015B /* bounce.aac */; };
+		3279F90F1E5797500036015B /* breaking wood.aac in Resources */ = {isa = PBXBuildFile; fileRef = 3279F90B1E5797500036015B /* breaking wood.aac */; };
+		3279F9101E5797500036015B /* falcon.aac in Resources */ = {isa = PBXBuildFile; fileRef = 3279F90C1E5797500036015B /* falcon.aac */; };
+		3279F9111E5797500036015B /* footsteps.aac in Resources */ = {isa = PBXBuildFile; fileRef = 3279F90D1E5797500036015B /* footsteps.aac */; };
+		3279F9121E5797500036015B /* wind.aac in Resources */ = {isa = PBXBuildFile; fileRef = 3279F90E1E5797500036015B /* wind.aac */; };
 		328D4F9B1E506B1400C10ED0 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D4F9A1E506B1400C10ED0 /* AudioManager.swift */; };
 		328D4F9D1E50972A00C10ED0 /* MasterPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D4F9C1E50972A00C10ED0 /* MasterPlayer.swift */; };
 		328D4F9F1E50BC3B00C10ED0 /* WorldAudioGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328D4F9E1E50BC3B00C10ED0 /* WorldAudioGenerator.swift */; };
@@ -172,11 +172,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		320E23CC1E50E6FC00524888 /* bounce.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bounce.ogg; sourceTree = "<group>"; };
-		320E23CD1E50E6FC00524888 /* breaking wood.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = "breaking wood.ogg"; sourceTree = "<group>"; };
-		320E23CE1E50E6FC00524888 /* falcon.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = falcon.ogg; sourceTree = "<group>"; };
-		320E23CF1E50E6FC00524888 /* footsteps.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = footsteps.ogg; sourceTree = "<group>"; };
-		320E23D41E50E70E00524888 /* wind.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = wind.ogg; sourceTree = "<group>"; };
 		3226FAA51DAC07AC00F063C5 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		322AB50C1E059A77002B5D71 /* WfMaterial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WfMaterial.swift; sourceTree = "<group>"; };
 		3235C5281DF2115100CEF81C /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -212,6 +207,11 @@
 		3275A13B1D99A91A00B52467 /* PolygonalFace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolygonalFace.swift; sourceTree = "<group>"; };
 		3279D9121D95D9BF001548F7 /* TTerrainTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTerrainTexture.swift; sourceTree = "<group>"; };
 		3279D9141D95DE5F001548F7 /* SkyBoxShaderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkyBoxShaderManager.swift; sourceTree = "<group>"; };
+		3279F9091E57905E0036015B /* bounce.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = bounce.aac; sourceTree = "<group>"; };
+		3279F90B1E5797500036015B /* breaking wood.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = "breaking wood.aac"; sourceTree = "<group>"; };
+		3279F90C1E5797500036015B /* falcon.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = falcon.aac; sourceTree = "<group>"; };
+		3279F90D1E5797500036015B /* footsteps.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = footsteps.aac; sourceTree = "<group>"; };
+		3279F90E1E5797500036015B /* wind.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = wind.aac; sourceTree = "<group>"; };
 		328D4F9A1E506B1400C10ED0 /* AudioManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		328D4F9C1E50972A00C10ED0 /* MasterPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterPlayer.swift; sourceTree = "<group>"; };
 		328D4F9E1E50BC3B00C10ED0 /* WorldAudioGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorldAudioGenerator.swift; sourceTree = "<group>"; };
@@ -429,11 +429,11 @@
 		328D4FA01E50D60C00C10ED0 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				320E23D41E50E70E00524888 /* wind.ogg */,
-				320E23CC1E50E6FC00524888 /* bounce.ogg */,
-				320E23CD1E50E6FC00524888 /* breaking wood.ogg */,
-				320E23CE1E50E6FC00524888 /* falcon.ogg */,
-				320E23CF1E50E6FC00524888 /* footsteps.ogg */,
+				3279F90B1E5797500036015B /* breaking wood.aac */,
+				3279F90C1E5797500036015B /* falcon.aac */,
+				3279F90D1E5797500036015B /* footsteps.aac */,
+				3279F90E1E5797500036015B /* wind.aac */,
+				3279F9091E57905E0036015B /* bounce.aac */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -855,8 +855,8 @@
 				32E4CB441E05797E00081996 /* marble.png in Resources */,
 				324CFB251DAED0DA0020CA56 /* ic_pad_down.png in Resources */,
 				32E4CB541E05797E00081996 /* tree.mtl in Resources */,
+				3279F9121E5797500036015B /* wind.aac in Resources */,
 				32E4CB401E05797E00081996 /* game_engine_logo.png in Resources */,
-				320E23D31E50E6FC00524888 /* footsteps.ogg in Resources */,
 				324CFB271DAED0DA0020CA56 /* ic_pad_right.png in Resources */,
 				32EF0CC91D7AF4F8006D9247 /* terrain_grass.png in Resources */,
 				32E4CB4B1E05797E00081996 /* left.png in Resources */,
@@ -874,6 +874,7 @@
 				3297C5F41D68F54E009F7416 /* sky_back.png in Resources */,
 				32E4CB3F1E05797E00081996 /* grass.png in Resources */,
 				3246A7BC1DE1D46B00D40DD0 /* gui_fragment_shader.fsh in Resources */,
+				3279F90F1E5797500036015B /* breaking wood.aac in Resources */,
 				325321521D7336DE0061B2ED /* sky_box_fragment_shader.fsh in Resources */,
 				32EF0CC61D7AF4F8006D9247 /* blend_map.png in Resources */,
 				32E4CB551E05797E00081996 /* tree.obj in Resources */,
@@ -883,7 +884,6 @@
 				32E4CB461E05797E00081996 /* player.obj in Resources */,
 				32E4CB3C1E05797E00081996 /* flower.png in Resources */,
 				32E4CB361E05797E00081996 /* banana_tree.obj in Resources */,
-				320E23D21E50E6FC00524888 /* falcon.ogg in Resources */,
 				32E4CB4E1E05797E00081996 /* blendMap.png in Resources */,
 				32E4CB481E05797E00081996 /* back.png in Resources */,
 				32EF0CCA1D7AF4F8006D9247 /* terrain.png in Resources */,
@@ -891,20 +891,20 @@
 				32E4CB471E05797E00081996 /* player.png in Resources */,
 				32E4CB391E05797E00081996 /* fern.png in Resources */,
 				32E4CB561E05797E00081996 /* tree.png in Resources */,
-				320E23D51E50E70E00524888 /* wind.ogg in Resources */,
 				32A921741D5EF5D900EF8477 /* Main.storyboard in Resources */,
 				32E4CB4D1E05797E00081996 /* top.png in Resources */,
 				32E4CB421E05797E00081996 /* marble.mtl in Resources */,
 				32E4CB511E05797E00081996 /* path.png in Resources */,
 				3297C5F51D68F54E009F7416 /* sky_bottom.png in Resources */,
+				3279F9101E5797500036015B /* falcon.aac in Resources */,
 				32A921761D5EF5D900EF8477 /* Images.xcassets in Resources */,
+				3279F9111E5797500036015B /* footsteps.aac in Resources */,
 				32E4CB3B1E05797E00081996 /* flower.obj in Resources */,
 				32A9216E1D5EF5D900EF8477 /* entity_fragment_shader.fsh in Resources */,
 				32E4CB431E05797E00081996 /* marble.obj in Resources */,
+				3279F90A1E57905E0036015B /* bounce.aac in Resources */,
 				32E4CB3A1E05797E00081996 /* flower.mtl in Resources */,
-				320E23D01E50E6FC00524888 /* bounce.ogg in Resources */,
 				32EF0CBF1D7AF3E5006D9247 /* terrain_vertex_shader.vsh in Resources */,
-				320E23D11E50E6FC00524888 /* breaking wood.ogg in Resources */,
 				325321501D7336CF0061B2ED /* sky_box_vertex_shader.vsh in Resources */,
 				32E4CB381E05797E00081996 /* fern.obj in Resources */,
 				32E4CB4A1E05797E00081996 /* front.png in Resources */,
