@@ -19,6 +19,7 @@ public class AudioManager {
     public static func initOpenAL() -> Bool {
         var error: ALenum = AL_NO_ERROR
         
+        
         // Create a new OpenAL Device
         // Pass NULL to specify the system’s default output device
         device = alcOpenDevice(nil)
