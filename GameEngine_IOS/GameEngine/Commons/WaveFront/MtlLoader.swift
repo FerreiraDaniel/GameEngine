@@ -57,7 +57,7 @@ public class MtlLoader : GenericLoader {
             var currentMaterial : WfMaterial? = nil;
             
             
-            let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(calloc(MAX_LINE_LENGTH, sizeof(CChar)));
+            let buffer : UnsafeMutablePointer<CChar> = UnsafeMutablePointer<CChar>.alloc(MAX_LINE_LENGTH);
             //Read the mtl file line by line
             let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
             while(fgets(buffer, bytesToRead, file) != nil) {

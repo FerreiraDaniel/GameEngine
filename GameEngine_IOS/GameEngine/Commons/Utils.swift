@@ -11,7 +11,7 @@ public class Utils : NSObject {
     */
     public static func arrayToPointer(lArray : Array<Float>) -> UnsafeMutablePointer<Float> {
         //Allocate  memory
-        let pointer = UnsafeMutablePointer<Float>(calloc(lArray.count, sizeof(Float)));
+        let pointer = UnsafeMutablePointer<Float>.alloc(lArray.count);
         
         //Copy elements one by one
         for i in 0 ..< lArray.count {
@@ -28,7 +28,7 @@ public class Utils : NSObject {
     */
     public static func arrayToPointer(lArray : Array<ushort>) -> UnsafeMutablePointer<ushort> {
         //Allocate  memory
-        let pointer = UnsafeMutablePointer<ushort>(calloc(lArray.count, sizeof(ushort)));
+        let pointer = UnsafeMutablePointer<ushort>.alloc(lArray.count);
         
         //Copy elements one by one
         for i in 0 ..< lArray.count {

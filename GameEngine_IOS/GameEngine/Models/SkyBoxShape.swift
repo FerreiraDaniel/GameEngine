@@ -38,7 +38,7 @@ public class SkyBoxShape : NSObject, IShape {
     */
     public override init() {
         //Allocate and fill the vertices memory
-        self._vertices = UnsafeMutablePointer<Float>(calloc(skyBoxVertexData.count, sizeof(CFloat)));
+        self._vertices = UnsafeMutablePointer<Float>.alloc(skyBoxVertexData.count);
         
         //Copy vertices one by one
         for i in 0 ..< skyBoxVertexData.count {

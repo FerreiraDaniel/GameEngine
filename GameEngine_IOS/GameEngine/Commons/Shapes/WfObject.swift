@@ -24,7 +24,7 @@ public class WfObject : NSObject, IShape {
     private static func floatArray2Pointer(floatArray : Array<Float>) -> UnsafeMutablePointer<Float>
     {
         let countElements : Int = floatArray.count;
-        let pointer = UnsafeMutablePointer<Float>(calloc(countElements, sizeof(CFloat)));
+        let pointer = UnsafeMutablePointer<Float>.alloc(countElements);
         
         //Copy vertices one by one
         for i in 0 ..< countElements {
@@ -39,7 +39,7 @@ public class WfObject : NSObject, IShape {
     private static func intArray2Pointer(intArray : Array<Int>) -> UnsafeMutablePointer<ushort>
     {
         let countElements : Int = intArray.count;
-        let pointer = UnsafeMutablePointer<ushort>(calloc(countElements, sizeof(ushort)));
+        let pointer = UnsafeMutablePointer<ushort>.alloc(countElements);
         
         //Copy vertices one by one
         for i in 0 ..< countElements {

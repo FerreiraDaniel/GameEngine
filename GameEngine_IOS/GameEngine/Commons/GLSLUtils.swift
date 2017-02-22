@@ -100,7 +100,7 @@ public class GLSLUtils {
         var logLength: GLint = 0
         glGetProgramiv(shaderProgram.programId, GLenum(GL_INFO_LOG_LENGTH), &logLength);
         if (logLength > 0) {
-            let log = UnsafeMutablePointer<GLchar>(malloc(Int(logLength)))
+            let log = UnsafeMutablePointer<GLchar>.alloc(Int(logLength))
             glGetProgramInfoLog(shaderProgram.programId, logLength, &logLength, log);
             NSLog("Program link log:\n%s", log);
             free(log);

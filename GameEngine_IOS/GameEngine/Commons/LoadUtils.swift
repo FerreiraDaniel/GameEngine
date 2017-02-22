@@ -38,8 +38,11 @@ public class LoadUtils {
         } else {
             let width = CGImageGetWidth(spriteImage);
             let height = CGImageGetHeight(spriteImage);
-            let spriteData = calloc(width * height * 4, sizeof(GLubyte));
+            let spriteData = UnsafeMutablePointer<GLubyte>.alloc(width * height * 4);
             
+            for index in 0..<(width * height * 4) {
+                spriteData[index] = 0
+            }
             
             let bitsPerComponent = CGImageGetBitsPerComponent(spriteImage); //Should be 8
             let bytesPerRow = CGImageGetBytesPerRow(spriteImage); //width * 4

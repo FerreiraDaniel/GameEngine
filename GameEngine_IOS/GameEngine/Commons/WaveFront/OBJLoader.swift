@@ -199,7 +199,7 @@ public class OBJLoader : GenericLoader {
         
         if(file != nil) {
             
-            let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>(calloc(MAX_LINE_LENGTH, sizeof(CChar)));
+            let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.alloc(MAX_LINE_LENGTH);
             //Read the obj file line by line
             let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
             while(fgets(buffer, bytesToRead, file) != nil) {

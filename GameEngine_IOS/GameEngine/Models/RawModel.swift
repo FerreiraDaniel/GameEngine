@@ -39,7 +39,7 @@ public class RawModel {
             self.indicesData = nil;
         } else {
             //Allocate and fill the vertices memory
-            self.indicesData = UnsafeMutablePointer<ushort>(calloc(indicesCount, sizeof(ushort)));
+            self.indicesData = UnsafeMutablePointer<ushort>.alloc(indicesCount);
             
             //Copy vertices one by one
             for i in 0 ..< indicesCount {

@@ -22,7 +22,7 @@ public class GuiShape : NSObject, IShape {
      */
     public override init() {
         //Allocate and fill the vertices memory
-        self._vertices = UnsafeMutablePointer<Float>(calloc(guiVertexData.count, sizeof(CFloat)));
+        self._vertices = UnsafeMutablePointer<Float>.alloc(guiVertexData.count);
         
         //Copy vertices one by one
         for i in 0 ..< guiVertexData.count {
