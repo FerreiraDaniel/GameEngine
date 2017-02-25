@@ -23,15 +23,15 @@ public class ShaderManager : NSObject{
         super.init()
         
         var vertShaderPathname, fragShaderPathname: String
-        var vertexShaderSrc, fragShaderSrc : UnsafePointer<Int8>
+        var vertexShaderSrc, fragShaderSrc : NSString?
         
         //Read the vertex file to one variable
         vertShaderPathname = NSBundle.mainBundle().pathForResource(vertexFile, ofType: "vsh")!
-        vertexShaderSrc = LoadUtils.readTextFromRawResource(vertShaderPathname);
+        vertexShaderSrc = LoadUtils.readText(vertShaderPathname);
         
         //Read the fragment shader file to one variable
         fragShaderPathname = NSBundle.mainBundle().pathForResource(fragmentFile, ofType: "fsh")!
-        fragShaderSrc = LoadUtils.readTextFromRawResource(fragShaderPathname);
+        fragShaderSrc = LoadUtils.readText(fragShaderPathname);
         
         self.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc: fragShaderSrc);
         

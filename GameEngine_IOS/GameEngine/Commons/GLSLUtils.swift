@@ -10,20 +10,25 @@ public class GLSLUtils {
     * @return 0 -> There was an error
     *         not 0 -> Id of the shader compiled
     */
-    private static func compileShader(inout shader: GLuint, type: GLenum, sourceCode: UnsafePointer<Int8>) -> Bool {
+    private static func compileShader(inout shader: GLuint, type: GLenum, sourceCode: NSString?) -> Bool {
         var status: GLint = 0
         
-        var castSource = UnsafePointer<GLchar>(sourceCode)
+        if(sourceCode == nil)
+        {
+            return false;
+        }
+        
+        var cSource = UnsafePointer<CChar>(sourceCode!.UTF8String)
         
         shader = glCreateShader(type)
-        glShaderSource(shader, 1, &castSource, nil)
+        glShaderSource(shader, 1, &cSource, nil)
         glCompileShader(shader)
         
         
         var logLength: GLint = 0
         glGetShaderiv(shader, GLenum(GL_INFO_LOG_LENGTH), &logLength);
         if logLength > 0 {
-            let log = UnsafeMutablePointer<GLchar>(malloc(Int(logLength)))
+            let log = UnsafeMutablePointer<CChar>.alloc(Int(logLength))
             glGetShaderInfoLog(shader, logLength, &logLength, log);
             NSLog("Shader compile log: \n%s", log);
             free(log)
@@ -48,7 +53,7 @@ public class GLSLUtils {
     *            Source code of the fragment shader
     * @return If nil There was an error not 0 -> Id of the program loaded
     */
-    public static func loadProgram(vertexShaderSrc: UnsafePointer<Int8>, fragShaderSrc: UnsafePointer<Int8>) -> ShaderProgram! {
+    public static func loadProgram(vertexShaderSrc: NSString?, fragShaderSrc: NSString?) -> ShaderProgram! {
         
         var vertShader : GLuint = 0;
         var fragShader : GLuint = 0;

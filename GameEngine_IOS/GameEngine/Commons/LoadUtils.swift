@@ -10,15 +10,13 @@ public class LoadUtils {
     *            Name of the resource where the text exists
     * @return The text that exists in the resource
     */
-    public static func readTextFromRawResource(fileName: String)  -> UnsafePointer<Int8> {
-        var source: UnsafePointer<Int8>
+    public static func readText(fileName: String)  -> NSString? {
         do {
-            source = try NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding).UTF8String
+            return try NSString(contentsOfFile: fileName, encoding: NSUTF8StringEncoding)
         } catch {
             print("Failed to load text file \(fileName)")
             return nil
         }
-        return source;
     }
     
     
@@ -28,7 +26,7 @@ public class LoadUtils {
     * @param fileName
     *            Name of the where the texture exists
     */
-    public static func loadTexture(path : String) -> TextureData! {
+    public static func loadTexture(path: String) -> TextureData! {
         
         let spriteImage : CGImageRef! = (UIImage(named: path)?.CGImage);
         

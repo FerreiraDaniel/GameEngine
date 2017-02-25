@@ -13,6 +13,13 @@ public class Loader : NSObject {
         return p.advancedBy(i)
     }
     
+    /*
+    func BUFFER_OFFSET(_ i: Int) -> UnsafeRawPointer? {
+        return UnsafeRawPointer(bitPattern: i)
+    }
+ */
+
+    
     /**
      * List of the vertex array objects loaded
      */
