@@ -15,7 +15,7 @@ public class GameViewController: GLKViewController {
      * The master render is going put all the elements together in order to
      * render the scene
      */
-    private var renderer : MasterRender! = nil;
+    private var renderer : MasterRender? = nil;
     
     /**
      * Array of entities to render
@@ -30,7 +30,7 @@ public class GameViewController: GLKViewController {
     /**
      * Array of GUIs to render
      */
-    private var guis : Array<GuiTexture> = [];
+    private var guis : Array<GuiTexture>? = [];
     
     /**
      * Position of the light in scene
@@ -150,15 +150,26 @@ public class GameViewController: GLKViewController {
      */
     private func renderFrame() {
         // game logic
-        renderer.startFrameRender();
-        renderer.processTerrains(terrains);
-        renderer.processEntities(entities);
-        renderer.processPlayer(player);
-        renderer.processSkyBox(skyBox);
-        renderer.processGUIs(self.guis);
-        
-        renderer.render(light);
-        renderer.endFrameRender();
+        if(renderer == nil)
+        {
+            print("error renderFrame: renderer should not be null")
+        } else
+        {
+            renderer!.startFrameRender();
+            renderer!.processTerrains(terrains);
+            renderer!.processEntities(entities);
+            renderer!.processPlayer(player);
+            renderer!.processSkyBox(skyBox);
+            
+            if(self.guis != nil)
+            {
+                renderer!.processGUIs(self.guis!);
+                
+            }
+            
+            renderer!.render(light);
+            renderer!.endFrameRender();
+        }
     }
     
     /**

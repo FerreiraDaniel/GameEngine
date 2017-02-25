@@ -4,7 +4,7 @@ import Foundation
  * Represents the 2D GUI
  */
 public class GuiShape : NSObject, IShape {
-    private var _vertices : UnsafeMutablePointer<Float> ;
+    private var _vertices : UnsafeMutablePointer<Float>? ;
     
     public static let SIZE : Float = 1.0
     private let GUI_NUMBER_OF_ELEMENTS : Int = 8;
@@ -26,7 +26,7 @@ public class GuiShape : NSObject, IShape {
         
         //Copy vertices one by one
         for i in 0 ..< guiVertexData.count {
-            self._vertices[i] = guiVertexData[i];
+            self._vertices![i] = guiVertexData[i];
         }
     }
     
@@ -34,7 +34,11 @@ public class GuiShape : NSObject, IShape {
      * Deinitialization of the gui shape
      */
     deinit {
-        free(self._vertices);
+        if(self._vertices != nil)
+        {
+            free(self._vertices!);
+            self._vertices = nil;
+        }
     }
     
     
@@ -42,7 +46,7 @@ public class GuiShape : NSObject, IShape {
      *
      * @return The vertices of the quad
      */
-    public func getVertices() -> UnsafeMutablePointer<Float> {
+    public func getVertices() -> UnsafeMutablePointer<Float>? {
         return self._vertices;
     }
     
@@ -56,7 +60,7 @@ public class GuiShape : NSObject, IShape {
     /**
      * @return the Coordinates of the textures of the shape
      */
-    public func getTextureCoords()  -> UnsafeMutablePointer<Float> {
+    public func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
         return nil;
     }
     
@@ -70,7 +74,7 @@ public class GuiShape : NSObject, IShape {
     /**
      * @return the normal vectors that make the shape
      */
-    public func getNormals() -> UnsafeMutablePointer<Float> {
+    public func getNormals() -> UnsafeMutablePointer<Float>? {
         return nil;
     }
     
@@ -84,7 +88,7 @@ public class GuiShape : NSObject, IShape {
     /**
      * @return The indices of the vertices that make the shape
      */
-    public func getIndices() -> UnsafeMutablePointer<ushort> {
+    public func getIndices() -> UnsafeMutablePointer<ushort>? {
         return nil;
     }
     

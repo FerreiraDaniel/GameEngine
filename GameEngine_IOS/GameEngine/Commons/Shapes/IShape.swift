@@ -8,7 +8,7 @@ public protocol IShape {
     /**
      * @return the vertices of the shape
      */
-    func getVertices() -> UnsafeMutablePointer<Float>
+    func getVertices() -> UnsafeMutablePointer<Float>?
     
     /**
      * @return number of vertices that make the shape
@@ -18,7 +18,7 @@ public protocol IShape {
     /**
      * @return the Coordinates of the textures of the shape
      */
-    func getTextureCoords()  -> UnsafeMutablePointer<Float>
+    func getTextureCoords()  -> UnsafeMutablePointer<Float>?
     
     /*
      Number of the texture coordinates
@@ -29,7 +29,7 @@ public protocol IShape {
      *
      * @return the normal vectors that make the shape
      */
-    func getNormals() -> UnsafeMutablePointer<Float>
+    func getNormals() -> UnsafeMutablePointer<Float>?
     
     /*
      * Number of normal that the shape has
@@ -39,7 +39,7 @@ public protocol IShape {
     /**
      * @return The indices of the vertices that make the shape
      */
-    func getIndices() -> UnsafeMutablePointer<ushort>
+    func getIndices() -> UnsafeMutablePointer<ushort>?
     
     /*
      Number of indices that the shapa has

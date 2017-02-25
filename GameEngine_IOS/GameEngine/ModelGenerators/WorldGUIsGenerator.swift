@@ -57,21 +57,29 @@ public class WorldGUIsGenerator {
      *
      * @return list of terrains of the scene
      */
-    public static func getGUIs(loader : Loader) -> Array<GuiTexture> {
+    public static func getGUIs(loader : Loader) -> Array<GuiTexture>? {
         let guiShape : GuiShape = GuiShape();
-        let rawModel : RawModel = loader.load2DPositionsToVAO(guiShape.getVertices(),positionsLength: Int(guiShape.countVertices()));
         
-        let leftButton = getGUI(loader, rawModel, "ic_pad_left", -0.8, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.left);
-        let upButton = getGUI(loader, rawModel, "ic_pad_up", -0.7, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.up);
-        let downButton = getGUI(loader, rawModel, "ic_pad_down", -0.7, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.down);
-        let rightButton = getGUI(loader, rawModel, "ic_pad_right", -0.6, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.right);
-        let squareButton = getGUI(loader, rawModel, "ic_pad_left", 0.6, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.square);
-        let xButton = getGUI(loader, rawModel, "ic_pad_down", 0.7, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.x);
-        let triangleButton = getGUI(loader, rawModel, "ic_pad_up", 0.7, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.triangle);
-        let circleButton = getGUI(loader, rawModel, "ic_pad_right", 0.8, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.circle);
-
-        
-        let guis : Array<GuiTexture> = [leftButton,upButton,downButton, rightButton, squareButton, xButton, triangleButton, circleButton];
-        return guis;
+        if(guiShape.getVertices() == nil)
+        {
+            print("fatal getGuis vertices should not be nil");
+            return nil
+        } else
+        {
+            let rawModel : RawModel = loader.load2DPositionsToVAO(guiShape.getVertices(), positionsLength: Int(guiShape.countVertices()));
+            
+            let leftButton = getGUI(loader, rawModel, "ic_pad_left", -0.8, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.left);
+            let upButton = getGUI(loader, rawModel, "ic_pad_up", -0.7, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.up);
+            let downButton = getGUI(loader, rawModel, "ic_pad_down", -0.7, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.down);
+            let rightButton = getGUI(loader, rawModel, "ic_pad_right", -0.6, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.right);
+            let squareButton = getGUI(loader, rawModel, "ic_pad_left", 0.6, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.square);
+            let xButton = getGUI(loader, rawModel, "ic_pad_down", 0.7, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.x);
+            let triangleButton = getGUI(loader, rawModel, "ic_pad_up", 0.7, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.triangle);
+            let circleButton = getGUI(loader, rawModel, "ic_pad_right", 0.8, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.circle);
+            
+            
+            let guis : Array<GuiTexture> = [leftButton,upButton,downButton, rightButton, squareButton, xButton, triangleButton, circleButton];
+            return guis;
+        }
     }
 }

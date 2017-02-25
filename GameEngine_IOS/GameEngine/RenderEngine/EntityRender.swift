@@ -149,7 +149,10 @@ public class EntityRender : NSObject {
      * @param model Raw model to get render
      */
     private func render(model: RawModel) {
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(model.indicesCount), GLenum(GL_UNSIGNED_SHORT), model.indicesData);
+        if(model.indicesData != nil)
+        {
+            glDrawElements(GLenum(GL_TRIANGLES), GLsizei(model.indicesCount), GLenum(GL_UNSIGNED_SHORT), model.indicesData!);
+        }
     }
     
     //----------------------------------------------------------------------------------

@@ -2,21 +2,21 @@ import Foundation
 import GLKit
 
 /**
-* Class responsible to render the terrain of the scene
-*/
+ * Class responsible to render the terrain of the scene
+ */
 public class TerrainRender : NSObject {
     
     /**
-    * Reference to the shader manager
-    */
+     * Reference to the shader manager
+     */
     var tShader : TerrainShaderManager!;
     
     /**
-    * Initializer of the terrain render
-    *
-    * @param aShader           Shader manager
-    * @param projectionMatrix  The projection matrix of the render
-    */
+     * Initializer of the terrain render
+     *
+     * @param aShader           Shader manager
+     * @param projectionMatrix  The projection matrix of the render
+     */
     public init( aShader : TerrainShaderManager, projectionMatrix : GLTransformation) {
         self.tShader = aShader;
         self.tShader.start();
@@ -25,14 +25,14 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Get the transformation matrix of one terrain
-    *
-    * @param terrain
-    *            Entity for which is to create the transformation matrix
-    *
-    * @return The transformation matrix that put the terrain in its right
-    *         position
-    */
+     * Get the transformation matrix of one terrain
+     *
+     * @param terrain
+     *            Entity for which is to create the transformation matrix
+     *
+     * @return The transformation matrix that put the terrain in its right
+     *         position
+     */
     private func getTransformationMatrix(terrain : Terrain) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
         matrix.glLoadIdentity();
@@ -45,17 +45,17 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Render the terrains in the scene
-    *
-    * @param skyColor
-    * 			Color of the sky
-    * @param sun
-    *            The source of light of the scene
-    * @param viewMatrix
-    *            View matrix to render the scene
-    * @param terrains
-    *            List of terrains of the scene
-    */
+     * Render the terrains in the scene
+     *
+     * @param skyColor
+     * 			Color of the sky
+     * @param sun
+     *            The source of light of the scene
+     * @param viewMatrix
+     *            View matrix to render the scene
+     * @param terrains
+     *            List of terrains of the scene
+     */
     public func render(skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
         tShader.start();
         tShader.loadSkyColor(skyColor);
@@ -68,11 +68,11 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Render one list of terrains
-    *
-    * @param terrains
-    *            Terrains to render
-    */
+     * Render one list of terrains
+     *
+     * @param terrains
+     *            Terrains to render
+     */
     private func render (terrains : Array<Terrain>) {
         if (terrains.isEmpty) {
             return;
@@ -87,11 +87,11 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Bind the attributes of openGL
-    *
-    * @param terrain
-    *      Terrain to get prepared
-    */
+     * Bind the attributes of openGL
+     *
+     * @param terrain
+     *      Terrain to get prepared
+     */
     private func prepareTerrain(terrain : Terrain) {
         let model : RawModel = terrain.model;
         
@@ -111,9 +111,9 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * When loads one texture defines that by default should zoom in/out it
-    */
-    private func defineTextureFunctionFilters() {        
+     * When loads one texture defines that by default should zoom in/out it
+     */
+    private func defineTextureFunctionFilters() {
         // The texture minifying function is used whenever the pixel being
         // textured maps to an area greater than one texture element
         glTexParameteri(GLuint(GL_TEXTURE_2D), GLuint(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
@@ -130,10 +130,10 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Bind the several textures of the terrain
-    *
-    * @param terrain Terrain that is going to get the textures bound
-    */
+     * Bind the several textures of the terrain
+     *
+     * @param terrain Terrain that is going to get the textures bound
+     */
     private func bindTextures(terrain : Terrain) {
         let texturesPackage : TerrainTexturesPack = terrain.texturePack;
         
@@ -152,7 +152,7 @@ public class TerrainRender : NSObject {
             GL_TEXTURE2 : grassTextureId,
             GL_TEXTURE3 : pathTextureId,
             GL_TEXTURE4 : weightMapTextureId,
-        ];
+            ];
         for (key, iTexture) in texturesMatching {
             glActiveTexture(GLenum(key));
             glBindTexture(GLenum(GL_TEXTURE_2D), GLuint(iTexture));
@@ -163,30 +163,33 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Render the terrain itself
-    *
-    * @param terrain
-    *            the terrain to render
-    */
+     * Render the terrain itself
+     *
+     * @param terrain
+     *            the terrain to render
+     */
     private func   prepareInstance(terrain : Terrain) {
         // Load the transformation matrix
         self.tShader.loadTransformationMatrix(self.getTransformationMatrix(terrain));
     }
     
     /**
-    * Call the render of the triangles to the terrain itself
-    *
-    * @param terrain A reference to the terrain to get render
-    */
+     * Call the render of the triangles to the terrain itself
+     *
+     * @param terrain A reference to the terrain to get render
+     */
     private func render_terrain(terrain : Terrain) {
         let rawModel : RawModel = terrain.model;
         
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei(rawModel.indicesCount), GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData);
+        if(rawModel.indicesData != nil)
+        {
+            glDrawElements(GLenum(GL_TRIANGLES), GLsizei(rawModel.indicesCount), GLenum(GL_UNSIGNED_SHORT), rawModel.indicesData!);
+        }
     }
     
     /**
-    * UnBind the previous binded elements
-    */
+     * UnBind the previous binded elements
+     */
     private func unbindTexturedModel() {
         glDisableVertexAttribArray(GLuint(TTerrainAttribute.position.rawValue));
         glDisableVertexAttribArray(GLuint(TTerrainAttribute.textureCoords.rawValue));
@@ -195,8 +198,8 @@ public class TerrainRender : NSObject {
     }
     
     /**
-    * Clean up because we need to clean up when we finish the program
-    */
+     * Clean up because we need to clean up when we finish the program
+     */
     deinit {
         tShader = nil;
     }

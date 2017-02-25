@@ -6,22 +6,22 @@ import Foundation
  */
 public class WfObject : NSObject, IShape {
     
-    private var _vertices : UnsafeMutablePointer<Float> ;
+    private var _vertices : UnsafeMutablePointer<Float>?
     private var _countVertices : Int;
-    private var _textureCoordinates: UnsafeMutablePointer<Float> ;
-    private var _countTextureCoordinates :  Int;
-    private var _normals: UnsafeMutablePointer<Float> ;
-    private var _countNormals : Int;
-    private var _indices : UnsafeMutablePointer<ushort>;
-    private var _countIndices : Int = 0;
-    private var _groupName : String?;
-    private var _material : IExternalMaterial?;
+    private var _textureCoordinates: UnsafeMutablePointer<Float>?
+    private var _countTextureCoordinates :  Int
+    private var _normals: UnsafeMutablePointer<Float>?
+    private var _countNormals : Int
+    private var _indices : UnsafeMutablePointer<ushort>?
+    private var _countIndices : Int = 0
+    private var _groupName : String?
+    private var _material : IExternalMaterial?
     
     
     /**
      *  Get one array of floats and returns one pointer to native memory of it
      */
-    private static func floatArray2Pointer(floatArray : Array<Float>) -> UnsafeMutablePointer<Float>
+    private static func floatArray2Pointer(floatArray : Array<Float>) -> UnsafeMutablePointer<Float>?
     {
         let countElements : Int = floatArray.count;
         let pointer = UnsafeMutablePointer<Float>.alloc(countElements);
@@ -36,7 +36,7 @@ public class WfObject : NSObject, IShape {
     /**
      *  Get one array of ints and returns one pointer to native memory of it
      */
-    private static func intArray2Pointer(intArray : Array<Int>) -> UnsafeMutablePointer<ushort>
+    private static func intArray2Pointer(intArray : Array<Int>) -> UnsafeMutablePointer<ushort>?
     {
         let countElements : Int = intArray.count;
         let pointer = UnsafeMutablePointer<ushort>.alloc(countElements);
@@ -88,16 +88,28 @@ public class WfObject : NSObject, IShape {
      * Dinicializes the waveFront file
      */
     deinit {
-        free(self._vertices);
-        free(self._textureCoordinates);
-        free(self._normals);
-        free(self._indices);
+        if(self._vertices != nil)
+        {
+            free(self._vertices!);
+        }
+        if(self._textureCoordinates != nil)
+        {
+            free(self._textureCoordinates!)
+        }
+        if(self._normals != nil)
+        {
+            free(self._normals!)
+        }
+        if(self._indices != nil)
+        {
+            free(self._indices!)
+        }
     }
     
     /**
      * @return the vertices of the shape
      */
-    public func getVertices() -> UnsafeMutablePointer<Float> {
+    public func getVertices() -> UnsafeMutablePointer<Float>? {
         return self._vertices;
     }
     
@@ -111,7 +123,7 @@ public class WfObject : NSObject, IShape {
     /**
      * @return the Coordinates of the textures of the shape
      */
-    public func getTextureCoords()  -> UnsafeMutablePointer<Float> {
+    public func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
         return self._textureCoordinates;
     }
     
@@ -126,7 +138,7 @@ public class WfObject : NSObject, IShape {
      *
      * @return the normal vectors that make the shape
      */
-    public func getNormals() -> UnsafeMutablePointer<Float> {
+    public func getNormals() -> UnsafeMutablePointer<Float>? {
         return self._normals;
     }
     
@@ -140,7 +152,7 @@ public class WfObject : NSObject, IShape {
     /**
      * @return The indices of the vertices that make the shape
      */
-    public func getIndices() -> UnsafeMutablePointer<ushort> {
+    public func getIndices() -> UnsafeMutablePointer<ushort>? {
         return self._indices;
     }
     

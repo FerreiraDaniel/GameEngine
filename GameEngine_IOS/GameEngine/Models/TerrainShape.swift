@@ -18,7 +18,7 @@ public class TerrainShape : NSObject, IShape {
     /**
      * Vertices of the terrain
      */
-    private var _vertices : UnsafeMutablePointer<Float> ;
+    private var _vertices : UnsafeMutablePointer<Float>? ;
     
     /**
      * Heights of the vertices that make the terrain
@@ -28,17 +28,17 @@ public class TerrainShape : NSObject, IShape {
     /**
      * Normals of the terrain
      */
-    private var _normals : UnsafeMutablePointer<Float>;
+    private var _normals : UnsafeMutablePointer<Float>?;
     
     /**
      * Coordinates of the textures
      */
-    private var _textureCoords : UnsafeMutablePointer<Float> ;
+    private var _textureCoords : UnsafeMutablePointer<Float>?;
     
     /**
      * The indices of the terrain
      */
-    private var _indices : UnsafeMutablePointer<ushort>;
+    private var _indices : UnsafeMutablePointer<ushort>?;
     
     /*Minimum height that the terrain has*/
     private static let MIN_HEIGHT : Float = -40.0;
@@ -155,7 +155,7 @@ public class TerrainShape : NSObject, IShape {
     /**
      * @return the vertices of the shape
      */
-    public func getVertices() -> UnsafeMutablePointer<Float> {
+    public func getVertices() -> UnsafeMutablePointer<Float>? {
         return self._vertices;
     }
     
@@ -169,7 +169,7 @@ public class TerrainShape : NSObject, IShape {
     /**
      * @return the Coordinates of the textures of the shape
      */
-    public func getTextureCoords()  -> UnsafeMutablePointer<Float> {
+    public func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
         return self._textureCoords;
     }
     
@@ -184,7 +184,7 @@ public class TerrainShape : NSObject, IShape {
      *
      * @return the normal vectors that make the shape
      */
-    public func getNormals() -> UnsafeMutablePointer<Float> {
+    public func getNormals() -> UnsafeMutablePointer<Float>? {
         return self._normals;
     }
     
@@ -198,7 +198,7 @@ public class TerrainShape : NSObject, IShape {
     /**
      * @return The indices of the vertices that make the shape
      */
-    public  func getIndices() -> UnsafeMutablePointer<ushort> {
+    public  func getIndices() -> UnsafeMutablePointer<ushort>? {
         return self._indices;
     }
     

@@ -115,22 +115,27 @@ public class Loader : NSObject {
      * @para dLength
      *            Number of elements that the data has
      */
-    private func storeDataInAttributeList(attributeNumber : Int, coordinateSize : GLint, data :UnsafePointer<Void> , dLength : Int) {
+    private func storeDataInAttributeList(attributeNumber : Int, coordinateSize : GLint, data :UnsafePointer<Void>? , dLength : Int) {
         
-        var vboID : GLuint = 0;
-        
-        glEnableVertexAttribArray(GLuint(attributeNumber));
-        glGenBuffers(1, &vboID);
-        self.vbos.append(vboID);
-        
-        // Bind the VBO just created
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID);
-        let countBytes : Int = dLength * sizeof(CFloat);
-        glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, data, GLenum(GL_STATIC_DRAW));
-        glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstants.vertexNormalized, RenderConstants.STRIDE, BUFFER_OFFSET(0));
-        // UnBind the current VBO
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
-        
+        if(data == nil)
+        {
+            print("something went wrong data nil not expected")
+        } else
+        {
+            var vboID : GLuint = 0;
+            
+            glEnableVertexAttribArray(GLuint(attributeNumber));
+            glGenBuffers(1, &vboID);
+            self.vbos.append(vboID);
+            
+            // Bind the VBO just created
+            glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID);
+            let countBytes : Int = dLength * sizeof(CFloat);
+            glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, data!, GLenum(GL_STATIC_DRAW));
+            glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstants.vertexNormalized, RenderConstants.STRIDE, BUFFER_OFFSET(0));
+            // UnBind the current VBO
+            glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);
+        }
     }
     
     /**
@@ -215,7 +220,7 @@ public class Loader : NSObject {
      *
      * @return The rawModel pointing to the created VAO
      */
-    private func  loadPositionsToVAO(positions : UnsafePointer<Void>, positionsLength : Int, dimensions : Int) -> RawModel {
+    private func  loadPositionsToVAO(positions : UnsafePointer<Void>?, positionsLength : Int, dimensions : Int) -> RawModel {
         
         let vaoID = self.createVAO();
         self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: GLint(dimensions), data: positions, dLength: positionsLength);
@@ -235,7 +240,7 @@ public class Loader : NSObject {
      *
      * @return The rawModel pointing to the created VAO
      */
-    public func load2DPositionsToVAO(positions : UnsafeMutablePointer<Float>, positionsLength : Int) -> RawModel{
+    public func load2DPositionsToVAO(positions : UnsafeMutablePointer<Float>?, positionsLength : Int) -> RawModel{
         let dimensions = 2;
         return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
     }
@@ -250,7 +255,7 @@ public class Loader : NSObject {
      *
      * @return The rawModel pointing to the created VAO
      */
-    public func load3DPositionsToVAO(positions : UnsafeMutablePointer<Float>, positionsLength : Int) -> RawModel{
+    public func load3DPositionsToVAO(positions : UnsafeMutablePointer<Float>?, positionsLength : Int) -> RawModel{
         let dimensions = 3;
         return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
     }
@@ -442,49 +447,6 @@ public class Loader : NSObject {
             
             return audioBuffer;
         }
-        
-        
-        
-        
-        
-        
-        /*
-         FileInputStream fin = null;
-         BufferedInputStream bin = null;
-         OggData oggFile = null;
-         try {
-         fin = new FileInputStream(RESOURCES_FOLDER + fileName + OGG_EXTENSION);
-         bin = new BufferedInputStream(fin);
-         oggFile = oggDecoder.getData(bin);
-         
-         if (oggFile == null) {
-         // Was not possible read the file so releases the resources
-         AL10.alDeleteBuffers(bufferId);
-         } else {
-         audioBuffers.add(bufferId);
-         int oggFormat = oggFile.channels > 1 ? AL10.AL_FORMAT_STEREO16 : AL10.AL_FORMAT_MONO16;
-         AL10.alBufferData(bufferId, oggFormat, oggFile.data, oggFile.rate);
-         // oggFile.dispose();
-         audioBuffer = new AudioBuffer(bufferId);
-         }
-         } catch (Exception e) {
-         e.printStackTrace();
-         } finally {
-         if (oggFile != null) {
-         oggFile.data.clear();
-         oggFile = null;
-         }
-         try {
-         if (bin != null) {
-         bin.close();
-         }
-         if (fin != null) {
-         fin.close();
-         }
-         } catch (IOException e) {
-         e.printStackTrace();
-         }
-         }*/
     }
     
     /**
@@ -501,18 +463,21 @@ public class Loader : NSObject {
      * @para dLength
      *            Number of indices that the data has
      */
-    private func bindIndicesBuffer(indices : UnsafePointer<Void>, dLength : Int) {
+    private func bindIndicesBuffer(indices : UnsafePointer<Void>?, dLength : Int) {
         
-        
-        var vboID : GLuint = 0;
-        glGenBuffers(1, &vboID);
-        vbos.append(vboID);
-        
-        // Bind the VBO just created
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID)
-        let countBytes = dLength * sizeof(CUnsignedShort);
-        glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, indices, GLenum(GL_STATIC_DRAW))
-        
+        if(indices == nil)
+        {
+            print("Unexpected bindIndicesBuffer: indices should not be nil")
+        } else {
+            var vboID : GLuint = 0;
+            glGenBuffers(1, &vboID);
+            vbos.append(vboID);
+            
+            // Bind the VBO just created
+            glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID)
+            let countBytes = dLength * sizeof(CUnsignedShort);
+            glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, indices!, GLenum(GL_STATIC_DRAW))
+        }
     }
     
     /**
