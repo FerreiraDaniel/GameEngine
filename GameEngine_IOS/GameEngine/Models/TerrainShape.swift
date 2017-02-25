@@ -52,10 +52,10 @@ public class TerrainShape : NSObject, IShape {
         ->
         (vertices: UnsafeMutablePointer<Float>, normals : UnsafeMutablePointer<Float>, textureCoords : UnsafeMutablePointer<Float>, indices : UnsafeMutablePointer<ushort>, heights: Array<Array<Float>>)
     {
-        return (Utils.arrayToPointer(vertices),
-                Utils.arrayToPointer(normals),
-                Utils.arrayToPointer(textureCoords),
-                Utils.arrayToPointer(indices),
+        return (Utils.toPointer(vertices),
+                Utils.toPointer(normals),
+                Utils.toPointer(textureCoords),
+                Utils.toPointer(indices),
                 heights
         )
     }
