@@ -145,7 +145,7 @@ public class TerrainShape : NSObject, IShape {
      * @return the height of the terrain in the specified position
      */
     private static func getHeight(x : Int, y : Int, heightMap : TextureData) -> Float {
-        let rgb : Float = Float(heightMap.getRGB(x, y: y));
+        let rgb : Float = Float(heightMap.getRGB(x, y: y)!);
         let heightNormal : Float = (rgb / TextureData.MAX_PIXEL_COLOR);
         let finalHeight : Float = (heightNormal * (MAX_HEIGHT - MIN_HEIGHT)) + MIN_HEIGHT;
         

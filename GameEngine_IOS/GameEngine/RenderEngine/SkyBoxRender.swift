@@ -4,7 +4,7 @@ import OpenGLES
 /**
 * Class responsible to render the sky box in the screen
 */
-public class SkyBoxRender : NSObject {
+public class SkyBoxRender {
     
     /**
     * Reference to the shader manager

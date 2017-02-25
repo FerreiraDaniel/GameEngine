@@ -12,13 +12,13 @@ public class AudioDecoder {
      * @param inFileURL The input url from which to read the audio file
      * @return The data describing the audio thats been read
      */
-    public func getData(inFileURL: NSURL) -> AudioData! {
+    public func getData(inFileURL: NSURL) -> AudioData? {
         var err: OSStatus = noErr
         var theFileLengthInFrames: Int64 = 0
         var theFileFormat: AudioStreamBasicDescription = AudioStreamBasicDescription()
         var thePropertySize: UInt32 = UInt32(strideofValue(theFileFormat))
         var extRef: ExtAudioFileRef = nil
-        var theData: UnsafeMutablePointer<CChar> = nil
+        var theData: UnsafeMutablePointer<Void>? = nil
         var theOutputFormat: AudioStreamBasicDescription = AudioStreamBasicDescription()
         
         // Open a file with ExtAudioFileOpen()
@@ -82,7 +82,7 @@ public class AudioDecoder {
             theDataBuffer.mNumberBuffers = 1
             theDataBuffer.mBuffers.mDataByteSize = dataSize
             theDataBuffer.mBuffers.mNumberChannels = theOutputFormat.mChannelsPerFrame
-            theDataBuffer.mBuffers.mData = UnsafeMutablePointer(theData)
+            theDataBuffer.mBuffers.mData = theData!
             
             // Read the data into an AudioBufferList
             var ioNumberFrames: UInt32 = UInt32(theFileLengthInFrames)
@@ -97,7 +97,10 @@ public class AudioDecoder {
                 return audioData
             } else {
                 // failure
-                theData.dealloc(Int(dataSize))
+                if(theData != nil)
+                {
+                    theData!.dealloc(Int(dataSize))
+                }
                 theData = nil // make sure to return NULL
                 print("MyGetOpenALAudioData: ExtAudioFileRead FAILED, Error = \(err)");
                 return nil;
@@ -110,11 +113,10 @@ public class AudioDecoder {
      *
      *  Dispose the ExtAudioFileRef, it is no longer needed
      */
-    public func cleanUp(audioData : AudioData!) {
+    public func cleanUp(audioData : AudioData?) {
         if(audioData != nil) {
-            let theData = UnsafeMutablePointer<CChar>(audioData.data)
-            if theData != nil {
-                theData.dealloc(Int(audioData.dataSize))
+            if audioData!.data != nil {
+                audioData!.data!.dealloc(Int(audioData!.dataSize))
             }
         }
     }

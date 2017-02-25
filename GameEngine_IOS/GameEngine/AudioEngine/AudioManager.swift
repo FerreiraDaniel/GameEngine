@@ -2,13 +2,11 @@ import Foundation
 
 import OpenAL
 
-/**
- * Class responsible for handling the creation, setup and close of audio
- */
+/// Responsible for handling the creation, setup and close of audio
 public class AudioManager {
     
-    private static var context: COpaquePointer = nil
-    private static var device: COpaquePointer = nil
+    private static var context: COpaquePointer? = nil
+    private static var device: COpaquePointer? = nil
     
     /**
      * Before using any openAL methods we need to initialize openAL
@@ -29,13 +27,13 @@ public class AudioManager {
         }else {
             // Create a new OpenAL Context
             // The new context will render to the OpenAL Device just created
-            context = alcCreateContext(device, nil)
+            context = alcCreateContext(device!, nil)
             if context == nil
             {
-                return false;
+                return false
             } else {
                 // Make the new context the Current OpenAL Context
-                alcMakeContextCurrent(context)
+                alcMakeContextCurrent(context!)
                 
                 error = alGetError()
                 
@@ -51,19 +49,18 @@ public class AudioManager {
         
     }
     
-    /**
-     * Releases the resources used by openAL
-     */
+    
+    /// Releases the resources used by openAL
     public static func teardownOpenAL() {
         
         //Release context
         if(context != nil) {
-            alcDestroyContext(context)
+            alcDestroyContext(context!)
             context = nil
         }
         //Close device
         if(device != nil) {
-            alcCloseDevice(device)
+            alcCloseDevice(device!)
             device = nil
         }
     }

@@ -1,22 +1,20 @@
 import Foundation
 import OpenGLES
 
-/**
- * Class responsible to render the entities in the screen
- */
-public class EntityRender : NSObject {
+
+/// Responsible to render the entities in the screen
+public class EntityRender {
     
-    /**
-     * Reference to the shader manager
-     */
+
+    /// Reference to the shader manager
     private var eShader : EntityShaderManager!;
     
-    /**
-     * Initializer of the entity render
-     *
-     * @param aShader           Shader manager
-     * @param projectionMatrix  The projection matrix of the render
-     */
+
+    /// Initializer of the entity render
+    ///
+    /// - Parameters:
+    ///   - aShader: Shader manager
+    ///   - projectionMatrix: The projection matrix of the render
     public init( aShader : EntityShaderManager, projectionMatrix : GLTransformation) {
         self.eShader = aShader;
         self.eShader.start();

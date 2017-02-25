@@ -4,7 +4,7 @@ import GLKit
 /**
  * Class responsible to render the terrain of the scene
  */
-public class TerrainRender : NSObject {
+public class TerrainRender {
     
     /**
      * Reference to the shader manager

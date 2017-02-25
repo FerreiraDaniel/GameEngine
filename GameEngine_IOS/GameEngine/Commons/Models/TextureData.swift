@@ -33,7 +33,7 @@ public class TextureData : NSObject {
     /**
      * The buffer with data about the pixels of the image
      */
-    var buffer : UnsafeMutablePointer<Void>;
+    var buffer : UnsafeMutablePointer<Void>?;
     
     /**
      * The initialize of the texture data
@@ -46,7 +46,7 @@ public class TextureData : NSObject {
      *            Height of the texture
      
      */
-    public init(buffer : UnsafeMutablePointer<Void>, width : Int, height : Int) {
+    public init(buffer : UnsafeMutablePointer<Void>?, width : Int, height : Int) {
         self.buffer = buffer
         self.width = width
         self.height = height
@@ -67,7 +67,7 @@ public class TextureData : NSObject {
             return nil;
         } else {
             let index = ((y * self.width) + x);
-            let rgbaptr = UnsafeMutablePointer<RGBA>(buffer)
+            let rgbaptr = UnsafeMutablePointer<RGBA>(buffer!)
             let rgba = rgbaptr[index];
             return rgba;
         }
@@ -80,7 +80,7 @@ public class TextureData : NSObject {
      * @return One integer representing the RGB colors of the pixel in the
      * position passed
      */
-    public func getRGB(x : Int, y : Int) -> Int {
+    public func getRGB(x : Int, y : Int) -> Int? {
         let rgb = getLRgb(x, y: y);
         let r = UInt(rgb.r)
         let g = UInt(rgb.g)

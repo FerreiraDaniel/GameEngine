@@ -195,14 +195,14 @@ public class OBJLoader : GenericLoader {
         
         //Open the obj file from the disk
         let objPath : String = NSBundle.mainBundle().pathForResource(objFileName, ofType: OBJ_EXTENSION)!
-        let file : UnsafeMutablePointer<FILE> = fopen(objPath, "r")
+        let file : UnsafeMutablePointer<FILE>? = fopen(objPath, "r")
         
         if(file != nil) {
             
             let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.alloc(MAX_LINE_LENGTH);
             //Read the obj file line by line
             let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
-            while(fgets(buffer, bytesToRead, file) != nil) {
+            while(fgets(buffer, bytesToRead, file!) != nil) {
                 let linen = String(UTF8String: UnsafePointer<CChar>(buffer))
                 let line = linen?.stringByReplacingOccurrencesOfString("\n", withString: EMPTY_STRING);
                 let currentLine : Array<String> = line!.componentsSeparatedByString(GenericLoader.SPLIT_TOKEN);
@@ -263,9 +263,8 @@ public class OBJLoader : GenericLoader {
                     break
                 }
             }
-            
-            free(buffer);
-            fclose(file);
+            buffer.dealloc(MAX_LINE_LENGTH)
+            fclose(file!);
         }
         
         return self.createShapes(vertices, normals, textures, faces, materials);

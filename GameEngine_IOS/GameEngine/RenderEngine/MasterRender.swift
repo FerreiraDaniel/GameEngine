@@ -1,41 +1,32 @@
 import Foundation
 import GLKit
 
-/**
- * Groups the entities in a hash map like this
- * the same entity will be just put in different positions
- */
-public class MasterRender : NSObject{
+
+/// Groups the entities in a hash map like this the same entity will be just put in different positions
+public class MasterRender {
     
     
-    /**
-     * Width of the screen
-     */
+    /// Width of the screen
     private var width : Int;
     
-    /**
-     * Height of the screen
-     */
+    
+    /// Height of the screen
     private var height : Int;
     
-    /**
-     * Reference to the render of the entities
-     */
+    
+    /// Reference to the render of the entities
     private var entityRender : EntityRender!;
     
-    /**
-     * Reference to the render of the terrains
-     */
+    
+    /// Reference to the render of the terrains
     private var terrainRender : TerrainRender!;
     
-    /**
-     * Reference to the render of the sky box
-     */
+    
+    /// Reference to the render of the sky box
     private var skyBoxRender : SkyBoxRender!;
     
-    /**
-     * Reference to the render of GUIs
-     */
+    
+    /// Reference to the render of GUIs
     private var guiRender : GuiRender!;
     
     /**
@@ -157,20 +148,20 @@ public class MasterRender : NSObject{
         }
     }
     
-    /**
-     * Call the method to update the player position
-     */
+    
+    /// Call the method to update the player position
     private func updatePlayer() {
         if (self.player != nil) {
             self.player.move(self.timeToRender, terrain: terrains[0]);
         }
     }
     
-    /**
-     *   Initiator of the master render
-     *   @param width Width of the view to render the 3D world
-     *   @param height Height of the view to render the 3D world
-     */
+    
+    /// Initiator of the master render
+    ///
+    /// - Parameters:
+    ///   - width: Width of the view to render the 3D world
+    ///   - height: Height of the view to render the 3D world
     public init(width : Int, height : Int) {
         
         
@@ -210,8 +201,6 @@ public class MasterRender : NSObject{
         
         // Initializes the camera
         self.camera = ThirdPersonCamera();
-        
-        super.init();
         
     }
     
@@ -354,9 +343,8 @@ public class MasterRender : NSObject{
         self.timeToRender = Float(interval);
     }
     
-    /**
-     * Clean the data of the previous frame
-     */
+    
+    /// Clean the data of the previous frame
     private func prepare()
     {
         glEnable(GLenum(GL_DEPTH_TEST));
@@ -368,9 +356,8 @@ public class MasterRender : NSObject{
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT) | GLbitfield(GL_DEPTH_BUFFER_BIT))
     }
     
-    /**
-     *  Releases the resources used by the class
-     */
+    
+    /// Releases the resources used by the class
     deinit {
         self.entityRender = nil;
         self.entities = nil;

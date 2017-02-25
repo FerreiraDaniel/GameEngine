@@ -36,7 +36,7 @@ public class LoadUtils {
         } else {
             let width = CGImageGetWidth(spriteImage);
             let height = CGImageGetHeight(spriteImage);
-            let spriteData = UnsafeMutablePointer<GLubyte>.alloc(width * height * 4);
+            let spriteData = UnsafeMutablePointer<UInt8>.alloc(width * height * 4);
             
             for index in 0..<(width * height * 4) {
                 spriteData[index] = 0

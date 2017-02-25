@@ -8,7 +8,7 @@ public class RawModel {
     /**
      * Buffer of indices of the model
      */
-    var indicesData : UnsafeMutablePointer<ushort>?
+    var indicesData : UnsafeMutablePointer<UInt16>?
     
     /**
      * Identifier of the vertex array object of the raw model
@@ -39,7 +39,7 @@ public class RawModel {
             self.indicesData = nil;
         } else {
             //Allocate and fill the vertices memory
-            self.indicesData = UnsafeMutablePointer<ushort>.alloc(indicesCount);
+            self.indicesData = UnsafeMutablePointer<UInt16>.alloc(indicesCount);
             
             //TODO check if was possible allocatte memory
             

@@ -2,35 +2,34 @@ import Foundation
 
 import OpenAL
 
-/**
- * Audio buffer to get played
- */
+
+/// Audio buffer to get played
 public class AudioBuffer : NSObject {
     
-    /**
-     * Identifier of the buffer to play in openAL
-     */
+    
+    ///Identifier of the buffer to play in openAL
     private var bufferId : ALint;
     
-    /**
-     * @param bufferId
-     *            Identifier of the buffer to play in openAL
-     */
+    
+    /// Initializer of the audio buffer
+    ///
+    /// - Parameter bufferId: Identifier of the buffer to play in openAL
     public init(_ bufferId : ALint) {
         self.bufferId = bufferId;
     }
     
-    /**
-     * @return the bufferId Identifier of the buffer to play in openAL
-     */
+    
+    /// Get the identifier of the associated buffer
+    ///
+    /// - Returns: The Identifier of the buffer to play in openAL
     public func getBufferId() -> ALint {
         return bufferId;
     }
     
-    /**
-     * @param bufferId
-     *            Identifier of the buffer to play in openAL
-     */
+    
+    /// Identifier of the buffer to play in openAL
+    ///
+    /// - Parameter bufferId: The identifier of the buffer
     public func setBufferId(bufferId : ALint) {
         self.bufferId = bufferId;
     }

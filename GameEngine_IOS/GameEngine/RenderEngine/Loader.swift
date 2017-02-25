@@ -6,7 +6,7 @@ import AudioToolbox
 /*
  * Load the elements to make the scene
  */
-public class Loader : NSObject {
+public class Loader  {
     
     func BUFFER_OFFSET(i: Int) -> UnsafePointer<Void> {
         let p: UnsafePointer<Void> = nil
@@ -47,10 +47,9 @@ public class Loader : NSObject {
     
     private let NUMBER_CUBE_FACES : Int = 6;
     
-    /**
-     * Initiator of the loader
-     */
-    public override init() {
+
+    /// Initiator of the loader
+    public init() {
         self.vaos = Array<GLuint>();
         self.vbos = Array<GLuint>();
         self.textures = Array<GLuint>();
@@ -315,11 +314,11 @@ public class Loader : NSObject {
             
             let width : GLsizei = GLsizei(textureData.width)
             let height : GLsizei = GLsizei(textureData.height)
-            let buffer : UnsafeMutablePointer<Void> = textureData.buffer
+            let buffer : UnsafeMutablePointer<Void>? = textureData.buffer
             
             
             glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA,  width, height, 0,
-                         GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
+                         GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer!);
             
             self.defineTextureFunctionFilters(GL_TEXTURE_2D);
             self.textures.append(textureId);
@@ -384,10 +383,16 @@ public class Loader : NSObject {
                     let target = cubicTextureTargets[i];
                     let width : GLsizei = GLsizei(textureData.width)
                     let height : GLsizei = GLsizei(textureData.height)
-                    let buffer : UnsafeMutablePointer<Void> = textureData.buffer
+                    let buffer : UnsafeMutablePointer<Void>? = textureData.buffer
                     
-                    glTexImage2D(GLenum(target), 0, GL_RGBA,  width, height, 0,
-                                 GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer);
+                    if(buffer == nil)
+                    {
+                        print("loadTCubeMap unexpected nil buffer")
+                    } else
+                    {
+                        glTexImage2D(GLenum(target), 0, GL_RGBA,  width, height, 0,
+                                     GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE),  buffer!);
+                    }
                 }
             }
             self.defineTextureFunctionFilters(GL_TEXTURE_CUBE_MAP);
@@ -406,9 +411,9 @@ public class Loader : NSObject {
      * @param fileName
      *            The file name of the file to load
      *
-     * @return The identifier of the buffer return by open GL
+     * @return The identifier of the buffer return by openAL
      */
-    public func loadSound(fileName : String) -> AudioBuffer! {
+    public func loadSound(fileName : String) -> AudioBuffer? {
         var audioBuffer : AudioBuffer! = nil;
         
         var bufferId : ALuint = 0
@@ -433,26 +438,26 @@ public class Loader : NSObject {
         
         let fileURL : NSURL = NSURL(fileURLWithPath: filePath)
         
-        var audioFile : AudioData! = nil
+
+        let audioFile = self.audioDecoder.getData(fileURL)
         
-        
-        audioFile = self.audioDecoder.getData(fileURL)
-        
-        if(audioFile == nil)
+        if let aFile = audioFile
         {
-            return nil
-        } else {
             //data = MyGetOpenALAudioData(fileURL, &size, &format, &freq)
             
-            let format : ALenum = (audioFile.channels > 1) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16
+            let format : ALenum = (aFile.channels > 1) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16
             
             
-            alBufferData(bufferId, format, audioFile.data, audioFile.dataSize, ALsizei(audioFile.rate))
+            alBufferData(bufferId, format, aFile.data!, aFile.dataSize, ALsizei(aFile.rate))
             self.audioDecoder.cleanUp(audioFile);
             
             audioBuffer = AudioBuffer(ALint(bufferId));
             
             return audioBuffer;
+        } else
+        {
+            print("Impossible to read the file \(fileURL)")
+            return nil;
         }
     }
     

@@ -50,7 +50,7 @@ public class MtlLoader : GenericLoader {
         
         let fNames : Array<String> = fileName.componentsSeparatedByString(".");
         let mtlPath : String = NSBundle.mainBundle().pathForResource(fNames[0], ofType: fNames[1])!
-        let file : UnsafeMutablePointer<FILE> = fopen(mtlPath, "r")
+        let file : UnsafeMutablePointer<FILE>? = fopen(mtlPath, "r")
         
         if(file != nil) {
             materials = Array<IExternalMaterial>();
@@ -60,7 +60,7 @@ public class MtlLoader : GenericLoader {
             let buffer : UnsafeMutablePointer<CChar> = UnsafeMutablePointer<CChar>.alloc(MAX_LINE_LENGTH);
             //Read the mtl file line by line
             let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
-            while(fgets(buffer, bytesToRead, file) != nil) {
+            while(fgets(buffer, bytesToRead, file!) != nil) {
                 let linen = String(UTF8String: UnsafePointer<CChar>(buffer))
                 let line = linen?.stringByReplacingOccurrencesOfString("\n", withString: "");
                 let currentLine : Array<String> = line!.componentsSeparatedByString(GenericLoader.SPLIT_TOKEN);
@@ -152,8 +152,8 @@ public class MtlLoader : GenericLoader {
                     break
                 }
             }
-            free(buffer);
-            fclose(file);
+            buffer.dealloc(MAX_LINE_LENGTH)
+            fclose(file!);
         }
         
         
