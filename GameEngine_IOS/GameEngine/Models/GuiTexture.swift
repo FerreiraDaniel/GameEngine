@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one texture to be show in the UI of the game (In 2D)
  */
-public class GuiTexture {
+open class GuiTexture {
     
     /**
      * Raw model of the entity
@@ -54,7 +54,7 @@ public class GuiTexture {
      * @return  False do not contains the location passed
      *          True contains the location passed
      */
-    public func containsLocation(locationX : Float, _ locationY : Float) -> Bool {
+    open func containsLocation(_ locationX : Float, _ locationY : Float) -> Bool {
         return (locationX >= (position.x - scale.x)) &&
             (locationX <= (position.x + scale.x)) &&
             ((locationY >= (position.y - scale.y)) && ((locationY <= (position.y + scale.y))));

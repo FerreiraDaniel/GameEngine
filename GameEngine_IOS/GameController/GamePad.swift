@@ -3,9 +3,9 @@ import Foundation
 /**
  * Used handle the entering of data from the user
  **/
-public class GamePad {
+open class GamePad {
     
-    private static var keysAreDown : Array<Bool> = Array<Bool>(count: GamePadKey.numOfKeys.rawValue, repeatedValue: false)
+    fileprivate static var keysAreDown : Array<Bool> = Array<Bool>(repeating: false, count: GamePadKey.numOfKeys.rawValue)
     
     /**
      *
@@ -13,7 +13,7 @@ public class GamePad {
      *
      * @return  Flag that indicates if the key was pressed or not
      */
-    public static func isKeyDown(selectedKey : GamePadKey) -> Bool {
+    open static func isKeyDown(_ selectedKey : GamePadKey) -> Bool {
         let value = keysAreDown[selectedKey.rawValue];
         GamePad.setKey(selectedKey, clicked: false);
         return value;
@@ -25,7 +25,7 @@ public class GamePad {
      * @param selectedKey the key that the user have clicked
      * @param clicked       Flag that indicates if is to indicate clicked or not
      */
-    public static func setKey(selectedKey : GamePadKey, clicked : Bool) {
+    open static func setKey(_ selectedKey : GamePadKey, clicked : Bool) {
         keysAreDown[selectedKey.rawValue] = clicked;
     }
 }

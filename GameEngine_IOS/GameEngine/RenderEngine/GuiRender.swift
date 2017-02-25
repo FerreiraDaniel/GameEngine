@@ -4,12 +4,12 @@ import OpenGLES
 /**
  * Class responsible to render the GUIs in the screen
  */
-public class GuiRender {
+open class GuiRender {
     
     /**
      * Reference to the shader manager
      */
-    private var gShader : GuiShaderManager!;
+    fileprivate var gShader : GuiShaderManager!;
     
     
     /**
@@ -31,7 +31,7 @@ public class GuiRender {
      * @return The transformation matrix that put the entity in its right
      *         position
      */
-    private func getTransformationMatrix(gui : GuiTexture) -> GLTransformation {
+    fileprivate func getTransformationMatrix(_ gui : GuiTexture) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
         matrix.glLoadIdentity();
         
@@ -49,7 +49,7 @@ public class GuiRender {
      * @param quad 	Reference to to quad where the GUIs are going to be Render
      * @param guis	List of GUIs to render
      */
-    public func render(guis : Array<GuiTexture>) {
+    open func render(_ guis : Array<GuiTexture>) {
         gShader.start();
         
         self.lrender(guis);
@@ -64,7 +64,7 @@ public class GuiRender {
      * @param guis
      *            List of GUIs to render
      */
-    private func lrender(guis: Array<GuiTexture> ) {
+    fileprivate func lrender(_ guis: Array<GuiTexture> ) {
         if (guis.isEmpty) {
             return;
         } else {
@@ -93,7 +93,7 @@ public class GuiRender {
      * @param quad
      Contains the positions to render the guis
      */
-    private func prepareModel(quad : RawModel) {
+    fileprivate func prepareModel(_ quad : RawModel) {
         glBindVertexArrayOES(GLuint(quad.vaoId));
         glEnableVertexAttribArray(GLuint(TGuiAttribute.position.rawValue));
     }
@@ -104,7 +104,7 @@ public class GuiRender {
      * @param gui
      *            Entity that is to get prepared to be loaded
      */
-    private func prepareInstance(gui: GuiTexture) {
+    fileprivate func prepareInstance(_ gui: GuiTexture) {
         glActiveTexture(GLenum(GL_TEXTURE0));
         glBindTexture(GLenum(GL_TEXTURE_2D), GLuint(gui.textureId));
         // Load the transformation matrix
@@ -117,14 +117,14 @@ public class GuiRender {
      * @param entity
      *            Entity to get render
      */
-    private func render(quad :RawModel) {
+    fileprivate func render(_ quad :RawModel) {
         glDrawArrays(GLenum(GL_TRIANGLE_STRIP), 0, GLsizei(quad.indicesCount));
     }
     
     /**
      * UnBind the previous binded elements
      */
-    private func unbindTexturedModel() {
+    fileprivate func unbindTexturedModel() {
         glDisableVertexAttribArray(GLuint(TGuiAttribute.position.rawValue));
         //Unbind vbo
         glBindBuffer(GLuint(GL_ARRAY_BUFFER), 0);

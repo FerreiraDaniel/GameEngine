@@ -3,17 +3,17 @@ import Foundation
 /**
  * Represents the sky box in the 3D world
  */
-public class SkyBoxShape : NSObject, IShape {
+open class SkyBoxShape : NSObject, IShape {
     
-    private var _vertices : UnsafeMutablePointer<Float>? ;
+    fileprivate var _vertices : UnsafeMutablePointer<Float>? ;
     
-    private let SKY_BOX_NUMBER_OF_ELEMENTS : Int = 108;
-    private static let SIZE : Float =  500.0
+    fileprivate let SKY_BOX_NUMBER_OF_ELEMENTS : Int = 108;
+    fileprivate static let SIZE : Float =  500.0
     
     /**
      * Vertices of the sky box
      */
-    private let skyBoxVertexData : Array<Float> = [
+    fileprivate let skyBoxVertexData : Array<Float> = [
         -SIZE, SIZE, -SIZE, -SIZE, -SIZE, -SIZE, SIZE, -SIZE, -SIZE, SIZE, -SIZE,
         -SIZE, SIZE, SIZE, -SIZE, -SIZE, SIZE, -SIZE,
         
@@ -38,7 +38,7 @@ public class SkyBoxShape : NSObject, IShape {
      */
     public override init() {
         //Allocate and fill the vertices memory
-        self._vertices = UnsafeMutablePointer<Float>.alloc(skyBoxVertexData.count);
+        self._vertices = UnsafeMutablePointer<Float>.allocate(capacity: skyBoxVertexData.count);
         
         //Copy vertices one by one
         for i in 0 ..< skyBoxVertexData.count {
@@ -59,28 +59,28 @@ public class SkyBoxShape : NSObject, IShape {
     /**
      * @return the vertices of the shape
      */
-    public func getVertices() -> UnsafeMutablePointer<Float>? {
+    open func getVertices() -> UnsafeMutablePointer<Float>? {
         return self._vertices;
     }
     
     /**
      * @return number of vertices that make the shape
      */
-    public func countVertices() -> Int {
+    open func countVertices() -> Int {
         return SKY_BOX_NUMBER_OF_ELEMENTS;
     }
     
     /**
      * @return the Coordinates of the textures of the shape
      */
-    public func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
+    open func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
         return nil;
     }
     
     /**
      *Number of the texture coordinates
      */
-    public func countTextureCoords() -> Int {
+    open func countTextureCoords() -> Int {
         return 0;
     }
     
@@ -88,35 +88,35 @@ public class SkyBoxShape : NSObject, IShape {
      *
      * @return the normal vectors that make the shape
      */
-    public func getNormals() -> UnsafeMutablePointer<Float>? {
+    open func getNormals() -> UnsafeMutablePointer<Float>? {
         return nil;
     }
     
     /*
      * Number of normal that the shape has
      */
-    public func countNormals() -> Int {
+    open func countNormals() -> Int {
         return 0;
     }
     
     /**
      * @return The indices of the vertices that make the shape
      */
-    public func getIndices() -> UnsafeMutablePointer<ushort>? {
+    open func getIndices() -> UnsafeMutablePointer<ushort>? {
         return nil;
     }
     
     /*
      Number of indices that the shape has
      */
-    public func countIndices() -> Int {
+    open func countIndices() -> Int {
         return 0;
     }
     
     /**
      * @return the groupName Name of the group wish belongs
      */
-    public func getGroupName() -> String? {
+    open func getGroupName() -> String? {
         return nil;
     }
     
@@ -124,7 +124,7 @@ public class SkyBoxShape : NSObject, IShape {
      *
      * @return The material that is associated with shape
      */
-    public func getMaterial() -> IExternalMaterial? {
+    open func getMaterial() -> IExternalMaterial? {
         return nil;
     }
 }

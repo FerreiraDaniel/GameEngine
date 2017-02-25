@@ -3,17 +3,17 @@ import Foundation
 /**
 * Represents a third person camera used by the user to see the 3D World
 */
-public class ThirdPersonCamera : Camera {
+open class ThirdPersonCamera : Camera {
     
     /**
     * Distance between camera and the player controlled by the user
     */
-    private var distanceFromPlayer : Float;
+    fileprivate var distanceFromPlayer : Float;
     
     /**
     * Angle around the player
     */
-    private var angleAroundPlayer : Float;
+    fileprivate var angleAroundPlayer : Float;
     
     /**
     * Initializer of the camera of the scene
@@ -30,7 +30,7 @@ public class ThirdPersonCamera : Camera {
     * @param player Reference to that the camera is going to follow
     * @param terrain			The camera needs to be above the terrain otherwise gets flick
     */
-    public func update(Player player: Player, terrain : Terrain) {
+    open func update(Player player: Player, terrain : Terrain) {
         let horizontalDistance = getHorizontalDistance();
         let verticalDistance = getVerticalDistance();
         self.calculateCameraPosition(horizontalDistance, verticalDistance: verticalDistance, player: player, terrain: terrain);
@@ -44,7 +44,7 @@ public class ThirdPersonCamera : Camera {
     * @param verticalDistance   Vertical distance
     * @param player             Player of the scene
     */
-    private func calculateCameraPosition(horizontalDistance: Float, verticalDistance : Float, player : Player, terrain : Terrain) {
+    fileprivate func calculateCameraPosition(_ horizontalDistance: Float, verticalDistance : Float, player : Player, terrain : Terrain) {
         let theta = player.rotY + angleAroundPlayer;
         let rTheta = Math.toRadians(theta);
         
@@ -64,14 +64,14 @@ public class ThirdPersonCamera : Camera {
     /**
     * @return Horizontal distance from the camera to the player
     */
-    private func getHorizontalDistance() -> Float {
+    fileprivate func getHorizontalDistance() -> Float {
         return (distanceFromPlayer * Math.cos(Math.toRadians(self.pitch)));
     }
     
     /**
     * @return Vertical distance from the camera to the player
     */
-    private func getVerticalDistance() -> Float {
+    fileprivate func getVerticalDistance() -> Float {
         return (distanceFromPlayer * Math.sin(Math.toRadians(self.pitch)));
     }
 }

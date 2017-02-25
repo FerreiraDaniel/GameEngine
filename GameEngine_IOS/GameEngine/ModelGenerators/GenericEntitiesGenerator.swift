@@ -3,7 +3,7 @@ import Foundation
 /**
  * Provide generic methods to generate entities
  */
-public class GenericEntitiesGenerator {
+open class GenericEntitiesGenerator {
     
     
     /**
@@ -20,7 +20,7 @@ public class GenericEntitiesGenerator {
      *
      * @return the textured model loaded
      */
-    internal static func getTexturedObj(loader : Loader, objName : String, hasTransparency : Bool, normalsPointingUp : Bool) -> Dictionary<String, MaterialGroup> {
+    internal static func getTexturedObj(_ loader : Loader, objName : String, hasTransparency : Bool, normalsPointingUp : Bool) -> Dictionary<String, MaterialGroup> {
         let shapes : [IShape] = OBJLoader.loadObjModel(objName);
         
         var groupsOfMaterials : Dictionary<String, MaterialGroup> = Dictionary<String, MaterialGroup>();

@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one light source in the scene
  */
-public class Light : NSObject {
+open class Light : NSObject {
     
     /**
      * Position where the light will exist

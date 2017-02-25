@@ -3,7 +3,7 @@ import Foundation
 /**
  * Contains a group of materials to be render in the scene As part of the the
  */
-public class MaterialGroup {
+open class MaterialGroup {
     
     /**
      * List of rawModel materials that compose the group

@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one raw model of one entity
  */
-public class RawModel {
+open class RawModel {
     
     /**
      * Buffer of indices of the model
@@ -39,7 +39,7 @@ public class RawModel {
             self.indicesData = nil;
         } else {
             //Allocate and fill the vertices memory
-            self.indicesData = UnsafeMutablePointer<UInt16>.alloc(indicesCount);
+            self.indicesData = UnsafeMutablePointer<UInt16>.allocate(capacity: indicesCount);
             
             //TODO check if was possible allocatte memory
             

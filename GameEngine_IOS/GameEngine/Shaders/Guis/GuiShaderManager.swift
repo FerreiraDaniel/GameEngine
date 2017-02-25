@@ -3,7 +3,7 @@ import Foundation
 /**
  * Manager of the shader files that are going to be load to render the 2D GUIs
  */
-public class GuiShaderManager : ShaderManager {
+open class GuiShaderManager : ShaderManager {
     
     /**
      * Initializor of the game shader where the vertex and fragment shader of
@@ -42,7 +42,7 @@ public class GuiShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadTransformationMatrix(matrix : GLTransformation) {
+    open func loadTransformationMatrix(_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TGuiUniform.transformationMatrix.rawValue], matrix: matrix);
     }
     

@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one color with (Red, Green, Blue, Alpha blend) components
  */
-public class ColorRGBA : ColorRGB {
+open class ColorRGBA : ColorRGB {
     
     /**
      * Alpha blend component

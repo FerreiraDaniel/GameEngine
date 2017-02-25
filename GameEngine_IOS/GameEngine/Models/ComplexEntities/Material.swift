@@ -3,7 +3,7 @@ import Foundation
 /**
  * Has all the required parameters to render one textured entity
  */
-public class Material {
+open class Material {
     
     /**
      * The identifier of the texture

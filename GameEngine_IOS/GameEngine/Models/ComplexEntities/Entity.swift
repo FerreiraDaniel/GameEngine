@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one entity in the 3D world
  */
-public class Entity : NSObject {
+open class Entity : NSObject {
     
     /**
      * Keys: Have the name of the group The name of the material group for
@@ -53,7 +53,7 @@ public class Entity : NSObject {
      * @param dy	Y component to be increase
      * @param dz	Z component to be increase
      */
-    public func increasePosition(dx : Float, dy : Float, dz : Float) {
+    open func increasePosition(_ dx : Float, dy : Float, dz : Float) {
         self.position.x += dx;
         self.position.y += dy;
         self.position.z += dz;
@@ -65,7 +65,7 @@ public class Entity : NSObject {
      * @param dy	Y component to be increase
      * @param dz	Z component to be increase
      */
-    public func increaseRotation(dx : Float, dy : Float, dz : Float) {
+    open func increaseRotation(_ dx : Float, dy : Float, dz : Float) {
         self.rotX += dx;
         self.rotY += dy;
         self.rotZ += dz;

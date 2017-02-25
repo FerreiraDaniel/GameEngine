@@ -3,12 +3,12 @@ import Foundation
 /**
  * Play all the different sound used by the audio engine
  */
-public class MasterPlayer {
+open class MasterPlayer {
     
     /**
      * Reference to the render of the entities
      */
-    private var entityPlayer : EntityPlayer;
+    fileprivate var entityPlayer : EntityPlayer;
     
     
     /**
@@ -27,14 +27,14 @@ public class MasterPlayer {
      * @param player        The player that is going to be show in the scene
      * give audio feedback to the user
      */
-    public func play(audioLibrary : [TAudioEnum: AudioBuffer], entities : [Entity], player : Player) {
+    open func play(_ audioLibrary : [TAudioEnum: AudioBuffer], entities : [Entity], player : Player) {
         self.entityPlayer.play(audioLibrary, entities: entities, player: player);
     }
     
     /**
      * Clean up because we need to clean up when we finish the program
      */
-    public func cleanUp() {
+    open func cleanUp() {
         self.entityPlayer.cleanUp();
     }
 }

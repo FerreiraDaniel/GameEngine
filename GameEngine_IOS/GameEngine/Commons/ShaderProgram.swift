@@ -4,7 +4,7 @@ import GLKit
 /**
 *	Represents one shader program in that can be running in the Graphic Boards
 */
-public class  ShaderProgram {
+open class  ShaderProgram {
     
     /**
     * The id of the program

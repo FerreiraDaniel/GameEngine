@@ -6,46 +6,46 @@ import AudioToolbox
 /*
  * Load the elements to make the scene
  */
-public class Loader  {
+open class Loader  {
     
-    func BUFFER_OFFSET(i: Int) -> UnsafePointer<Void> {
-        let p: UnsafePointer<Void> = nil
+/*    func BUFFER_OFFSET(_ i: Int) -> UnsafeRawPointer {
+        let p: UnsafeRawPointer? = nil
         return p.advancedBy(i)
     }
-    
-    /*
+  */  
+
     func BUFFER_OFFSET(_ i: Int) -> UnsafeRawPointer? {
         return UnsafeRawPointer(bitPattern: i)
     }
- */
+
 
     
     /**
      * List of the vertex array objects loaded
      */
-    private var vaos : Array<GLuint>!;
+    fileprivate var vaos : Array<GLuint>!;
     
     /**
      * List of the vertex buffer objects loaded
      */
-    private var vbos : Array<GLuint>!;
+    fileprivate var vbos : Array<GLuint>!;
     
     /**
      * List of the textures that make part of the game engine
      */
-    private var textures : Array<GLuint>!;
+    fileprivate var textures : Array<GLuint>!;
     
     /**
      * Decoder for audio files
      */
-    private var audioDecoder : AudioDecoder;
+    fileprivate var audioDecoder : AudioDecoder;
     
     /**
      * Extension of the png files
      */
-    private let PNG_EXTENSION : String  = "png";
+    fileprivate let PNG_EXTENSION : String  = "png";
     
-    private let NUMBER_CUBE_FACES : Int = 6;
+    fileprivate let NUMBER_CUBE_FACES : Int = 6;
     
 
     /// Initiator of the loader
@@ -60,7 +60,7 @@ public class Loader  {
      *
      * @return If possible one audio source with everything set
      */
-    private func genAudioSource() -> AudioSource! {
+    fileprivate func genAudioSource() -> AudioSource! {
         var sourceId : ALuint = 0;
         
         alGenSources(1, &sourceId)
@@ -81,7 +81,7 @@ public class Loader  {
      *
      * @return A list of the audio sources generated
      */
-    public func genAudioSources(numberOfSources : Int) -> [AudioSource] {
+    open func genAudioSources(_ numberOfSources : Int) -> [AudioSource] {
         var sourceLst : [AudioSource] = [AudioSource]();
         
         for _ in 0 ..< numberOfSources {
@@ -99,7 +99,7 @@ public class Loader  {
      *
      * @return the identifier of the VAO created
      */
-    private func createVAO() -> Int {
+    fileprivate func createVAO() -> Int {
         var vaoID : GLuint = 0;
         glGenVertexArraysOES(1, &vaoID);
         vaos.append(vaoID);
@@ -121,7 +121,7 @@ public class Loader  {
      * @para dLength
      *            Number of elements that the data has
      */
-    private func storeDataInAttributeList(attributeNumber : Int, coordinateSize : GLint, data :UnsafePointer<Void>? , dLength : Int) {
+    fileprivate func storeDataInAttributeList(_ attributeNumber : Int, coordinateSize : GLint, data :UnsafeRawPointer? , dLength : Int) {
         
         if(data == nil)
         {
@@ -136,7 +136,7 @@ public class Loader  {
             
             // Bind the VBO just created
             glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID);
-            let countBytes : Int = dLength * sizeof(CFloat);
+            let countBytes : Int = dLength * MemoryLayout<CFloat>.size;
             glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, data!, GLenum(GL_STATIC_DRAW));
             glVertexAttribPointer(GLuint(attributeNumber), coordinateSize, GLenum(GL_FLOAT), RenderConstants.vertexNormalized, RenderConstants.STRIDE, BUFFER_OFFSET(0));
             // UnBind the current VBO
@@ -152,7 +152,7 @@ public class Loader  {
      *
      * @return A row model with information loaded
      */
-    public func loadToVAO(shape : IShape) -> RawModel{
+    open func loadToVAO(_ shape : IShape) -> RawModel{
         
         let vaoID = self.createVAO();
         
@@ -185,7 +185,7 @@ public class Loader  {
      *
      * @return The material loaded
      */
-    public func loadMaterial(shape : IShape) -> Material? {
+    open func loadMaterial(_ shape : IShape) -> Material? {
         let externalMaterial : IExternalMaterial? = shape.getMaterial()
         
         
@@ -226,7 +226,7 @@ public class Loader  {
      *
      * @return The rawModel pointing to the created VAO
      */
-    private func  loadPositionsToVAO(positions : UnsafePointer<Void>?, positionsLength : Int, dimensions : Int) -> RawModel {
+    fileprivate func  loadPositionsToVAO(_ positions : UnsafeRawPointer?, positionsLength : Int, dimensions : Int) -> RawModel {
         
         let vaoID = self.createVAO();
         self.storeDataInAttributeList(TEntityAttribute.position.rawValue, coordinateSize: GLint(dimensions), data: positions, dLength: positionsLength);
@@ -246,7 +246,7 @@ public class Loader  {
      *
      * @return The rawModel pointing to the created VAO
      */
-    public func load2DPositionsToVAO(positions : UnsafeMutablePointer<Float>?, positionsLength : Int) -> RawModel{
+    open func load2DPositionsToVAO(_ positions : UnsafeMutablePointer<Float>?, positionsLength : Int) -> RawModel{
         let dimensions = 2;
         return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
     }
@@ -261,7 +261,7 @@ public class Loader  {
      *
      * @return The rawModel pointing to the created VAO
      */
-    public func load3DPositionsToVAO(positions : UnsafeMutablePointer<Float>?, positionsLength : Int) -> RawModel{
+    open func load3DPositionsToVAO(_ positions : UnsafeMutablePointer<Float>?, positionsLength : Int) -> RawModel{
         let dimensions = 3;
         return self.loadPositionsToVAO(positions, positionsLength: positionsLength, dimensions: dimensions);
     }
@@ -272,7 +272,7 @@ public class Loader  {
      * @param itarget
      *            the target of the filter
      */
-    private func defineTextureFunctionFilters (itarget : Int32) {
+    fileprivate func defineTextureFunctionFilters (_ itarget : Int32) {
         let target : GLenum = GLenum(itarget);
         
         glTexParameteri(target, GLenum(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
@@ -290,12 +290,12 @@ public class Loader  {
      *
      * @return Identifier of the texture loaded
      */
-    public func loadTexture(fileName : String) -> Int {
-        var imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
+    open func loadTexture(_ fileName : String) -> Int {
+        var imagePath : String! = Bundle.main.path(forResource: fileName, ofType: PNG_EXTENSION)
         
         if(imagePath == nil) {
-            let fName = fileName.componentsSeparatedByString(".")
-            imagePath = NSBundle.mainBundle().pathForResource(fName[0], ofType: PNG_EXTENSION)
+            let fName = fileName.components(separatedBy: ".")
+            imagePath = Bundle.main.path(forResource: fName[0], ofType: PNG_EXTENSION)
         }
         
         if(imagePath == nil) {
@@ -314,7 +314,7 @@ public class Loader  {
             
             let width : GLsizei = GLsizei(textureData.width)
             let height : GLsizei = GLsizei(textureData.height)
-            let buffer : UnsafeMutablePointer<Void>? = textureData.buffer
+            let buffer : UnsafeMutableRawPointer? = textureData.buffer
             
             
             glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GL_RGBA,  width, height, 0,
@@ -336,8 +336,8 @@ public class Loader  {
      *
      * @return The texture read from the file without any openGL bind
      */
-    public func getTextureData(fileName : String) -> TextureData! {
-        let imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
+    open func getTextureData(_ fileName : String) -> TextureData! {
+        let imagePath : String! = Bundle.main.path(forResource: fileName, ofType: PNG_EXTENSION)
         
         if(imagePath == nil) {
             print("Impossible to get the patch to \(fileName)");
@@ -357,7 +357,7 @@ public class Loader  {
      *
      * @return Identifier of the texture cubic texture loaded
      */
-    public func loadTCubeMap(fileNames : Array<String>!) -> Int {
+    open func loadTCubeMap(_ fileNames : Array<String>!) -> Int {
         if (fileNames == nil) {
             return -1;
         } else {
@@ -374,16 +374,16 @@ public class Loader  {
             for i in 0 ..< NUMBER_CUBE_FACES {
                 let fileName = fileNames[i];
                 
-                let imagePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: PNG_EXTENSION)
+                let imagePath : String! = Bundle.main.path(forResource: fileName, ofType: PNG_EXTENSION)
                 let textureData = LoadUtils.loadTexture(imagePath);
                 
                 if (textureData == nil) {
                     return -1;
                 } else {
                     let target = cubicTextureTargets[i];
-                    let width : GLsizei = GLsizei(textureData.width)
-                    let height : GLsizei = GLsizei(textureData.height)
-                    let buffer : UnsafeMutablePointer<Void>? = textureData.buffer
+                    let width : GLsizei = GLsizei(textureData!.width)
+                    let height : GLsizei = GLsizei(textureData!.height)
+                    let buffer : UnsafeMutableRawPointer? = textureData?.buffer
                     
                     if(buffer == nil)
                     {
@@ -413,7 +413,7 @@ public class Loader  {
      *
      * @return The identifier of the buffer return by openAL
      */
-    public func loadSound(fileName : String) -> AudioBuffer? {
+    open func loadSound(_ fileName : String) -> AudioBuffer? {
         var audioBuffer : AudioBuffer! = nil;
         
         var bufferId : ALuint = 0
@@ -429,14 +429,14 @@ public class Loader  {
             return nil;
         }
         
-        let filePath : String! = NSBundle.mainBundle().pathForResource(fileName, ofType: "aac")
+        let filePath : String! = Bundle.main.path(forResource: fileName, ofType: "aac")
         if(filePath == nil) {
             print("Impossible to get the patch to audio \(fileName) ");
             return nil;
         }
         
         
-        let fileURL : NSURL = NSURL(fileURLWithPath: filePath)
+        let fileURL : URL = URL(fileURLWithPath: filePath)
         
 
         let audioFile = self.audioDecoder.getData(fileURL)
@@ -464,7 +464,7 @@ public class Loader  {
     /**
      * UnBind the current vertex array object
      */
-    private func unbindVAO() {
+    fileprivate func unbindVAO() {
         glBindVertexArrayOES(0);
     }
     
@@ -475,7 +475,7 @@ public class Loader  {
      * @para dLength
      *            Number of indices that the data has
      */
-    private func bindIndicesBuffer(indices : UnsafePointer<Void>?, dLength : Int) {
+    fileprivate func bindIndicesBuffer(_ indices : UnsafeRawPointer?, dLength : Int) {
         
         if(indices == nil)
         {
@@ -487,7 +487,7 @@ public class Loader  {
             
             // Bind the VBO just created
             glBindBuffer(GLenum(GL_ARRAY_BUFFER), vboID)
-            let countBytes = dLength * sizeof(CUnsignedShort);
+            let countBytes = dLength * MemoryLayout<CUnsignedShort>.size;
             glBufferData(GLenum(GL_ARRAY_BUFFER), countBytes, indices!, GLenum(GL_STATIC_DRAW))
         }
     }

@@ -4,11 +4,11 @@ import Foundation
  * Helps to create the matrix to pass in the render as GL V1 has but
  * Adapted for GL V2
  */
-public class GLTransformation {
+open class GLTransformation {
     
-    private let GL_TRANSFORMATION_MATRIX_SIZE : Int = 16
+    fileprivate let GL_TRANSFORMATION_MATRIX_SIZE : Int = 16
     
-    private var mMatrix : [Float]
+    fileprivate var mMatrix : [Float]
     
     
     /**
@@ -16,7 +16,7 @@ public class GLTransformation {
      */
     public init()
     {
-        self.mMatrix = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0)
+        self.mMatrix = Array<Float>(repeating: 0.0, count: GL_TRANSFORMATION_MATRIX_SIZE)
     }
     
     /**
@@ -26,7 +26,7 @@ public class GLTransformation {
      * @param ty Specify the y coordinate of a translation vector
      * @param tz Specify the z coordinate of a translation vector
      */
-    public func glTranslate(tx : Float, ty : Float, tz : Float) {
+    open func glTranslate(_ tx : Float, ty : Float, tz : Float) {
         //Set the last row of the transformation matrix to translate
         mMatrix[12] += (mMatrix[0] * tx + mMatrix[4]
             * ty + mMatrix[2 * 4] * tz);
@@ -45,8 +45,8 @@ public class GLTransformation {
      * @param srcB Second matrix
      *
      */
-    private func lMultiplyMatrix( srcA : Array<Float>, srcB : Array<Float>)  {
-        var tmp : [Float] = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0);
+    fileprivate func lMultiplyMatrix( _ srcA : Array<Float>, srcB : Array<Float>)  {
+        var tmp : [Float] = Array<Float>(repeating: 0.0, count: GL_TRANSFORMATION_MATRIX_SIZE);
         
         for i : Int  in 0 ..< 4 {
             //Entire row
@@ -88,7 +88,7 @@ public class GLTransformation {
      * @param y     Specify the factor in y coordinate
      * @param z     Specify the factor in z coordinate
      */
-    public func glRotate(angle : Float, x : Float, y : Float, z : Float) {
+    open func glRotate(_ angle : Float, x : Float, y : Float, z : Float) {
         let mag : CFloat = sqrt(x * x + y * y + z * z)
         
         let radians : CFloat = angle * Float(M_PI / 180.0)
@@ -97,7 +97,7 @@ public class GLTransformation {
         let cosAngle : Float = cosf(radians);
         
         if (mag > 0.0) {
-            var rotMat : [Float] = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0);
+            var rotMat : [Float] = Array<Float>(repeating: 0.0, count: GL_TRANSFORMATION_MATRIX_SIZE);
             
             //Compute the normal vector
             let nx = x / mag;
@@ -154,11 +154,11 @@ public class GLTransformation {
      * @param nearZ  Specify the distance to the near clipping plane. Distances must be positive.
      * @param farZ   Specify the distance to the far depth clipping plane. Distances must be positive.
      */
-    private func glFrustum (left : Float, right : Float, bottom : Float, top : Float, nearZ : Float, farZ : Float) {
+    fileprivate func glFrustum (_ left : Float, right : Float, bottom : Float, top : Float, nearZ : Float, farZ : Float) {
         let deltaX : Float = right - left;
         let deltaY : Float = top - bottom;
         let deltaZ : Float = farZ - nearZ;
-        var frustum : [Float] = Array<Float>(count: GL_TRANSFORMATION_MATRIX_SIZE, repeatedValue: 0.0);
+        var frustum : [Float] = Array<Float>(repeating: 0.0, count: GL_TRANSFORMATION_MATRIX_SIZE);
         
         if ((nearZ <= 0.0) || (farZ <= 0.0) || (deltaX <= 0.0)
             || (deltaY <= 0.0) || (deltaZ <= 0.0)) {
@@ -200,7 +200,7 @@ public class GLTransformation {
      * @param nearZ      specifies the distance from the viewer to the near clipping plane (always positive).
      * @param farZ       specifies the distance from the viewer to the far clipping plane (always positive).
      */
-    public func  gluPerspective(yViewAngle : Float, aspect : Float, nearZ : Float, farZ : Float){
+    open func  gluPerspective(_ yViewAngle : Float, aspect : Float, nearZ : Float, farZ : Float){
         
         let yAngle : Float = Math.toRadians(yViewAngle)
         
@@ -214,7 +214,7 @@ public class GLTransformation {
     /**
      * Replace the current matrix with the identity matrix
      */
-    public func  glLoadIdentity(){
+    open func  glLoadIdentity(){
         for i : Int  in 0 ..<  GL_TRANSFORMATION_MATRIX_SIZE {
             self.mMatrix[i] = 0.0;
         }
@@ -232,7 +232,7 @@ public class GLTransformation {
      * @param sy	scaling vector in the y-axle
      * @param sz 	scaling vector in the z-axle
      */
-    public func  glScale(sx : Float, sy : Float, sz : Float) {
+    open func  glScale(_ sx : Float, sy : Float, sz : Float) {
         //Set the main diagonal
         mMatrix[0] = sx * mMatrix[0];
         mMatrix[5] = sy * mMatrix[5];
@@ -248,7 +248,7 @@ public class GLTransformation {
      * @param ty	translation vector in the y-axle
      * @param tz 	translation vector in the z-axle
      */
-    public func setTranslation(tx : Float, ty: Float, tz : Float) {
+    open func setTranslation(_ tx : Float, ty: Float, tz : Float) {
         //The translation is the last row
         mMatrix[12] = tx;
         mMatrix[13] = ty;
@@ -259,7 +259,7 @@ public class GLTransformation {
     /**
      * @return current matrix
      */
-    public func getMatrix() ->  Array<Float> {
+    open func getMatrix() ->  Array<Float> {
         return self.mMatrix;
     }
 }

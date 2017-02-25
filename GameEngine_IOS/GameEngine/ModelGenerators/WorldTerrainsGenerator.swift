@@ -3,7 +3,7 @@ import Foundation
 /**
  * Responsible for creating the multiple terrains of the 3D world
  */
-public class WorldTerrainsGenerator : NSObject {
+open class WorldTerrainsGenerator : NSObject {
     
     /**
      * Load the textures of the terrain
@@ -13,7 +13,7 @@ public class WorldTerrainsGenerator : NSObject {
      *
      * @return the textures package of the terrain
      */
-    private static func getTexturedTerrain(loader : Loader) -> TerrainTexturesPack {
+    fileprivate static func getTexturedTerrain(_ loader : Loader) -> TerrainTexturesPack {
         let weightMapTextureId : Int = loader.loadTexture("blend_map");
         let backgroundTextureId : Int = loader.loadTexture("terrain");
         let mudTextureId : Int = loader.loadTexture("mud");
@@ -41,7 +41,7 @@ public class WorldTerrainsGenerator : NSObject {
      *
      * @return The terrain in the position specified
      */
-    private static func getTerrain(texturedTerrain : TerrainTexturesPack, terrainModel : RawModel, heights : [[Float]], position : Vector3f) -> Terrain {
+    fileprivate static func getTerrain(_ texturedTerrain : TerrainTexturesPack, terrainModel : RawModel, heights : [[Float]], position : Vector3f) -> Terrain {
         let terrain : Terrain = Terrain(texturePack: texturedTerrain, rawModel : terrainModel, heights: heights, position : position);
         return terrain;
     }
@@ -54,7 +54,7 @@ public class WorldTerrainsGenerator : NSObject {
      *
      * @return list of terrains of the scene
      */
-    public static func getTerrains(loader : Loader) -> Array<Terrain> {
+    open static func getTerrains(_ loader : Loader) -> Array<Terrain> {
         let texturedTerrain : TerrainTexturesPack = getTexturedTerrain(loader);
         let heightMap : TextureData = loader.getTextureData("heightmap");
         let terrain : TerrainShape = TerrainShape(heightMap: heightMap);

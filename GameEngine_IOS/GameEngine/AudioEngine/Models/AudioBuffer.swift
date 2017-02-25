@@ -4,11 +4,11 @@ import OpenAL
 
 
 /// Audio buffer to get played
-public class AudioBuffer : NSObject {
+open class AudioBuffer : NSObject {
     
     
     ///Identifier of the buffer to play in openAL
-    private var bufferId : ALint;
+    fileprivate var bufferId : ALint;
     
     
     /// Initializer of the audio buffer
@@ -22,7 +22,7 @@ public class AudioBuffer : NSObject {
     /// Get the identifier of the associated buffer
     ///
     /// - Returns: The Identifier of the buffer to play in openAL
-    public func getBufferId() -> ALint {
+    open func getBufferId() -> ALint {
         return bufferId;
     }
     
@@ -30,7 +30,7 @@ public class AudioBuffer : NSObject {
     /// Identifier of the buffer to play in openAL
     ///
     /// - Parameter bufferId: The identifier of the buffer
-    public func setBufferId(bufferId : ALint) {
+    open func setBufferId(_ bufferId : ALint) {
         self.bufferId = bufferId;
     }
     

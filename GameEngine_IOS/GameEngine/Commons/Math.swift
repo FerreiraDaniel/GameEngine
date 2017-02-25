@@ -5,12 +5,12 @@ import GLKit
  * Contains a set of methods to help in the migration from Java to Swift project when using math
  * Class
  */
-public class Math {
+open class Math {
     
     /**
      *  Transforms an angle in the degrees to radians
      */
-    public static func toRadians(degreesAngle : Float) -> Float
+    open static func toRadians(_ degreesAngle : Float) -> Float
     {
         let radiansAngle = GLKMathDegreesToRadians(degreesAngle);
         return radiansAngle;
@@ -19,7 +19,7 @@ public class Math {
     /**
      * Return the cosine of the angle passed
      */
-    public static func cos(radianAngle : Float) -> Float
+    open static func cos(_ radianAngle : Float) -> Float
     {
         return cosf(radianAngle);
     }
@@ -27,7 +27,7 @@ public class Math {
     /**
      * Return the sine of the angle passed
      */
-    public static func sin(radianAngle : Float) -> Float
+    open static func sin(_ radianAngle : Float) -> Float
     {
         return sinf(radianAngle);
     }
@@ -35,7 +35,7 @@ public class Math {
     /*
      *  Returns the correctly rounded positive square root of a double value.
      */
-    public static func sqrt(a : Float) -> Float
+    open static func sqrt(_ a : Float) -> Float
     {
         return sqrtf(a)
     }
@@ -55,7 +55,7 @@ public class Math {
      *          floating-point value that less than or equal to the argument
      *          and is equal to a mathematical integer.
      */
-    public static func floor(a : Float) -> Float {
+    open static func floor(_ a : Float) -> Float {
         return floorf(a);
     }
     
@@ -75,7 +75,7 @@ public class Math {
      *
      * @return The location determined
      */
-    public static func barryCentric(v1 : Vector3f, v2 : Vector3f, v3 : Vector3f, pos : Vector2f) -> Float {
+    open static func barryCentric(_ v1 : Vector3f, v2 : Vector3f, v3 : Vector3f, pos : Vector2f) -> Float {
         let det0 : Float = ((v2.z - v3.z) * (v1.x - v3.x))
         let det1 : Float = ((v3.x - v2.x) * (v1.z - v3.z))
         let det : Float =  det0 + det1;

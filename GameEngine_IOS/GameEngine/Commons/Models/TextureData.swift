@@ -3,7 +3,7 @@ import Foundation
 /**
  * Holds the data of the pixels of a texture as well as the width and height
  */
-public class TextureData : NSObject {
+open class TextureData : NSObject {
     
     // struct of components of the image (RGBA)
     struct RGBA {
@@ -15,10 +15,10 @@ public class TextureData : NSObject {
     
     
     /*Max allowed value of the a component of a pixel*/
-    private static let MAX_COMPONENT : Int = 255;
+    fileprivate static let MAX_COMPONENT : Int = 255;
     
     /*Maximum value that the component RGB has*/
-    public static let MAX_PIXEL_COLOR : Float = Float(MAX_COMPONENT * MAX_COMPONENT * MAX_COMPONENT);
+    open static let MAX_PIXEL_COLOR : Float = Float(MAX_COMPONENT * MAX_COMPONENT * MAX_COMPONENT);
     
     /**
      * Width of the texture
@@ -33,7 +33,7 @@ public class TextureData : NSObject {
     /**
      * The buffer with data about the pixels of the image
      */
-    var buffer : UnsafeMutablePointer<Void>?;
+    var buffer : UnsafeMutableRawPointer?;
     
     /**
      * The initialize of the texture data
@@ -46,7 +46,7 @@ public class TextureData : NSObject {
      *            Height of the texture
      
      */
-    public init(buffer : UnsafeMutablePointer<Void>?, width : Int, height : Int) {
+    public init(buffer : UnsafeMutableRawPointer?, width : Int, height : Int) {
         self.buffer = buffer
         self.width = width
         self.height = height
@@ -60,14 +60,14 @@ public class TextureData : NSObject {
      *
      * @return  The value representing the component read
      */
-    private func getLRgb(x : Int, y : Int) -> RGBA! {
+    fileprivate func getLRgb(_ x : Int, y : Int) -> RGBA! {
         // First check if the coordinates are in the range of the image
         if ((self.buffer == nil) || (x < 0) || (x >= self.height) || (y < 0) || (y >= self.height)) {
             // No in the range
             return nil;
         } else {
             let index = ((y * self.width) + x);
-            let rgbaptr = UnsafeMutablePointer<RGBA>(buffer!)
+            let rgbaptr = buffer!.assumingMemoryBound(to: RGBA.self)
             let rgba = rgbaptr[index];
             return rgba;
         }
@@ -80,11 +80,11 @@ public class TextureData : NSObject {
      * @return One integer representing the RGB colors of the pixel in the
      * position passed
      */
-    public func getRGB(x : Int, y : Int) -> Int? {
+    open func getRGB(_ x : Int, y : Int) -> Int? {
         let rgb = getLRgb(x, y: y);
-        let r = UInt(rgb.r)
-        let g = UInt(rgb.g)
-        let b = UInt(rgb.b)
+        let r = UInt((rgb?.r)!)
+        let g = UInt((rgb?.g)!)
+        let b = UInt((rgb?.b)!)
         
         return Int((b << 16) + (g << 8) + (r));
     }

@@ -7,7 +7,7 @@ import GLKit
 * Represents the the camera used by the user to see the
 * 3D World
 */
-public class Camera
+open class Camera
 {
 
     

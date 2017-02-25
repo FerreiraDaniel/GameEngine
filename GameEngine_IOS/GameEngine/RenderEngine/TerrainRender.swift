@@ -4,7 +4,7 @@ import GLKit
 /**
  * Class responsible to render the terrain of the scene
  */
-public class TerrainRender {
+open class TerrainRender {
     
     /**
      * Reference to the shader manager
@@ -33,7 +33,7 @@ public class TerrainRender {
      * @return The transformation matrix that put the terrain in its right
      *         position
      */
-    private func getTransformationMatrix(terrain : Terrain) -> GLTransformation {
+    fileprivate func getTransformationMatrix(_ terrain : Terrain) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
         matrix.glLoadIdentity();
         matrix.glTranslate(terrain.x, ty: terrain.y, tz: terrain.z);
@@ -56,7 +56,7 @@ public class TerrainRender {
      * @param terrains
      *            List of terrains of the scene
      */
-    public func render(skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
+    open func render(_ skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation, terrains : Array<Terrain>) {
         tShader.start();
         tShader.loadSkyColor(skyColor);
         tShader.loadLight(sun);
@@ -73,7 +73,7 @@ public class TerrainRender {
      * @param terrains
      *            Terrains to render
      */
-    private func render (terrains : Array<Terrain>) {
+    fileprivate func render (_ terrains : Array<Terrain>) {
         if (terrains.isEmpty) {
             return;
         } else {
@@ -92,7 +92,7 @@ public class TerrainRender {
      * @param terrain
      *      Terrain to get prepared
      */
-    private func prepareTerrain(terrain : Terrain) {
+    fileprivate func prepareTerrain(_ terrain : Terrain) {
         let model : RawModel = terrain.model;
         
         
@@ -113,7 +113,7 @@ public class TerrainRender {
     /**
      * When loads one texture defines that by default should zoom in/out it
      */
-    private func defineTextureFunctionFilters() {
+    fileprivate func defineTextureFunctionFilters() {
         // The texture minifying function is used whenever the pixel being
         // textured maps to an area greater than one texture element
         glTexParameteri(GLuint(GL_TEXTURE_2D), GLuint(GL_TEXTURE_MIN_FILTER), GL_LINEAR);
@@ -134,7 +134,7 @@ public class TerrainRender {
      *
      * @param terrain Terrain that is going to get the textures bound
      */
-    private func bindTextures(terrain : Terrain) {
+    fileprivate func bindTextures(_ terrain : Terrain) {
         let texturesPackage : TerrainTexturesPack = terrain.texturePack;
         
         
@@ -168,7 +168,7 @@ public class TerrainRender {
      * @param terrain
      *            the terrain to render
      */
-    private func   prepareInstance(terrain : Terrain) {
+    fileprivate func   prepareInstance(_ terrain : Terrain) {
         // Load the transformation matrix
         self.tShader.loadTransformationMatrix(self.getTransformationMatrix(terrain));
     }
@@ -178,7 +178,7 @@ public class TerrainRender {
      *
      * @param terrain A reference to the terrain to get render
      */
-    private func render_terrain(terrain : Terrain) {
+    fileprivate func render_terrain(_ terrain : Terrain) {
         let rawModel : RawModel = terrain.model;
         
         if(rawModel.indicesData != nil)
@@ -190,7 +190,7 @@ public class TerrainRender {
     /**
      * UnBind the previous binded elements
      */
-    private func unbindTexturedModel() {
+    fileprivate func unbindTexturedModel() {
         glDisableVertexAttribArray(GLuint(TTerrainAttribute.position.rawValue));
         glDisableVertexAttribArray(GLuint(TTerrainAttribute.textureCoords.rawValue));
         glDisableVertexAttribArray(GLuint(TTerrainAttribute.normal.rawValue));

@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents a 3D Vector with their x,y,z coordinates
  */
-public class Vector3f : Vector2f {
+open class Vector3f : Vector2f {
     
     var z : Float;
     
@@ -32,7 +32,7 @@ public class Vector3f : Vector2f {
     /**
      * Normalizes the components of the vector
      */
-    public func normalise() {
+    open func normalise() {
         let magnitude : Float = Math.sqrt((self.x * self.x) + (self.y * self.y) + (self.z * self.z));
         self.x = (x / magnitude);
         self.y = (y / magnitude);

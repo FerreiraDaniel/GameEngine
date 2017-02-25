@@ -3,9 +3,9 @@ import Foundation
 /**
  * Parses files formated in wavefront format That describes a set of material
  */
-public class MtlLoader : GenericLoader {
+open class MtlLoader : GenericLoader {
     
-    private static let TAG : String = "MtlLoader";
+    fileprivate static let TAG : String = "MtlLoader";
     
     
     /**
@@ -14,7 +14,7 @@ public class MtlLoader : GenericLoader {
      *
      * @return Parse one element with only one component
      */
-    private static func parseComponent(line : [String]) -> Float {
+    fileprivate static func parseComponent(_ line : [String]) -> Float {
         return Float(line[ComponentPositions.r]) ?? 0.0
     }
     
@@ -26,7 +26,7 @@ public class MtlLoader : GenericLoader {
      *
      * @return The color that got parsed
      */
-    private static func parseRgbColor(line : [String]) -> ColorRGB {
+    fileprivate static func parseRgbColor(_ line : [String]) -> ColorRGB {
         let r : Float = Float(line[ComponentPositions.r]) ?? 0.0
         let g : Float = Float(line[ComponentPositions.g]) ?? 0.0
         let b : Float = Float(line[ComponentPositions.b]) ?? 0.0
@@ -42,14 +42,14 @@ public class MtlLoader : GenericLoader {
      *
      * @return A list with information about material read
      */
-    private static func lLoadObjModel(fileName : String) -> [IExternalMaterial]? {
+    fileprivate static func lLoadObjModel(_ fileName : String) -> [IExternalMaterial]? {
         
         var materials : [IExternalMaterial]?  = nil;
         
         //Open the obj file from the disk
         
-        let fNames : Array<String> = fileName.componentsSeparatedByString(".");
-        let mtlPath : String = NSBundle.mainBundle().pathForResource(fNames[0], ofType: fNames[1])!
+        let fNames : Array<String> = fileName.components(separatedBy: ".");
+        let mtlPath : String = Bundle.main.path(forResource: fNames[0], ofType: fNames[1])!
         let file : UnsafeMutablePointer<FILE>? = fopen(mtlPath, "r")
         
         if(file != nil) {
@@ -57,13 +57,13 @@ public class MtlLoader : GenericLoader {
             var currentMaterial : WfMaterial? = nil;
             
             
-            let buffer : UnsafeMutablePointer<CChar> = UnsafeMutablePointer<CChar>.alloc(MAX_LINE_LENGTH);
+            let buffer : UnsafeMutablePointer<CChar> = UnsafeMutablePointer<CChar>.allocate(capacity: MAX_LINE_LENGTH);
             //Read the mtl file line by line
-            let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
+            let bytesToRead : Int32 = Int32(MemoryLayout<CChar>.size * MAX_LINE_LENGTH);
             while(fgets(buffer, bytesToRead, file!) != nil) {
-                let linen = String(UTF8String: UnsafePointer<CChar>(buffer))
-                let line = linen?.stringByReplacingOccurrencesOfString("\n", withString: "");
-                let currentLine : Array<String> = line!.componentsSeparatedByString(GenericLoader.SPLIT_TOKEN);
+                let linen = String(validatingUTF8: UnsafePointer<CChar>(buffer))
+                let line = linen?.replacingOccurrences(of: "\n", with: "");
+                let currentLine : Array<String> = line!.components(separatedBy: GenericLoader.SPLIT_TOKEN);
                 let prefix : String = currentLine[0];
                 
                 if(prefix.characters.count == 0) {
@@ -152,7 +152,7 @@ public class MtlLoader : GenericLoader {
                     break
                 }
             }
-            buffer.dealloc(MAX_LINE_LENGTH)
+            buffer.deallocate(capacity: MAX_LINE_LENGTH)
             fclose(file!);
         }
         
@@ -169,7 +169,7 @@ public class MtlLoader : GenericLoader {
      *
      * @return the HashMap with materials
      */
-    private static func buildMapOfMaterials(materials : [IExternalMaterial]?) -> Dictionary<String, IExternalMaterial>? {
+    fileprivate static func buildMapOfMaterials(_ materials : [IExternalMaterial]?) -> Dictionary<String, IExternalMaterial>? {
         if ((materials == nil) || (materials?.isEmpty)!) {
             return nil;
         } else {
@@ -190,7 +190,7 @@ public class MtlLoader : GenericLoader {
      *
      * @return An hash with information about materials read
      */
-    public static func loadObjModel(fileName : String) -> Dictionary<String, IExternalMaterial>? {
+    open static func loadObjModel(_ fileName : String) -> Dictionary<String, IExternalMaterial>? {
         return buildMapOfMaterials(MtlLoader.lLoadObjModel(fileName));
     }
 }

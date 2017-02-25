@@ -3,9 +3,9 @@ import Foundation
 /**
  ** The model to the terrain entity
  */
-public class Terrain {
+open class Terrain {
     
-    private let SIZE : Float = 500
+    fileprivate let SIZE : Float = 500
     
     /**
      * Position of the terrain in the x-axle
@@ -61,7 +61,7 @@ public class Terrain {
      *               terrain
      * @return The height of the terrain in the specified position of the world
      */
-    public func getHeightOfTerrain(worldX : Float, worldZ : Float) -> Float {
+    open func getHeightOfTerrain(_ worldX : Float, worldZ : Float) -> Float {
         let terrainX : Float = worldX - self.x;
         let terrainZ : Float = worldZ - self.z;
         let gridSquareSize : Float = TerrainShape.SIZE / Float(self.heights.count - 1);
@@ -70,8 +70,8 @@ public class Terrain {
         if (gridX >= heights.count - 1 || gridZ >= heights.count - 1 || gridX < 0 || gridZ < 0) {
             return 0;
         } else {
-            let xCoord : Float = Math.floor(terrainX % gridSquareSize);
-            let zCoord : Float = Math.floor(terrainZ % gridSquareSize);
+            let xCoord : Float = Math.floor(terrainX.truncatingRemainder(dividingBy: gridSquareSize));
+            let zCoord : Float = Math.floor(terrainZ.truncatingRemainder(dividingBy: gridSquareSize));
             
             var height : Float;
             if (xCoord <= (gridSquareSize - zCoord)) {

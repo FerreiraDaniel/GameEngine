@@ -3,28 +3,28 @@ import Foundation
 /**
  * Player that is going to be used in the scene
  */
-public class Player : Entity {
+open class Player : Entity {
     
     /*Distance that the user is going to run in one second*/
-    private let RUN_SPEED : Float = 20.0;
+    fileprivate let RUN_SPEED : Float = 20.0;
     /*Angle that the user will turn in one second*/
-    private let TURN_SPEED : Float = 160.0;
+    fileprivate let TURN_SPEED : Float = 160.0;
     /*The gravity that is going to push the player back to the ground*/
-    private let GRAVITY : Float = -0.5;
+    fileprivate let GRAVITY : Float = -0.5;
     /*Power that the player is going to be push up when is jumping*/
-    private let JUMP_POWER : Float = 0.3;
+    fileprivate let JUMP_POWER : Float = 0.3;
     
     /*The current speed of the player*/
-    private var currentSpeed : Float;
+    fileprivate var currentSpeed : Float;
     
     /*The current speed turning*/
-    private var currentTurnSpeed : Float;
+    fileprivate var currentTurnSpeed : Float;
     
     /*The speed which the player is going up*/
-    private var upwardsSpeed : Float;
+    fileprivate var upwardsSpeed : Float;
     
     /*Indicates if is jumping or not*/
-    private var isJumping : Bool
+    fileprivate var isJumping : Bool
     
     /**
      * Initiator of the player to be render in the 3D world
@@ -48,7 +48,7 @@ public class Player : Entity {
      * Check the input of the user in order to update the current values of the movement
      * @param terrain Reference to the terrain
      */
-    private func checkInputs(terrain : Terrain) {
+    fileprivate func checkInputs(_ terrain : Terrain) {
         if (GamePad.isKeyDown(GamePadKey.circle)) {
             //Go in front
             self.currentSpeed = -RUN_SPEED;
@@ -81,7 +81,7 @@ public class Player : Entity {
      * @param timeToRender The time that took to render the last frame in seconds like that the movement of the player is
      *                     frame rate independent
      */
-    private func moveAndRotate(timeToRender : Float) {
+    fileprivate func moveAndRotate(_ timeToRender : Float) {
         let turnByFrame : Float = currentTurnSpeed * timeToRender;
         self.increaseRotation(0.0, dy: turnByFrame, dz: 0.0);
         let distance : Float = currentSpeed * timeToRender;
@@ -98,7 +98,7 @@ public class Player : Entity {
      *                     frame rate independent
      * @param terrain      Reference to the terrain to compute where is going to fall
      */
-    private func fallDown(timeToRender : Float, terrain : Terrain) {
+    fileprivate func fallDown(_ timeToRender : Float, terrain : Terrain) {
         let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
         
         
@@ -119,7 +119,7 @@ public class Player : Entity {
      * Set the upward speed of the player in order make it jump
      * @param terrain Reference to the terrain in order to compute the height that is going to jump
      */
-    private func jump(terrain : Terrain) {
+    fileprivate func jump(_ terrain : Terrain) {
         let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
         if (position.y <= terrainHeight) {
             upwardsSpeed = terrainHeight + JUMP_POWER;
@@ -134,7 +134,7 @@ public class Player : Entity {
      *                     frame rate independent
      * @param terrain	Terrain used to determine the height where the player is going to fall/stay
      */
-    public func move(timeToRender : Float, terrain : Terrain) {
+    open func move(_ timeToRender : Float, terrain : Terrain) {
         checkInputs(terrain);
         moveAndRotate(timeToRender);
         fallDown(timeToRender, terrain: terrain);
@@ -144,7 +144,7 @@ public class Player : Entity {
     /**
      * @return the current speed of the player
      */
-    public func getCurrentSpeed() -> Float {
+    open func getCurrentSpeed() -> Float {
         return self.currentSpeed;
     }
 }

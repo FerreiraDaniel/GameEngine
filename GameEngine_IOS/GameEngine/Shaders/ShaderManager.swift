@@ -5,9 +5,9 @@ import OpenGLES
  *  Master class to handle shaders
  *
  */
-public class ShaderManager : NSObject{
+open class ShaderManager : NSObject{
     
-    public var shaderProgram : ShaderProgram!
+    open var shaderProgram : ShaderProgram!
     internal var uniforms : Array<Int>
     
     /**
@@ -18,7 +18,7 @@ public class ShaderManager : NSObject{
      * @param numberOfUniforms number of uniform locations of the shader program
      */
     public init(vertexFile : String, fragmentFile : String, numberOfUniforms : Int) {
-        self.uniforms = Array<Int>(count: numberOfUniforms, repeatedValue: -1)
+        self.uniforms = Array<Int>(repeating: -1, count: numberOfUniforms)
         
         super.init()
         
@@ -26,11 +26,11 @@ public class ShaderManager : NSObject{
         var vertexShaderSrc, fragShaderSrc : NSString?
         
         //Read the vertex file to one variable
-        vertShaderPathname = NSBundle.mainBundle().pathForResource(vertexFile, ofType: "vsh")!
+        vertShaderPathname = Bundle.main.path(forResource: vertexFile, ofType: "vsh")!
         vertexShaderSrc = LoadUtils.readText(vertShaderPathname);
         
         //Read the fragment shader file to one variable
-        fragShaderPathname = NSBundle.mainBundle().pathForResource(fragmentFile, ofType: "fsh")!
+        fragShaderPathname = Bundle.main.path(forResource: fragmentFile, ofType: "fsh")!
         fragShaderSrc = LoadUtils.readText(fragShaderPathname);
         
         self.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc: fragShaderSrc);
@@ -68,7 +68,7 @@ public class ShaderManager : NSObject{
      * Called to provide the attributes that are goin to get bound to the shader
      */
     internal func getAttributes() -> Dictionary<Int, String>! {
-        NSException.raise("Invoked abstract method", format: "Invoked abstract method", arguments:getVaList(["nil"]))
+        NSException.raise(NSExceptionName(rawValue: "Invoked abstract method"), format: "Invoked abstract method", arguments:getVaList(["nil"]))
         return nil;
     }
     
@@ -76,7 +76,7 @@ public class ShaderManager : NSObject{
     /**
      * Called to bind the attributes to the program shader
      */
-    private func bindAttributes() {
+    fileprivate func bindAttributes() {
         let attributes : Dictionary<Int, String>! = self.getAttributes();
         
         
@@ -91,14 +91,14 @@ public class ShaderManager : NSObject{
      * Called to provide the uniform locations that are goin to get bound to the shader
      */
     internal func getUniformLocations() -> Dictionary<NSInteger, String>! {
-        NSException.raise("Invoked abstract method", format: "Invoked abstract method", arguments:getVaList(["nil"]))
+        NSException.raise(NSExceptionName(rawValue: "Invoked abstract method"), format: "Invoked abstract method", arguments:getVaList(["nil"]))
         return nil;
     }
     
     /**
      * Called to ensure that all the shader managers get their uniform locations
      */
-    private func getAllUniformLocations() {
+    fileprivate func getAllUniformLocations() {
         
         let uniformsDic : Dictionary<NSInteger, String> = getUniformLocations();
         
@@ -117,7 +117,7 @@ public class ShaderManager : NSObject{
      * @param attributeIndex Index of the attribute to bind
      * @param variableName   Name of the attribute to bind
      */
-    private func bindAttribute(attributeIndex : Int , variableName : String) {
+    fileprivate func bindAttribute(_ attributeIndex : Int , variableName : String) {
         glBindAttribLocation(shaderProgram.programId, GLuint(attributeIndex), variableName);
     }
     
@@ -127,7 +127,7 @@ public class ShaderManager : NSObject{
      * @param uniformName the name of the uniform variable as appears in the shader code
      * @return the position of the uniform variable in program shader
      */
-    internal func  getUniformLocation(uniformName : String) -> Int {
+    internal func  getUniformLocation(_ uniformName : String) -> Int {
         return Int(glGetUniformLocation(shaderProgram.programId, uniformName));
     }
     
@@ -139,7 +139,7 @@ public class ShaderManager : NSObject{
      * @param value
      *            The value to load
      */
-    internal func loadInt(location : Int, value : Int) {
+    internal func loadInt(_ location : Int, value : Int) {
         glUniform1i(GLint(location), Int32(value));
     }
     
@@ -149,7 +149,7 @@ public class ShaderManager : NSObject{
      * @param location location of the shader variable in the script
      * @param value    value to load
      */
-    internal func loadFloat(location : Int, value : Float) {
+    internal func loadFloat(_ location : Int, value : Float) {
         glUniform1f(GLint(location), value);
     }
     
@@ -161,7 +161,7 @@ public class ShaderManager : NSObject{
      * @param vector
      *            The vector to load
      */
-    internal func loadVector(location : Int, vector : Vector2f) {
+    internal func loadVector(_ location : Int, vector : Vector2f) {
         glUniform2f(GLint(location), vector.x, vector.y);
     }
     
@@ -171,7 +171,7 @@ public class ShaderManager : NSObject{
      * @param location location of the shader variable in the script
      * @param vector The vector to load
      */
-    internal func  loadVector(location : Int, vector : Vector3f) {
+    internal func  loadVector(_ location : Int, vector : Vector3f) {
         glUniform3f(GLint(location), vector.x, vector.y, vector.z);
     }
     
@@ -183,7 +183,7 @@ public class ShaderManager : NSObject{
      * @param color
      *            The color to load
      */
-    internal func loadColorRGB(location: Int,  color: ColorRGB) {
+    internal func loadColorRGB(_ location: Int,  color: ColorRGB) {
         glUniform3f(GLint(location), color.r, color.g, color.b);
     }
     
@@ -195,7 +195,7 @@ public class ShaderManager : NSObject{
      * @param color
      *            The color to load
      */
-    internal func loadColorRGBA(location : Int, color: ColorRGBA) {
+    internal func loadColorRGBA(_ location : Int, color: ColorRGBA) {
         glUniform4f(GLint(location), color.r, color.g, color.b, color.a);
     }
     
@@ -205,7 +205,7 @@ public class ShaderManager : NSObject{
      * @param location The location of the shader variable in the script
      * @param value    value to load
      */
-    internal func  loadBoolean(location : Int, value : Bool) {
+    internal func  loadBoolean(_ location : Int, value : Bool) {
         let toLoad : Float = value ? 1.0 : 0.0;
         glUniform1f(GLint(location), toLoad);
     }
@@ -216,14 +216,14 @@ public class ShaderManager : NSObject{
      * @param location The location of the shader variable in the script
      * @param matrix   Matrix to load
      */
-    public func loadMatrix (location : Int, matrix : GLTransformation) {
+    open func loadMatrix (_ location : Int, matrix : GLTransformation) {
         glUniformMatrix4fv(GLint(location), 1, 0, matrix.getMatrix());
     }
     
     /**
      * Indicates that should start to use a certain program shader
      */
-    public func start() {
+    open func start() {
         if (shaderProgram != nil) {
             glUseProgram(shaderProgram.programId);
         }
@@ -232,7 +232,7 @@ public class ShaderManager : NSObject{
     /**
      * Indicate that should not use a certain program no more
      */
-    public func  stop() {
+    open func  stop() {
         glUseProgram(0);
     }
     

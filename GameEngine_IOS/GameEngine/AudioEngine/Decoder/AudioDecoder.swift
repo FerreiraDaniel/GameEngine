@@ -1,7 +1,7 @@
 import Foundation
 import AudioToolbox
 
-public class AudioDecoder {
+open class AudioDecoder {
     
     public init() {
     }
@@ -12,17 +12,17 @@ public class AudioDecoder {
      * @param inFileURL The input url from which to read the audio file
      * @return The data describing the audio thats been read
      */
-    public func getData(inFileURL: NSURL) -> AudioData? {
+    open func getData(_ inFileURL: URL) -> AudioData? {
         var err: OSStatus = noErr
         var theFileLengthInFrames: Int64 = 0
         var theFileFormat: AudioStreamBasicDescription = AudioStreamBasicDescription()
-        var thePropertySize: UInt32 = UInt32(strideofValue(theFileFormat))
-        var extRef: ExtAudioFileRef = nil
-        var theData: UnsafeMutablePointer<Void>? = nil
+        var thePropertySize: UInt32 = UInt32(MemoryLayout.stride(ofValue: theFileFormat))
+        var extRef: ExtAudioFileRef? = nil
+        var theData: UnsafeMutableRawPointer? = nil
         var theOutputFormat: AudioStreamBasicDescription = AudioStreamBasicDescription()
         
         // Open a file with ExtAudioFileOpen()
-        err = ExtAudioFileOpenURL(inFileURL, &extRef)
+        err = ExtAudioFileOpenURL(inFileURL as CFURL, &extRef)
         if err != noErr
         {
             print("MyGetOpenALAudioData: ExtAudioFileOpenURL FAILED, Error = \(err)");
@@ -30,7 +30,7 @@ public class AudioDecoder {
         }
         
         // Get the audio data format
-        err = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileDataFormat, &thePropertySize, &theFileFormat)
+        err = ExtAudioFileGetProperty(extRef!, kExtAudioFileProperty_FileDataFormat, &thePropertySize, &theFileFormat)
         if err != noErr
         {
             print("MyGetOpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileDataFormat) FAILED, Error = \(err)");
@@ -54,7 +54,7 @@ public class AudioDecoder {
         theOutputFormat.mFormatFlags = kAudioFormatFlagsNativeEndian | kAudioFormatFlagIsPacked | kAudioFormatFlagIsSignedInteger
         
         // Set the desired client (output) data format
-        err = ExtAudioFileSetProperty(extRef, kExtAudioFileProperty_ClientDataFormat, UInt32(strideofValue(theOutputFormat)), &theOutputFormat)
+        err = ExtAudioFileSetProperty(extRef!, kExtAudioFileProperty_ClientDataFormat, UInt32(MemoryLayout.stride(ofValue: theOutputFormat)), &theOutputFormat)
         if err != noErr
         {
             print("MyGetOpenALAudioData: ExtAudioFileSetProperty(kExtAudioFileProperty_ClientDataFormat) FAILED, Error = \(err)");
@@ -62,8 +62,8 @@ public class AudioDecoder {
         }
         
         // Get the total frame count
-        thePropertySize = UInt32(strideofValue(theFileLengthInFrames))
-        err = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileLengthFrames, &thePropertySize, &theFileLengthInFrames)
+        thePropertySize = UInt32(MemoryLayout.stride(ofValue: theFileLengthInFrames))
+        err = ExtAudioFileGetProperty(extRef!, kExtAudioFileProperty_FileLengthFrames, &thePropertySize, &theFileLengthInFrames)
         if err != noErr
         {
             print("MyGetOpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileLengthFrames) FAILED, Error = \(err)");
@@ -72,7 +72,7 @@ public class AudioDecoder {
         
         // Read all the data into memory
         let dataSize = UInt32(theFileLengthInFrames) * theOutputFormat.mBytesPerFrame
-        theData = UnsafeMutablePointer.alloc(Int(dataSize))
+        theData = UnsafeMutableRawPointer.allocate(bytes: Int(dataSize), alignedTo: 1)
         if theData == nil
         {
             return nil
@@ -86,7 +86,7 @@ public class AudioDecoder {
             
             // Read the data into an AudioBufferList
             var ioNumberFrames: UInt32 = UInt32(theFileLengthInFrames)
-            err = ExtAudioFileRead(extRef, &ioNumberFrames, &theDataBuffer)
+            err = ExtAudioFileRead(extRef!, &ioNumberFrames, &theDataBuffer)
             if err == noErr {
                 // success
                 let audioData = AudioData()
@@ -99,7 +99,7 @@ public class AudioDecoder {
                 // failure
                 if(theData != nil)
                 {
-                    theData!.dealloc(Int(dataSize))
+                    theData!.deallocate(bytes: Int(dataSize), alignedTo: 1)
                 }
                 theData = nil // make sure to return NULL
                 print("MyGetOpenALAudioData: ExtAudioFileRead FAILED, Error = \(err)");
@@ -113,10 +113,10 @@ public class AudioDecoder {
      *
      *  Dispose the ExtAudioFileRef, it is no longer needed
      */
-    public func cleanUp(audioData : AudioData?) {
+    open func cleanUp(_ audioData : AudioData?) {
         if(audioData != nil) {
             if audioData!.data != nil {
-                audioData!.data!.dealloc(Int(audioData!.dataSize))
+                audioData!.data!.deallocate(bytes: Int(audioData!.dataSize), alignedTo: 1)
             }
         }
     }

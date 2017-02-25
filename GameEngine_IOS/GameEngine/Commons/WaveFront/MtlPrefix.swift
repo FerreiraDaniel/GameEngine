@@ -1,101 +1,101 @@
 /**
  * Set of all the prefixes supported by the material parser
  */
-public class MtlPrefix {
+open class MtlPrefix {
     
     /**
      * The prefix of a comment
      */
-    public static let COMMENT = "#";
+    open static let COMMENT = "#";
     
     /**
      * The prefix of a new material
      */
-    public static let NEW_MATERIAL = "newmtl";
+    open static let NEW_MATERIAL = "newmtl";
     
     /**
      * The prefix of weight of specular color
      */
-    public static let WEIGHT_SPECULAR_COLOR = "Ns";
+    open static let WEIGHT_SPECULAR_COLOR = "Ns";
     
     /**
      * The prefix of specular color
      */
-    public static let SPECULAR_COLOR = "Ks";
+    open static let SPECULAR_COLOR = "Ks";
     
     /**
      * The prefix of ambient color
      */
-    public static let AMBIENT_COLOR = "Ka";
+    open static let AMBIENT_COLOR = "Ka";
     
     /**
      * The prefix of diffuse color
      */
-    public static let DIFFUSE_COLOR = "Kd";
+    open static let DIFFUSE_COLOR = "Kd";
     
     /**
      * The prefix of emissive color
      */
-    public static let EMISSIVE_COLOR = "Ke";
+    open static let EMISSIVE_COLOR = "Ke";
     
     /**
      * The prefix of optical density
      */
-    public static let OPTICAL_DENSITY = "Ni";
+    open static let OPTICAL_DENSITY = "Ni";
     
     /**
      * The prefix of dissolve factor
      */
-    public static let DISSOLVE_FACTOR = "d";
+    open static let DISSOLVE_FACTOR = "d";
     
     /**
      * The prefix of inverse of dissolve factor
      */
-    public static let DISSOLVE_FACTOR_INVERTED = "Tr";
+    open static let DISSOLVE_FACTOR_INVERTED = "Tr";
     
     /**
      * The prefix of illumination model
      */
-    public static let ILLUMINATION_MODEL = "illum";
+    open static let ILLUMINATION_MODEL = "illum";
     
     /**
      * The prefix of transmission filter
      */
-    public static let TRANSMISSION_FILTER = "Tf";
+    open static let TRANSMISSION_FILTER = "Tf";
     
     /**
      * The prefix of diffuse color texture map
      */
-    public static let COLOR_TEXTURE_MAP = "map_Kd";
+    open static let COLOR_TEXTURE_MAP = "map_Kd";
     
     /**
      * The prefix of specular color texture map
      */
-    public static let SPECULAR_COLOR_TEXTURE_MAP = "map_Ks";
+    open static let SPECULAR_COLOR_TEXTURE_MAP = "map_Ks";
     
     /**
      * The prefix of ambient color texture map
      */
-    public static let AMBIENT_COLOR_TEXTURE_MAP = "map_Ka";
+    open static let AMBIENT_COLOR_TEXTURE_MAP = "map_Ka";
     
     /**
      * The prefix of bump texture map
      */
-    public static let BUMP_TEXTURE_MAP = "map_Bump";
+    open static let BUMP_TEXTURE_MAP = "map_Bump";
     
     /**
      * The prefix of bump texture map
      */
-    public static let BUMP_TEXTURE_MAP_V2 = "bump";
+    open static let BUMP_TEXTURE_MAP_V2 = "bump";
     
     /**
      * The prefix of bump texture map
      */
-    public static let BUMP_TEXTURE_MAP_V3 = "map_Disp";
+    open static let BUMP_TEXTURE_MAP_V3 = "map_Disp";
     
     /**
      * The prefix of opacity texture map
      */
-    public static let OPACITY_MAP = "map_d";
+    open static let OPACITY_MAP = "map_d";
     
 }

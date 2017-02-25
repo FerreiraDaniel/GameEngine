@@ -3,7 +3,7 @@ import Foundation
 /**
 * Represents a box with sky textures
 */
-public class SkyBox  {
+open class SkyBox  {
     
     /**
     * RawModel of the skyBox

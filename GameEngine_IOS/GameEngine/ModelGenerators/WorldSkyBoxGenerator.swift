@@ -3,7 +3,7 @@ import Foundation
 /**
 * Responsible for creating the sky of the 3D world
 */
-public class WorldSkyBoxGenerator : NSObject {
+open class WorldSkyBoxGenerator : NSObject {
     
     /**
     * The sky of the 3D scene
@@ -12,7 +12,7 @@ public class WorldSkyBoxGenerator : NSObject {
     *
     * @return the reference to the sky box created
     */
-    public static func getSky(loader : Loader) -> SkyBox {
+    open static func getSky(_ loader : Loader) -> SkyBox {
         let skyBoxShape : IShape = SkyBoxShape()
         let rawModel : RawModel = loader.load3DPositionsToVAO(skyBoxShape.getVertices(), positionsLength: Int(skyBoxShape.countVertices()));
         

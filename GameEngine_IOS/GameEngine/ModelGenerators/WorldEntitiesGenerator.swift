@@ -4,14 +4,14 @@ import GLKit
 /**
  * Responsible for creating the multiple entities of the 3D world
  */
-public class WorldEntitiesGenerator : GenericEntitiesGenerator{
+open class WorldEntitiesGenerator : GenericEntitiesGenerator{
     
-    private static let NUMBER_OF_TREES : Int = 10;
-    private static let NUMBER_OF_BANANA_TREES : Int = 5;
-    private static let NUMBER_OF_FERNS : Int = 100;
-    private static let NUMBER_OF_GRASS : Int = 10;
-    private static let NUMBER_OF_FLOWERS  : Int = 20;
-    private static let NUMBER_OF_MARBLES : Int = 10;
+    fileprivate static let NUMBER_OF_TREES : Int = 10;
+    fileprivate static let NUMBER_OF_BANANA_TREES : Int = 5;
+    fileprivate static let NUMBER_OF_FERNS : Int = 100;
+    fileprivate static let NUMBER_OF_GRASS : Int = 10;
+    fileprivate static let NUMBER_OF_FLOWERS  : Int = 20;
+    fileprivate static let NUMBER_OF_MARBLES : Int = 10;
     
     
     
@@ -25,7 +25,7 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
      *
      * @return the entity to render
      */
-    private static func getEntity(genericEntity : GenericEntity,  position : Vector3f) -> Entity {
+    fileprivate static func getEntity(_ genericEntity : GenericEntity,  position : Vector3f) -> Entity {
         let rotation : Float = 0;
         let scale : Float = 1.0;
         let entity : Entity = Entity(genericEntity: genericEntity ,
@@ -41,7 +41,7 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
     /**
      * Get the default values of the entities that are going make the world
      */
-    private static func getEntitiesMap() -> Dictionary<DefaultModelGenerator, Int> {
+    fileprivate static func getEntitiesMap() -> Dictionary<DefaultModelGenerator, Int> {
         
         /* Fern model */
         let fernModel = DefaultModelGenerator(objectType: TEntity.fern, objectName: "fern", scale: 3.0, hasTransparency: true, normalsPointingUp: true);
@@ -82,7 +82,7 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
      *
      * @return The entities that will compose the 3D world
      */
-    public static func getEntities(loader : Loader, terrain : Terrain) -> Array<Entity> {
+    open static func getEntities(_ loader : Loader, terrain : Terrain) -> Array<Entity> {
         let entitiesMap : Dictionary<DefaultModelGenerator, Int> = WorldEntitiesGenerator.getEntitiesMap();
         
         //Alloccate the entities list
@@ -111,7 +111,7 @@ public class WorldEntitiesGenerator : GenericEntitiesGenerator{
      *
      * @return A source of light to the scene
      */
-    public static func getLight() -> Light {
+    open static func getLight() -> Light {
         let lightPosition : Vector3f = Vector3f(x: 10.0 , y: 100.0 , z: 10.0)
         let lightColor : ColorRGB = ColorRGB(r: 1.0 , g: 1.0 , b: 1.0)
         

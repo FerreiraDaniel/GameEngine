@@ -3,7 +3,7 @@ import Foundation
 /**
 * Represents a 2D Vector with their x,y,z coordinates
 */
-public class Vector2f {
+open class Vector2f {
     
     var x : Float;
     var y : Float;

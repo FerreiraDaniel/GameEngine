@@ -5,17 +5,17 @@ import OpenAL
 /**
  * Source represents the object that can play sounds for instance the CD player
  */
-public class AudioSource {
+open class AudioSource {
     
     /**
      * Identifier of the source in openAL
      */
-    private var sourceId : ALuint;
+    fileprivate var sourceId : ALuint;
     
     /**
      * Reference to the buffer currently in the source if any
      */
-    private var buffer : AudioBuffer!;
+    fileprivate var buffer : AudioBuffer!;
     
     /**
      * @param sourceId
@@ -29,7 +29,7 @@ public class AudioSource {
     /**
      * @return the sourceId Identifier of the source in openAL
      */
-    public func getSourceId() -> ALuint {
+    open func getSourceId() -> ALuint {
     return sourceId;
     }
     
@@ -37,21 +37,21 @@ public class AudioSource {
      * @param sourceId
      *            Identifier of the source in openAL to set
      */
-    public func setSourceId(sourceId : ALuint) {
+    open func setSourceId(_ sourceId : ALuint) {
         self.sourceId = sourceId;
     }
     
     /**
      * @return the buffer currently associated with source
      */
-    public func getBuffer() -> AudioBuffer! {
+    open func getBuffer() -> AudioBuffer! {
         return self.buffer;
     }
     
     /**
      * @param buffer the buffer to set in the source
      */
-    public func setBuffer(buffer : AudioBuffer!) {
+    open func setBuffer(_ buffer : AudioBuffer!) {
         self.buffer = buffer;
     }
     

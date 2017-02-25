@@ -3,91 +3,91 @@ import GLKit
 
 
 /// Groups the entities in a hash map like this the same entity will be just put in different positions
-public class MasterRender {
+open class MasterRender {
     
     
     /// Width of the screen
-    private var width : Int;
+    fileprivate var width : Int;
     
     
     /// Height of the screen
-    private var height : Int;
+    fileprivate var height : Int;
     
     
     /// Reference to the render of the entities
-    private var entityRender : EntityRender!;
+    fileprivate var entityRender : EntityRender!;
     
     
     /// Reference to the render of the terrains
-    private var terrainRender : TerrainRender!;
+    fileprivate var terrainRender : TerrainRender!;
     
     
     /// Reference to the render of the sky box
-    private var skyBoxRender : SkyBoxRender!;
+    fileprivate var skyBoxRender : SkyBoxRender!;
     
     
     /// Reference to the render of GUIs
-    private var guiRender : GuiRender!;
+    fileprivate var guiRender : GuiRender!;
     
     /**
      * Reference to the camera from where the user is going to see the 3D world
      */
-    private var camera : ThirdPersonCamera!;
+    fileprivate var camera : ThirdPersonCamera!;
     
     /**
      * Entities of the world that are going to be rendered
      */
-    private var entities : Dictionary<String, Array<Entity>>!;
+    fileprivate var entities : Dictionary<String, Array<Entity>>!;
     
     /**
      * List of terrains of the world that are going to be render
      */
-    private var terrains : Array<Terrain>!;
+    fileprivate var terrains : Array<Terrain>!;
     
     /**
      * The player that is going to be show in the scene
      */
-    private var player : Player!;
+    fileprivate var player : Player!;
     
     /**
      * List of GUIs to show the status of the user
      */
-    private var GUIs : Array<GuiTexture>!;
+    fileprivate var GUIs : Array<GuiTexture>!;
     
     /**
      * The sky box that is going to use during the render
      */
-    private var skyBox : SkyBox!;
+    fileprivate var skyBox : SkyBox!;
     
     /**
      * Used to track how long tacks to render a frame
      */
-    private var startDate : NSDate!;
+    fileprivate var startDate : Date!;
     
     /**
      * The time to render one last frame in seconds
      * Variable used to be frame rate independent when moves the entities around
      */
-    private var timeToRender : Float = 0.0;
+    fileprivate var timeToRender : Float = 0.0;
     
     /* Constants of the camera */
-    private static let FOV : Float = 65.0;
-    private static let NEAR_PLANE : Float = 0.1;
-    private static let FAR_PLANE : Float = 1000.0;
+    fileprivate static let FOV : Float = 65.0;
+    fileprivate static let NEAR_PLANE : Float = 0.1;
+    fileprivate static let FAR_PLANE : Float = 1000.0;
     
     
     /*Components of the color of the sky*/
-    private static let SKY_R : Float = 0.5;
-    private static let SKY_G : Float = 0.5;
-    private static let SKY_B : Float = 0.5;
-    private static let SKY_A : Float = 1.0;
+    fileprivate static let SKY_R : Float = 0.5;
+    fileprivate static let SKY_G : Float = 0.5;
+    fileprivate static let SKY_B : Float = 0.5;
+    fileprivate static let SKY_A : Float = 1.0;
     
     /**
      * Create the projection matrix with parameters of the camera
      *
      * @return A projection matrix
      */
-    private static func createProjectionMatrix(width : Int, height : Int) -> GLTransformation {
+    fileprivate static func createProjectionMatrix(_ width : Int, height : Int) -> GLTransformation {
         let matrix : GLTransformation = GLTransformation();
         matrix.glLoadIdentity();
         let aspect : Float = fabs( ((1.0) * Float(width)) / Float(height));
@@ -105,7 +105,7 @@ public class MasterRender {
      *
      * @return The view matrix
      */
-    private static func createViewMatrix(aCamera : Camera) -> GLTransformation {
+    fileprivate static func createViewMatrix(_ aCamera : Camera) -> GLTransformation {
         let matrix : GLTransformation = GLTransformation();
         matrix.glLoadIdentity();
         matrix.glRotate(aCamera.pitch, x: 1.0, y: 0.0, z: 0.0);
@@ -122,7 +122,7 @@ public class MasterRender {
      * Calls the methods to update the camera and updates the matrix that
      * describe the camera in the scene
      */
-    private func updateCamera() -> GLTransformation {
+    fileprivate func updateCamera() -> GLTransformation {
         
         //Update the camera taking in account the position of the player
         if(player != nil) {
@@ -137,7 +137,7 @@ public class MasterRender {
     /**
      * Uses the GUIs to update the game pad of the game
      */
-    private func updateGamePad() {
+    fileprivate func updateGamePad() {
         if ((self.GUIs != nil) && (!self.GUIs.isEmpty)) {
             for guiTexture in GUIs {
                 if(guiTexture.gamePadKey != nil) {
@@ -150,7 +150,7 @@ public class MasterRender {
     
     
     /// Call the method to update the player position
-    private func updatePlayer() {
+    fileprivate func updatePlayer() {
         if (self.player != nil) {
             self.player.move(self.timeToRender, terrain: terrains[0]);
         }
@@ -210,7 +210,7 @@ public class MasterRender {
      * @param entity
      *            the entity to add to the render
      */
-    private func processEntity(entity : Entity) {
+    fileprivate func processEntity(_ entity : Entity) {
         let genericEntity : GenericEntity = entity.genericEntity;
         let key : String = genericEntity.id;
         var batch : Array<Entity>! = entities[key];
@@ -231,7 +231,7 @@ public class MasterRender {
      * @param lEntities
      *            list of entities to get render in the next frame
      */
-    public func processEntities(lEntities : Array<Entity>!) {
+    open func processEntities(_ lEntities : Array<Entity>!) {
         self.entities.removeAll();
         if ((lEntities != nil) && (!lEntities.isEmpty)) {
             for entity in lEntities {
@@ -246,7 +246,7 @@ public class MasterRender {
      * @param terrain
      *            the terrain to render
      */
-    private func  processTerrain(terrain : Terrain) {
+    fileprivate func  processTerrain(_ terrain : Terrain) {
         self.terrains.append(terrain);
     }
     
@@ -256,7 +256,7 @@ public class MasterRender {
      * @param lTerrains
      *            list of terrains to process
      */
-    public func  processTerrains(lTerrains : Array<Terrain>!) {
+    open func  processTerrains(_ lTerrains : Array<Terrain>!) {
         self.terrains.removeAll();
         for terrain in lTerrains {
             self.processTerrain(terrain);
@@ -269,7 +269,7 @@ public class MasterRender {
      * @param gui
      *            the GUI to render
      */
-    private func processGUI(gui : GuiTexture) {
+    fileprivate func processGUI(_ gui : GuiTexture) {
         self.GUIs.append(gui);
     }
     
@@ -279,7 +279,7 @@ public class MasterRender {
      * @param lGuis
      *            array of GUIs to process
      */
-    public func processGUIs(lGuis : Array<GuiTexture>) {
+    open func processGUIs(_ lGuis : Array<GuiTexture>) {
         self.GUIs.removeAll();
         
         if (!lGuis.isEmpty) {
@@ -293,7 +293,7 @@ public class MasterRender {
     /**
      * Set the sky box the use during the render
      */
-    public func  processSkyBox(aSkyBox : SkyBox) {
+    open func  processSkyBox(_ aSkyBox : SkyBox) {
         self.skyBox = aSkyBox;
     }
     
@@ -302,7 +302,7 @@ public class MasterRender {
      *
      * @param player The player that is going to set
      */
-    public func processPlayer(player : Player) {
+    open func processPlayer(_ player : Player) {
         self.player = player;
     }
     
@@ -312,7 +312,7 @@ public class MasterRender {
      * @param sun
      *            Sun of the scene
      */
-    public func render(sun : Light) {
+    open func render(_ sun : Light) {
         self.prepare();
         self.updateGamePad();
         self.updatePlayer();
@@ -328,24 +328,24 @@ public class MasterRender {
      * Indicates that is going to start the rendering of a new frame Like that
      * the master render can compute how long tacks to render the frame
      */
-    public func startFrameRender() {
-        self.startDate = NSDate();
+    open func startFrameRender() {
+        self.startDate = Date();
     }
     
     /**
      * Indicates that is going to end the rendering of a frame Like that the
      * master render can compute how long tacks to render the frame
      */
-    public func endFrameRender() {
+    open func endFrameRender() {
         // Logs frames/s
-        let endDate = NSDate();
-        let interval : NSTimeInterval = endDate.timeIntervalSinceDate(self.startDate);
+        let endDate = Date();
+        let interval : TimeInterval = endDate.timeIntervalSince(self.startDate);
         self.timeToRender = Float(interval);
     }
     
     
     /// Clean the data of the previous frame
-    private func prepare()
+    fileprivate func prepare()
     {
         glEnable(GLenum(GL_DEPTH_TEST));
         

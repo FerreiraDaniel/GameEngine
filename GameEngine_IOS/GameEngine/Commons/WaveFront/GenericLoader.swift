@@ -3,7 +3,7 @@ import Foundation
 /**
  * Contains methods used by the wavefront loaders
  */
-public class GenericLoader {
+open class GenericLoader {
     
     internal static let SPLIT_TOKEN = " ";
     internal static let EMPTY_STRING = "";
@@ -23,7 +23,7 @@ public class GenericLoader {
      *
      * @return The parsed vector
      */
-    internal static func parseVector2f(xStr : String, yStr : String) -> Vector2f {
+    internal static func parseVector2f(_ xStr : String, yStr : String) -> Vector2f {
         let x : Float = Float(xStr) ?? 0.0
         let y : Float = Float(yStr) ?? 0.0
         
@@ -43,7 +43,7 @@ public class GenericLoader {
      *
      * @return The parsed vector
      */
-    internal static func parseVector3f(xStr : String, yStr : String, zStr : String) -> Vector3f {
+    internal static func parseVector3f(_ xStr : String, yStr : String, zStr : String) -> Vector3f {
         let x : Float = Float(xStr) ?? 0.0
         let y : Float = Float(yStr) ?? 0.0
         let z : Float = Float(zStr) ?? 0.0
@@ -60,10 +60,10 @@ public class GenericLoader {
      *
      * @return A a string defined by in one line
      */
-    internal static func parseStringComponent(line : String, _ currentLine: [String]) -> String {
+    internal static func parseStringComponent(_ line : String, _ currentLine: [String]) -> String {
         let startIndex : Int = currentLine[0].characters.count
-        let index = line.startIndex.advancedBy(startIndex)
-        let fileName = line.substringFromIndex(index)
-        return fileName.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet());
+        let index = line.characters.index(line.startIndex, offsetBy: startIndex)
+        let fileName = line.substring(from: index)
+        return fileName.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines);
     }
 }

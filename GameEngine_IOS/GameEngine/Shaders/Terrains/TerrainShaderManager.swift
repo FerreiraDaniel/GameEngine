@@ -4,7 +4,7 @@ import Foundation
  * Manager of the shader files that are going to be load to render the 3D
  * Terrain
  */
-public class TerrainShaderManager : ShaderManager {
+open class TerrainShaderManager : ShaderManager {
     
     /**
      * Initializor of the game shader where the vertex and fragment shader of
@@ -55,12 +55,12 @@ public class TerrainShaderManager : ShaderManager {
      * Associate the shader variables with textures that were defined in the
      * bind of textures
      */
-    public func connectTextureUnits() {
-        super.loadInt(uniforms[TTerrainUniform.backgroundTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT0.rawValue);
-        super.loadInt(uniforms[TTerrainUniform.mudTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT1.rawValue);
-        super.loadInt(uniforms[TTerrainUniform.grassTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT2.rawValue);
-        super.loadInt(uniforms[TTerrainUniform.pathTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT3.rawValue);
-        super.loadInt(uniforms[TTerrainUniform.weightMapTexture.rawValue], value: TTerrainTexture.TEXTURE_UNIT4.rawValue);
+    open func connectTextureUnits() {
+        super.loadInt(uniforms[TTerrainUniform.backgroundTexture.rawValue], value: TTerrainTexture.texture_UNIT0.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.mudTexture.rawValue], value: TTerrainTexture.texture_UNIT1.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.grassTexture.rawValue], value: TTerrainTexture.texture_UNIT2.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.pathTexture.rawValue], value: TTerrainTexture.texture_UNIT3.rawValue);
+        super.loadInt(uniforms[TTerrainUniform.weightMapTexture.rawValue], value: TTerrainTexture.texture_UNIT4.rawValue);
     }
     
     /**
@@ -69,7 +69,7 @@ public class TerrainShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadProjectionMatrix (matrix : GLTransformation) {
+    open func loadProjectionMatrix (_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TTerrainUniform.projectionMatrix.rawValue], matrix: matrix);
     }
     
@@ -80,7 +80,7 @@ public class TerrainShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadViewMatrix (matrix : GLTransformation) {
+    open func loadViewMatrix (_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TTerrainUniform.viewMatrix.rawValue], matrix: matrix);
     }
     
@@ -90,7 +90,7 @@ public class TerrainShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadTransformationMatrix(matrix : GLTransformation) {
+    open func loadTransformationMatrix(_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TTerrainUniform.transformationMatrix.rawValue], matrix: matrix);
     }
     
@@ -100,7 +100,7 @@ public class TerrainShaderManager : ShaderManager {
      *
      * @param light the light to load in the shader program
      */
-    public func loadLight(light : Light) {
+    open func loadLight(_ light : Light) {
         super.loadVector(uniforms[TTerrainUniform.lightPosition.rawValue], vector: light.position);
         super.loadColorRGB(uniforms[TTerrainUniform.lightColor.rawValue], color: light.color);
     }
@@ -111,7 +111,7 @@ public class TerrainShaderManager : ShaderManager {
      * @param damper		The damper of the specular lighting
      * @param reflectivity	The reflectivity of the material
      */
-    public func loadShineVariables(damper : Float, reflectivity : Float) {
+    open func loadShineVariables(_ damper : Float, reflectivity : Float) {
         super.loadFloat(uniforms[TTerrainUniform.shineDamper.rawValue], value: damper);
         super.loadFloat(uniforms[TTerrainUniform.reflectivity.rawValue], value : reflectivity);
     }
@@ -123,7 +123,7 @@ public class TerrainShaderManager : ShaderManager {
      * @param skyColor
      * 			Color of the sky
      */
-    public func  loadSkyColor(skyColor : ColorRGBA) {
+    open func  loadSkyColor(_ skyColor : ColorRGBA) {
         super.loadColorRGBA(uniforms[TTerrainUniform.skyColor.rawValue], color: skyColor);
     }
 }

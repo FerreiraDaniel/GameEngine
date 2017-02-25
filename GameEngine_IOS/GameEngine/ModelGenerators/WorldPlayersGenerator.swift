@@ -3,11 +3,11 @@ import Foundation
 /**
  * Responsible for creating the creating the player(s) of the scene
  */
-public class WorldPlayersGenerator {
+open class WorldPlayersGenerator {
     /**
      * @return The model with information to generate a player
      */
-    private static func getPlayerModel() -> DefaultModelGenerator {
+    fileprivate static func getPlayerModel() -> DefaultModelGenerator {
         /* Player model */
         let playerModel = DefaultModelGenerator(objectType: TEntity.player ,objectName: "player", scale: 0.5, hasTransparency: false, normalsPointingUp: false);
         return playerModel;
@@ -17,7 +17,7 @@ public class WorldPlayersGenerator {
      * @param loader loader that will load the entities of the 3D world
      * @return The player that is going to be used in the scene
      */
-    public static func getPlayer(loader : Loader) -> Player {
+    open static func getPlayer(_ loader : Loader) -> Player {
         let model : DefaultModelGenerator = getPlayerModel();
         let xPosition : Float = 20.0;
         let zPosition : Float = 0.0;

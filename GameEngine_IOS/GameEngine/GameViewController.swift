@@ -4,69 +4,69 @@ import UIKit
 import GLKit
 
 
-public class GameViewController: GLKViewController {
+open class GameViewController: GLKViewController {
     
     /**
      * Number of audio sources available
      */
-    private let POOL_SOURCES_SIZE : Int = 32;
+    fileprivate let POOL_SOURCES_SIZE : Int = 32;
     
     /**
      * The master render is going put all the elements together in order to
      * render the scene
      */
-    private var renderer : MasterRender? = nil;
+    fileprivate var renderer : MasterRender? = nil;
     
     /**
      * Array of entities to render
      */
-    private var entities : Array<Entity> = [];
+    fileprivate var entities : Array<Entity> = [];
     
     /**
      * Array of terrains to render
      */
-    private var terrains : Array<Terrain> = [];
+    fileprivate var terrains : Array<Terrain> = [];
     
     /**
      * Array of GUIs to render
      */
-    private var guis : Array<GuiTexture>? = [];
+    fileprivate var guis : Array<GuiTexture>? = [];
     
     /**
      * Position of the light in scene
      */
-    private var light : Light! = nil;
+    fileprivate var light : Light! = nil;
     
     /**
      * SkyBox of the 3D world
      */
-    private var skyBox : SkyBox! = nil;
+    fileprivate var skyBox : SkyBox! = nil;
     
     /**
      * The player that is going to be show in the scene
      */
-    private var player : Player! = nil;
+    fileprivate var player : Player! = nil;
     
     
     /**
      * Dictionary of sounds supported by the game
      */
-    private var audioLibrary : [TAudioEnum :  AudioBuffer]! = nil;
+    fileprivate var audioLibrary : [TAudioEnum :  AudioBuffer]! = nil;
     
     /**
      * Reference to the player of sounds of the game
      */
-    private var masterPlayer : MasterPlayer! = nil;
+    fileprivate var masterPlayer : MasterPlayer! = nil;
     
-    private var context:  EAGLContext! = nil;
+    fileprivate var context:  EAGLContext! = nil;
     
     /**
      *  Is called once when the controller is created and viewDidAppear is called each time the view, well
      */
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.context = EAGLContext(API: .OpenGLES2)
+        self.context = EAGLContext(api: .openGLES2)
         
         if !(self.context != nil) {
             print("Failed to create ES context")
@@ -74,7 +74,7 @@ public class GameViewController: GLKViewController {
         
         let view = self.view as! GLKView
         view.context = self.context!
-        view.drawableDepthFormat = GLKViewDrawableDepthFormat.Format24
+        view.drawableDepthFormat = GLKViewDrawableDepthFormat.format24
         
         //Handle events registration
         let gestureRecognizer = GameEngineGestureRecognizer()
@@ -117,30 +117,30 @@ public class GameViewController: GLKViewController {
     
     
     
-    public override func didReceiveMemoryWarning() {
+    open override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        if self.isViewLoaded() && (self.view.window != nil) {
+        if self.isViewLoaded && (self.view.window != nil) {
             self.view = nil
             
             self.tearDownGL()
             AudioManager.teardownOpenAL()
             
-            if EAGLContext.currentContext() === self.context {
-                EAGLContext.setCurrentContext(nil)
+            if EAGLContext.current() === self.context {
+                EAGLContext.setCurrent(nil)
             }
             self.context = nil
         }
     }
     
-    private func setupGL() {
-        EAGLContext.setCurrentContext(self.context);
+    fileprivate func setupGL() {
+        EAGLContext.setCurrent(self.context);
         
         self.renderer =  MasterRender(width: Int(self.view.bounds.size.width), height: Int(self.view.bounds.size.height))
     }
     
-    private func tearDownGL() {
-        EAGLContext.setCurrentContext(self.context);
+    fileprivate func tearDownGL() {
+        EAGLContext.setCurrent(self.context);
         self.renderer = nil;
     }
     
@@ -148,7 +148,7 @@ public class GameViewController: GLKViewController {
      * Makes all the necessary calls to update the
      * frame
      */
-    private func renderFrame() {
+    fileprivate func renderFrame() {
         // game logic
         if(renderer == nil)
         {
@@ -175,7 +175,7 @@ public class GameViewController: GLKViewController {
     /**
      * Calls everything necessary to play the sounds of the game
      */
-    private func playAudio() {
+    fileprivate func playAudio() {
         masterPlayer.play(self.audioLibrary, entities: self.entities, player: self.player)
     }
     
@@ -183,25 +183,25 @@ public class GameViewController: GLKViewController {
      * Draw the entities of the scene
      *
      */
-    public func update() {
+    open func update() {
         renderFrame()
         playAudio();
     }
     
-    @IBAction func leftPressed(sender: AnyObject) {
+    @IBAction func leftPressed(_ sender: AnyObject) {
         GamePad.setKey(GamePadKey.left, clicked: true)
     }
     
     
-    @IBAction func rightPressed(sender: AnyObject) {
+    @IBAction func rightPressed(_ sender: AnyObject) {
         GamePad.setKey(GamePadKey.right, clicked: true)
     }
     
-    @IBAction func downPressed(sender: AnyObject) {
+    @IBAction func downPressed(_ sender: AnyObject) {
         GamePad.setKey(GamePadKey.down, clicked: true)
     }
     
-    @IBAction func upPressed(sender: AnyObject) {
+    @IBAction func upPressed(_ sender: AnyObject) {
         GamePad.setKey(GamePadKey.up, clicked: true)
     }
     

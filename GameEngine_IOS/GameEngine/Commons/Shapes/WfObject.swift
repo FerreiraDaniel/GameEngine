@@ -4,27 +4,27 @@ import Foundation
  * Represents one entity with a shape
  * defined by one waveFront file
  */
-public class WfObject : NSObject, IShape {
+open class WfObject : NSObject, IShape {
     
-    private var _vertices : UnsafeMutablePointer<Float>?
-    private var _countVertices : Int;
-    private var _textureCoordinates: UnsafeMutablePointer<Float>?
-    private var _countTextureCoordinates :  Int
-    private var _normals: UnsafeMutablePointer<Float>?
-    private var _countNormals : Int
-    private var _indices : UnsafeMutablePointer<ushort>?
-    private var _countIndices : Int = 0
-    private var _groupName : String?
-    private var _material : IExternalMaterial?
+    fileprivate var _vertices : UnsafeMutablePointer<Float>?
+    fileprivate var _countVertices : Int;
+    fileprivate var _textureCoordinates: UnsafeMutablePointer<Float>?
+    fileprivate var _countTextureCoordinates :  Int
+    fileprivate var _normals: UnsafeMutablePointer<Float>?
+    fileprivate var _countNormals : Int
+    fileprivate var _indices : UnsafeMutablePointer<ushort>?
+    fileprivate var _countIndices : Int = 0
+    fileprivate var _groupName : String?
+    fileprivate var _material : IExternalMaterial?
     
     
     /**
      *  Get one array of floats and returns one pointer to native memory of it
      */
-    private static func floatArray2Pointer(floatArray : Array<Float>) -> UnsafeMutablePointer<Float>?
+    fileprivate static func floatArray2Pointer(_ floatArray : Array<Float>) -> UnsafeMutablePointer<Float>?
     {
         let countElements : Int = floatArray.count;
-        let pointer = UnsafeMutablePointer<Float>.alloc(countElements);
+        let pointer = UnsafeMutablePointer<Float>.allocate(capacity: countElements);
         
         //Copy vertices one by one
         for i in 0 ..< countElements {
@@ -36,10 +36,10 @@ public class WfObject : NSObject, IShape {
     /**
      *  Get one array of ints and returns one pointer to native memory of it
      */
-    private static func intArray2Pointer(intArray : Array<Int>) -> UnsafeMutablePointer<ushort>?
+    fileprivate static func intArray2Pointer(_ intArray : Array<Int>) -> UnsafeMutablePointer<ushort>?
     {
         let countElements : Int = intArray.count;
-        let pointer = UnsafeMutablePointer<ushort>.alloc(countElements);
+        let pointer = UnsafeMutablePointer<ushort>.allocate(capacity: countElements);
         
         //Copy vertices one by one
         for i in 0 ..< countElements {
@@ -109,28 +109,28 @@ public class WfObject : NSObject, IShape {
     /**
      * @return the vertices of the shape
      */
-    public func getVertices() -> UnsafeMutablePointer<Float>? {
+    open func getVertices() -> UnsafeMutablePointer<Float>? {
         return self._vertices;
     }
     
     /**
      * @return number of vertices that make the shape
      */
-    public func countVertices() -> Int {
+    open func countVertices() -> Int {
         return self._countVertices;
     }
     
     /**
      * @return the Coordinates of the textures of the shape
      */
-    public func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
+    open func getTextureCoords()  -> UnsafeMutablePointer<Float>? {
         return self._textureCoordinates;
     }
     
     /*
      Number of the texture coordinates
      */
-    public func countTextureCoords() -> Int {
+    open func countTextureCoords() -> Int {
         return self._countTextureCoordinates;
     }
     
@@ -138,35 +138,35 @@ public class WfObject : NSObject, IShape {
      *
      * @return the normal vectors that make the shape
      */
-    public func getNormals() -> UnsafeMutablePointer<Float>? {
+    open func getNormals() -> UnsafeMutablePointer<Float>? {
         return self._normals;
     }
     
     /*
      * Number of normal that the shape has
      */
-    public func countNormals() -> Int {
+    open func countNormals() -> Int {
         return self._countNormals;
     }
     
     /**
      * @return The indices of the vertices that make the shape
      */
-    public func getIndices() -> UnsafeMutablePointer<ushort>? {
+    open func getIndices() -> UnsafeMutablePointer<ushort>? {
         return self._indices;
     }
     
     /*
      Number of indices that the shape has
      */
-    public func countIndices() -> Int {
+    open func countIndices() -> Int {
         return self._countIndices;
     }
     
     /**
      * @return the groupName Name of the group wish belongs
      */
-    public func getGroupName() -> String? {
+    open func getGroupName() -> String? {
         return self._groupName;
     }
     
@@ -174,7 +174,7 @@ public class WfObject : NSObject, IShape {
      *
      * @return The material associated with shape
      */
-    public func getMaterial() -> IExternalMaterial? {
+    open func getMaterial() -> IExternalMaterial? {
         return self._material;
     }
 }

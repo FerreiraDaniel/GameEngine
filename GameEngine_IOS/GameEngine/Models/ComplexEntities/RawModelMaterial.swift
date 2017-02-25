@@ -4,7 +4,7 @@ import Foundation
  * Wrapper that besides of have the raw model also has the material to put in
  * the model
  */
-public class RawModelMaterial {
+open class RawModelMaterial {
     /**
      * Raw model of the entity
      */

@@ -3,11 +3,11 @@ import OpenGLES
 
 
 /// Responsible to render the entities in the screen
-public class EntityRender {
+open class EntityRender {
     
 
     /// Reference to the shader manager
-    private var eShader : EntityShaderManager!;
+    fileprivate var eShader : EntityShaderManager!;
     
 
     /// Initializer of the entity render
@@ -36,7 +36,7 @@ public class EntityRender {
      *            List of entities of the scene
      * @param player     The player of the scene
      */
-    public func render(skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>, player : Player) {
+    open func render(_ skyColor : ColorRGBA, sun : Light, viewMatrix : GLTransformation , entities : Dictionary<String, Array<Entity>>, player : Player) {
         // Render the object
         eShader.start();
         //Load the elements of the scene
@@ -61,7 +61,7 @@ public class EntityRender {
      * @return The transformation matrix that put the entity in its right
      *         position
      */
-    private func getTransformationMatrix(entity : Entity) -> GLTransformation {
+    fileprivate func getTransformationMatrix(_ entity : Entity) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
         matrix.glLoadIdentity();
         let entityPosition : Vector3f = entity.position;
@@ -82,7 +82,7 @@ public class EntityRender {
      * @param entities
      *            HashMap of entities to render
      */
-    private func render(entities : Dictionary<String, Array<Entity>>){
+    fileprivate func render(_ entities : Dictionary<String, Array<Entity>>){
         if (!entities.isEmpty) {
             for (_, batch) in entities {
                 let firstEntity : Entity = batch.first!;
@@ -118,7 +118,7 @@ public class EntityRender {
      *
      * @param player the player that is to render in the scene
      */
-    private func renderPlayer(player : Player) {
+    fileprivate func renderPlayer(_ player : Player) {
         let genericEntity : GenericEntity = player.genericEntity;
         let groupsOfMaterials : Dictionary<String, MaterialGroup> = genericEntity.groupsOfMaterials;
         for(_, materialGroup) in groupsOfMaterials {
@@ -146,7 +146,7 @@ public class EntityRender {
      *
      * @param model Raw model to get render
      */
-    private func render(model: RawModel) {
+    fileprivate func render(_ model: RawModel) {
         if(model.indicesData != nil)
         {
             glDrawElements(GLenum(GL_TRIANGLES), GLsizei(model.indicesCount), GLenum(GL_UNSIGNED_SHORT), model.indicesData!);
@@ -160,7 +160,7 @@ public class EntityRender {
      *
      * @param model Model that contains the model of the entity with textures
      */
-    private func prepareModel(model : RawModel) {
+    fileprivate func prepareModel(_ model : RawModel) {
         glBindVertexArrayOES(GLuint(model.vaoId));
         //Enable the attributes to bind
         glEnableVertexAttribArray(GLuint(TEntityAttribute.position.rawValue));
@@ -173,7 +173,7 @@ public class EntityRender {
      *
      * @param material Contains a reference to the material to bind
      */
-    private func prepareMaterial(material : Material) {
+    fileprivate func prepareMaterial(_ material : Material) {
         if(!material.hasTransparency) {
             self.enableCulling();
         };
@@ -204,7 +204,7 @@ public class EntityRender {
      * @param entity
      * 			Entity that is to get prepared to be loaded
      */
-    private func loadEntityTransformation(entity : Entity) {
+    fileprivate func loadEntityTransformation(_ entity : Entity) {
         // Load the transformation matrix
         eShader.loadTransformationMatrix(self.getTransformationMatrix(entity));
     }
@@ -213,7 +213,7 @@ public class EntityRender {
     /**
      * Enable culling of faces to get better performance
      */
-    private func enableCulling() {
+    fileprivate func enableCulling() {
         //Enable the GL cull face feature
         glEnable(GLuint(GL_CULL_FACE));
         //Avoid to render faces that are away from the camera
@@ -223,7 +223,7 @@ public class EntityRender {
     /**
      * Disable the culling of the faces vital for transparent model
      */
-    private func disableCulling() {
+    fileprivate func disableCulling() {
         glDisable(GLuint(GL_CULL_FACE));
     }
     
@@ -233,7 +233,7 @@ public class EntityRender {
     /**
      * UnBind the previous bound elements
      */
-    private func unPrepareModel() {
+    fileprivate func unPrepareModel() {
         
         glDisableVertexAttribArray(GLuint(TEntityAttribute.position.rawValue));
         glDisableVertexAttribArray(GLuint(TEntityAttribute.textureCoords.rawValue));
@@ -248,7 +248,7 @@ public class EntityRender {
      *
      * @param material Contains a reference to the material to bind
      */
-    private func unPrepareMaterial(material : Material) {
+    fileprivate func unPrepareMaterial(_ material : Material) {
         // Restore the state if has transparency
         if (!material.hasTransparency) {
             disableCulling();

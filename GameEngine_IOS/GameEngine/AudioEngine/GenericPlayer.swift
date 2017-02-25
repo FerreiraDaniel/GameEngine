@@ -6,7 +6,7 @@ import OpenAL
  * Contains a set of methods that are useful for all the players of the
  * application
  */
-public class GenericPlayer {
+open class GenericPlayer {
     
     /**
      * Plays one buffer in a certain source
@@ -16,7 +16,7 @@ public class GenericPlayer {
      * @param audioBuffer
      *            Buffer to play
      */
-    internal func play(audioSource : AudioSource, audioBuffer : AudioBuffer) {
+    internal func play(_ audioSource : AudioSource, audioBuffer : AudioBuffer) {
     
         let sourceId : ALuint = audioSource.getSourceId();
         let bufferId : ALint = audioBuffer.getBufferId();
@@ -34,7 +34,7 @@ public class GenericPlayer {
      * @param sourceId
      *            Identifier of the source of audio
      */
-    internal func pause(sourceId : ALuint) {
+    internal func pause(_ sourceId : ALuint) {
         alSourcePause(sourceId);
     }
     
@@ -44,7 +44,7 @@ public class GenericPlayer {
      * @param sourceId
      *            Identifier of the source of audio
      */
-    internal func continuePlaying(sourceId: ALuint) {
+    internal func continuePlaying(_ sourceId: ALuint) {
         alSourcePlay(sourceId);
     }
     
@@ -54,7 +54,7 @@ public class GenericPlayer {
      * @param audioSource
      *            The source of audio
      */
-    internal func stop(audioSource : AudioSource) {
+    internal func stop(_ audioSource : AudioSource) {
         audioSource.setBuffer(nil);
         alSourceStop(audioSource.getSourceId());
     }
@@ -69,14 +69,14 @@ public class GenericPlayer {
      * @param loop
      *            The flag that indicate if should use looping or not
      */
-    internal func setLoop(sourceId : ALuint, loop : Bool) {
+    internal func setLoop(_ sourceId : ALuint, loop : Bool) {
         alSourcei(sourceId, AL_LOOPING, (loop) ? AL_TRUE : AL_FALSE);
     }
     
     /**
      *  Returns the state of the source
      */
-    private func getSourceiState(sourceId : ALuint) -> ALint {
+    fileprivate func getSourceiState(_ sourceId : ALuint) -> ALint {
         var state : ALint = 0;
         alGetSourcei(sourceId, AL_SOURCE_STATE, &state);
         return state;
@@ -87,7 +87,7 @@ public class GenericPlayer {
      *            Identifier of the source of audio
      * @return If the source is playing or not
      */
-    internal func isPlaying(sourceId : ALuint) -> Bool {
+    internal func isPlaying(_ sourceId : ALuint) -> Bool {
         return getSourceiState(sourceId) == AL_PLAYING;
     }
     
@@ -96,7 +96,7 @@ public class GenericPlayer {
      *            Identifier of the source of audio
      * @return If the source is paused or not
      */
-    internal func isPaused(sourceId : ALuint) -> Bool {
+    internal func isPaused(_ sourceId : ALuint) -> Bool {
         return getSourceiState(sourceId) == AL_PAUSED;
     }
     
@@ -108,7 +108,7 @@ public class GenericPlayer {
      * @param velocity
      *            The velocity to set
      */
-    internal func setVelocity(sourceId : ALuint, velocity : Vector3f) {
+    internal func setVelocity(_ sourceId : ALuint, velocity : Vector3f) {
     /* Set the velocity of the source */
     // Vector3f velocity = new Vector3f(0.0f, 0.0f, 0.0f);
         alSource3f(sourceId, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
@@ -122,7 +122,7 @@ public class GenericPlayer {
      * @param volume
      *            volume of the source between 0.0f and 1.0f
      */
-    internal func  setVolume(sourceId: ALuint, volume : ALfloat) {
+    internal func  setVolume(_ sourceId: ALuint, volume : ALfloat) {
     /* Set the gain of the source */
         alSourcef(sourceId, AL_GAIN, volume);
     }
@@ -136,7 +136,7 @@ public class GenericPlayer {
      * @param pitch
      *            The pitch to set in the source
      */
-    internal func  setPitch(sourceId : ALuint, pitch : ALfloat) {
+    internal func  setPitch(_ sourceId : ALuint, pitch : ALfloat) {
     /* Set the pitch of the source */
         alSourcef(sourceId, AL_PITCH, pitch);
     }
@@ -149,7 +149,7 @@ public class GenericPlayer {
      * @param position
      *            The position to set
      */
-    internal func  setPosition(sourceId : ALuint, position : Vector3f) {
+    internal func  setPosition(_ sourceId : ALuint, position : Vector3f) {
     /* Set the position of the source */
     // Vector3f position = new Vector3f(0.0f, 0.0f, 0.0f);
         alSource3f(sourceId, AL_POSITION, position.x, position.y, position.z);

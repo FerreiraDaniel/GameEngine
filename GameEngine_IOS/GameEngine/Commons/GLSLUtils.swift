@@ -1,7 +1,7 @@
 import Foundation
 import OpenGLES
 
-public class GLSLUtils {
+open class GLSLUtils {
     
     /**
     * Load and compiles the shader into device memory
@@ -10,7 +10,7 @@ public class GLSLUtils {
     * @return 0 -> There was an error
     *         not 0 -> Id of the shader compiled
     */
-    private static func compileShader(inout shader: GLuint, type: GLenum, sourceCode: NSString?) -> Bool {
+    fileprivate static func compileShader(_ shader: inout GLuint, type: GLenum, sourceCode: NSString?) -> Bool {
         var status: GLint = 0
         
         if(sourceCode == nil)
@@ -18,7 +18,7 @@ public class GLSLUtils {
             return false;
         }
         
-        var cSource = UnsafePointer<CChar>(sourceCode!.UTF8String)
+        var cSource = UnsafePointer<CChar>(sourceCode!.utf8String)
         
         shader = glCreateShader(type)
         glShaderSource(shader, 1, &cSource, nil)
@@ -28,7 +28,7 @@ public class GLSLUtils {
         var logLength: GLint = 0
         glGetShaderiv(shader, GLenum(GL_INFO_LOG_LENGTH), &logLength);
         if logLength > 0 {
-            let log = UnsafeMutablePointer<CChar>.alloc(Int(logLength))
+            let log = UnsafeMutablePointer<CChar>.allocate(capacity: Int(logLength))
             glGetShaderInfoLog(shader, logLength, &logLength, log);
             NSLog("Shader compile log: \n%s", log);
             free(log)
@@ -53,7 +53,7 @@ public class GLSLUtils {
     *            Source code of the fragment shader
     * @return If nil There was an error not 0 -> Id of the program loaded
     */
-    public static func loadProgram(vertexShaderSrc: NSString?, fragShaderSrc: NSString?) -> ShaderProgram! {
+    open static func loadProgram(_ vertexShaderSrc: NSString?, fragShaderSrc: NSString?) -> ShaderProgram! {
         
         var vertShader : GLuint = 0;
         var fragShader : GLuint = 0;
@@ -97,7 +97,7 @@ public class GLSLUtils {
     *
     * @return False = Not linked True = Linked
     */
-    public static func linkProgram(shaderProgram: ShaderProgram) -> Bool {
+    open static func linkProgram(_ shaderProgram: ShaderProgram) -> Bool {
         var status : GLint = 0;
         glLinkProgram(shaderProgram.programId);
         
@@ -105,7 +105,7 @@ public class GLSLUtils {
         var logLength: GLint = 0
         glGetProgramiv(shaderProgram.programId, GLenum(GL_INFO_LOG_LENGTH), &logLength);
         if (logLength > 0) {
-            let log = UnsafeMutablePointer<GLchar>.alloc(Int(logLength))
+            let log = UnsafeMutablePointer<GLchar>.allocate(capacity: Int(logLength))
             glGetProgramInfoLog(shaderProgram.programId, logLength, &logLength, log);
             NSLog("Program link log:\n%s", log);
             free(log);

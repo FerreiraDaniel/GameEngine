@@ -3,25 +3,25 @@ import Foundation
 /**
  * Parses files formated in wavefront format
  */
-public class OBJLoader : GenericLoader {
+open class OBJLoader : GenericLoader {
     
     /**
      * Extension of the obj files
      */
-    private static let OBJ_EXTENSION : String = "obj";
+    fileprivate static let OBJ_EXTENSION : String = "obj";
     
     
-    private static let INITIAL_ARRAY_CAPACITY : Int = 1000;
+    fileprivate static let INITIAL_ARRAY_CAPACITY : Int = 1000;
     
     /* Character for split material and group */
-    private static let MAT_GROUP_SPLIT : String = "@";
+    fileprivate static let MAT_GROUP_SPLIT : String = "@";
     
     /**
      * Number of components depending upon the type of element
      */
-    private static let COORDINATES_BY_VERTEX : Int = 3;
-    private static let COORDINATES_BY_TEXTURE : Int = 2;
-    private static let COORDINATES_BY_NORMAL : Int = 3;
+    fileprivate static let COORDINATES_BY_VERTEX : Int = 3;
+    fileprivate static let COORDINATES_BY_TEXTURE : Int = 2;
+    fileprivate static let COORDINATES_BY_NORMAL : Int = 3;
     
     /**
      *
@@ -30,7 +30,7 @@ public class OBJLoader : GenericLoader {
      *
      * @return A key to use in the dictionary of indices
      */
-    private static func getKey(face : PolygonalFace) -> String {
+    fileprivate static func getKey(_ face : PolygonalFace) -> String {
         let materialName :  String = (face.materialName == EMPTY_STRING) ? EMPTY_STRING : face.materialName;
         let groupName : String = (face.groupName == EMPTY_STRING) ? EMPTY_STRING : face.groupName;
         return materialName + MAT_GROUP_SPLIT + groupName;
@@ -52,13 +52,13 @@ public class OBJLoader : GenericLoader {
      *
      * @return List of objects created
      */
-    private static func buildShapesLst(verticesArray : [Float], _ normalsArray : [Float], _ texturesArray : [Float],
+    fileprivate static func buildShapesLst(_ verticesArray : [Float], _ normalsArray : [Float], _ texturesArray : [Float],
                                        _ indicesArrayMap : Dictionary<String, [Int]>, _ materials : Dictionary<String, IExternalMaterial>?) -> [IShape] {
         var wfObjectList : [IShape] = [IShape]();
         
         for (key, indicesList) in indicesArrayMap {
-            let materialName = key.componentsSeparatedByString(MAT_GROUP_SPLIT)[0];
-            let groupName = key.componentsSeparatedByString(MAT_GROUP_SPLIT)[1];
+            let materialName = key.components(separatedBy: MAT_GROUP_SPLIT)[0];
+            let groupName = key.components(separatedBy: MAT_GROUP_SPLIT)[1];
             var material : IExternalMaterial? = nil;
             
             if((materials != nil) && (materials![materialName] != nil)){
@@ -81,7 +81,7 @@ public class OBJLoader : GenericLoader {
      
      * @return The waveFront element as an IShape
      */
-    private static func createShapes(vertices : Array<Vector3f>,
+    fileprivate static func createShapes(_ vertices : Array<Vector3f>,
                                      _ normals : Array<Vector3f>,
                                        _ textures : Array<Vector2f>,
                                          _ faces : Array<PolygonalFace>,
@@ -93,15 +93,15 @@ public class OBJLoader : GenericLoader {
         
         //Vertices
         let verticesLength = (numberVertices * COORDINATES_BY_VERTEX);
-        var aVertices : Array<Float> = Array<Float>(count: verticesLength, repeatedValue: 0.0);
+        var aVertices : Array<Float> = Array<Float>(repeating: 0.0, count: verticesLength);
         
         //Normals
         let normalsLength = numberVertices * COORDINATES_BY_NORMAL;
-        var normalsArray : Array<Float> = Array<Float>(count: normalsLength, repeatedValue: 0.0);
+        var normalsArray : Array<Float> = Array<Float>(repeating: 0.0, count: normalsLength);
         
         //Textures
         let textureLength = numberVertices * COORDINATES_BY_TEXTURE;
-        var texturesArray : Array<Float> = Array<Float>(count: textureLength, repeatedValue: 0.0);
+        var texturesArray : Array<Float> = Array<Float>(repeating: 0.0, count: textureLength);
         
         //Indices
         var indicesArrayMap : Dictionary<String, [Int]> = Dictionary<String, [Int]>();
@@ -160,7 +160,7 @@ public class OBJLoader : GenericLoader {
     /**
      * Process one vertex
      */
-    private static func processVertex(vertexData : Array<String>, _ groupName : String, _ materialName : String) -> PolygonalFace {
+    fileprivate static func processVertex(_ vertexData : Array<String>, _ groupName : String, _ materialName : String) -> PolygonalFace {
         let vertexIndex : Int = (Int(vertexData[TComponentPosition.vertexPos.rawValue]) ?? 0) - 1;
         let textureIndex : Int = (Int(vertexData[TComponentPosition.texturPos.rawValue]) ?? 0) - 1;
         let normalIndex : Int = (Int(vertexData[TComponentPosition.normalPos.rawValue]) ?? 0) - 1;
@@ -182,7 +182,7 @@ public class OBJLoader : GenericLoader {
      *
      * @return The shape with information about the waveFront file read
      */
-    public static func loadObjModel(objFileName : String) -> [IShape] {
+    open static func loadObjModel(_ objFileName : String) -> [IShape] {
         //Declares the arrays where the elements of the obj file are going to be store
         var materials : Dictionary<String, IExternalMaterial>?  = nil;
         var vertices : Array<Vector3f> = Array<Vector3f>();
@@ -194,18 +194,18 @@ public class OBJLoader : GenericLoader {
         
         
         //Open the obj file from the disk
-        let objPath : String = NSBundle.mainBundle().pathForResource(objFileName, ofType: OBJ_EXTENSION)!
+        let objPath : String = Bundle.main.path(forResource: objFileName, ofType: OBJ_EXTENSION)!
         let file : UnsafeMutablePointer<FILE>? = fopen(objPath, "r")
         
         if(file != nil) {
             
-            let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.alloc(MAX_LINE_LENGTH);
+            let buffer : UnsafeMutablePointer<Int8> = UnsafeMutablePointer<Int8>.allocate(capacity: MAX_LINE_LENGTH);
             //Read the obj file line by line
-            let bytesToRead : Int32 = Int32(sizeof(CChar) * MAX_LINE_LENGTH);
+            let bytesToRead : Int32 = Int32(MemoryLayout<CChar>.size * MAX_LINE_LENGTH);
             while(fgets(buffer, bytesToRead, file!) != nil) {
-                let linen = String(UTF8String: UnsafePointer<CChar>(buffer))
-                let line = linen?.stringByReplacingOccurrencesOfString("\n", withString: EMPTY_STRING);
-                let currentLine : Array<String> = line!.componentsSeparatedByString(GenericLoader.SPLIT_TOKEN);
+                let linen = String(validatingUTF8: UnsafePointer<CChar>(buffer))
+                let line = linen?.replacingOccurrences(of: "\n", with: EMPTY_STRING);
+                let currentLine : Array<String> = line!.components(separatedBy: GenericLoader.SPLIT_TOKEN);
                 let prefix : String = currentLine[0];
                 switch(prefix) {
                 // The comments in the OBJ do nothing
@@ -253,7 +253,7 @@ public class OBJLoader : GenericLoader {
                 case OBJPrefix.FACE:
                     // Parses the faces
                     for i : Int in 1 ..< 4 {
-                        let fVertexStr : Array<String> = currentLine[i].componentsSeparatedByString("/");
+                        let fVertexStr : Array<String> = currentLine[i].components(separatedBy: "/");
                         let pFace : PolygonalFace = self.processVertex(fVertexStr, currentGroupName, currentMaterialName);
                         faces.append(pFace);
                     }
@@ -263,7 +263,7 @@ public class OBJLoader : GenericLoader {
                     break
                 }
             }
-            buffer.dealloc(MAX_LINE_LENGTH)
+            buffer.deallocate(capacity: MAX_LINE_LENGTH)
             fclose(file!);
         }
         

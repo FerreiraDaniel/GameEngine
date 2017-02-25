@@ -3,19 +3,19 @@ import Foundation
 /**
  * Responsible for creating the multiple GUIs to the user interact with 3D world
  */
-public class WorldGUIsGenerator {
+open class WorldGUIsGenerator {
     
     /*Zoom that is going apply in the buttons of the gam*/
-    private static let BUTTONS_ZOOM : Float = 0.07;
+    fileprivate static let BUTTONS_ZOOM : Float = 0.07;
     
     /*Position of the buttons that are upper in the Y*/
-    private static let UPPER_BUTTONS : Float = -0.7;
+    fileprivate static let UPPER_BUTTONS : Float = -0.7;
     
     /*Position of the buttons that are in the middle in the Y*/
-    private static let MIDDLE_BUTTONS : Float = -0.8;
+    fileprivate static let MIDDLE_BUTTONS : Float = -0.8;
     
     /*Position of the buttons that are upper in the Y*/
-    private static let BOTTOM_BUTTONS : Float = -0.9;
+    fileprivate static let BOTTOM_BUTTONS : Float = -0.9;
     
     /**
      *
@@ -35,7 +35,7 @@ public class WorldGUIsGenerator {
      *
      * @return The textured GUI to render GUI
      */
-    private static func  getGUI(loader : Loader, _ rawMode : RawModel, _ textureFileName : String, _ xPosition : Float,
+    fileprivate static func  getGUI(_ loader : Loader, _ rawMode : RawModel, _ textureFileName : String, _ xPosition : Float,
                                 _ yPosition : Float, _ scale : Float, _ key :GamePadKey!) -> GuiTexture {
         // Load the texture of the GUI
         let textureId : Int = loader.loadTexture(textureFileName);
@@ -57,7 +57,7 @@ public class WorldGUIsGenerator {
      *
      * @return list of terrains of the scene
      */
-    public static func getGUIs(loader : Loader) -> Array<GuiTexture>? {
+    open static func getGUIs(_ loader : Loader) -> Array<GuiTexture>? {
         let guiShape : GuiShape = GuiShape();
         
         if(guiShape.getVertices() == nil)

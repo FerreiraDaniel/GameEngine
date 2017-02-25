@@ -3,10 +3,10 @@ import Foundation
 import OpenAL
 
 /// Responsible for handling the creation, setup and close of audio
-public class AudioManager {
+open class AudioManager {
     
-    private static var context: COpaquePointer? = nil
-    private static var device: COpaquePointer? = nil
+    fileprivate static var context: OpaquePointer? = nil
+    fileprivate static var device: OpaquePointer? = nil
     
     /**
      * Before using any openAL methods we need to initialize openAL
@@ -14,7 +14,7 @@ public class AudioManager {
      * @return False -> One or more errors occurred True -> Everything was all
      *         right
      */
-    public static func initOpenAL() -> Bool {
+    open static func initOpenAL() -> Bool {
         var error: ALenum = AL_NO_ERROR
         
         
@@ -51,7 +51,7 @@ public class AudioManager {
     
     
     /// Releases the resources used by openAL
-    public static func teardownOpenAL() {
+    open static func teardownOpenAL() {
         
         //Release context
         if(context != nil) {

@@ -3,7 +3,7 @@ import Foundation
 /**
  * Represents one color with (Red, Green and Blue) components
  */
-public class ColorRGB {
+open class ColorRGB {
     
     /**
      * Red component

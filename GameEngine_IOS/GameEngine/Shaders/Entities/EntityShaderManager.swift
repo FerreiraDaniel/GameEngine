@@ -1,6 +1,6 @@
 import Foundation
 
-public class EntityShaderManager : ShaderManager {
+open class EntityShaderManager : ShaderManager {
     /**
      * Initializor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
@@ -50,7 +50,7 @@ public class EntityShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadProjectionMatrix (matrix : GLTransformation) {
+    open func loadProjectionMatrix (_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.projectionMatrix.rawValue], matrix: matrix);
     }
     
@@ -60,7 +60,7 @@ public class EntityShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadViewMatrix (matrix : GLTransformation) {
+    open func loadViewMatrix (_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.viewMatrix.rawValue], matrix: matrix);
     }
     
@@ -70,7 +70,7 @@ public class EntityShaderManager : ShaderManager {
      * @param matrix
      *            the matrix to be loaded
      */
-    public func loadTransformationMatrix(matrix : GLTransformation) {
+    open func loadTransformationMatrix(_ matrix : GLTransformation) {
         super.loadMatrix(uniforms[TEntityUniform.transformationMatrix.rawValue], matrix: matrix);
     }
     
@@ -80,7 +80,7 @@ public class EntityShaderManager : ShaderManager {
      *
      * @param light the light to load in the shader program
      */
-    public func loadLight(light : Light) {
+    open func loadLight(_ light : Light) {
         super.loadVector(uniforms[TEntityUniform.lightPosition.rawValue], vector: light.position);
         super.loadColorRGB(uniforms[TEntityUniform.lightColor.rawValue], color: light.color);
     }
@@ -91,7 +91,7 @@ public class EntityShaderManager : ShaderManager {
      * @param damper		The damper of the specular lighting
      * @param reflectivity	The reflectivity of the material
      */
-    public func loadShineVariables(damper : Float, reflectivity : Float) {
+    open func loadShineVariables(_ damper : Float, reflectivity : Float) {
         super.loadFloat(uniforms[TEntityUniform.shineDamper.rawValue], value: damper);
         super.loadFloat(uniforms[TEntityUniform.reflectivity.rawValue], value : reflectivity);
     }
@@ -101,7 +101,7 @@ public class EntityShaderManager : ShaderManager {
      *
      * @param normalsPointingUp Flag that indicates if all the normals of the entity are poiting up or not
      */
-    public func loadNormalsPointingUp(normalsPointingUp : Bool) {
+    open func loadNormalsPointingUp(_ normalsPointingUp : Bool) {
         super.loadBoolean( uniforms[TEntityUniform.normalsPointingUp.rawValue], value :  normalsPointingUp);
     }
     
@@ -111,7 +111,7 @@ public class EntityShaderManager : ShaderManager {
      * @param skyColor
      * 			Color of the sky
      */
-    public func  loadSkyColor(skyColor : ColorRGBA) {
+    open func  loadSkyColor(_ skyColor : ColorRGBA) {
         super.loadColorRGBA(uniforms[TEntityUniform.skyColor.rawValue], color: skyColor)
     }
     
@@ -121,7 +121,7 @@ public class EntityShaderManager : ShaderManager {
      * @param textureWeight
      *            texture weight of the material
      */
-    public func loadTextureWeight(textureWeight : Float) {
+    open func loadTextureWeight(_ textureWeight : Float) {
         super.loadFloat(uniforms[TEntityUniform.textureWeight.rawValue], value: textureWeight);
     }
     
@@ -131,7 +131,7 @@ public class EntityShaderManager : ShaderManager {
      * @param diffuseColor
      *            diffuse color of the material
      */
-    public func loadDiffuseColor(diffuseColor : ColorRGBA) {
+    open func loadDiffuseColor(_ diffuseColor : ColorRGBA) {
         super.loadColorRGBA(uniforms[TEntityUniform.diffuseColor.rawValue], color : diffuseColor);
     }
 }

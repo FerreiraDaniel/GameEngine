@@ -7,36 +7,36 @@ import OpenAL
  * Is going to demand the reproduction of audio due to the control of the
  * entities
  */
-public class EntityPlayer : GenericPlayer {
+open class EntityPlayer : GenericPlayer {
     
     /**
      * If the entity is far away from the player more that the threshold is not
      * going to be listened
      */
-    private let SOUND_THRESHOLD : Float = 50.0;
+    fileprivate let SOUND_THRESHOLD : Float = 50.0;
     
     /**
      * First if going to make a rough approximation only after is going to check
      * if exists a crash
      */
-    private let ROUGH_THRESHOLD : Float = 10.0;
-    private let CRASH_THRESHOLD : Float = 2.0;
+    fileprivate let ROUGH_THRESHOLD : Float = 10.0;
+    fileprivate let CRASH_THRESHOLD : Float = 2.0;
     
     /**
      * List of sound sources available to the entity player
      *
      */
-    private var sourcesAvailable : [AudioSource];
+    fileprivate var sourcesAvailable : [AudioSource];
     
     /**
      * The player can always play audio;
      */
-    private var playerSource : AudioSource!;
+    fileprivate var playerSource : AudioSource!;
     
     /**
      * Sources assign to the entityes
      */
-    private var sourcesAssign : [Entity : AudioSource];
+    fileprivate var sourcesAssign : [Entity : AudioSource];
     
     /**
      * Constructor of the entity player
@@ -57,7 +57,7 @@ public class EntityPlayer : GenericPlayer {
      * @param listenerPos
      *            Position of the listener in the 3D world
      */
-    private func setListenerData(listenerPos : Vector3f) {
+    fileprivate func setListenerData(_ listenerPos : Vector3f) {
         alListener3f(AL_POSITION, listenerPos.x, listenerPos.y, listenerPos.z);
         // Second sets the velocity of the listener (for the moment idle
         let  listenerVel : Vector3f = Vector3f(x: 0.0, y: 0.0, z: 0.0);
@@ -73,7 +73,7 @@ public class EntityPlayer : GenericPlayer {
      * @param player
      *            The player of the scene and also the listener
      */
-    private func playPlayer(audioLibrary : [TAudioEnum: AudioBuffer], player : Player) {
+    fileprivate func playPlayer(_ audioLibrary : [TAudioEnum: AudioBuffer], player : Player) {
         self.setListenerData(player.position);
         
         // If the player is running plays the sound of the footsteps
@@ -110,7 +110,7 @@ public class EntityPlayer : GenericPlayer {
      * @return False = Not passed in the rough approximation True = Passed in
      *         the rough approximation
      */
-    private func roughApproximation(position1 : Vector3f, position2 : Vector3f, threshold : Float) -> Bool {
+    fileprivate func roughApproximation(_ position1 : Vector3f, position2 : Vector3f, threshold : Float) -> Bool {
         let xDiff : Float = abs(position1.x - position2.x);
         let yDiff : Float = abs(position1.y - position2.y);
         let zDiff : Float = abs(position1.z - position2.z);
@@ -128,7 +128,7 @@ public class EntityPlayer : GenericPlayer {
      *
      * @return The square of the distance between two positions
      */
-    private func squareDistance(position1 : Vector3f, position2 : Vector3f) -> Float {
+    fileprivate func squareDistance(_ position1 : Vector3f, position2 : Vector3f) -> Float {
         let xDiff : Float = abs(position1.x - position2.x);
         let yDiff : Float = abs(position1.y - position2.y);
         let zDiff : Float = abs(position1.z - position2.z);
@@ -146,7 +146,7 @@ public class EntityPlayer : GenericPlayer {
      * @return False the player can not listen the entity True the entity can be
      *         listen by the player
      */
-    private func passesThreshold(pPosition : Vector3f, ePosition : Vector3f) -> Bool {
+    fileprivate func passesThreshold(_ pPosition : Vector3f, ePosition : Vector3f) -> Bool {
         return roughApproximation(pPosition, position2: ePosition, threshold: SOUND_THRESHOLD);
     }
     
@@ -158,7 +158,7 @@ public class EntityPlayer : GenericPlayer {
      * @param entities
      *            Set of entities that should provide sound feedback
      */
-    private func assignSources(player : Player, entities : [Entity]) {
+    fileprivate func assignSources(_ player : Player, entities : [Entity]) {
         let pPosition : Vector3f = player.position;
         for entity in entities {
             if (passesThreshold(pPosition, ePosition: entity.position)) {
@@ -175,7 +175,7 @@ public class EntityPlayer : GenericPlayer {
             } else {
                 // Not passed threshold
                 if (sourcesAssign[entity] != nil) {
-                    let aSource = sourcesAssign.removeValueForKey(entity)!;
+                    let aSource = sourcesAssign.removeValue(forKey: entity)!;
                     self.stop(aSource);
                     self.sourcesAvailable.append(aSource);
                 }
@@ -197,7 +197,7 @@ public class EntityPlayer : GenericPlayer {
      * @return False = No crash was detected True = A crash was detected and the
      *         sound was played
      */
-    private func playCrash(audioLibrary : [TAudioEnum : AudioBuffer], entity : Entity, pPosition : Vector3f) -> Bool {
+    fileprivate func playCrash(_ audioLibrary : [TAudioEnum : AudioBuffer], entity : Entity, pPosition : Vector3f) -> Bool {
         if (roughApproximation(pPosition, position2: entity.position, threshold: ROUGH_THRESHOLD)
             && (squareDistance(pPosition, position2: entity.position) < CRASH_THRESHOLD)) {
             let audioSource : AudioSource = sourcesAssign[entity]!;
@@ -254,7 +254,7 @@ public class EntityPlayer : GenericPlayer {
      * @param player
      *            The player of the scene and also the listener
      */
-    private func playEntities(audioLibrary : [TAudioEnum : AudioBuffer], entities : [Entity]!, player : Player) {
+    fileprivate func playEntities(_ audioLibrary : [TAudioEnum : AudioBuffer], entities : [Entity]!, player : Player) {
         if (entities != nil) {
             let pPosition : Vector3f = player.position;
             
@@ -302,7 +302,7 @@ public class EntityPlayer : GenericPlayer {
      * @param player
      *            The player of the scene and also the listener
      */
-    public func play(audioLibrary : [TAudioEnum: AudioBuffer] , entities : [Entity], player : Player) {
+    open func play(_ audioLibrary : [TAudioEnum: AudioBuffer] , entities : [Entity], player : Player) {
         self.playPlayer(audioLibrary, player: player);
         self.assignSources(player, entities: entities);
         let entitiesPlaying : [Entity] = Array(self.sourcesAssign.keys);
@@ -314,6 +314,6 @@ public class EntityPlayer : GenericPlayer {
     /**
      * Clean up because we need to clean up when we finish the program
      */
-    public func cleanUp() {
+    open func cleanUp() {
     }
 }

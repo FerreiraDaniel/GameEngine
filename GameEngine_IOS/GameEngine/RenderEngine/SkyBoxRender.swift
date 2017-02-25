@@ -4,12 +4,12 @@ import OpenGLES
 /**
 * Class responsible to render the sky box in the screen
 */
-public class SkyBoxRender {
+open class SkyBoxRender {
     
     /**
     * Reference to the shader manager
     */
-    private var sbShader : SkyBoxShaderManager!;
+    fileprivate var sbShader : SkyBoxShaderManager!;
     
     
     /**
@@ -28,7 +28,7 @@ public class SkyBoxRender {
     
     //---------------------------------------------------------------------------------
     //Render method
-    public func render(viewMatrix : GLTransformation, skyBox : SkyBox)
+    open func render(_ viewMatrix : GLTransformation, skyBox : SkyBox)
     {
         // Render the object
         sbShader.start();
@@ -54,7 +54,7 @@ public class SkyBoxRender {
     * @param skyBox
     * 			The sky box description that should be prepared
     */
-    private func prepareSkyBox(skyBox : SkyBox) {
+    fileprivate func prepareSkyBox(_ skyBox : SkyBox) {
         let model : RawModel = skyBox.model;
         
         
@@ -70,7 +70,7 @@ public class SkyBoxRender {
     /**
     * Bind the cube texture of the skyBox
     */
-    private func bindTextures(skyBox : SkyBox) {
+    fileprivate func bindTextures(_ skyBox : SkyBox) {
         glActiveTexture(GLenum(GL_TEXTURE0));
         glBindTexture(GLenum(GL_TEXTURE_CUBE_MAP), GLuint(skyBox.textureId));
     }
@@ -83,7 +83,7 @@ public class SkyBoxRender {
     * @param skyBox
     * 			The sky box to be render
     */
-    private func render(skyBox :  SkyBox) {
+    fileprivate func render(_ skyBox :  SkyBox) {
         let rawModel : RawModel  = skyBox.model;
         glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(rawModel.indicesCount));
     }
@@ -92,7 +92,7 @@ public class SkyBoxRender {
     /**
     * UnBind the previous binded elements
     */
-    public func  unbindTexture() {
+    open func  unbindTexture() {
         glDisableVertexAttribArray(GLuint(TSkyBoxAttribute.position.rawValue));
         // UnBind the current VBO
         glBindBuffer(GLenum(GL_ARRAY_BUFFER), 0);

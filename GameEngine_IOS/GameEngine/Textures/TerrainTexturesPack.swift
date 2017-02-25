@@ -3,7 +3,7 @@ import Foundation
 /**
 * Contains the identifiers to the several textures of a terrain
 */
-public class TerrainTexturesPack {
+open class TerrainTexturesPack {
     
     /**
     * The identifier of the weight map texture

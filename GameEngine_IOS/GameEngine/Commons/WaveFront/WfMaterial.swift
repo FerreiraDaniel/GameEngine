@@ -3,14 +3,14 @@ import Foundation
 /**
  * Represents one material defined by one waveFront file
  */
-public class WfMaterial : IExternalMaterial {
+open class WfMaterial : IExternalMaterial {
     
     /**
      * Name of the material
      *
      * Example: newmtl Body
      */
-    private var _name : String?;
+    fileprivate var _name : String?;
     
     /**
      * Weight of specular color
@@ -19,7 +19,7 @@ public class WfMaterial : IExternalMaterial {
      *
      * Example: Ns 96.078431
      */
-    private var _weightSpecularColor : Float
+    fileprivate var _weightSpecularColor : Float
     
     /**
      * Specular color is the color of the light of a specular reflection
@@ -30,21 +30,21 @@ public class WfMaterial : IExternalMaterial {
      *
      * Example: Ks 0.064706 0.090196 0.131373
      */
-    private var _specularColor : ColorRGB?
+    fileprivate var _specularColor : ColorRGB?
     
     /**
      * The ambient color of the material
      *
      * Example: Ka 1.000000 1.000000 1.000000
      */
-    private var _ambientColor : ColorRGB?
+    fileprivate var _ambientColor : ColorRGB?
     
     /**
      * The diffuse color Diffuse color weighted by the diffuse coefficient.
      *
      * Example: Kd 0.175686 0.244706 0.351373
      */
-    private var _diffuseColor : ColorRGB?
+    fileprivate var _diffuseColor : ColorRGB?
     
     /**
      * Defines the lighting output of the material itself Color only affect the
@@ -52,7 +52,7 @@ public class WfMaterial : IExternalMaterial {
      *
      * Example: Ke 0.000000 0.000000 0.000000
      */
-    private var _emissiveColor : ColorRGB?
+    fileprivate var _emissiveColor : ColorRGB?
     
     /**
      * Is the value for the optical density. The values can range from 0.001 to
@@ -61,7 +61,7 @@ public class WfMaterial : IExternalMaterial {
      *
      * Example: Ni 1.000000
      */
-    private var _opticalDensity : Float
+    fileprivate var _opticalDensity : Float
     
     /**
      * Dissolve factor (pseudo-transparency). Values are from 0-1. 0 is
@@ -69,56 +69,56 @@ public class WfMaterial : IExternalMaterial {
      *
      * Example: d 1.000000
      */
-    private var _dissolveFactor : Float
+    fileprivate var _dissolveFactor : Float
     
     /**
      * Multiple illumination models are available, per material
      *
      * Example: illum illum_#
      */
-    private var _illuminationModel : Int
+    fileprivate var _illuminationModel : Int
     
     /**
      * Transmission filter
      *
      * Example: Tf r g b
      */
-    private var _transmissionFactor : ColorRGB?
+    fileprivate var _transmissionFactor : ColorRGB?
     
     /**
      * Diffuse color texture map.
      *
      * Example: map_Kd fileName
      */
-    private var _diffuseTextureFileName : String?
+    fileprivate var _diffuseTextureFileName : String?
     
     /**
      * Specular color texture map.
      *
      * Example: map_Ks
      */
-    private var _specularTextureFileName : String?
+    fileprivate var _specularTextureFileName : String?
     
     /**
      * Ambient color texture map.
      *
      * Example: map_Ka
      */
-    private var _ambientTextureFileName : String?
+    fileprivate var _ambientTextureFileName : String?
     
     /**
      * Bump texture map.
      *
      * Example: map_Bump
      */
-    private var _bumpTextureFileName : String?
+    fileprivate var _bumpTextureFileName : String?
     
     /**
      * Opacity texture map.
      *
      * Example: map_d
      */
-    private var _opacityTextureFileName : String?
+    fileprivate var _opacityTextureFileName : String?
     
     /**
      * Constructor of wave front material
@@ -144,105 +144,105 @@ public class WfMaterial : IExternalMaterial {
     /**
      * @return the name
      */
-    public func getName() -> String? {
+    open func getName() -> String? {
         return self._name;
     }
     
     /**
      * @return the weightSpecularColor
      */
-    public func getWeightSpecularColor() -> Float {
+    open func getWeightSpecularColor() -> Float {
         return self._weightSpecularColor;
     }
     
     /**
      * @return the specularColor
      */
-    public func getSpecularColor() -> ColorRGB? {
+    open func getSpecularColor() -> ColorRGB? {
         return self._specularColor;
     }
     
     /**
      * @return the ambientColor
      */
-    public func getAmbientColor() -> ColorRGB? {
+    open func getAmbientColor() -> ColorRGB? {
         return self._ambientColor;
     }
     
     /**
      * @return the diffuseColor
      */
-    public func getDiffuseColor() -> ColorRGB? {
+    open func getDiffuseColor() -> ColorRGB? {
         return self._diffuseColor;
     }
     
     /**
      * @return the emissiveColor
      */
-    public func getEmissiveColor() -> ColorRGB? {
+    open func getEmissiveColor() -> ColorRGB? {
         return self._emissiveColor;
     }
     
     /**
      * @return the opticalDensity
      */
-    public func getOpticalDensity() -> Float {
+    open func getOpticalDensity() -> Float {
         return self._opticalDensity;
     }
     
     /**
      * @return the dissolveFactor
      */
-    public func getDissolveFactor() -> Float {
+    open func getDissolveFactor() -> Float {
         return self._dissolveFactor;
     }
     
     /**
      * @return the illuminationModel
      */
-    public func getIlluminationModel() -> Int {
+    open func getIlluminationModel() -> Int {
         return self._illuminationModel;
     }
     
     /**
      * @return the transmisionFactor
      */
-    public func getTransmisionFactor() -> ColorRGB? {
+    open func getTransmisionFactor() -> ColorRGB? {
         return self._transmissionFactor;
     }
     
     /**
      * @return the diffuseTextureFileName
      */
-    public func getDiffuseTextureFileName() -> String? {
+    open func getDiffuseTextureFileName() -> String? {
         return self._diffuseTextureFileName;
     }
     
     /**
      * @return the specularTextureFileName
      */
-    public func getSpecularTextureFileName() -> String? {
+    open func getSpecularTextureFileName() -> String? {
         return self._specularTextureFileName;
     }
     
     /**
      * @return the ambientTextureFileName
      */
-    public func getAmbientTextureFileName() -> String? {
+    open func getAmbientTextureFileName() -> String? {
         return self._ambientTextureFileName;
     }
     
     /**
      * @return the bumpTextureFileName
      */
-    public func getBumpTextureFileName() -> String? {
+    open func getBumpTextureFileName() -> String? {
         return self._bumpTextureFileName;
     }
     
     /**
      * @return the opacityTextureFileName
      */
-    public func getOpacityTextureFileName() -> String? {
+    open func getOpacityTextureFileName() -> String? {
         return self._opacityTextureFileName;
     }
     
@@ -250,7 +250,7 @@ public class WfMaterial : IExternalMaterial {
      * @param name
      *            the name to set
      */
-    public func setName(name : String) {
+    open func setName(_ name : String) {
         self._name = name;
     }
     
@@ -258,7 +258,7 @@ public class WfMaterial : IExternalMaterial {
      * @param weightSpecularColor
      *            the weightSpecularColor to set
      */
-    public func setWeightSpecularColor(weightSpecularColor : Float) {
+    open func setWeightSpecularColor(_ weightSpecularColor : Float) {
         self._weightSpecularColor = weightSpecularColor;
     }
     
@@ -266,7 +266,7 @@ public class WfMaterial : IExternalMaterial {
      * @param specularColor
      *            the specularColor to set
      */
-    public func setSpecularColor(specularColor : ColorRGB) {
+    open func setSpecularColor(_ specularColor : ColorRGB) {
         self._specularColor = specularColor;
     }
     
@@ -274,7 +274,7 @@ public class WfMaterial : IExternalMaterial {
      * @param ambientColor
      *            the ambientColor to set
      */
-    public func setAmbientColor(ambientColor : ColorRGB) {
+    open func setAmbientColor(_ ambientColor : ColorRGB) {
         self._ambientColor = ambientColor;
     }
     
@@ -282,7 +282,7 @@ public class WfMaterial : IExternalMaterial {
      * @param diffuseColor
      *            the diffuseColor to set
      */
-    public func setDiffuseColor(diffuseColor : ColorRGB) {
+    open func setDiffuseColor(_ diffuseColor : ColorRGB) {
         self._diffuseColor = diffuseColor;
     }
     
@@ -290,7 +290,7 @@ public class WfMaterial : IExternalMaterial {
      * @param emissiveColor
      *            the emissiveColor to set
      */
-    public func setEmissiveColor(emissiveColor : ColorRGB) {
+    open func setEmissiveColor(_ emissiveColor : ColorRGB) {
         self._emissiveColor = emissiveColor;
     }
     
@@ -298,7 +298,7 @@ public class WfMaterial : IExternalMaterial {
      * @param opticalDensity
      *            the opticalDensity to set
      */
-    public func setOpticalDensity(opticalDensity : Float) {
+    open func setOpticalDensity(_ opticalDensity : Float) {
         self._opticalDensity = opticalDensity;
     }
     
@@ -306,7 +306,7 @@ public class WfMaterial : IExternalMaterial {
      * @param dissolveFactor
      *            the dissolveFactor to set
      */
-    public func setDissolveFactor(dissolveFactor : Float) {
+    open func setDissolveFactor(_ dissolveFactor : Float) {
         self._dissolveFactor = dissolveFactor;
     }
     
@@ -314,7 +314,7 @@ public class WfMaterial : IExternalMaterial {
      * @param illuminationModel
      *            the illuminationModel to set
      */
-    public func setIlluminationModel(illuminationModel : Int) {
+    open func setIlluminationModel(_ illuminationModel : Int) {
         self._illuminationModel = illuminationModel;
     }
     
@@ -322,7 +322,7 @@ public class WfMaterial : IExternalMaterial {
      * @param transmisionFactor
      *            the transmisionFactor to set
      */
-    public func setTransmisionFactor(transmisionFactor : ColorRGB) {
+    open func setTransmisionFactor(_ transmisionFactor : ColorRGB) {
         self._transmissionFactor = transmisionFactor;
     }
     
@@ -330,7 +330,7 @@ public class WfMaterial : IExternalMaterial {
      * @param diffuseTextureFileName
      *            the diffuseTextureFileName to set
      */
-    public func setDiffuseTextureFileName(diffuseTextureFileName : String) {
+    open func setDiffuseTextureFileName(_ diffuseTextureFileName : String) {
         self._diffuseTextureFileName = diffuseTextureFileName;
     }
     
@@ -338,7 +338,7 @@ public class WfMaterial : IExternalMaterial {
      * @param specularTextureFileName
      *            the specularTextureFileName to set
      */
-    public func setSpecularTextureFileName(specularTextureFileName : String) {
+    open func setSpecularTextureFileName(_ specularTextureFileName : String) {
         self._specularTextureFileName = specularTextureFileName;
     }
     
@@ -346,7 +346,7 @@ public class WfMaterial : IExternalMaterial {
      * @param ambientTextureFileName
      *            the ambientTextureFileName to set
      */
-    public func setAmbientTextureFileName(ambientTextureFileName : String) {
+    open func setAmbientTextureFileName(_ ambientTextureFileName : String) {
         self._ambientTextureFileName = ambientTextureFileName;
     }
     
@@ -354,7 +354,7 @@ public class WfMaterial : IExternalMaterial {
      * @param bumpTextureFileName
      *            the bumpTextureFileName to set
      */
-    public func setBumpTextureFileName(bumpTextureFileName : String) {
+    open func setBumpTextureFileName(_ bumpTextureFileName : String) {
         self._bumpTextureFileName = bumpTextureFileName;
     }
     
@@ -362,7 +362,7 @@ public class WfMaterial : IExternalMaterial {
      * @param opacityTextureFileName
      *            the opacityTextureFileName to set
      */
-    public func setOpacityTextureFileName(opacityTextureFileName : String) {
+    open func setOpacityTextureFileName(_ opacityTextureFileName : String) {
         self._opacityTextureFileName = opacityTextureFileName;
     }
     
