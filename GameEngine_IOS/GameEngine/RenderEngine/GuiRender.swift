@@ -33,11 +33,11 @@ open class GuiRender {
      */
     fileprivate func getTransformationMatrix(_ gui : GuiTexture) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
-        matrix.glLoadIdentity();
+        matrix.loadIdentity();
         
-        matrix.glTranslate(gui.position.x, ty: gui.position.y, tz: 0.0);
+        matrix.translate(x: gui.position.x, y: gui.position.y, z: 0.0);
         
-        matrix.glScale(gui.scale.x, sy: gui.scale.y, sz: 1.0);
+        matrix.scale(x: gui.scale.x, y: gui.scale.y, z: 1.0);
         return matrix;
         
     }

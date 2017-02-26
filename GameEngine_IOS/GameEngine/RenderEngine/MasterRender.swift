@@ -89,9 +89,9 @@ open class MasterRender {
      */
     fileprivate static func createProjectionMatrix(_ width : Int, height : Int) -> GLTransformation {
         let matrix : GLTransformation = GLTransformation();
-        matrix.glLoadIdentity();
+        matrix.loadIdentity();
         let aspect : Float = fabs( ((1.0) * Float(width)) / Float(height));
-        matrix.gluPerspective(FOV, aspect: aspect, nearZ: NEAR_PLANE, farZ: FAR_PLANE);
+        matrix.perspective(yViewAngle: FOV, aspect: aspect, nearZ: NEAR_PLANE, farZ: FAR_PLANE);
         
         return matrix;
     }
@@ -105,15 +105,15 @@ open class MasterRender {
      *
      * @return The view matrix
      */
-    fileprivate static func createViewMatrix(_ aCamera : Camera) -> GLTransformation {
+    fileprivate static func createViewMatrix(camera : Camera) -> GLTransformation {
         let matrix : GLTransformation = GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.glRotate(aCamera.pitch, x: 1.0, y: 0.0, z: 0.0);
-        matrix.glRotate(aCamera.yaw, x:0.0, y:1.0, z: 0.0);
+        matrix.loadIdentity();
+        matrix.rotate(angle: camera.pitch, x: 1.0, y: 0.0, z: 0.0);
+        matrix.rotate(angle: camera.yaw, x:0.0, y:1.0, z: 0.0);
         
         
-        let camPosition : Vector3f = aCamera.position;
-        matrix.glTranslate(-camPosition.x, ty: -camPosition.y, tz: -camPosition.z);
+        let camPosition : Vector3f = camera.position;
+        matrix.translate(x: -camPosition.x, y: -camPosition.y, z: -camPosition.z);
         return matrix;
     }
     
@@ -130,7 +130,7 @@ open class MasterRender {
         }
         
         // Matrix update
-        let viewMatrix : GLTransformation = MasterRender.createViewMatrix(camera);
+        let viewMatrix : GLTransformation = MasterRender.createViewMatrix(camera: camera);
         return viewMatrix;
     }
     

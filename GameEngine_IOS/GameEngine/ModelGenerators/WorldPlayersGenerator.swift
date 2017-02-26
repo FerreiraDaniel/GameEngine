@@ -9,7 +9,7 @@ open class WorldPlayersGenerator {
      */
     fileprivate static func getPlayerModel() -> DefaultModelGenerator {
         /* Player model */
-        let playerModel = DefaultModelGenerator(objectType: TEntity.player ,objectName: "player", scale: 1.0, hasTransparency: false, normalsPointingUp: false);
+        let playerModel = DefaultModelGenerator(objectType: TEntity.player ,objectName: "player", scale: 0.5, hasTransparency: false, normalsPointingUp: false);
         return playerModel;
     }
     

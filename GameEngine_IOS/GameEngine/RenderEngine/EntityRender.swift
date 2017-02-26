@@ -63,15 +63,15 @@ open class EntityRender {
      */
     fileprivate func getTransformationMatrix(_ entity : Entity) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
-        matrix.glLoadIdentity();
+        matrix.loadIdentity();
         let entityPosition : Vector3f = entity.position;
         
-        matrix.glTranslate(entityPosition.x, ty: entityPosition.y, tz: entityPosition.z);
-        matrix.glRotate(entity.rotX, x: 1.0, y: 0.0, z: 0.0)
-        matrix.glRotate(entity.rotY, x: 0.0, y: 1.0, z: 0.0)
-        matrix.glRotate(entity.rotZ, x: 0.0, y: 0.0, z: 1.0)
+        matrix.translate(x: entityPosition.x, y: entityPosition.y, z: entityPosition.z);
+        matrix.rotate(angle: entity.rotX, x: 1.0, y: 0.0, z: 0.0)
+        matrix.rotate(angle: entity.rotY, x: 0.0, y: 1.0, z: 0.0)
+        matrix.rotate(angle: entity.rotZ, x: 0.0, y: 0.0, z: 1.0)
         
-        matrix.glScale(entity.scale, sy: entity.scale, sz: entity.scale);
+        matrix.scale(x: entity.scale, y: entity.scale, z: entity.scale);
         return matrix;
     }
     

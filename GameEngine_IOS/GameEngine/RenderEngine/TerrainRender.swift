@@ -35,12 +35,12 @@ open class TerrainRender {
      */
     fileprivate func getTransformationMatrix(_ terrain : Terrain) -> GLTransformation {
         let matrix : GLTransformation  = GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.glTranslate(terrain.x, ty: terrain.y, tz: terrain.z);
+        matrix.loadIdentity();
+        matrix.translate(x: terrain.x, y: terrain.y, z: terrain.z);
         let terrainRotation : Float = 0.0;
-        matrix.glRotate(terrainRotation, x: 1.0, y: 0.0, z: 0.0)
-        matrix.glRotate(terrainRotation, x: 0.0, y: 1.0, z: 0.0)
-        matrix.glRotate(terrainRotation, x: 0.0, y: 0.0, z: 1.0)
+        matrix.rotate(angle: terrainRotation, x: 1.0, y: 0.0, z: 0.0)
+        matrix.rotate(angle: terrainRotation, x: 0.0, y: 1.0, z: 0.0)
+        matrix.rotate(angle: terrainRotation, x: 0.0, y: 0.0, z: 1.0)
         return matrix;
     }
     
