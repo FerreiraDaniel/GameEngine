@@ -22,7 +22,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         /* Player model */
         DefaultModelGenerator playerModel = new DefaultModelGenerator();
         playerModel.setObjectReference(R.raw.player);
-        playerModel.setScale(0.5f);
+        playerModel.setScale(1.0f);
         playerModel.setHasTransparency(false);
         playerModel.setNormalsPointingUp(false);
 
@@ -39,8 +39,10 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         DefaultModelGenerator model = getPlayerModel();
 
         float xPosition = 20.0f;
+        float yPosition = -1.0f;
         float zPosition = 0.0f;
-        Vector3f playerPosition = new Vector3f(xPosition, -1.0f, zPosition);
+
+        Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
 
         //Load the obj of the player
         HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, model.getObjectReference(),

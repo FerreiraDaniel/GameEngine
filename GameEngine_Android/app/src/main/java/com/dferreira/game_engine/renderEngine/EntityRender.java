@@ -87,7 +87,7 @@ public class EntityRender {
     }
 
     /**
-     * Render the entities in the scene
+     * Render the player in the scene
      *
      * @param skyColor   Color of the sky
      * @param sun        The source of light of the scene

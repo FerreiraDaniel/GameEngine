@@ -10,14 +10,16 @@ import java.nio.FloatBuffer;
  */
 public class GLTransformation {
 
-    private float[] mMatrix = new float[16];
+	private final int MATRIX_SIZE = 16;
+	private final int FLOAT_SIZE = 4;
+    private float[] mMatrix = new float[MATRIX_SIZE];
     private final FloatBuffer mMatrixFloatBuffer;
 
     /**
      * Simply allocates space for a matrix of [4x4] floats
      */
     public GLTransformation() {
-        mMatrixFloatBuffer = ByteBuffer.allocateDirect(16 * 4)
+        mMatrixFloatBuffer = ByteBuffer.allocateDirect(MATRIX_SIZE * FLOAT_SIZE)
                 .order(ByteOrder.nativeOrder()).asFloatBuffer();
     }
 
@@ -174,7 +176,7 @@ public class GLTransformation {
      *
      */
     private void multiplyMatrix(float[] srcA, float[] srcB) {
-        float[] tmp = new float[16];
+        float[] tmp = new float[MATRIX_SIZE];
         int i;
 
         for (i = 0; i < 4; i++) {
@@ -216,7 +218,7 @@ public class GLTransformation {
      * Replace the current matrix with the identity matrix
      */
     public void glLoadIdentity() {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < MATRIX_SIZE; i++)
             mMatrix[i] = 0.0f;
 
         //Set the main diagonal

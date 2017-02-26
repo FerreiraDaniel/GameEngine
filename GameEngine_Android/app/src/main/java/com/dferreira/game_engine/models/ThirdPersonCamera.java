@@ -37,13 +37,14 @@ public class ThirdPersonCamera extends Camera {
         this.setYaw(180 - player.getRotY() + angleAroundPlayer);
     }
 
+
     /**
-     * Compute the position where the camera should be to follow the player_mtl
+     * Compute the position where the camera should be to follow the player
      *
-     * @param horizontalDistance Horizontal distance
-     * @param verticalDistance   Vertical distance
-     * @param player             Player of the scene
-     * @param terrain            The camera needs to be above the terrain otherwise gets flick
+     * @param horizontalDistance		Horizontal distance
+     * @param verticalDistance	Vertical distance
+     * @param player			Player of the scene
+     * @param terrain			The camera needs to be above the terrain otherwise gets flick
      */
     private void calculateCameraPosition(float horizontalDistance, float verticalDistance, Player player, Terrain terrain) {
         float theta = player.getRotY() + angleAroundPlayer;
@@ -52,12 +53,11 @@ public class ThirdPersonCamera extends Camera {
         float offsetZ = (float) (horizontalDistance * Math.cos(rTheta));
         getPosition().x = 1.0f * player.getPosition().x + offsetX;
         getPosition().z = 1.0f * player.getPosition().z - offsetZ;
-        getPosition().y = (player.getPosition().y + 10.0f) + verticalDistance;
         float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
-        if (getPosition().y < terrainHeight) {
-            getPosition().y = (player.getPosition().y + 10.0f + terrainHeight +
-                    verticalDistance);
-        }
+
+        float yReference = (terrainHeight > player.getPosition().y) ? terrainHeight : player.getPosition().y;
+        getPosition().y = (yReference + 10.0f  +
+                verticalDistance);
     }
 
 

@@ -10,14 +10,16 @@ import java.nio.FloatBuffer;
  */
 public class GLTransformation {
 
+    private final int MATRIX_SIZE = 16;
+    private final int FLOAT_SIZE = 4;
+    private float[] mMatrix = new float[MATRIX_SIZE];
     private final FloatBuffer mMatrixFloatBuffer;
-    private float[] mMatrix = new float[16];
 
     /**
      * Simply allocates space for a matrix of [4x4] floats
      */
     public GLTransformation() {
-        mMatrixFloatBuffer = ByteBuffer.allocateDirect(16 * 4)
+        mMatrixFloatBuffer = ByteBuffer.allocateDirect(MATRIX_SIZE * FLOAT_SIZE)
                 .order(ByteOrder.nativeOrder()).asFloatBuffer();
     }
 
@@ -29,7 +31,6 @@ public class GLTransformation {
      * @param ty Specify the y coordinate of a translation vector
      * @param tz Specify the z coordinate of a translation vector
      */
-    @SuppressWarnings("SameParameterValue")
     public void glTranslate(float tx, float ty, float tz) {
         //Set the last row of the transformation matrix to translate
         mMatrix[12] += (mMatrix[0] * tx + mMatrix[4]
@@ -50,7 +51,6 @@ public class GLTransformation {
      * @param y     Specify the factor in y coordinate
      * @param z     Specify the factor in z coordinate
      */
-    @SuppressWarnings("SameParameterValue")
     public void glRotate(float angle, float x, float y, float z) {
         float sinAngle, cosAngle;
         float mag = (float) Math.sqrt((double) (x * x + y * y + z * z));
@@ -116,7 +116,7 @@ public class GLTransformation {
      * @param farZ   Specify the distance to the far depth clipping plane. Distances must be positive.
      */
     private void glFrustum(float left, float right, float bottom, float top,
-                          float nearZ, float farZ) {
+                           float nearZ, float farZ) {
         float deltaX = right - left;
         float deltaY = top - bottom;
         float deltaZ = farZ - nearZ;
@@ -177,7 +177,7 @@ public class GLTransformation {
      *
      */
     private void multiplyMatrix(float[] srcA, float[] srcB) {
-        float[] tmp = new float[16];
+        float[] tmp = new float[MATRIX_SIZE];
         int i;
 
         for (i = 0; i < 4; i++) {
@@ -220,7 +220,7 @@ public class GLTransformation {
      * Replace the current matrix with the identity matrix
      */
     public void glLoadIdentity() {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < MATRIX_SIZE; i++)
             mMatrix[i] = 0.0f;
 
         //Set the main diagonal

@@ -146,7 +146,20 @@ public class EntityRender {
 				Material material = rawModelMaterial.getMaterial();
 				prepareMaterial(material);
 				prepareModel(model);
+				
+				float x = player.getRotX();
+                float y = player.getRotY();
+                float z = player.getRotZ();
+				
+				
+                player.setRotX(0.0f);
+                player.setRotY(0.0f);
+                player.setRotZ(0.0f);
 				loadEntityTransformation(player);
+				player.setRotX(x);
+                player.setRotY(y);
+                player.setRotZ(z);
+				
 				render(model);
 				unprepareModel();
 				unPrepareMaterial(material);

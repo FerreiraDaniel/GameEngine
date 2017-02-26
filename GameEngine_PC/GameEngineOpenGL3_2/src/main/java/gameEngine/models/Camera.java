@@ -31,7 +31,7 @@ public class Camera {
 	 * Initializer of the camera of the scene
 	 */
 	public Camera() {
-		this.position = new Vector3f(0, 1.0f, 0);
+		this.position = new Vector3f(0, 2.5f, 0);
 	}
 
 
