@@ -54,12 +54,12 @@ public class TerrainRender {
 	 */
 	private GLTransformation getTransformationMatrix(Terrain terrain) {
 		GLTransformation matrix = new GLTransformation();
-		matrix.glLoadIdentity();
-		matrix.glTranslate(terrain.getX(), terrain.getY(), terrain.getZ());
+		matrix.loadIdentity();
+		matrix.translate(terrain.getX(), terrain.getY(), terrain.getZ());
 		float terrainRotation = 0.0f;
-		matrix.glRotate(terrainRotation, 1.0f, 0.0f, 0.0f);
-		matrix.glRotate(terrainRotation, 0.0f, 1.0f, 0.0f);
-		matrix.glRotate(terrainRotation, 0.0f, 0.0f, 1.0f);
+		matrix.rotate(terrainRotation, 1.0f, 0.0f, 0.0f);
+		matrix.rotate(terrainRotation, 0.0f, 1.0f, 0.0f);
+		matrix.rotate(terrainRotation, 0.0f, 0.0f, 1.0f);
 
 		return matrix;
 	}

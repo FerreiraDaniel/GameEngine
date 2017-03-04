@@ -60,13 +60,13 @@ public class EntityRender {
 	 */
 	private GLTransformation getTransformationMatrix(Entity entity) {
 		GLTransformation matrix = new GLTransformation();
-		matrix.glLoadIdentity();
-		matrix.glTranslate(entity.getPosition().x, entity.getPosition().y, entity.getPosition().z);
-		matrix.glRotate(entity.getRotX(), 1.0f, 0.0f, 0.0f);
-		matrix.glRotate(entity.getRotY(), 0.0f, 1.0f, 0.0f);
-		matrix.glRotate(entity.getRotZ(), 0.0f, 0.0f, 1.0f);
+		matrix.loadIdentity();
+		matrix.translate(entity.getPosition().x, entity.getPosition().y, entity.getPosition().z);
+		matrix.rotate(entity.getRotX(), 1.0f, 0.0f, 0.0f);
+		matrix.rotate(entity.getRotY(), 0.0f, 1.0f, 0.0f);
+		matrix.rotate(entity.getRotZ(), 0.0f, 0.0f, 1.0f);
 
-		matrix.glScale(entity.getScale(), entity.getScale(), entity.getScale());
+		matrix.scale(entity.getScale(), entity.getScale(), entity.getScale());
 		return matrix;
 	}
 
@@ -146,20 +146,7 @@ public class EntityRender {
 				Material material = rawModelMaterial.getMaterial();
 				prepareMaterial(material);
 				prepareModel(model);
-				
-				float x = player.getRotX();
-                float y = player.getRotY();
-                float z = player.getRotZ();
-				
-				
-                player.setRotX(0.0f);
-                player.setRotY(0.0f);
-                player.setRotZ(0.0f);
 				loadEntityTransformation(player);
-				player.setRotX(x);
-                player.setRotY(y);
-                player.setRotZ(z);
-				
 				render(model);
 				unprepareModel();
 				unPrepareMaterial(material);
@@ -209,7 +196,7 @@ public class EntityRender {
 
 		// Load the texture weight of the material
 		eShader.loadTextureWeight(material.getTextureWeight());
-		
+
 		// Load the diffuse color of the material
 		eShader.loadDiffuseColor(material.getDiffuseColor());
 	}

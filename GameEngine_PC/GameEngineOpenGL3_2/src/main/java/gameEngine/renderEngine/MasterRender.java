@@ -30,7 +30,7 @@ import com.dferreira.commons.models.Light;
  */
 public class MasterRender {
 
-	private static final float FOV = 70.0f;
+	private static final float FOV = 45.0f;
 	private static final float CAMERA_RATE = 16.0f / 9.0f;
 	private static final float NEAR_PLANE = 0.1f;
 	private static final float FAR_PLANE = 1000.0f;
@@ -109,8 +109,8 @@ public class MasterRender {
 	 */
 	private GLTransformation createProjectionMatrix() {
 		GLTransformation matrix = new GLTransformation();
-		matrix.glLoadIdentity();
-		matrix.gluPerspective(FOV, CAMERA_RATE, NEAR_PLANE, FAR_PLANE);
+		matrix.loadIdentity();
+		matrix.perspective(FOV, CAMERA_RATE, NEAR_PLANE, FAR_PLANE);
 
 		return matrix;
 	}
@@ -275,10 +275,10 @@ public class MasterRender {
 	 */
 	private GLTransformation createViewMatrix(Camera camera) {
 		GLTransformation matrix = new GLTransformation();
-		matrix.glLoadIdentity();
-		matrix.glRotate(camera.getPitch(), 1.0f, 0.0f, 0.0f);
-		matrix.glRotate(camera.getYaw(), 0.0f, 1.0f, 0.0f);
-		matrix.glTranslate(-camera.getPosition().x, -camera.getPosition().y, -camera.getPosition().z);
+		matrix.loadIdentity();
+		matrix.rotate(camera.getPitch(), 1.0f, 0.0f, 0.0f);
+		matrix.rotate(camera.getYaw(), 0.0f, 1.0f, 0.0f);
+		matrix.translate(-camera.getPosition().x, -camera.getPosition().y, -camera.getPosition().z);
 
 		return matrix;
 	}
