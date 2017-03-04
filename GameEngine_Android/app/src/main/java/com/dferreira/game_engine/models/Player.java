@@ -56,20 +56,20 @@ public class Player extends Entity {
      * @param terrain Reference to the terrain
      */
     private void checkInputs(Terrain terrain) {
-        if (GamePad.isKeyDown(GamePadKey.x)) {
+        if (GamePad.isDown(GamePadKey.x)) {
             //Go in front
             this.currentSpeed = RUN_SPEED;
-        } else if (GamePad.isKeyDown(GamePadKey.circle)) {
+        } else if (GamePad.isDown(GamePadKey.circle)) {
             //Go backwards
             this.currentSpeed = -RUN_SPEED;
         } else {
             //Stay where it is
             this.currentSpeed = 0;
         }
-        if (GamePad.isKeyDown(GamePadKey.left)) {
+        if (GamePad.isDown(GamePadKey.left)) {
             //Rotate counterclockwise
             this.currentTurnSpeed = -TURN_SPEED;
-        } else if (GamePad.isKeyDown(GamePadKey.right)) {
+        } else if (GamePad.isDown(GamePadKey.right)) {
             //Rotate clockwise
             this.currentTurnSpeed = TURN_SPEED;
         } else {
@@ -77,7 +77,7 @@ public class Player extends Entity {
             this.currentTurnSpeed = 0;
         }
 
-        if (GamePad.isKeyDown(GamePadKey.triangle)) {
+        if (GamePad.isDown(GamePadKey.triangle)) {
             this.jump(terrain);
         }
     }

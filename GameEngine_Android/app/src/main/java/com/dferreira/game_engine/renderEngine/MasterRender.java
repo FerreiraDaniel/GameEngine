@@ -300,8 +300,8 @@ public class MasterRender {
         if ((this.GUIs != null) && (!this.GUIs.isEmpty())) {
             for (GuiTexture guiTexture : this.GUIs) {
                 if (guiTexture.getGamePadKey() != null) {
-                    boolean keyPressed = guiTexture.containsLocation(GameEngineTouchListener.getGlX(), GameEngineTouchListener.getGlY());
-                    GamePad.setKey(guiTexture.getGamePadKey(), keyPressed && GameEngineTouchListener.getIsPressed());
+                    boolean keyPressed = guiTexture.containsLocation(GameEngineTouchListener.getNormalX(), GameEngineTouchListener.getNormalY());
+                    GamePad.set(guiTexture.getGamePadKey(), keyPressed && GameEngineTouchListener.isPressed());
                 }
             }
         }

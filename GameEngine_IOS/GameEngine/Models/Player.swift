@@ -49,20 +49,20 @@ open class Player : Entity {
      * @param terrain Reference to the terrain
      */
     fileprivate func checkInputs(_ terrain : Terrain) {
-        if (GamePad.isKeyDown(GamePadKey.circle)) {
+        if (GamePad.isDown(key: GamePadKey.circle)) {
             //Go in front
             self.currentSpeed = -RUN_SPEED;
-        } else if (GamePad.isKeyDown(GamePadKey.x)) {
+        } else if (GamePad.isDown(key: GamePadKey.x)) {
             //Go backwards
             self.currentSpeed = RUN_SPEED;
         } else {
             //Stay where it is
             self.currentSpeed = 0;
         }
-        if(GamePad.isKeyDown(GamePadKey.left)) {
+        if(GamePad.isDown(key: GamePadKey.left)) {
             //Rotate counterclockwise
             self.currentTurnSpeed = -TURN_SPEED;
-        } else if (GamePad.isKeyDown(GamePadKey.right)) {
+        } else if (GamePad.isDown(key: GamePadKey.right)) {
             //Rotate clockwise
             self.currentTurnSpeed = TURN_SPEED;
         } else {
@@ -70,9 +70,9 @@ open class Player : Entity {
             self.currentTurnSpeed = 0;
         }
         
-        /*if (GamePad.isKeyDown(GamePad.KEY_TRIANGLE)) {
-         self.jump(terrain);
-         }*/
+        if (GamePad.isDown(key: GamePadKey.triangle)) {
+            self.jump(terrain: terrain);
+        }
     }
     
     /**
@@ -115,13 +115,14 @@ open class Player : Entity {
         }
     }
     
-    /**
-     * Set the upward speed of the player in order make it jump
-     * @param terrain Reference to the terrain in order to compute the height that is going to jump
-     */
-    fileprivate func jump(_ terrain : Terrain) {
+
+    /// Set the upward speed of the player in order make it jump
+    ///
+    /// - Parameter terrain: Reference to the terrain in order to compute the height that is going to jump
+    fileprivate func jump(terrain : Terrain) {
         let terrainHeight = terrain.getHeightOfTerrain(position.x, worldZ: position.z);
-        if (position.y <= terrainHeight) {
+        if ((position.y <= terrainHeight) && (!isJumping))
+        {
             upwardsSpeed = terrainHeight + JUMP_POWER;
             isJumping = true
         }

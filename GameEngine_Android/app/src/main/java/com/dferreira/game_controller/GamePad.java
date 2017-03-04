@@ -5,25 +5,26 @@ package com.dferreira.game_controller;
  */
 public class GamePad {
 
+    /**
+     * List of booleans to indicate if the key was pressed or not
+     */
     private static final boolean[] keysAreDown = new boolean[GamePadKey.numOfKeys.getValue()];
 
     /**
-     *
-     * @param selectedKey key to check
-     *
-     * @return  Flag that indicates if the key was pressed or not
+     * @param key key to check
+     * @return Flag that indicates if the key was pressed or not
      */
-    public static boolean isKeyDown(GamePadKey selectedKey) {
-        return keysAreDown[selectedKey.getValue()];
+    public static boolean isDown(GamePadKey key) {
+        return keysAreDown[key.getValue()];
     }
 
     /**
      * Called when the user presses on of the virtual buttons
      *
-     * @param selectedKey the key that the user have clicked
-     * @param clicked       Flag that indicates if is to indicate clicked or not
+     * @param key     The key that the user have clicked
+     * @param clicked Flag that indicates if is to indicate clicked or not
      */
-    public static void setKey(GamePadKey selectedKey, boolean clicked) {
-        keysAreDown[selectedKey.getValue()] = clicked;
+    public static void set(GamePadKey key, boolean clicked) {
+        keysAreDown[key.getValue()] = clicked;
     }
 }

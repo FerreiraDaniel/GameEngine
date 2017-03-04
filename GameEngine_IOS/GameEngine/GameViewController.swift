@@ -188,22 +188,6 @@ open class GameViewController: GLKViewController {
         playAudio();
     }
     
-    @IBAction func leftPressed(_ sender: AnyObject) {
-        GamePad.setKey(GamePadKey.left, clicked: true)
-    }
-    
-    
-    @IBAction func rightPressed(_ sender: AnyObject) {
-        GamePad.setKey(GamePadKey.right, clicked: true)
-    }
-    
-    @IBAction func downPressed(_ sender: AnyObject) {
-        GamePad.setKey(GamePadKey.down, clicked: true)
-    }
-    
-    @IBAction func upPressed(_ sender: AnyObject) {
-        GamePad.setKey(GamePadKey.up, clicked: true)
-    }
     
     deinit {
     }

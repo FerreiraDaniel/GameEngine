@@ -91,7 +91,7 @@ open class MasterRender {
         let matrix : GLTransformation = GLTransformation();
         matrix.loadIdentity();
         let aspect : Float = fabs( ((1.0) * Float(width)) / Float(height));
-        matrix.perspective(yViewAngle: FOV, aspect: aspect, nearZ: NEAR_PLANE, farZ: FAR_PLANE);
+        matrix.perspective(yAngle: FOV, aspect: aspect, nearZ: NEAR_PLANE, farZ: FAR_PLANE);
         
         return matrix;
     }
@@ -134,15 +134,18 @@ open class MasterRender {
         return viewMatrix;
     }
     
-    /**
-     * Uses the GUIs to update the game pad of the game
-     */
+    
+    /// Uses the GUIs to update the game pad of the game
     fileprivate func updateGamePad() {
         if ((self.GUIs != nil) && (!self.GUIs.isEmpty)) {
             for guiTexture in GUIs {
                 if(guiTexture.gamePadKey != nil) {
-                    let keyPressed = guiTexture.containsLocation(GameEngineGestureRecognizer.getGlX(), GameEngineGestureRecognizer.getGlY());
-                    GamePad.setKey(guiTexture.gamePadKey, clicked: keyPressed && GameEngineGestureRecognizer.getIsPressed());
+                    let normalX = GameEngineGestureRecognizer.getNormalX()
+                    let normalY = GameEngineGestureRecognizer.getNormalY()
+                    let isPressed = GameEngineGestureRecognizer.isPressed()
+                    
+                    let keyPressed = guiTexture.containsLocation(normalX, normalY);
+                    GamePad.set(key: guiTexture.gamePadKey, clicked: keyPressed && isPressed);
                 }
             }
         }

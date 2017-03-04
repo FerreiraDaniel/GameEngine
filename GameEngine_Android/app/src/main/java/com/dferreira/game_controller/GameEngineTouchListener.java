@@ -8,9 +8,14 @@ import android.view.View;
  */
 public class GameEngineTouchListener implements View.OnTouchListener {
 
+    //Indicates if there was a press or not
     private static boolean pressed = false;
-    private static float glX = 0.0f;
-    private static float glY = 0.0f;
+
+    //Indicates where in the x-axle the screen was pressed values between (-1.0 and 1)
+    private static float normalX = 0.0f;
+
+    //Indicates where in the Y-axle the screen was pressed values between (-1.0 and 1)
+    private static float normalY = 0.0f;
 
     /**
      * The width of the draw window
@@ -25,29 +30,29 @@ public class GameEngineTouchListener implements View.OnTouchListener {
     /**
      * @return Indicates if the the interface is pressed
      */
-    public static boolean getIsPressed() {
+    public static boolean isPressed() {
         return pressed;
     }
 
     /**
      * @return The position that is was pressed in the x-coordinate
      */
-    public static float getGlX() {
-        return glX;
+    public static float getNormalX() {
+        return normalX;
     }
 
     /**
      * @return The position that is was pressed in the y-coordinate
      */
-    public static float getGlY() {
-        return glY;
+    public static float getNormalY() {
+        return normalY;
     }
 
     /**
      * @param xScreenPosition The position in the coordinates of the screen
      * @return the value in gl format between -1.0 and 1
      */
-    private float getGLXPosition(float xScreenPosition) {
+    private float getNormalXPosition(float xScreenPosition) {
         return ((xScreenPosition / width) * 2.0f) - 1.0f;
     }
 
@@ -74,8 +79,8 @@ public class GameEngineTouchListener implements View.OnTouchListener {
             case MotionEvent.ACTION_DOWN:
                 float positionX = motionEvent.getX();
                 float positionY = motionEvent.getY();
-                glX = getGLXPosition(positionX);
-                glY = getGLYPosition(positionY);
+                normalX = getNormalXPosition(positionX);
+                normalY = getGLYPosition(positionY);
                 pressed = true;
                 break;
             case MotionEvent.ACTION_UP:
