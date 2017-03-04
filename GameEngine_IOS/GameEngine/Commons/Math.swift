@@ -7,12 +7,13 @@ import GLKit
  */
 open class Math {
     
-    /**
-     *  Transforms an angle in the degrees to radians
-     */
-    open static func toRadians(_ degreesAngle : Float) -> Float
+    /// Transforms an angle in the degrees to radians
+    ///
+    /// - Parameter degrees: The angle to conver in degrees
+    /// - Returns: The angle transformed in radian
+    open static func toRadians(degrees : Float) -> Float
     {
-        let radiansAngle = GLKMathDegreesToRadians(degreesAngle);
+        let radiansAngle = GLKMathDegreesToRadians(degrees);
         return radiansAngle;
     }
     

@@ -4,6 +4,10 @@ import Foundation
 /// Helps to create the matrix to pass in the render as GL V1 has but adapted for GL V2
 open class GLTransformation {
     
+    /// The size of a side of the matrix
+    fileprivate let MATRIX_SIDE : Int = 4
+    
+    
     /// The size of the matrix that is 4x4
     fileprivate let MATRIX_SIZE : Int = 16
     
@@ -43,14 +47,14 @@ open class GLTransformation {
     fileprivate func multiplyMatrix(matA : Array<Float>, matB : Array<Float>)  {
         var tmp : [Float] = Array<Float>(repeating: 0.0, count: MATRIX_SIZE);
         
-        for i : Int  in 0 ..< 4 {
+        for i : Int  in 0 ..< MATRIX_SIDE {
             //Entire row
             let a0 : Float = matA[i * 4];
             let a1 : Float = matA[i * 4 + 1];
             let a2 : Float = matA[i * 4 + 2];
             let a3 : Float = matA[i * 4 + 3];
             
-            for j : Int in 0 ..< 4 {
+            for j : Int in 0 ..< MATRIX_SIDE {
                 //Entire column
                 let b0 : Float = matB[0 * 4 + j]
                 let b1 : Float = matB[1 * 4 + j]
@@ -74,19 +78,17 @@ open class GLTransformation {
     }
     
     
-    
-    /**
-     * Multiply the current matrix by a rotation matrix
-     *
-     * @param angle Specifies the angle of rotation, in degrees.
-     * @param x     Specify the factor in x coordinate
-     * @param y     Specify the factor in y coordinate
-     * @param z     Specify the factor in z coordinate
-     */
+    /// Multiply the current matrix by a rotation matrix
+    ///
+    /// - Parameters:
+    ///   - angle: Specifies the angle of rotation, in degrees.
+    ///   - x: Specify the factor in x coordinate
+    ///   - y: Specify the factor in y coordinate
+    ///   - z: Specify the factor in z coordinate
     open func rotate(angle : Float, x : Float, y : Float, z : Float) {
         let mag : CFloat = sqrt(x * x + y * y + z * z)
         
-        let radians : CFloat = angle * Float(M_PI / 180.0)
+        let radians : CFloat = Math.toRadians(degrees: angle)
         
         let sinAngle : Float = sinf(radians);
         let cosAngle : Float = cosf(radians);
@@ -139,16 +141,16 @@ open class GLTransformation {
         }
     }
     
-    /**
-     * Multiply the current matrix by a perspective matrix
-     *
-     * @param left   Specify the coordinate for the vertical clipping plane.
-     * @param right  Specify the coordinate for the right vertical clipping plane.
-     * @param bottom Specify the coordinate for the bottom horizontal clipping plane.
-     * @param top    Specify the coordinate for the horizontal clipping plane.
-     * @param nearZ  Specify the distance to the near clipping plane. Distances must be positive.
-     * @param farZ   Specify the distance to the far depth clipping plane. Distances must be positive.
-     */
+    
+    /// Multiply the current matrix by a perspective matrix
+    ///
+    /// - Parameters:
+    ///   - left: Specify the coordinate for the vertical clipping plane.
+    ///   - right: Specify the coordinate for the right vertical clipping plane.
+    ///   - bottom: Specify the coordinate for the bottom horizontal clipping plane.
+    ///   - top: Specify the coordinate for the horizontal clipping plane.
+    ///   - nearZ: Specify the distance to the near clipping plane. Distances must be positive.
+    ///   - farZ: Specify the distance to the far depth clipping plane. Distances must be positive.
     fileprivate func frustum (left: Float, right: Float, bottom: Float, top: Float, nearZ: Float, farZ: Float) {
         let deltaX : Float = right - left;
         let deltaY : Float = top - bottom;
@@ -188,18 +190,18 @@ open class GLTransformation {
     }
     
     
-    
-    /**
-     * @param yViewAngle specifies the field of view angle, in degrees, in the Y direction.
-     * @param aspect     specifies the aspect ration that determines the field of view in the x direction. The aspect ratio is the ratio of x (width) to y (height).
-     * @param nearZ      specifies the distance from the viewer to the near clipping plane (always positive).
-     * @param farZ       specifies the distance from the viewer to the far clipping plane (always positive).
-     */
-    open func perspective(yViewAngle : Float, aspect : Float, nearZ : Float, farZ : Float){
+    /// Multiply the current matrix by a matrix that should transform the perspective of the player
+    ///
+    /// - Parameters:
+    ///   - yAngle: Specifies the field of view angle, in degrees, in the Y direction.
+    ///   - aspect: Specifies the aspect ration that determines the field of view in the x direction. The aspect ratio is the ratio of x (width) to y (height).
+    ///   - nearZ: Specifies the distance from the viewer to the near clipping plane (always positive).
+    ///   - farZ: Specifies the distance from the viewer to the far clipping plane (always positive).
+    open func perspective(yAngle : Float, aspect : Float, nearZ : Float, farZ : Float){
         
-        let yAngle : Float = Math.toRadians(yViewAngle)
+        let rAngle : Float = Math.toRadians(degrees: yAngle)
         
-        let frustumH : Float = tan(yAngle) * nearZ;
+        let frustumH : Float = tan(rAngle) * nearZ;
         let frustumW : Float = frustumH * aspect;
         
         self.frustum(left: -frustumW, right: frustumW, bottom: -frustumH, top: frustumH, nearZ: nearZ, farZ: farZ)
@@ -220,12 +222,13 @@ open class GLTransformation {
         data[15] = 1.0;
     }
     
-    /**
-     * Multiples the matrix by on vector of scaling
-     * @param sx 	scaling vector in the x-axle
-     * @param sy	scaling vector in the y-axle
-     * @param sz 	scaling vector in the z-axle
-     */
+    
+    /// Multiples the matrix by on vector of scaling
+    ///
+    /// - Parameters:
+    ///   - x: Scaling vector in the x-axle
+    ///   - y: Scaling vector in the y-axle
+    ///   - z: Scaling vector in the z-axle
     open func scale(x : Float, y : Float, z : Float) {
         var scaleMatrix : [Float] = Array<Float>(repeating: 0.0, count: MATRIX_SIZE);
         
@@ -239,24 +242,24 @@ open class GLTransformation {
     }
     
     
-    /**
-     * Set the translation in the matrix
-     *
-     * @param tx 	translation vector in the x-axle
-     * @param ty	translation vector in the y-axle
-     * @param tz 	translation vector in the z-axle
-     */
-    open func setTranslation(_ tx : Float, ty: Float, tz : Float) {
+    
+    /// Set the translation in the matrix
+    ///
+    /// - Parameters:
+    ///   - x: Translation vector in the x-axle
+    ///   - y: Translation vector in the y-axle
+    ///   - z: Translation vector in the z-axle
+    open func setTranslation(x : Float, y: Float, z : Float) {
         //The translation is the last row
-        data[12] = tx;
-        data[13] = ty;
-        data[14] = tz;
+        data[12] = x;
+        data[13] = y;
+        data[14] = z;
     }
     
     
-    /**
-     * @return current matrix
-     */
+    /// Use by low level APIs
+    ///
+    /// - Returns: Current matrix as one array of floats
     open func getMatrix() ->  Array<Float> {
         return self.data;
     }

@@ -71,7 +71,7 @@ open class MasterRender {
     fileprivate var timeToRender : Float = 0.0;
     
     /* Constants of the camera */
-    fileprivate static let FOV : Float = 65.0;
+    fileprivate static let FOV : Float = 45.0;
     fileprivate static let NEAR_PLANE : Float = 0.1;
     fileprivate static let FAR_PLANE : Float = 1000.0;
     

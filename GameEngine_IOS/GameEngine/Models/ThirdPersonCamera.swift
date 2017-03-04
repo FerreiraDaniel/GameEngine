@@ -46,7 +46,7 @@ open class ThirdPersonCamera : Camera {
     */
     fileprivate func calculateCameraPosition(_ horizontalDistance: Float, verticalDistance : Float, player : Player, terrain : Terrain) {
         let theta = player.rotY + angleAroundPlayer;
-        let rTheta = Math.toRadians(theta);
+        let rTheta = Math.toRadians(degrees: theta);
         
         let offsetX : Float = (horizontalDistance * sin(rTheta));
         let offsetZ : Float = (horizontalDistance * cos(rTheta));
@@ -65,13 +65,13 @@ open class ThirdPersonCamera : Camera {
     * @return Horizontal distance from the camera to the player
     */
     fileprivate func getHorizontalDistance() -> Float {
-        return (distanceFromPlayer * Math.cos(Math.toRadians(self.pitch)));
+        return (distanceFromPlayer * Math.cos(Math.toRadians(degrees: self.pitch)));
     }
     
     /**
     * @return Vertical distance from the camera to the player
     */
     fileprivate func getVerticalDistance() -> Float {
-        return (distanceFromPlayer * Math.sin(Math.toRadians(self.pitch)));
+        return (distanceFromPlayer * Math.sin(Math.toRadians(degrees: self.pitch)));
     }
 }

@@ -57,13 +57,11 @@ public class ThirdPersonCamera extends Camera {
         float offsetZ = (float) (horizontalDistance * Math.cos(rTheta));
         getPosition().x = 1.0f * player.getPosition().x + offsetX;
         getPosition().z = 1.0f * player.getPosition().z - offsetZ;
-        getPosition().y = (player.getPosition().y + 10.0f  + 
-        		verticalDistance);
         float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z);
-        if(getPosition().y < terrainHeight) {
-        	getPosition().y = (player.getPosition().y + 10.0f + terrainHeight  + 
-            		verticalDistance);
-        } 
+
+        float yReference = (terrainHeight > player.getPosition().y) ? terrainHeight : player.getPosition().y;
+        getPosition().y = (yReference + 10.0f  +
+                verticalDistance);
     }
 	
 	/**
