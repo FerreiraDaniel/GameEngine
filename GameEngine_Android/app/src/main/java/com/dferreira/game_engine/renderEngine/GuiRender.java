@@ -40,10 +40,10 @@ public class GuiRender {
      */
     private GLTransformation getTransformationMatrix(GuiTexture gui) {
         GLTransformation matrix = new GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.glTranslate(gui.getPosition().x, gui.getPosition().y, 0.0f);
+        matrix.loadIdentity();
+        matrix.translate(gui.getPosition().x, gui.getPosition().y, 0.0f);
 
-        matrix.glScale(gui.getScale().x, gui.getScale().y, 1.0f);
+        matrix.scale(gui.getScale().x, gui.getScale().y, 1.0f);
         return matrix;
     }
 

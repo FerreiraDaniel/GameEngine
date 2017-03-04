@@ -35,7 +35,7 @@ import java.util.Map;
 public class MasterRender {
 
     /* Constants of the camera */
-    private static final float FOV = 70.0f;
+    private static final float FOV = 45.0f;
     private static final float CAMERA_RATE = 16.0f / 9.0f;
     private static final float NEAR_PLANE = 0.1f;
     private static final float FAR_PLANE = 1000.0f;
@@ -152,8 +152,8 @@ public class MasterRender {
      */
     private GLTransformation createProjectionMatrix() {
         GLTransformation matrix = new GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.gluPerspective(FOV, CAMERA_RATE, NEAR_PLANE, FAR_PLANE);
+        matrix.loadIdentity();
+        matrix.perspective(FOV, CAMERA_RATE, NEAR_PLANE, FAR_PLANE);
 
         return matrix;
     }
@@ -191,12 +191,10 @@ public class MasterRender {
      *
      * @param lEntities list of entities to get render in the next frame
      */
-    @SuppressWarnings("ForLoopReplaceableByForEach")
     public void processEntities(Entity[] lEntities) {
         entities.clear();
         if ((lEntities != null) && (lEntities.length > 0)) {
-            for (int i = 0; i < lEntities.length; i++) {
-                Entity entity = lEntities[i];
+            for (Entity entity : lEntities) {
                 processEntity(entity);
             }
         }
@@ -216,12 +214,10 @@ public class MasterRender {
      *
      * @param lTerrains list of terrains to process
      */
-    @SuppressWarnings("ForLoopReplaceableByForEach")
     public void processTerrains(Terrain[] lTerrains) {
         this.terrains.clear();
         if ((lTerrains != null) && (lTerrains.length > 0)) {
-            for (int i = 0; i < lTerrains.length; i++) {
-                Terrain terrain = lTerrains[i];
+            for (Terrain terrain : lTerrains) {
                 processTerrain(terrain);
             }
         }
@@ -251,9 +247,7 @@ public class MasterRender {
     public void processGUIs(GuiTexture[] lGUIs) {
         this.GUIs.clear();
         if ((lGUIs != null) && (lGUIs.length > 0)) {
-            //noinspection ForLoopReplaceableByForEach
-            for (int i = 0; i < lGUIs.length; i++) {
-                GuiTexture gui = lGUIs[i];
+            for (GuiTexture gui : lGUIs) {
                 processGUI(gui);
             }
         }
@@ -276,10 +270,10 @@ public class MasterRender {
      */
     private GLTransformation createViewMatrix(Camera camera) {
         GLTransformation matrix = new GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.glRotate(camera.getPitch(), 1.0f, 0.0f, 0.0f);
-        matrix.glRotate(camera.getYaw(), 0.0f, 1.0f, 0.0f);
-        matrix.glTranslate(-camera.getPosition().x, -camera.getPosition().y, -camera.getPosition().z);
+        matrix.loadIdentity();
+        matrix.rotate(camera.getPitch(), 1.0f, 0.0f, 0.0f);
+        matrix.rotate(camera.getYaw(), 0.0f, 1.0f, 0.0f);
+        matrix.translate(-camera.getPosition().x, -camera.getPosition().y, -camera.getPosition().z);
 
         return matrix;
     }
@@ -304,9 +298,7 @@ public class MasterRender {
      */
     private void updateGamePad() {
         if ((this.GUIs != null) && (!this.GUIs.isEmpty())) {
-            //noinspection ForLoopReplaceableByForEach
-            for (int i = 0; i < this.GUIs.size(); i++) {
-                GuiTexture guiTexture = this.GUIs.get(i);
+            for (GuiTexture guiTexture : this.GUIs) {
                 if (guiTexture.getGamePadKey() != null) {
                     boolean keyPressed = guiTexture.containsLocation(GameEngineTouchListener.getGlX(), GameEngineTouchListener.getGlY());
                     GamePad.setKey(guiTexture.getGamePadKey(), keyPressed && GameEngineTouchListener.getIsPressed());

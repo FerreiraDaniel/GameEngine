@@ -54,15 +54,15 @@ public class EntityRender {
      */
     private GLTransformation getTransformationMatrix(Entity entity) {
         GLTransformation matrix = new GLTransformation();
-        matrix.glLoadIdentity();
-        matrix.glTranslate(entity.getPosition().x, entity.getPosition().y, entity.getPosition().z);
+        matrix.loadIdentity();
+        matrix.translate(entity.getPosition().x, entity.getPosition().y, entity.getPosition().z);
         //Rotate the entity
-        matrix.glRotate(entity.getRotX(), 1.0f, 0.0f, 0.0f);
-        matrix.glRotate(entity.getRotY(), 0.0f, 1.0f, 0.0f);
-        matrix.glRotate(entity.getRotZ(), 0.0f, 0.0f, 1.0f);
+        matrix.rotate(entity.getRotX(), 1.0f, 0.0f, 0.0f);
+        matrix.rotate(entity.getRotY(), 0.0f, 1.0f, 0.0f);
+        matrix.rotate(entity.getRotZ(), 0.0f, 0.0f, 1.0f);
 
         //Scale the entity
-        matrix.glScale(entity.getScale(), entity.getScale(), entity.getScale());
+        matrix.scale(entity.getScale(), entity.getScale(), entity.getScale());
 
         return matrix;
     }
