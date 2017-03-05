@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dferreira.commons.models.Light;
 
+import gameEngine.audioEngine.AudioLoader;
 import gameEngine.audioEngine.MasterPlayer;
 import gameEngine.audioEngine.TAudioEnum;
 import gameEngine.modelGenerators.WorldAudioGenerator;
@@ -37,6 +38,12 @@ public class GameEngineRenderer {
 	 * Loader should handle the loading of resources from disk
 	 */
 	private Loader loader;
+	
+	/**
+	 * Loader should handle the loading of resources from disk
+	 */
+	private AudioLoader audioLoader;
+	
 
 	/**
 	 * The master render is going put all the elements together in order to
@@ -100,6 +107,8 @@ public class GameEngineRenderer {
 	public void onSurfaceCreated() {
 		/* Initializes the main variables responsible to render the 3D world */
 		this.loader = new Loader();
+		/* Initializes the main variable responsible to the audio of the 3D world*/
+		this.audioLoader = new AudioLoader();
 		this.renderer = new MasterRender();
 		
 
@@ -124,10 +133,10 @@ public class GameEngineRenderer {
 		
 		
 		/* Prepares the sounds to be used by the engine*/
-		this.audioLibrary = WorldAudioGenerator.getBuffers(loader);
+		this.audioLibrary = WorldAudioGenerator.getBuffers(this.audioLoader);
 		
 		/*Sounds player*/
-		List<AudioSource> sourceLst = loader.genAudioSources(POOL_SOURCES_SIZE);
+		List<AudioSource> sourceLst = this.audioLoader.genAudioSources(POOL_SOURCES_SIZE);
 		this.masterPlayer = new MasterPlayer(sourceLst);
 		
 	}

@@ -3,66 +3,53 @@ import Foundation
 import UIKit
 import GLKit
 
-
+//A view controller that manages an OpenGL ES rendering loop
 open class GameViewController: GLKViewController {
     
-    /**
-     * Number of audio sources available
-     */
+    
+    /// Number of audio sources available
     fileprivate let POOL_SOURCES_SIZE : Int = 32;
     
-    /**
-     * The master render is going put all the elements together in order to
-     * render the scene
-     */
+    /// The master render is going put all the elements together in order to render the scene
     fileprivate var renderer : MasterRender? = nil;
     
-    /**
-     * Array of entities to render
-     */
+    
+    /// Array of entities to render
     fileprivate var entities : Array<Entity> = [];
     
-    /**
-     * Array of terrains to render
-     */
+    
+    /// Array of terrains to render
     fileprivate var terrains : Array<Terrain> = [];
     
-    /**
-     * Array of GUIs to render
-     */
+    
+    /// Array of GUIs to render
     fileprivate var guis : Array<GuiTexture>? = [];
     
-    /**
-     * Position of the light in scene
-     */
+    
+    /// Position of the light in scene
     fileprivate var light : Light! = nil;
     
-    /**
-     * SkyBox of the 3D world
-     */
+    
+    /// SkyBox of the 3D world
     fileprivate var skyBox : SkyBox! = nil;
     
-    /**
-     * The player that is going to be show in the scene
-     */
+    
+    /// The player that is going to be show in the scene
     fileprivate var player : Player! = nil;
     
     
-    /**
-     * Dictionary of sounds supported by the game
-     */
+    /// Dictionary of sounds supported by the game
     fileprivate var audioLibrary : [TAudioEnum :  AudioBuffer]! = nil;
     
-    /**
-     * Reference to the player of sounds of the game
-     */
+    
+    /// Reference to the player of sounds of the game
     fileprivate var masterPlayer : MasterPlayer! = nil;
     
+    /// Manages an OpenGL ES rendering context
+    /// The state information, commands, and resources needed to draw using OpenGL ES
     fileprivate var context:  EAGLContext! = nil;
     
-    /**
-     *  Is called once when the controller is created and viewDidAppear is called each time the view, well
-     */
+    /// Method should set up your context and any drawable properties and can perform other resource allocation and initialization
     open override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,43 +67,38 @@ open class GameViewController: GLKViewController {
         let gestureRecognizer = GameEngineGestureRecognizer()
         view.addGestureRecognizer(gestureRecognizer)
         
+        self.setupAudioEngine()
         self.setupGL()
         
-        AudioManager.initOpenAL()
         
-        /* Initializes the main variables responsible to render the 3D world */
+        // Initializes the main variables responsible to render the 3D world
         let loader : Loader = Loader()
         
-        /* Prepares the terrains that is going to render */
+        
+        // Prepares the terrains that is going to render
         self.terrains = WorldTerrainsGenerator.getTerrains(loader);
         
-        /* Prepares the entities that is going to be render */
+        // Prepares the entities that is going to be render
         self.entities = WorldEntitiesGenerator.getEntities(loader, terrain: terrains[0]);
         
         
-        /* Load the lights that is going to render*/
+        // Load the lights that is going to render
         self.light = WorldEntitiesGenerator.getLight();
         
-        /* Prepares the guis that is going to render*/
+        // Prepares the guis that is going to render
         self.guis = WorldGUIsGenerator.getGUIs(loader);
         
-        /* Load the sky box that is going to render*/
+        // Load the sky box that is going to render
         self.skyBox = WorldSkyBoxGenerator.getSky(loader);
         
-        /*Prepares the player that is going to be used in the scene*/
+        //Prepares the player that is going to be used in the scene
         self.player = WorldPlayersGenerator.getPlayer(loader);
-        
-        /* Prepares the sounds to be used by the engine*/
-        self.audioLibrary = WorldAudioGenerator.getBuffers(loader);
-        
-        /*Sounds player*/
-        let sourceLst : [AudioSource] = loader.genAudioSources(POOL_SOURCES_SIZE);
-        self.masterPlayer = MasterPlayer(sourcesAvailable: sourceLst);
     }
     
     
     
     
+    /// Sent to the view controller when the app receives a memory warning
     open override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -133,21 +115,39 @@ open class GameViewController: GLKViewController {
         }
     }
     
+    
+    /// Setup everything required to use the open GL elements
     fileprivate func setupGL() {
         EAGLContext.setCurrent(self.context);
         
         self.renderer =  MasterRender(width: Int(self.view.bounds.size.width), height: Int(self.view.bounds.size.height))
     }
     
+    ///Setup all the elements to reproduce audio
+    fileprivate func setupAudioEngine() {
+        let audioIniatialized = AudioManager.initOpenAL()
+        
+        if audioIniatialized
+        {
+            /* Initiailizes the main variable responsible to the audio of the 3D world*/
+            let audioLoader = AudioLoader();
+            
+            /* Prepares the sounds to be used by the engine*/
+            self.audioLibrary = WorldAudioGenerator.getBuffers(audioLoader);
+            
+            /*Sounds player*/
+            let sourceLst : [AudioSource] = audioLoader.genSources(count: POOL_SOURCES_SIZE);
+            self.masterPlayer = MasterPlayer(sourcesAvailable: sourceLst);
+        }
+    }
+    
+    
     fileprivate func tearDownGL() {
         EAGLContext.setCurrent(self.context);
         self.renderer = nil;
     }
     
-    /**
-     * Makes all the necessary calls to update the
-     * frame
-     */
+    // Makes all the necessary calls to update the scene
     fileprivate func renderFrame() {
         // game logic
         if(renderer == nil)
@@ -172,26 +172,19 @@ open class GameViewController: GLKViewController {
         }
     }
     
-    /**
-     * Calls everything necessary to play the sounds of the game
-     */
+    
+    /// Calls everything necessary to play the sounds of the game
     fileprivate func playAudio() {
-        masterPlayer.play(self.audioLibrary, entities: self.entities, player: self.player)
+        masterPlayer.play(library: self.audioLibrary, entities: self.entities, player: self.player)
     }
     
-    /**
-     * Draw the entities of the scene
-     *
-     */
+    /// Draw the entities of the scene
     open func update() {
         renderFrame()
-        playAudio();
+        playAudio()
     }
     
-    
+    /// A deinitializer is called immediately before a class instance is deallocated
     deinit {
     }
-    
-    
-    
 }

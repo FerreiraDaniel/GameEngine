@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.lwjgl.openal.AL10;
-
 import com.dferreira.commons.Vector3f;
 
 import gameEngine.models.AudioBuffer;
@@ -61,50 +59,39 @@ public class EntityPlayer extends GenericPlayer {
 		this.sourcesAssign = new HashMap<Entity, AudioSource>();
 	}
 
-	/**
-	 * The the properties of the listener of the scene
-	 * 
-	 * @param listenerPos
-	 *            Position of the listener in the 3D world
-	 */
-	private void setListenerData(Vector3f listenerPos) {
-		AL10.alListener3f(AL10.AL_POSITION, listenerPos.x, listenerPos.y, listenerPos.z);
-		// Second sets the velocity of the listener (for the moment idle
-		Vector3f listenerVel = new Vector3f(0.0f, 0.0f, 0.0f);
-		AL10.alListener3f(AL10.AL_VELOCITY, listenerVel.x, listenerVel.y, listenerVel.z);
-	}
 
 	/**
 	 * Set the listener position and reproduces the sound of the player
 	 * 
-	 * @param audioLibrary
+	 * @param library
 	 *            Set of sounds that can use to provide sound feedback to the
 	 *            user
 	 * @param player
 	 *            The player of the scene and also the listener
 	 */
-	private void playPlayer(HashMap<TAudioEnum, AudioBuffer> audioLibrary, Player player) {
-		this.setListenerData(player.getPosition());
+	private void playPlayer(HashMap<TAudioEnum, AudioBuffer> library, Player player) {
+		this.positioningListener(player.getPosition());
 
 		// If the player is running plays the sound of the footsteps
-		int playerSrcId = this.playerSource.getSourceId();
 		if (player.getCurrentSpeed() == 0) {
-			if (this.isPlaying(playerSrcId)) {
-				this.pause(playerSrcId);
+			if (this.isPlaying(this.playerSource)) {
+				this.pause(this.playerSource);
 			}
 		} else {
-			if (this.isPaused(playerSrcId)) {
-				this.continuePlaying(playerSrcId);
+			float pitch = player.getCurrentSpeed() / 30.0f;
+			if (this.isPaused(this.playerSource)) {
+				this.setPitch(this.playerSource, pitch);
+				this.continuePlaying(this.playerSource);
 			} else {
-				if (!this.isPlaying(playerSrcId)) {
-					AudioBuffer footStepsBuffer = audioLibrary.get(TAudioEnum.footsteps);
-					this.setPitch(playerSrcId, 2.0f);
-					this.setVolume(playerSrcId, 1.0f);
+				if (!this.isPlaying(this.playerSource)) {
+					AudioBuffer footStepsBuffer = library.get(TAudioEnum.footsteps);
+					this.setPitch(this.playerSource, pitch);
+					this.setVolume(this.playerSource, 1.0f);
 					this.play(playerSource, footStepsBuffer);
-					this.setLoop(playerSrcId, true);
+					this.setLoop(this.playerSource, true);
 				}
 			}
-			this.setPosition(playerSrcId, player.getPosition());
+			this.setPosition(this.playerSource, player.getPosition());
 		}
 	}
 
@@ -121,11 +108,9 @@ public class EntityPlayer extends GenericPlayer {
 	 *         the rough approximation
 	 */
 	private boolean roughApproximation(Vector3f position1, Vector3f position2, float threshold) {
-		float xDiff = Math.abs(position1.x - position2.x);
-		float yDiff = Math.abs(position1.y - position2.y);
-		float zDiff = Math.abs(position1.z - position2.z);
-
-		return (xDiff < threshold) && (yDiff < threshold) && (zDiff < threshold);
+		return (Math.abs(position1.x - position2.x) < threshold) && 
+				(Math.abs(position1.y - position2.y) < threshold) && 
+				(Math.abs(position1.z - position2.z) < threshold);
 	}
 
 	/**
@@ -197,22 +182,21 @@ public class EntityPlayer extends GenericPlayer {
 	/**
 	 * Check is an entity crashed against the player
 	 * 
-	 * @param audioLibrary
+	 * @param library
 	 *            Set of sounds that can use to provide sound feedback to the
 	 *            user
 	 * @param entity
 	 *            The entity to check
-	 * @param pPosition
+	 * @param player
 	 *            The position of the player that is going to check the crash
 	 * 
 	 * @return False = No crash was detected True = A crash was detected and the
 	 *         sound was played
 	 */
-	private boolean playCrash(HashMap<TAudioEnum, AudioBuffer> audioLibrary, Entity entity, Vector3f pPosition) {
-		if (roughApproximation(pPosition, entity.getPosition(), ROUGH_THRESHOLD)
-				&& (squareDistance(pPosition, entity.getPosition()) < CRASH_THRESHOLD)) {
-			AudioSource audioSource = sourcesAssign.get(entity);
-			int sourceId = audioSource.getSourceId();
+	private boolean playCrash(HashMap<TAudioEnum, AudioBuffer> library, Entity entity, Vector3f player) {
+		if (roughApproximation(player, entity.getPosition(), ROUGH_THRESHOLD)
+				&& (squareDistance(player, entity.getPosition()) < CRASH_THRESHOLD)) {
+			AudioSource source = sourcesAssign.get(entity);
 			TEntity tEntity = entity.getGenericEntity().getObjectType(); 
 			switch(tEntity) {
 			case banana_tree:
@@ -224,25 +208,25 @@ public class EntityPlayer extends GenericPlayer {
 			case grass:
 				break;
 			case marble:
-				if (!isPlaying(sourceId) && (audioSource.getBuffer() == null)) {
-					AudioBuffer breakingWood = audioLibrary.get(TAudioEnum.breakingWood);
-					this.setPitch(sourceId, 1.0f);
-					this.setVolume(sourceId, 1.0f);
-					this.setPosition(sourceId, entity.getPosition());
-					this.play(audioSource, breakingWood);
-					this.setLoop(sourceId, false);
+				if (!isPlaying(source) && (source.getBuffer() == null)) {
+					AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
+					this.setPitch(source, 1.0f);
+					this.setVolume(source, 1.0f);
+					this.setPosition(source, entity.getPosition());
+					this.play(source, breakingWood);
+					this.setLoop(source, false);
 				}
 				break;
 			case player:
 				break;
 			case tree:
-				AudioBuffer breakingWood = audioLibrary.get(TAudioEnum.breakingWood);
-				if (!isPlaying(sourceId) || ((audioSource.getBuffer() == null) || (audioSource.getBuffer() != breakingWood))) {
-					this.setPitch(sourceId, 1.0f);
-					this.setVolume(sourceId, 1.0f);
-					this.setPosition(sourceId, entity.getPosition());
-					this.play(audioSource, breakingWood);
-					this.setLoop(sourceId, false);
+				AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
+				if (!isPlaying(source) || ((source.getBuffer() == null) || (source.getBuffer() != breakingWood))) {
+					this.setPitch(source, 1.0f);
+					this.setVolume(source, 1.0f);
+					this.setPosition(source, entity.getPosition());
+					this.play(source, breakingWood);
+					this.setLoop(source, false);
 				}
 				break;
 			default:
@@ -258,7 +242,7 @@ public class EntityPlayer extends GenericPlayer {
 	/**
 	 * Reproduces the sound of the entities
 	 * 
-	 * @param audioLibrary
+	 * @param library
 	 *            Set of sounds that can use to provide sound feedback to the
 	 *            user
 	 * @param entities
@@ -266,37 +250,36 @@ public class EntityPlayer extends GenericPlayer {
 	 * @param player
 	 *            The player of the scene and also the listener
 	 */
-	private void playEntities(HashMap<TAudioEnum, AudioBuffer> audioLibrary, Set<Entity> entities, Player player) {
+	private void playEntities(HashMap<TAudioEnum, AudioBuffer> library, Set<Entity> entities, Player player) {
 		if (entities != null) {
 			Vector3f pPosition = player.getPosition();
 
 			for (Entity entity : entities) {
 				// Check is has one source
-				AudioSource audioSource = sourcesAssign.get(entity);
-				if (audioSource == null) {
+				AudioSource source = sourcesAssign.get(entity);
+				if (source == null) {
 					continue;
 				}
 
-				if (!playCrash(audioLibrary, entity, pPosition)) {
+				if (!playCrash(library, entity, pPosition)) {
 					// If not played a crash
 					if (entity.getGenericEntity().getObjectType() != TEntity.tree) {
 						continue;
 					}
 
 					// Make birds to play in each tree
-					AudioBuffer breakingWood = audioLibrary.get(TAudioEnum.breakingWood);
-					if(audioSource.getBuffer() == breakingWood) {
+					AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
+					if(source.getBuffer() == breakingWood) {
 						continue;
 					}
 					
-					int sourceId = audioSource.getSourceId();
-					if (!isPlaying(sourceId)) {
-						AudioBuffer falconBuffer = audioLibrary.get(TAudioEnum.falcon);
-						this.setPitch(sourceId, 1.0f);
-						this.setVolume(sourceId, 1.0f);
-						this.setPosition(sourceId, entity.getPosition());
-						this.play(audioSource, falconBuffer);
-						this.setLoop(sourceId, true);
+					if (!isPlaying(source)) {
+						AudioBuffer falconBuffer = library.get(TAudioEnum.falcon);
+						this.setPitch(source, 1.0f);
+						this.setVolume(source, 1.0f);
+						this.setPosition(source, entity.getPosition());
+						this.play(source, falconBuffer);
+						this.setLoop(source, true);
 					}
 				}
 
@@ -307,7 +290,7 @@ public class EntityPlayer extends GenericPlayer {
 	/**
 	 * Plays all the sounds related with entities
 	 * 
-	 * @param audioLibrary
+	 * @param library
 	 *            Set of sounds that can use to provide sound feedback to the
 	 *            user
 	 * @param entities
@@ -315,13 +298,13 @@ public class EntityPlayer extends GenericPlayer {
 	 * @param player
 	 *            The player of the scene and also the listener
 	 */
-	public void play(HashMap<TAudioEnum, AudioBuffer> audioLibrary, Entity[] entities, Player player) {
+	public void play(HashMap<TAudioEnum, AudioBuffer> library, Entity[] entities, Player player) {
 		if (player == null) {
 			return;
 		}
-		this.playPlayer(audioLibrary, player);
+		this.playPlayer(library, player);
 		this.assignSources(player, entities);
-		this.playEntities(audioLibrary, this.sourcesAssign.keySet(), player);
+		this.playEntities(library, this.sourcesAssign.keySet(), player);
 
 	}
 

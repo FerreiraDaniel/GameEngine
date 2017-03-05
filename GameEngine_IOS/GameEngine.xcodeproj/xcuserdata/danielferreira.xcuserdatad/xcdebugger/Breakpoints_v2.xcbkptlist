@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "loadMaterial(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "loadTexture(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,12 +394,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/GenericPlayer.swift"
-            timestampString = "508510838.175458"
+            timestampString = "510412149.444506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "isPlaying(sourceId:)"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "isPlaying(source:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/GameViewController.swift"
-            timestampString = "509142832.240913"
+            timestampString = "510405445.265916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "GameViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -426,12 +426,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/GenericPlayer.swift"
-            timestampString = "508510838.175458"
+            timestampString = "510412149.444506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "isPlaying(sourceId:)"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "isPlaying(source:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -442,28 +442,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/GenericPlayer.swift"
-            timestampString = "508509675.648405"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "getSourceiState(sourceId:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/AudioEngine/GenericPlayer.swift"
-            timestampString = "508510838.175458"
+            timestampString = "510412149.444506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
             endingLineNumber = "81"
-            landmarkName = "getSourceiState(sourceId:)"
+            landmarkName = "getSourceiState(source:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -474,12 +458,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/GenericPlayer.swift"
-            timestampString = "508510838.175458"
+            timestampString = "510412149.444506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"
             endingLineNumber = "83"
-            landmarkName = "getSourceiState(sourceId:)"
+            landmarkName = "getSourceiState(source:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/AudioEngine/GenericPlayer.swift"
+            timestampString = "510412149.444506"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "getSourceiState(source:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -490,12 +490,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
-            timestampString = "508586217.062311"
+            timestampString = "510417776.284416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "playCrash(audioLibrary:entity:pPosition:)"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "playCrash(library:entity:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -506,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/GameViewController.swift"
-            timestampString = "508613919.299083"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -598,7 +598,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/AudioManager.swift"
@@ -634,12 +634,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "508613900.509988"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "getBuffers(loader:)"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "getBuffers(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -650,12 +650,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "508613901.339189"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "getBuffers(loader:)"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "getBuffers(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -666,11 +666,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "508614868.976882"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30">
+            startingLineNumber = "27"
+            endingLineNumber = "27">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -680,12 +680,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "508614868.976882"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "getBuffers(loader:)"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "getBuffers(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -696,11 +696,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "508614868.976882"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "WorldAudioGenerator"
             landmarkType = "3">
          </BreakpointContent>
@@ -712,43 +712,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
-            landmarkName = "loadSound(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
-            landmarkName = "loadSound(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
             landmarkName = "getTextureData(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -760,11 +728,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "508614917.457365"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "WorldAudioGenerator"
             landmarkType = "3">
          </BreakpointContent>
@@ -776,11 +744,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "getTextureData(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -792,11 +760,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/GameViewController.swift"
-            timestampString = "509722928.293182"
+            timestampString = "510405445.265916"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "playAudio()"
             landmarkType = "7">
          </BreakpointContent>
@@ -808,12 +776,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "509139333.449622"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "getBuffers(loader:)"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "getBuffers(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -824,12 +792,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/ModelGenerators/WorldAudioGenerator.swift"
-            timestampString = "509139828.159993"
+            timestampString = "510405124.396959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "getBuffers(loader:)"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "getBuffers(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -840,12 +808,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
-            timestampString = "509139970.868081"
+            timestampString = "510417776.284416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "playPlayer(audioLibrary:player:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "playPlayer(library:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -856,12 +824,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
-            timestampString = "509140016.46141"
+            timestampString = "510417776.284416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "playPlayer(audioLibrary:player:)"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "playPlayer(library:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -872,12 +840,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
-            timestampString = "509140021.365566"
+            timestampString = "510417776.284416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "playPlayer(audioLibrary:player:)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "playPlayer(library:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -888,28 +856,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
-            timestampString = "509140038.49431"
+            timestampString = "510417776.284416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
-            landmarkName = "play(audioLibrary:entities:player:)"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "play(library:entities:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
-            timestampString = "509140040.510438"
+            timestampString = "510417776.284416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
-            landmarkName = "play(audioLibrary:entities:player:)"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "play(library:entities:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -920,44 +888,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/AudioEngine/MasterPlayer.swift"
-            timestampString = "509140059.598601"
+            timestampString = "510412149.444506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "play(audioLibrary:entities:player:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "genAudioSource()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "genAudioSource()"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "play(_:entities:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -984,27 +920,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "createVAO()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1016,11 +936,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "deinit"
             landmarkType = "7">
          </BreakpointContent>
@@ -1032,11 +952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "createVAO()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1101,8 +1021,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "117"
             endingLineNumber = "117"
-            landmarkName = "cleanUp(_:)"
-            landmarkType = "7">
+            landmarkName = "AudioDecoder"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1112,43 +1032,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "genAudioSource()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "genAudioSource()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1176,27 +1064,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "genAudioSources(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "loadToVAO(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1208,11 +1080,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509747432.956151"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "loadMaterial(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1336,11 +1208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GameEngine/RenderEngine/Loader.swift"
-            timestampString = "509748635.313503"
+            timestampString = "510402541.00425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "385"
-            endingLineNumber = "385"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "loadTCubeMap(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1518,6 +1390,54 @@
             startingLineNumber = "74"
             endingLineNumber = "74"
             landmarkName = "checkInputs(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
+            timestampString = "510417776.284416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "playCrash(library:entity:player:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
+            timestampString = "510417776.284416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "playCrash(library:entity:player:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GameEngine/AudioEngine/EntityPlayer.swift"
+            timestampString = "510417776.284416"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "playPlayer(library:player:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

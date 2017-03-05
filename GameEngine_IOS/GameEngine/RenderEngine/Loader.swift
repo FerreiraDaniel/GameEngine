@@ -1,7 +1,5 @@
 import Foundation
 import GLKit
-import OpenAL
-import AudioToolbox
 
 /*
  * Load the elements to make the scene
@@ -35,10 +33,7 @@ open class Loader  {
      */
     fileprivate var textures : Array<GLuint>!;
     
-    /**
-     * Decoder for audio files
-     */
-    fileprivate var audioDecoder : AudioDecoder;
+
     
     /**
      * Extension of the png files
@@ -50,49 +45,11 @@ open class Loader  {
 
     /// Initiator of the loader
     public init() {
-        self.vaos = Array<GLuint>();
-        self.vbos = Array<GLuint>();
-        self.textures = Array<GLuint>();
-        self.audioDecoder = AudioDecoder()
+        self.vaos = Array<GLuint>()
+        self.vbos = Array<GLuint>()
+        self.textures = Array<GLuint>()
     }
     
-    /**
-     *
-     * @return If possible one audio source with everything set
-     */
-    fileprivate func genAudioSource() -> AudioSource! {
-        var sourceId : ALuint = 0;
-        
-        alGenSources(1, &sourceId)
-        let error = alGetError()
-        if(error == AL_NO_ERROR)
-        {
-            return AudioSource(sourceId: sourceId)
-        } else
-        {
-            return nil
-        }
-    }
-    
-    /**
-     *
-     * @param numberOfSources
-     *            Number of audio sources to generate
-     *
-     * @return A list of the audio sources generated
-     */
-    open func genAudioSources(_ numberOfSources : Int) -> [AudioSource] {
-        var sourceLst : [AudioSource] = [AudioSource]();
-        
-        for _ in 0 ..< numberOfSources {
-            let audioSource : AudioSource! = genAudioSource();
-            if audioSource != nil {
-                sourceLst.append(audioSource)
-            }
-        }
-        
-        return sourceLst
-    }
     
     /**
      * Create a vertex array object
@@ -402,64 +359,6 @@ open class Loader  {
         }
     }
     
-    
-    
-    
-    /**
-     * Load one audio file in a buffer
-     *
-     * @param fileName
-     *            The file name of the file to load
-     *
-     * @return The identifier of the buffer return by openAL
-     */
-    open func loadSound(_ fileName : String) -> AudioBuffer? {
-        var audioBuffer : AudioBuffer! = nil;
-        
-        var bufferId : ALuint = 0
-        
-        alGenBuffers(1, &bufferId)
-        
-        
-        
-        /**
-         * Was not possible to one buffer return AL false
-         */
-        if (alGetError() != AL_NO_ERROR) {
-            return nil;
-        }
-        
-        let filePath : String! = Bundle.main.path(forResource: fileName, ofType: "aac")
-        if(filePath == nil) {
-            print("Impossible to get the patch to audio \(fileName) ");
-            return nil;
-        }
-        
-        
-        let fileURL : URL = URL(fileURLWithPath: filePath)
-        
-
-        let audioFile = self.audioDecoder.getData(fileURL)
-        
-        if let aFile = audioFile
-        {
-            //data = MyGetOpenALAudioData(fileURL, &size, &format, &freq)
-            
-            let format : ALenum = (aFile.channels > 1) ? AL_FORMAT_STEREO16 : AL_FORMAT_MONO16
-            
-            
-            alBufferData(bufferId, format, aFile.data!, aFile.dataSize, ALsizei(aFile.rate))
-            self.audioDecoder.cleanUp(audioFile);
-            
-            audioBuffer = AudioBuffer(ALint(bufferId));
-            
-            return audioBuffer;
-        } else
-        {
-            print("Impossible to read the file \(fileURL)")
-            return nil;
-        }
-    }
     
     /**
      * UnBind the current vertex array object

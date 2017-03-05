@@ -26,12 +26,4 @@ open class AudioBuffer : NSObject {
         return bufferId;
     }
     
-    
-    /// Identifier of the buffer to play in openAL
-    ///
-    /// - Parameter bufferId: The identifier of the buffer
-    open func setBufferId(_ bufferId : ALint) {
-        self.bufferId = bufferId;
-    }
-    
 }

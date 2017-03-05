@@ -8,12 +8,9 @@ open class AudioManager {
     fileprivate static var context: OpaquePointer? = nil
     fileprivate static var device: OpaquePointer? = nil
     
-    /**
-     * Before using any openAL methods we need to initialize openAL
-     *
-     * @return False -> One or more errors occurred True -> Everything was all
-     *         right
-     */
+    /// Before using any openAL methods we need to initialize openAL
+    /// - Returns:  False = One or more errors occurred
+    ///             True = Everything was all
     open static func initOpenAL() -> Bool {
         var error: ALenum = AL_NO_ERROR
         

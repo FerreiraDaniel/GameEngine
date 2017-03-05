@@ -59,11 +59,11 @@ public class MasterPlayer {
 
 	/**
 	 * 
-	 * @param audioLibrary	Set of sounds that the players can use to 
+	 * @param library	Set of sounds that the players can use to 
 	 * give audio feedback to the user
 	 */
-	public void play(HashMap<TAudioEnum, AudioBuffer> audioLibrary) {
-		this.entityPlayer.play(audioLibrary, entities, player);
+	public void play(HashMap<TAudioEnum, AudioBuffer> library) {
+		this.entityPlayer.play(library, entities, player);
 	}
 
 	/**

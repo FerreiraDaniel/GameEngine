@@ -1,46 +1,32 @@
 import Foundation
 
-import OpenAL
 
-
-/**
- * Is going to demand the reproduction of audio due to the control of the
- * entities
- */
+/// Is going to demand the reproduction of audio due to the control of the entities
 open class EntityPlayer : GenericPlayer {
     
-    /**
-     * If the entity is far away from the player more that the threshold is not
-     * going to be listened
-     */
-    fileprivate let SOUND_THRESHOLD : Float = 50.0;
     
-    /**
-     * First if going to make a rough approximation only after is going to check
-     * if exists a crash
-     */
-    fileprivate let ROUGH_THRESHOLD : Float = 10.0;
-    fileprivate let CRASH_THRESHOLD : Float = 2.0;
+    /// If the entity is far away from the player more that the threshold is not going to be listened
+    fileprivate let SOUND_THRESHOLD : Float = 50.0
     
-    /**
-     * List of sound sources available to the entity player
-     *
-     */
-    fileprivate var sourcesAvailable : [AudioSource];
+    /// First if going to make a rough approximation only after is going to check if exists a crash
+    fileprivate let ROUGH_THRESHOLD : Float = 10.0
+    fileprivate let CRASH_THRESHOLD : Float = 2.0
     
-    /**
-     * The player can always play audio;
-     */
-    fileprivate var playerSource : AudioSource!;
     
-    /**
-     * Sources assign to the entityes
-     */
-    fileprivate var sourcesAssign : [Entity : AudioSource];
+    /// List of sound sources available to the entity player
+    fileprivate var sourcesAvailable : [AudioSource]
     
-    /**
-     * Constructor of the entity player
-     */
+    
+    /// The player can always play audio
+    fileprivate var playerSource : AudioSource!
+    
+    
+    /// Sources assigned to the entities
+    fileprivate var sourcesAssign : [Entity : AudioSource]
+    
+    /// Initializer of the entity player
+    ///
+    /// - Parameter sourcesAvailable: The list of sources available
     public init(sourcesAvailable : [AudioSource]) {
         self.sourcesAvailable = sourcesAvailable;
         if ((!self.sourcesAvailable.isEmpty)) {
@@ -51,84 +37,59 @@ open class EntityPlayer : GenericPlayer {
         self.sourcesAssign = [Entity : AudioSource]();
     }
     
-    /**
-     * The the properties of the listener of the scene
-     *
-     * @param listenerPos
-     *            Position of the listener in the 3D world
-     */
-    fileprivate func setListenerData(_ listenerPos : Vector3f) {
-        alListener3f(AL_POSITION, listenerPos.x, listenerPos.y, listenerPos.z);
-        // Second sets the velocity of the listener (for the moment idle
-        let  listenerVel : Vector3f = Vector3f(x: 0.0, y: 0.0, z: 0.0);
-        alListener3f(AL_VELOCITY, listenerVel.x, listenerVel.y, listenerVel.z);
-    }
     
-    /**
-     * Set the listener position and reproduces the sound of the player
-     *
-     * @param audioLibrary
-     *            Set of sounds that can use to provide sound feedback to the
-     *            user
-     * @param player
-     *            The player of the scene and also the listener
-     */
-    fileprivate func playPlayer(_ audioLibrary : [TAudioEnum: AudioBuffer], player : Player) {
-        self.setListenerData(player.position);
+    /// Set the listener position and reproduces the sound of the player
+    ///
+    /// - Parameters:
+    ///   - library: Set of sounds that can use to provide sound feedback to the user
+    ///   - player: The player of the scene and also the listener
+    fileprivate func playPlayer(library : [TAudioEnum: AudioBuffer], player : Player) {
+        self.positioningListener(position: player.position);
         
         // If the player is running plays the sound of the footsteps
-        let playerSrcId = self.playerSource.getSourceId();
         if (player.getCurrentSpeed() == 0) {
-            if (self.isPlaying(playerSrcId)) {
-                self.pause(playerSrcId);
+            if (self.isPlaying(source: playerSource)) {
+                self.pause(source: playerSource);
             }
         } else {
-            if (self.isPaused(playerSrcId)) {
-                self.continuePlaying(playerSrcId);
+            let pitch = player.getCurrentSpeed() / 15.0
+            if (self.isPaused(source: playerSource)) {
+                self.continuePlaying(source: playerSource);
             } else {
-                if (!self.isPlaying(playerSrcId)) {
-                    let footStepsBuffer : AudioBuffer = audioLibrary[TAudioEnum.footsteps]!;
-                    self.setPitch(playerSrcId, pitch: 2.0);
-                    self.setVolume(playerSrcId, volume: 1.0);
-                    self.play(playerSource, audioBuffer: footStepsBuffer);
-                    self.setLoop(playerSrcId, loop: true);
+                if (!self.isPlaying(source: playerSource)) {
+                    let footStepsBuffer : AudioBuffer = library[TAudioEnum.footsteps]!;
+                    self.setPitch(source: playerSource, pitch: pitch);
+                    self.setVolume(source: playerSource, volume: 1.0);
+                    self.play(source: playerSource, buffer: footStepsBuffer);
+                    self.setLoop(source: self.playerSource, loop: true);
                 }
             }
-            self.setPosition(playerSrcId, position: player.position);
+            self.setPosition(source: playerSource, position: player.position);
         }
     }
     
-    /**
-     *
-     * @param position1
-     *            The position one to take in account
-     * @param position2
-     *            The position two entity to take in account
-     * @param threshold
-     *            The threshold that is going to use to the match
-     *
-     * @return False = Not passed in the rough approximation True = Passed in
-     *         the rough approximation
-     */
-    fileprivate func roughApproximation(_ position1 : Vector3f, position2 : Vector3f, threshold : Float) -> Bool {
-        let xDiff : Float = abs(position1.x - position2.x);
-        let yDiff : Float = abs(position1.y - position2.y);
-        let zDiff : Float = abs(position1.z - position2.z);
-        
-        return (xDiff < threshold) && (yDiff < threshold) && (zDiff < threshold);
+    /// Makes one aproximation component by compoenent (Faster that usual distance)
+    ///
+    /// - Parameters:
+    ///   - position1: The position one to take in account
+    ///   - position2: The position two entity to take in account
+    ///   - threshold: The threshold that is going to use to the match
+    /// - Returns:  False = Not passed in the rough approximation
+    ///             True  = Passed in the rough approximation
+    fileprivate func roughApproximation(position1 : Vector3f, position2 : Vector3f, threshold : Float) -> Bool {
+        return (abs(position1.x - position2.x) < threshold) &&
+            (abs(position1.y - position2.y) < threshold) &&
+            (abs(position1.z - position2.z) < threshold);
     }
     
-    /**
-     *
-     * @param position1
-     *            The position one to take in account
-     * @param position2
-     *            The position two entity to take in account
-     *
-     *
-     * @return The square of the distance between two positions
-     */
-    fileprivate func squareDistance(_ position1 : Vector3f, position2 : Vector3f) -> Float {
+    
+    /// Computes the distance between two points
+    ///
+    /// - Parameters:
+    ///   - position1: The position one to take in account
+    ///   - position2: The position two entity to take in account
+    /// - Returns: The square of the distance between two positions
+    fileprivate func squareDistance(position1 : Vector3f, position2 : Vector3f) -> Float {
         let xDiff : Float = abs(position1.x - position2.x);
         let yDiff : Float = abs(position1.y - position2.y);
         let zDiff : Float = abs(position1.z - position2.z);
@@ -136,32 +97,28 @@ open class EntityPlayer : GenericPlayer {
         return (xDiff * xDiff) + (yDiff * yDiff) + (zDiff * zDiff);
     }
     
-    /**
-     *
-     * @param pPosition
-     *            The position of player to take in account
-     * @param ePosition
-     *            The position of entity to take in account
-     *
-     * @return False the player can not listen the entity True the entity can be
-     *         listen by the player
-     */
-    fileprivate func passesThreshold(_ pPosition : Vector3f, ePosition : Vector3f) -> Bool {
-        return roughApproximation(pPosition, position2: ePosition, threshold: SOUND_THRESHOLD);
+    
+    /// Indicates if an entity passes the threshold to be considered
+    ///
+    /// - Parameters:
+    ///   - pPosition: The position of player to take in account
+    ///   - ePosition: The position of entity to take in account
+    /// - Returns: False the player can not listen the entity
+    ///             True the entity can be listen by the player
+    fileprivate func passesThreshold(pPosition : Vector3f, ePosition : Vector3f) -> Bool {
+        return roughApproximation(position1: pPosition, position2: ePosition, threshold: SOUND_THRESHOLD);
     }
     
-    /**
-     * Assign audio sources to the entities
-     *
-     * @param player
-     *            The player of the scene and also the listener
-     * @param entities
-     *            Set of entities that should provide sound feedback
-     */
-    fileprivate func assignSources(_ player : Player, entities : [Entity]) {
+
+    /// Assign audio sources to the entities
+    ///
+    /// - Parameters:
+    ///   - player: The player of the scene and also the listener
+    ///   - entities: Set of entities that should provide sound feedback
+    fileprivate func assignSources(player : Player, entities : [Entity]) {
         let pPosition : Vector3f = player.position;
         for entity in entities {
-            if (passesThreshold(pPosition, ePosition: entity.position)) {
+            if (passesThreshold(pPosition: pPosition, ePosition: entity.position)) {
                 // Can not assign nothing
                 if (sourcesAvailable.isEmpty) {
                     //Is going to continue searching maybe there is anothers that do not pass the threshold
@@ -176,32 +133,26 @@ open class EntityPlayer : GenericPlayer {
                 // Not passed threshold
                 if (sourcesAssign[entity] != nil) {
                     let aSource = sourcesAssign.removeValue(forKey: entity)!;
-                    self.stop(aSource);
+                    self.stop(source: aSource);
                     self.sourcesAvailable.append(aSource);
                 }
             }
         }
     }
     
-    /**
-     * Check is an entity crashed against the player
-     *
-     * @param audioLibrary
-     *            Set of sounds that can use to provide sound feedback to the
-     *            user
-     * @param entity
-     *            The entity to check
-     * @param pPosition
-     *            The position of the player that is going to check the crash
-     *
-     * @return False = No crash was detected True = A crash was detected and the
-     *         sound was played
-     */
-    fileprivate func playCrash(_ audioLibrary : [TAudioEnum : AudioBuffer], entity : Entity, pPosition : Vector3f) -> Bool {
-        if (roughApproximation(pPosition, position2: entity.position, threshold: ROUGH_THRESHOLD)
-            && (squareDistance(pPosition, position2: entity.position) < CRASH_THRESHOLD)) {
-            let audioSource : AudioSource = sourcesAssign[entity]!;
-            let sourceId : ALuint = audioSource.getSourceId();
+
+    /// Check is an entity crashed against the player
+    ///
+    /// - Parameters:
+    ///   - library: Set of sounds that can use to provide sound feedback to the user
+    ///   - entity: The entity to check
+    ///   - player: The position of the player that is going to check the crash
+    /// - Returns:  False = No crash was detected
+    ///             True = A crash was detected and the sound was played
+    fileprivate func playCrash(library : [TAudioEnum : AudioBuffer], entity : Entity, player : Vector3f) -> Bool {
+        if (roughApproximation(position1: player, position2: entity.position, threshold: ROUGH_THRESHOLD)
+            && (squareDistance(position1: player, position2: entity.position) < CRASH_THRESHOLD)) {
+            let source : AudioSource = sourcesAssign[entity]!;
             let tEntity : TEntity = entity.genericEntity.objectType;
             
             switch(tEntity) {
@@ -214,25 +165,25 @@ open class EntityPlayer : GenericPlayer {
             case .grass:
                 break;
             case .marble:
-                if (!isPlaying(sourceId) && (audioSource.getBuffer() == nil)) {
-                    let breakingWood : AudioBuffer = audioLibrary[TAudioEnum.breakingWood]!;
-                    self.setPitch(sourceId, pitch: 1.0);
-                    self.setVolume(sourceId, volume: 1.0);
-                    self.setPosition(sourceId, position: entity.position);
-                    self.play(audioSource, audioBuffer: breakingWood);
-                    self.setLoop(sourceId, loop: false);
+                if (!isPlaying(source: source) && (source.getBuffer() == nil)) {
+                    let breakingWood : AudioBuffer = library[TAudioEnum.breakingWood]!;
+                    self.setPitch(source: source, pitch: 1.0);
+                    self.setVolume(source: source, volume: 1.0);
+                    self.setPosition(source: source, position: entity.position);
+                    self.play(source: source, buffer: breakingWood);
+                    self.setLoop(source: source, loop: false);
                 }
                 break;
             case .player:
                 break;
             case .tree:
-                let breakingWood : AudioBuffer! = audioLibrary[TAudioEnum.breakingWood];
-                if (!isPlaying(sourceId) || ((audioSource.getBuffer() == nil) || (audioSource.getBuffer() != breakingWood))) {
-                    self.setPitch(sourceId, pitch: 1.0);
-                    self.setVolume(sourceId, volume: 1.0);
-                    self.setPosition(sourceId, position: entity.position);
-                    self.play(audioSource, audioBuffer: breakingWood);
-                    self.setLoop(sourceId, loop: false);
+                let breakingWood : AudioBuffer! = library[TAudioEnum.breakingWood];
+                if (!isPlaying(source: source) || ((source.getBuffer() == nil) || (source.getBuffer() != breakingWood))) {
+                    self.setPitch(source: source, pitch: 1.0);
+                    self.setVolume(source: source, volume: 1.0);
+                    self.setPosition(source: source, position: entity.position);
+                    self.play(source: source, buffer: breakingWood);
+                    self.setLoop(source: source, loop: false);
                 }
                 break;
             }
@@ -243,47 +194,42 @@ open class EntityPlayer : GenericPlayer {
         }
     }
     
-    /**
-     * Reproduces the sound of the entities
-     *
-     * @param audioLibrary
-     *            Set of sounds that can use to provide sound feedback to the
-     *            user
-     * @param entities
-     *            Set of entities that should provide sound feedback
-     * @param player
-     *            The player of the scene and also the listener
-     */
-    fileprivate func playEntities(_ audioLibrary : [TAudioEnum : AudioBuffer], entities : [Entity]!, player : Player) {
+
+    /// Reproduces the sound of the entities
+    ///
+    /// - Parameters:
+    ///   - library: Set of sounds that can use to provide sound feedback to the user
+    ///   - entities: Set of entities that should provide sound feedback
+    ///   - player: The player of the scene and also the listener
+    fileprivate func playEntities(library : [TAudioEnum : AudioBuffer], entities : [Entity]!, player : Player) {
         if (entities != nil) {
             let pPosition : Vector3f = player.position;
             
             for entity in entities {
                 // Check is has one source
-                let audioSource : AudioSource! = sourcesAssign[entity];
-                if (audioSource == nil) {
+                let source : AudioSource! = sourcesAssign[entity];
+                if (source == nil) {
                     continue;
                 }
                 
-                if (!playCrash(audioLibrary, entity: entity, pPosition: pPosition)) {
+                if (!playCrash(library: library, entity: entity, player: pPosition)) {
                     // If not played a crash
                     if (entity.genericEntity.objectType != TEntity.tree) {
                         continue;
                     }
                     
                     // Make birds to play in each tree
-                    let breakingWood : AudioBuffer = audioLibrary[TAudioEnum.breakingWood]!;
-                    if ((audioSource.getBuffer() != nil) && (audioSource.getBuffer() == breakingWood)) {
+                    let breakingWood : AudioBuffer = library[TAudioEnum.breakingWood]!;
+                    if ((source.getBuffer() != nil) && (source.getBuffer() == breakingWood)) {
                         continue;
                     }
-                    let sourceId : ALuint = audioSource.getSourceId()
-                    if (!isPlaying(sourceId)) {
-                        let falconBuffer : AudioBuffer = audioLibrary[TAudioEnum.falcon]!;
-                        self.setPitch(sourceId, pitch: 1.0);
-                        self.setVolume(sourceId, volume: 1.0);
-                        self.setPosition(sourceId, position: entity.position);
-                        self.play(audioSource, audioBuffer: falconBuffer);
-                        self.setLoop(sourceId, loop: true);
+                    if (!isPlaying(source: source)) {
+                        let falconBuffer : AudioBuffer = library[TAudioEnum.falcon]!;
+                        self.setPitch(source: source, pitch: 1.0);
+                        self.setVolume(source: source, volume: 1.0);
+                        self.setPosition(source: source, position: entity.position);
+                        self.play(source: source, buffer: falconBuffer);
+                        self.setLoop(source: source, loop: true);
                     }
                 }
                 
@@ -291,29 +237,24 @@ open class EntityPlayer : GenericPlayer {
         }
     }
     
-    /**
-     * Plays all the sounds related with entities
-     *
-     * @param audioLibrary
-     *            Set of sounds that can use to provide sound feedback to the
-     *            user
-     * @param entities
-     *            Set of entities that should provide sound feedback
-     * @param player
-     *            The player of the scene and also the listener
-     */
-    open func play(_ audioLibrary : [TAudioEnum: AudioBuffer] , entities : [Entity], player : Player) {
-        self.playPlayer(audioLibrary, player: player);
-        self.assignSources(player, entities: entities);
+
+    /// Plays all the sounds related with entities
+    ///
+    /// - Parameters:
+    ///   - library: Set of sounds that can use to provide sound feedback to the user
+    ///   - entities: Set of entities that should provide sound feedback
+    ///   - player: The player of the scene and also the listener
+    open func play(library : [TAudioEnum: AudioBuffer] , entities : [Entity], player : Player) {
+        self.playPlayer(library: library, player: player);
+        self.assignSources(player: player, entities: entities);
         let entitiesPlaying : [Entity] = Array(self.sourcesAssign.keys);
         
-        self.playEntities(audioLibrary, entities: entitiesPlaying, player: player);
+        self.playEntities(library: library, entities: entitiesPlaying, player: player);
         
     }
     
-    /**
-     * Clean up because we need to clean up when we finish the program
-     */
+
+    /// Clean up because we need to clean up when we finish the program
     open func cleanUp() {
     }
 }
