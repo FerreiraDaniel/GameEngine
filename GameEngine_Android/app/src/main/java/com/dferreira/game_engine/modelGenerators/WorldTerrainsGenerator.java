@@ -18,9 +18,6 @@ import com.dferreira.game_engine.textures.TerrainTexturesPack;
  */
 public class WorldTerrainsGenerator {
 
-    private final static int NUMBER_OF_TERRAINS = 1;
-
-
     /**
      * Load the texture of the terrain
      *
@@ -59,12 +56,12 @@ public class WorldTerrainsGenerator {
     }
 
     /**
-     * The terrains of the 3D scene
+     * The terrain of the 3D scene
      *
      * @param loader Loader to load the raw model
-     * @return A set of the terrains of the 3D scene
+     * @return The terrain of the 3D scene
      */
-    public static Terrain[] getTerrains(Context context, Loader loader, LoaderGL loaderGL) {
+    public static Terrain getTerrain(Context context, Loader loader, LoaderGL loaderGL) {
         TerrainTexturesPack terrainTexturesPackage = getTexturedTerrain(context, loaderGL);
         TextureData heightMap = loader.getTextureData(context, R.mipmap.terrain_heightmap);
 
@@ -73,13 +70,7 @@ public class WorldTerrainsGenerator {
         RawModel model = loader.loadToRawModel(terrain.getVertices(), terrain.getTextureCoords(), terrain.getNormals(),
                 terrain.getIndices());
 
-        Terrain[] terrains = new Terrain[NUMBER_OF_TERRAINS];
-
-
         Vector3f terrainPosition1 = new Vector3f(0.0f, 0.0f, -0.1f);
-        Terrain terrain1 = getTerrain(terrainTexturesPackage, model, terrain.getHeights(), terrainPosition1);
-
-        terrains[0] = terrain1;
-        return terrains;
+        return getTerrain(terrainTexturesPackage, model, terrain.getHeights(), terrainPosition1);
     }
 }

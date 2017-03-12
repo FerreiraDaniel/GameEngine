@@ -13,17 +13,15 @@ public class SkyBox {
     /**
      * The identifier of the sky box cubic texture
      */
-    private final int textureId;
+    private Integer textureId;
 
     /**
      * The constructor of the skyBox
      *
-     * @param textureId the Identifier of the texture of the sky
      * @param model     The model of the sky box
      */
-    public SkyBox(int textureId, RawModel model) {
+    public SkyBox(RawModel model) {
         super();
-        this.textureId = textureId;
         this.model = model;
     }
 
@@ -35,9 +33,17 @@ public class SkyBox {
     }
 
     /**
+     * Set the texture identifier
+     * @param textureId The Identifier of the texture of the sky
+     */
+    public void setTextureId(Integer textureId) {
+        this.textureId = textureId;
+    }
+
+    /**
      * @return the textureId
      */
-    public int getTextureId() {
+    public Integer getTextureId() {
         return textureId;
     }
 }

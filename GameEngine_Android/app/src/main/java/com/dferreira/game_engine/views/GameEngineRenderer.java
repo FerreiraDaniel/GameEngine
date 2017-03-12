@@ -63,9 +63,9 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     private Entity[] entities;
 
     /**
-     * Array of terrains to render
+     * Terrain to render
      */
-    private Terrain[] terrains;
+    private Terrain terrain;
 
     /**
      * Array of GUIs to render
@@ -126,14 +126,14 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        this.terrains = WorldTerrainsGenerator.getTerrains(context, loader, loaderGL);
+        this.terrain = WorldTerrainsGenerator.getTerrain(context, loader, loaderGL);
 
         Date terrainLoaded = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - renderInitialized.getTime()) + " ms");
 
         /*Prepares the entities that are going to be render*/
-        this.entities = WorldEntitiesGenerator.getEntities(context, loader, loaderGL, terrains[0]);
+        this.entities = WorldEntitiesGenerator.getEntities(context, loader, loaderGL, terrain);
 
         Date entitiesLoaded = new Date();
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize entities " + (entitiesLoaded.getTime() - terrainLoaded.getTime()) + " ms");
@@ -153,7 +153,8 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         WorldGUIsGenerator.loadTextures(context, loaderGL, this.GUIs);
 
         /* Load the sky box that is going to render*/
-        this.skyBox = WorldSkyBoxGenerator.getSky(context, loader, loaderGL);
+        this.skyBox = WorldSkyBoxGenerator.getSky(loader);
+        WorldSkyBoxGenerator.loadTextures(context, loaderGL, this.skyBox);
 
         Date skyBoxLoaded = new Date();
 
@@ -182,7 +183,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         //game logic
         renderer.startFrameRender();
-        renderer.processTerrains(terrains);
+        renderer.processTerrains(terrain);
         renderer.processEntities(entities);
         renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);

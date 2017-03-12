@@ -28,15 +28,24 @@ public class WorldSkyBoxGenerator {
     /**
      * The sky of the 3D scene
      *
-     * @param context Context where the method was called
-     * @param loader  object that is going to read the textures of the sky
-     * @param loaderGL  object that is going to read the textures of the sky
+     * @param loader  object that is going to read the coordinates of the sky
      * @return the reference to the sky box created
      */
-    public static SkyBox getSky(Context context, Loader loader, LoaderGL loaderGL) {
+    public static SkyBox getSky(Loader loader) {
         IShape skyBoxShape = new SkyBoxShape();
         RawModel rawModel = loader.load3DPositionsToRawModel(skyBoxShape.getVertices());
+        return new SkyBox(rawModel);
+    }
+
+    /**
+     * Load the textures of the skyBox
+     *
+     * @param context   Context where the method was called
+     * @param loaderGL  Object that is going to read the textures of the sky
+     * @param skyBox    The skyBox to load the elements
+     */
+    public static void loadTextures(Context context, LoaderGL loaderGL, SkyBox skyBox) {
         Integer textureId = loaderGL.loadTCubeMap(context, SKY_RESOURCE_IDS);
-        return new SkyBox(textureId, rawModel);
+        skyBox.setTextureId(textureId);
     }
 }

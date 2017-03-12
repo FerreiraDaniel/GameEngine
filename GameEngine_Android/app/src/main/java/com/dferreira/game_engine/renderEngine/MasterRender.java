@@ -212,14 +212,12 @@ public class MasterRender {
     /**
      * Put the terrains to process in the list of terrains to process
      *
-     * @param lTerrains list of terrains to process
+     * @param terrain The Terrain to process
      */
-    public void processTerrains(Terrain[] lTerrains) {
+    public void processTerrains(Terrain terrain) {
         this.terrains.clear();
-        if ((lTerrains != null) && (lTerrains.length > 0)) {
-            for (Terrain terrain : lTerrains) {
+        if (terrain != null) {
                 processTerrain(terrain);
-            }
         }
     }
 
