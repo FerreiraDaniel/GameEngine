@@ -12,6 +12,7 @@ import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.renderEngine.Loader;
+import com.dferreira.game_engine.renderEngine.LoaderGL;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -106,10 +107,11 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
     /**
      * @param loader  loader that will load the entities of the 3D world
+     * @param loaderGL  loader that will load the entities of the 3D world
      * @param terrain The terrain used to determine the height position
      * @return The entities that will compose the 3D world
      */
-    public static Entity[] getEntities(Context context, Loader loader, Terrain terrain) {
+    public static Entity[] getEntities(Context context, Loader loader, LoaderGL loaderGL, Terrain terrain) {
 
         HashMap<DefaultModelGenerator, Integer> entitiesMap = getEntitiesMap();
 
@@ -122,7 +124,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         Random random = new Random();
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
-            HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, key.getObjectReference(),
+            HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, loaderGL, key.getObjectReference(),
                     key.getHasTransparency(), key.getNormalsPointingUp());
             GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
             //Prepare generic entity end

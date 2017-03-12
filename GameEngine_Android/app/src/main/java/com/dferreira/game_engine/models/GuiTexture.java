@@ -16,7 +16,13 @@ public class GuiTexture {
     /**
      * Identifier of the texture
      */
-    private final int textureId;
+    private final int textureResourceId;
+
+
+    /**
+     * Identifier of the texture
+     */
+    private int textureId;
 
     /**
      * Position of the texture between (0,0) and (1.0,1.0)
@@ -36,15 +42,15 @@ public class GuiTexture {
 
     /**
      * @param rawModel   The rawModel that will be used by the guiTexture
-     * @param textureId  Identifier of the texture
+     * @param textureResourceId  Identifier of resource that contains the texture
      * @param position   Position of the texture between (0,0) and (1.0,1.0)
      * @param scale      Scale factor of the texture
      * @param gamePadKey The reference to the key that will be trigger
      */
-    public GuiTexture(RawModel rawModel, int textureId, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
+    public GuiTexture(RawModel rawModel, int textureResourceId, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
         super();
         this.rawModel = rawModel;
-        this.textureId = textureId;
+        this.textureResourceId = textureResourceId;
         this.position = position;
         this.scale = scale;
         this.gamePadKey = gamePadKey;
@@ -55,6 +61,22 @@ public class GuiTexture {
      */
     public RawModel getRawModel() {
         return rawModel;
+    }
+
+    /**
+     *
+     * @return  Identifier of resource that contains the texture of the gui
+     */
+    public int getTextureResourceId() {
+        return textureResourceId;
+    }
+
+    /**
+     *
+     * @param textureId Identifier of the texture
+     */
+    public void setTextureId(int textureId) {
+        this.textureId = textureId;
     }
 
     /**

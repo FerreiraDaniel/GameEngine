@@ -37,7 +37,6 @@ public class LoadUtils {
     private static TextureData pDecodeTextureFile(Context context, int resourceId) {
         Bitmap bitmap;
         bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
-        //byte[] buffer = new byte[bitmap.getWidth() * bitmap.getHeight() * NUMBER_OF_COMPONENTS];
         int bufferI = bitmap.getWidth() * bitmap.getHeight();
         int[] buffer = new int[bufferI];
 

@@ -8,6 +8,7 @@ import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.SkyBoxShape;
 import com.dferreira.game_engine.renderEngine.Loader;
+import com.dferreira.game_engine.renderEngine.LoaderGL;
 
 
 /**
@@ -29,12 +30,13 @@ public class WorldSkyBoxGenerator {
      *
      * @param context Context where the method was called
      * @param loader  object that is going to read the textures of the sky
+     * @param loaderGL  object that is going to read the textures of the sky
      * @return the reference to the sky box created
      */
-    public static SkyBox getSky(Context context, Loader loader) {
+    public static SkyBox getSky(Context context, Loader loader, LoaderGL loaderGL) {
         IShape skyBoxShape = new SkyBoxShape();
         RawModel rawModel = loader.load3DPositionsToRawModel(skyBoxShape.getVertices());
-        Integer textureId = loader.loadTCubeMap(context, SKY_RESOURCE_IDS);
+        Integer textureId = loaderGL.loadTCubeMap(context, SKY_RESOURCE_IDS);
         return new SkyBox(textureId, rawModel);
     }
 }

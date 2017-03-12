@@ -10,7 +10,7 @@ public class Material {
     /**
      * The identifier of the texture
      */
-    private final int textureId;
+    private Integer textureId;
 
     /**
      * The weight of the texture for the ambient color of the object
@@ -46,10 +46,8 @@ public class Material {
     /**
      * Constructor of the texture model
      *
-     * @param id Identifier of the texture id
      */
-    public Material(int id) {
-        this.textureId = id;
+    public Material() {
         this.shineDamper = 1.0f;
         this.reflectivity = 0.0f;
         this.hasTransparency = false;
@@ -57,9 +55,18 @@ public class Material {
     }
 
     /**
+     *
+     * @param textureId The identifier of the texture
+     *
+     */
+    public void setTextureId(Integer textureId) {
+        this.textureId = textureId;
+    }
+
+    /**
      * @return the identifier of the texture
      */
-    public int getTextureId() {
+    public Integer getTextureId() {
         return textureId;
     }
 

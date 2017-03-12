@@ -17,6 +17,7 @@ import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.renderEngine.Loader;
+import com.dferreira.game_engine.renderEngine.LoaderGL;
 import com.dferreira.game_engine.renderEngine.MasterRender;
 
 import java.util.Date;
@@ -38,12 +39,16 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     // Member variables
     private int mWidth;
     private int mHeight;
+
     /**
      * NOTE: The loader could be a local variable at this stage but in the future
      * resources should be release in different methods
      */
     @SuppressWarnings("FieldCanBeLocal")
     private Loader loader;
+
+    @SuppressWarnings("FieldCanBeLocal")
+    private LoaderGL loaderGL;
 
     /**
      * The master render is going put all the elements together
@@ -111,6 +116,8 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         /*Initializes the main variables responsible to render the 3D world*/
         this.loader = new Loader();
+        this.loaderGL = new LoaderGL();
+
 
         this.renderer = new MasterRender(context);
 
@@ -119,14 +126,14 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        this.terrains = WorldTerrainsGenerator.getTerrains(context, loader);
+        this.terrains = WorldTerrainsGenerator.getTerrains(context, loader, loaderGL);
 
         Date terrainLoaded = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - renderInitialized.getTime()) + " ms");
 
         /*Prepares the entities that are going to be render*/
-        this.entities = WorldEntitiesGenerator.getEntities(context, loader, terrains[0]);
+        this.entities = WorldEntitiesGenerator.getEntities(context, loader, loaderGL, terrains[0]);
 
         Date entitiesLoaded = new Date();
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize entities " + (entitiesLoaded.getTime() - terrainLoaded.getTime()) + " ms");
@@ -142,17 +149,18 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize light " + (lightLoaded.getTime() - terrainLoaded.getTime()) + " ms");
 
         		/* Prepares the GUIs that is going to render*/
-        this.GUIs = WorldGUIsGenerator.getGUIs(context, loader);
+        this.GUIs = WorldGUIsGenerator.getGUIs(loader);
+        WorldGUIsGenerator.loadTextures(context, loaderGL, this.GUIs);
 
         /* Load the sky box that is going to render*/
-        this.skyBox = WorldSkyBoxGenerator.getSky(context, loader);
+        this.skyBox = WorldSkyBoxGenerator.getSky(context, loader, loaderGL);
 
         Date skyBoxLoaded = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time initialize sky " + (skyBoxLoaded.getTime() - lightLoaded.getTime()) + " ms");
 
         /*Prepares the player_mtl that is going to be used in the scene*/
-        this.player = WorldPlayersGenerator.getPlayer(context, loader);
+        this.player = WorldPlayersGenerator.getPlayer(context, loader, loaderGL);
 
         Date playerLoader = new Date();
 

@@ -198,7 +198,9 @@ public class EntityRender {
 
         //Enable the specific texture
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, material.getTextureId());
+        if(material.getTextureWeight() > 0.0f) {
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, material.getTextureId());
+        }
 
         // Load if should put the normals of the entity point up or not
         eShader.loadNormalsPointingUp(material.areNormalsPointingUp());

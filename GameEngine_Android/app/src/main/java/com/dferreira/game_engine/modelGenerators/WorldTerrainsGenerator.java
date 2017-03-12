@@ -10,6 +10,7 @@ import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.TerrainShape;
 import com.dferreira.game_engine.renderEngine.Loader;
+import com.dferreira.game_engine.renderEngine.LoaderGL;
 import com.dferreira.game_engine.textures.TerrainTexturesPack;
 
 /**
@@ -26,7 +27,7 @@ public class WorldTerrainsGenerator {
      * @param loader Loader to load the raw model
      * @return the textured model of the terrain
      */
-    private static TerrainTexturesPack getTexturedTerrain(Context context, Loader loader) {
+    private static TerrainTexturesPack getTexturedTerrain(Context context, LoaderGL loader) {
         Integer weightMapTextureId = loader.loadTexture(context, R.mipmap.weight_map);
         Integer backgroundTextureId = loader.loadTexture(context, R.mipmap.terrain);
         Integer mudTextureId = loader.loadTexture(context, R.mipmap.mud);
@@ -63,8 +64,8 @@ public class WorldTerrainsGenerator {
      * @param loader Loader to load the raw model
      * @return A set of the terrains of the 3D scene
      */
-    public static Terrain[] getTerrains(Context context, Loader loader) {
-        TerrainTexturesPack terrainTexturesPackage = getTexturedTerrain(context, loader);
+    public static Terrain[] getTerrains(Context context, Loader loader, LoaderGL loaderGL) {
+        TerrainTexturesPack terrainTexturesPackage = getTexturedTerrain(context, loaderGL);
         TextureData heightMap = loader.getTextureData(context, R.mipmap.terrain_heightmap);
 
         TerrainShape terrain = new TerrainShape(heightMap);
