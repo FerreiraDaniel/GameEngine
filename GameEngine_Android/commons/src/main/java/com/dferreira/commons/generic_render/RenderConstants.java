@@ -1,4 +1,4 @@
-package com.dferreira.game_engine.renderEngine;
+package com.dferreira.commons.generic_render;
 
 @SuppressWarnings("WeakerAccess")
 public class RenderConstants {

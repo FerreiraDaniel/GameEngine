@@ -1,14 +1,11 @@
 package com.dferreira.game_engine.modelGenerators;
 
-import android.content.Context;
-
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.game_engine.R;
-import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.SkyBoxShape;
-import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.renderEngine.LoaderGL;
 
 
 /**
@@ -28,24 +25,23 @@ public class WorldSkyBoxGenerator {
     /**
      * The sky of the 3D scene
      *
-     * @param loader  object that is going to read the coordinates of the sky
+     * @param loaderRenderAPI object that is going to read the coordinates of the sky
      * @return the reference to the sky box created
      */
-    public static SkyBox getSky(Loader loader) {
+    public static SkyBox getSky(ILoaderRenderAPI loaderRenderAPI) {
         IShape skyBoxShape = new SkyBoxShape();
-        RawModel rawModel = loader.load3DPositionsToRawModel(skyBoxShape.getVertices());
+        IRawModel rawModel = loaderRenderAPI.load3DPositionsToRawModel(skyBoxShape.getVertices());
         return new SkyBox(rawModel);
     }
 
     /**
      * Load the textures of the skyBox
      *
-     * @param context   Context where the method was called
-     * @param loaderGL  Object that is going to read the textures of the sky
-     * @param skyBox    The skyBox to load the elements
+     * @param loaderRenderAPI Loader to load the raw model
+     * @param skyBox          The skyBox to load the elements
      */
-    public static void loadTextures(Context context, LoaderGL loaderGL, SkyBox skyBox) {
-        Integer textureId = loaderGL.loadTCubeMap(context, SKY_RESOURCE_IDS);
+    public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, SkyBox skyBox) {
+        Integer textureId = loaderRenderAPI.loadTCubeMap(SKY_RESOURCE_IDS, false);
         skyBox.setTextureId(textureId);
     }
 }

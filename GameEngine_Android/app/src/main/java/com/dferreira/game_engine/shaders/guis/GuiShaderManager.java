@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
 
@@ -26,10 +27,11 @@ public class GuiShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context Context where the game engine will be created
+     * @param context   Context where the game engine will be created
+     * @param renderAPI Reference to the API that is going to manage the program shader
      */
-    public GuiShaderManager(Context context) {
-        super(context, R.raw.gui_vertex_shader, R.raw.gui_fragment_shader);
+    public GuiShaderManager(Context context, IShaderManagerAPI renderAPI) {
+        super(context, R.raw.gui_vertex_shader, R.raw.gui_fragment_shader, renderAPI);
     }
 
     /**

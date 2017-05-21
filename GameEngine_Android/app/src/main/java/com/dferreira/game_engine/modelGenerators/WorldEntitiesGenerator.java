@@ -5,14 +5,15 @@ import android.content.Context;
 
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.models.Light;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Terrain;
 import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.renderEngine.LoaderGL;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -106,12 +107,14 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
     }
 
     /**
+     * @param context   Context where is to create the entities
      * @param loader  loader that will load the entities of the 3D world
-     * @param loaderGL  loader that will load the entities of the 3D world
+     * @param loaderAPI  loader that will load the entities of the 3D world
      * @param terrain The terrain used to determine the height position
+     *
      * @return The entities that will compose the 3D world
      */
-    public static Entity[] getEntities(Context context, Loader loader, LoaderGL loaderGL, Terrain terrain) {
+    public static Entity[] getEntities(Context context, Loader loader, ILoaderRenderAPI loaderAPI, Terrain terrain) {
 
         HashMap<DefaultModelGenerator, Integer> entitiesMap = getEntitiesMap();
 
@@ -124,7 +127,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         Random random = new Random();
         int count = 0;
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
-            HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, loaderGL, key.getObjectReference(),
+            HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, loaderAPI, key.getObjectReference(),
                     key.getHasTransparency(), key.getNormalsPointingUp());
             GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
             //Prepare generic entity end
@@ -145,6 +148,20 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
     }
 
     /**
+     * Load the textures of a list of entities
+     *
+     * @param loaderRenderAPI Loader to load content specific to the render API
+     * @param entities          The entities for which is to load the textures
+     */
+    public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, Entity[] entities) {
+        if (!Utils.isEmpty(entities)) {
+            for (Entity entity : entities) {
+                loadTexturesOfEntity(loaderRenderAPI, entity);
+            }
+        }
+    }
+
+    /**
      * @return A light source to the scene
      */
     public static Light getLight() {
@@ -153,6 +170,4 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
         return new Light(lightPosition, lightColor);
     }
-
-
 }

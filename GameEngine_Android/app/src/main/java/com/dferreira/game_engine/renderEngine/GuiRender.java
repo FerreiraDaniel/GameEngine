@@ -1,13 +1,12 @@
 package com.dferreira.game_engine.renderEngine;
 
-import android.opengl.GLES20;
-
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
+import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.game_engine.models.GuiTexture;
-import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.shaders.guis.GuiShaderManager;
 import com.dferreira.game_engine.shaders.guis.TGuiAttribute;
-import com.dferreira.game_engine.shaders.skyBox.TSkyBoxAttribute;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
  * Class responsible to render the GUIs in the screen
  */
 @SuppressWarnings("WeakerAccess")
-public class GuiRender {
+public class GuiRender extends GenericRender {
 
     /**
      * Reference to the shader manager
@@ -25,9 +24,11 @@ public class GuiRender {
     /**
      * Constructor of the entity render
      *
-     * @param gManager Shader manager
+     * @param gManager       Shader manager
+     * @param frameRenderAPI Reference to the API responsible for render the frame
      */
-    public GuiRender(GuiShaderManager gManager) {
+    public GuiRender(GuiShaderManager gManager, IFrameRenderAPI frameRenderAPI) {
+        super(frameRenderAPI);
         this.gShader = gManager;
     }
 
@@ -66,19 +67,21 @@ public class GuiRender {
      * @param GUIs List of GUIs to render
      */
     private void lRender(List<GuiTexture> GUIs) {
-        if ((GUIs != null) && (!GUIs.isEmpty())) {
-            GLES20.glEnable(GLES20.GL_BLEND);
-            GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
-            GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+        if (!Utils.isEmpty(GUIs)) {
+
+            this.frameRenderAPI.enableBlend();
+            this.frameRenderAPI.disableDepthTest();
+
             for (GuiTexture gui : GUIs) {
                 prepareModel(gui.getRawModel());
                 prepareInstance(gui);
                 render(gui.getRawModel());
 
-                unbindTexturedModel();
             }
-            GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-            GLES20.glDisable(GLES20.GL_BLEND);
+            unPrepareModel();
+
+            this.frameRenderAPI.disableBlend();
+            this.frameRenderAPI.enableDepthTest();
         }
     }
 
@@ -88,14 +91,8 @@ public class GuiRender {
      *
      * @param rawModel Model that contains the model of the entity with textures
      */
-    private void prepareModel(RawModel rawModel) {
-        //Enable the attributes to bind
-        GLES20.glEnableVertexAttribArray(TGuiAttribute.position.ordinal());
-
-        //Load from buffers
-        // Load the vertex data
-        GLES20.glVertexAttribPointer(TSkyBoxAttribute.position.getValue(), RenderConstants.VERTEX_SIZE_2D, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, rawModel.getVertexBuffer());
-
+    private void prepareModel(IRawModel rawModel) {
+        this.frameRenderAPI.prepare2DModel(rawModel, TGuiAttribute.position);
     }
 
     /**
@@ -104,8 +101,7 @@ public class GuiRender {
      * @param gui Entity that is to get prepared to be loaded
      */
     private void prepareInstance(GuiTexture gui) {
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, gui.getTextureId());
+        this.frameRenderAPI.activeAndBindTexture(gui.getTextureId());
         // Load the transformation matrix
         gShader.loadTransformationMatrix(getTransformationMatrix(gui));
     }
@@ -115,15 +111,15 @@ public class GuiRender {
      *
      * @param quad The quad to render
      */
-    private void render(RawModel quad) {
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, quad.getVertexCount());
+    private void render(IRawModel quad) {
+        this.frameRenderAPI.drawQuadVertex(quad);
     }
 
     /**
      * UnBind the previous bound elements
      */
-    private void unbindTexturedModel() {
-        GLES20.glDisableVertexAttribArray(TGuiAttribute.position.ordinal());
+    private void unPrepareModel() {
+        this.frameRenderAPI.unPrepareModel(TGuiAttribute.position);
     }
 
     /**

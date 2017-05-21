@@ -3,12 +3,12 @@ package com.dferreira.game_engine.modelGenerators;
 import android.content.Context;
 
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
 import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.renderEngine.LoaderGL;
 
 import java.util.HashMap;
 
@@ -36,7 +36,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
      * @return The player_mtl that is going to be used in the scene
      */
     @SuppressWarnings("UnnecessaryLocalVariable")
-    public static Player getPlayer(Context context, Loader loader, LoaderGL loaderGL) {
+    public static Player getPlayer(Context context, Loader loader, ILoaderRenderAPI loaderAPI) {
         DefaultModelGenerator model = getPlayerModel();
 
         float xPosition = 20.0f;
@@ -46,7 +46,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
 
         //Load the obj of the player
-        HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, loaderGL, model.getObjectReference(),
+        HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, loaderAPI, model.getObjectReference(),
                 model.getHasTransparency(), model.getNormalsPointingUp());
         GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
         //Prepare generic entity end
@@ -55,5 +55,16 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
                 model.getScale() // Scale
         );
         return player;
+    }
+
+
+    /**
+     * Load the textures of the players
+     *
+     * @param loaderRenderAPI Loader to load the raw model
+     * @param player          The player which is to load the textures
+     */
+    public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, Player player) {
+        loadTexturesOfEntity(loaderRenderAPI, player);
     }
 }

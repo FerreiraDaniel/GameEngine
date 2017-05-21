@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
 
@@ -27,16 +28,16 @@ public class SkyBoxShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context Context where the game engine will be created
+     * @param context   Context where the game engine will be created
+     * @param renderAPI Reference to the API that is going to manage the program shader
      */
-    public SkyBoxShaderManager(Context context) {
-        super(context, R.raw.sky_box_vertex_shader, R.raw.sky_box_fragment_shader);
+    public SkyBoxShaderManager(Context context, IShaderManagerAPI renderAPI) {
+        super(context, R.raw.sky_box_vertex_shader, R.raw.sky_box_fragment_shader, renderAPI);
     }
 
 
     /**
      * Bind the attributes of the program
-     *
      */
     @Override
     protected List<IEnum> getAttributes() {
@@ -61,8 +62,7 @@ public class SkyBoxShaderManager extends ShaderManager {
     /**
      * Load the projection matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadProjectionMatrix(GLTransformation matrix) {
         super.loadMatrix(uniforms[TSkyBoxUniform.projectionMatrix.getValue()], matrix);
@@ -71,8 +71,7 @@ public class SkyBoxShaderManager extends ShaderManager {
     /**
      * Load the transformation matrix
      *
-     * @param matrix
-     *            the matrix to be loaded
+     * @param matrix the matrix to be loaded
      */
     public void loadViewMatrix(GLTransformation matrix) {
         matrix.setTranslation(0.0f, 0.0f, 0.0f);

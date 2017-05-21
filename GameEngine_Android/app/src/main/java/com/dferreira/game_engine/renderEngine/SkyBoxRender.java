@@ -1,10 +1,8 @@
 package com.dferreira.game_engine.renderEngine;
 
-
-import android.opengl.GLES20;
-
 import com.dferreira.commons.GLTransformation;
-import com.dferreira.game_engine.models.RawModel;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.shaders.skyBox.SkyBoxShaderManager;
 import com.dferreira.game_engine.shaders.skyBox.TSkyBoxAttribute;
@@ -13,7 +11,7 @@ import com.dferreira.game_engine.shaders.skyBox.TSkyBoxAttribute;
  * Class responsible to render the sky box in the screen
  */
 @SuppressWarnings("WeakerAccess")
-public class SkyBoxRender {
+public class SkyBoxRender extends GenericRender {
 
     /**
      * Reference to the shader manager
@@ -25,8 +23,10 @@ public class SkyBoxRender {
      *
      * @param sbManager        Shader manager
      * @param projectionMatrix The projection matrix
+     * @param frameRenderAPI   Reference to the API responsible for render the frame
      */
-    public SkyBoxRender(SkyBoxShaderManager sbManager, GLTransformation projectionMatrix) {
+    public SkyBoxRender(SkyBoxShaderManager sbManager, GLTransformation projectionMatrix, IFrameRenderAPI frameRenderAPI) {
+        super(frameRenderAPI);
         this.sbShader = sbManager;
 
         sbManager.start();
@@ -55,46 +55,36 @@ public class SkyBoxRender {
      * @param skyBox The sky box to bind the attributes
      */
     private void prepareSkyBox(SkyBox skyBox) {
-        RawModel model = skyBox.getModel();
-
-        //Enable the attributes to bind
-        GLES20.glEnableVertexAttribArray(TSkyBoxAttribute.position.getValue());
+        IRawModel model = skyBox.getModel();
 
         // bind several textures of the sky box
         bindTextures(skyBox);
-
-        //Load from buffers
-        // Load the vertex data
-        GLES20.glVertexAttribPointer(TSkyBoxAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
-
-
+        this.frameRenderAPI.prepare3DModel(model, TSkyBoxAttribute.position);
     }
 
     /**
      * Bind the cube texture of the skyBox
      */
     private void bindTextures(SkyBox skyBox) {
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP, skyBox.getTextureId());
+        this.frameRenderAPI.activeAndBindCubeTexture(skyBox.getTextureId());
     }
 
 
     /**
      * Call the render of the triangles to the skyBox itself
      *
-     * @param skyBox
-     *            The sky box to be render
+     * @param skyBox The sky box to be render
      */
     private void render(SkyBox skyBox) {
-        RawModel model = skyBox.getModel();
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, model.getVertexCount());
+        IRawModel model = skyBox.getModel();
+        this.frameRenderAPI.drawTrianglesVertex(model);
     }
 
     /**
      * UnBind the previous bound elements
      */
     private void unbindTexture() {
-        GLES20.glDisableVertexAttribArray(TSkyBoxAttribute.position.getValue());
+        this.frameRenderAPI.unPrepareModel(TSkyBoxAttribute.position);
     }
 
     /**

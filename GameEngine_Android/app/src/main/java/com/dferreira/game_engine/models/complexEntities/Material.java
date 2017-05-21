@@ -1,26 +1,14 @@
 package com.dferreira.game_engine.models.complexEntities;
 
-import com.dferreira.commons.ColorRGBA;
-
 /**
  * Has the parameters of the material of a rawModel
  */
 public class Material {
 
     /**
-     * The identifier of the texture
+     * Diffuse component of the color
      */
-    private Integer textureId;
-
-    /**
-     * The weight of the texture for the ambient color of the object
-     */
-    private float textureWeight;
-
-    /**
-     * constant color of the ambient component
-     */
-    private ColorRGBA diffuseColor;
+    private LightingComponent diffuse;
 
     /**
      * How damped the shine is
@@ -45,29 +33,12 @@ public class Material {
 
     /**
      * Constructor of the texture model
-     *
      */
     public Material() {
         this.shineDamper = 1.0f;
         this.reflectivity = 0.0f;
         this.hasTransparency = false;
         this.normalsPointingUp = false;
-    }
-
-    /**
-     *
-     * @param textureId The identifier of the texture
-     *
-     */
-    public void setTextureId(Integer textureId) {
-        this.textureId = textureId;
-    }
-
-    /**
-     * @return the identifier of the texture
-     */
-    public Integer getTextureId() {
-        return textureId;
     }
 
     /**
@@ -129,32 +100,23 @@ public class Material {
         return normalsPointingUp;
     }
 
+
     /**
-     * @param textureWeight the weight of texture to set
+     *
+     * @return Get the diffuse component of the material
      */
-    public void setTextureWeight(float textureWeight) {
-        this.textureWeight = textureWeight;
+    public LightingComponent getDiffuse() {
+        return diffuse;
     }
 
     /**
-     * @return the weight of  component to the final diffuse
+     * Sets the diffuse component of the material
+     *
+     * @param diffuse The diffuse component to set
      */
-    public float getTextureWeight() {
-        return textureWeight;
-    }
-
-    /**
-     * @return the diffuseColor
-     */
-    public ColorRGBA getDiffuseColor() {
-        return diffuseColor;
+    public void setDiffuse(LightingComponent diffuse) {
+        this.diffuse = diffuse;
     }
 
 
-    /**
-     * @param diffuseColor the diffuseColor to set
-     */
-    public void setDiffuseColor(ColorRGBA diffuseColor) {
-        this.diffuseColor = diffuseColor;
-    }
 }

@@ -1,15 +1,15 @@
 package com.dferreira.game_engine.renderEngine;
 
-import android.opengl.GLES10;
-import android.opengl.GLES20;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.models.Player;
-import com.dferreira.game_engine.models.RawModel;
 import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.complexEntities.GenericEntity;
+import com.dferreira.game_engine.models.complexEntities.LightingComponent;
 import com.dferreira.game_engine.models.complexEntities.Material;
 import com.dferreira.game_engine.models.complexEntities.MaterialGroup;
 import com.dferreira.game_engine.models.complexEntities.RawModelMaterial;
@@ -24,7 +24,7 @@ import java.util.Map;
  * Class responsible to render the entities in the screen
  */
 @SuppressWarnings("WeakerAccess")
-public class EntityRender {
+public class EntityRender extends GenericRender {
 
     /**
      * Reference to the shader manager
@@ -36,8 +36,10 @@ public class EntityRender {
      *
      * @param sManager         Shader manager
      * @param projectionMatrix The projection matrix of the render
+     * @param frameRenderAPI   Reference to the API responsible for render the frame
      */
-    public EntityRender(EntityShaderManager sManager, GLTransformation projectionMatrix) {
+    public EntityRender(EntityShaderManager sManager, GLTransformation projectionMatrix, IFrameRenderAPI frameRenderAPI) {
+        super(frameRenderAPI);
         this.eShader = sManager;
 
         sManager.start();
@@ -117,7 +119,7 @@ public class EntityRender {
                 for (String groupName : groupsOfMaterials.keySet()) {
                     MaterialGroup materialGroup = groupsOfMaterials.get(groupName);
                     for (RawModelMaterial rawModelMaterial : materialGroup.getMaterials()) {
-                        RawModel model = rawModelMaterial.getRawModel();
+                        IRawModel model = rawModelMaterial.getRawModel();
                         Material material = rawModelMaterial.getMaterial();
                         prepareMaterial(material);
                         prepareModel(model);
@@ -145,7 +147,7 @@ public class EntityRender {
         for (String groupName : groupsOfMaterials.keySet()) {
             MaterialGroup materialGroup = groupsOfMaterials.get(groupName);
             for (RawModelMaterial rawModelMaterial : materialGroup.getMaterials()) {
-                RawModel model = rawModelMaterial.getRawModel();
+                IRawModel model = rawModelMaterial.getRawModel();
                 Material material = rawModelMaterial.getMaterial();
                 prepareMaterial(material);
                 prepareModel(model);
@@ -162,25 +164,29 @@ public class EntityRender {
      *
      * @param model Model that contains the model of the entity with textures
      */
-    private void prepareModel(RawModel model) {
-        //Enable the attributes to bind
-        GLES20.glEnableVertexAttribArray(TEntityAttribute.position.getValue());
-        GLES20.glEnableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
-        GLES20.glEnableVertexAttribArray(TEntityAttribute.normal.getValue());
+    private void prepareModel(IRawModel model) {
+        frameRenderAPI.prepareModel(model,
+                TEntityAttribute.position,
+                TEntityAttribute.textureCoords,
+                TEntityAttribute.normal
+        );
+    }
 
-        // Load the vertex data
-        GLES20.glVertexAttribPointer(TEntityAttribute.position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, model.getVertexBuffer());
+    /**
+     * Prepares the shader to render a lighting component
+     *
+     * @param component The component to be prepared
+     */
+    private void prepareLightingComponent(LightingComponent component) {
+        if (component.getTextureWeight() > 0.0f) {
+            this.frameRenderAPI.activeAndBindTexture(component.getTextureId());
+        }
 
-        // Load the texture coordinate
-        GLES20.glVertexAttribPointer(TEntityAttribute.textureCoords.getValue(), RenderConstants.NUMBER_COMPONENTS_PER_VERTEX_ATTR, GLES20.GL_FLOAT,
-                RenderConstants.VERTEX_NORMALIZED,
-                RenderConstants.STRIDE,
-                model.getTexCoordinates());
+        // Load the texture weight of the material
+        eShader.loadTextureWeight(component.getTextureWeight());
 
-
-        // Load the normals data
-        GLES20.glVertexAttribPointer(TEntityAttribute.normal.getValue(), RenderConstants.NUMBER_COMPONENTS_PER_NORMAL_ATTR, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE,
-                model.getNormalBuffer());
+        // Load the diffuse color of the material
+        eShader.loadDiffuseColor(component.getColor());
     }
 
     /**
@@ -192,15 +198,9 @@ public class EntityRender {
 
         //Enable the culling to not force the render of polygons that are not going to be visible
         if (!material.hasTransparency()) {
-            enableCulling();
+            this.frameRenderAPI.enableCulling();
         }
 
-
-        //Enable the specific texture
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        if(material.getTextureWeight() > 0.0f) {
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, material.getTextureId());
-        }
 
         // Load if should put the normals of the entity point up or not
         eShader.loadNormalsPointingUp(material.areNormalsPointingUp());
@@ -208,11 +208,7 @@ public class EntityRender {
         //Load the light properties
         eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
 
-        // Load the texture weight of the material
-        eShader.loadTextureWeight(material.getTextureWeight());
-
-        // Load the diffuse color of the material
-        eShader.loadDiffuseColor(material.getDiffuseColor());
+        prepareLightingComponent(material.getDiffuse());
     }
 
 
@@ -231,36 +227,16 @@ public class EntityRender {
      *
      * @param model Raw model to get render
      */
-    private void render(RawModel model) {
-        //Specify the indexes
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, model.getNumOfIndexes(),
-                GLES20.GL_UNSIGNED_INT, model.getIndexBuffer());
+    private void render(IRawModel model) {
+        this.frameRenderAPI.drawTrianglesIndexes(model);
+
     }
 
     /**
      * UnBind the previous bound elements
      */
     private void unPrepareModel() {
-        GLES20.glDisableVertexAttribArray(TEntityAttribute.position.getValue());
-        GLES20.glDisableVertexAttribArray(TEntityAttribute.textureCoords.getValue());
-        GLES20.glDisableVertexAttribArray(TEntityAttribute.normal.getValue());
-    }
-
-    /**
-     * Enable culling of faces to get better performance
-     */
-    private void enableCulling() {
-        // Enable the GL cull face feature
-        GLES10.glEnable(GLES10.GL_CULL_FACE);
-        // Avoid to render faces that are away from the camera
-        GLES10.glCullFace(GLES10.GL_BACK);
-    }
-
-    /**
-     * Disable the culling of the faces vital for transparent model
-     */
-    private void disableCulling() {
-        GLES10.glDisable(GLES10.GL_CULL_FACE);
+        this.frameRenderAPI.unPrepareModel(TEntityAttribute.position, TEntityAttribute.textureCoords, TEntityAttribute.normal);
     }
 
     /**
@@ -271,7 +247,7 @@ public class EntityRender {
     private void unPrepareMaterial(Material material) {
         // Restore the state if has transparency
         if (!material.hasTransparency()) {
-            disableCulling();
+            this.frameRenderAPI.disableCulling();
         }
     }
 

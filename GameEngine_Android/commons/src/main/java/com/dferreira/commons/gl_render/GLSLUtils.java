@@ -1,13 +1,15 @@
-package com.dferreira.commons;
+package com.dferreira.commons.gl_render;
 
 import android.opengl.GLES10;
 import android.opengl.GLES20;
 import android.util.Log;
 
+import com.dferreira.commons.generic_render.ShaderProgram;
+
 /**
  * Allow to load a shader program (fragment and vertex shader)
  */
-public class GLSLUtils {
+class GLSLUtils {
 
     private final static String TAG = "GLSLUtils";
 
@@ -54,7 +56,7 @@ public class GLSLUtils {
      * @return 0 -> There was an error
      * not 0 -> Id of the program loaded
      */
-    public static ShaderProgram loadProgram(String vertexShaderSrc, String fragShaderSrc) {
+    static ShaderProgram loadProgram(String vertexShaderSrc, String fragShaderSrc) {
         int vertexShader;
         int fragmentShader;
         int programId;
@@ -101,7 +103,7 @@ public class GLSLUtils {
      * @param shaderProgram The program shader not linked yet
      * @return False = Not linked True = Linked
      */
-    public static boolean linkProgram(ShaderProgram shaderProgram) {
+    static boolean linkProgram(ShaderProgram shaderProgram) {
         int[] linked = new int[1];
 
         // Link the program all together

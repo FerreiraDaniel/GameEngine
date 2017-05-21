@@ -1,6 +1,6 @@
 package com.dferreira.game_engine.models.complexEntities;
 
-import com.dferreira.game_engine.models.RawModel;
+import com.dferreira.commons.generic_render.IRawModel;
 
 /**
  * Wrapper that besides of have the raw model also has the material to put in the model
@@ -10,7 +10,7 @@ public class RawModelMaterial {
     /**
      * Raw model of the entity
      */
-    private final RawModel rawModel;
+    private final IRawModel rawModel;
 
     /**
      * Reference to the material of the entity
@@ -20,10 +20,10 @@ public class RawModelMaterial {
     /**
      * Constructor of the textured model
      *
-     * @param rawModel          Raw model of the entity
-     * @param material          Reference to the material of the entity
+     * @param rawModel Raw model of the entity
+     * @param material Reference to the material of the entity
      */
-    public RawModelMaterial(RawModel rawModel, Material material) {
+    public RawModelMaterial(IRawModel rawModel, Material material) {
         super();
         this.rawModel = rawModel;
         this.material = material;
@@ -33,7 +33,7 @@ public class RawModelMaterial {
     /**
      * @return the raw model of the entity
      */
-    public RawModel getRawModel() {
+    public IRawModel getRawModel() {
         return rawModel;
     }
 

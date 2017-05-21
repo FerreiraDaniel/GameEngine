@@ -3,6 +3,7 @@ package com.dferreira.game_engine.models;
 import com.dferreira.commons.Maths;
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.game_engine.textures.TerrainTexturesPack;
 
 /**
@@ -29,26 +30,23 @@ public class Terrain {
     private final float[][] heights;
 
     /**
-     * The RawModel of the terrain
+     * The GLRawModel of the terrain
      */
-    private final RawModel model;
+    private final IRawModel model;
 
     /**
      * The different textures of the terrain
      */
-    private final TerrainTexturesPack texturePack;
+    private TerrainTexturesPack texturePack;
 
     /**
      * The constructor of the terrain entity
      *
-     * @param texturePack The identifiers of the textures to the terrain
-     * @param rawModel    The model of the terrain
-     * @param heights     The heights of the terrain
-     * @param position    Position where the terrain will be put in
+     * @param rawModel The model of the terrain
+     * @param heights  The heights of the terrain
+     * @param position Position where the terrain will be put in
      */
-    public Terrain(TerrainTexturesPack texturePack, RawModel rawModel, float[][] heights, Vector3f position) {
-
-        this.texturePack = texturePack;
+    public Terrain(IRawModel rawModel, float[][] heights, Vector3f position) {
         this.model = rawModel;
         this.heights = heights;
         this.x = position.x * TerrainShape.SIZE;
@@ -80,6 +78,15 @@ public class Terrain {
     }
 
     /**
+     * Set the textures package of the terrain
+     *
+     * @param texturePack The identifiers of the textures to the terrain
+     */
+    public void setTexturePack(TerrainTexturesPack texturePack) {
+        this.texturePack = texturePack;
+    }
+
+    /**
      * @return the texturePack
      */
     public TerrainTexturesPack getTexturePack() {
@@ -90,7 +97,7 @@ public class Terrain {
     /**
      * @return the model
      */
-    public RawModel getModel() {
+    public IRawModel getModel() {
         return model;
     }
 

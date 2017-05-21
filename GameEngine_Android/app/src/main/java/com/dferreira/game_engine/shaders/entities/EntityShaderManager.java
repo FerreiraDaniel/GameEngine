@@ -5,6 +5,7 @@ import android.content.Context;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
@@ -28,10 +29,11 @@ public class EntityShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context Context where the game engine will be created
+     * @param context   Context where the game engine will be created
+     * @param renderAPI Reference to the API that is going to manage the program shader
      */
-    public EntityShaderManager(Context context) {
-        super(context, R.raw.entity_vertex_shader, R.raw.entity_fragment_shader);
+    public EntityShaderManager(Context context, IShaderManagerAPI renderAPI) {
+        super(context, R.raw.entity_vertex_shader, R.raw.entity_fragment_shader, renderAPI);
     }
 
     /**
@@ -131,8 +133,7 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Load the texture weight of the material
      *
-     * @param textureWeight
-     *            texture weight of the material
+     * @param textureWeight texture weight of the material
      */
     public void loadTextureWeight(float textureWeight) {
         super.loadFloat(uniforms[TEntityUniform.textureWeight.getValue()], textureWeight);
@@ -141,8 +142,7 @@ public class EntityShaderManager extends ShaderManager {
     /**
      * Load the diffuse color of the material
      *
-     * @param diffuseColor
-     *            diffuse color of the material
+     * @param diffuseColor diffuse color of the material
      */
     public void loadDiffuseColor(ColorRGBA diffuseColor) {
         super.loadColorRGBA(uniforms[TEntityUniform.diffuseColor.getValue()], diffuseColor);

@@ -1,14 +1,16 @@
 package com.dferreira.game_engine.models;
 
+import com.dferreira.commons.generic_render.IRawModel;
+
 /**
  * Represents a box with sky textures
  */
 public class SkyBox {
 
     /**
-     * RawModel of the skyBox
+     * GLRawModel of the skyBox
      */
-    private final RawModel model;
+    private final IRawModel model;
 
     /**
      * The identifier of the sky box cubic texture
@@ -20,7 +22,7 @@ public class SkyBox {
      *
      * @param model     The model of the sky box
      */
-    public SkyBox(RawModel model) {
+    public SkyBox(IRawModel model) {
         super();
         this.model = model;
     }
@@ -28,7 +30,7 @@ public class SkyBox {
     /**
      * @return the model
      */
-    public RawModel getModel() {
+    public IRawModel getModel() {
         return model;
     }
 

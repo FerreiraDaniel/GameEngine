@@ -1,7 +1,7 @@
-package com.dferreira.commons;
+package com.dferreira.commons.generic_render;
 
 /**
- *	Represents one shader program in that can be running in the Graphic Boards
+ * Represents one shader program in that can be running in the Graphic Boards
  */
 public class ShaderProgram {
     /**

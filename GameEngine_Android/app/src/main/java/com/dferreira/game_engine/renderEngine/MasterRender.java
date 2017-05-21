@@ -1,12 +1,14 @@
 package com.dferreira.game_engine.renderEngine;
 
 import android.content.Context;
-import android.opengl.GLES10;
-import android.opengl.GLES20;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
+import com.dferreira.commons.generic_render.IRenderAPIAccess;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.models.Light;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.game_controller.GameEngineTouchListener;
 import com.dferreira.game_controller.GamePad;
 import com.dferreira.game_engine.models.Camera;
@@ -45,6 +47,11 @@ public class MasterRender {
     private static final float SKY_G = 0.5f;
     private static final float SKY_B = 0.5f;
     private static final float SKY_A = 1.0f;
+
+    /**
+     * Reference to the API that is going to render the scene
+     */
+    private final IRenderAPIAccess renderAPI;
 
     /**
      * Reference to the render of the entities
@@ -111,28 +118,37 @@ public class MasterRender {
 
     /**
      * Constructor of the master renderer
+     *
+     * @param context   Context where the master render would be called
+     * @param renderAPI The accessor to the API that is going to be responsible for rendering the scene
      */
-    public MasterRender(Context context) {
+    public MasterRender(Context context, IRenderAPIAccess renderAPI) {
         //Initializes the projection matrix
         GLTransformation projectionMatrix = createProjectionMatrix();
 
+        //Set the render api access
+        this.renderAPI = renderAPI;
+
+        IShaderManagerAPI shaderManagerAPI = renderAPI.getShaderManagerAPI();
+        IFrameRenderAPI frameRenderAPI = renderAPI.getFrameRenderAPI();
+
         //Initializes the entity render
-        EntityShaderManager eShader = new EntityShaderManager(context);
-        this.entityRender = new EntityRender(eShader, projectionMatrix);
+        EntityShaderManager eShader = new EntityShaderManager(context, shaderManagerAPI);
+        this.entityRender = new EntityRender(eShader, projectionMatrix, frameRenderAPI);
 
         // Initializes the entities to be render
         this.entities = new HashMap<>();
 
         // Initializes the terrain render
-        TerrainShaderManager tShader = new TerrainShaderManager(context);
-        this.terrainRender = new TerrainRender(tShader, projectionMatrix);
+        TerrainShaderManager tShader = new TerrainShaderManager(context, shaderManagerAPI);
+        this.terrainRender = new TerrainRender(tShader, projectionMatrix, frameRenderAPI);
 
         // Initializes the sky box render
-        SkyBoxShaderManager sbManager = new SkyBoxShaderManager(context);
-        this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix);
+        SkyBoxShaderManager sbManager = new SkyBoxShaderManager(context, shaderManagerAPI);
+        this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix, frameRenderAPI);
 
-        GuiShaderManager gShader = new GuiShaderManager(context);
-        this.guiRender = new GuiRender(gShader);
+        GuiShaderManager gShader = new GuiShaderManager(context, shaderManagerAPI);
+        this.guiRender = new GuiRender(gShader, frameRenderAPI);
 
         // Initializes the terrains to render
         this.terrains = new ArrayList<>();
@@ -162,13 +178,7 @@ public class MasterRender {
      * Clean the data of the previous frame
      */
     private void prepare() {
-        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
-
-        // Set the color clear value
-        GLES20.glClearColor(0, 0.3f, 0, 1);
-
-        // Clear the color and depth buffers
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES10.GL_DEPTH_BUFFER_BIT);
+        renderAPI.getFrameRenderAPI().prepareFrame();
     }
 
     /**
@@ -193,7 +203,7 @@ public class MasterRender {
      */
     public void processEntities(Entity[] lEntities) {
         entities.clear();
-        if ((lEntities != null) && (lEntities.length > 0)) {
+        if (!Utils.isEmpty(lEntities)) {
             for (Entity entity : lEntities) {
                 processEntity(entity);
             }
@@ -217,7 +227,7 @@ public class MasterRender {
     public void processTerrains(Terrain terrain) {
         this.terrains.clear();
         if (terrain != null) {
-                processTerrain(terrain);
+            processTerrain(terrain);
         }
     }
 

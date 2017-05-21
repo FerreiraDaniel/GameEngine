@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconDuplicates">
+        <ignore path="src/main/res/mipmap-mdpi/sky_bottom.png" />
+        <ignore path="src/main/res/mipmap-mdpi/sky_front.png" />
+    </issue>
+    <issue id="UnusedResources">
+        <ignore path="src/main/res/mipmap-mdpi/banana_tree_leaf.png" />
+        <ignore path="src/main/res/mipmap-mdpi/banana_tree_trunk.png" />
+        <ignore path="src/main/res/mipmap-mdpi/fern.png" />
+        <ignore path="src/main/res/mipmap-mdpi/flower.png" />
+        <ignore path="src/main/res/mipmap-mdpi/grass.png" />
+        <ignore path="src/main/res/mipmap-mdpi/marble.png" />
+        <ignore path="src/main/res/mipmap-mdpi/player.png" />
+        <ignore path="src/main/res/mipmap-mdpi/tree.png" />
+    </issue>
+</lint>

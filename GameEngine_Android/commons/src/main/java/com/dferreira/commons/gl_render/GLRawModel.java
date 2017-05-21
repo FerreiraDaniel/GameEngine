@@ -1,13 +1,14 @@
-package com.dferreira.game_engine.models;
+package com.dferreira.commons.gl_render;
 
+import com.dferreira.commons.generic_render.IRawModel;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 /**
- * Represents one raw model of one entity
+ * * Represents one raw model of one entity of the OpenGL V2
  */
-public class RawModel {
+public class GLRawModel implements IRawModel {
 
     /**
      * Number of vertices of the raw model
@@ -49,7 +50,7 @@ public class RawModel {
      * @param normalBuffer   Buffer that describes which normal will be user
      * @param texCoordinates Coordinates of the textures in the model
      */
-    public RawModel(FloatBuffer vertexBuffer, IntBuffer indexBuffer, int numOfIndexes, FloatBuffer normalBuffer, FloatBuffer texCoordinates) {
+    public GLRawModel(FloatBuffer vertexBuffer, IntBuffer indexBuffer, int numOfIndexes, FloatBuffer normalBuffer, FloatBuffer texCoordinates) {
         super();
         this.vertexBuffer = vertexBuffer;
         this.vertexCount = 0;
@@ -65,7 +66,7 @@ public class RawModel {
      * @param vertexBuffer Buffer that describes the position of the vertices
      * @param vertexCount  Number of vertices that compose the raw model
      */
-    public RawModel(FloatBuffer vertexBuffer, int vertexCount) {
+    public GLRawModel(FloatBuffer vertexBuffer, int vertexCount) {
         super();
         this.vertexBuffer = vertexBuffer;
         this.vertexCount = vertexCount;
@@ -111,10 +112,19 @@ public class RawModel {
         return normalBuffer;
     }
 
+
+    /**
+     * @return the number of vertex
+     */
+    public int getVertexCount() {
+        return vertexCount;
+    }
+
     /**
      * Clean the memory used by the model
      */
-    public void cleanUp() {
+    @Override
+    public void dispose() {
         if (vertexBuffer != null) {
             vertexBuffer.clear();
         }
@@ -124,14 +134,5 @@ public class RawModel {
         if (texCoordinates != null) {
             texCoordinates.clear();
         }
-
-
-    }
-
-    /**
-     * @return the number of vertex
-     */
-    public int getVertexCount() {
-        return vertexCount;
     }
 }

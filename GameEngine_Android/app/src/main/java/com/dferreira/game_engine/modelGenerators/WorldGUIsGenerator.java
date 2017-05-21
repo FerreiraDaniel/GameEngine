@@ -1,15 +1,12 @@
 package com.dferreira.game_engine.modelGenerators;
 
-import android.content.Context;
-
 import com.dferreira.commons.Vector2f;
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.game_controller.GamePadKey;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.models.GuiShape;
 import com.dferreira.game_engine.models.GuiTexture;
-import com.dferreira.game_engine.models.RawModel;
-import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.renderEngine.LoaderGL;
 
 /**
  * Responsible for creating the multiple GUIs to the user interact with 3D world
@@ -40,7 +37,7 @@ public class WorldGUIsGenerator {
      * @return The textured GUI to render GUI
      */
     @SuppressWarnings("SameParameterValue")
-    private static GuiTexture getGUI(RawModel rawMode, int textureResourceId, float xPosition,
+    private static GuiTexture getGUI(IRawModel rawMode, int textureResourceId, float xPosition,
                                      float yPosition, float scale, GamePadKey key) {
         // Create the position of the GUI
         Vector2f guiPosition = new Vector2f(xPosition, yPosition);
@@ -54,12 +51,12 @@ public class WorldGUIsGenerator {
     /**
      * The GUIs of the scene
      *
-     * @param loader The loader in charge of loading the textures of the guis
+     * @param loaderRenderAPI The loader in charge of loading the textures of the guis
      * @return list of guis of the scene
      */
-    public static GuiTexture[] getGUIs(Loader loader) {
+    public static GuiTexture[] getGUIs(ILoaderRenderAPI loaderRenderAPI) {
         GuiShape guiShape = new GuiShape();
-        RawModel rawModel = loader.load2DPositionsToRawModel(guiShape.getVertices());
+        IRawModel rawModel = loaderRenderAPI.load2DPositionsToRawModel(guiShape.getVertices());
         GuiTexture leftButton = getGUI(rawModel, R.drawable.ic_pad_left, -0.8f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.left);
         GuiTexture upButton = getGUI(rawModel, R.drawable.ic_pad_up, -0.7f, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.up);
         GuiTexture downButton = getGUI(rawModel, R.drawable.ic_pad_down, -0.7f, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.down);
@@ -87,15 +84,14 @@ public class WorldGUIsGenerator {
     /**
      * Loads the textures of the guis
      *
-     * @param context   Context where will execute the load
-     * @param loaderGL
-     * @param guis      List of the guis in the scene
+     * @param loaderRenderAPI Loader to load the raw model
+     * @param GUIs            List of the GUIs in the scene
      */
-    public static void loadTextures(Context context, LoaderGL loaderGL, GuiTexture[] guis) {
-        if ((guis != null) && (guis.length != 0)) {
-            for (GuiTexture guiTexture: guis) {
+    public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, GuiTexture[] GUIs) {
+        if ((GUIs != null) && (GUIs.length != 0)) {
+            for (GuiTexture guiTexture : GUIs) {
                 // Load the texture of the GUI
-                Integer textureId = loaderGL.loadTexture(context, guiTexture.getTextureResourceId());
+                Integer textureId = loaderRenderAPI.loadTexture(guiTexture.getTextureResourceId(), false);
                 guiTexture.setTextureId(textureId);
             }
         }

@@ -1,20 +1,17 @@
 package com.dferreira.game_engine.shaders;
 
 import android.content.Context;
-import android.opengl.GLES20;
 import android.util.Log;
 
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.ColorRGBA;
-import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.ShaderProgram;
-import com.dferreira.commons.Vector2f;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_render.ShaderProgram;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.utils.LoadUtils;
 
-import java.nio.FloatBuffer;
 import java.util.List;
 
 /**
@@ -25,28 +22,31 @@ public abstract class ShaderManager {
 
     private static final String TAG = "ShaderManager";
     private final ShaderProgram shaderProgram;
+    private final IShaderManagerAPI shaderManagerAPI;
 
 
     /**
      * Constructor of the program shader manager
      *
-     * @param context      Context where the game engine will be created
-     * @param vertexFile   Identifier of the file with vertex description
-     * @param fragmentFile Identifier of the file with fragment description
+     * @param context       Context where the game engine will be created
+     * @param vertexFile    Identifier of the file with vertex description
+     * @param fragmentFile  Identifier of the file with fragment description
+     * @param shaderManagerAPI     Reference to the API that is going to manage the program shader
      */
     @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
-    public ShaderManager(Context context, int vertexFile, int fragmentFile) {
+    protected ShaderManager(Context context, int vertexFile, int fragmentFile, IShaderManagerAPI shaderManagerAPI) {
 
         String vertexShaderSrc = LoadUtils.readTextFromRawResource(context, vertexFile);
         String fragShaderSrc = LoadUtils.readTextFromRawResource(context, fragmentFile);
-        this.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc);
+        this.shaderManagerAPI = shaderManagerAPI;
+        this.shaderProgram = shaderManagerAPI.loadProgram(vertexShaderSrc, fragShaderSrc);
 
         if (this.shaderProgram == null) {
             Log.e(TAG, "Was impossible compile the program shader");
             return;
         }
         bindAttributes();
-        boolean linked = GLSLUtils.linkProgram(shaderProgram);
+        boolean linked = shaderManagerAPI.linkProgram(shaderProgram);
         if (linked) {
             getAllUniformLocations();
         }
@@ -81,9 +81,8 @@ public abstract class ShaderManager {
      * @param variableName   Name of the attribute to bind
      */
     private void bindAttribute(int attributeIndex, String variableName) {
-        GLES20.glBindAttribLocation(shaderProgram.getProgramId(), attributeIndex, variableName);
+        this.shaderManagerAPI.glBindAttributeLocation(shaderProgram, attributeIndex, variableName);
     }
-
 
     /**
      * Get the position of one uniform variable in the program shader
@@ -92,7 +91,7 @@ public abstract class ShaderManager {
      * @return the position of the uniform variable in program shader
      */
     protected int getUniformLocation(Enum<?> uniformName) {
-        int location = GLES20.glGetUniformLocation(shaderProgram.getProgramId(), uniformName.toString());
+        int location = this.shaderManagerAPI.getUniformLocation(shaderProgram, uniformName);
         if (location < 0) {
             Log.e(TAG, "Was not possible to load the location : " + uniformName);
         }
@@ -106,7 +105,7 @@ public abstract class ShaderManager {
      * @param value    The value to load
      */
     protected void loadInt(int location, int value) {
-        GLES20.glUniform1i(location, value);
+        this.shaderManagerAPI.loadInt(location, value);
     }
 
     /**
@@ -116,19 +115,9 @@ public abstract class ShaderManager {
      * @param value    value to load
      */
     protected void loadFloat(int location, float value) {
-        GLES20.glUniform1f(location, value);
+        this.shaderManagerAPI.loadFloat(location, value);
     }
 
-    /**
-     * Load a 2D vector to be used in the shader script
-     *
-     * @param location location of the shader variable in the script
-     * @param vector   The vector to load
-     */
-    @SuppressWarnings("unused")
-    protected void loadVector(int location, Vector2f vector) {
-        GLES20.glUniform2f(location, vector.x, vector.y);
-    }
 
     /**
      * Load a 3D vector to be used in the shader script
@@ -137,7 +126,7 @@ public abstract class ShaderManager {
      * @param vector   The vector to load
      */
     protected void loadVector(int location, Vector3f vector) {
-        GLES20.glUniform3f(location, vector.x, vector.y, vector.z);
+        this.shaderManagerAPI.loadVector(location, vector);
     }
 
     /**
@@ -147,7 +136,7 @@ public abstract class ShaderManager {
      * @param color    The color to load
      */
     protected void loadColorRGB(int location, ColorRGB color) {
-        GLES20.glUniform3f(location, color.r, color.g, color.b);
+        this.shaderManagerAPI.loadColorRGB(location, color);
     }
 
     /**
@@ -157,7 +146,7 @@ public abstract class ShaderManager {
      * @param color    The color to load
      */
     protected void loadColorRGBA(int location, ColorRGBA color) {
-        GLES20.glUniform4f(location, color.r, color.g, color.b, color.a);
+        this.shaderManagerAPI.loadColorRGBA(location, color);
     }
 
     /**
@@ -167,8 +156,7 @@ public abstract class ShaderManager {
      * @param value    value to load
      */
     protected void loadBoolean(int location, boolean value) {
-        float toLoad = value ? 1 : 0;
-        GLES20.glUniform1f(location, toLoad);
+        this.shaderManagerAPI.loadBoolean(location, value);
     }
 
     /**
@@ -178,10 +166,7 @@ public abstract class ShaderManager {
      * @param matrix   Matrix to load
      */
     protected void loadMatrix(int location, GLTransformation matrix) {
-        FloatBuffer matrixFb = matrix.getAsFloatBuffer();
-
-        GLES20.glUniformMatrix4fv(location, 1, false, matrixFb);
-
+        this.shaderManagerAPI.loadMatrix(location, matrix);
     }
 
 
@@ -189,31 +174,20 @@ public abstract class ShaderManager {
      * Indicates that should start to use a certain program shader
      */
     public void start() {
-        if (shaderProgram != null) {
-            GLES20.glUseProgram(shaderProgram.getProgramId());
-        }
+        this.shaderManagerAPI.start(shaderProgram);
     }
 
     /**
      * Indicate that should not use a certain program no more
      */
     public void stop() {
-        GLES20.glUseProgram(0);
+        this.shaderManagerAPI.stop();
     }
 
     /**
      * Clean the program shader from memory
      */
     public void cleanUp() {
-        this.stop();
-        int vertexShaderID = shaderProgram.getVertexShaderId();
-        int fragmentShaderID = shaderProgram.getFragmentShaderId();
-        int programId = shaderProgram.getProgramId();
-
-        GLES20.glDetachShader(programId, vertexShaderID);
-        GLES20.glDetachShader(programId, fragmentShaderID);
-        GLES20.glDeleteShader(vertexShaderID);
-        GLES20.glDeleteShader(fragmentShaderID);
-        GLES20.glDeleteProgram(programId);
+        this.shaderManagerAPI.deleteProgram(shaderProgram);
     }
 }

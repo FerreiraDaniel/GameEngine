@@ -5,6 +5,7 @@ import android.content.Context;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.R;
 import com.dferreira.game_engine.shaders.ShaderManager;
@@ -53,9 +54,10 @@ public class TerrainShaderManager extends ShaderManager {
      * the game engine are loaded
      *
      * @param context Context where the game engine will be created
+     * @param renderAPI     Reference to the API that is going to manage the program shader
      */
-    public TerrainShaderManager(Context context) {
-        super(context, R.raw.terrain_vertex_shader, R.raw.terrain_fragment_shader);
+    public TerrainShaderManager(Context context, IShaderManagerAPI renderAPI) {
+        super(context, R.raw.terrain_vertex_shader, R.raw.terrain_fragment_shader, renderAPI);
     }
 
     /**

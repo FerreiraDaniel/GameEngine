@@ -1,6 +1,7 @@
 package com.dferreira.game_engine.models;
 
 import com.dferreira.commons.Vector2f;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.game_controller.GamePadKey;
 
 /**
@@ -11,7 +12,7 @@ public class GuiTexture {
     /**
      * Raw model of the entity
      */
-    private final RawModel rawModel;
+    private final IRawModel rawModel;
 
     /**
      * Identifier of the texture
@@ -47,7 +48,7 @@ public class GuiTexture {
      * @param scale      Scale factor of the texture
      * @param gamePadKey The reference to the key that will be trigger
      */
-    public GuiTexture(RawModel rawModel, int textureResourceId, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
+    public GuiTexture(IRawModel rawModel, int textureResourceId, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
         super();
         this.rawModel = rawModel;
         this.textureResourceId = textureResourceId;
@@ -59,7 +60,7 @@ public class GuiTexture {
     /**
      * @return the raw model of the entity
      */
-    public RawModel getRawModel() {
+    public IRawModel getRawModel() {
         return rawModel;
     }
 

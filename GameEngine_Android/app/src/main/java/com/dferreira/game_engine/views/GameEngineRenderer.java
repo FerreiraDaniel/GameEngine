@@ -1,23 +1,24 @@
 package com.dferreira.game_engine.views;
 
 import android.content.Context;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.generic_render.IRenderAPIAccess;
+import com.dferreira.commons.gl_render.GLRenderAPIAccess;
 import com.dferreira.commons.models.Light;
 import com.dferreira.game_engine.modelGenerators.WorldEntitiesGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldGUIsGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldPlayersGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldSkyBoxGenerator;
 import com.dferreira.game_engine.modelGenerators.WorldTerrainsGenerator;
-import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.models.GuiTexture;
 import com.dferreira.game_engine.models.Player;
 import com.dferreira.game_engine.models.SkyBox;
 import com.dferreira.game_engine.models.Terrain;
+import com.dferreira.game_engine.models.complexEntities.Entity;
 import com.dferreira.game_engine.renderEngine.Loader;
-import com.dferreira.game_engine.renderEngine.LoaderGL;
 import com.dferreira.game_engine.renderEngine.MasterRender;
 
 import java.util.Date;
@@ -48,7 +49,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     private Loader loader;
 
     @SuppressWarnings("FieldCanBeLocal")
-    private LoaderGL loaderGL;
+    private IRenderAPIAccess renderAPIAccess;
 
     /**
      * The master render is going put all the elements together
@@ -109,31 +110,29 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
         Date startDate = new Date();
-        // enable face culling feature
-        gl.glEnable(GL10.GL_CULL_FACE);
-        // specify which faces to not draw
-        gl.glCullFace(GL10.GL_BACK);
 
         /*Initializes the main variables responsible to render the 3D world*/
         this.loader = new Loader();
-        this.loaderGL = new LoaderGL();
+        this.renderAPIAccess = new GLRenderAPIAccess(context);
+        ILoaderRenderAPI loaderAPI = renderAPIAccess.getLoaderRenderAPI();
 
-
-        this.renderer = new MasterRender(context);
+        this.renderer = new MasterRender(context, renderAPIAccess);
 
         Date renderInitialized = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        this.terrain = WorldTerrainsGenerator.getTerrain(context, loader, loaderGL);
+        this.terrain = WorldTerrainsGenerator.getTerrain(context, loader, loaderAPI);
+        WorldTerrainsGenerator.loadTextures(loaderAPI, this.terrain);
 
         Date terrainLoaded = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - renderInitialized.getTime()) + " ms");
 
         /*Prepares the entities that are going to be render*/
-        this.entities = WorldEntitiesGenerator.getEntities(context, loader, loaderGL, terrain);
+        this.entities = WorldEntitiesGenerator.getEntities(context, loader, loaderAPI, terrain);
+        WorldEntitiesGenerator.loadTextures(loaderAPI, this.entities);
 
         Date entitiesLoaded = new Date();
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize entities " + (entitiesLoaded.getTime() - terrainLoaded.getTime()) + " ms");
@@ -149,19 +148,20 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize light " + (lightLoaded.getTime() - terrainLoaded.getTime()) + " ms");
 
         		/* Prepares the GUIs that is going to render*/
-        this.GUIs = WorldGUIsGenerator.getGUIs(loader);
-        WorldGUIsGenerator.loadTextures(context, loaderGL, this.GUIs);
+        this.GUIs = WorldGUIsGenerator.getGUIs(loaderAPI);
+        WorldGUIsGenerator.loadTextures(loaderAPI, this.GUIs);
 
         /* Load the sky box that is going to render*/
-        this.skyBox = WorldSkyBoxGenerator.getSky(loader);
-        WorldSkyBoxGenerator.loadTextures(context, loaderGL, this.skyBox);
+        this.skyBox = WorldSkyBoxGenerator.getSky(loaderAPI);
+        WorldSkyBoxGenerator.loadTextures(loaderAPI, this.skyBox);
 
         Date skyBoxLoaded = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time initialize sky " + (skyBoxLoaded.getTime() - lightLoaded.getTime()) + " ms");
 
         /*Prepares the player_mtl that is going to be used in the scene*/
-        this.player = WorldPlayersGenerator.getPlayer(context, loader, loaderGL);
+        this.player = WorldPlayersGenerator.getPlayer(context, loader, loaderAPI);
+        WorldPlayersGenerator.loadTextures(loaderAPI, this.player);
 
         Date playerLoader = new Date();
 
@@ -179,7 +179,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 glUnused) {
         // Set the viewport
-        GLES20.glViewport(0, 0, mWidth, mHeight);
+        renderAPIAccess.getFrameRenderAPI().setViewPort(0, 0, mWidth, mHeight);
 
         //game logic
         renderer.startFrameRender();
