@@ -62,7 +62,7 @@ class GLFrameRender implements IFrameRenderAPI {
     }
 
     /**
-     * Prepares one model to be render in scene
+     * Prepares one 2D model to be render in scene
      *
      * @param model    The model to be prepared to be rendered
      * @param position The position attribute
@@ -122,7 +122,12 @@ class GLFrameRender implements IFrameRenderAPI {
         GLES20.glDisableVertexAttribArray(position.getValue());
     }
 
-
+    /**
+     * Activates and binds the texture with ID passed in the specified target
+     *
+     * @param target    Target where is to bind the texture
+     * @param textureId The identifier of the texture
+     */
     private void activeAndBind2DTexture(int target, int textureId) {
         //Enable the specific texture
         GLES20.glActiveTexture(target);
@@ -260,7 +265,7 @@ class GLFrameRender implements IFrameRenderAPI {
     }
 
     /**
-     * Specifies the affine transformation of x and y from normalized device coordinates to window coordinates
+     * Specifies the transformation of x and y from normalized device coordinates to window coordinates
      *
      * @param x      Specify the lower left corner of the viewport rectangle, in pixels. The initial value is (0,0).
      * @param y      Specify the lower left corner of the viewport rectangle, in pixels. The initial value is (0,0).
