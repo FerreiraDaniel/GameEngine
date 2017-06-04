@@ -21,7 +21,15 @@ import java.util.List;
 public abstract class ShaderManager {
 
     private static final String TAG = "ShaderManager";
+
+    /**
+     * Reference to the program shader used
+     */
     private final ShaderProgram shaderProgram;
+
+    /**
+     * API responsible for managing the Shader
+     */
     private final IShaderManagerAPI shaderManagerAPI;
 
 

@@ -48,6 +48,9 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     @SuppressWarnings("FieldCanBeLocal")
     private Loader loader;
 
+    /**
+     * Reference to the API responsible for render the scene
+     */
     @SuppressWarnings("FieldCanBeLocal")
     private IRenderAPIAccess renderAPIAccess;
 
