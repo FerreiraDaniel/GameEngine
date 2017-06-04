@@ -1,7 +1,5 @@
 package com.dferreira.gameEngine.shaders.skyBox;
 
-import android.content.Context;
-
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
@@ -28,11 +26,10 @@ public class SkyBoxShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context   Context where the game engine will be created
      * @param renderAPI Reference to the API that is going to manage the program shader
      */
-    public SkyBoxShaderManager(Context context, IShaderManagerAPI renderAPI) {
-        super(context, R.raw.sky_box_vertex_shader, R.raw.sky_box_fragment_shader, renderAPI);
+    public SkyBoxShaderManager(IShaderManagerAPI renderAPI) {
+        super(R.raw.sky_box_vertex_shader, R.raw.sky_box_fragment_shader, renderAPI);
     }
 
 

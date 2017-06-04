@@ -1,7 +1,5 @@
 package com.dferreira.gameEngine.renderEngine;
 
-import android.content.Context;
-
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
@@ -119,10 +117,9 @@ public class MasterRender {
     /**
      * Constructor of the master renderer
      *
-     * @param context   Context where the master render would be called
      * @param renderAPI The accessor to the API that is going to be responsible for rendering the scene
      */
-    public MasterRender(Context context, IRenderAPIAccess renderAPI) {
+    public MasterRender(IRenderAPIAccess renderAPI) {
         //Initializes the projection matrix
         GLTransformation projectionMatrix = createProjectionMatrix();
 
@@ -133,21 +130,21 @@ public class MasterRender {
         IFrameRenderAPI frameRenderAPI = renderAPI.getFrameRenderAPI();
 
         //Initializes the entity render
-        EntityShaderManager eShader = new EntityShaderManager(context, shaderManagerAPI);
+        EntityShaderManager eShader = new EntityShaderManager(shaderManagerAPI);
         this.entityRender = new EntityRender(eShader, projectionMatrix, frameRenderAPI);
 
         // Initializes the entities to be render
         this.entities = new HashMap<>();
 
         // Initializes the terrain render
-        TerrainShaderManager tShader = new TerrainShaderManager(context, shaderManagerAPI);
+        TerrainShaderManager tShader = new TerrainShaderManager(shaderManagerAPI);
         this.terrainRender = new TerrainRender(tShader, projectionMatrix, frameRenderAPI);
 
         // Initializes the sky box render
-        SkyBoxShaderManager sbManager = new SkyBoxShaderManager(context, shaderManagerAPI);
+        SkyBoxShaderManager sbManager = new SkyBoxShaderManager(shaderManagerAPI);
         this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix, frameRenderAPI);
 
-        GuiShaderManager gShader = new GuiShaderManager(context, shaderManagerAPI);
+        GuiShaderManager gShader = new GuiShaderManager(shaderManagerAPI);
         this.guiRender = new GuiRender(gShader, frameRenderAPI);
 
         // Initializes the terrains to render

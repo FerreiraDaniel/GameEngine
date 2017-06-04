@@ -1,11 +1,11 @@
 package com.dferreira.commons.wavefront;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.shapes.IExternalMaterial;
+import com.dferreira.commons.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -58,7 +58,7 @@ class MtlLoader extends GenericLoader {
         List<IExternalMaterial> materials = null;
 
         try {
-            if (TextUtils.isEmpty(fileName)) {
+            if (Utils.isEmpty(fileName)) {
                 return null;
             } else {
                 String resourceName = fileName.split("\\.mtl")[0];
@@ -195,8 +195,7 @@ class MtlLoader extends GenericLoader {
             return null;
         } finally {
             try {
-                if(reader != null)
-                {
+                if (reader != null) {
                     reader.close();
                 }
                 inputStream.close();

@@ -1,8 +1,8 @@
 package com.dferreira.commons.utils;
 
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Utils for every basic stuff
@@ -17,7 +17,7 @@ public class Utils {
      * @return True if is null or empty
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public static boolean isEmpty(HashMap entity) {
+    public static boolean isEmpty(Map entity) {
         return (entity == null) || (entity.isEmpty());
     }
 
@@ -42,4 +42,16 @@ public class Utils {
     public static <T> boolean isEmpty(T[] entity) {
         return (entity == null) || (entity.length == 0);
     }
+
+
+    /**
+     * Returns true if the string is null or 0-length.
+     *
+     * @param str the string to be examined
+     * @return true if str is null or zero length
+     */
+    public static boolean isEmpty(String str) {
+        return (str == null || str.length() == 0);
+    }
+
 }

@@ -1,15 +1,15 @@
 package com.dferreira.commons.wavefront;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.androidUtils.ResourcesCache;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.shapes.WfObject;
-import com.dferreira.commons.utils.ResourcesCache;
+import com.dferreira.commons.utils.Utils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -40,8 +40,8 @@ public class OBJLoader extends GenericLoader {
      * @return A key to use in the dictionary of indices
      */
     private static String getKey(PolygonalFace face) {
-        String materialName = (face.getMaterialName() == null) ? "" : face.getMaterialName();
-        String groupName = (face.getGroupName() == null) ? "" : face.getGroupName();
+        String materialName = (face.getMaterialName() == null) ? Utils.EMPTY_STRING : face.getMaterialName();
+        String groupName = (face.getGroupName() == null) ? Utils.EMPTY_STRING : face.getGroupName();
         return materialName + MAT_GROUP_SPLIT + groupName;
     }
 
@@ -262,7 +262,7 @@ public class OBJLoader extends GenericLoader {
      * @return Long value or null if it is the case
      */
     private static Long parseLongComponent(String strComponent) {
-        if (TextUtils.isEmpty(strComponent)) {
+        if (Utils.isEmpty(strComponent)) {
             return null;
         } else {
             return Long.parseLong(strComponent) - 1;
@@ -276,7 +276,7 @@ public class OBJLoader extends GenericLoader {
      * @return Short value or null if it is the case
      */
     private static Integer parseIntComponent(String strComponent) {
-        if (TextUtils.isEmpty(strComponent)) {
+        if (Utils.isEmpty(strComponent)) {
             return null;
         } else {
             return (Integer.parseInt(strComponent) - 1);

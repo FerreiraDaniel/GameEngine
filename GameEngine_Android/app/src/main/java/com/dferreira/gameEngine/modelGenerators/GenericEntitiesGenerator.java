@@ -1,7 +1,6 @@
 package com.dferreira.gameEngine.modelGenerators;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
@@ -72,7 +71,7 @@ class GenericEntitiesGenerator {
                 if (!Utils.isEmpty(materialGroups.getMaterials())) {
                     for (RawModelMaterial rawModelMaterial : materialGroups.getMaterials()) {
                         Material material = rawModelMaterial.getMaterial();
-                        if (!TextUtils.isEmpty(material.getDiffuse().getFilename())) {
+                        if (!Utils.isEmpty(material.getDiffuse().getFilename())) {
                             int textureId = loaderRenderAPI.loadTexture(material.getDiffuse().getFilename(), false);
                             material.getDiffuse().setTextureId(textureId);
                         }

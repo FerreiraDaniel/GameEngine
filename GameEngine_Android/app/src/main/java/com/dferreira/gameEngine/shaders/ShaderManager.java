@@ -1,6 +1,5 @@
 package com.dferreira.gameEngine.shaders;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.dferreira.commons.ColorRGB;
@@ -8,9 +7,9 @@ import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.generic_render.ShaderProgram;
-import com.dferreira.commons.utils.LoadUtils;
 
 import java.util.List;
 
@@ -36,16 +35,15 @@ public abstract class ShaderManager {
     /**
      * Constructor of the program shader manager
      *
-     * @param context       Context where the game engine will be created
-     * @param vertexFile    Identifier of the file with vertex description
-     * @param fragmentFile  Identifier of the file with fragment description
-     * @param shaderManagerAPI     Reference to the API that is going to manage the program shader
+     * @param vertexFile       Identifier of the file with vertex description
+     * @param fragmentFile     Identifier of the file with fragment description
+     * @param shaderManagerAPI Reference to the API that is going to manage the program shader
      */
     @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
-    protected ShaderManager(Context context, int vertexFile, int fragmentFile, IShaderManagerAPI shaderManagerAPI) {
+    protected ShaderManager(int vertexFile, int fragmentFile, IShaderManagerAPI shaderManagerAPI) {
 
-        String vertexShaderSrc = LoadUtils.readTextFromRawResource(context, vertexFile);
-        String fragShaderSrc = LoadUtils.readTextFromRawResource(context, fragmentFile);
+        String vertexShaderSrc = LoadUtils.readTextFromRawResource(vertexFile);
+        String fragShaderSrc = LoadUtils.readTextFromRawResource(fragmentFile);
         this.shaderManagerAPI = shaderManagerAPI;
         this.shaderProgram = shaderManagerAPI.loadProgram(vertexShaderSrc, fragShaderSrc);
 

@@ -1,14 +1,13 @@
 package com.dferreira.commons.gl_render;
 
-import android.content.Context;
 import android.opengl.GLES20;
-import android.text.TextUtils;
 
+import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IShape;
-import com.dferreira.commons.utils.LoadUtils;
+import com.dferreira.commons.utils.Utils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -19,7 +18,7 @@ import java.util.HashMap;
 /**
  * Loader for parts that are specific to openGL
  */
-public class GLLoader implements ILoaderRenderAPI {
+class GLLoader implements ILoaderRenderAPI {
 
     @SuppressWarnings("FieldCanBeLocal")
     private final int INT_IN_BYTES = 4;
@@ -27,10 +26,6 @@ public class GLLoader implements ILoaderRenderAPI {
     @SuppressWarnings("FieldCanBeLocal")
     private final int FLOAT_IN_BYTES = 4;
 
-    /**
-     * Context that some methods need to load resources
-     */
-    private final Context context;
 
     /**
      * Identifiers of the textures bound to OpenGL
@@ -39,11 +34,8 @@ public class GLLoader implements ILoaderRenderAPI {
 
     /**
      * Constructor of the loader GL
-     *
-     * @param context Context that some methods need to load resources
      */
-    public GLLoader(Context context) {
-        this.context = context;
+    GLLoader() {
         this.textureIdentifiers = new HashMap<>();
     }
 
@@ -86,7 +78,7 @@ public class GLLoader implements ILoaderRenderAPI {
      */
     @Override
     public Integer loadTexture(int resourceId, boolean repeat) {
-        TextureData textureData = LoadUtils.decodeTextureFile(context, resourceId);
+        TextureData textureData = LoadUtils.decodeTextureFile(resourceId);
 
         int[] textureId = new int[1];
         GLES20.glGenTextures(1, textureId, 0);
@@ -111,11 +103,11 @@ public class GLLoader implements ILoaderRenderAPI {
     @Override
     public Integer loadTexture(String textureFileName, boolean repeat) {
 
-        if (TextUtils.isEmpty(textureFileName)) {
+        if (Utils.isEmpty(textureFileName)) {
             return 0;
         } else {
             String resourceName = textureFileName.split("\\.png")[0];
-            int resourceId = context.getResources().getIdentifier(resourceName, "mipmap", context.getPackageName());
+            int resourceId = LoadUtils.getResourceIdOfMipMap(resourceName);
             if (resourceId == 0) {
                 return 0;
             } else {
@@ -151,7 +143,7 @@ public class GLLoader implements ILoaderRenderAPI {
         for (int i = 0; i < cubicTextureTargets.length; i++) {
             int resourceId = resourceIds[i];
 
-            TextureData textureData = LoadUtils.decodeTextureFile(context, resourceId);
+            TextureData textureData = LoadUtils.decodeTextureFile(resourceId);
             if (textureData == null) {
                 return null;
             } else {

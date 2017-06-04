@@ -1,12 +1,10 @@
 package com.dferreira.gameEngine.renderEngine;
 
-import android.content.Context;
-import android.text.TextUtils;
-
 import com.dferreira.commons.ColorRGBA;
+import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IExternalMaterial;
-import com.dferreira.commons.utils.LoadUtils;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.commons.wavefront.RGBAColorEnum;
 import com.dferreira.gameEngine.models.complexEntities.LightingComponent;
 import com.dferreira.gameEngine.models.complexEntities.Material;
@@ -15,7 +13,6 @@ import com.dferreira.gameEngine.models.complexEntities.Material;
  * Load the data to render the scene
  */
 public class Loader {
-
 
     /**
      * Load the diffuse component of the material
@@ -28,8 +25,8 @@ public class Loader {
         ColorRGBA color;
         String textureFileName = externalMaterial.getDiffuseTextureFileName();
 
-        if ((TextUtils.isEmpty(textureFileName))
-                || (TextUtils.isEmpty(textureFileName))) {
+        if ((Utils.isEmpty(textureFileName))
+                || (Utils.isEmpty(textureFileName))) {
             textureWeight = 0.0f;
             color = (externalMaterial.getDiffuseColor() == null) ? RGBAColorEnum.transparent.toRGBA() : new ColorRGBA(externalMaterial.getDiffuseColor());
             textureFileName = null;
@@ -68,13 +65,12 @@ public class Loader {
     /**
      * Loads the data of a texture without bind
      *
-     * @param context    Context where this method will be called
      * @param resourceId id of the resource where the texture exists
      * @return The texture read from the file without any openGL bind
      */
     @SuppressWarnings({"SameParameterValue", "UnnecessaryLocalVariable"})
-    public TextureData getTextureData(Context context, int resourceId) {
-        TextureData textureData = LoadUtils.decodeTextureFile(context, resourceId);
+    public TextureData getTextureData(int resourceId) {
+        TextureData textureData = LoadUtils.decodeTextureFile(resourceId);
         return textureData;
     }
 

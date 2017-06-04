@@ -1,7 +1,5 @@
 package com.dferreira.commons.gl_render;
 
-import android.content.Context;
-
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRenderAPIAccess;
@@ -29,11 +27,9 @@ public class GLRenderAPIAccess implements IRenderAPIAccess {
 
     /**
      * Constructor to the render responsible to access the openGL API
-     *
-     * @param context Context that some methods need to load resources
      */
-    public GLRenderAPIAccess(Context context) {
-        this.loader = new GLLoader(context);
+    public GLRenderAPIAccess() {
+        this.loader = new GLLoader();
         this.frameRender = new GLFrameRender();
         this.shaderManagerAPI = new GLShaderManager();
     }

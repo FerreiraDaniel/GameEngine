@@ -1,4 +1,4 @@
-package com.dferreira.commons.utils;
+package com.dferreira.commons.androidUtils;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -26,15 +26,28 @@ public class LoadUtils {
      */
     private final static int NUMBER_OF_COMPONENTS = 4;
 
+    /**
+     * Context where the methods will be called
+     */
+    private static Context context;
+
+
+    /**
+     * Set the context with which the different methods are going to be called
+     *
+     * @param context The context to set
+     */
+    public static void setContext(Context context) {
+        LoadUtils.context = context;
+    }
 
     /**
      * Load texture from resource
      *
-     * @param context    Context where this method will be called
      * @param resourceId id of the resource where the texture exists
      * @return The data of the texture
      */
-    private static TextureData pDecodeTextureFile(Context context, int resourceId) {
+    private static TextureData pDecodeTextureFile(int resourceId) {
         Bitmap bitmap;
         bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
         int bufferI = bitmap.getWidth() * bitmap.getHeight();
@@ -62,15 +75,14 @@ public class LoadUtils {
     /**
      * Load texture from resource using cache if possible
      *
-     * @param context    Context where this method will be called
      * @param resourceId id of the resource where the texture exists
      * @return The data of the texture
      */
-    public static TextureData decodeTextureFile(Context context, int resourceId) {
+    public static TextureData decodeTextureFile(int resourceId) {
         ResourcesCache cache = ResourcesCache.getInstance();
         TextureData tData = (TextureData) cache.get(resourceId);
         if (tData == null) {
-            TextureData textureData = pDecodeTextureFile(context, resourceId);
+            TextureData textureData = pDecodeTextureFile(resourceId);
             cache.put(resourceId, textureData);
             return textureData;
         } else {
@@ -81,11 +93,10 @@ public class LoadUtils {
     /**
      * Returns if openGL 2.0 exists in device or not
      *
-     * @param context Context where this method will be called
      * @return false -> There are no GLes v2.0 available into device
      * true  -> Exist GLes v2.0 into device
      */
-    public static boolean detectOpenGLES20(Context context) {
+    public static boolean detectOpenGLES20() {
         ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ConfigurationInfo info = am.getDeviceConfigurationInfo();
@@ -95,11 +106,10 @@ public class LoadUtils {
     /**
      * Reads a string from a certain resource
      *
-     * @param context       Context where this method will be called
      * @param rawResourceId id of the resource where the text exists
      * @return The text that exists in the resource
      */
-    private static String pReadTextFromRawResource(Context context, int rawResourceId) {
+    private static String pReadTextFromRawResource(int rawResourceId) {
         InputStream inputStream = context.getResources().openRawResource(rawResourceId);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         String str = null;
@@ -123,19 +133,28 @@ public class LoadUtils {
     /**
      * Reads a string from a certain resource
      *
-     * @param context       Context where this method will be called
      * @param rawResourceId id of the resource where the text exists
      * @return The text that exists in the resource
      */
-    public static String readTextFromRawResource(Context context, int rawResourceId) {
+    public static String readTextFromRawResource(int rawResourceId) {
         ResourcesCache cache = ResourcesCache.getInstance();
         String cachedText = (String) cache.get(rawResourceId);
         if (cachedText == null) {
-            String newText = pReadTextFromRawResource(context, rawResourceId);
+            String newText = pReadTextFromRawResource(rawResourceId);
             cache.put(rawResourceId, newText);
             return newText;
         } else {
             return cachedText;
         }
+    }
+
+    /**
+     * Get the resource id of a mipMap with name passed
+     *
+     * @param resourceName Name of the resource from where is to get the mipMap
+     * @return Identifier of the mipMap
+     */
+    public static int getResourceIdOfMipMap(String resourceName) {
+        return context.getResources().getIdentifier(resourceName, "mipmap", context.getPackageName());
     }
 }

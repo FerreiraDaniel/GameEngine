@@ -1,6 +1,5 @@
 package com.dferreira.gameEngine.shaders.entities;
 
-import android.content.Context;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
@@ -29,11 +28,10 @@ public class EntityShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param context   Context where the game engine will be created
      * @param renderAPI Reference to the API that is going to manage the program shader
      */
-    public EntityShaderManager(Context context, IShaderManagerAPI renderAPI) {
-        super(context, R.raw.entity_vertex_shader, R.raw.entity_fragment_shader, renderAPI);
+    public EntityShaderManager(IShaderManagerAPI renderAPI) {
+        super(R.raw.entity_vertex_shader, R.raw.entity_fragment_shader, renderAPI);
     }
 
     /**

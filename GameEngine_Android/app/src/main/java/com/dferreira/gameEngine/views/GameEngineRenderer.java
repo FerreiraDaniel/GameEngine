@@ -116,17 +116,17 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         /*Initializes the main variables responsible to render the 3D world*/
         this.loader = new Loader();
-        this.renderAPIAccess = new GLRenderAPIAccess(context);
+        this.renderAPIAccess = new GLRenderAPIAccess();
         ILoaderRenderAPI loaderAPI = renderAPIAccess.getLoaderRenderAPI();
 
-        this.renderer = new MasterRender(context, renderAPIAccess);
+        this.renderer = new MasterRender(renderAPIAccess);
 
         Date renderInitialized = new Date();
 
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        this.terrain = WorldTerrainsGenerator.getTerrain(context, loader, loaderAPI);
+        this.terrain = WorldTerrainsGenerator.getTerrain(loader, loaderAPI);
         WorldTerrainsGenerator.loadTextures(loaderAPI, this.terrain);
 
         Date terrainLoaded = new Date();

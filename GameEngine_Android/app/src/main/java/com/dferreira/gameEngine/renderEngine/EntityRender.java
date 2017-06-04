@@ -6,6 +6,7 @@ import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.models.Light;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Player;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
 import com.dferreira.gameEngine.models.complexEntities.GenericEntity;
@@ -113,7 +114,7 @@ public class EntityRender extends GenericRender {
      * @param entities HashMap of entities to render
      */
     private void render(Map<GenericEntity, List<Entity>> entities) {
-        if ((entities != null) && (!entities.isEmpty())) {
+        if (!Utils.isEmpty(entities)) {
             for (GenericEntity genericEntity : entities.keySet()) {
                 HashMap<String, MaterialGroup> groupsOfMaterials = genericEntity.getGroupsOfMaterials();
                 for (String groupName : groupsOfMaterials.keySet()) {

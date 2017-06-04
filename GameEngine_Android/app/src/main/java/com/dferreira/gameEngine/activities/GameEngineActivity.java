@@ -3,7 +3,7 @@ package com.dferreira.gameEngine.activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import com.dferreira.commons.utils.LoadUtils;
+import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.gameEngine.R;
 
 /**
@@ -19,7 +19,8 @@ public class GameEngineActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (LoadUtils.detectOpenGLES20(this)) {
+        LoadUtils.setContext(this);
+        if (LoadUtils.detectOpenGLES20()) {
             this.setContentView(R.layout.game_engine_activity);
         }
     }

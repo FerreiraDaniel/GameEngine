@@ -1,4 +1,4 @@
-package com.dferreira.commons.utils;
+package com.dferreira.commons.androidUtils;
 
 import android.app.ActivityManager;
 import android.content.Context;

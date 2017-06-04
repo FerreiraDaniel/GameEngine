@@ -1,8 +1,5 @@
 package com.dferreira.gameEngine.modelGenerators;
 
-
-import android.content.Context;
-
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
@@ -56,13 +53,12 @@ public class WorldTerrainsGenerator {
     }
 
     /**
-     * @param context         Context where the terrain would be created
      * @param loader          Loader to load the raw model
      * @param loaderRenderAPI The API responsible for load elements specifics to the render
      * @return The terrain of the 3D scene
      */
-    public static Terrain getTerrain(Context context, Loader loader, ILoaderRenderAPI loaderRenderAPI) {
-        TextureData heightMap = loader.getTextureData(context, R.mipmap.terrain_heightmap);
+    public static Terrain getTerrain(Loader loader, ILoaderRenderAPI loaderRenderAPI) {
+        TextureData heightMap = loader.getTextureData(R.mipmap.terrain_heightmap);
 
         TerrainShape terrain = new TerrainShape(heightMap);
 
