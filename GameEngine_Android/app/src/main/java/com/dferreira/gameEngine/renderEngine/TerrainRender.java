@@ -25,7 +25,7 @@ public class TerrainRender extends GenericRender {
 
 
     /**
-     * Constructor of the entity render
+     * Constructor of the terrain render
      *
      * @param sManager         Shader manager
      * @param projectionMatrix The projection matrix of the render

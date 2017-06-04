@@ -10,6 +10,7 @@ import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.generic_render.ShaderProgram;
+import com.dferreira.commons.utils.Utils;
 
 import java.util.List;
 
@@ -63,7 +64,7 @@ public abstract class ShaderManager {
      */
     private void bindAttributes() {
         List<IEnum> attributes = getAttributes();
-        if ((attributes != null) && (!attributes.isEmpty())) {
+        if (!Utils.isEmpty(attributes)) {
             for (IEnum attribute : attributes) {
                 bindAttribute(attribute.getValue(), attribute.toString());
             }

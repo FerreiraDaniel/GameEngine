@@ -25,8 +25,7 @@ public class Loader {
         ColorRGBA color;
         String textureFileName = externalMaterial.getDiffuseTextureFileName();
 
-        if ((Utils.isEmpty(textureFileName))
-                || (Utils.isEmpty(textureFileName))) {
+        if (Utils.isEmpty(textureFileName)) {
             textureWeight = 0.0f;
             color = (externalMaterial.getDiffuseColor() == null) ? RGBAColorEnum.transparent.toRGBA() : new ColorRGBA(externalMaterial.getDiffuseColor());
             textureFileName = null;

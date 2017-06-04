@@ -216,7 +216,7 @@ class MtlLoader extends GenericLoader {
      * @return the HashMap with materials
      */
     private static HashMap<String, IExternalMaterial> buildMapOfMaterials(List<IExternalMaterial> materials) {
-        if ((materials == null) || (materials.isEmpty())) {
+        if (Utils.isEmpty(materials)) {
             return null;
         } else {
             HashMap<String, IExternalMaterial> mapOfMaterials = new HashMap<>();

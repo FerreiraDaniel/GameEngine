@@ -3,6 +3,7 @@ package com.dferreira.gameEngine.modelGenerators;
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameController.GamePadKey;
 import com.dferreira.gameEngine.R;
 import com.dferreira.gameEngine.models.GuiShape;
@@ -88,7 +89,7 @@ public class WorldGUIsGenerator {
      * @param GUIs            List of the GUIs in the scene
      */
     public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, GuiTexture[] GUIs) {
-        if ((GUIs != null) && (GUIs.length != 0)) {
+        if (!Utils.isEmpty(GUIs)) {
             for (GuiTexture guiTexture : GUIs) {
                 // Load the texture of the GUI
                 Integer textureId = loaderRenderAPI.loadTexture(guiTexture.getTextureResourceId(), false);

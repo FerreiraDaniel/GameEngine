@@ -22,7 +22,7 @@ public class GuiRender extends GenericRender {
     private final GuiShaderManager gShader;
 
     /**
-     * Constructor of the entity render
+     * Constructor of the gui render
      *
      * @param gManager       Shader manager
      * @param frameRenderAPI Reference to the API responsible for render the frame

@@ -305,7 +305,7 @@ public class MasterRender {
      * Uses the GUIs to update the game pad of the game
      */
     private void updateGamePad() {
-        if ((this.GUIs != null) && (!this.GUIs.isEmpty())) {
+        if (!Utils.isEmpty(this.GUIs)) {
             for (GuiTexture guiTexture : this.GUIs) {
                 if (guiTexture.getGamePadKey() != null) {
                     boolean keyPressed = guiTexture.containsLocation(GameEngineTouchListener.getNormalX(), GameEngineTouchListener.getNormalY());
