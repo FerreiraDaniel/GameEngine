@@ -38,8 +38,7 @@ public class GenericEntitiesGenerator {
 
 		HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
 
-		for (int i = 0; i < shapes.size(); i++) {
-			IShape shape = shapes.get(i);
+		for (IShape shape : shapes) {
 
 			RawModel model = loader.loadToVAO(shape.getVertices(), shape.getTextureCoords(), shape.getNormals(),
 					shape.getIndices());

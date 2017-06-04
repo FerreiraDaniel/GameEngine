@@ -6,6 +6,7 @@ import java.util.List;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.shaders.ShaderManager;
@@ -60,9 +61,13 @@ public class TerrainShaderManager extends ShaderManager {
 	/**
 	 * Constructor of the game shader where the vertex and fragment shader of
 	 * the game engine are loaded
+	 * 
+	 * @param renderAPI
+	 *            Reference to the API that is going to manage the program
+	 *            shader
 	 */
-	public TerrainShaderManager() {
-		super(VERTEX_FILE, FRAGMENT_FILE);
+	public TerrainShaderManager(IShaderManagerAPI renderAPI) {
+		super(VERTEX_FILE, FRAGMENT_FILE, renderAPI);
 	}
 
 	/**

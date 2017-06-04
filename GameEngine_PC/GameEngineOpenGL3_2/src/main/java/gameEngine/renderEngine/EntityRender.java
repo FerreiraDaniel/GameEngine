@@ -11,12 +11,14 @@ import org.lwjgl.opengl.GL30;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.models.Player;
 import gameEngine.models.RawModel;
 import gameEngine.models.complexEntities.Entity;
 import gameEngine.models.complexEntities.GenericEntity;
+import gameEngine.models.complexEntities.LightingComponent;
 import gameEngine.models.complexEntities.Material;
 import gameEngine.models.complexEntities.MaterialGroup;
 import gameEngine.models.complexEntities.RawModelMaterial;
@@ -26,22 +28,23 @@ import gameEngine.shaders.entities.TEntityAttribute;
 /**
  * Class responsible to render the entities in the screen
  */
-public class EntityRender {
+public class EntityRender extends GenericRender {
 
 	/**
 	 * Reference to the shader manager
 	 */
 	private EntityShaderManager eShader;
 
-	/**
-	 * Constructor of the entity render
-	 * 
-	 * @param sManager
-	 *            Shader manager
-	 * @param projectionMatrix
-	 *            The projection matrix to the entity render
-	 */
-	public EntityRender(EntityShaderManager sManager, GLTransformation projectionMatrix) {
+    /**
+     * Initializer of the entity render
+     *
+     * @param sManager         Shader manager
+     * @param projectionMatrix The projection matrix of the render
+     * @param frameRenderAPI   Reference to the API responsible for render the frame
+     */
+	public EntityRender(EntityShaderManager sManager, GLTransformation projectionMatrix, IFrameRenderAPI frameRenderAPI) {
+		super(frameRenderAPI);
+		
 		this.eShader = sManager;
 
 		sManager.start();
@@ -171,6 +174,23 @@ public class EntityRender {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 	}
 
+    /**
+     * Prepares the shader to render a lighting component
+     *
+     * @param component The component to be prepared
+     */
+    private void prepareLightingComponent(LightingComponent component) {
+        if (component.getTextureWeight() > 0.0f) {
+            this.frameRenderAPI.activeAndBindTexture(component.getTextureId());
+        }
+
+        // Load the texture weight of the material
+        eShader.loadTextureWeight(component.getTextureWeight());
+
+        // Load the diffuse color of the material
+        eShader.loadDiffuseColor(component.getColor());
+    }
+	
 	/**
 	 * Bind the attributes of the material with openGL
 	 * 
@@ -185,20 +205,13 @@ public class EntityRender {
 			enableCulling();
 		}
 
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, material.getTextureId());
-
 		// Load if should put the normals of the entity point up or not
 		eShader.loadNormalsPointingUp(material.areNormalsPointingUp());
 
 		// Load the the light properties
 		eShader.loadShineVariables(material.getShineDamper(), material.getReflectivity());
 
-		// Load the texture weight of the material
-		eShader.loadTextureWeight(material.getTextureWeight());
-
-		// Load the diffuse color of the material
-		eShader.loadDiffuseColor(material.getDiffuseColor());
+		prepareLightingComponent(material.getDiffuse());
 	}
 
 	/**
@@ -209,10 +222,13 @@ public class EntityRender {
 	 */
 	private void prepareModel(RawModel model) {
 		GL30.glBindVertexArray(model.getVaoId());
+		
 		// Enable the attributes to bind
 		GL20.glEnableVertexAttribArray(TEntityAttribute.position.ordinal());
 		GL20.glEnableVertexAttribArray(TEntityAttribute.textureCoords.ordinal());
 		GL20.glEnableVertexAttribArray(TEntityAttribute.normal.ordinal());
+		
+		
 	}
 
 	/**
@@ -263,7 +279,7 @@ public class EntityRender {
 	 * Clean up because we need to clean up when we finish the program
 	 */
 	public void cleanUp() {
-		eShader.cleanUp();
+		eShader.dispose();
 	}
 
 }

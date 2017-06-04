@@ -1,17 +1,15 @@
 package gameEngine.shaders;
 
 import java.util.List;
-import org.lwjgl.opengl.GL20;
 
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.ColorRGBA;
-import com.dferreira.commons.GLSLUtils;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.LoadUtils;
-import com.dferreira.commons.ShaderProgram;
-import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_render.ShaderProgram;
 
 /**
  * Generic shader manager with methods to load vertex shader and fragment shader
@@ -24,8 +22,16 @@ public abstract class ShaderManager {
 	 */
 	protected static final String COMMON_PATH = "src/main/java/gameEngine/shaders/";
 
+	/**
+	 * Reference to the program shader used 
+	 */
 	private ShaderProgram shaderProgram;
 
+    /**
+     * API responsible for managing the Shader
+     */
+    private final IShaderManagerAPI shaderManagerAPI;
+	
 	/**
 	 * Constructor of the program shader manager
 	 * 
@@ -33,18 +39,20 @@ public abstract class ShaderManager {
 	 *            The file with vertex description
 	 * @param fragmentFile
 	 *            The file with fragment description
+	 * @param shaderManagerAPI     Reference to the API that is going to manage the program shader
 	 */
-	public ShaderManager(String vertexFile, String fragmentFile) {
+	protected ShaderManager(String vertexFile, String fragmentFile, IShaderManagerAPI shaderManagerAPI) {
 
 		String vertexShaderSrc = LoadUtils.readTextFromRawResource(vertexFile);
 		String fragShaderSrc = LoadUtils.readTextFromRawResource(fragmentFile);
-		this.shaderProgram = GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc);
+		this.shaderManagerAPI = shaderManagerAPI;
+		this.shaderProgram = shaderManagerAPI.loadProgram(vertexShaderSrc, fragShaderSrc);
 
 		if (this.shaderProgram == null) {
 			return;
 		}
 		bindAttributes();
-		boolean linked = GLSLUtils.linkProgram(shaderProgram);
+		boolean linked = shaderManagerAPI.linkProgram(shaderProgram);
 		if (linked) {
 			getAllUniformLocations();
 		}
@@ -81,7 +89,7 @@ public abstract class ShaderManager {
 	 *            Name of the variable in the vertex shader
 	 */
 	private void bindAttribute(int attributeIndex, String variableName) {
-		GL20.glBindAttribLocation(shaderProgram.getProgramId(), attributeIndex, variableName);
+		this.shaderManagerAPI.glBindAttributeLocation(shaderProgram, attributeIndex, variableName);
 	}
 
 	/**
@@ -93,7 +101,7 @@ public abstract class ShaderManager {
 	 * @return the position of the uniform variable in program shader
 	 */
 	protected int getUniformLocation(Enum<?> uniformName) {
-		int location = GL20.glGetUniformLocation(shaderProgram.getProgramId(), uniformName.toString());
+		int location = this.shaderManagerAPI.getUniformLocation(shaderProgram, uniformName);
 		if (location < 0) {
 			System.err.println("Was not possible to load the location : " + uniformName);
 		}
@@ -109,7 +117,7 @@ public abstract class ShaderManager {
 	 *            The value to load
 	 */
 	protected void loadInt(int location, int value) {
-		GL20.glUniform1i(location, value);
+		this.shaderManagerAPI.loadInt(location, value);
 	}
 
 	/**
@@ -121,20 +129,9 @@ public abstract class ShaderManager {
 	 *            value to load
 	 */
 	protected void loadFloat(int location, float value) {
-		GL20.glUniform1f(location, value);
+		this.shaderManagerAPI.loadFloat(location, value);
 	}
 
-	/**
-	 * Load a 2D vector to be used in the shader script
-	 * 
-	 * @param location
-	 *            location of the shader variable in the script
-	 * @param vector
-	 *            The vector to load
-	 */
-	protected void loadVector(int location, Vector2f vector) {
-		GL20.glUniform2f(location, vector.x, vector.y);
-	}
 
 	/**
 	 * Load a 3D vector to be used in the shader script
@@ -145,7 +142,7 @@ public abstract class ShaderManager {
 	 *            The vector to load
 	 */
 	protected void loadVector(int location, Vector3f vector) {
-		GL20.glUniform3f(location, vector.x, vector.y, vector.z);
+		this.shaderManagerAPI.loadVector(location, vector);
 	}
 
 	/**
@@ -157,7 +154,7 @@ public abstract class ShaderManager {
 	 *            The color to load
 	 */
 	protected void loadColorRGB(int location, ColorRGB color) {
-		GL20.glUniform3f(location, color.r, color.g, color.b);
+		this.shaderManagerAPI.loadColorRGB(location, color);
 	}
 
 	/**
@@ -169,7 +166,7 @@ public abstract class ShaderManager {
 	 *            The color to load
 	 */
 	protected void loadColorRGBA(int location, ColorRGBA color) {
-		GL20.glUniform4f(location, color.r, color.g, color.b, color.a);
+		this.shaderManagerAPI.loadColorRGBA(location, color);
 	}
 
 	/**
@@ -181,8 +178,7 @@ public abstract class ShaderManager {
 	 *            value to load
 	 */
 	protected void loadBoolean(int location, boolean value) {
-		float toLoad = value ? 1 : 0;
-		GL20.glUniform1f(location, toLoad);
+		this.shaderManagerAPI.loadBoolean(location, value);
 	}
 
 	/**
@@ -194,36 +190,27 @@ public abstract class ShaderManager {
 	 *            Matrix to load
 	 */
 	protected void loadMatrix(int location, GLTransformation matrix) {
-		GL20.glUniformMatrix4(location, false, matrix.getAsFloatBuffer());
+		 this.shaderManagerAPI.loadMatrix(location, matrix);
 	}
 
 	/**
 	 * Indicates that should start to use a certain program shader
 	 */
 	public void start() {
-		GL20.glUseProgram(shaderProgram.getProgramId());
+		 this.shaderManagerAPI.start(shaderProgram);
 	}
 
 	/**
 	 * Indicate that should not use a certain program no more
 	 */
 	public void stop() {
-		GL20.glUseProgram(0);
+		this.shaderManagerAPI.stop();
 	}
 
 	/**
 	 * A bit of memory management
 	 */
-	public void cleanUp() {
-		this.stop();
-		int vertexShaderID = shaderProgram.getVertexShaderId();
-		int fragmentShaderID = shaderProgram.getFragmentShaderId();
-		int programId = shaderProgram.getProgramId();
-
-		GL20.glDetachShader(programId, vertexShaderID);
-		GL20.glDetachShader(programId, fragmentShaderID);
-		GL20.glDeleteShader(vertexShaderID);
-		GL20.glDeleteShader(fragmentShaderID);
-		GL20.glDeleteProgram(programId);
+	public void dispose() {
+		this.shaderManagerAPI.deleteProgram(shaderProgram);
 	}
 }

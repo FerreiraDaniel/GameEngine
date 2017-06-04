@@ -4,6 +4,9 @@ package gameEngine.views;
 import java.util.HashMap;
 import java.util.List;
 
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.generic_render.IRenderAPIAccess;
+import com.dferreira.commons.gl_render.GLRenderAPIAccess;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.audioEngine.AudioLoader;
@@ -44,6 +47,10 @@ public class GameEngineRenderer {
 	 */
 	private AudioLoader audioLoader;
 	
+    /**
+     * Reference to the API responsible for render the scene
+     */
+    private IRenderAPIAccess renderAPIAccess;
 
 	/**
 	 * The master render is going put all the elements together in order to
@@ -109,7 +116,10 @@ public class GameEngineRenderer {
 		this.loader = new Loader();
 		/* Initializes the main variable responsible to the audio of the 3D world*/
 		this.audioLoader = new AudioLoader();
-		this.renderer = new MasterRender();
+		
+		this.renderAPIAccess = new GLRenderAPIAccess();
+		ILoaderRenderAPI loaderAPI = renderAPIAccess.getLoaderRenderAPI();
+		this.renderer = new MasterRender(renderAPIAccess);
 		
 
 		/* Prepares the terrains that is going to render */

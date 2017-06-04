@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 
 import gameEngine.shaders.ShaderManager;
 
@@ -24,8 +25,6 @@ public class SkyBoxShaderManager extends ShaderManager {
 	 */
 	private static final String FRAGMENT_FILE = COMMON_PATH + "skyBox/sky_box_fragment_shader.glsl";
 
-
-
 	/**
 	 * All the uniform locations in the shader programs
 	 */
@@ -34,9 +33,13 @@ public class SkyBoxShaderManager extends ShaderManager {
 	/**
 	 * Constructor of the game shader where the vertex and fragment shader of
 	 * the game engine are loaded
+	 * 
+	 * @param renderAPI
+	 *            Reference to the API that is going to manage the program
+	 *            shader
 	 */
-	public SkyBoxShaderManager() {
-		super(VERTEX_FILE, FRAGMENT_FILE);
+	public SkyBoxShaderManager(IShaderManagerAPI renderAPI) {
+		super(VERTEX_FILE, FRAGMENT_FILE, renderAPI);
 	}
 
 	/**

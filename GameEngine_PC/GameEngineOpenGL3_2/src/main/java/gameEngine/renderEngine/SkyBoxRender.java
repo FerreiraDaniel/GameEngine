@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
 
 import gameEngine.models.RawModel;
 import gameEngine.models.SkyBox;
@@ -15,7 +16,7 @@ import gameEngine.shaders.skyBox.TSkyBoxAttribute;
 /**
  * Class responsible to render the sky in the screen
  */
-public class SkyBoxRender {
+public class SkyBoxRender extends GenericRender {
 
 	/**
 	 * Reference to the shader manager
@@ -24,14 +25,18 @@ public class SkyBoxRender {
 
 	/**
 	 * Constructor of the skyBox render
-	 * 
+	 *
 	 * @param sbManager
 	 *            Shader manager
-	 * 
 	 * @param projectionMatrix
 	 *            The projection matrix
+	 * @param frameRenderAPI
+	 *            Reference to the API responsible for render the frame
 	 */
-	public SkyBoxRender(SkyBoxShaderManager sbManager, GLTransformation projectionMatrix) {
+	public SkyBoxRender(SkyBoxShaderManager sbManager, GLTransformation projectionMatrix,
+			IFrameRenderAPI frameRenderAPI) {
+		super(frameRenderAPI);
+
 		this.sbShader = sbManager;
 
 		sbManager.start();
@@ -106,7 +111,7 @@ public class SkyBoxRender {
 	 * Clean up because we need to clean up when we finish the program
 	 */
 	public void cleanUp() {
-		sbShader.cleanUp();
+		sbShader.dispose();
 	}
 
 }

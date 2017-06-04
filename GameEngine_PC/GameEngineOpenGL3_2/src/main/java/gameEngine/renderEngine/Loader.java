@@ -1,6 +1,5 @@
 package gameEngine.renderEngine;
 
-
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
@@ -15,13 +14,16 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
-
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IExternalMaterial;
+import com.dferreira.commons.utils.Utils;
+import com.dferreira.commons.waveFront.RGBAColorEnum;
+
 import gameEngine.models.RawModel;
+import gameEngine.models.complexEntities.LightingComponent;
 import gameEngine.models.complexEntities.Material;
 import gameEngine.shaders.entities.TEntityAttribute;
 
@@ -41,8 +43,6 @@ public class Loader {
 	 * List of the textures that make part of the game engine
 	 */
 	private List<Integer> textures;
-
-
 
 	/**
 	 * Number of components that make part of one vertex
@@ -121,6 +121,40 @@ public class Loader {
 	}
 
 	/**
+	 * Load the diffuse component of the material
+	 *
+	 * @param externalMaterial
+	 *            A reference to the external material to load
+	 * @return The diffuse lighting component of the material
+	 */
+	private LightingComponent loadDiffuseLighting(IExternalMaterial externalMaterial) {
+		Integer textureId;
+		float textureWeight;
+		ColorRGBA color;
+		String textureFileName = externalMaterial.getDiffuseTextureFileName();
+
+		if (Utils.isEmpty(textureFileName)) {
+			textureId = 0;
+			textureWeight = 0.0f;
+			color = (externalMaterial.getDiffuseColor() == null) ? RGBAColorEnum.transparent.toRGBA()
+					: new ColorRGBA(externalMaterial.getDiffuseColor());
+			textureFileName = null;
+		} else {
+			textureId = this.loadTexture(externalMaterial.getDiffuseTextureFileName());
+			textureWeight = 1.0f;
+			color = RGBAColorEnum.transparent.toRGBA();
+		}
+
+		LightingComponent diffuse = new LightingComponent();
+		diffuse.setTextureWeight(textureWeight);
+		diffuse.setColor(color);
+		diffuse.setFilename(textureFileName);
+		diffuse.setTextureId(textureId);
+
+		return diffuse;
+	}
+
+	/**
 	 * 
 	 * @param externalMaterial
 	 *            A reference to an external material with all the information
@@ -132,25 +166,10 @@ public class Loader {
 		if (externalMaterial == null) {
 			return null;
 		} else {
-			Integer textureId;
-			float textureWeight;
-			ColorRGBA diffuseColor;
+			Material material = new Material();
 
-			if ((externalMaterial.getDiffuseTextureFileName() == null)
-					|| ("".equals(externalMaterial.getDiffuseTextureFileName().trim()))) {
-				textureId = 0;
-				textureWeight = 0.0f;
-				diffuseColor = (externalMaterial.getDiffuseColor() == null) ? new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f)
-						: new ColorRGBA(externalMaterial.getDiffuseColor());
-			} else {
-				textureId = this.loadTexture(externalMaterial.getDiffuseTextureFileName());
-				textureWeight = 1.0f;
-				diffuseColor = new ColorRGBA(0.0f, 0.0f, 0.0f, 1.0f);
-			}
-			Material material = new Material(textureId);
-
-			material.setTextureWeight(textureWeight);
-			material.setDiffuseColor(diffuseColor);
+			LightingComponent diffuse = loadDiffuseLighting(externalMaterial);
+			material.setDiffuse(diffuse);
 
 			return material;
 		}
@@ -288,10 +307,6 @@ public class Loader {
 		TextureData textureData = LoadUtils.loadTexture(RESOURCES_FOLDER + fileName + PNG_EXTENSION);
 		return textureData;
 	}
-
-
-
-
 
 	/**
 	 * Create a vertex array object

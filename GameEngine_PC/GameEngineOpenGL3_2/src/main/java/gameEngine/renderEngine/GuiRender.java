@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
 
 import gameEngine.models.GuiTexture;
 import gameEngine.models.RawModel;
@@ -17,20 +18,24 @@ import gameEngine.shaders.guis.TGuiAttribute;
 /**
  * Class responsible to render the GUIs in the screen
  */
-public class GuiRender {
+public class GuiRender extends GenericRender {
 
 	/**
 	 * Reference to the shader manager
 	 */
 	private GuiShaderManager gShader;
-	
+
 	/**
-	 * Constructor of the entity render
-	 * 
+	 * Constructor of the gui render
+	 *
 	 * @param gManager
 	 *            Shader manager
+	 * @param frameRenderAPI
+	 *            Reference to the API responsible for render the frame
 	 */
-	public GuiRender(GuiShaderManager gManager) {
+	public GuiRender(GuiShaderManager gManager, IFrameRenderAPI frameRenderAPI) {
+		super(frameRenderAPI);
+
 		this.gShader = gManager;
 	}
 
@@ -56,7 +61,8 @@ public class GuiRender {
 	 * Render the GUIs in the scene
 	 * 
 	 * 
-	 * @param guis	List of GUIs to render
+	 * @param guis
+	 *            List of GUIs to render
 	 */
 	public void render(List<GuiTexture> guis) {
 		gShader.start();
@@ -64,12 +70,12 @@ public class GuiRender {
 		this.lrender(guis);
 		gShader.stop();
 	}
-	
 
 	/**
 	 * Render the GUIs in the scene
 	 * 
-	 * @param guis	List of GUIs to render
+	 * @param guis
+	 *            List of GUIs to render
 	 */
 	private void lrender(List<GuiTexture> guis) {
 		if ((guis == null) || (guis.isEmpty())) {
@@ -82,15 +88,13 @@ public class GuiRender {
 				prepareModel(gui.getRawModel());
 				prepareInstance(gui);
 				render(gui.getRawModel());
-				
+
 				unbindTexturedModel();
 			}
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
 			GL11.glDisable(GL11.GL_BLEND);
 		}
 	}
-	
-
 
 	/**
 	 * Bind the attributes of openGL
@@ -116,12 +120,12 @@ public class GuiRender {
 		gShader.loadTransformationMatrix(getTransformationMatrix(gui));
 	}
 
-    /**
-     * Call the render of the triangles to the entity itself
-     *
-     * @param quad
-     *            The quad to render
-     */
+	/**
+	 * Call the render of the triangles to the entity itself
+	 *
+	 * @param quad
+	 *            The quad to render
+	 */
 	private void render(RawModel quad) {
 		GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, quad.getVertexCount());
 	}
@@ -131,7 +135,7 @@ public class GuiRender {
 	 */
 	private void unbindTexturedModel() {
 		GL20.glDisableVertexAttribArray(TGuiAttribute.position.ordinal());
-		//Unbind vbo
+		// Unbind vbo
 		GL30.glBindVertexArray(0);
 	}
 
@@ -139,7 +143,7 @@ public class GuiRender {
 	 * Clean up because we need to clean up when we finish the program
 	 */
 	public void cleanUp() {
-		gShader.cleanUp();
+		gShader.dispose();
 	}
 
 }

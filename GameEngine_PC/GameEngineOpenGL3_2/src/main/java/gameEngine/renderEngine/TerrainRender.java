@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL30;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.models.Light;
 
 import gameEngine.models.RawModel;
@@ -21,20 +22,22 @@ import gameEngine.textures.TerrainTexturesPack;
 /**
  * Class responsible to render the entities in the screen
  */
-public class TerrainRender {
+public class TerrainRender extends GenericRender {
 
 	/**
 	 * Reference to the shader manager
 	 */
 	private TerrainShaderManager tShader;
 
-	/**
-	 * Constructor of the entity render
-	 * 
-	 * @param sManager
-	 *            Shader manager
-	 */
-	public TerrainRender(TerrainShaderManager sManager, GLTransformation projectionMatrix) {
+    /**
+     * Constructor of the terrain render
+     *
+     * @param sManager         Shader manager
+     * @param projectionMatrix The projection matrix of the render
+     * @param frameRenderAPI   Reference to the API responsible for render the frame
+     */
+	public TerrainRender(TerrainShaderManager sManager, GLTransformation projectionMatrix, IFrameRenderAPI frameRenderAPI) {
+        super(frameRenderAPI);
 		this.tShader = sManager;
 
 		sManager.start();
@@ -204,7 +207,7 @@ public class TerrainRender {
 	 * Clean up because we need to clean up when we finish the program
 	 */
 	public void cleanUp() {
-		tShader.cleanUp();
+		tShader.dispose();
 	}
 
 }

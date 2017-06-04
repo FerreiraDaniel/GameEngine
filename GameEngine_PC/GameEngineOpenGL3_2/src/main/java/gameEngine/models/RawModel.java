@@ -8,12 +8,12 @@ public class RawModel {
 	/**
 	 * Identifier of the vertex array object of the raw model
 	 */
-	private int vaoId;
+	private final int vaoId;
 
 	/**
 	 * Number of vertices of the raw model
 	 */
-	private int vertexCount;
+	private final int vertexCount;
 
 	/**
 	 * Constructor of the raw model

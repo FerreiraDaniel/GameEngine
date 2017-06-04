@@ -23,6 +23,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.generic_render.IFrameRenderAPI;
+import com.dferreira.commons.generic_render.IRenderAPIAccess;
+import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.models.Light;
 
 /**
@@ -42,6 +45,11 @@ public class MasterRender {
 	private static final float SKY_A = 1.0f;
 
 	/**
+	 * Reference to the API that is going to render the scene
+	 */
+	private final IRenderAPIAccess renderAPI;
+
+	/**
 	 * Reference to the render of the entities
 	 */
 	private final EntityRender entityRender;
@@ -55,12 +63,12 @@ public class MasterRender {
 	 * Reference to the render of the sky box
 	 */
 	private final SkyBoxRender skyBoxRender;
-	
+
 	/**
 	 * Reference to the render of GUIs
 	 */
 	private final GuiRender guiRender;
-	
+
 	/**
 	 * Reference to the camera from where the user is going to see the 3D world
 	 */
@@ -75,7 +83,7 @@ public class MasterRender {
 	 * List of terrains of the world that are going to be render
 	 */
 	private List<Terrain> terrains;
-	
+
 	/**
 	 * The player that is going to be show in the scene
 	 */
@@ -85,7 +93,7 @@ public class MasterRender {
 	 * List of GUIs to show the status of the user
 	 */
 	private List<GuiTexture> guis;
-	
+
 	/**
 	 * The sky box that is going to use during the render
 	 */
@@ -95,10 +103,10 @@ public class MasterRender {
 	 * Used to track how long tacks to render a frame
 	 */
 	private Date startDate;
-	
+
 	/**
-	 * The time to render one last frame in seconds
-	 * Variable used to be frame rate independent when moves the entities around
+	 * The time to render one last frame in seconds Variable used to be frame
+	 * rate independent when moves the entities around
 	 */
 	private float timeToRender;
 
@@ -117,37 +125,46 @@ public class MasterRender {
 
 	/**
 	 * Constructor of the master renderer
-	 * 
+	 *
+	 * @param renderAPI
+	 *            The accessor to the API that is going to be responsible for
+	 *            rendering the scene
 	 */
-	public MasterRender() {
+	public MasterRender(IRenderAPIAccess renderAPI) {
 
 		// Initializes the projection matrix
 		GLTransformation projectionMatrix = createProjectionMatrix();
 
+		// Set the render API access
+		this.renderAPI = renderAPI;
+
+		IShaderManagerAPI shaderManagerAPI = renderAPI.getShaderManagerAPI();
+		IFrameRenderAPI frameRenderAPI = renderAPI.getFrameRenderAPI();
+
 		// Initializes the entity render
-		EntityShaderManager eShader = new EntityShaderManager();
-		this.entityRender = new EntityRender(eShader, projectionMatrix);
+		EntityShaderManager eShader = new EntityShaderManager(shaderManagerAPI);
+		this.entityRender = new EntityRender(eShader, projectionMatrix, frameRenderAPI);
 
 		// Initializes the entities to be render
-		this.entities = new HashMap<GenericEntity, List<Entity>>();
+		this.entities = new HashMap<>();
 
 		// Initializes the terrain render
-		TerrainShaderManager tShader = new TerrainShaderManager();
-		this.terrainRender = new TerrainRender(tShader, projectionMatrix);
+		TerrainShaderManager tShader = new TerrainShaderManager(shaderManagerAPI);
+		this.terrainRender = new TerrainRender(tShader, projectionMatrix, frameRenderAPI);
 
 		// Initializes the sky box render
-		SkyBoxShaderManager sbManager = new SkyBoxShaderManager();
-		this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix);
+		SkyBoxShaderManager sbManager = new SkyBoxShaderManager(shaderManagerAPI);
+		this.skyBoxRender = new SkyBoxRender(sbManager, projectionMatrix, frameRenderAPI);
 
-		GuiShaderManager gShader = new GuiShaderManager();
-		this.guiRender = new GuiRender(gShader);
-		
+		GuiShaderManager gShader = new GuiShaderManager(shaderManagerAPI);
+		this.guiRender = new GuiRender(gShader, frameRenderAPI);
+
 		// Initializes the terrains to render
 		this.terrains = new ArrayList<Terrain>();
 
 		// Initializes the GUIs to render
 		this.guis = new ArrayList<GuiTexture>();
-		
+
 		// Initializes the camera
 		this.camera = new ThirdPersonCamera();
 
@@ -211,7 +228,7 @@ public class MasterRender {
 			}
 		}
 	}
-	
+
 	/**
 	 * Put a GUI in the list of GUIs to render
 	 * 
@@ -221,7 +238,7 @@ public class MasterRender {
 	private void processGUI(GuiTexture gui) {
 		this.guis.add(gui);
 	}
-	
+
 	/**
 	 * Put the GUIs to process in the list of GUIs to process
 	 * 
@@ -237,20 +254,22 @@ public class MasterRender {
 			}
 		}
 	}
-	
+
 	/**
 	 * Set the sky box the use during the render
 	 * 
-	 * @param skyBox The sky box that is going to set
+	 * @param skyBox
+	 *            The sky box that is going to set
 	 */
 	public void processSkyBox(SkyBox skyBox) {
 		this.skyBox = skyBox;
 	}
-	
+
 	/**
 	 * Set the player that is going to use during the render
 	 * 
-	 * @param player The player that is going to set
+	 * @param player
+	 *            The player that is going to set
 	 */
 	public void processPlayer(Player player) {
 		this.player = player;
@@ -288,22 +307,22 @@ public class MasterRender {
 	 * describe the camera in the scene
 	 */
 	private GLTransformation updateCamera() {
-		
-		//Update the camera taking in account the position of the player
-		if(player != null) {
+
+		// Update the camera taking in account the position of the player
+		if (player != null) {
 			camera.update(player, this.terrains.get(0));
 		}
-				
+
 		// Matrix update
 		GLTransformation viewMatrix = createViewMatrix(camera);
 		return viewMatrix;
 	}
-	
+
 	/**
 	 * Call the method to update the player position
 	 */
 	private void updatePlayer() {
-		if(this.player != null) {
+		if (this.player != null) {
 			this.player.move(this.timeToRender, this.terrains.get(0));
 		}
 	}
@@ -325,7 +344,6 @@ public class MasterRender {
 		this.guiRender.render(this.guis);
 	}
 
-
 	/**
 	 * Indicates that is going to start the rendering of a new frame Like that
 	 * the master render can compute how long tacks to render the frame
@@ -342,9 +360,9 @@ public class MasterRender {
 		// Logs frames/s
 		Date endDate = new Date();
 		this.timeToRender = (endDate.getTime() - startDate.getTime()) / 1000.0f;
-		//System.out.println((1.0 / timeToRender) + " ms");
+		// System.out.println((1.0 / timeToRender) + " ms");
 	}
-	
+
 	/**
 	 * Clean up because we need to clean up when we finish the program
 	 */
@@ -354,7 +372,7 @@ public class MasterRender {
 		this.skyBoxRender.cleanUp();
 		this.entities.clear();
 		this.terrains.clear();
-		this.guis.clear();		
+		this.guis.clear();
 		this.entities = null;
 		this.terrains = null;
 		this.guis = null;
