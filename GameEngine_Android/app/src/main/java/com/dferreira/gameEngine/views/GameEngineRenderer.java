@@ -69,7 +69,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     /**
      * Terrain to render
      */
-    private Terrain terrain;
+    private Terrain[] terrains;
 
     /**
      * Array of GUIs to render
@@ -126,8 +126,11 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        this.terrain = WorldTerrainsGenerator.getTerrain(loader, loaderAPI);
-        WorldTerrainsGenerator.loadTextures(loaderAPI, this.terrain);
+        Terrain terrain = WorldTerrainsGenerator.getTerrain(loader, loaderAPI);
+        WorldTerrainsGenerator.loadTextures(loaderAPI, terrain);
+
+        this.terrains = new Terrain[1];
+        this.terrains[0] = terrain;
 
         Date terrainLoaded = new Date();
 
@@ -186,7 +189,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         //game logic
         renderer.startFrameRender();
-        renderer.processTerrains(terrain);
+        renderer.processTerrains(terrains);
         renderer.processEntities(entities);
         renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);

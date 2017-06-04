@@ -202,7 +202,7 @@ class GLLoader implements ILoaderRenderAPI {
     }
 
     /**
-     * Load a list of 2D positions to GLRawModel
+     * Load a list of 2D positions to IRawModel
      *
      * @param positions Positions to load
      * @return The rawModel pointing to the positions
@@ -214,7 +214,7 @@ class GLLoader implements ILoaderRenderAPI {
     }
 
     /**
-     * Load a list of 3D positions to GLRawModel
+     * Load a list of 3D positions to IRawModel
      *
      * @param positions Positions to load
      * @return The rawModel pointing to the positions

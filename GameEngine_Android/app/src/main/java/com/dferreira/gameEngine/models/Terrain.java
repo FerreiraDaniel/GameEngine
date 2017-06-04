@@ -30,7 +30,7 @@ public class Terrain {
     private final float[][] heights;
 
     /**
-     * The GLRawModel of the terrain
+     * The IRawModel of the terrain
      */
     private final IRawModel model;
 

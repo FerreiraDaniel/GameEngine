@@ -5,6 +5,7 @@ import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.models.Light;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.gameEngine.shaders.terrains.TerrainShaderManager;
@@ -84,7 +85,7 @@ public class TerrainRender extends GenericRender {
      * @param terrains List of Terrains to render
      */
     private void render(List<Terrain> terrains) {
-        if ((terrains != null) && (!terrains.isEmpty())) {
+        if (!Utils.isEmpty(terrains)) {
             for (Terrain terrain : terrains) {
                 prepareTerrain(terrain);
                 prepareInstance(terrain);
