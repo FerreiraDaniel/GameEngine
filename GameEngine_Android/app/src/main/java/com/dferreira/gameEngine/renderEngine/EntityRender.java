@@ -245,7 +245,8 @@ public class EntityRender extends GenericRender {
     /**
      * Clean up because we need to clean up when we finish the program
      */
-    public void cleanUp() {
-        this.eShader.cleanUp();
+    @Override
+    public void dispose() {
+        this.eShader.dispose();
     }
 }

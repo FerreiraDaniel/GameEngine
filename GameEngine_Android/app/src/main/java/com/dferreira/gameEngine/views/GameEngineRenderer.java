@@ -217,6 +217,6 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
      * Clean up because we need to clean up when we finish the program
      */
     public void cleanUp() {
-        this.renderer.cleanUp();
+        this.renderer.dispose();
     }
 }

@@ -125,8 +125,8 @@ public class GuiRender extends GenericRender {
     /**
      * Clean up because we need to clean up when we finish the program
      */
-    public void cleanUp() {
-        gShader.cleanUp();
+    public void dispose() {
+        gShader.dispose();
     }
 
 }

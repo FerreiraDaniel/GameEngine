@@ -362,11 +362,11 @@ public class MasterRender {
     /**
      * Clean up because we need to clean up when we finish the program
      */
-    public void cleanUp() {
-        this.entityRender.cleanUp();
-        this.terrainRender.cleanUp();
-        this.skyBoxRender.cleanUp();
-        this.guiRender.cleanUp();
+    public void dispose() {
+        this.entityRender.dispose();
+        this.terrainRender.dispose();
+        this.skyBoxRender.dispose();
+        this.guiRender.dispose();
         this.entities.clear();
         this.terrains.clear();
         this.GUIs.clear();

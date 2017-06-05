@@ -18,4 +18,9 @@ abstract class GenericRender {
     GenericRender(IFrameRenderAPI frameRenderAPI) {
         this.frameRenderAPI = frameRenderAPI;
     }
+
+    /**
+     * Dispose the resources used by the render
+     */
+    public abstract void dispose();
 }
