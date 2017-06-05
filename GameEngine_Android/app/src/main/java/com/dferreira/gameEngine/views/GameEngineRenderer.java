@@ -10,6 +10,7 @@ import com.dferreira.commons.gl_render.GLRenderAPIAccess;
 import com.dferreira.commons.models.Light;
 import com.dferreira.gameEngine.modelGenerators.WorldEntitiesGenerator;
 import com.dferreira.gameEngine.modelGenerators.WorldGUIsGenerator;
+import com.dferreira.gameEngine.modelGenerators.WorldLightsGenerator;
 import com.dferreira.gameEngine.modelGenerators.WorldPlayersGenerator;
 import com.dferreira.gameEngine.modelGenerators.WorldSkyBoxGenerator;
 import com.dferreira.gameEngine.modelGenerators.WorldTerrainsGenerator;
@@ -77,9 +78,9 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
     private GuiTexture[] GUIs;
 
     /**
-     * Position of the light in scene
+     * The lights in scene
      */
-    private Light light;
+    private Light[] lights;
 
     /**
      * SkyBox of the 3D world
@@ -145,8 +146,8 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
 
 
-        /* Load the lights that is going to render*/
-        this.light = WorldEntitiesGenerator.getLight();
+		/* Load the light that is going to render */
+        this.lights = WorldLightsGenerator.getLights();
 
 
         Date lightLoaded = new Date();
@@ -194,7 +195,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         renderer.processPlayer(player);
         renderer.processSkyBox(skyBox);
         renderer.processGUIs(this.GUIs);
-        renderer.render(light);
+        renderer.render(this.lights);
 
         renderer.endFrameRender();
     }

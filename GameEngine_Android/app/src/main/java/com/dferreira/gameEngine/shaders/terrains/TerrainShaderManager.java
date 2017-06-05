@@ -111,13 +111,14 @@ public class TerrainShaderManager extends ShaderManager {
     }
 
     /**
-     * Put passes the information of the light to the Shader program
+     * Put passes the information of the lights to the Shader program
      *
-     * @param light the light to load in the shader program
+     * @param lights
+     *            the lights to load in the shader program
      */
-    public void loadLight(Light light) {
-        super.loadVector(uniforms[TTerrainUniform.lightPosition.ordinal()], light.getPosition());
-        super.loadColorRGB(uniforms[TTerrainUniform.lightColor.ordinal()], light.getColor());
+    public void loadLights(Light[] lights) {
+        super.loadVector(uniforms[TTerrainUniform.lightPosition.ordinal()], lights[0].getPosition());
+        super.loadColorRGB(uniforms[TTerrainUniform.lightColor.ordinal()], lights[0].getColor());
     }
 
     /**

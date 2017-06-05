@@ -74,35 +74,26 @@ public class EntityRender extends GenericRender {
     /**
      * Render the entities in the scene
      *
-     * @param skyColor   Color of the sky
-     * @param sun        The source of light of the scene
-     * @param viewMatrix View matrix to render the scene
-     * @param entities   List of entities of the scene
+     * @param skyColor
+     *            Color of the sky
+     *
+     * @param lights
+     *            The lights of the scene
+     * @param viewMatrix
+     *            View matrix to render the scene
+     * @param entities
+     *            List of entities of the scene
+     * @param player
+     *            The player of the scene
      */
-    public void render(ColorRGBA skyColor, Light sun, GLTransformation viewMatrix, Map<GenericEntity, List<Entity>> entities) {
+    public void render(ColorRGBA skyColor, Light[] lights, GLTransformation viewMatrix,
+                       Map<GenericEntity, List<Entity>> entities, Player player) {
         eShader.start();
         eShader.loadSkyColor(skyColor);
-        eShader.loadLight(sun);
+        eShader.loadLights(lights);
         eShader.loadViewMatrix(viewMatrix);
 
         this.render(entities);
-        eShader.stop();
-    }
-
-    /**
-     * Render the player in the scene
-     *
-     * @param skyColor   Color of the sky
-     * @param sun        The source of light of the scene
-     * @param viewMatrix View matrix to render the scene
-     * @param player     The player_mtl of the scene
-     */
-    public void render(ColorRGBA skyColor, Light sun, GLTransformation viewMatrix, Player player) {
-        eShader.start();
-        eShader.loadSkyColor(skyColor);
-        eShader.loadLight(sun);
-        eShader.loadViewMatrix(viewMatrix);
-
         this.renderPlayer(player);
         eShader.stop();
     }
@@ -230,7 +221,6 @@ public class EntityRender extends GenericRender {
      */
     private void render(IRawModel model) {
         this.frameRenderAPI.drawTrianglesIndexes(model);
-
     }
 
     /**
