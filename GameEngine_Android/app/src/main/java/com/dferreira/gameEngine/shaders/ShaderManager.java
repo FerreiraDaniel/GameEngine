@@ -194,7 +194,7 @@ public abstract class ShaderManager {
     /**
      * Clean the program shader from memory
      */
-    public void cleanUp() {
+    public void dispose() {
         this.shaderManagerAPI.deleteProgram(shaderProgram);
     }
 }

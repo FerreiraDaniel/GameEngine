@@ -90,7 +90,7 @@ public class SkyBoxRender extends GenericRender {
     /**
      * Clean up because we need to clean up when we finish the program
      */
-    public void cleanUp() {
-        sbShader.cleanUp();
+    public void dispose() {
+        sbShader.dispose();
     }
 }
