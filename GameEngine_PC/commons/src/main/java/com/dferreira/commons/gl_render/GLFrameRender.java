@@ -8,18 +8,22 @@ import org.lwjgl.opengl.GL30;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 
 
 /**
  * Contains useful methods when is render on frame using OpenGL
  */
-
 class GLFrameRender implements IFrameRenderAPI {
 
-	@Override
+    /**
+     * Clear the screen as well as the depth buffer
+     */
+    @Override
 	public void prepareFrame() {
-		// TODO Auto-generated method stub
-		
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GL11.glClearColor(0, 0.3f, 0, 1);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 	}
 
     /**
@@ -42,9 +46,18 @@ class GLFrameRender implements IFrameRenderAPI {
 		GL20.glEnableVertexAttribArray(normal.getValue());
 	}
 
+    /**
+     * Prepares one 2D model to be render in scene
+     *
+     * @param model    The model to be prepared to be rendered
+     * @param position The position attribute
+     */
 	@Override
 	public void prepare2DModel(IRawModel model, IEnum position) {
-		// TODO Auto-generated method stub
+		GLRawModel rawModel = (GLRawModel) model;
+		
+		GL30.glBindVertexArray(rawModel.getVaoId());
+		GL20.glEnableVertexAttribArray(position.getValue());
 		
 	}
 
@@ -79,52 +92,56 @@ class GLFrameRender implements IFrameRenderAPI {
     /**
      * Activates and binds the texture with ID passed in the specified target
      *
-     * @param target    Target where is to bind the texture
-     * @param textureId The identifier of the texture
+     * @param target  Target where is to bind the texture
+     * @param texture The texture to use
      */
-    private void activeAndBind2DTexture(int target, int textureId) {
+    private void activeAndBind2DTexture(int target, ITexture texture) {
+        GLTexture glTexture = (GLTexture) texture;
+        
         //Enable the specific texture
     	GL13.glActiveTexture(target);
-    	GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+    	GL11.glBindTexture(GL11.GL_TEXTURE_2D, glTexture.getId());
     }
 
     /**
-     * Activates and binds the texture with ID passed
+     * Activates and binds the texture with passed
      *
-     * @param textureId The identifier of the texture
+     * @param texture The texture to use
      */
     @Override
-    public void activeAndBindTexture(Integer textureId) {
-    	activeAndBind2DTexture(GL13.GL_TEXTURE0, textureId);
+    public void activeAndBindTexture(ITexture texture) {
+    	activeAndBind2DTexture(GL13.GL_TEXTURE0, texture);
 	}
 
     /**
      * Activates and binds a cubic texture with ID passed
      *
-     * @param textureId The identifier of the texture
+     * @param texture The texture to use
      */
     @Override
-    public void activeAndBindCubeTexture(Integer textureId) {
+    public void activeAndBindCubeTexture(ITexture texture) {
+    	GLTexture glTexture = (GLTexture) texture;
+    	
     	GL13.glActiveTexture(GL13.GL_TEXTURE0);
-    	GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, textureId);
+    	GL11.glBindTexture(GL13.GL_TEXTURE_CUBE_MAP, glTexture.getId());
     }
 
     /**
-     * Activates and binds a set of textures with IDs passed
+     * Activates and binds a set of textures passed
      *
-     * @param textureId1 The identifier of the texture 1
-     * @param textureId2 The identifier of the texture 2
-     * @param textureId3 The identifier of the texture 3
-     * @param textureId4 The identifier of the texture 4
-     * @param textureId5 The identifier of the texture 5
+     * @param texture1 The texture 1
+     * @param texture2 The texture 2
+     * @param texture3 The texture 3
+     * @param texture4 The texture 4
+     * @param texture5 The texture 5
      */
     @Override
-    public void activeAndBindTextures(int textureId1, int textureId2, int textureId3, int textureId4, int textureId5) {
-        activeAndBind2DTexture(GL13.GL_TEXTURE0, textureId1);
-        activeAndBind2DTexture(GL13.GL_TEXTURE1, textureId2);
-        activeAndBind2DTexture(GL13.GL_TEXTURE2, textureId3);
-        activeAndBind2DTexture(GL13.GL_TEXTURE3, textureId4);
-        activeAndBind2DTexture(GL13.GL_TEXTURE4, textureId5);
+    public void activeAndBindTextures(ITexture texture1, ITexture texture2, ITexture texture3, ITexture texture4, ITexture texture5) {
+        activeAndBind2DTexture(GL13.GL_TEXTURE0, texture1);
+        activeAndBind2DTexture(GL13.GL_TEXTURE1, texture2);
+        activeAndBind2DTexture(GL13.GL_TEXTURE2, texture3);
+        activeAndBind2DTexture(GL13.GL_TEXTURE3, texture4);
+        activeAndBind2DTexture(GL13.GL_TEXTURE4, texture5);
     }
 
     /**

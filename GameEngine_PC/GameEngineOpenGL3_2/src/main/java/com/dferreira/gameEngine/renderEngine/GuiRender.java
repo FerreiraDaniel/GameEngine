@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL30;
 
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.gl_render.GLRawModel;
 import com.dferreira.gameEngine.models.GuiTexture;
 import com.dferreira.gameEngine.shaders.guis.GuiShaderManager;
@@ -95,16 +96,14 @@ public class GuiRender extends GenericRender {
 		}
 	}
 
-	/**
-	 * Bind the attributes of openGL
-	 * 
-	 * @param texturedModel
-	 *            Model that contains the model of the entity with textures
-	 */
-	private void prepareModel(GLRawModel quad) {
-		GL30.glBindVertexArray(quad.getVaoId());
-		GL20.glEnableVertexAttribArray(TGuiAttribute.position.ordinal());
-	}
+    /**
+     * Bind the attributes of openGL
+     *
+     * @param rawModel Model that contains the model of the entity with textures
+     */
+    private void prepareModel(IRawModel rawModel) {
+        this.frameRenderAPI.prepare2DModel(rawModel, TGuiAttribute.position);
+    }
 
 	/**
 	 * Load the transformation matrix of the GUI
@@ -113,20 +112,20 @@ public class GuiRender extends GenericRender {
 	 *            Entity that is to get prepared to be loaded
 	 */
 	private void prepareInstance(GuiTexture gui) {
-		GL13.glActiveTexture(GL13.GL_TEXTURE0);
-		GL11.glBindTexture(GL11.GL_TEXTURE_2D, gui.getTextureId());
+		this.frameRenderAPI.activeAndBindTexture(gui.getTexture());
 		// Load the transformation matrix
 		gShader.loadTransformationMatrix(getTransformationMatrix(gui));
 	}
 
-	/**
-	 * Call the render of the triangles to the entity itself
-	 *
-	 * @param quad
-	 *            The quad to render
-	 */
-	private void render(GLRawModel quad) {
-		GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, quad.getVertexCount());
+    /**
+     * Call the render of the triangles to the entity itself
+     *
+     * @param quad The quad to render
+     */
+    private void render(IRawModel quad) {
+		GLRawModel quad2 = (GLRawModel)quad;
+		
+		GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, quad2.getVertexCount());
 	}
 
 	/**

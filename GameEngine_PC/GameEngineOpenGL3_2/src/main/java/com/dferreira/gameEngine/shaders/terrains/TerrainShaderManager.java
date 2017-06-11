@@ -7,6 +7,7 @@ import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.commons.models.Light;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 import com.dferreira.gameEngine.shaders.entities.TEntityAttribute;
@@ -20,12 +21,14 @@ public class TerrainShaderManager extends ShaderManager {
 	/**
 	 * Path of the vertex shader file
 	 */
-	private static final String VERTEX_FILE = COMMON_PATH + "terrains/terrain_vertex_shader.glsl";
+	// private static final String VERTEX_FILE = COMMON_PATH +
+	// "terrains/terrain_vertex_shader.glsl";
 
 	/**
 	 * Path of the fragment shader file
 	 */
-	private static final String FRAGMENT_FILE = COMMON_PATH + "terrains/terrain_fragment_shader.glsl";
+	// private static final String FRAGMENT_FILE = COMMON_PATH +
+	// "terrains/terrain_fragment_shader.glsl";
 
 	/**
 	 * Texture unit that was bind with glBindTexture GL_TEXTURE0
@@ -66,7 +69,7 @@ public class TerrainShaderManager extends ShaderManager {
 	 *            shader
 	 */
 	public TerrainShaderManager(IShaderManagerAPI renderAPI) {
-		super(VERTEX_FILE, FRAGMENT_FILE, renderAPI);
+		super(TextEnum.terrain_vertex_shader, TextEnum.terrain_fragment_shader, renderAPI);
 	}
 
 	/**

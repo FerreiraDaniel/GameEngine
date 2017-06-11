@@ -6,10 +6,11 @@ import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
-import com.dferreira.commons.LoadUtils;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.generic_render.ShaderProgram;
+import com.dferreira.commons.generic_resources.TextEnum;
+import com.dferreira.commons.utils.Utils;
 
 /**
  * Generic shader manager with methods to load vertex shader and fragment shader
@@ -20,7 +21,7 @@ public abstract class ShaderManager {
 	/**
 	 * Directory where the shader are in the project
 	 */
-	protected static final String COMMON_PATH = "src/main/java/com/dferreira/gameEngine/shaders/";
+	//protected static final String COMMON_PATH = "src/main/java/com/dferreira/gameEngine/shaders/";
 
 	/**
 	 * Reference to the program shader used 
@@ -32,23 +33,20 @@ public abstract class ShaderManager {
      */
     private final IShaderManagerAPI shaderManagerAPI;
 	
-	/**
-	 * Constructor of the program shader manager
-	 * 
-	 * @param vertexFile
-	 *            The file with vertex description
-	 * @param fragmentFile
-	 *            The file with fragment description
-	 * @param shaderManagerAPI     Reference to the API that is going to manage the program shader
-	 */
-	protected ShaderManager(String vertexFile, String fragmentFile, IShaderManagerAPI shaderManagerAPI) {
+    /**
+     * Constructor of the program shader manager
+     *
+     * @param vertexFile       Identifier of the file with vertex description
+     * @param fragmentFile     Identifier of the file with fragment description
+     * @param shaderManagerAPI Reference to the API that is going to manage the program shader
+     */
+	protected ShaderManager(TextEnum vertexFile, TextEnum fragmentFile,  IShaderManagerAPI shaderManagerAPI) {
 
-		String vertexShaderSrc = LoadUtils.readTextFromRawResource(vertexFile);
-		String fragShaderSrc = LoadUtils.readTextFromRawResource(fragmentFile);
 		this.shaderManagerAPI = shaderManagerAPI;
-		this.shaderProgram = shaderManagerAPI.loadProgram(vertexShaderSrc, fragShaderSrc);
+		this.shaderProgram = shaderManagerAPI.loadProgram(vertexFile, fragmentFile);
 
 		if (this.shaderProgram == null) {
+			System.err.print("Was impossible compile the program shader");
 			return;
 		}
 		bindAttributes();
@@ -62,12 +60,12 @@ public abstract class ShaderManager {
 	 * Bind the attributes of the shader
 	 */
 	private void bindAttributes() {
-		List<IEnum> attributes = getAttributes();
-		if ((attributes != null) && (!attributes.isEmpty())) {
-			for (IEnum attribute : attributes) {
-				bindAttribute(attribute.getValue(), attribute.toString());
-			}
-		}
+        List<IEnum> attributes = getAttributes();
+        if (!Utils.isEmpty(attributes)) {
+            for (IEnum attribute : attributes) {
+                bindAttribute(attribute.getValue(), attribute.toString());
+            }
+        }
 	}
 
 	/**

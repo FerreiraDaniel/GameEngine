@@ -7,6 +7,7 @@ import java.util.List;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
 /**
@@ -17,12 +18,12 @@ public class GuiShaderManager extends ShaderManager {
 	/**
 	 * Path of the vertex shader file
 	 */
-	private static final String VERTEX_FILE = COMMON_PATH + "guis/gui_vertex_shader.glsl";
+	//private static final String VERTEX_FILE = COMMON_PATH + "guis/gui_vertex_shader.glsl";
 
 	/**
 	 * Path of the fragment shader file
 	 */
-	private static final String FRAGMENT_FILE = COMMON_PATH + "guis/gui_fragment_shader.glsl";
+	//private static final String FRAGMENT_FILE = COMMON_PATH + "guis/gui_fragment_shader.glsl";
 
 	/**
 	 * All the uniform locations in the shader programs
@@ -38,7 +39,7 @@ public class GuiShaderManager extends ShaderManager {
 	 *            shader
 	 */
 	public GuiShaderManager(IShaderManagerAPI renderAPI) {
-		super(VERTEX_FILE, FRAGMENT_FILE, renderAPI);
+		super(TextEnum.gui_vertex_shader, TextEnum.gui_fragment_shader, renderAPI);
 	}
 
 	/**

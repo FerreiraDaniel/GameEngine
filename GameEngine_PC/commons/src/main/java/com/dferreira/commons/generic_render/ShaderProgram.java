@@ -1,65 +1,65 @@
 package com.dferreira.commons.generic_render;
 
 /**
- *	Represents one shader program in that can be running in the Graphic Boards
+ * Represents one shader program in that can be running in the Graphic Boards
  */
 public class ShaderProgram {
-	/**
-	 * The id of the program
-	 */
-	private int programId;
-	
-	/**
-	 * The id of the vertex shader
-	 */
-	private int vertexShaderId;
-	
-	/**
-	 * The id of the fragment shader
-	 */
-	private int fragmentShaderId;
+    /**
+     * The id of the program
+     */
+    private int programId;
 
-	/**
-	 * @return the programId
-	 */
-	public int getProgramId() {
-		return programId;
-	}
+    /**
+     * The id of the vertex shader
+     */
+    private int vertexShaderId;
 
-	/**
-	 * @param programId the programId to set
-	 */
-	public void setProgramId(int programId) {
-		this.programId = programId;
-	}
+    /**
+     * The id of the fragment shader
+     */
+    private int fragmentShaderId;
 
-	/**
-	 * @return the vertexShaderId
-	 */
-	public int getVertexShaderId() {
-		return vertexShaderId;
-	}
+    /**
+     * @return the programId
+     */
+    public int getProgramId() {
+        return programId;
+    }
 
-	/**
-	 * @param vertexShaderId the vertexShaderId to set
-	 */
-	public void setVertexShaderId(int vertexShaderId) {
-		this.vertexShaderId = vertexShaderId;
-	}
+    /**
+     * @param programId the programId to set
+     */
+    public void setProgramId(int programId) {
+        this.programId = programId;
+    }
 
-	/**
-	 * @return the fragmentShaderId
-	 */
-	public int getFragmentShaderId() {
-		return fragmentShaderId;
-	}
+    /**
+     * @return the vertexShaderId
+     */
+    public int getVertexShaderId() {
+        return vertexShaderId;
+    }
 
-	/**
-	 * @param fragmentShaderId the fragmentShaderId to set
-	 */
-	public void setFragmentShaderId(int fragmentShaderId) {
-		this.fragmentShaderId = fragmentShaderId;
-	}
-	
-	
+    /**
+     * @param vertexShaderId the vertexShaderId to set
+     */
+    public void setVertexShaderId(int vertexShaderId) {
+        this.vertexShaderId = vertexShaderId;
+    }
+
+    /**
+     * @return the fragmentShaderId
+     */
+    public int getFragmentShaderId() {
+        return fragmentShaderId;
+    }
+
+    /**
+     * @param fragmentShaderId the fragmentShaderId to set
+     */
+    public void setFragmentShaderId(int fragmentShaderId) {
+        this.fragmentShaderId = fragmentShaderId;
+    }
+
+
 }

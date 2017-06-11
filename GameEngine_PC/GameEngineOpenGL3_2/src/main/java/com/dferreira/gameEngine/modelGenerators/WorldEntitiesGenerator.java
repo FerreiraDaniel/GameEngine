@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Random;
 
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
 import com.dferreira.gameEngine.models.complexEntities.GenericEntity;
@@ -138,5 +140,21 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 			}
 		}
 		return entities;
+	}
+
+	/**
+	 * Load the textures of a list of entities
+	 *
+	 * @param loaderRenderAPI
+	 *            Loader to load content specific to the render API
+	 * @param entities
+	 *            The entities for which is to load the textures
+	 */
+	public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, Entity[] entities) {
+		if (!Utils.isEmpty(entities)) {
+			for (Entity entity : entities) {
+				loadTexturesOfEntity(loaderRenderAPI, entity);
+			}
+		}
 	}
 }

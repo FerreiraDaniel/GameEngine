@@ -1,6 +1,7 @@
 package com.dferreira.gameEngine.models.complexEntities;
 
 import com.dferreira.commons.ColorRGBA;
+import com.dferreira.commons.generic_render.ITexture;
 
 /**
  * A material can be composed by several components like: (Emissive lighting,
@@ -9,10 +10,10 @@ import com.dferreira.commons.ColorRGBA;
 
 public class LightingComponent {
 
-	/**
-	 * The identifier of the texture
-	 */
-	private Integer textureId;
+    /**
+     * The texture in the API used
+     */
+    private ITexture texture;
 
 	/**
 	 * The name of the file associated with texture of component (If any) (Note:
@@ -30,20 +31,19 @@ public class LightingComponent {
 	 */
 	private ColorRGBA color;
 
-	/**
-	 * @param textureId
-	 *            The identifier of the texture
-	 */
-	public void setTextureId(Integer textureId) {
-		this.textureId = textureId;
-	}
+    /**
+     * @return the identifier of the texture
+     */
+    public ITexture getTexture() {
+        return this.texture;
+    }
 
-	/**
-	 * @return the identifier of the texture
-	 */
-	public Integer getTextureId() {
-		return textureId;
-	}
+    /**
+     * @param texture The texture to set
+     */
+    public void setTexture(ITexture texture) {
+        this.texture = texture;
+    }
 
 	/**
 	 * @return The file name of the texture of the component

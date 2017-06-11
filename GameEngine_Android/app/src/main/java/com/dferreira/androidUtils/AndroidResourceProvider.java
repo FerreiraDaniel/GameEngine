@@ -32,7 +32,7 @@ public class AndroidResourceProvider implements IResourceProvider, ISubResourceP
 
 
     private final static String MTL_PREFIX = "\\.mtl";
-    private final static String PNG_PREFIX = "\\.png";
+    private final static String PNG_EXTENSION = "\\.png";
 
     private final static String MIPMAP = "mipmap";
     private final static String RAW = "raw";
@@ -214,7 +214,7 @@ public class AndroidResourceProvider implements IResourceProvider, ISubResourceP
         if (Utils.isEmpty(textureFileName)) {
             return null;
         } else {
-            String resourceName = textureFileName.split(PNG_PREFIX)[0];
+            String resourceName = textureFileName.split(PNG_EXTENSION)[0];
             int resourceId = context.getResources().getIdentifier(resourceName, MIPMAP, context.getPackageName());
             return pGetTexture(resourceId);
         }

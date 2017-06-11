@@ -8,6 +8,7 @@ import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.commons.models.Light;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
@@ -20,12 +21,12 @@ public class EntityShaderManager extends ShaderManager {
 	/**
 	 * Path of the vertex shader file
 	 */
-	private static final String VERTEX_FILE = COMMON_PATH + "entities/entity_vertex_shader.glsl";
+	//private static final String VERTEX_FILE = COMMON_PATH + "entities/entity_vertex_shader.glsl";
 
 	/**
 	 * Path of the fragment shader file
 	 */
-	private static final String FRAGMENT_FILE = COMMON_PATH + "entities/entity_fragment_shader.glsl";
+	//private static final String FRAGMENT_FILE = COMMON_PATH + "entities/entity_fragment_shader.glsl";
 
 	/**
 	 * All the uniform locations in the shader programs
@@ -39,7 +40,7 @@ public class EntityShaderManager extends ShaderManager {
 	 * @param renderAPI Reference to the API that is going to manage the program shader
 	 */
 	public EntityShaderManager(IShaderManagerAPI renderAPI) {
-		super(VERTEX_FILE, FRAGMENT_FILE, renderAPI);
+		super(TextEnum.entity_vertex_shader, TextEnum.entity_fragment_shader, renderAPI);
 	}
 
 	/**

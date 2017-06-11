@@ -1,7 +1,9 @@
 package com.dferreira.gameEngine.models;
 
 import com.dferreira.commons.Vector2f;
-import com.dferreira.commons.gl_render.GLRawModel;
+import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_resources.TextureEnum;
 
 /**
  * Represents one texture to be show in the UI of the game (In 2D)
@@ -11,35 +13,41 @@ public class GuiTexture {
 	/**
 	 * Raw model of the entity
 	 */
-	private final GLRawModel rawModel;
+	private final IRawModel rawModel;
 
 	/**
 	 * Identifier of the texture
 	 */
-	private final int textureId;
+	private final TextureEnum textureEnum;
 
 	/**
 	 * Position of the texture between (0,0) and (1.0,1.0)
 	 */
 	private final Vector2f position;
-
 	/**
 	 * Scale factor of the texture
 	 */
 	private final Vector2f scale;
 
 	/**
-	 * @param textureId
-	 *            Identifier of the texture
+	 * Identifier of the texture
+	 */
+	private ITexture texture;
+
+	/**
+	 * @param rawModel
+	 *            The rawModel that will be used by the guiTexture
+	 * @param textureEnum
+	 *            Identifier of resource that contains the texture
 	 * @param position
 	 *            Position of the texture between (0,0) and (1.0,1.0)
 	 * @param scale
 	 *            Scale factor of the texture
 	 */
-	public GuiTexture(GLRawModel rawModel, int textureId, Vector2f position, Vector2f scale) {
+	public GuiTexture(IRawModel rawModel, TextureEnum textureEnum, Vector2f position, Vector2f scale) {
 		super();
 		this.rawModel = rawModel;
-		this.textureId = textureId;
+		this.textureEnum = textureEnum;
 		this.position = position;
 		this.scale = scale;
 	}
@@ -47,15 +55,32 @@ public class GuiTexture {
 	/**
 	 * @return the raw model of the entity
 	 */
-	public GLRawModel getRawModel() {
+	public IRawModel getRawModel() {
 		return rawModel;
 	}
 
 	/**
-	 * @return Identifier of the texture
+	 *
+	 * @return Identifier of resource that contains the texture of the gui
 	 */
-	public int getTextureId() {
-		return textureId;
+	public TextureEnum getTextureEnum() {
+		return this.textureEnum;
+	}
+
+	/**
+	 * @return Texture in the Graphics API Framework
+	 */
+	public ITexture getTexture() {
+		return texture;
+	}
+
+	/**
+	 *
+	 * @param texture
+	 *            Texture API Framework
+	 */
+	public void setTexture(ITexture texture) {
+		this.texture = texture;
 	}
 
 	/**

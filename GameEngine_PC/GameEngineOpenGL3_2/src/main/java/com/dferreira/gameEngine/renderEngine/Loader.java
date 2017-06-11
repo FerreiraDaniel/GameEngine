@@ -127,19 +127,17 @@ public class Loader {
 	 * @return The diffuse lighting component of the material
 	 */
 	private LightingComponent loadDiffuseLighting(IExternalMaterial externalMaterial) {
-		Integer textureId;
 		float textureWeight;
 		ColorRGBA color;
 		String textureFileName = externalMaterial.getDiffuseTextureFileName();
 
 		if (Utils.isEmpty(textureFileName)) {
-			textureId = 0;
 			textureWeight = 0.0f;
 			color = (externalMaterial.getDiffuseColor() == null) ? RGBAColorEnum.transparent.toRGBA()
 					: new ColorRGBA(externalMaterial.getDiffuseColor());
 			textureFileName = null;
 		} else {
-			textureId = this.loadTexture(externalMaterial.getDiffuseTextureFileName());
+			//textureId = this.loadTexture(externalMaterial.getDiffuseTextureFileName());
 			textureWeight = 1.0f;
 			color = RGBAColorEnum.transparent.toRGBA();
 		}
@@ -148,7 +146,6 @@ public class Loader {
 		diffuse.setTextureWeight(textureWeight);
 		diffuse.setColor(color);
 		diffuse.setFilename(textureFileName);
-		diffuse.setTextureId(textureId);
 
 		return diffuse;
 	}
@@ -250,7 +247,7 @@ public class Loader {
 					GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, textureData.getBuffer());
 
 			defineTextureFunctionFilters(GL11.GL_TEXTURE_2D);
-			textures.add(textureId);
+			this.textures.add(textureId);
 			return textureId;
 		}
 	}
@@ -290,7 +287,7 @@ public class Loader {
 			}
 		}
 		defineTextureFunctionFilters(GL13.GL_TEXTURE_CUBE_MAP);
-		textures.add(textureId);
+		this.textures.add(textureId);
 		return textureId;
 	}
 

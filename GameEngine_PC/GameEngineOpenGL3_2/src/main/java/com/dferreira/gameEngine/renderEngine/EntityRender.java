@@ -174,7 +174,7 @@ public class EntityRender extends GenericRender {
 	 */
 	private void prepareLightingComponent(LightingComponent component) {
 		if (component.getTextureWeight() > 0.0f) {
-			this.frameRenderAPI.activeAndBindTexture(component.getTextureId());
+			this.frameRenderAPI.activeAndBindTexture(component.getTexture());
 		}
 
 		// Load the texture weight of the material

@@ -1,108 +1,110 @@
 package com.dferreira.gameEngine.textures;
 
+import com.dferreira.commons.generic_render.ITexture;
+
 /**
- * Contains the identifiers to the several textures of a terrain
+ * Contains the all textures of a terrain
  */
 public class TerrainTexturesPack {
 
 	/**
-	 * The identifier of the weight map texture
+	 * Weight map texture
 	 */
-	private int weightMapTextureId;
+	private ITexture weightMapTexture;
 
 	/**
-	 * The identifier of the background texture
+	 * Background texture
 	 */
-	private int backgroundTextureId;
+	private ITexture backgroundTexture;
 
 	/**
-	 * Identifier of the mud texture
+	 * The mud texture
 	 */
-	private int mudTextureId;
+	private ITexture mudTexture;
 
 	/**
-	 * Identifier of the grass texture
+	 * The grass texture
 	 */
-	private int grassTextureId;
+	private ITexture grassTexture;
 
 	/**
-	 * Identifier of the path texture
+	 * Path texture
 	 */
-	private int pathTextureId;
+	private ITexture pathTexture;
 
 	/**
-	 * @return the blendMapTextureId
+	 * @return the blend Map Texture
 	 */
-	public int getWeightMapTextureId() {
-		return weightMapTextureId;
+	public ITexture getWeightMapTexture() {
+		return this.weightMapTexture;
 	}
 
 	/**
-	 * @param weightMapTextureId
-	 *            the blendMapTextureId to set
+	 * @param weightMapTexture
+	 *            the blendMapTexture to set
 	 */
-	public void setWeightMapTextureId(int weightMapTextureId) {
-		this.weightMapTextureId = weightMapTextureId;
+	public void setWeightMapTexture(ITexture weightMapTexture) {
+		this.weightMapTexture = weightMapTexture;
 	}
 
 	/**
-	 * @return the backgroundTextureId
+	 * @return the backgroundTexture
 	 */
-	public int getBackgroundTextureId() {
-		return backgroundTextureId;
+	public ITexture getBackgroundTexture() {
+		return backgroundTexture;
 	}
 
 	/**
-	 * @param backgroundTextureId
-	 *            the backgroundTextureId to set
+	 * @param backgroundTexture
+	 *            the backgroundTexture to set
 	 */
-	public void setBackgroundTextureId(int backgroundTextureId) {
-		this.backgroundTextureId = backgroundTextureId;
+	public void setBackgroundTexture(ITexture backgroundTexture) {
+		this.backgroundTexture = backgroundTexture;
 	}
 
 	/**
-	 * @return the mudTextureId
+	 * @return the mudTexture
 	 */
-	public int getMudTextureId() {
-		return mudTextureId;
+	public ITexture getMudTexture() {
+		return mudTexture;
 	}
 
 	/**
-	 * @param mudTextureId
-	 *            the mudTextureId to set
+	 * @param mudTexture
+	 *            the texture mud to set
 	 */
-	public void setMudTextureId(int mudTextureId) {
-		this.mudTextureId = mudTextureId;
+	public void setMudTexture(ITexture mudTexture) {
+		this.mudTexture = mudTexture;
 	}
 
 	/**
-	 * @return the grassTextureId
+	 * @return the texture grass
 	 */
-	public int getGrassTextureId() {
-		return grassTextureId;
+	public ITexture getGrassTexture() {
+		return grassTexture;
 	}
 
 	/**
-	 * @param grassTextureId
-	 *            the grassTextureId to set
+	 * @param grassTexture
+	 *            the texture grass to set
 	 */
-	public void setGrassTextureId(int grassTextureId) {
-		this.grassTextureId = grassTextureId;
+	public void setGrassTexture(ITexture grassTexture) {
+		this.grassTexture = grassTexture;
 	}
 
 	/**
-	 * @return the pathTextureId
+	 * @return the texture path
 	 */
-	public int getPathTextureId() {
-		return pathTextureId;
+	public ITexture getPathTexture() {
+		return this.pathTexture;
 	}
 
 	/**
-	 * @param pathTextureId
-	 *            the pathTextureId to set
+	 * @param pathTexture
+	 *            the path texture to set
 	 */
-	public void setPathTextureId(int pathTextureId) {
-		this.pathTextureId = pathTextureId;
+	public void setPathTexture(ITexture pathTexture) {
+		this.pathTexture = pathTexture;
 	}
 
 }

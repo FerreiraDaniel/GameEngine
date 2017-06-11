@@ -4,6 +4,7 @@ import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRenderAPIAccess;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.IResourceProvider;
 
 /**
  * Has all the required components to render the scene with openGL
@@ -25,14 +26,13 @@ public class GLRenderAPIAccess implements IRenderAPIAccess {
 	 */
 	private final IShaderManagerAPI shaderManagerAPI;
 
-	/**
-	 * Constructor to the render responsible to access the openGL API
-	 *
-	 */
-	public GLRenderAPIAccess() {
-		this.loader = new GLLoader();
+    /**
+     * Constructor to the render responsible to access the openGL API
+     */
+    public GLRenderAPIAccess(IResourceProvider resourceProvider) {
+		this.loader = new GLLoader(resourceProvider);
 		this.frameRender = new GLFrameRender();
-		this.shaderManagerAPI = new GLShaderManager();
+		this.shaderManagerAPI = new GLShaderManager(resourceProvider);
 	}
 
 	/**

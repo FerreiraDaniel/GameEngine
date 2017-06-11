@@ -20,6 +20,7 @@ public class GuiTexture {
      * Identifier of the texture
      */
     private final TextureEnum textureEnum;
+
     /**
      * Position of the texture between (0,0) and (1.0,1.0)
      */
@@ -33,6 +34,7 @@ public class GuiTexture {
      * Note if null nothing will be trigger
      */
     private final GamePadKey gamePadKey;
+
     /**
      * Identifier of the texture
      */

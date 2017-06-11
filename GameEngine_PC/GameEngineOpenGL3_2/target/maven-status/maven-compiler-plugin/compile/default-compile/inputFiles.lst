@@ -12,6 +12,7 @@
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/complexEntities/LightingComponent.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/audioEngine/AudioManager.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/Terrain.java
+/Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/desktopUtils/DesktopResourceProvider.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/modelGenerators/DefaultModelGenerator.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/GuiTexture.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/renderEngine/GuiRender.java

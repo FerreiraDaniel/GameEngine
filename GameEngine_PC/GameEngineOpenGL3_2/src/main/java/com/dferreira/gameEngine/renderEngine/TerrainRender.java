@@ -1,18 +1,16 @@
 package com.dferreira.gameEngine.renderEngine;
 
-import java.util.HashMap;
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
-import com.dferreira.commons.gl_render.GLRawModel;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.models.Light;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.gameEngine.shaders.terrains.TerrainShaderManager;
@@ -66,44 +64,53 @@ public class TerrainRender extends GenericRender {
 		return matrix;
 	}
 
-	/**
-	 * Render the terrains in the scene
-	 * 
-	 * @param skyColor
-	 *            Color of the sky
-	 * @param lights
-	 *            The lights of the scene
-	 * @param viewMatrix
-	 *            View matrix to render the scene
-	 * @param terrains
-	 *            List of terrains of the scene
-	 */
-	public void render(ColorRGBA skyColor, Light[] lights, GLTransformation viewMatrix, List<Terrain> terrains) {
-		tShader.start();
-		tShader.loadSkyColor(skyColor);
-		tShader.loadLights(lights);
-		tShader.loadViewMatrix(viewMatrix);
+    /**
+     * Render the terrains in the scene
+     *
+     * @param skyColor   Color of the sky
+     * @param lights     The lights of the scene
+     * @param viewMatrix View matrix to render the scene
+     * @param terrains   List of terrains of the scene
+     */
+    public void render(ColorRGBA skyColor, Light[] lights, GLTransformation viewMatrix, List<Terrain> terrains) {
+        tShader.start();
+        tShader.loadSkyColor(skyColor);
+        tShader.loadLights(lights);
+        tShader.loadViewMatrix(viewMatrix);
 
-		this.render(terrains);
-		tShader.stop();
-	}
+        this.render(terrains);
+        tShader.stop();
+    }
 
+    /**
+     * Render one list of terrains
+     *
+     * @param terrains List of Terrains to render
+     */
+    private void render(List<Terrain> terrains) {
+        if (!Utils.isEmpty(terrains)) {
+            for (Terrain terrain : terrains) {
+                prepareTerrain(terrain);
+                prepareInstance(terrain);
+                render(terrain);
+                unbindTexturedModel();
+            }
+        }
+    }
+    
 	/**
-	 * Render one list of terrains
+	 * Bind the several textures of the terrain
 	 * 
-	 * @param terrains
-	 *            List of Terrains to render
+	 * @param terrain
+	 *            Terrain that is going to get the textures bound
 	 */
-	private void render(List<Terrain> terrains) {
-		if ((terrains != null) && (!terrains.isEmpty())) {
-			for (int i = 0; i < terrains.size(); i++) {
-				Terrain terrain = terrains.get(i);
-				prepareTerrain(terrain);
-				prepareInstance(terrain);
-				render(terrain);
-				unbindTexturedModel();
-			}
-		}
+	private void bindTextures(Terrain terrain) {
+		TerrainTexturesPack texturesPackage = terrain.getTexturePack();
+        this.frameRenderAPI.activeAndBindTextures(texturesPackage.getBackgroundTexture(),
+                texturesPackage.getMudTexture(),
+                texturesPackage.getGrassTexture(),
+                texturesPackage.getPathTexture(),
+                texturesPackage.getWeightMapTexture());
 	}
 
 	/**
@@ -113,62 +120,21 @@ public class TerrainRender extends GenericRender {
 	 *            Terrain to get prepared
 	 */
 	private void prepareTerrain(Terrain terrain) {
-		GLRawModel model = terrain.getModel();
-
-		GL30.glBindVertexArray(model.getVaoId());
-		GL20.glEnableVertexAttribArray(TTerrainAttribute.position.getValue());
-		GL20.glEnableVertexAttribArray(TTerrainAttribute.textureCoords.getValue());
-		GL20.glEnableVertexAttribArray(TTerrainAttribute.normal.getValue());
+		IRawModel model = terrain.getModel();
 
 		// bind several textures of the terrain
 		bindTextures(terrain);
 
 		// Bind the light properties
 		tShader.loadShineVariables(1.0f, 0.0f);
+		
+		this.frameRenderAPI.prepareModel(model,
+                TTerrainAttribute.position,
+                TTerrainAttribute.textureCoords,
+                TTerrainAttribute.normal
+        );
 	}
 
-	/**
-	 * When loads one texture defines that by default should zoom in/out it
-	 */
-	private void defineTextureFunctionFilters() {
-		// The texture minification function is used whenever the pixel being
-		// textured maps to an area greater than one texture element
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-
-		// The texture magnification function is used when the pixel being
-		// textured maps to an area less than or equal to one texture element
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-
-		// Sets the wrap parameter for texture coordinate s
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, GL11.GL_REPEAT);
-
-		// Sets the wrap parameter for texture coordinate t
-		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T, GL11.GL_REPEAT);
-	}
-
-	/**
-	 * Bind the several textures of the terrain
-	 * 
-	 * @param terrain
-	 *            Terrain that is going to get the textures bound
-	 */
-	private void bindTextures(Terrain terrain) {
-		TerrainTexturesPack texturesPackage = terrain.getTexturePack();
-		HashMap<Integer, Integer> texturesMatching = new HashMap<>();
-		texturesMatching.put(GL13.GL_TEXTURE0, texturesPackage.getBackgroundTextureId());
-		texturesMatching.put(GL13.GL_TEXTURE1, texturesPackage.getMudTextureId());
-		texturesMatching.put(GL13.GL_TEXTURE2, texturesPackage.getGrassTextureId());
-		texturesMatching.put(GL13.GL_TEXTURE3, texturesPackage.getPathTextureId());
-		texturesMatching.put(GL13.GL_TEXTURE4, texturesPackage.getWeightMapTextureId());
-
-		for (int key : texturesMatching.keySet()) {
-			GL13.glActiveTexture(key);
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturesMatching.get(key));
-
-			// Set filtering of the texture
-			defineTextureFunctionFilters();
-		}
-	}
 
 	/**
 	 * Render the terrain itself
@@ -188,8 +154,8 @@ public class TerrainRender extends GenericRender {
 	 *            A reference to the terrain to get render
 	 */
 	private void render(Terrain terrain) {
-		GLRawModel model = terrain.getModel();
-		GL11.glDrawElements(GL11.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
+		IRawModel model = terrain.getModel();
+        this.frameRenderAPI.drawTrianglesIndexes(model);
 	}
 
 	/**

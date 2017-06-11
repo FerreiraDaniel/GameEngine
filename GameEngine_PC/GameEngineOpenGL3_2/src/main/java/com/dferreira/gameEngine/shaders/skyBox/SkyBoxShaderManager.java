@@ -6,6 +6,7 @@ import java.util.List;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
 /**
@@ -17,12 +18,14 @@ public class SkyBoxShaderManager extends ShaderManager {
 	/**
 	 * Path of the vertex shader file
 	 */
-	private static final String VERTEX_FILE = COMMON_PATH + "skyBox/sky_box_vertex_shader.glsl";
+	// private static final String VERTEX_FILE = COMMON_PATH +
+	// "skyBox/sky_box_vertex_shader.glsl";
 
 	/**
 	 * Path of the fragment shader file
 	 */
-	private static final String FRAGMENT_FILE = COMMON_PATH + "skyBox/sky_box_fragment_shader.glsl";
+	// private static final String FRAGMENT_FILE = COMMON_PATH +
+	// "skyBox/sky_box_fragment_shader.glsl";
 
 	/**
 	 * All the uniform locations in the shader programs
@@ -38,7 +41,7 @@ public class SkyBoxShaderManager extends ShaderManager {
 	 *            shader
 	 */
 	public SkyBoxShaderManager(IShaderManagerAPI renderAPI) {
-		super(VERTEX_FILE, FRAGMENT_FILE, renderAPI);
+		super(TextEnum.sky_box_vertex_shader, TextEnum.sky_box_fragment_shader, renderAPI);
 	}
 
 	/**

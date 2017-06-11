@@ -3,6 +3,7 @@ package com.dferreira.gameEngine.models;
 import com.dferreira.commons.Maths;
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.gl_render.GLRawModel;
 import com.dferreira.gameEngine.textures.TerrainTexturesPack;
 
@@ -92,7 +93,7 @@ public class Terrain {
 	/**
 	 * @return the model
 	 */
-	public GLRawModel getModel() {
+	public IRawModel getModel() {
 		return model;
 	}
 

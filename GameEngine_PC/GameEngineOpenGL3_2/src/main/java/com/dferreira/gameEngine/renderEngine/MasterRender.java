@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.lwjgl.opengl.GL11;
-
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
@@ -278,9 +276,7 @@ public class MasterRender {
 	 * Clean the data of the previous frame
 	 */
 	private void prepare() {
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glClearColor(0, 0.3f, 0, 1);
-		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		renderAPI.getFrameRenderAPI().prepareFrame();
 	}
 
 	/**

@@ -162,7 +162,7 @@ class GLFrameRender implements IFrameRenderAPI {
     }
 
     /**
-     * Activates and binds a set of textures with IDs passed
+     * Activates and binds a set of textures passed
      *
      * @param texture1 The texture 1
      * @param texture2 The texture 2

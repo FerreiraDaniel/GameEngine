@@ -72,7 +72,7 @@ class GLLoader implements ILoaderRenderAPI {
     }
 
     /**
-     * Load a texture in openGLES api
+     * Load a texture in openGLES API
      *
      * @param textureData The data of the texture to load
      * @param repeat      Indicate that should repeat the texture if the polygon surpass the size of texture

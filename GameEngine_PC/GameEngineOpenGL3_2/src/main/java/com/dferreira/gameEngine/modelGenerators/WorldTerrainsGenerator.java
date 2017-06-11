@@ -1,6 +1,9 @@
 package com.dferreira.gameEngine.modelGenerators;
 
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.gl_render.GLRawModel;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.gameEngine.models.Terrain;
@@ -12,32 +15,32 @@ import com.dferreira.gameEngine.textures.TerrainTexturesPack;
  * Responsible for creating the multiple terrains of the 3D world
  */
 public class WorldTerrainsGenerator {
-	private final static String TERRAIN_FOLDER = "terrain/";
+
 	private final static int NUMBER_OF_TERRAINS = 1;
 
-	/**
-	 * Load the textures of the terrain
-	 *
-	 * @param loader
-	 *            the loader of the texture
-	 *
-	 * @return the textures package of the terrain
-	 */
-	private static TerrainTexturesPack getTexturedTerrain(Loader loader) {
-		Integer weightMapTextureId = loader.loadTexture(TERRAIN_FOLDER + "blendMap");
-		Integer backgroundTextureId = loader.loadTexture(TERRAIN_FOLDER + "terrain");
-		Integer mudTextureId = loader.loadTexture(TERRAIN_FOLDER + "mud");
-		Integer grassTextureId = loader.loadTexture(TERRAIN_FOLDER + "terrain_grass");
-		Integer pathTextureId = loader.loadTexture(TERRAIN_FOLDER + "path");
-		// Create the package
-		TerrainTexturesPack texturesPackage = new TerrainTexturesPack();
-		texturesPackage.setWeightMapTextureId(weightMapTextureId);
-		texturesPackage.setBackgroundTextureId(backgroundTextureId);
-		texturesPackage.setMudTextureId(mudTextureId);
-		texturesPackage.setGrassTextureId(grassTextureId);
-		texturesPackage.setPathTextureId(pathTextureId);
+    /**
+     * Load the texture of the terrain
+     *
+     * @param loaderRenderAPI Loader to load the raw model
+     * @return the textured model of the terrain
+     */
+	private static TerrainTexturesPack getTexturedTerrain(ILoaderRenderAPI loaderRenderAPI) {
+        boolean repeat = true;
+        ITexture weightMapTexture = loaderRenderAPI.loadTexture(TextureEnum.weight_map, repeat);
+        ITexture backgroundTexture = loaderRenderAPI.loadTexture(TextureEnum.terrain, repeat);
+        ITexture mudTexture = loaderRenderAPI.loadTexture(TextureEnum.mud, repeat);
+        ITexture grassTexture = loaderRenderAPI.loadTexture(TextureEnum.terrain_grass, repeat);
+        ITexture pathTexture = loaderRenderAPI.loadTexture(TextureEnum.path, repeat);
+        
+        // Create the package
+        TerrainTexturesPack texturesPackage = new TerrainTexturesPack();
+        texturesPackage.setWeightMapTexture(weightMapTexture);
+        texturesPackage.setBackgroundTexture(backgroundTexture);
+        texturesPackage.setMudTexture(mudTexture);
+        texturesPackage.setGrassTexture(grassTexture);
+        texturesPackage.setPathTexture(pathTexture);
 
-		return texturesPackage;
+        return texturesPackage;
 	}
 
 	/**
@@ -68,9 +71,9 @@ public class WorldTerrainsGenerator {
 	 *
 	 * @return list of terrains of the scene
 	 */
-	public static Terrain[] getTerrains(Loader loader) {
-		TerrainTexturesPack texturedTerrain = getTexturedTerrain(loader);
-		TextureData heightMap = loader.getTextureData(TERRAIN_FOLDER + "heightmap");
+	public static Terrain[] getTerrains(Loader loader, ILoaderRenderAPI loaderRenderAPI) {
+		TerrainTexturesPack texturedTerrain = getTexturedTerrain(loaderRenderAPI);
+		TextureData heightMap = loaderRenderAPI.getTextureData(TextureEnum.terrain_heightmap);
 		TerrainShape terrain = new TerrainShape(heightMap);
 		GLRawModel model = loader.loadToVAO(terrain.getVertices(), terrain.getTextureCoords(), terrain.getNormals(),
 				terrain.getIndices());

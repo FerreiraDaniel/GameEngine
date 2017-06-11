@@ -53,7 +53,6 @@ class GLShaderManager implements IShaderManagerAPI {
         String vertexShaderSrc = this.resourceProvider.getResource(vertexShader);
         String fragShaderSrc = this.resourceProvider.getResource(fragShader);
         return loadProgram(vertexShaderSrc, fragShaderSrc);
-
     }
 
     /**

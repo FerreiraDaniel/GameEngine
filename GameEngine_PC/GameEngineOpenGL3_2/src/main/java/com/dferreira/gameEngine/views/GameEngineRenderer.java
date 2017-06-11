@@ -6,8 +6,10 @@ import java.util.List;
 
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRenderAPIAccess;
+import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.gl_render.GLRenderAPIAccess;
 import com.dferreira.commons.models.Light;
+import com.dferreira.desktopUtils.DesktopResourceProvider;
 import com.dferreira.gameEngine.audioEngine.AudioLoader;
 import com.dferreira.gameEngine.audioEngine.MasterPlayer;
 import com.dferreira.gameEngine.audioEngine.TAudioEnum;
@@ -70,7 +72,7 @@ public class GameEngineRenderer {
 	/**
 	 * Array of GUIs to render
 	 */
-	private GuiTexture[] guis;
+	private GuiTexture[] GUIs;
 	
 
 	/**
@@ -116,23 +118,25 @@ public class GameEngineRenderer {
 		/* Initializes the main variable responsible to the audio of the 3D world*/
 		this.audioLoader = new AudioLoader();
 		
-		this.renderAPIAccess = new GLRenderAPIAccess();
+		IResourceProvider resourceProvider = new DesktopResourceProvider();
+		this.renderAPIAccess = new GLRenderAPIAccess(resourceProvider);
 		ILoaderRenderAPI loaderAPI = renderAPIAccess.getLoaderRenderAPI();
 		this.renderer = new MasterRender(renderAPIAccess);
 		
 
 		/* Prepares the terrains that is going to render */
-		this.terrains = WorldTerrainsGenerator.getTerrains(loader);
+		this.terrains = WorldTerrainsGenerator.getTerrains(loader, loaderAPI);
 				
 		/* Prepares the entities that is going to be render */
 		this.entities = WorldEntitiesGenerator.getEntities(loader, terrains[0]);
-
+		WorldEntitiesGenerator.loadTextures(loaderAPI, this.entities);
 
 		/* Load the light that is going to render */
 		this.lights = WorldLightsGenerator.getLights();
 
 		/* Prepares the GUIs that is going to render*/
-		this.guis = WorldGUIsGenerator.getGUIs(loader);
+		this.GUIs = WorldGUIsGenerator.getGUIs(loader);
+		WorldGUIsGenerator.loadTextures(loaderAPI, this.GUIs);
 		
 		/* Load the sky box that is going to render */
 		this.skyBox = WorldSkyBoxGenerator.getSky(loader);
@@ -160,7 +164,7 @@ public class GameEngineRenderer {
 		renderer.processEntities(entities);
 		renderer.processSkyBox(skyBox);
 		renderer.processPlayer(player);
-		renderer.processGUIs(this.guis);
+		renderer.processGUIs(this.GUIs);
 		renderer.render(lights);
 		DisplayManager.updateDisplay();
 		renderer.endFrameRender();
