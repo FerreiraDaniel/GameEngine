@@ -74,17 +74,11 @@ public class EntityRender extends GenericRender {
     /**
      * Render the entities in the scene
      *
-     * @param skyColor
-     *            Color of the sky
-     *
-     * @param lights
-     *            The lights of the scene
-     * @param viewMatrix
-     *            View matrix to render the scene
-     * @param entities
-     *            List of entities of the scene
-     * @param player
-     *            The player of the scene
+     * @param skyColor   Color of the sky
+     * @param lights     The lights of the scene
+     * @param viewMatrix View matrix to render the scene
+     * @param entities   List of entities of the scene
+     * @param player     The player of the scene
      */
     public void render(ColorRGBA skyColor, Light[] lights, GLTransformation viewMatrix,
                        Map<GenericEntity, List<Entity>> entities, Player player) {
@@ -171,7 +165,7 @@ public class EntityRender extends GenericRender {
      */
     private void prepareLightingComponent(LightingComponent component) {
         if (component.getTextureWeight() > 0.0f) {
-            this.frameRenderAPI.activeAndBindTexture(component.getTextureId());
+            this.frameRenderAPI.activeAndBindTexture(component.getTexture());
         }
 
         // Load the texture weight of the material

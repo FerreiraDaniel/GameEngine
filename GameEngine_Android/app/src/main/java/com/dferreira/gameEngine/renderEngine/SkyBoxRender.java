@@ -66,7 +66,7 @@ public class SkyBoxRender extends GenericRender {
      * Bind the cube texture of the skyBox
      */
     private void bindTextures(SkyBox skyBox) {
-        this.frameRenderAPI.activeAndBindCubeTexture(skyBox.getTextureId());
+        this.frameRenderAPI.activeAndBindCubeTexture(skyBox.getTexture());
     }
 
 

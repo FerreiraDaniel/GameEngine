@@ -44,7 +44,7 @@ public class WorldLightsGenerator {
     /**
      * @return A blue light to the scene
      */
-    public static Light getBlueLight() {
+    private static Light getBlueLight() {
         Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
         ColorRGB lightColor = new ColorRGB(0.0f, 0.0f, 1.0f);
 

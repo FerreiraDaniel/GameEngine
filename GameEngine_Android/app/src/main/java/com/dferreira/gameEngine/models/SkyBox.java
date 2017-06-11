@@ -1,6 +1,7 @@
 package com.dferreira.gameEngine.models;
 
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 
 /**
  * Represents a box with sky textures
@@ -13,14 +14,14 @@ public class SkyBox {
     private final IRawModel model;
 
     /**
-     * The identifier of the sky box cubic texture
+     * The Cubic texture in the Graphics API
      */
-    private Integer textureId;
+    private ITexture texture;
 
     /**
      * The constructor of the skyBox
      *
-     * @param model     The model of the sky box
+     * @param model The model of the sky box
      */
     public SkyBox(IRawModel model) {
         super();
@@ -35,17 +36,16 @@ public class SkyBox {
     }
 
     /**
-     * Set the texture identifier
-     * @param textureId The Identifier of the texture of the sky
+     * @return Texture in the Graphics API Framework
      */
-    public void setTextureId(Integer textureId) {
-        this.textureId = textureId;
+    public ITexture getTexture() {
+        return texture;
     }
 
     /**
-     * @return the textureId
+     * @param texture Texture API Framework
      */
-    public Integer getTextureId() {
-        return textureId;
+    public void setTexture(ITexture texture) {
+        this.texture = texture;
     }
 }

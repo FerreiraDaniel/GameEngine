@@ -101,7 +101,7 @@ public class GuiRender extends GenericRender {
      * @param gui Entity that is to get prepared to be loaded
      */
     private void prepareInstance(GuiTexture gui) {
-        this.frameRenderAPI.activeAndBindTexture(gui.getTextureId());
+        this.frameRenderAPI.activeAndBindTexture(gui.getTexture());
         // Load the transformation matrix
         gShader.loadTransformationMatrix(getTransformationMatrix(gui));
     }

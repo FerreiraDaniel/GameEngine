@@ -3,6 +3,7 @@ package com.dferreira.gameEngine.modelGenerators;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.gameEngine.models.Terrain;
@@ -23,18 +24,18 @@ public class WorldTerrainsGenerator {
     @SuppressWarnings("ConstantConditions")
     private static TerrainTexturesPack getTexturedTerrain(ILoaderRenderAPI loaderRenderAPI) {
         boolean repeat = true;
-        Integer weightMapTextureId = loaderRenderAPI.loadTexture(TextureEnum.weight_map, repeat);
-        Integer backgroundTextureId = loaderRenderAPI.loadTexture(TextureEnum.terrain, repeat);
-        Integer mudTextureId = loaderRenderAPI.loadTexture(TextureEnum.mud, repeat);
-        Integer grassTextureId = loaderRenderAPI.loadTexture(TextureEnum.terrain_grass, repeat);
-        Integer pathTextureId = loaderRenderAPI.loadTexture(TextureEnum.path, repeat);
+        ITexture weightMapTexture = loaderRenderAPI.loadTexture(TextureEnum.weight_map, repeat);
+        ITexture backgroundTexture = loaderRenderAPI.loadTexture(TextureEnum.terrain, repeat);
+        ITexture mudTexture = loaderRenderAPI.loadTexture(TextureEnum.mud, repeat);
+        ITexture grassTexture = loaderRenderAPI.loadTexture(TextureEnum.terrain_grass, repeat);
+        ITexture pathTexture = loaderRenderAPI.loadTexture(TextureEnum.path, repeat);
         // Create the package
         TerrainTexturesPack texturesPackage = new TerrainTexturesPack();
-        texturesPackage.setWeightMapTextureId(weightMapTextureId);
-        texturesPackage.setBackgroundTextureId(backgroundTextureId);
-        texturesPackage.setMudTextureId(mudTextureId);
-        texturesPackage.setGrassTextureId(grassTextureId);
-        texturesPackage.setPathTextureId(pathTextureId);
+        texturesPackage.setWeightMapTexture(weightMapTexture);
+        texturesPackage.setBackgroundTexture(backgroundTexture);
+        texturesPackage.setMudTexture(mudTexture);
+        texturesPackage.setGrassTexture(grassTexture);
+        texturesPackage.setPathTexture(pathTexture);
 
         return texturesPackage;
     }

@@ -3,6 +3,7 @@ package com.dferreira.gameEngine.modelGenerators;
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameController.GamePadKey;
@@ -92,8 +93,8 @@ public class WorldGUIsGenerator {
         if (!Utils.isEmpty(GUIs)) {
             for (GuiTexture guiTexture : GUIs) {
                 // Load the texture of the GUI
-                Integer textureId = loaderRenderAPI.loadTexture(guiTexture.getTextureEnum(), false);
-                guiTexture.setTextureId(textureId);
+                ITexture texture = loaderRenderAPI.loadTexture(guiTexture.getTextureEnum(), false);
+                guiTexture.setTexture(texture);
             }
         }
     }

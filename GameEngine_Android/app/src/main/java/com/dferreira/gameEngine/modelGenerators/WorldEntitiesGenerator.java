@@ -1,11 +1,9 @@
 package com.dferreira.gameEngine.modelGenerators;
 
-import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.generic_resources.ModelEnum;
-import com.dferreira.commons.models.Light;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
@@ -110,9 +108,10 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
     /**
      * @param loader    loader that will load the entities of the 3D world
      * @param loaderAPI loader that will load the entities of the 3D world
+     * @param resourceProvider  Provider of the resources used in the application
      * @param terrain   The terrain used to determine the height position
+     *
      * @return The entities that will compose the 3D world
-     * @parem resourceProvider  Provider of the resources used in the application
      */
     public static Entity[] getEntities(Loader loader, ILoaderRenderAPI loaderAPI, IResourceProvider resourceProvider, Terrain terrain) {
 
@@ -159,15 +158,5 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
                 loadTexturesOfEntity(loaderRenderAPI, entity);
             }
         }
-    }
-
-    /**
-     * @return A light source to the scene
-     */
-    public static Light getLight() {
-        Vector3f lightPosition = new Vector3f(10.0f, 100.0f, 10.0f);
-        ColorRGB lightColor = new ColorRGB(1.0f, 1.0f, 1.0f);
-
-        return new Light(lightPosition, lightColor);
     }
 }

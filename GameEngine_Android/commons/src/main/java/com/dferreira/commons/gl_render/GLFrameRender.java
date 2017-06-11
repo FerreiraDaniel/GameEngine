@@ -6,6 +6,7 @@ import android.opengl.GLES20;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_render.RenderConstants;
 
 /**
@@ -125,53 +126,57 @@ class GLFrameRender implements IFrameRenderAPI {
     /**
      * Activates and binds the texture with ID passed in the specified target
      *
-     * @param target    Target where is to bind the texture
-     * @param textureId The identifier of the texture
+     * @param target  Target where is to bind the texture
+     * @param texture The texture to use
      */
-    private void activeAndBind2DTexture(int target, int textureId) {
+    private void activeAndBind2DTexture(int target, ITexture texture) {
+        GLTexture glTexture = (GLTexture) texture;
+
         //Enable the specific texture
         GLES20.glActiveTexture(target);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, glTexture.getId());
     }
 
     /**
-     * Activates and binds the texture with ID passed
+     * Activates and binds the texture with passed
      *
-     * @param textureId The identifier of the texture
+     * @param texture The texture to use
      */
     @Override
-    public void activeAndBindTexture(Integer textureId) {
+    public void activeAndBindTexture(ITexture texture) {
         //Enable the specific texture
-        activeAndBind2DTexture(GLES20.GL_TEXTURE0, textureId);
+        activeAndBind2DTexture(GLES20.GL_TEXTURE0, texture);
     }
 
     /**
      * Activates and binds a cubic texture with ID passed
      *
-     * @param textureId The identifier of the texture
+     * @param texture The texture to use
      */
     @Override
-    public void activeAndBindCubeTexture(Integer textureId) {
+    public void activeAndBindCubeTexture(ITexture texture) {
+        GLTexture glTexture = (GLTexture) texture;
+
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP, textureId);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP, glTexture.getId());
     }
 
     /**
      * Activates and binds a set of textures with IDs passed
      *
-     * @param textureId1 The identifier of the texture 1
-     * @param textureId2 The identifier of the texture 2
-     * @param textureId3 The identifier of the texture 3
-     * @param textureId4 The identifier of the texture 4
-     * @param textureId5 The identifier of the texture 5
+     * @param texture1 The texture 1
+     * @param texture2 The texture 2
+     * @param texture3 The texture 3
+     * @param texture4 The texture 4
+     * @param texture5 The texture 5
      */
     @Override
-    public void activeAndBindTextures(int textureId1, int textureId2, int textureId3, int textureId4, int textureId5) {
-        activeAndBind2DTexture(GLES20.GL_TEXTURE0, textureId1);
-        activeAndBind2DTexture(GLES20.GL_TEXTURE1, textureId2);
-        activeAndBind2DTexture(GLES20.GL_TEXTURE2, textureId3);
-        activeAndBind2DTexture(GLES20.GL_TEXTURE3, textureId4);
-        activeAndBind2DTexture(GLES20.GL_TEXTURE4, textureId5);
+    public void activeAndBindTextures(ITexture texture1, ITexture texture2, ITexture texture3, ITexture texture4, ITexture texture5) {
+        activeAndBind2DTexture(GLES20.GL_TEXTURE0, texture1);
+        activeAndBind2DTexture(GLES20.GL_TEXTURE1, texture2);
+        activeAndBind2DTexture(GLES20.GL_TEXTURE2, texture3);
+        activeAndBind2DTexture(GLES20.GL_TEXTURE3, texture4);
+        activeAndBind2DTexture(GLES20.GL_TEXTURE4, texture5);
     }
 
     /**

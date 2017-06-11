@@ -101,11 +101,11 @@ public class TerrainRender extends GenericRender {
      */
     private void bindTextures(Terrain terrain) {
         TerrainTexturesPack texturesPackage = terrain.getTexturePack();
-        this.frameRenderAPI.activeAndBindTextures(texturesPackage.getBackgroundTextureId(),
-                texturesPackage.getMudTextureId(),
-                texturesPackage.getGrassTextureId(),
-                texturesPackage.getPathTextureId(),
-                texturesPackage.getWeightMapTextureId());
+        this.frameRenderAPI.activeAndBindTextures(texturesPackage.getBackgroundTexture(),
+                texturesPackage.getMudTexture(),
+                texturesPackage.getGrassTexture(),
+                texturesPackage.getPathTexture(),
+                texturesPackage.getWeightMapTexture());
     }
 
     /**

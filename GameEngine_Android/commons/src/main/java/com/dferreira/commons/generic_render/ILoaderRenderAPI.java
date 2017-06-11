@@ -12,25 +12,14 @@ public interface ILoaderRenderAPI {
 
 
     /**
-     * Indicates if the API passed as argument is possible to be used for render
-     * the scene or not
-     *
-     * @param supportedRenderAPI    API to get tested
-     *
-     * @return False -> The API is not supported
-     *          True -> The API is supported
-     */
-    boolean detectSupportedAPI(SupportedRenderAPIEnum supportedRenderAPI);
-
-
-    /**
      * Load a texture in the Render API
      *
      * @param textureEnum Enum of the resource where the texture exists
      * @param repeat     Indicate that should repeat the texture if the polygon surpass the size of texture
+     *
      * @return The identifier of the texture loaded
      */
-    Integer loadTexture(TextureEnum textureEnum, boolean repeat);
+    ITexture loadTexture(TextureEnum textureEnum, boolean repeat);
 
     /**
      * Load a texture in the Render API
@@ -40,7 +29,7 @@ public interface ILoaderRenderAPI {
      * @return The identifier of the texture loaded
      */
     @SuppressWarnings("SameParameterValue")
-    Integer loadTexture(String filename, boolean repeat);
+    ITexture loadTexture(String filename, boolean repeat);
 
     /**
      * Loads the data of a texture without bind
@@ -49,7 +38,7 @@ public interface ILoaderRenderAPI {
      *
      * @return The texture read from the file without any openGL bind
      */
-    public TextureData getTextureData(TextureEnum textureEnum);
+    TextureData getTextureData(TextureEnum textureEnum);
 
     /**
      * Load a set of textures in the Render API
@@ -59,7 +48,7 @@ public interface ILoaderRenderAPI {
      * @return The identifier of the texture
      */
     @SuppressWarnings("SameParameterValue")
-    Integer loadTCubeMap(TextureEnum[] textures, boolean repeat);
+    ITexture loadTCubeMap(TextureEnum[] textures, boolean repeat);
 
     /**
      * Load from a shape to one equivalent IRawModel

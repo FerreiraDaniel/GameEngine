@@ -2,6 +2,7 @@ package com.dferreira.gameEngine.models;
 
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.gameController.GamePadKey;
 
@@ -35,7 +36,7 @@ public class GuiTexture {
     /**
      * Identifier of the texture
      */
-    private int textureId;
+    private ITexture texture;
 
     /**
      * @param rawModel   The rawModel that will be used by the guiTexture
@@ -69,18 +70,18 @@ public class GuiTexture {
     }
 
     /**
-     * @return Identifier of the texture
+     * @return Texture in the Graphics API Framework
      */
-    public int getTextureId() {
-        return textureId;
+    public ITexture getTexture() {
+        return texture;
     }
 
     /**
      *
-     * @param textureId Identifier of the texture
+     * @param texture Texture API Framework
      */
-    public void setTextureId(int textureId) {
-        this.textureId = textureId;
+    public void setTexture(ITexture texture) {
+        this.texture = texture;
     }
 
     /**

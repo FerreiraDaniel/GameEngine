@@ -59,29 +59,29 @@ public interface IFrameRenderAPI {
     void unPrepareModel(IEnum position);
 
     /**
-     * Activates and binds the texture with ID passed
+     * Activates and binds the texture with passed
      *
-     * @param textureId The identifier of the texture
+     * @param texture The texture to use
      */
-    void activeAndBindTexture(Integer textureId);
+    void activeAndBindTexture(ITexture texture);
 
     /**
      * Activates and binds a cubic texture with ID passed
      *
-     * @param textureId The identifier of the texture
+     * @param texture The texture to use
      */
-    void activeAndBindCubeTexture(Integer textureId);
+    void activeAndBindCubeTexture(ITexture texture);
 
     /**
      * Activates and binds a set of textures with IDs passed
      *
-     * @param textureId1 The identifier of the texture 1
-     * @param textureId2 The identifier of the texture 2
-     * @param textureId3 The identifier of the texture 3
-     * @param textureId4 The identifier of the texture 4
-     * @param textureId5 The identifier of the texture 5
+     * @param texture1 The texture 1
+     * @param texture2 The texture 2
+     * @param texture3 The texture 3
+     * @param texture4 The texture 4
+     * @param texture5 The texture 5
      */
-    void activeAndBindTextures(int textureId1, int textureId2, int textureId3, int textureId4, int textureId5);
+    void activeAndBindTextures(ITexture texture1, ITexture texture2, ITexture texture3, ITexture texture4, ITexture texture5);
 
     /**
      * Draw a set of triangles using for that there indexes

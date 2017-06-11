@@ -2,6 +2,7 @@ package com.dferreira.gameEngine.modelGenerators;
 
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
@@ -65,8 +66,8 @@ class GenericEntitiesGenerator {
                     for (RawModelMaterial rawModelMaterial : materialGroups.getMaterials()) {
                         Material material = rawModelMaterial.getMaterial();
                         if (!Utils.isEmpty(material.getDiffuse().getFilename())) {
-                            int textureId = loaderRenderAPI.loadTexture(material.getDiffuse().getFilename(), false);
-                            material.getDiffuse().setTextureId(textureId);
+                            ITexture texture = loaderRenderAPI.loadTexture(material.getDiffuse().getFilename(), false);
+                            material.getDiffuse().setTexture(texture);
                         }
                     }
                 }

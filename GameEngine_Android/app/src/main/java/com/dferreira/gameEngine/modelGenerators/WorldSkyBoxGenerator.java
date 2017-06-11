@@ -2,6 +2,7 @@ package com.dferreira.gameEngine.modelGenerators;
 
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.gameEngine.models.SkyBox;
@@ -41,7 +42,7 @@ public class WorldSkyBoxGenerator {
      * @param skyBox          The skyBox to load the elements
      */
     public static void loadTextures(ILoaderRenderAPI loaderRenderAPI, SkyBox skyBox) {
-        Integer textureId = loaderRenderAPI.loadTCubeMap(SKY_RESOURCE_IDS, false);
-        skyBox.setTextureId(textureId);
+        ITexture texture = loaderRenderAPI.loadTCubeMap(SKY_RESOURCE_IDS, false);
+        skyBox.setTexture(texture);
     }
 }

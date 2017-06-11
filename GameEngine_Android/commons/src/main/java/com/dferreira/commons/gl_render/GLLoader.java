@@ -4,7 +4,7 @@ import android.opengl.GLES20;
 
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
-import com.dferreira.commons.generic_render.SupportedRenderAPIEnum;
+import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
@@ -40,18 +40,6 @@ class GLLoader implements ILoaderRenderAPI {
         this.resourceProvider = resourceProvider;
     }
 
-    /**
-     * Indicates if the API passed as argument is possible to be used for render
-     * the scene or not
-     *
-     * @param supportedRenderAPI API to get tested
-     * @return False -> The API is not supported
-     * True -> The API is supported
-     */
-    @Override
-    public boolean detectSupportedAPI(SupportedRenderAPIEnum supportedRenderAPI) {
-        return false;
-    }
 
     /**
      * When loads one texture defines that by default should zoom in/out it
@@ -90,7 +78,7 @@ class GLLoader implements ILoaderRenderAPI {
      * @param repeat      Indicate that should repeat the texture if the polygon surpass the size of texture
      * @return Id from the texture that was bounded in openGL
      */
-    private Integer pLoadTexture(TextureData textureData, boolean repeat) {
+    private ITexture pLoadTexture(TextureData textureData, boolean repeat) {
 
         int[] textureId = new int[1];
         GLES20.glGenTextures(1, textureId, 0);
@@ -102,7 +90,10 @@ class GLLoader implements ILoaderRenderAPI {
 
         defineTextureFunctionFilters(GLES20.GL_TEXTURE_2D, getWrapFilters(repeat));
 
-        return textureId[0];
+        GLTexture texture = new GLTexture();
+        texture.setId(textureId[0]);
+
+        return texture;
     }
 
     /**
@@ -113,7 +104,7 @@ class GLLoader implements ILoaderRenderAPI {
      * @return Id from the texture that was bounded in openGL
      */
     @Override
-    public Integer loadTexture(TextureEnum textureEnum, boolean repeat) {
+    public ITexture loadTexture(TextureEnum textureEnum, boolean repeat) {
         TextureData textureData = this.resourceProvider.getResource(textureEnum);
         return pLoadTexture(textureData, repeat);
     }
@@ -126,7 +117,7 @@ class GLLoader implements ILoaderRenderAPI {
      * @return Id from the texture that was bounded in openGL
      */
     @Override
-    public Integer loadTexture(String textureFileName, boolean repeat) {
+    public ITexture loadTexture(String textureFileName, boolean repeat) {
         TextureData textureData = this.resourceProvider.getTexture(textureFileName);
         return pLoadTexture(textureData, repeat);
     }
@@ -150,7 +141,7 @@ class GLLoader implements ILoaderRenderAPI {
      * @return Identifier of the texture cubic texture loaded
      */
     @Override
-    public Integer loadTCubeMap(TextureEnum[] textures, boolean repeat) {
+    public ITexture loadTCubeMap(TextureEnum[] textures, boolean repeat) {
         if (Utils.isEmpty(textures)) {
             return null;
         } else {
@@ -177,7 +168,11 @@ class GLLoader implements ILoaderRenderAPI {
                 }
             }
             defineTextureFunctionFilters(GLES20.GL_TEXTURE_CUBE_MAP, getWrapFilters(repeat));
-            return textureId[0];
+
+            GLTexture texture = new GLTexture();
+            texture.setId(textureId[0]);
+
+            return texture;
         }
     }
 

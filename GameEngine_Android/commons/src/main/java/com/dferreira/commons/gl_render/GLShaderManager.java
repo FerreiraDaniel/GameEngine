@@ -21,7 +21,7 @@ class GLShaderManager implements IShaderManagerAPI {
     /**
      * Provider of resources (The one that will load from the disk or not)
      */
-    private IResourceProvider resourceProvider;
+    private final IResourceProvider resourceProvider;
 
     /**
      *

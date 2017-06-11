@@ -41,7 +41,7 @@ public class AndroidResourceProvider implements IResourceProvider, ISubResourceP
     /**
      * Context where the methods will be called
      */
-    private Context context;
+    private final Context context;
 
     public AndroidResourceProvider(Context context) {
         this.context = context;
@@ -127,6 +127,7 @@ public class AndroidResourceProvider implements IResourceProvider, ISubResourceP
      * @param modelEnum The model to load
      * @return A resource descriptor to load the model passed as argument
      */
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     @Override
     public List<IShape> getResource(ModelEnum modelEnum) {
         ResourcesCache cache = ResourcesCache.getInstance();

@@ -1,6 +1,7 @@
 package com.dferreira.gameEngine.models.complexEntities;
 
 import com.dferreira.commons.ColorRGBA;
+import com.dferreira.commons.generic_render.ITexture;
 
 /**
  * A material can be composed by several components like:
@@ -10,9 +11,9 @@ import com.dferreira.commons.ColorRGBA;
 public class LightingComponent {
 
     /**
-     * The identifier of the texture
+     * The texture in the API used
      */
-    private Integer textureId;
+    private ITexture texture;
 
     /**
      * The name of the file associated with texture of component (If any)
@@ -31,17 +32,17 @@ public class LightingComponent {
     private ColorRGBA color;
 
     /**
-     * @param textureId The identifier of the texture
+     * @return the identifier of the texture
      */
-    public void setTextureId(Integer textureId) {
-        this.textureId = textureId;
+    public ITexture getTexture() {
+        return this.texture;
     }
 
     /**
-     * @return the identifier of the texture
+     * @param texture The texture to set
      */
-    public Integer getTextureId() {
-        return textureId;
+    public void setTexture(ITexture texture) {
+        this.texture = texture;
     }
 
     /**
@@ -61,17 +62,17 @@ public class LightingComponent {
     }
 
     /**
-     * @param textureWeight the weight of texture to set
-     */
-    public void setTextureWeight(float textureWeight) {
-        this.textureWeight = textureWeight;
-    }
-
-    /**
      * @return the weight of  component to the final diffuse
      */
     public float getTextureWeight() {
         return textureWeight;
+    }
+
+    /**
+     * @param textureWeight the weight of texture to set
+     */
+    public void setTextureWeight(float textureWeight) {
+        this.textureWeight = textureWeight;
     }
 
     /**
