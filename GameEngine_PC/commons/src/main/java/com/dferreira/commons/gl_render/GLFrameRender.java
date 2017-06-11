@@ -83,10 +83,16 @@ class GLFrameRender implements IFrameRenderAPI {
 		
 	}
 
-	@Override
-	public void unPrepareModel(IEnum position) {
-		// TODO Auto-generated method stub
-		
+    /**
+     * UnBind the previous bound elements
+     *
+     * @param position The position attribute
+     */
+    @Override
+    public void unPrepareModel(IEnum position) {
+		GL20.glDisableVertexAttribArray(position.getValue());
+		// Unbind vbo
+		GL30.glBindVertexArray(0);
 	}
 	
     /**
@@ -163,10 +169,15 @@ class GLFrameRender implements IFrameRenderAPI {
 		
 	}
 
-	@Override
-	public void drawQuadVertex(IRawModel quad) {
-		// TODO Auto-generated method stub
-		
+    /**
+     * Draw a quad using for that there vertex
+     *
+     * @param quad The model to be drawn
+     */
+    @Override
+    public void drawQuadVertex(IRawModel quad) {
+        GLRawModel rawModel = (GLRawModel) quad;
+        GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, rawModel.getVertexCount());
 	}
 
     /**
@@ -193,8 +204,7 @@ class GLFrameRender implements IFrameRenderAPI {
      */
     @Override
 	public void enableDepthTest() {
-		// TODO Auto-generated method stub
-		
+    	GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 
     /**
@@ -202,8 +212,7 @@ class GLFrameRender implements IFrameRenderAPI {
      */
     @Override
 	public void disableDepthTest() {
-		// TODO Auto-generated method stub
-		
+    	GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
     /**
@@ -211,8 +220,8 @@ class GLFrameRender implements IFrameRenderAPI {
      */
     @Override
 	public void enableBlend() {
-		// TODO Auto-generated method stub
-		
+    	GL11.glEnable(GL11.GL_BLEND);
+    	GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 	}
 
     /**
@@ -220,8 +229,7 @@ class GLFrameRender implements IFrameRenderAPI {
      */
     @Override
 	public void disableBlend() {
-		// TODO Auto-generated method stub
-		
+    	GL11.glDisable(GL11.GL_BLEND);
 	}
 
     /**
