@@ -1,11 +1,9 @@
 package com.dferreira.commons.wavefront;
 
-import android.content.Context;
-import android.util.Log;
 
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.Vector3f;
-import com.dferreira.commons.androidUtils.ResourcesCache;
+import com.dferreira.commons.generic_resources.ISubResourceProvider;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.shapes.WfObject;
@@ -23,17 +21,14 @@ import java.util.List;
  */
 public class OBJLoader extends GenericLoader {
 
-    /* Character for split material and group */
-    private final static String MAT_GROUP_SPLIT = "@";
-
     @SuppressWarnings("WeakerAccess")
     public final static int COORDINATES_BY_VERTEX = 3;
     @SuppressWarnings("WeakerAccess")
     public final static int COORDINATES_BY_TEXTURE = 2;
     @SuppressWarnings("WeakerAccess")
     public final static int COORDINATES_BY_NORMAL = 3;
-    private final static String TAG = "OBJLoader";
-
+    /* Character for split material and group */
+    private final static String MAT_GROUP_SPLIT = "@";
 
     /**
      * @param face reference to a Polygonal face
@@ -143,21 +138,11 @@ public class OBJLoader extends GenericLoader {
     /**
      * Parses one waveFront file
      *
-     * @param context    Context where the method is called
-     * @param resourceId id of the resource where the waveFront file exists
-     * @return The shapes with information about the waveFront file read
+     * @param inputStream           The resource where the waveFront file exists
+     * @param subResourceProvider   Load the sub type of resources like (Materials)
+     * @return Wavefront object
      */
-    @SuppressWarnings("SameParameterValue")
-    private static List<IShape> pLoadObjModel(Context context, int resourceId) {
-        InputStream inputStream;
-
-
-        try {
-            inputStream = context.getResources().openRawResource(resourceId);
-        } catch (Exception e) {
-            Log.e(TAG, "Could not load file!", e);
-            return null;
-        }
+    public static List<IShape> loadObjModel(InputStream inputStream, ISubResourceProvider subResourceProvider) {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream), 1024);
         String line;
@@ -167,8 +152,8 @@ public class OBJLoader extends GenericLoader {
         List<Vector2f> textures = new ArrayList<>();
         List<Vector3f> normals = new ArrayList<>();
         ArrayList<PolygonalFace> facesLst = new ArrayList<>();
-        String currentGroupName = "";
-        String currentMaterialName = "";
+        String currentGroupName = Utils.EMPTY_STRING;
+        String currentMaterialName = Utils.EMPTY_STRING;
         try {
             while ((line = reader.readLine()) != null) {
                 String[] currentLine = line.split(SPLIT_TOKEN);
@@ -179,7 +164,7 @@ public class OBJLoader extends GenericLoader {
                     // Definition of the list of materials of the model
                     case OBJPrefix.MATERIALS:
                         String materialsFileName = parseStringComponent(line, currentLine);
-                        materials = MtlLoader.loadObjModel(context, materialsFileName);
+                        materials = subResourceProvider.getMaterials(materialsFileName); //MtlLoader.loadObjModel(context, materialsFileName);
                         break;
                     // Parses the information that is to update the current material
                     // used
@@ -234,26 +219,6 @@ public class OBJLoader extends GenericLoader {
     }
 
 
-    /**
-     * Parses one waveFront file (Using cache mechanism if possible)
-     *
-     * @param resourceId id of the resource where the waveFront file exists
-     * @return Wavefront object
-     */
-    @SuppressWarnings({"SameParameterValue", "unchecked"})
-    public static List<IShape> loadObjModel(Context context, int resourceId) {
-        ResourcesCache cache = ResourcesCache.getInstance();
-        List<IShape> shape = (List<IShape>) cache.get(resourceId);
-        if (shape == null) {
-            List<IShape> newShapes = pLoadObjModel(context, resourceId);
-            if (newShapes != null) {
-                cache.put(resourceId, newShapes);
-            }
-            return newShapes;
-        } else {
-            return shape;
-        }
-    }
 
     /**
      * Parse a component in string format and return its long value

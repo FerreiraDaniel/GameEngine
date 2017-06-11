@@ -4,6 +4,7 @@ import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_resources.TextEnum;
 
 /**
  * Interface that should be implemented by the interface that makes the access to the
@@ -12,12 +13,12 @@ import com.dferreira.commons.Vector3f;
 
 public interface IShaderManagerAPI {
     /**
-     * @param vertexShaderSrc Source code of the vertex shader
-     * @param fragShaderSrc   Source code of the fragment shader
+     * @param vertexShader Source code of the vertex shader
+     * @param fragShader   Source code of the fragment shader
      * @return 0 -> There was an error
      * not 0 -> Id of the program loaded
      */
-    ShaderProgram loadProgram(String vertexShaderSrc, String fragShaderSrc);
+    ShaderProgram loadProgram(TextEnum vertexShader, TextEnum fragShader);
 
     /**
      * Link the program shader with their vertex shader and fragment shader

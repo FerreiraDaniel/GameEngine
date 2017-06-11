@@ -2,8 +2,8 @@ package com.dferreira.gameEngine.modelGenerators;
 
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.shapes.IShape;
-import com.dferreira.gameEngine.R;
 import com.dferreira.gameEngine.models.SkyBox;
 import com.dferreira.gameEngine.models.SkyBoxShape;
 
@@ -14,13 +14,13 @@ import com.dferreira.gameEngine.models.SkyBoxShape;
 public class WorldSkyBoxGenerator {
 
     /* The names that the textures of the sky have */
-    private final static int[] SKY_RESOURCE_IDS = {
-            R.mipmap.sky_right,
-            R.mipmap.sky_left,
-            R.mipmap.sky_top,
-            R.mipmap.sky_bottom,
-            R.mipmap.sky_back,
-            R.mipmap.sky_front};
+    private final static TextureEnum[] SKY_RESOURCE_IDS = {
+            TextureEnum.sky_right,
+            TextureEnum.sky_left,
+            TextureEnum.sky_top,
+            TextureEnum.sky_bottom,
+            TextureEnum.sky_back,
+            TextureEnum.sky_front};
 
     /**
      * The sky of the 3D scene

@@ -1,8 +1,5 @@
 package com.dferreira.commons.wavefront;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.utils.Utils;
@@ -18,9 +15,7 @@ import java.util.List;
 /**
  * Parses files with wavefront format That describes a set of material
  */
-class MtlLoader extends GenericLoader {
-
-    private final static String TAG = "MtlLoader";
+public class MtlLoader extends GenericLoader {
 
     /**
      * @param line line to get parsed
@@ -47,30 +42,14 @@ class MtlLoader extends GenericLoader {
     /**
      * Parses one waveFront file contain a list of material
      *
-     * @param context  Context where the method is called
-     * @param fileName Name of the file without extension
+     * @param inputStream Input stream of the file to read
      * @return A list with information about material read
      */
-    private static List<IExternalMaterial> lLoadObjModel(Context context, String fileName) {
-        InputStream inputStream;
+    private static List<IExternalMaterial> lLoadObjModel(InputStream inputStream) {
         BufferedReader reader = null;
         String line;
         List<IExternalMaterial> materials = null;
 
-        try {
-            if (Utils.isEmpty(fileName)) {
-                return null;
-            } else {
-                String resourceName = fileName.split("\\.mtl")[0];
-                int resourceId = context.getResources().getIdentifier(resourceName, "raw", context.getPackageName());
-                inputStream = context.getResources().openRawResource(resourceId);
-            }
-        } catch (Exception e) {
-            System.err.println("Could not load file!");
-            e.printStackTrace();
-            Log.e(TAG, e.getMessage());
-            return null;
-        }
 
         try {
             reader = new BufferedReader(new InputStreamReader(inputStream), 1024);
@@ -78,7 +57,7 @@ class MtlLoader extends GenericLoader {
             WfMaterial currentMaterial = null;
 
             while ((line = reader.readLine()) != null) {
-                if ("".equals(line.trim())) {
+                if (Utils.EMPTY_STRING.equals(line.trim())) {
                     continue;
                 }
 
@@ -220,8 +199,7 @@ class MtlLoader extends GenericLoader {
             return null;
         } else {
             HashMap<String, IExternalMaterial> mapOfMaterials = new HashMap<>();
-            for (int i = 0; i < materials.size(); i++) {
-                IExternalMaterial material = materials.get(i);
+            for (IExternalMaterial material : materials) {
                 mapOfMaterials.put(material.getName(), material);
             }
             return mapOfMaterials;
@@ -231,11 +209,11 @@ class MtlLoader extends GenericLoader {
     /**
      * Parses one waveFront file contain a list of material
      *
-     * @param context  Context where the method is called
-     * @param fileName Name of the file without extension
+     * @param inputStream Input stream of the file to read
      * @return An hash with information about materials read
      */
-    public static HashMap<String, IExternalMaterial> loadObjModel(Context context, String fileName) {
-        return buildMapOfMaterials(MtlLoader.lLoadObjModel(context, fileName));
+    public static HashMap<String, IExternalMaterial> loadMaterials(InputStream inputStream) {
+        List<IExternalMaterial> materials = MtlLoader.lLoadObjModel(inputStream);
+        return buildMapOfMaterials(materials);
     }
 }

@@ -1,8 +1,6 @@
 package com.dferreira.gameEngine.renderEngine;
 
 import com.dferreira.commons.ColorRGBA;
-import com.dferreira.commons.androidUtils.LoadUtils;
-import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.commons.wavefront.RGBAColorEnum;
@@ -59,19 +57,5 @@ public class Loader {
             return material;
         }
     }
-
-
-    /**
-     * Loads the data of a texture without bind
-     *
-     * @param resourceId id of the resource where the texture exists
-     * @return The texture read from the file without any openGL bind
-     */
-    @SuppressWarnings({"SameParameterValue", "UnnecessaryLocalVariable"})
-    public TextureData getTextureData(int resourceId) {
-        TextureData textureData = LoadUtils.decodeTextureFile(resourceId);
-        return textureData;
-    }
-
 
 }

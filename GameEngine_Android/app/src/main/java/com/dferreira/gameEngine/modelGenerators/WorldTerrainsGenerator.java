@@ -3,11 +3,10 @@ package com.dferreira.gameEngine.modelGenerators;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
-import com.dferreira.gameEngine.R;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.models.TerrainShape;
-import com.dferreira.gameEngine.renderEngine.Loader;
 import com.dferreira.gameEngine.textures.TerrainTexturesPack;
 
 /**
@@ -24,11 +23,11 @@ public class WorldTerrainsGenerator {
     @SuppressWarnings("ConstantConditions")
     private static TerrainTexturesPack getTexturedTerrain(ILoaderRenderAPI loaderRenderAPI) {
         boolean repeat = true;
-        Integer weightMapTextureId = loaderRenderAPI.loadTexture(R.mipmap.weight_map, repeat);
-        Integer backgroundTextureId = loaderRenderAPI.loadTexture(R.mipmap.terrain, repeat);
-        Integer mudTextureId = loaderRenderAPI.loadTexture(R.mipmap.mud, repeat);
-        Integer grassTextureId = loaderRenderAPI.loadTexture(R.mipmap.terrain_grass, repeat);
-        Integer pathTextureId = loaderRenderAPI.loadTexture(R.mipmap.path, repeat);
+        Integer weightMapTextureId = loaderRenderAPI.loadTexture(TextureEnum.weight_map, repeat);
+        Integer backgroundTextureId = loaderRenderAPI.loadTexture(TextureEnum.terrain, repeat);
+        Integer mudTextureId = loaderRenderAPI.loadTexture(TextureEnum.mud, repeat);
+        Integer grassTextureId = loaderRenderAPI.loadTexture(TextureEnum.terrain_grass, repeat);
+        Integer pathTextureId = loaderRenderAPI.loadTexture(TextureEnum.path, repeat);
         // Create the package
         TerrainTexturesPack texturesPackage = new TerrainTexturesPack();
         texturesPackage.setWeightMapTextureId(weightMapTextureId);
@@ -53,12 +52,11 @@ public class WorldTerrainsGenerator {
     }
 
     /**
-     * @param loader          Loader to load the raw model
      * @param loaderRenderAPI The API responsible for load elements specifics to the render
      * @return The terrain of the 3D scene
      */
-    public static Terrain getTerrain(Loader loader, ILoaderRenderAPI loaderRenderAPI) {
-        TextureData heightMap = loader.getTextureData(R.mipmap.terrain_heightmap);
+    public static Terrain getTerrain(ILoaderRenderAPI loaderRenderAPI) {
+        TextureData heightMap = loaderRenderAPI.getTextureData(TextureEnum.terrain_heightmap);
 
         TerrainShape terrain = new TerrainShape(heightMap);
 

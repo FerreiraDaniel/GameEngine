@@ -1,5 +1,7 @@
 package com.dferreira.commons.generic_render;
 
+import com.dferreira.commons.generic_resources.TextureEnum;
+import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IShape;
 
 /**
@@ -7,20 +9,28 @@ import com.dferreira.commons.shapes.IShape;
  */
 
 public interface ILoaderRenderAPI {
+
+
     /**
-     * @param fileName The identifier of texture associated with file
-     * @return The identifier of the texture that much with specified file name
+     * Indicates if the API passed as argument is possible to be used for render
+     * the scene or not
+     *
+     * @param supportedRenderAPI    API to get tested
+     *
+     * @return False -> The API is not supported
+     *          True -> The API is supported
      */
-    int getTextureId(String fileName);
+    boolean detectSupportedAPI(SupportedRenderAPIEnum supportedRenderAPI);
+
 
     /**
      * Load a texture in the Render API
      *
-     * @param resourceId The identifier of the resource where is to load the texture
+     * @param textureEnum Enum of the resource where the texture exists
      * @param repeat     Indicate that should repeat the texture if the polygon surpass the size of texture
      * @return The identifier of the texture loaded
      */
-    Integer loadTexture(int resourceId, boolean repeat);
+    Integer loadTexture(TextureEnum textureEnum, boolean repeat);
 
     /**
      * Load a texture in the Render API
@@ -33,14 +43,23 @@ public interface ILoaderRenderAPI {
     Integer loadTexture(String filename, boolean repeat);
 
     /**
+     * Loads the data of a texture without bind
+     *
+     * @param textureEnum id of the resource where the texture exists
+     *
+     * @return The texture read from the file without any openGL bind
+     */
+    public TextureData getTextureData(TextureEnum textureEnum);
+
+    /**
      * Load a set of textures in the Render API
      *
-     * @param resourcesId The identifiers of the resources to load
+     * @param textures The resources where should get the images of the cube
      * @param repeat      Indicate that should repeat the texture if the polygon surpass the size of texture
      * @return The identifier of the texture
      */
     @SuppressWarnings("SameParameterValue")
-    Integer loadTCubeMap(int[] resourcesId, boolean repeat);
+    Integer loadTCubeMap(TextureEnum[] textures, boolean repeat);
 
     /**
      * Load from a shape to one equivalent IRawModel

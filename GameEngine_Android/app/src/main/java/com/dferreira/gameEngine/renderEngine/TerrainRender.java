@@ -124,7 +124,7 @@ public class TerrainRender extends GenericRender {
         //Load the light properties
         tShader.loadShineVariables(1.0f, 0.0f);
 
-        frameRenderAPI.prepareModel(model,
+        this.frameRenderAPI.prepareModel(model,
                 TTerrainAttribute.position,
                 TTerrainAttribute.textureCoords,
                 TTerrainAttribute.normal

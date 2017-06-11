@@ -1,10 +1,9 @@
 package com.dferreira.gameEngine.modelGenerators;
 
-import android.content.Context;
-
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
-import com.dferreira.gameEngine.R;
+import com.dferreira.commons.generic_resources.IResourceProvider;
+import com.dferreira.commons.generic_resources.ModelEnum;
 import com.dferreira.gameEngine.models.Player;
 import com.dferreira.gameEngine.models.complexEntities.GenericEntity;
 import com.dferreira.gameEngine.models.complexEntities.MaterialGroup;
@@ -17,12 +16,14 @@ import java.util.HashMap;
  */
 public class WorldPlayersGenerator extends GenericEntitiesGenerator {
     /**
+     * @param rProvider Provider of the resources to load
+     *
      * @return The model with information to generate a player_mtl
      */
-    private static DefaultModelGenerator getPlayerModel() {
+    private static DefaultModelGenerator getPlayerModel(IResourceProvider rProvider) {
         /* Player model */
         DefaultModelGenerator playerModel = new DefaultModelGenerator();
-        playerModel.setObjectReference(R.raw.player);
+        playerModel.setObjectReference(rProvider.getResource(ModelEnum.player));
         playerModel.setScale(1.0f);
         playerModel.setHasTransparency(false);
         playerModel.setNormalsPointingUp(false);
@@ -36,8 +37,8 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
      * @return The player_mtl that is going to be used in the scene
      */
     @SuppressWarnings("UnnecessaryLocalVariable")
-    public static Player getPlayer(Context context, Loader loader, ILoaderRenderAPI loaderAPI) {
-        DefaultModelGenerator model = getPlayerModel();
+    public static Player getPlayer(Loader loader, ILoaderRenderAPI loaderAPI, IResourceProvider resourceProvider) {
+        DefaultModelGenerator model = getPlayerModel(resourceProvider);
 
         float xPosition = 20.0f;
         float yPosition = -1.0f;
@@ -46,7 +47,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         Vector3f playerPosition = new Vector3f(xPosition, yPosition, zPosition);
 
         //Load the obj of the player
-        HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(context, loader, loaderAPI, model.getObjectReference(),
+        HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, loaderAPI, model.getObjectReference(),
                 model.getHasTransparency(), model.getNormalsPointingUp());
         GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
         //Prepare generic entity end

@@ -5,8 +5,8 @@ import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.commons.models.Light;
-import com.dferreira.gameEngine.R;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class EntityShaderManager extends ShaderManager {
      * @param renderAPI Reference to the API that is going to manage the program shader
      */
     public EntityShaderManager(IShaderManagerAPI renderAPI) {
-        super(R.raw.entity_vertex_shader, R.raw.entity_fragment_shader, renderAPI);
+        super(TextEnum.entity_vertex_shader, TextEnum.entity_fragment_shader, renderAPI);
     }
 
     /**

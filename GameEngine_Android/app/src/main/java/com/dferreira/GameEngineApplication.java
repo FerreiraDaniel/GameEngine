@@ -2,7 +2,7 @@ package com.dferreira;
 
 import android.app.Application;
 
-import com.dferreira.commons.androidUtils.ResourcesCache;
+import com.dferreira.androidUtils.ResourcesCache;
 
 /**
  * Main class of the game engine application

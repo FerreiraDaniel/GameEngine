@@ -2,6 +2,7 @@ package com.dferreira.gameEngine.models;
 
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.gameController.GamePadKey;
 
 /**
@@ -17,41 +18,36 @@ public class GuiTexture {
     /**
      * Identifier of the texture
      */
-    private final int textureResourceId;
-
-
+    private final TextureEnum textureEnum;
+    /**
+     * Position of the texture between (0,0) and (1.0,1.0)
+     */
+    private final Vector2f position;
+    /**
+     * Scale factor of the texture
+     */
+    private final Vector2f scale;
+    /**
+     * The game pad key that the gui texture will trigger if pressed
+     * Note if null nothing will be trigger
+     */
+    private final GamePadKey gamePadKey;
     /**
      * Identifier of the texture
      */
     private int textureId;
 
     /**
-     * Position of the texture between (0,0) and (1.0,1.0)
-     */
-    private final Vector2f position;
-
-    /**
-     * Scale factor of the texture
-     */
-    private final Vector2f scale;
-
-    /**
-     * The game pad key that the gui texture will trigger if pressed
-     * Note if null nothing will be trigger
-     */
-    private final GamePadKey gamePadKey;
-
-    /**
      * @param rawModel   The rawModel that will be used by the guiTexture
-     * @param textureResourceId  Identifier of resource that contains the texture
+     * @param textureEnum  Identifier of resource that contains the texture
      * @param position   Position of the texture between (0,0) and (1.0,1.0)
      * @param scale      Scale factor of the texture
      * @param gamePadKey The reference to the key that will be trigger
      */
-    public GuiTexture(IRawModel rawModel, int textureResourceId, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
+    public GuiTexture(IRawModel rawModel, TextureEnum textureEnum, Vector2f position, Vector2f scale, GamePadKey gamePadKey) {
         super();
         this.rawModel = rawModel;
-        this.textureResourceId = textureResourceId;
+        this.textureEnum = textureEnum;
         this.position = position;
         this.scale = scale;
         this.gamePadKey = gamePadKey;
@@ -68,8 +64,15 @@ public class GuiTexture {
      *
      * @return  Identifier of resource that contains the texture of the gui
      */
-    public int getTextureResourceId() {
-        return textureResourceId;
+    public TextureEnum getTextureEnum() {
+        return this.textureEnum;
+    }
+
+    /**
+     * @return Identifier of the texture
+     */
+    public int getTextureId() {
+        return textureId;
     }
 
     /**
@@ -78,13 +81,6 @@ public class GuiTexture {
      */
     public void setTextureId(int textureId) {
         this.textureId = textureId;
-    }
-
-    /**
-     * @return Identifier of the texture
-     */
-    public int getTextureId() {
-        return textureId;
     }
 
     /**

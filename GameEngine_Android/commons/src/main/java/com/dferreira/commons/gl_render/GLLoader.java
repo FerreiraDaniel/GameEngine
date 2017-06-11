@@ -2,9 +2,11 @@ package com.dferreira.commons.gl_render;
 
 import android.opengl.GLES20;
 
-import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.SupportedRenderAPIEnum;
+import com.dferreira.commons.generic_resources.IResourceProvider;
+import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.utils.Utils;
@@ -13,7 +15,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.HashMap;
 
 /**
  * Loader for parts that are specific to openGL
@@ -28,15 +29,28 @@ class GLLoader implements ILoaderRenderAPI {
 
 
     /**
-     * Identifiers of the textures bound to OpenGL
+     * Provider of the resources (highly dependent from the architecture)
      */
-    private final HashMap<String, Integer> textureIdentifiers;
+    private final IResourceProvider resourceProvider;
 
     /**
      * Constructor of the loader GL
      */
-    GLLoader() {
-        this.textureIdentifiers = new HashMap<>();
+    GLLoader(IResourceProvider resourceProvider) {
+        this.resourceProvider = resourceProvider;
+    }
+
+    /**
+     * Indicates if the API passed as argument is possible to be used for render
+     * the scene or not
+     *
+     * @param supportedRenderAPI API to get tested
+     * @return False -> The API is not supported
+     * True -> The API is supported
+     */
+    @Override
+    public boolean detectSupportedAPI(SupportedRenderAPIEnum supportedRenderAPI) {
+        return false;
     }
 
     /**
@@ -70,15 +84,13 @@ class GLLoader implements ILoaderRenderAPI {
     }
 
     /**
-     * Load texture from resource
+     * Load a texture in openGLES api
      *
-     * @param resourceId id of the resource where the texture exists
-     * @param repeat     Indicate that should repeat the texture if the polygon surpass the size of texture
+     * @param textureData The data of the texture to load
+     * @param repeat      Indicate that should repeat the texture if the polygon surpass the size of texture
      * @return Id from the texture that was bounded in openGL
      */
-    @Override
-    public Integer loadTexture(int resourceId, boolean repeat) {
-        TextureData textureData = LoadUtils.decodeTextureFile(resourceId);
+    private Integer pLoadTexture(TextureData textureData, boolean repeat) {
 
         int[] textureId = new int[1];
         GLES20.glGenTextures(1, textureId, 0);
@@ -94,6 +106,19 @@ class GLLoader implements ILoaderRenderAPI {
     }
 
     /**
+     * Load texture from resource
+     *
+     * @param textureEnum Enum of the resource where the texture exists
+     * @param repeat      Indicate that should repeat the texture if the polygon surpass the size of texture
+     * @return Id from the texture that was bounded in openGL
+     */
+    @Override
+    public Integer loadTexture(TextureEnum textureEnum, boolean repeat) {
+        TextureData textureData = this.resourceProvider.getResource(textureEnum);
+        return pLoadTexture(textureData, repeat);
+    }
+
+    /**
      * Load texture from resource located in the mipmap folder
      *
      * @param textureFileName The name of the texture where the texture exists
@@ -102,72 +127,60 @@ class GLLoader implements ILoaderRenderAPI {
      */
     @Override
     public Integer loadTexture(String textureFileName, boolean repeat) {
+        TextureData textureData = this.resourceProvider.getTexture(textureFileName);
+        return pLoadTexture(textureData, repeat);
+    }
 
-        if (Utils.isEmpty(textureFileName)) {
-            return 0;
-        } else {
-            String resourceName = textureFileName.split("\\.png")[0];
-            int resourceId = LoadUtils.getResourceIdOfMipMap(resourceName);
-            if (resourceId == 0) {
-                return 0;
-            } else {
-                int textureId = loadTexture(resourceId, repeat);
-                textureIdentifiers.put(textureFileName, textureId);
-                return textureId;
-            }
-        }
+    /**
+     * Loads the data of a texture without bind
+     *
+     * @param textureEnum id of the resource where the texture exists
+     * @return The texture read from the file without any openGL bind
+     */
+    @Override
+    public TextureData getTextureData(TextureEnum textureEnum) {
+        return this.resourceProvider.getResource(textureEnum);
     }
 
     /**
      * Loads a cubic texture
      *
-     * @param resourceIds The resources where should get the images of the cube
-     * @param repeat      Indicate that should repeat the texture if the polygon surpass the size of texture
+     * @param textures The resources where should get the images of the cube
+     * @param repeat   Indicate that should repeat the texture if the polygon surpass the size of texture
      * @return Identifier of the texture cubic texture loaded
      */
     @Override
-    public Integer loadTCubeMap(int[] resourceIds, boolean repeat) {
-        if (resourceIds == null) {
+    public Integer loadTCubeMap(TextureEnum[] textures, boolean repeat) {
+        if (Utils.isEmpty(textures)) {
             return null;
-        }
-        int[] cubicTextureTargets = new int[]{GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_X,
-                GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
-                GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
-                GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
-
-        int[] textureId = new int[1];
-        GLES20.glGenTextures(1, textureId, 0);
-        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP, textureId[0]);
-
-        for (int i = 0; i < cubicTextureTargets.length; i++) {
-            int resourceId = resourceIds[i];
-
-            TextureData textureData = LoadUtils.decodeTextureFile(resourceId);
-            if (textureData == null) {
-                return null;
-            } else {
-                int target = cubicTextureTargets[i];
-                GLES20.glTexImage2D(target, 0, GLES20.GL_RGBA, textureData.getWidth(), textureData.getHeight(), 0,
-                        GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, textureData.getBuffer());
-            }
-        }
-        defineTextureFunctionFilters(GLES20.GL_TEXTURE_CUBE_MAP, getWrapFilters(repeat));
-        return textureId[0];
-    }
-
-
-    /**
-     * @param fileName The identifier of texture associated with file
-     * @return The identifier of the texture that much with specified file name
-     */
-    public int getTextureId(String fileName) {
-        if (textureIdentifiers.containsKey(fileName)) {
-            return this.textureIdentifiers.get(fileName);
         } else {
-            return 0;
+            int[] cubicTextureTargets = new int[]{GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_X,
+                    GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_X, GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
+                    GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, GLES20.GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
+                    GLES20.GL_TEXTURE_CUBE_MAP_NEGATIVE_Z};
+
+            int[] textureId = new int[1];
+            GLES20.glGenTextures(1, textureId, 0);
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_CUBE_MAP, textureId[0]);
+
+            for (int i = 0; i < cubicTextureTargets.length; i++) {
+                TextureEnum texture = textures[i];
+
+                TextureData textureData = resourceProvider.getResource(texture);
+                if (textureData == null) {
+                    return null;
+                } else {
+                    int target = cubicTextureTargets[i];
+                    GLES20.glTexImage2D(target, 0, GLES20.GL_RGBA, textureData.getWidth(), textureData.getHeight(), 0,
+                            GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, textureData.getBuffer());
+                }
+            }
+            defineTextureFunctionFilters(GLES20.GL_TEXTURE_CUBE_MAP, getWrapFilters(repeat));
+            return textureId[0];
         }
     }
+
 
     /**
      * Load from a shape to one equivalent IRawModel

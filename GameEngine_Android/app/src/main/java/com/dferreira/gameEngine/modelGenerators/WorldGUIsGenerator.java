@@ -3,9 +3,9 @@ package com.dferreira.gameEngine.modelGenerators;
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameController.GamePadKey;
-import com.dferreira.gameEngine.R;
 import com.dferreira.gameEngine.models.GuiShape;
 import com.dferreira.gameEngine.models.GuiTexture;
 
@@ -29,16 +29,16 @@ public class WorldGUIsGenerator {
 
 
     /**
-     * @param rawMode           Shape of the GUI
-     * @param textureResourceId The name of the file where the texture exists
-     * @param xPosition         xPosition of the GUI
-     * @param yPosition         yPosition of the GUI
-     * @param scale             The scale of the GUI
-     * @param key               The key that GUI match if any
+     * @param rawMode     Shape of the GUI
+     * @param textureEnum The enum of the file where the texture exists
+     * @param xPosition   xPosition of the GUI
+     * @param yPosition   yPosition of the GUI
+     * @param scale       The scale of the GUI
+     * @param key         The key that GUI match if any
      * @return The textured GUI to render GUI
      */
     @SuppressWarnings("SameParameterValue")
-    private static GuiTexture getGUI(IRawModel rawMode, int textureResourceId, float xPosition,
+    private static GuiTexture getGUI(IRawModel rawMode, TextureEnum textureEnum, float xPosition,
                                      float yPosition, float scale, GamePadKey key) {
         // Create the position of the GUI
         Vector2f guiPosition = new Vector2f(xPosition, yPosition);
@@ -46,7 +46,7 @@ public class WorldGUIsGenerator {
         Vector2f guiScale = new Vector2f(scale, scale);
         // Create the textured GUI
 
-        return new GuiTexture(rawMode, textureResourceId, guiPosition, guiScale, key);
+        return new GuiTexture(rawMode, textureEnum, guiPosition, guiScale, key);
     }
 
     /**
@@ -58,14 +58,14 @@ public class WorldGUIsGenerator {
     public static GuiTexture[] getGUIs(ILoaderRenderAPI loaderRenderAPI) {
         GuiShape guiShape = new GuiShape();
         IRawModel rawModel = loaderRenderAPI.load2DPositionsToRawModel(guiShape.getVertices());
-        GuiTexture leftButton = getGUI(rawModel, R.drawable.ic_pad_left, -0.8f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.left);
-        GuiTexture upButton = getGUI(rawModel, R.drawable.ic_pad_up, -0.7f, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.up);
-        GuiTexture downButton = getGUI(rawModel, R.drawable.ic_pad_down, -0.7f, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.down);
-        GuiTexture rightButton = getGUI(rawModel, R.drawable.ic_pad_right, -0.6f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.right);
-        GuiTexture squareButton = getGUI(rawModel, R.drawable.ic_pad_left, 0.6f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.square);
-        GuiTexture xButton = getGUI(rawModel, R.drawable.ic_pad_down, 0.7f, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.x);
-        GuiTexture triangleButton = getGUI(rawModel, R.drawable.ic_pad_up, 0.7f, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.triangle);
-        GuiTexture circleButton = getGUI(rawModel, R.drawable.ic_pad_right, 0.8f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.circle);
+        GuiTexture leftButton = getGUI(rawModel, TextureEnum.ic_pad_left, -0.8f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.left);
+        GuiTexture upButton = getGUI(rawModel, TextureEnum.ic_pad_up, -0.7f, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.up);
+        GuiTexture downButton = getGUI(rawModel, TextureEnum.ic_pad_down, -0.7f, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.down);
+        GuiTexture rightButton = getGUI(rawModel, TextureEnum.ic_pad_right, -0.6f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.right);
+        GuiTexture squareButton = getGUI(rawModel, TextureEnum.ic_pad_left, 0.6f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.square);
+        GuiTexture xButton = getGUI(rawModel, TextureEnum.ic_pad_down, 0.7f, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.x);
+        GuiTexture triangleButton = getGUI(rawModel, TextureEnum.ic_pad_up, 0.7f, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.triangle);
+        GuiTexture circleButton = getGUI(rawModel, TextureEnum.ic_pad_right, 0.8f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.circle);
 
         GuiTexture[] GUIs = new GuiTexture[NUMBER_OF_GUI];
 
@@ -92,7 +92,7 @@ public class WorldGUIsGenerator {
         if (!Utils.isEmpty(GUIs)) {
             for (GuiTexture guiTexture : GUIs) {
                 // Load the texture of the GUI
-                Integer textureId = loaderRenderAPI.loadTexture(guiTexture.getTextureResourceId(), false);
+                Integer textureId = loaderRenderAPI.loadTexture(guiTexture.getTextureEnum(), false);
                 guiTexture.setTextureId(textureId);
             }
         }

@@ -1,12 +1,9 @@
 package com.dferreira.gameEngine.modelGenerators;
 
-import android.content.Context;
-
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.utils.Utils;
-import com.dferreira.commons.wavefront.OBJLoader;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
 import com.dferreira.gameEngine.models.complexEntities.Material;
 import com.dferreira.gameEngine.models.complexEntities.MaterialGroup;
@@ -26,21 +23,17 @@ class GenericEntitiesGenerator {
     /**
      * Load a textured model
      *
-     * @param context           Context where this method will be called
      * @param loader            the loader of the texture
-     * @param modelId           The name of the waveFront file without extension
+     * @param shapes            List of shapes that make the model
      * @param hasTransparency   Flag that indicates if has transparency or not
      * @param normalsPointingUp Indicates that all the normals of the object are pointing up
      * @return the textured model loaded
      */
-    static HashMap<String, MaterialGroup> getTexturedObj(Context context, Loader loader, ILoaderRenderAPI loaderAPI, int modelId,
+    static HashMap<String, MaterialGroup> getTexturedObj(Loader loader, ILoaderRenderAPI loaderAPI, List<IShape> shapes,
                                                          boolean hasTransparency, boolean normalsPointingUp) {
-        List<IShape> shapes = OBJLoader.loadObjModel(context, modelId);
-
         HashMap<String, MaterialGroup> groupsOfMaterials = new HashMap<>();
 
         for (IShape shape : shapes) {
-
             IRawModel model = loaderAPI.loadToRawModel(shape);
             Material material = loader.loadMaterial(shape.getMaterial());
             material.setShineDamper(10.0f);

@@ -3,7 +3,7 @@ package com.dferreira.gameEngine.shaders.guis;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
-import com.dferreira.gameEngine.R;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class GuiShaderManager extends ShaderManager {
      * @param renderAPI Reference to the API that is going to manage the program shader
      */
     public GuiShaderManager(IShaderManagerAPI renderAPI) {
-        super(R.raw.gui_vertex_shader, R.raw.gui_fragment_shader, renderAPI);
+        super(TextEnum.gui_vertex_shader, TextEnum.gui_fragment_shader, renderAPI);
     }
 
     /**

@@ -3,7 +3,7 @@ package com.dferreira.gameEngine.shaders.skyBox;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
-import com.dferreira.gameEngine.R;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class SkyBoxShaderManager extends ShaderManager {
      * @param renderAPI Reference to the API that is going to manage the program shader
      */
     public SkyBoxShaderManager(IShaderManagerAPI renderAPI) {
-        super(R.raw.sky_box_vertex_shader, R.raw.sky_box_fragment_shader, renderAPI);
+        super(TextEnum.sky_box_vertex_shader, TextEnum.sky_box_fragment_shader, renderAPI);
     }
 
 

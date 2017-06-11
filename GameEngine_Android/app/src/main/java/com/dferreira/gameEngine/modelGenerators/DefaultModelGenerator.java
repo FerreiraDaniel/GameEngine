@@ -1,5 +1,9 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import com.dferreira.commons.shapes.IShape;
+
+import java.util.List;
+
 /**
  * Define the default properties that the element should obey
  */
@@ -9,7 +13,7 @@ public class DefaultModelGenerator {
     /**
      * The name of the .obj that represents the model
      */
-    private int objectReference;
+    private List<IShape> objectReference;
 
 
     /**
@@ -32,7 +36,7 @@ public class DefaultModelGenerator {
     /**
      * @return The reference to the object that represents the model
      */
-    public int getObjectReference() {
+    public List<IShape> getObjectReference() {
         return objectReference;
     }
 
@@ -41,7 +45,7 @@ public class DefaultModelGenerator {
      *
      * @param objectReference reference to the object to set
      */
-    public void setObjectReference(int objectReference) {
+    public void setObjectReference(List<IShape> objectReference) {
         this.objectReference = objectReference;
     }
 

@@ -4,8 +4,8 @@ import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.commons.models.Light;
-import com.dferreira.gameEngine.R;
 import com.dferreira.gameEngine.shaders.ShaderManager;
 
 import java.util.ArrayList;
@@ -51,10 +51,10 @@ public class TerrainShaderManager extends ShaderManager {
      * Constructor of the game shader where the vertex and fragment shader of
      * the game engine are loaded
      *
-     * @param renderAPI     Reference to the API that is going to manage the program shader
+     * @param renderAPI Reference to the API that is going to manage the program shader
      */
     public TerrainShaderManager(IShaderManagerAPI renderAPI) {
-        super(R.raw.terrain_vertex_shader, R.raw.terrain_fragment_shader, renderAPI);
+        super(TextEnum.terrain_vertex_shader, TextEnum.terrain_fragment_shader, renderAPI);
     }
 
     /**
@@ -113,8 +113,7 @@ public class TerrainShaderManager extends ShaderManager {
     /**
      * Put passes the information of the lights to the Shader program
      *
-     * @param lights
-     *            the lights to load in the shader program
+     * @param lights the lights to load in the shader program
      */
     public void loadLights(Light[] lights) {
         super.loadVector(uniforms[TTerrainUniform.lightPosition.ordinal()], lights[0].getPosition());

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
+import com.dferreira.androidUtils.AndroidResourceProvider;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRenderAPIAccess;
+import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.gl_render.GLRenderAPIAccess;
 import com.dferreira.commons.models.Light;
 import com.dferreira.gameEngine.modelGenerators.WorldEntitiesGenerator;
@@ -117,7 +119,8 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
 
         /*Initializes the main variables responsible to render the 3D world*/
         this.loader = new Loader();
-        this.renderAPIAccess = new GLRenderAPIAccess();
+        IResourceProvider resourceProvider = new AndroidResourceProvider(this.context);
+        this.renderAPIAccess = new GLRenderAPIAccess(resourceProvider);
         ILoaderRenderAPI loaderAPI = renderAPIAccess.getLoaderRenderAPI();
 
         this.renderer = new MasterRender(renderAPIAccess);
@@ -127,7 +130,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize render " + (renderInitialized.getTime() - startDate.getTime()) + " ms");
 
         /* Prepares the terrain that is going to render */
-        Terrain terrain = WorldTerrainsGenerator.getTerrain(loader, loaderAPI);
+        Terrain terrain = WorldTerrainsGenerator.getTerrain(loaderAPI);
         WorldTerrainsGenerator.loadTextures(loaderAPI, terrain);
 
         this.terrains = new Terrain[1];
@@ -138,7 +141,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time to initialize terrains " + (terrainLoaded.getTime() - renderInitialized.getTime()) + " ms");
 
         /*Prepares the entities that are going to be render*/
-        this.entities = WorldEntitiesGenerator.getEntities(context, loader, loaderAPI, terrain);
+        this.entities = WorldEntitiesGenerator.getEntities(loader, loaderAPI, resourceProvider, terrain);
         WorldEntitiesGenerator.loadTextures(loaderAPI, this.entities);
 
         Date entitiesLoaded = new Date();
@@ -167,7 +170,7 @@ public class GameEngineRenderer implements GLSurfaceView.Renderer {
         Log.d(TIME_TO_RENDER_TAG, "Time initialize sky " + (skyBoxLoaded.getTime() - lightLoaded.getTime()) + " ms");
 
         /*Prepares the player_mtl that is going to be used in the scene*/
-        this.player = WorldPlayersGenerator.getPlayer(context, loader, loaderAPI);
+        this.player = WorldPlayersGenerator.getPlayer(loader, loaderAPI, resourceProvider);
         WorldPlayersGenerator.loadTextures(loaderAPI, this.player);
 
         Date playerLoader = new Date();

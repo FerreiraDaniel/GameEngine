@@ -7,9 +7,9 @@ import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.Vector3f;
-import com.dferreira.commons.androidUtils.LoadUtils;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.generic_render.ShaderProgram;
+import com.dferreira.commons.generic_resources.TextEnum;
 import com.dferreira.commons.utils.Utils;
 
 import java.util.List;
@@ -41,12 +41,10 @@ public abstract class ShaderManager {
      * @param shaderManagerAPI Reference to the API that is going to manage the program shader
      */
     @SuppressWarnings({"SameParameterValue", "WeakerAccess"})
-    protected ShaderManager(int vertexFile, int fragmentFile, IShaderManagerAPI shaderManagerAPI) {
+    protected ShaderManager(TextEnum vertexFile, TextEnum fragmentFile, IShaderManagerAPI shaderManagerAPI) {
 
-        String vertexShaderSrc = LoadUtils.readTextFromRawResource(vertexFile);
-        String fragShaderSrc = LoadUtils.readTextFromRawResource(fragmentFile);
         this.shaderManagerAPI = shaderManagerAPI;
-        this.shaderProgram = shaderManagerAPI.loadProgram(vertexShaderSrc, fragShaderSrc);
+        this.shaderProgram = shaderManagerAPI.loadProgram(vertexFile, fragmentFile);
 
         if (this.shaderProgram == null) {
             Log.e(TAG, "Was impossible compile the program shader");

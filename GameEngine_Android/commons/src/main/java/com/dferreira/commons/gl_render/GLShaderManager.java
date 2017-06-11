@@ -5,9 +5,11 @@ import android.opengl.GLES20;
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
+import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.IShaderManagerAPI;
 import com.dferreira.commons.generic_render.ShaderProgram;
-import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_resources.IResourceProvider;
+import com.dferreira.commons.generic_resources.TextEnum;
 
 import java.nio.FloatBuffer;
 
@@ -16,6 +18,18 @@ import java.nio.FloatBuffer;
  */
 class GLShaderManager implements IShaderManagerAPI {
 
+    /**
+     * Provider of resources (The one that will load from the disk or not)
+     */
+    private IResourceProvider resourceProvider;
+
+    /**
+     *
+     * @param resourceProvider Provider of resources
+     */
+    GLShaderManager(IResourceProvider resourceProvider) {
+        this.resourceProvider = resourceProvider;
+    }
 
     /**
      * @param vertexShaderSrc Source code of the vertex shader
@@ -23,9 +37,23 @@ class GLShaderManager implements IShaderManagerAPI {
      * @return 0 -> There was an error
      * not 0 -> Id of the program loaded
      */
-    @Override
-    public ShaderProgram loadProgram(String vertexShaderSrc, String fragShaderSrc) {
+    private ShaderProgram loadProgram(String vertexShaderSrc, String fragShaderSrc) {
         return GLSLUtils.loadProgram(vertexShaderSrc, fragShaderSrc);
+    }
+
+
+    /**
+     * @param vertexShader Source code of the vertex shader
+     * @param fragShader   Source code of the fragment shader
+     * @return 0 -> There was an error
+     * not 0 -> Id of the program loaded
+     */
+    @Override
+    public ShaderProgram loadProgram(TextEnum vertexShader, TextEnum fragShader) {
+        String vertexShaderSrc = this.resourceProvider.getResource(vertexShader);
+        String fragShaderSrc = this.resourceProvider.getResource(fragShader);
+        return loadProgram(vertexShaderSrc, fragShaderSrc);
+
     }
 
     /**
