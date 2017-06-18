@@ -1,8 +1,6 @@
 package com.dferreira.commons.generic_render;
 
 
-import com.dferreira.commons.IEnum;
-
 /**
  * Interface of the frame render API
  */
@@ -17,46 +15,32 @@ public interface IFrameRenderAPI {
     /**
      * Prepares one model to be render in scene
      *
-     * @param model         The model to be prepared to be rendered
-     * @param position      The position attribute
-     * @param textureCoords The texture attribute
-     * @param normal        The normal attribute position
+     * @param model The model to be prepared to be rendered
      */
-    void prepareModel(IRawModel model, IEnum position, IEnum textureCoords, IEnum normal);
+    void prepareModel(IRawModel model);
 
     /**
      * Prepares one model to be render in scene
      *
-     * @param model    The model to be prepared to be rendered
-     * @param position The position attribute
+     * @param model The model to be prepared to be rendered
      */
     @SuppressWarnings("SameParameterValue")
-    void prepare2DModel(IRawModel model, IEnum position);
+    void prepare2DModel(IRawModel model);
 
     /**
      * Prepares one model to be render in scene
      *
-     * @param model    The model to be prepared to be rendered
-     * @param position The position attribute
+     * @param model The model to be prepared to be rendered
      */
     @SuppressWarnings("SameParameterValue")
-    void prepare3DModel(IRawModel model, IEnum position);
+    void prepare3DModel(IRawModel model);
 
     /**
      * UnBind the previous bound elements
      *
-     * @param position      The position attribute
-     * @param textureCoords The texture attribute
-     * @param normal        The normal attribute position
+     * @param model The model to be prepared to be rendered
      */
-    void unPrepareModel(IEnum position, IEnum textureCoords, IEnum normal);
-
-    /**
-     * UnBind the previous bound elements
-     *
-     * @param position The position attribute
-     */
-    void unPrepareModel(IEnum position);
+    void unPrepareModel(IRawModel model);
 
     /**
      * Activates and binds the texture with passed

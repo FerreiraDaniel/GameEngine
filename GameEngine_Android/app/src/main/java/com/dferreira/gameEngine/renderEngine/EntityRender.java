@@ -15,7 +15,6 @@ import com.dferreira.gameEngine.models.complexEntities.Material;
 import com.dferreira.gameEngine.models.complexEntities.MaterialGroup;
 import com.dferreira.gameEngine.models.complexEntities.RawModelMaterial;
 import com.dferreira.gameEngine.shaders.entities.EntityShaderManager;
-import com.dferreira.gameEngine.shaders.entities.TEntityAttribute;
 
 import java.util.HashMap;
 import java.util.List;
@@ -114,7 +113,7 @@ public class EntityRender extends GenericRender {
                             loadEntityTransformation(entity);
                             render(model);
                         }
-                        unPrepareModel();
+                        unPrepareModel(model);
                         unPrepareMaterial(material);
                     }
                 }
@@ -139,7 +138,7 @@ public class EntityRender extends GenericRender {
                 prepareModel(model);
                 loadEntityTransformation(player);
                 render(model);
-                unPrepareModel();
+                unPrepareModel(model);
                 unPrepareMaterial(material);
             }
         }
@@ -151,11 +150,7 @@ public class EntityRender extends GenericRender {
      * @param model Model that contains the model of the entity with textures
      */
     private void prepareModel(IRawModel model) {
-        frameRenderAPI.prepareModel(model,
-                TEntityAttribute.position,
-                TEntityAttribute.textureCoords,
-                TEntityAttribute.normal
-        );
+        frameRenderAPI.prepareModel(model);
     }
 
     /**
@@ -219,9 +214,11 @@ public class EntityRender extends GenericRender {
 
     /**
      * UnBind the previous bound elements
+     *
+     * @param model Model to unPrepare
      */
-    private void unPrepareModel() {
-        this.frameRenderAPI.unPrepareModel(TEntityAttribute.position, TEntityAttribute.textureCoords, TEntityAttribute.normal);
+    private void unPrepareModel(IRawModel model) {
+        this.frameRenderAPI.unPrepareModel(model);
     }
 
     /**

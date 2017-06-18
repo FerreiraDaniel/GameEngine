@@ -1,5 +1,6 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import com.dferreira.commons.generic_resources.ModelEnum;
 import com.dferreira.commons.shapes.IShape;
 
 import java.util.List;
@@ -9,6 +10,11 @@ import java.util.List;
  */
 @SuppressWarnings("WeakerAccess")
 public class DefaultModelGenerator {
+
+    /**
+     * The type of object that is going to be create by this model generator
+     */
+    private ModelEnum objectType;
 
     /**
      * The name of the .obj that represents the model
@@ -32,6 +38,20 @@ public class DefaultModelGenerator {
      */
     private boolean normalsPointingUp;
 
+
+    /**
+     * @return the type that represents the model
+     */
+    public ModelEnum getObjectType() {
+        return objectType;
+    }
+
+    /**
+     * @param objectType the type of object that represents the model
+     */
+    public void setObjectType(ModelEnum objectType) {
+        this.objectType = objectType;
+    }
 
     /**
      * @return The reference to the object that represents the model

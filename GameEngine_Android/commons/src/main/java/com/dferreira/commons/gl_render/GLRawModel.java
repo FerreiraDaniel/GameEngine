@@ -1,12 +1,15 @@
 package com.dferreira.commons.gl_render;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.HashMap;
 
 /**
- * * Represents one raw model of one entity of the OpenGL V2
+ * * Represents one raw model of one entity of the OpenGL ES V2
  */
 public class GLRawModel implements IRawModel {
 
@@ -43,14 +46,20 @@ public class GLRawModel implements IRawModel {
     private final int numOfIndexes;
 
     /**
+     * List of attributes associated with the model
+     */
+    private final HashMap<RenderAttributeEnum, IEnum> attributes;
+
+    /**
      * Constructor of a raw model
      *
      * @param vertexBuffer   Buffer that describes the position of the vertices
      * @param indexBuffer    Buffer that describes which vertices will be used
      * @param normalBuffer   Buffer that describes which normal will be user
      * @param texCoordinates Coordinates of the textures in the model
+     * @param attributes     List of attributes associated with the model
      */
-    public GLRawModel(FloatBuffer vertexBuffer, IntBuffer indexBuffer, int numOfIndexes, FloatBuffer normalBuffer, FloatBuffer texCoordinates) {
+    public GLRawModel(FloatBuffer vertexBuffer, IntBuffer indexBuffer, int numOfIndexes, FloatBuffer normalBuffer, FloatBuffer texCoordinates, HashMap<RenderAttributeEnum, IEnum> attributes) {
         super();
         this.vertexBuffer = vertexBuffer;
         this.vertexCount = 0;
@@ -58,6 +67,7 @@ public class GLRawModel implements IRawModel {
         this.texCoordinates = texCoordinates;
         this.normalBuffer = normalBuffer;
         this.numOfIndexes = numOfIndexes;
+        this.attributes = attributes;
     }
 
     /**
@@ -66,14 +76,14 @@ public class GLRawModel implements IRawModel {
      * @param vertexBuffer Buffer that describes the position of the vertices
      * @param vertexCount  Number of vertices that compose the raw model
      */
-    public GLRawModel(FloatBuffer vertexBuffer, int vertexCount) {
-        super();
+    public GLRawModel(FloatBuffer vertexBuffer, int vertexCount, HashMap<RenderAttributeEnum, IEnum> attributes) {
         this.vertexBuffer = vertexBuffer;
         this.vertexCount = vertexCount;
         this.indexBuffer = null;
         this.normalBuffer = null;
         this.texCoordinates = null;
         this.numOfIndexes = 0;
+        this.attributes = attributes;
     }
 
     /**
@@ -118,6 +128,17 @@ public class GLRawModel implements IRawModel {
      */
     public int getVertexCount() {
         return vertexCount;
+    }
+
+
+    /**
+     * Takes the model and the render attribute and returns the corresponding IEnum
+     *
+     * @param renderAttribute The attribute to fetch
+     * @return Enum of the render attribute
+     */
+    public IEnum getAttribute(RenderAttributeEnum renderAttribute) {
+        return this.attributes.get(renderAttribute);
     }
 
     /**

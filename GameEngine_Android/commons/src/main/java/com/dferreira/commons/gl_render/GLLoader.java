@@ -2,9 +2,11 @@ package com.dferreira.commons.gl_render;
 
 import android.opengl.GLES20;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
@@ -15,6 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.HashMap;
 
 /**
  * Loader for parts that are specific to openGL
@@ -180,11 +183,12 @@ class GLLoader implements ILoaderRenderAPI {
     /**
      * Load from a shape to one equivalent IRawModel
      *
-     * @param shape The shape to load
-     * @return A row model with information loaded
+     * @param shape      The shape to load
+     * @param attributes Map of attributes associated with the model
+     * @return A raw model with information loaded
      */
     @Override
-    public IRawModel loadToRawModel(IShape shape) {
+    public IRawModel loadToRawModel(IShape shape, HashMap<RenderAttributeEnum, IEnum> attributes) {
         float[] positions = shape.getVertices();
         float[] textureCoordinates = shape.getTextureCoords();
         float[] normals = shape.getNormals();
@@ -195,7 +199,7 @@ class GLLoader implements ILoaderRenderAPI {
         FloatBuffer normalBuffer = storeDataInFloatBuffer(normals);
         FloatBuffer texCoordinatesBuffer = storeDataInFloatBuffer(textureCoordinates);
 
-        return new GLRawModel(vertexBuffer, indexBuffer, indices.length, normalBuffer, texCoordinatesBuffer);
+        return new GLRawModel(vertexBuffer, indexBuffer, indices.length, normalBuffer, texCoordinatesBuffer, attributes);
     }
 
     /**
@@ -203,34 +207,38 @@ class GLLoader implements ILoaderRenderAPI {
      *
      * @param positions  Positions to load
      * @param dimensions Dimensions of the positions to load
+     * @param attributes List of attributes associated with the model
+     * @return A raw model with information loaded
      */
-    private IRawModel loadPositionsToRawModel(float[] positions, int dimensions) {
+    private IRawModel loadPositionsToRawModel(float[] positions, int dimensions, HashMap<RenderAttributeEnum, IEnum> attributes) {
         FloatBuffer vertexBuffer = storeDataInFloatBuffer(positions);
-        return new GLRawModel(vertexBuffer, positions.length / dimensions);
+        return new GLRawModel(vertexBuffer, positions.length / dimensions, attributes);
     }
 
     /**
      * Load a list of 2D positions to IRawModel
      *
-     * @param positions Positions to load
-     * @return The rawModel pointing to the positions
+     * @param positions  Positions to load
+     * @param attributes List of attributes associated with the model
+     * @return The model loaded
      */
     @Override
-    public IRawModel load2DPositionsToRawModel(float[] positions) {
+    public IRawModel load2DPositionsToRawModel(float[] positions, HashMap<RenderAttributeEnum, IEnum> attributes) {
         int dimensions = 2;
-        return loadPositionsToRawModel(positions, dimensions);
+        return loadPositionsToRawModel(positions, dimensions, attributes);
     }
 
     /**
      * Load a list of 3D positions to IRawModel
      *
-     * @param positions Positions to load
+     * @param positions  Positions to load
+     * @param attributes List of attributes associated with the model
      * @return The rawModel pointing to the positions
      */
     @Override
-    public IRawModel load3DPositionsToRawModel(float[] positions) {
+    public IRawModel load3DPositionsToRawModel(float[] positions, HashMap<RenderAttributeEnum, IEnum> attributes) {
         int dimensions = 3;
-        return loadPositionsToRawModel(positions, dimensions);
+        return loadPositionsToRawModel(positions, dimensions, attributes);
     }
 
     /**
@@ -273,5 +281,13 @@ class GLLoader implements ILoaderRenderAPI {
                 .position(0);
 
         return fBuffer;
+    }
+
+    /**
+     * Clean up the resources used by the loader
+     */
+    @Override
+    public void dispose() {
+
     }
 }

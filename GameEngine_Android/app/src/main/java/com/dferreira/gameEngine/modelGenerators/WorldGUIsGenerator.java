@@ -1,14 +1,19 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.Vector2f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameController.GamePadKey;
 import com.dferreira.gameEngine.models.GuiShape;
 import com.dferreira.gameEngine.models.GuiTexture;
+import com.dferreira.gameEngine.shaders.guis.TGuiAttribute;
+
+import java.util.HashMap;
 
 /**
  * Responsible for creating the multiple GUIs to the user interact with 3D world
@@ -58,7 +63,12 @@ public class WorldGUIsGenerator {
      */
     public static GuiTexture[] getGUIs(ILoaderRenderAPI loaderRenderAPI) {
         GuiShape guiShape = new GuiShape();
-        IRawModel rawModel = loaderRenderAPI.load2DPositionsToRawModel(guiShape.getVertices());
+
+        HashMap<RenderAttributeEnum, IEnum> attributes = new HashMap<>();
+
+        attributes.put(RenderAttributeEnum.position, TGuiAttribute.position);
+
+        IRawModel rawModel = loaderRenderAPI.load2DPositionsToRawModel(guiShape.getVertices(), attributes);
         GuiTexture leftButton = getGUI(rawModel, TextureEnum.ic_pad_left, -0.8f, MIDDLE_BUTTONS, BUTTONS_ZOOM, GamePadKey.left);
         GuiTexture upButton = getGUI(rawModel, TextureEnum.ic_pad_up, -0.7f, UPPER_BUTTONS, BUTTONS_ZOOM, GamePadKey.up);
         GuiTexture downButton = getGUI(rawModel, TextureEnum.ic_pad_down, -0.7f, BOTTOM_BUTTONS, BUTTONS_ZOOM, GamePadKey.down);

@@ -1,6 +1,8 @@
 package com.dferreira.gameEngine.models.complexEntities;
 
 
+import com.dferreira.commons.generic_resources.ModelEnum;
+
 import java.util.HashMap;
 
 /**
@@ -8,28 +10,42 @@ import java.util.HashMap;
  */
 public class GenericEntity {
 
-
     /**
      * Keys: Have the name of the group The name of the material group for
      * instance harm
      */
     private final HashMap<String, MaterialGroup> groupsOfMaterials;
 
+    /**
+     * The type of the object that the model is supporting
+     */
+    private ModelEnum objectType;
 
     /**
      * Constructor of the generic entity to be render in the 3D world
      *
      * @param groupsOfMaterials HashMap with groups of materials to use in entity
+     * @param objectType        The type of the object that the model is supporting
      */
-    public GenericEntity(HashMap<String, MaterialGroup> groupsOfMaterials) {
+    public GenericEntity(HashMap<String, MaterialGroup> groupsOfMaterials, ModelEnum objectType) {
         super();
         this.groupsOfMaterials = groupsOfMaterials;
+        this.objectType = objectType;
     }
 
     /**
-     * @return the groupsOfMaterials
+     * @return the groups of materials
      */
     public HashMap<String, MaterialGroup> getGroupsOfMaterials() {
         return groupsOfMaterials;
     }
+
+    /**
+     * @return The type of the object that the model is supporting
+     */
+    public ModelEnum getObjectType() {
+        return objectType;
+    }
+
+
 }

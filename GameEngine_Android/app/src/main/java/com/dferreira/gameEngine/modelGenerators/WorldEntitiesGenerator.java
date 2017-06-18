@@ -52,6 +52,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
 		/*Fern model*/
         DefaultModelGenerator fernModel = new DefaultModelGenerator();
+        fernModel.setObjectType(ModelEnum.fern);
         fernModel.setObjectReference(rProvider.getResource(ModelEnum.fern));
         fernModel.setScale(1.0f);
         fernModel.setHasTransparency(true);
@@ -59,6 +60,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
 		/*Tree model*/
         DefaultModelGenerator treeModel = new DefaultModelGenerator();
+        treeModel.setObjectType(ModelEnum.tree);
         treeModel.setObjectReference(rProvider.getResource(ModelEnum.tree));
         treeModel.setScale(10.0f);
         treeModel.setHasTransparency(false);
@@ -66,6 +68,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
         /*Banana tree*/
         DefaultModelGenerator bananaTreeModel = new DefaultModelGenerator();
+        bananaTreeModel.setObjectType(ModelEnum.banana_tree);
         bananaTreeModel.setObjectReference(rProvider.getResource(ModelEnum.banana_tree));
         bananaTreeModel.setScale(1.0f);
         bananaTreeModel.setHasTransparency(true);
@@ -74,6 +77,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
 		/*grass model*/
         DefaultModelGenerator grassModel = new DefaultModelGenerator();
+        grassModel.setObjectType(ModelEnum.grass);
         grassModel.setObjectReference(rProvider.getResource(ModelEnum.grass));
         grassModel.setScale(1.0f);
         grassModel.setHasTransparency(true);
@@ -81,14 +85,16 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 
         		/* flower model */
         DefaultModelGenerator flowerModel = new DefaultModelGenerator();
+        flowerModel.setObjectType(ModelEnum.flower);
         flowerModel.setObjectReference(rProvider.getResource(ModelEnum.flower));
         flowerModel.setScale(1.0f);
         flowerModel.setHasTransparency(true);
-        flowerModel.setNormalsPointingUp(true);
+        flowerModel.setNormalsPointingUp(false);
 
 
         		/*Marble model*/
         DefaultModelGenerator marbleModel = new DefaultModelGenerator();
+        marbleModel.setObjectType(ModelEnum.marble);
         marbleModel.setObjectReference(rProvider.getResource(ModelEnum.marble));
         marbleModel.setScale(5.0f);
         marbleModel.setHasTransparency(false);
@@ -128,7 +134,7 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
         for (DefaultModelGenerator key : entitiesMap.keySet()) {
             HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, loaderAPI, key.getObjectReference(),
                     key.getHasTransparency(), key.getNormalsPointingUp());
-            GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
+            GenericEntity genericEntity = new GenericEntity(groupsOfMaterials, key.getObjectType());
             //Prepare generic entity end
             Integer numberOfEntities = entitiesMap.get(key);
             for (int i = 0; i < numberOfEntities; i++) {

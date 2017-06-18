@@ -1,12 +1,17 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.gameEngine.models.SkyBox;
 import com.dferreira.gameEngine.models.SkyBoxShape;
+import com.dferreira.gameEngine.shaders.skyBox.TSkyBoxAttribute;
+
+import java.util.HashMap;
 
 
 /**
@@ -21,7 +26,8 @@ public class WorldSkyBoxGenerator {
             TextureEnum.sky_top,
             TextureEnum.sky_bottom,
             TextureEnum.sky_back,
-            TextureEnum.sky_front};
+            TextureEnum.sky_front
+    };
 
     /**
      * The sky of the 3D scene
@@ -31,7 +37,12 @@ public class WorldSkyBoxGenerator {
      */
     public static SkyBox getSky(ILoaderRenderAPI loaderRenderAPI) {
         IShape skyBoxShape = new SkyBoxShape();
-        IRawModel rawModel = loaderRenderAPI.load3DPositionsToRawModel(skyBoxShape.getVertices());
+
+        HashMap<RenderAttributeEnum, IEnum> attributes = new HashMap<>();
+
+        attributes.put(RenderAttributeEnum.position, TSkyBoxAttribute.position);
+
+        IRawModel rawModel = loaderRenderAPI.load3DPositionsToRawModel(skyBoxShape.getVertices(), attributes);
         return new SkyBox(rawModel);
     }
 

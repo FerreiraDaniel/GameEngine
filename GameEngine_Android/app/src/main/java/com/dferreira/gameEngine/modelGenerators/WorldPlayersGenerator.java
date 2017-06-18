@@ -15,15 +15,17 @@ import java.util.HashMap;
  * Responsible for creating the creating the player_mtl(s) of the scene
  */
 public class WorldPlayersGenerator extends GenericEntitiesGenerator {
+
     /**
      * @param rProvider Provider of the resources to load
-     *
      * @return The model with information to generate a player_mtl
      */
     private static DefaultModelGenerator getPlayerModel(IResourceProvider rProvider) {
         /* Player model */
         DefaultModelGenerator playerModel = new DefaultModelGenerator();
         playerModel.setObjectReference(rProvider.getResource(ModelEnum.player));
+        playerModel.setObjectType(ModelEnum.player);
+        ;
         playerModel.setScale(1.0f);
         playerModel.setHasTransparency(false);
         playerModel.setNormalsPointingUp(false);
@@ -49,7 +51,7 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         //Load the obj of the player
         HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, loaderAPI, model.getObjectReference(),
                 model.getHasTransparency(), model.getNormalsPointingUp());
-        GenericEntity genericEntity = new GenericEntity(groupsOfMaterials);
+        GenericEntity genericEntity = new GenericEntity(groupsOfMaterials, model.getObjectType());
         //Prepare generic entity end
         Player player = new Player(genericEntity, playerPosition, // Position
                 0.0f, 0.0f, 0.0f, // Rotation

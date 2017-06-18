@@ -1,14 +1,19 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.models.TerrainShape;
+import com.dferreira.gameEngine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.gameEngine.textures.TerrainTexturesPack;
+
+import java.util.HashMap;
 
 /**
  * Responsible for creating the multiple terrains of the 3D world
@@ -61,7 +66,14 @@ public class WorldTerrainsGenerator {
 
         TerrainShape terrain = new TerrainShape(heightMap);
 
-        IRawModel model = loaderRenderAPI.loadToRawModel(terrain);
+        HashMap<RenderAttributeEnum, IEnum> attributes = new HashMap<>();
+
+        attributes.put(RenderAttributeEnum.position, TTerrainAttribute.position);
+        attributes.put(RenderAttributeEnum.textureCoords, TTerrainAttribute.textureCoords);
+        attributes.put(RenderAttributeEnum.normal, TTerrainAttribute.normal);
+
+
+        IRawModel model = loaderRenderAPI.loadToRawModel(terrain, attributes);
 
         Vector3f terrainPosition1 = new Vector3f(0.0f, 0.0f, -0.1f);
         return getTerrain(model, terrain.getHeights(), terrainPosition1);

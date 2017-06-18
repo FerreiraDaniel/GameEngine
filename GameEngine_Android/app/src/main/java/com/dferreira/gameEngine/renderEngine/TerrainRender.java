@@ -7,7 +7,6 @@ import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.models.Light;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
-import com.dferreira.gameEngine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.gameEngine.shaders.terrains.TerrainShaderManager;
 import com.dferreira.gameEngine.textures.TerrainTexturesPack;
 
@@ -90,7 +89,7 @@ public class TerrainRender extends GenericRender {
                 prepareTerrain(terrain);
                 prepareInstance(terrain);
                 render(terrain);
-                unbindTexturedModel();
+                unbindTexturedModel(terrain);
             }
         }
     }
@@ -124,11 +123,7 @@ public class TerrainRender extends GenericRender {
         //Load the light properties
         tShader.loadShineVariables(1.0f, 0.0f);
 
-        this.frameRenderAPI.prepareModel(model,
-                TTerrainAttribute.position,
-                TTerrainAttribute.textureCoords,
-                TTerrainAttribute.normal
-        );
+        this.frameRenderAPI.prepareModel(model);
     }
 
     /**
@@ -153,9 +148,12 @@ public class TerrainRender extends GenericRender {
 
     /**
      * UnBind the previous bound elements
+     *
+     * @param terrain A reference to the terrain to get render
      */
-    private void unbindTexturedModel() {
-        this.frameRenderAPI.unPrepareModel(TTerrainAttribute.position, TTerrainAttribute.textureCoords, TTerrainAttribute.normal);
+    private void unbindTexturedModel(Terrain terrain) {
+        IRawModel model = terrain.getModel();
+        this.frameRenderAPI.unPrepareModel(model);
     }
 
 

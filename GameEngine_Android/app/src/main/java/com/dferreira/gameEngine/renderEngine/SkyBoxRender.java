@@ -5,7 +5,6 @@ import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.gameEngine.models.SkyBox;
 import com.dferreira.gameEngine.shaders.skyBox.SkyBoxShaderManager;
-import com.dferreira.gameEngine.shaders.skyBox.TSkyBoxAttribute;
 
 /**
  * Class responsible to render the sky box in the screen
@@ -45,7 +44,7 @@ public class SkyBoxRender extends GenericRender {
         sbShader.loadViewMatrix(viewMatrix);
         prepareSkyBox(skyBox);
         render(skyBox);
-        unbindTexture();
+        unbindTexture(skyBox);
         sbShader.stop();
     }
 
@@ -59,7 +58,7 @@ public class SkyBoxRender extends GenericRender {
 
         // bind several textures of the sky box
         bindTextures(skyBox);
-        this.frameRenderAPI.prepare3DModel(model, TSkyBoxAttribute.position);
+        this.frameRenderAPI.prepare3DModel(model);
     }
 
     /**
@@ -82,9 +81,13 @@ public class SkyBoxRender extends GenericRender {
 
     /**
      * UnBind the previous bound elements
+     *
+     * @param skyBox The sky box to be render
      */
-    private void unbindTexture() {
-        this.frameRenderAPI.unPrepareModel(TSkyBoxAttribute.position);
+    private void unbindTexture(SkyBox skyBox) {
+        IRawModel model = skyBox.getModel();
+
+        this.frameRenderAPI.unPrepareModel(model);
     }
 
     /**

@@ -7,6 +7,7 @@ import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_render.RenderConstants;
 
 /**
@@ -30,17 +31,20 @@ class GLFrameRender implements IFrameRenderAPI {
     }
 
 
+
     /**
      * Prepares one model to be render in scene
      *
-     * @param model         The model to be prepared to be rendered
-     * @param position      The position attribute
-     * @param textureCoords The texture attribute
-     * @param normal        The normal attribute position
+     * @param model The model to be prepared to be rendered
      */
     @Override
-    public void prepareModel(IRawModel model, IEnum position, IEnum textureCoords, IEnum normal) {
+    public void prepareModel(IRawModel model) {
         GLRawModel rawModel = (GLRawModel) model;
+
+        IEnum position = rawModel.getAttribute(RenderAttributeEnum.position); // The position attribute
+        IEnum textureCoords = rawModel.getAttribute(RenderAttributeEnum.textureCoords); // The texture attribute
+        IEnum normal = rawModel.getAttribute(RenderAttributeEnum.normal);// The normal attribute position
+
 
         // Load the vertex data
         GLES20.glVertexAttribPointer(position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, rawModel.getVertexBuffer());
@@ -65,12 +69,13 @@ class GLFrameRender implements IFrameRenderAPI {
     /**
      * Prepares one 2D model to be render in scene
      *
-     * @param model    The model to be prepared to be rendered
-     * @param position The position attribute
+     * @param model The model to be prepared to be rendered
      */
     @Override
-    public void prepare2DModel(IRawModel model, IEnum position) {
+    public void prepare2DModel(IRawModel model) {
         GLRawModel rawModel = (GLRawModel) model;
+
+        IEnum position = rawModel.getAttribute(RenderAttributeEnum.position); // The position attribute
 
         // Load the vertex data
         GLES20.glVertexAttribPointer(position.getValue(), RenderConstants.VERTEX_SIZE_2D, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, rawModel.getVertexBuffer());
@@ -84,12 +89,13 @@ class GLFrameRender implements IFrameRenderAPI {
     /**
      * Prepares one model to be render in scene
      *
-     * @param model    The model to be prepared to be rendered
-     * @param position The position attribute
+     * @param model The model to be prepared to be rendered
      */
     @Override
-    public void prepare3DModel(IRawModel model, IEnum position) {
+    public void prepare3DModel(IRawModel model) {
         GLRawModel rawModel = (GLRawModel) model;
+
+        IEnum position = rawModel.getAttribute(RenderAttributeEnum.position); // The position attribute
 
         // Load the vertex data
         GLES20.glVertexAttribPointer(position.getValue(), RenderConstants.VERTEX_SIZE, GLES20.GL_FLOAT, RenderConstants.VERTEX_NORMALIZED, RenderConstants.STRIDE, rawModel.getVertexBuffer());
@@ -102,25 +108,25 @@ class GLFrameRender implements IFrameRenderAPI {
     /**
      * UnBind the previous bound elements
      *
-     * @param position      The position attribute
-     * @param textureCoords The texture attribute
-     * @param normal        The normal attribute position
+     * @param model The model to be prepared to be rendered
      */
     @Override
-    public void unPrepareModel(IEnum position, IEnum textureCoords, IEnum normal) {
-        GLES20.glDisableVertexAttribArray(position.getValue());
-        GLES20.glDisableVertexAttribArray(textureCoords.getValue());
-        GLES20.glDisableVertexAttribArray(normal.getValue());
-    }
+    public void unPrepareModel(IRawModel model) {
+        GLRawModel rawModel = (GLRawModel) model;
 
-    /**
-     * UnBind the previous bound elements
-     *
-     * @param position The position attribute
-     */
-    @Override
-    public void unPrepareModel(IEnum position) {
+        IEnum position = rawModel.getAttribute(RenderAttributeEnum.position); // The position attribute
+        IEnum textureCoords = rawModel.getAttribute(RenderAttributeEnum.textureCoords); // The texture attribute
+        IEnum normal = rawModel.getAttribute(RenderAttributeEnum.normal);// The normal attribute position
+
+
         GLES20.glDisableVertexAttribArray(position.getValue());
+
+        if (textureCoords != null) {
+            GLES20.glDisableVertexAttribArray(textureCoords.getValue());
+        }
+        if (normal != null) {
+            GLES20.glDisableVertexAttribArray(normal.getValue());
+        }
     }
 
     /**
