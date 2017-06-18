@@ -2,6 +2,11 @@ package com.dferreira.commons.gl_render;
 
 import com.dferreira.commons.generic_render.IRawModel;
 
+import java.util.HashMap;
+
+import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
+
 /**
  * Represents one raw model of one entity
  */
@@ -18,17 +23,25 @@ public class GLRawModel implements IRawModel {
 	private final int vertexCount;
 
 	/**
+	 * List of attributes associated with the model
+	 */
+	private final HashMap<RenderAttributeEnum, IEnum> attributes;
+
+	/**
 	 * Constructor of the raw model
 	 * 
 	 * @param vaoId
 	 *            The identifier of vertex array object assigned by openGL
 	 * @param vertexCount
 	 *            number of vertex
+	 * @param attributes
+	 *            List of attributes associated with the model
 	 */
-	public GLRawModel(int vaoId, int vertexCount) {
+	public GLRawModel(int vaoId, int vertexCount, HashMap<RenderAttributeEnum, IEnum> attributes) {
 		super();
 		this.vaoId = vaoId;
 		this.vertexCount = vertexCount;
+		this.attributes = attributes;
 	}
 
 	/**
@@ -44,6 +57,16 @@ public class GLRawModel implements IRawModel {
 	public int getVertexCount() {
 		return vertexCount;
 	}
+	
+    /**
+     * Takes the model and the render attribute and returns the corresponding IEnum
+     *
+     * @param renderAttribute The attribute to fetch
+     * @return Enumeration of the render attribute
+     */
+    public IEnum getAttribute(RenderAttributeEnum renderAttribute) {
+        return this.attributes.get(renderAttribute);
+    }
 
 	/**
 	 * Clean the memory used by the model

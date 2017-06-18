@@ -1,48 +1,51 @@
 package com.dferreira.gameEngine.models;
 
-import com.dferreira.commons.gl_render.GLRawModel;
+import com.dferreira.commons.generic_render.IRawModel;
+import com.dferreira.commons.generic_render.ITexture;
 
 /**
  * Represents a box with sky textures
  */
 public class SkyBox {
 
-	/**
-	 * RawModel of the skyBox
-	 */
-	private final GLRawModel model;
+    /**
+     * GLRawModel of the skyBox
+     */
+    private final IRawModel model;
 
-	/**
-	 * The identifier of the sky box cubic texture
-	 */
-	private final int textureId;
+    /**
+     * The Cubic texture in the Graphics API
+     */
+    private ITexture texture;
 
-	/**
-	 * The constructor of the skyBox
-	 * 
-	 * @param textureId
-	 *            the Identifier of the texture of the sky
-	 * @param model
-	 *            The model of the sky box
-	 */
-	public SkyBox(int textureId, GLRawModel model) {
-		super();
-		this.textureId = textureId;
-		this.model = model;
-	}
+    /**
+     * The constructor of the skyBox
+     *
+     * @param model The model of the sky box
+     */
+    public SkyBox(IRawModel model) {
+        super();
+        this.model = model;
+    }
 
-	/**
-	 * @return the model
-	 */
-	public GLRawModel getModel() {
-		return model;
-	}
+    /**
+     * @return the model
+     */
+    public IRawModel getModel() {
+        return model;
+    }
 
-	/**
-	 * @return the texture identifier
-	 */
-	public int getTextureId() {
-		return textureId;
-	}
+    /**
+     * @return Texture in the Graphics API Framework
+     */
+    public ITexture getTexture() {
+        return texture;
+    }
 
+    /**
+     * @param texture Texture API Framework
+     */
+    public void setTexture(ITexture texture) {
+        this.texture = texture;
+    }
 }

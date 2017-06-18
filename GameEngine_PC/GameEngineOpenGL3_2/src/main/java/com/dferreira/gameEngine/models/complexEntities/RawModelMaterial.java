@@ -1,48 +1,47 @@
 package com.dferreira.gameEngine.models.complexEntities;
 
-import com.dferreira.commons.gl_render.GLRawModel;
+import com.dferreira.commons.generic_render.IRawModel;
 
 /**
- * Wrapper that besides of have the raw model also has the material to put in
- * the model
+ * Wrapper that besides of have the raw model also has the material to put in the model
  */
 public class RawModelMaterial {
 
-	/**
-	 * Raw model of the entity
-	 */
-	private GLRawModel rawModel;
+    /**
+     * Raw model of the entity
+     */
+    private final IRawModel rawModel;
 
-	/**
-	 * Reference to the material of the collection of faces
-	 */
-	private Material material;
+    /**
+     * Reference to the material of the entity
+     */
+    private final Material material;
 
-	/**
-	 * Constructor of the textured model
-	 * 
-	 * @param rawModel
-	 *            Raw model of the entity
-	 * @param material
-	 *            Reference to the texture of the entity
-	 */
-	public RawModelMaterial(GLRawModel rawModel, Material material) {
-		super();
-		this.rawModel = rawModel;
-		this.material = material;
-	}
+    /**
+     * Constructor of the textured model
+     *
+     * @param rawModel Raw model of the entity
+     * @param material Reference to the material of the entity
+     */
+    public RawModelMaterial(IRawModel rawModel, Material material) {
+        super();
+        this.rawModel = rawModel;
+        this.material = material;
+    }
 
-	/**
-	 * @return the raw model of the entity
-	 */
-	public GLRawModel getRawModel() {
-		return rawModel;
-	}
 
-	/**
-	 * @return the description of the texture of the rawModel
-	 */
-	public Material getMaterial() {
-		return material;
-	}
+    /**
+     * @return the raw model of the entity
+     */
+    public IRawModel getRawModel() {
+        return rawModel;
+    }
+
+
+    /**
+     * @return the description of the material of the entity
+     */
+    public Material getMaterial() {
+        return material;
+    }
 }

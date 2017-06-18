@@ -5,12 +5,13 @@ import java.util.Random;
 
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
+import com.dferreira.commons.generic_resources.IResourceProvider;
+import com.dferreira.commons.generic_resources.ModelEnum;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
 import com.dferreira.gameEngine.models.complexEntities.GenericEntity;
 import com.dferreira.gameEngine.models.complexEntities.MaterialGroup;
-import com.dferreira.gameEngine.models.complexEntities.TEntity;
 import com.dferreira.gameEngine.renderEngine.Loader;
 
 /**
@@ -43,50 +44,59 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 	}
 
 	/**
-	 * Get a meta-data structure with values of the entities that are going make
-	 * the world
+	 * Get the default values of the entities that are going make the world
+	 *
+	 * @param rProvider
+	 *            Provider of the resources to load
+	 * @return The map of model VS quantities of entities
 	 */
-	private static HashMap<DefaultModelGenerator, Integer> getEntitiesMap() {
+	private static HashMap<DefaultModelGenerator, Integer> getEntitiesMap(IResourceProvider rProvider) {
 		HashMap<DefaultModelGenerator, Integer> entitiesMap = new HashMap<DefaultModelGenerator, Integer>();
 
 		/* Fern model */
 		DefaultModelGenerator fernModel = new DefaultModelGenerator();
-		fernModel.setObjectType(TEntity.fern);
+		fernModel.setObjectType(ModelEnum.fern);
+		fernModel.setObjectReference(rProvider.getResource(ModelEnum.fern));
 		fernModel.setScale(1.0f);
 		fernModel.setHasTransparency(true);
 		fernModel.setNormalsPointingUp(true);
 
 		/* Tree model */
 		DefaultModelGenerator treeModel = new DefaultModelGenerator();
-		treeModel.setObjectType(TEntity.tree);
+		treeModel.setObjectType(ModelEnum.tree);
+		treeModel.setObjectReference(rProvider.getResource(ModelEnum.tree));
 		treeModel.setScale(10.0f);
 		treeModel.setHasTransparency(false);
 		treeModel.setNormalsPointingUp(false);
 
 		/* Banana tree */
 		DefaultModelGenerator bananaTreeModel = new DefaultModelGenerator();
-		bananaTreeModel.setObjectType(TEntity.banana_tree);
+		bananaTreeModel.setObjectType(ModelEnum.banana_tree);
+		bananaTreeModel.setObjectReference(rProvider.getResource(ModelEnum.banana_tree));
 		bananaTreeModel.setScale(1.0f);
 		bananaTreeModel.setHasTransparency(true);
 		bananaTreeModel.setNormalsPointingUp(false);
 
 		/* grass model */
 		DefaultModelGenerator grassModel = new DefaultModelGenerator();
-		grassModel.setObjectType(TEntity.grass);
+		grassModel.setObjectType(ModelEnum.grass);
+		grassModel.setObjectReference(rProvider.getResource(ModelEnum.grass));
 		grassModel.setScale(1.0f);
 		grassModel.setHasTransparency(true);
 		grassModel.setNormalsPointingUp(true);
 
 		/* flower model */
 		DefaultModelGenerator flowerModel = new DefaultModelGenerator();
-		flowerModel.setObjectType(TEntity.flower);
+		flowerModel.setObjectType(ModelEnum.flower);
+		flowerModel.setObjectReference(rProvider.getResource(ModelEnum.flower));
 		flowerModel.setScale(1.0f);
 		flowerModel.setHasTransparency(true);
-		flowerModel.setNormalsPointingUp(true);
+		flowerModel.setNormalsPointingUp(false);
 
 		/* Marble model */
 		DefaultModelGenerator marbleModel = new DefaultModelGenerator();
-		marbleModel.setObjectType(TEntity.marble);
+		marbleModel.setObjectType(ModelEnum.marble);
+		marbleModel.setObjectReference(rProvider.getResource(ModelEnum.marble));
 		marbleModel.setScale(5.0f);
 		marbleModel.setHasTransparency(false);
 		marbleModel.setNormalsPointingUp(false);
@@ -103,15 +113,21 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 	}
 
 	/**
-	 * 
 	 * @param loader
 	 *            loader that will load the entities of the 3D world
+	 * @param loaderAPI
+	 *            loader that will load the entities of the 3D world
+	 * @param resourceProvider
+	 *            Provider of the resources used in the application
 	 * @param terrain
 	 *            The terrain used to determine the height position
+	 *
 	 * @return The entities that will compose the 3D world
 	 */
-	public static Entity[] getEntities(Loader loader, Terrain terrain) {
-		HashMap<DefaultModelGenerator, Integer> entitiesMap = getEntitiesMap();
+	public static Entity[] getEntities(Loader loader, ILoaderRenderAPI loaderAPI, IResourceProvider resourceProvider,
+			Terrain terrain) {
+
+		HashMap<DefaultModelGenerator, Integer> entitiesMap = getEntitiesMap(resourceProvider);
 
 		int totalModels = 0;
 		for (DefaultModelGenerator key : entitiesMap.keySet()) {
@@ -122,8 +138,8 @@ public class WorldEntitiesGenerator extends GenericEntitiesGenerator {
 		Random random = new Random();
 		int count = 0;
 		for (DefaultModelGenerator key : entitiesMap.keySet()) {
-			HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, key.getObjectType().getValue(),
-					key.getHasTransparency(), key.getNormalsPointingUp());
+			HashMap<String, MaterialGroup> groupsOfMaterials = getTexturedObj(loader, loaderAPI,
+					key.getObjectReference(), key.getHasTransparency(), key.getNormalsPointingUp());
 			GenericEntity genericEntity = new GenericEntity(groupsOfMaterials, key.getObjectType());
 			// Prepare generic entity end
 			Integer numberOfObjs = entitiesMap.get(key);

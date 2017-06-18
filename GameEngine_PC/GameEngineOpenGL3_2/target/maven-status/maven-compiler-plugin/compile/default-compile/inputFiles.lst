@@ -17,7 +17,6 @@
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/GuiTexture.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/renderEngine/GuiRender.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/shaders/skyBox/TSkyBoxAttribute.java
-/Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/complexEntities/TEntity.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/Player.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/shaders/entities/TEntityAttribute.java
 /Users/danielferreira/Documents/GameEngine/GameEngine_PC/GameEngineOpenGL3_2/src/main/java/com/dferreira/gameEngine/models/complexEntities/Entity.java

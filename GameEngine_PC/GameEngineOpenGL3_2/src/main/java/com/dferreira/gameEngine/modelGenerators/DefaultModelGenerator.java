@@ -1,16 +1,25 @@
-package com.dferreira.gameEngine.modelGenerators;
+ package com.dferreira.gameEngine.modelGenerators;
 
-import com.dferreira.gameEngine.models.complexEntities.TEntity;
+import com.dferreira.commons.generic_resources.ModelEnum;
+import com.dferreira.commons.shapes.IShape;
+
+import java.util.List;
 
 /**
  * Define the default properties that the element should obey
  */
+@SuppressWarnings("WeakerAccess")
 public class DefaultModelGenerator {
+
+	/**
+	 * The type of object that is going to be create by this model generator
+	 */
+	private ModelEnum objectType;
 
 	/**
 	 * The name of the .obj that represents the model
 	 */
-	private TEntity objectType;
+	private List<IShape> objectReference;
 
 	/**
 	 * The scale of the model
@@ -29,18 +38,35 @@ public class DefaultModelGenerator {
 	private boolean normalsPointingUp;
 
 	/**
-	 * @return the objectType that represents the model
+	 * @return the type that represents the model
 	 */
-	public TEntity getObjectType() {
+	public ModelEnum getObjectType() {
 		return objectType;
 	}
 
 	/**
-	 * @param objectName
-	 *            the objectName to set that represents the model
+	 * @param objectType
+	 *            the type of object that represents the model
 	 */
-	public void setObjectType(TEntity objectType) {
+	public void setObjectType(ModelEnum objectType) {
 		this.objectType = objectType;
+	}
+
+	/**
+	 * @return The reference to the object that represents the model
+	 */
+	public List<IShape> getObjectReference() {
+		return objectReference;
+	}
+
+	/**
+	 * Set the reference to object the represents the model
+	 *
+	 * @param objectReference
+	 *            reference to the object to set
+	 */
+	public void setObjectReference(List<IShape> objectReference) {
+		this.objectReference = objectReference;
 	}
 
 	/**

@@ -6,7 +6,6 @@ import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.GuiTexture;
 import com.dferreira.gameEngine.shaders.guis.GuiShaderManager;
-import com.dferreira.gameEngine.shaders.guis.TGuiAttribute;
 
 import java.util.List;
 
@@ -78,7 +77,7 @@ public class GuiRender extends GenericRender {
                 render(gui.getRawModel());
 
             }
-            unPrepareModel();
+            unPrepareModel(GUIs.get(0).getRawModel());
 
             this.frameRenderAPI.disableBlend();
             this.frameRenderAPI.enableDepthTest();
@@ -92,7 +91,7 @@ public class GuiRender extends GenericRender {
      * @param rawModel Model that contains the model of the entity with textures
      */
     private void prepareModel(IRawModel rawModel) {
-        this.frameRenderAPI.prepare2DModel(rawModel, TGuiAttribute.position);
+        this.frameRenderAPI.prepare2DModel(rawModel);
     }
 
     /**
@@ -117,9 +116,11 @@ public class GuiRender extends GenericRender {
 
     /**
      * UnBind the previous bound elements
+     *
+     * @param quad The quad to render
      */
-    private void unPrepareModel() {
-        this.frameRenderAPI.unPrepareModel(TGuiAttribute.position);
+    private void unPrepareModel(IRawModel quad) {
+        this.frameRenderAPI.unPrepareModel(quad);
     }
 
     /**

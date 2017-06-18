@@ -13,6 +13,7 @@ import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.utils.Utils;
+import com.dferreira.commons.waveFront.OBJLoader;
 
 /**
  * Has the actions to allow to get the resources from in desktop architecture
@@ -84,10 +85,18 @@ public class DesktopResourceProvider implements IResourceProvider, ISubResourceP
 	}
 
 
-	@Override
-	public List<IShape> getResource(ModelEnum modelEnum) {
-		// TODO Auto-generated method stub
-		return null;
+    /**
+     * @param modelEnum The model to load
+     * @return A resource descriptor to load the model passed as argument
+     */
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
+    @Override
+    public List<IShape> getResource(ModelEnum modelEnum) {
+    	
+    	String objName = modelEnum.toString();
+    	List<IShape> shapes = OBJLoader.loadObjModel(objName);
+    	
+		return shapes;
 	}
 
 	/**

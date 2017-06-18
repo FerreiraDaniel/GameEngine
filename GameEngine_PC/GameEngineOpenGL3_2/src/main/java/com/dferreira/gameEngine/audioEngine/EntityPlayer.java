@@ -6,11 +6,12 @@ import java.util.Map;
 import java.util.Set;
 
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_resources.ModelEnum;
+import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.AudioBuffer;
 import com.dferreira.gameEngine.models.AudioSource;
 import com.dferreira.gameEngine.models.Player;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
-import com.dferreira.gameEngine.models.complexEntities.TEntity;
 
 /**
  * Is going to demand the reproduction of audio due to the control of the
@@ -52,12 +53,11 @@ public class EntityPlayer extends GenericPlayer {
 	 */
 	public EntityPlayer(List<AudioSource> sourcesAvailable) {
 		this.sourcesAvailable = sourcesAvailable;
-		if ((this.sourcesAvailable != null) && (!this.sourcesAvailable.isEmpty())) {
-			playerSource = this.sourcesAvailable.remove(this.sourcesAvailable.size() - 1);
+		if (!Utils.isEmpty(this.sourcesAvailable)) {
+			this.playerSource = this.sourcesAvailable.remove(this.sourcesAvailable.size() - 1);
 		}
 		this.sourcesAssign = new HashMap<Entity, AudioSource>();
 	}
-
 
 	/**
 	 * Set the listener position and reproduces the sound of the player
@@ -107,9 +107,8 @@ public class EntityPlayer extends GenericPlayer {
 	 *         the rough approximation
 	 */
 	private boolean roughApproximation(Vector3f position1, Vector3f position2, float threshold) {
-		return (Math.abs(position1.x - position2.x) < threshold) && 
-				(Math.abs(position1.y - position2.y) < threshold) && 
-				(Math.abs(position1.z - position2.z) < threshold);
+		return (Math.abs(position1.x - position2.x) < threshold) && (Math.abs(position1.y - position2.y) < threshold)
+				&& (Math.abs(position1.z - position2.z) < threshold);
 	}
 
 	/**
@@ -196,8 +195,8 @@ public class EntityPlayer extends GenericPlayer {
 		if (roughApproximation(player, entity.getPosition(), ROUGH_THRESHOLD)
 				&& (squareDistance(player, entity.getPosition()) < CRASH_THRESHOLD)) {
 			AudioSource source = sourcesAssign.get(entity);
-			TEntity tEntity = entity.getGenericEntity().getObjectType(); 
-			switch(tEntity) {
+			ModelEnum tEntity = entity.getGenericEntity().getObjectType();
+			switch (tEntity) {
 			case banana_tree:
 				break;
 			case fern:
@@ -231,7 +230,7 @@ public class EntityPlayer extends GenericPlayer {
 			default:
 				break;
 			}
-			
+
 			return true;
 		} else {
 			return false;
@@ -250,7 +249,7 @@ public class EntityPlayer extends GenericPlayer {
 	 *            The player of the scene and also the listener
 	 */
 	private void playEntities(HashMap<TAudioEnum, AudioBuffer> library, Set<Entity> entities, Player player) {
-		if (entities != null) {
+		if (!Utils.isEmpty(entities)) {
 			Vector3f pPosition = player.getPosition();
 
 			for (Entity entity : entities) {
@@ -262,16 +261,16 @@ public class EntityPlayer extends GenericPlayer {
 
 				if (!playCrash(library, entity, pPosition)) {
 					// If not played a crash
-					if (entity.getGenericEntity().getObjectType() != TEntity.tree) {
+					if (entity.getGenericEntity().getObjectType() != ModelEnum.tree) {
 						continue;
 					}
 
 					// Make birds to play in each tree
 					AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
-					if(source.getBuffer() == breakingWood) {
+					if (source.getBuffer() == breakingWood) {
 						continue;
 					}
-					
+
 					if (!isPlaying(source)) {
 						AudioBuffer falconBuffer = library.get(TAudioEnum.falcon);
 						this.setPitch(source, 1.0f);

@@ -2,6 +2,8 @@ package com.dferreira.commons.utils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 
 /**
  * Utils for every basic stuff
@@ -51,6 +53,17 @@ public class Utils {
 	 */
 	public static boolean isEmpty(String str) {
 		return (str == null || str.length() == 0);
+	}
+
+	/**
+	 * Indicates if the entity passed is null or empty
+	 *
+	 * @param entity
+	 *            The entity to check
+	 * @return True if is null or empty
+	 */
+	public static boolean isEmpty(Set entities) {
+		return (entities == null || entities.size() == 0);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.dferreira.gameEngine.models.complexEntities;
 
 import java.util.HashMap;
 
+import com.dferreira.commons.generic_resources.ModelEnum;
+
 /**
  * Generic entity without any specific of a determined entity
  */
@@ -16,7 +18,7 @@ public class GenericEntity {
 	/**
 	 * The type of the object that the model is supporting
 	 */
-	private TEntity objectType;
+	private final ModelEnum objectType;
 
 	/**
 	 * 
@@ -27,7 +29,7 @@ public class GenericEntity {
 	 * @param objectType
 	 *            The type of the object that the model is supporting
 	 */
-	public GenericEntity(HashMap<String, MaterialGroup> groupsOfMaterials, TEntity objectType) {
+	public GenericEntity(HashMap<String, MaterialGroup> groupsOfMaterials, ModelEnum objectType) {
 		super();
 		this.groupsOfMaterials = groupsOfMaterials;
 		this.objectType = objectType;
@@ -43,9 +45,8 @@ public class GenericEntity {
 	/**
 	 * @return The type of the object that the model is supporting
 	 */
-	public TEntity getObjectType() {
+	public ModelEnum getObjectType() {
 		return objectType;
 	}
 
-	
 }
