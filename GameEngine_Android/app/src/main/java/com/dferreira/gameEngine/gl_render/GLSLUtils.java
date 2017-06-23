@@ -1,4 +1,4 @@
-package com.dferreira.commons.gl_render;
+package com.dferreira.gameEngine.gl_render;
 
 import android.opengl.GLES10;
 import android.opengl.GLES20;

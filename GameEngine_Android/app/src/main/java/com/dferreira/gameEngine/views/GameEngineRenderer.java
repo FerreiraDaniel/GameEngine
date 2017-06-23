@@ -8,7 +8,7 @@ import com.dferreira.androidUtils.AndroidResourceProvider;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRenderAPIAccess;
 import com.dferreira.commons.generic_resources.IResourceProvider;
-import com.dferreira.commons.gl_render.GLRenderAPIAccess;
+import com.dferreira.gameEngine.gl_render.GLRenderAPIAccess;
 import com.dferreira.commons.models.Light;
 import com.dferreira.gameEngine.modelGenerators.WorldEntitiesGenerator;
 import com.dferreira.gameEngine.modelGenerators.WorldGUIsGenerator;
