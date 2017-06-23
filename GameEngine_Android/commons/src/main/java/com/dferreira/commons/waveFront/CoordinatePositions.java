@@ -1,4 +1,4 @@
-package com.dferreira.commons.wavefront;
+package com.dferreira.commons.waveFront;
 
 /**
  *	Positions where the coordinates are when each line of wavefront

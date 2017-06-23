@@ -1,4 +1,4 @@
-package com.dferreira.commons.wavefront;
+package com.dferreira.commons.waveFront;
 
 import java.io.Serializable;
 
@@ -13,8 +13,8 @@ public class PolygonalFace implements Serializable {
     private static final long serialVersionUID = -1392812648568716201L;
 
     private final Integer vertexIndex;
-    private final Long textureIndex;
-    private final Long normalIndex;
+    private final Integer textureIndex;
+    private final Integer normalIndex;
     private final String groupName;
     private final String materialName;
 
@@ -28,7 +28,7 @@ public class PolygonalFace implements Serializable {
      * @param groupName    Name of the group that the face belongs
      * @param materialName Material that the material has if any
      */
-    public PolygonalFace(Integer vertexIndex, Long textureIndex, Long normalIndex, String groupName,
+    public PolygonalFace(Integer vertexIndex, Integer textureIndex, Integer normalIndex, String groupName,
                          String materialName) {
         this.vertexIndex = vertexIndex;
         this.textureIndex = textureIndex;
@@ -47,14 +47,14 @@ public class PolygonalFace implements Serializable {
     /**
      * @return Index of the texture of the face
      */
-    public Long getTextureIndex() {
+    public Integer getTextureIndex() {
         return textureIndex;
     }
 
     /**
      * @return Index of normal for this face
      */
-    public Long getNormalIndex() {
+    public Integer getNormalIndex() {
         return normalIndex;
     }
 

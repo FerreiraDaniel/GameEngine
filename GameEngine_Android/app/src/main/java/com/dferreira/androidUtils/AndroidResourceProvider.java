@@ -12,10 +12,11 @@ import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.utils.Utils;
-import com.dferreira.commons.wavefront.MtlLoader;
-import com.dferreira.commons.wavefront.OBJLoader;
+import com.dferreira.commons.waveFront.MtlLoader;
+import com.dferreira.commons.waveFront.OBJLoader;
 import com.dferreira.gameEngine.R;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
@@ -135,13 +136,22 @@ public class AndroidResourceProvider implements IResourceProvider, ISubResourceP
         List<IShape> shape = (List<IShape>) cache.get(cacheKey);
         if (shape == null) {
             int resourceId = getResourceId(modelEnum);
+            InputStream inputStream = null;
             try {
-                InputStream inputStream = context.getResources().openRawResource(resourceId);
+                inputStream = context.getResources().openRawResource(resourceId);
                 shape = OBJLoader.loadObjModel(inputStream, this);
                 cache.put(cacheKey, shape);
             } catch (Exception e) {
                 Log.e(TAG, "Could not load file!", e);
                 return null;
+            } finally {
+                if (inputStream != null) {
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         } else {
             Log.d(TAG, "Cached: " + cacheKey);

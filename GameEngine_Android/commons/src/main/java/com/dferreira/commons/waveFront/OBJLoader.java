@@ -1,4 +1,4 @@
-package com.dferreira.commons.wavefront;
+package com.dferreira.commons.waveFront;
 
 
 import com.dferreira.commons.Vector2f;
@@ -10,6 +10,7 @@ import com.dferreira.commons.shapes.WfObject;
 import com.dferreira.commons.utils.Utils;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -93,12 +94,11 @@ public class OBJLoader extends GenericLoader {
         float[] texturesArray = new float[vertices.size() * COORDINATES_BY_TEXTURE];
         HashMap<String, List<Integer>> indicesArrayMap = new HashMap<>();
 
-        for (int j = 0; j < facesLst.size(); j++) {
-            PolygonalFace face = facesLst.get(j);
+        for (PolygonalFace face : facesLst) {
 
             int vertexIndex = face.getVertexIndex();
-            int normalIndex = face.getNormalIndex().intValue();
-            int textureIndex = face.getTextureIndex().intValue();
+            int normalIndex = face.getNormalIndex();
+            int textureIndex = face.getTextureIndex();
 
             Vector3f vertex = vertices.get(vertexIndex);
             Vector3f currentNorm = normals.get(normalIndex);
@@ -138,8 +138,8 @@ public class OBJLoader extends GenericLoader {
     /**
      * Parses one waveFront file
      *
-     * @param inputStream           The resource where the waveFront file exists
-     * @param subResourceProvider   Load the sub type of resources like (Materials)
+     * @param inputStream         The resource where the waveFront file exists
+     * @param subResourceProvider Load the sub type of resources like (Materials)
      * @return Wavefront object
      */
     public static List<IShape> loadObjModel(InputStream inputStream, ISubResourceProvider subResourceProvider) {
@@ -215,24 +215,17 @@ public class OBJLoader extends GenericLoader {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-
-
-    /**
-     * Parse a component in string format and return its long value
-     *
-     * @param strComponent Component to parse
-     * @return Long value or null if it is the case
-     */
-    private static Long parseLongComponent(String strComponent) {
-        if (Utils.isEmpty(strComponent)) {
-            return null;
-        } else {
-            return Long.parseLong(strComponent) - 1;
-        }
-    }
 
     /**
      * Parse a component in string format and return its short value
@@ -259,8 +252,8 @@ public class OBJLoader extends GenericLoader {
      */
     private static PolygonalFace processVertex(String[] vertexData, String groupName, String materialName) {
         Integer vertexIndex = parseIntComponent(vertexData[0]);
-        Long textureIndex = parseLongComponent(vertexData[1]);
-        Long normalIndex = parseLongComponent(vertexData[2]);
+        Integer textureIndex = parseIntComponent(vertexData[1]);
+        Integer normalIndex = parseIntComponent(vertexData[2]);
 
         return new PolygonalFace(vertexIndex, textureIndex, normalIndex, groupName, materialName);
     }

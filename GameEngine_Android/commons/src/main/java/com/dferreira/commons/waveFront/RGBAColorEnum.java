@@ -1,4 +1,4 @@
-package com.dferreira.commons.wavefront;
+package com.dferreira.commons.waveFront;
 
 import com.dferreira.commons.ColorRGBA;
 

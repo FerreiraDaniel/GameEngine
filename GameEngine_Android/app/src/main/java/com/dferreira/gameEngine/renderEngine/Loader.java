@@ -3,7 +3,7 @@ package com.dferreira.gameEngine.renderEngine;
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.utils.Utils;
-import com.dferreira.commons.wavefront.RGBAColorEnum;
+import com.dferreira.commons.waveFront.RGBAColorEnum;
 import com.dferreira.gameEngine.models.complexEntities.LightingComponent;
 import com.dferreira.gameEngine.models.complexEntities.Material;
 

@@ -1,4 +1,4 @@
-package com.dferreira.commons.wavefront;
+package com.dferreira.commons.waveFront;
 
 import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.shapes.IExternalMaterial;
