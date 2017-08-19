@@ -1,10 +1,10 @@
 package com.dferreira.gameEngine.models;
 
+import org.lwjgl.input.Keyboard;
+
 import com.dferreira.commons.Vector3f;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
 import com.dferreira.gameEngine.models.complexEntities.GenericEntity;
-
-import org.lwjgl.input.Keyboard;
 
 /**
  * Player that is going to be used in the scene

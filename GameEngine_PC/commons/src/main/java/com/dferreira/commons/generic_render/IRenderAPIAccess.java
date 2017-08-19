@@ -5,7 +5,6 @@ package com.dferreira.commons.generic_render;
  */
 public interface IRenderAPIAccess {
 
-
     /**
      * @return The loader render API
      */
@@ -20,4 +19,9 @@ public interface IRenderAPIAccess {
      * @return The shader manager API
      */
     IShaderManagerAPI getShaderManagerAPI();
+    
+    /**
+     * Dispose resources used by the render API
+     */
+    void dispose();
 }

@@ -1,9 +1,9 @@
  package com.dferreira.gameEngine.modelGenerators;
 
+import java.util.List;
+
 import com.dferreira.commons.generic_resources.ModelEnum;
 import com.dferreira.commons.shapes.IShape;
-
-import java.util.List;
 
 /**
  * Define the default properties that the element should obey

@@ -1,10 +1,9 @@
-package com.dferreira.commons.gl_render;
-
-import com.dferreira.commons.generic_render.IRawModel;
+package com.dferreira.gameEngine.gl_render;
 
 import java.util.HashMap;
 
 import com.dferreira.commons.IEnum;
+import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.RenderAttributeEnum;
 
 /**

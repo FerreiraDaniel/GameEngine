@@ -1,5 +1,7 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import java.util.HashMap;
+
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
@@ -10,8 +12,6 @@ import com.dferreira.commons.shapes.IShape;
 import com.dferreira.gameEngine.models.SkyBox;
 import com.dferreira.gameEngine.models.SkyBoxShape;
 import com.dferreira.gameEngine.shaders.skyBox.TSkyBoxAttribute;
-
-import java.util.HashMap;
 
 
 /**

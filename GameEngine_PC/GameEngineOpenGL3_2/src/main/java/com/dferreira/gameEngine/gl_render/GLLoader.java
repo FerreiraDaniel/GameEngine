@@ -1,4 +1,4 @@
-package com.dferreira.commons.gl_render;
+package com.dferreira.gameEngine.gl_render;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -14,16 +14,16 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import com.dferreira.commons.IEnum;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
-import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_render.ITexture;
+import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.generic_resources.TextureEnum;
 import com.dferreira.commons.models.TextureData;
 import com.dferreira.commons.shapes.IShape;
 import com.dferreira.commons.utils.Utils;
-import com.dferreira.commons.IEnum;
 
 /**
  * Loader for parts that are specific to openGL
@@ -148,7 +148,6 @@ public class GLLoader implements ILoaderRenderAPI {
 		GLTexture texture = new GLTexture();
 		texture.setId(textureId);
 		this.textures.add(textureId);
-
 		return texture;
 	}
 

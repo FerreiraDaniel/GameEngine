@@ -1,20 +1,22 @@
-package com.dferreira.gameEngine.models;
+package com.dferreira.gameEngine.al_player;
+
+import com.dferreira.commons.generic_player.IAudioDescription;
 
 /**
  * Audio buffer to get played
  */
-public class AudioBuffer {
+public class ALAudioDescription implements IAudioDescription {
 
 	/**
 	 * Identifier of the buffer to play in openAL
 	 */
-	private int bufferId;
+	private final int bufferId;
 
 	/**
 	 * @param bufferId
 	 *            Identifier of the buffer to play in openAL
 	 */
-	public AudioBuffer(int bufferId) {
+	public ALAudioDescription(int bufferId) {
 		super();
 		this.bufferId = bufferId;
 	}
@@ -25,13 +27,4 @@ public class AudioBuffer {
 	public int getBufferId() {
 		return bufferId;
 	}
-
-	/**
-	 * @param bufferId
-	 *            Identifier of the buffer to play in openAL
-	 */
-	public void setBufferId(int bufferId) {
-		this.bufferId = bufferId;
-	}
-
 }

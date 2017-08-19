@@ -1,6 +1,7 @@
 package com.dferreira.gameEngine.engineTester;
 
-import com.dferreira.gameEngine.audioEngine.AudioManager;
+import com.dferreira.commons.IPlaformSet;
+import com.dferreira.desktopUtils.DesktopInterfacesSet;
 import com.dferreira.gameEngine.renderEngine.DisplayManager;
 import com.dferreira.gameEngine.views.GameEngineRenderer;
 
@@ -19,19 +20,23 @@ public class MainGameLoop {
 	public static void main(String[] args) {
 		DisplayManager.createDisplay();
 		DisplayManager.printSystemInfo();
-		AudioManager.init();
-
-		GameEngineRenderer gameEngineRender = new GameEngineRenderer();
+		
+		
+		IPlaformSet platformSet = new DesktopInterfacesSet();
+		
+		platformSet.getListener().init();
+		
+		GameEngineRenderer gameEngineRender = new GameEngineRenderer(platformSet);
 
 		gameEngineRender.onSurfaceCreated();
 		while (DisplayManager.closeWasNotRequested()) {
 			gameEngineRender.onDrawFrame();
 		}
-		gameEngineRender.dealloc();
-
+		gameEngineRender.dispose();
+		platformSet.dispose();
+		
 		/* Calls the clean up methods to free memory */
 
 		DisplayManager.closeDisplay();
-		AudioManager.cleanUp();
 	}
 }

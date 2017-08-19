@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Set;
 
 import com.dferreira.commons.Vector3f;
+import com.dferreira.commons.generic_player.IAudioDescription;
+import com.dferreira.commons.generic_player.IAudioSource;
+import com.dferreira.commons.generic_player.IListener;
+import com.dferreira.commons.generic_resources.AudioEnum;
 import com.dferreira.commons.generic_resources.ModelEnum;
 import com.dferreira.commons.utils.Utils;
-import com.dferreira.gameEngine.models.AudioBuffer;
-import com.dferreira.gameEngine.models.AudioSource;
 import com.dferreira.gameEngine.models.Player;
 import com.dferreira.gameEngine.models.complexEntities.Entity;
 
@@ -17,7 +19,7 @@ import com.dferreira.gameEngine.models.complexEntities.Entity;
  * Is going to demand the reproduction of audio due to the control of the
  * entities
  */
-public class EntityPlayer extends GenericPlayer {
+public class EntityPlayer {
 
 	/**
 	 * If the entity is far away from the player more that the threshold is not
@@ -36,27 +38,27 @@ public class EntityPlayer extends GenericPlayer {
 	 * List of sound sources available to the entity player
 	 * 
 	 */
-	private List<AudioSource> sourcesAvailable;
+	private List<IAudioSource> sourcesAvailable;
 
 	/**
 	 * The player can always play audio;
 	 */
-	private AudioSource playerSource;
+	private IAudioSource playerSource;
 
 	/**
 	 * Sources assign
 	 */
-	private Map<Entity, AudioSource> sourcesAssign;
+	private Map<Entity, IAudioSource> sourcesAssign;
 
 	/**
 	 * Constructor of the entity player
 	 */
-	public EntityPlayer(List<AudioSource> sourcesAvailable) {
+	public EntityPlayer(List<IAudioSource> sourcesAvailable) {
 		this.sourcesAvailable = sourcesAvailable;
 		if (!Utils.isEmpty(this.sourcesAvailable)) {
 			this.playerSource = this.sourcesAvailable.remove(this.sourcesAvailable.size() - 1);
 		}
-		this.sourcesAssign = new HashMap<Entity, AudioSource>();
+		this.sourcesAssign = new HashMap<Entity, IAudioSource>();
 	}
 
 	/**
@@ -65,32 +67,34 @@ public class EntityPlayer extends GenericPlayer {
 	 * @param library
 	 *            Set of sounds that can use to provide sound feedback to the
 	 *            user
+	 * @param listener
+	 *            Listener to put in a certain position
 	 * @param player
 	 *            The player of the scene and also the listener
 	 */
-	private void playPlayer(HashMap<TAudioEnum, AudioBuffer> library, Player player) {
-		this.positioningListener(player.getPosition());
+	private void playPlayer(HashMap<AudioEnum, IAudioDescription> library, IListener listener, Player player) {
+		listener.positioning(player.getPosition());
 
 		// If the player is running plays the sound of the footsteps
 		if (player.getCurrentSpeed() == 0) {
-			if (this.isPlaying(this.playerSource)) {
-				this.pause(this.playerSource);
+			if (playerSource.isPlaying()) {
+				playerSource.pause();
 			}
 		} else {
 			float pitch = player.getCurrentSpeed() / 30.0f;
-			if (this.isPaused(this.playerSource)) {
-				this.setPitch(this.playerSource, pitch);
-				this.continuePlaying(this.playerSource);
+			if (playerSource.isPaused()) {
+				playerSource.setPitch(pitch);
+				playerSource.continuePlaying();
 			} else {
-				if (!this.isPlaying(this.playerSource)) {
-					AudioBuffer footStepsBuffer = library.get(TAudioEnum.footsteps);
-					this.setPitch(this.playerSource, pitch);
-					this.setVolume(this.playerSource, 1.0f);
-					this.play(playerSource, footStepsBuffer);
-					this.setLoop(this.playerSource, true);
+				if (!playerSource.isPlaying()) {
+					IAudioDescription footStepsBuffer = library.get(AudioEnum.footsteps);
+					playerSource.setPitch(pitch);
+					playerSource.setVolume(1.0f);
+					playerSource.play(footStepsBuffer);
+					playerSource.setLoop(true);
 				}
 			}
-			this.setPosition(this.playerSource, player.getPosition());
+			playerSource.setPosition(player.getPosition());
 		}
 	}
 
@@ -144,7 +148,7 @@ public class EntityPlayer extends GenericPlayer {
 	}
 
 	/**
-	 * Assign audio sources to the entities
+	 * Assign audio sources to the entities	taking in account the position of the player
 	 * 
 	 * @param player
 	 *            The player of the scene and also the listener
@@ -152,7 +156,7 @@ public class EntityPlayer extends GenericPlayer {
 	 *            Set of entities that should provide sound feedback
 	 */
 	private void assignSources(Player player, Entity[] entities) {
-		if ((player != null) && (entities != null)) {
+		if ((player != null) && (!Utils.isEmpty(entities))) {
 			Vector3f pPosition = player.getPosition();
 			for (Entity entity : entities) {
 				if (passesThreshold(pPosition, entity.getPosition())) {
@@ -162,14 +166,14 @@ public class EntityPlayer extends GenericPlayer {
 					}
 					// Check is a source was already assign
 					if (!sourcesAssign.containsKey(entity)) {
-						AudioSource aSource = sourcesAvailable.remove(sourcesAvailable.size() - 1);
+						IAudioSource aSource = sourcesAvailable.remove(sourcesAvailable.size() - 1);
 						sourcesAssign.put(entity, aSource);
 					}
 				} else {
 					// Not passed threshold
 					if (sourcesAssign.containsKey(entity)) {
-						AudioSource aSource = sourcesAssign.remove(entity);
-						this.stop(aSource);
+						IAudioSource aSource = sourcesAssign.remove(entity);
+						aSource.stop();
 						this.sourcesAvailable.add(aSource);
 					}
 				}
@@ -191,10 +195,10 @@ public class EntityPlayer extends GenericPlayer {
 	 * @return False = No crash was detected True = A crash was detected and the
 	 *         sound was played
 	 */
-	private boolean playCrash(HashMap<TAudioEnum, AudioBuffer> library, Entity entity, Vector3f player) {
+	private boolean playCrash(HashMap<AudioEnum, IAudioDescription> library, Entity entity, Vector3f player) {
 		if (roughApproximation(player, entity.getPosition(), ROUGH_THRESHOLD)
 				&& (squareDistance(player, entity.getPosition()) < CRASH_THRESHOLD)) {
-			AudioSource source = sourcesAssign.get(entity);
+			IAudioSource source = sourcesAssign.get(entity);
 			ModelEnum tEntity = entity.getGenericEntity().getObjectType();
 			switch (tEntity) {
 			case banana_tree:
@@ -206,25 +210,26 @@ public class EntityPlayer extends GenericPlayer {
 			case grass:
 				break;
 			case marble:
-				if (!isPlaying(source) && (source.getBuffer() == null)) {
-					AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
-					this.setPitch(source, 1.0f);
-					this.setVolume(source, 1.0f);
-					this.setPosition(source, entity.getPosition());
-					this.play(source, breakingWood);
-					this.setLoop(source, false);
+				if (!source.isPlaying() && (source.getAudioDescription() == null)) {
+					IAudioDescription breakingWood = library.get(AudioEnum.breakingWood);
+					source.setPitch(1.0f);
+					source.setVolume(1.0f);
+					source.setPosition(entity.getPosition());
+					source.play(breakingWood);
+					source.setLoop(false);
 				}
 				break;
 			case player:
 				break;
 			case tree:
-				AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
-				if (!isPlaying(source) || ((source.getBuffer() == null) || (source.getBuffer() != breakingWood))) {
-					this.setPitch(source, 1.0f);
-					this.setVolume(source, 1.0f);
-					this.setPosition(source, entity.getPosition());
-					this.play(source, breakingWood);
-					this.setLoop(source, false);
+				IAudioDescription breakingWood = library.get(AudioEnum.breakingWood);
+				if (!source.isPlaying()
+						|| ((source.getAudioDescription() == null) || (source.getAudioDescription() != breakingWood))) {
+					source.setPitch(1.0f);
+					source.setVolume(1.0f);
+					source.setPosition(entity.getPosition());
+					source.play(breakingWood);
+					source.setLoop(false);
 				}
 				break;
 			default:
@@ -248,13 +253,13 @@ public class EntityPlayer extends GenericPlayer {
 	 * @param player
 	 *            The player of the scene and also the listener
 	 */
-	private void playEntities(HashMap<TAudioEnum, AudioBuffer> library, Set<Entity> entities, Player player) {
+	private void playEntities(HashMap<AudioEnum, IAudioDescription> library, Set<Entity> entities, Player player) {
 		if (!Utils.isEmpty(entities)) {
 			Vector3f pPosition = player.getPosition();
 
 			for (Entity entity : entities) {
 				// Check is has one source
-				AudioSource source = sourcesAssign.get(entity);
+				IAudioSource source = sourcesAssign.get(entity);
 				if (source == null) {
 					continue;
 				}
@@ -266,18 +271,18 @@ public class EntityPlayer extends GenericPlayer {
 					}
 
 					// Make birds to play in each tree
-					AudioBuffer breakingWood = library.get(TAudioEnum.breakingWood);
-					if (source.getBuffer() == breakingWood) {
+					IAudioDescription breakingWood = library.get(AudioEnum.breakingWood);
+					if (source.getAudioDescription() == breakingWood) {
 						continue;
 					}
 
-					if (!isPlaying(source)) {
-						AudioBuffer falconBuffer = library.get(TAudioEnum.falcon);
-						this.setPitch(source, 1.0f);
-						this.setVolume(source, 1.0f);
-						this.setPosition(source, entity.getPosition());
-						this.play(source, falconBuffer);
-						this.setLoop(source, true);
+					if (!source.isPlaying()) {
+						IAudioDescription falconBuffer = library.get(AudioEnum.falcon);
+						source.setPitch(1.0f);
+						source.setVolume(1.0f);
+						source.setPosition(entity.getPosition());
+						source.play(falconBuffer);
+						source.setLoop(true);
 					}
 				}
 
@@ -291,16 +296,19 @@ public class EntityPlayer extends GenericPlayer {
 	 * @param library
 	 *            Set of sounds that can use to provide sound feedback to the
 	 *            user
+	 * @param listener
+	 *            Listener to put in a certain position
 	 * @param entities
 	 *            Set of entities that should provide sound feedback
 	 * @param player
 	 *            The player of the scene and also the listener
 	 */
-	public void play(HashMap<TAudioEnum, AudioBuffer> library, Entity[] entities, Player player) {
+	public void play(HashMap<AudioEnum, IAudioDescription> library, IListener listener, Entity[] entities,
+			Player player) {
 		if (player == null) {
 			return;
 		}
-		this.playPlayer(library, player);
+		this.playPlayer(library, listener, player);
 		this.assignSources(player, entities);
 		this.playEntities(library, this.sourcesAssign.keySet(), player);
 
@@ -309,7 +317,7 @@ public class EntityPlayer extends GenericPlayer {
 	/**
 	 * Clean up because we need to clean up when we finish the program
 	 */
-	public void cleanUp() {
+	public void dispose() {
 
 	}
 }

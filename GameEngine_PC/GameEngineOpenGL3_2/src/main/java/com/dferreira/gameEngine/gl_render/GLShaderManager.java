@@ -1,4 +1,4 @@
-package com.dferreira.commons.gl_render;
+package com.dferreira.gameEngine.gl_render;
 
 import org.lwjgl.opengl.GL20;
 
@@ -201,4 +201,11 @@ class GLShaderManager implements IShaderManagerAPI {
 		GL20.glDeleteShader(fragmentShaderID);
 		GL20.glDeleteProgram(programId);
     }
+
+	/**
+	 * Dispose resources used by the shader manager
+	 */
+	@Override
+	public void dispose() {
+	}
 }

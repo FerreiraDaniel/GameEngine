@@ -1,5 +1,7 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import java.util.HashMap;
+
 import com.dferreira.commons.IEnum;
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
@@ -12,8 +14,6 @@ import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.models.TerrainShape;
 import com.dferreira.gameEngine.shaders.terrains.TTerrainAttribute;
 import com.dferreira.gameEngine.textures.TerrainTexturesPack;
-
-import java.util.HashMap;
 
 /**
  * Responsible for creating the multiple terrains of the 3D world

@@ -1,6 +1,10 @@
 package com.dferreira.gameEngine.renderEngine;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
@@ -15,10 +19,6 @@ import com.dferreira.gameEngine.models.complexEntities.Material;
 import com.dferreira.gameEngine.models.complexEntities.MaterialGroup;
 import com.dferreira.gameEngine.models.complexEntities.RawModelMaterial;
 import com.dferreira.gameEngine.shaders.entities.EntityShaderManager;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Class responsible to render the entities in the screen

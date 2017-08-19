@@ -1,4 +1,4 @@
-package com.dferreira.commons.gl_render;
+package com.dferreira.gameEngine.gl_render;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
@@ -298,6 +298,13 @@ class GLFrameRender implements IFrameRenderAPI {
 	public void setViewPort(int x, int y, int width, int height) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/**
+	 * Clean up the resources used by the render API
+	 */
+	@Override
+	public void dispose() {
 	}
 
 }

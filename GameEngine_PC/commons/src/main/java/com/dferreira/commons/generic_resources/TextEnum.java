@@ -1,7 +1,7 @@
 package com.dferreira.commons.generic_resources;
 
 /**
- * Enum with all the texts that are available to the game
+ * Enumeration with all the texts that are available to the game
  */
 public enum TextEnum {
     entity_vertex_shader,

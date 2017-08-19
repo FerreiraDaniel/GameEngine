@@ -1,4 +1,4 @@
-package com.dferreira.commons.gl_render;
+package com.dferreira.gameEngine.gl_render;
 
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
@@ -57,5 +57,15 @@ public class GLRenderAPIAccess implements IRenderAPIAccess {
 	@Override
 	public IShaderManagerAPI getShaderManagerAPI() {
 		return shaderManagerAPI;
+	}
+
+	/**
+	 * Dispose the resources used by the Render API
+	 */
+	@Override
+	public void dispose() {
+		this.loader.dispose();;
+		this.frameRender.dispose();
+		this.shaderManagerAPI.dispose();
 	}
 }

@@ -41,7 +41,7 @@ void main(void) {
 	vec4 textureColor = texture(textureSampler,pass_textureCoords);
 
 	/*Check if the half if less that 0.5 if is ignore the element*/
-	if(textureColor.a < 0.5) {
+	if ((textureColor.a < 0.5) && (textureWeight == 1.0)) {
 		discard;
 	}
 	

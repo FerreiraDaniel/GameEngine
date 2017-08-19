@@ -1,13 +1,13 @@
 package com.dferreira.gameEngine.renderEngine;
 
+import java.util.List;
+
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
 import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.GuiTexture;
 import com.dferreira.gameEngine.shaders.guis.GuiShaderManager;
-
-import java.util.List;
 
 /**
  * Class responsible to render the GUIs in the screen

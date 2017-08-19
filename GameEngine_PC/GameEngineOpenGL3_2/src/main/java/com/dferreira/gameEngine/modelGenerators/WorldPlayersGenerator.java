@@ -1,5 +1,7 @@
 package com.dferreira.gameEngine.modelGenerators;
 
+import java.util.HashMap;
+
 import com.dferreira.commons.Vector3f;
 import com.dferreira.commons.generic_render.ILoaderRenderAPI;
 import com.dferreira.commons.generic_resources.IResourceProvider;
@@ -8,8 +10,6 @@ import com.dferreira.gameEngine.models.Player;
 import com.dferreira.gameEngine.models.complexEntities.GenericEntity;
 import com.dferreira.gameEngine.models.complexEntities.MaterialGroup;
 import com.dferreira.gameEngine.renderEngine.Loader;
-
-import java.util.HashMap;
 
 /**
  * Responsible for creating the creating the player_mtl(s) of the scene
@@ -25,7 +25,6 @@ public class WorldPlayersGenerator extends GenericEntitiesGenerator {
         DefaultModelGenerator playerModel = new DefaultModelGenerator();
         playerModel.setObjectReference(rProvider.getResource(ModelEnum.player));
         playerModel.setObjectType(ModelEnum.player);
-        ;
         playerModel.setScale(1.0f);
         playerModel.setHasTransparency(false);
         playerModel.setNormalsPointingUp(false);

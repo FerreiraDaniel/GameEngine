@@ -9,11 +9,9 @@ import com.dferreira.commons.generic_render.IRawModel;
 import com.dferreira.commons.generic_render.ITexture;
 import com.dferreira.commons.generic_render.RenderAttributeEnum;
 import com.dferreira.commons.generic_resources.TextureEnum;
-import com.dferreira.commons.gl_render.GLRawModel;
 import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.GuiShape;
 import com.dferreira.gameEngine.models.GuiTexture;
-import com.dferreira.gameEngine.renderEngine.Loader;
 import com.dferreira.gameEngine.shaders.guis.TGuiAttribute;
 
 /**

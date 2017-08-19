@@ -2,9 +2,10 @@ package com.dferreira.gameEngine.modelGenerators;
 
 import java.util.HashMap;
 
-import com.dferreira.gameEngine.audioEngine.AudioLoader;
-import com.dferreira.gameEngine.audioEngine.TAudioEnum;
-import com.dferreira.gameEngine.models.AudioBuffer;
+import com.dferreira.commons.generic_player.IAudioDescription;
+import com.dferreira.commons.generic_player.IAudioLoader;
+import com.dferreira.commons.generic_resources.AudioEnum;
+import com.dferreira.commons.generic_resources.IResourceProvider;
 
 /**
  * Generates the sounds that is going to be used by the audio engine of the game
@@ -12,20 +13,18 @@ import com.dferreira.gameEngine.models.AudioBuffer;
 public class WorldAudioGenerator {
 
 	/**
-	 * Folder where the resources are
-	 */
-	private final static String AUDIO_FOLDER = "audio/";
-
-	/**
 	 * Creates one dictionary with buffers to the audio engine
+	 * 
+	 * @param loader
+	 * @param resourceProvider
+	 * @return
 	 */
-	public static HashMap<TAudioEnum, AudioBuffer> getBuffers(AudioLoader loader) {
-		TAudioEnum[] audioTypes = TAudioEnum.values();
-		HashMap<TAudioEnum, AudioBuffer> audioLibrary = new HashMap<TAudioEnum, AudioBuffer>();
+	public static HashMap<AudioEnum, IAudioDescription> getBuffers(IAudioLoader loader, IResourceProvider resourceProvider) {
+		AudioEnum[] audioTypes = AudioEnum.values();
+		HashMap<AudioEnum, IAudioDescription> audioLibrary = new HashMap<AudioEnum, IAudioDescription>();
 
-		for (TAudioEnum tAudio : audioTypes) {
-			String fileName = tAudio.getValue();
-			AudioBuffer audioBuffer = loader.loadSound(AUDIO_FOLDER + fileName);
+		for (AudioEnum tAudio : audioTypes) {
+			IAudioDescription audioBuffer = loader.loadAudio(tAudio, resourceProvider);
 			if (audioBuffer != null) {
 				audioLibrary.put(tAudio, audioBuffer);
 			}

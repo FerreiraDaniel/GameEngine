@@ -1,5 +1,7 @@
 package com.dferreira.gameEngine.renderEngine;
 
+import java.util.List;
+
 import com.dferreira.commons.ColorRGBA;
 import com.dferreira.commons.GLTransformation;
 import com.dferreira.commons.generic_render.IFrameRenderAPI;
@@ -9,8 +11,6 @@ import com.dferreira.commons.utils.Utils;
 import com.dferreira.gameEngine.models.Terrain;
 import com.dferreira.gameEngine.shaders.terrains.TerrainShaderManager;
 import com.dferreira.gameEngine.textures.TerrainTexturesPack;
-
-import java.util.List;
 
 /**
  * Class responsible to render the terrain of the scene

@@ -1,4 +1,4 @@
-package com.dferreira.commons.gl_render;
+package com.dferreira.gameEngine.gl_render;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
@@ -112,7 +112,7 @@ class GLSLUtils {
 
 		if (linkStatus == GL11.GL_FALSE) {
 			System.err.println("Error linking program:");
-			System.out.println(GL20.glGetShaderInfoLog(shaderProgram.getProgramId(), STR_MAX_LEN));
+			System.err.println(GL20.glGetShaderInfoLog(shaderProgram.getProgramId(), STR_MAX_LEN));
 			GL20.glDeleteProgram(shaderProgram.getProgramId());
 			return false;
 		} else {
