@@ -1,1 +1,1 @@
-include ':app', ':commons'
+include ':app', ':desktop_opengl3_2', ':commons'

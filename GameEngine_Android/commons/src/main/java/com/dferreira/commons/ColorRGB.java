@@ -5,31 +5,34 @@ package com.dferreira.commons;
  */
 public class ColorRGB {
 
-    /**
-     * Red component
-     */
-    public final float r;
+	/**
+	 * Red component
+	 */
+	public float r;
 
-    /**
-     * Green component
-     */
-    public final float g;
+	/**
+	 * Green component
+	 */
+	public float g;
 
-    /**
-     * Blue component
-     */
-    public final float b;
+	/**
+	 * Blue component
+	 */
+	public float b;
 
-    /**
-     * @param r Red component
-     * @param g Green component
-     * @param b Blue component
-     */
-    public ColorRGB(float r, float g, float b) {
-        super();
-        this.r = r;
-        this.g = g;
-        this.b = b;
-    }
+	/**
+	 * @param r
+	 *            Red component
+	 * @param g
+	 *            Green component
+	 * @param b
+	 *            Blue component
+	 */
+	public ColorRGB(float r, float g, float b) {
+		super();
+		this.r = r;
+		this.g = g;
+		this.b = b;
+	}
 
 }

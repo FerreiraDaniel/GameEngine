@@ -5,20 +5,20 @@ package com.dferreira.commons;
  */
 public class Vector2f {
 
-    /* The coordinates them selves */
-    public float x, y;
+	/* The coordinates them selves */
+	public float x, y;
 
-    /**
-     * The constructor of the vector
-     *
-     * @param x
-     *            coordinate
-     * @param y
-     *            coordinate
-     */
-    public Vector2f(float x, float y) {
-        super();
-        this.x = x;
-        this.y = y;
-    }
+	/**
+	 * The constructor of the vector
+	 * 
+	 * @param x
+	 *            coordinate
+	 * @param y
+	 *            coordinate
+	 */
+	public Vector2f(float x, float y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
 }

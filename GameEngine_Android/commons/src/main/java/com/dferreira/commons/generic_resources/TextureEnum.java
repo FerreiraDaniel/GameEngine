@@ -5,6 +5,7 @@ package com.dferreira.commons.generic_resources;
  */
 
 public enum TextureEnum {
+	game_engine_logo,
     ic_pad_up,
     ic_pad_down,
     ic_pad_right,
@@ -14,5 +15,11 @@ public enum TextureEnum {
     sky_top,
     sky_bottom,
     sky_back,
-    weight_map, terrain, mud, terrain_grass, path, terrain_heightmap, sky_front
+    weight_map, 
+    terrain, 
+    mud, 
+    terrain_grass, 
+    path, 
+    terrain_heightmap, 
+    sky_front
 }

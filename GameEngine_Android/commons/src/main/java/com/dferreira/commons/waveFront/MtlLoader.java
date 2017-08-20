@@ -4,6 +4,9 @@ import com.dferreira.commons.ColorRGB;
 import com.dferreira.commons.shapes.IExternalMaterial;
 import com.dferreira.commons.utils.Utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,8 +20,12 @@ import java.util.List;
  */
 public class MtlLoader extends GenericLoader {
 
+    private final static Logger logger = LogManager.getLogger(MtlLoader.class);
+    private final static String TAG = "MtlLoader";
+    private final static int BUFFER_SIZE = 1024;
+
     /**
-     * @param line line to get parsed
+     * @param line
      * @return Parse one element with only one component
      */
     private static float parseComponent(String[] line) {
@@ -52,7 +59,7 @@ public class MtlLoader extends GenericLoader {
 
 
         try {
-            reader = new BufferedReader(new InputStreamReader(inputStream), 1024);
+            reader = new BufferedReader(new InputStreamReader(inputStream), BUFFER_SIZE);
             materials = new ArrayList<>();
             WfMaterial currentMaterial = null;
 
@@ -195,16 +202,18 @@ public class MtlLoader extends GenericLoader {
      * @return the HashMap with materials
      */
     private static HashMap<String, IExternalMaterial> buildMapOfMaterials(List<IExternalMaterial> materials) {
-        if (Utils.isEmpty(materials)) {
+        if ((materials == null) || (materials.isEmpty())) {
             return null;
         } else {
             HashMap<String, IExternalMaterial> mapOfMaterials = new HashMap<>();
-            for (IExternalMaterial material : materials) {
+            for (int i = 0; i < materials.size(); i++) {
+                IExternalMaterial material = materials.get(i);
                 mapOfMaterials.put(material.getName(), material);
             }
             return mapOfMaterials;
         }
     }
+
 
     /**
      * Parses one waveFront file contain a list of material

@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/commons" />
+            <option value="$PROJECT_DIR$/desktop_opengl3_2" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -3,6 +3,8 @@ package com.dferreira.androidUtils;
 import android.content.Context;
 import android.util.Log;
 
+import com.dferreira.commons.generic_resources.AudioEnum;
+import com.dferreira.commons.generic_resources.IAudioData;
 import com.dferreira.commons.generic_resources.IResourceProvider;
 import com.dferreira.commons.generic_resources.ISubResourceProvider;
 import com.dferreira.commons.generic_resources.ModelEnum;
@@ -212,6 +214,25 @@ public class AndroidResourceProvider implements IResourceProvider, ISubResourceP
     public String getResource(TextEnum textEnum) {
         int resourceId = getResourceId(textEnum);
         return pGetText(resourceId);
+    }
+
+    /**
+     * Get the file to use in the player reproduction
+     *
+     * @param audioEnum The audio to load
+     * @return Input stream to the audio to load
+     */
+    @Override
+    public IAudioData getResource(AudioEnum audioEnum) {
+        return null;
+    }
+
+    /**
+     * Dispose the resources used by the resource provider
+     */
+    @Override
+    public void dispose() {
+
     }
 
 

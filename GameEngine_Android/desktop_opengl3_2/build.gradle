@@ -1,0 +1,81 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+
+repositories {
+
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+def lwjgl_version = '2.9.3'
+def log4j_version = "2.6.1"
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':commons')
+    compile group: 'org.lwjgl.lwjgl', name: 'lwjgl', version: lwjgl_version
+    compile group: 'org.lwjgl.lwjgl', name: 'lwjgl_util', version: lwjgl_version
+    compile group: 'org.slick2d', name: 'slick2d-core', version: '1.0.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: log4j_version
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: log4j_version
+    testCompile group: 'junit', name: 'junit', version: '4.10'
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+
+
+def platforms = ['windows', 'linux', 'osx']
+
+platforms.each { platform ->
+    task "${platform}Natives" {
+        def outputDir = "$buildDir/natives"
+        println("start copy $platform")
+        inputs.files(configurations.compile)
+        outputs.dir(outputDir)
+        doLast {
+            copy {
+                def artifacts = configurations.compile.resolvedConfiguration.resolvedArtifacts
+                        .findAll { it.classifier == "natives-$platform" }
+                artifacts.each {
+                    from zipTree(it.file)
+                }
+                into outputDir
+            }
+        }
+    }
+}
+
+task natives {
+    description "Copies native libraries to an appropriate directory."
+    dependsOn platforms.collect { "${it}Natives" }.findAll { tasks[it] }
+}
+
+task fatJar(type: Jar) {
+    description "Makes a jar with all dependencies needed by the project"
+    dependsOn natives
+    manifest {
+        attributes 'Implementation-Title': 'GameEngine PC',
+                'Implementation-Version': '0.01',
+                'Main-Class': 'com.dferreira.gameEngine.engineTester.MainGameLoop'
+    }
+    baseName = project.name + '-all'
+    from {
+        configurations.compile.collect {
+            println(it)
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}
+
+
+
+

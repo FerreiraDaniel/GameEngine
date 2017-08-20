@@ -31,6 +31,8 @@ public class OBJLoader extends GenericLoader {
     /* Character for split material and group */
     private final static String MAT_GROUP_SPLIT = "@";
 
+    private final static int BUFFER_SIZE = 1024;
+
     /**
      * @param face reference to a Polygonal face
      * @return A key to use in the dictionary of indices
@@ -144,7 +146,7 @@ public class OBJLoader extends GenericLoader {
      */
     public static List<IShape> loadObjModel(InputStream inputStream, ISubResourceProvider subResourceProvider) {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream), 1024);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream), BUFFER_SIZE);
         String line;
         String[] fVertexStr;
         HashMap<String, IExternalMaterial> materials = null;

@@ -288,4 +288,10 @@ class GLFrameRender implements IFrameRenderAPI {
         GLES20.glViewport(x, y, width, height);
     }
 
+    /**
+     * Clean up the resources used by the render API
+     */
+    @Override
+    public void dispose() {
+    }
 }

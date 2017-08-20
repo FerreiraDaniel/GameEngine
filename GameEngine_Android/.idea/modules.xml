@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/GameEngine_Android.iml" filepath="$PROJECT_DIR$/GameEngine_Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/commons/commons.iml" filepath="$PROJECT_DIR$/commons/commons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/desktop_opengl3_2/desktop_opengl3_2.iml" filepath="$PROJECT_DIR$/desktop_opengl3_2/desktop_opengl3_2.iml" />
     </modules>
   </component>
 </project>

@@ -24,7 +24,6 @@ class GLShaderManager implements IShaderManagerAPI {
     private final IResourceProvider resourceProvider;
 
     /**
-     *
      * @param resourceProvider Provider of resources
      */
     GLShaderManager(IResourceProvider resourceProvider) {
@@ -207,5 +206,12 @@ class GLShaderManager implements IShaderManagerAPI {
         GLES20.glDeleteShader(vertexShaderID);
         GLES20.glDeleteShader(fragmentShaderID);
         GLES20.glDeleteProgram(programId);
+    }
+
+    /**
+     * Dispose resources used by the shader manager
+     */
+    @Override
+    public void dispose() {
     }
 }

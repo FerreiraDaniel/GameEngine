@@ -59,4 +59,14 @@ public class GLRenderAPIAccess implements IRenderAPIAccess {
     public IShaderManagerAPI getShaderManagerAPI() {
         return shaderManagerAPI;
     }
+
+    /**
+     * Dispose the resources used by the Render API
+     */
+    @Override
+    public void dispose() {
+        this.loader.dispose();
+        this.frameRender.dispose();
+        this.shaderManagerAPI.dispose();
+    }
 }

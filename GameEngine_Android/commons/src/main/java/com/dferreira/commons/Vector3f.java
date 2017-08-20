@@ -5,43 +5,39 @@ package com.dferreira.commons;
  */
 public class Vector3f extends Vector2f {
 
-    /* The coordinates them selves */
-    public float z;
+	/* The coordinates them selves */
+	public float z;
 
-    /**
-     * The constructor of the vector
-     *
-     * @param x
-     *            x-coordinate
-     * @param y
-     *            y-coordinate
-     * @param z
-     *            z-coordinate
-     */
-    public Vector3f(float x, float y, float z) {
-        super(x, y);
-        this.z = z;
-    }
+	/**
+	 * The constructor of the vector
+	 * 
+	 * @param x
+	 *            coordinate
+	 * @param y
+	 *            coordinate
+	 * @param z
+	 *            coordinate
+	 */
+	public Vector3f(float x, float y, float z) {
+		super(x, y);
+		this.z = z;
+	}
 
-    /**
-     * @return A string describing the vector3f
-     */
-    @Override
-    public String toString() {
-        return "Vector3f{" +
-                "x=" + x +
-                "y=" + y +
-                "z=" + z +
-                '}';
-    }
+	/**
+	 * Transforms a 3F vector into a string
+	 */
+	@Override
+	public String toString() {
+		return String.format("(%f,%f,%f)", x, y, z);
+	}
 
-    /**
-     * Normalizes the components of the vector
-     */
-    public void normalise() {
-        double magnitude = Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
-        this.x = (float) (x / magnitude);
-        this.y = (float) (y / magnitude);
-        this.z = (float) (z / magnitude);
-    }
+	/**
+	 * Normalizes the components of the vector
+	 */
+	public void normalise() {
+		double magnitude = Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z));
+		this.x = (float) (x / magnitude);
+		this.y = (float) (y / magnitude);
+		this.z = (float) (z / magnitude);
+	}
 }

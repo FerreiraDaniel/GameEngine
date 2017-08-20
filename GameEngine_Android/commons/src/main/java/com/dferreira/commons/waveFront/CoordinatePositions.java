@@ -1,7 +1,7 @@
 package com.dferreira.commons.waveFront;
 
 /**
- *	Positions where the coordinates are when each line of wavefront
+ *	Positions where the coordinates are when each line of wavefront 
  *is parsed
  */
 class CoordinatePositions {

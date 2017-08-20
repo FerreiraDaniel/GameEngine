@@ -10,29 +10,46 @@ import java.util.List;
  */
 public interface IResourceProvider {
 
-    /**
-     * @param modelEnum The model to load
-     * @return The list of shapes that make part of the model to load
-     */
-    List<IShape> getResource(ModelEnum modelEnum);
+	/**
+	 * @param modelEnum
+	 *            The model to load
+	 * @return The list of shapes that make part of the model to load
+	 */
+	List<IShape> getResource(ModelEnum modelEnum);
 
+	/**
+	 * @param textureEnum
+	 *            The texture to load
+	 * @return The information of the texture to load
+	 */
+	TextureData getResource(TextureEnum textureEnum);
 
-    /**
-     * @param textureEnum The texture to load
-     * @return The information of the texture to load
-     */
-    TextureData getResource(TextureEnum textureEnum);
+	/**
+	 * @param textureFileName
+	 *            Name of the file where the texture it is
+	 * @return The texture data of the file passed
+	 */
+	TextureData getTexture(String textureFileName);
 
-    /**
-     * @param textureFileName Name of the file where the texture it is
-     * @return The texture data of the file passed
-     */
-    TextureData getTexture(String textureFileName);
+	/**
+	 * @param textEnum
+	 *            The text to load
+	 * @return The text loaded
+	 */
+	String getResource(TextEnum textEnum);
 
-    /**
-     * @param textEnum The text to load
-     * @return The text loaded
-     */
-    String getResource(TextEnum textEnum);
+	/**
+	 * Get the file to use in the player reproduction
+	 * 
+	 * @param audioEnum
+	 *            The audio to load
+	 * 
+	 * @return Input stream to the audio to load
+	 */
+	IAudioData getResource(AudioEnum audioEnum);
 
+	/**
+	 * Dispose the resources used by the resource provider
+	 */
+	void dispose();
 }
